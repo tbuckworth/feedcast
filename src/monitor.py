@@ -6,7 +6,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-import cloudscraper
 import feedparser
 
 
@@ -92,10 +91,7 @@ class FeedMonitor:
 
     def fetch_feed(self, url: str, feed_name: str) -> list[FeedEntry]:
         """Fetch and parse an RSS feed, returning new entries."""
-        # Use cloudscraper to bypass Cloudflare protection
-        scraper = cloudscraper.create_scraper()
-        response = scraper.get(url, timeout=30)
-        feed = feedparser.parse(response.content)
+        feed = feedparser.parse(url)
         entries = []
 
         for entry in feed.entries:
