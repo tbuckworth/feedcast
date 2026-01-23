@@ -31,6 +31,6 @@ feeds:
     prompt: null  # Uses default_prompt
 
   - name: "Scott Alexander"
-    url: "https://astralcodexten.substack.com/feed"
+    url: "https://www.astralcodexten.com/feed"
     mode: "verbatim"
     prompt: null
