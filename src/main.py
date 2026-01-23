@@ -103,6 +103,11 @@ def main(config_path: Path | None = None) -> None:
             entries = monitor.fetch_feed(feed_config.url, feed_config.name)
             print(f"  Found {len(entries)} new entries")
 
+            # Only process the most recent entry per feed per run
+            if entries:
+                entries = [entries[-1]]
+                print(f"  Processing most recent entry only")
+
             for entry in entries:
                 print(f"\n  Processing: {entry.title}")
 
