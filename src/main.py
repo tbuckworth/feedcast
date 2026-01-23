@@ -100,13 +100,6 @@ def main(config_path: Path | None = None) -> None:
         print(f"  Mode: {feed_config.mode}")
 
         try:
-            # Debug: test raw feed fetching with cloudscraper
-            import cloudscraper
-            scraper = cloudscraper.create_scraper()
-            resp = scraper.get(feed_config.url, timeout=30)
-            print(f"  HTTP status: {resp.status_code}")
-            print(f"  Content-Type: {resp.headers.get('content-type', 'unknown')}")
-            print(f"  Content starts with: {resp.text[:200]}")
 
             entries = monitor.fetch_feed(feed_config.url, feed_config.name)
             print(f"  Found {len(entries)} new entries")
