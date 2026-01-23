@@ -5,7 +5,7 @@ podcast:
   email: "feedcast@example.com"
   language: "en-us"
   image_url: ""
-  base_url: "https://example.github.io/feedcast"
+  base_url: "https://tbuckworth.github.io/feedcast"
 
 tts:
   voice: "bm_george"
