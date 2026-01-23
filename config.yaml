@@ -26,7 +26,7 @@ default_prompt: |
 
 feeds:
   - name: "Zvi Mowshowitz"
-    url: "https://thezvi.substack.com/feed"
+    url: "https://podcast.lesswrong.com/users/zvi.rss"
     mode: "summarize"
     prompt: null  # Uses default_prompt
 
