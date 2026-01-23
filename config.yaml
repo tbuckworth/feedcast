@@ -1,0 +1,36 @@
+podcast:
+  title: "Feedcast - AI Safety Blog Summaries"
+  description: "AI-generated audio summaries of AI safety blog posts"
+  author: "Feedcast Bot"
+  email: "feedcast@example.com"
+  language: "en-us"
+  image_url: ""
+  base_url: "https://example.github.io/feedcast"
+
+tts:
+  voice: "bm_george"
+  speed: 1.0
+
+default_prompt: |
+  Summarize this AI safety blog post for a PhD student studying AI safety.
+
+  Requirements:
+  - Be concise and to the point - no fluff or padding
+  - Preserve technical terminology and nuance - do not dumb down
+  - Extract the core arguments, key claims, and most important information
+  - Focus on what's new, significant, or actionable in the AI safety landscape
+  - Use natural spoken English suitable for audio (no bullet points, lists, or formatting)
+  - Aim for 2-3 minutes speaking time (~300-450 words)
+
+  The listener already has technical context in ML and AI safety. Give them the headlines and substance, not background explanations.
+
+feeds:
+  - name: "Zvi Mowshowitz"
+    url: "https://thezvi.substack.com/feed"
+    mode: "summarize"
+    prompt: null  # Uses default_prompt
+
+  - name: "Scott Alexander"
+    url: "https://astralcodexten.substack.com/feed"
+    mode: "verbatim"
+    prompt: null
