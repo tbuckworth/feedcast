@@ -100,12 +100,14 @@ def main(config_path: Path | None = None) -> None:
         print(f"  Mode: {feed_config.mode}")
 
         try:
-            # Debug: test raw feed parsing
-            import feedparser
-            raw_feed = feedparser.parse(feed_config.url)
-            print(f"  Raw feed entries: {len(raw_feed.entries)}")
-            if raw_feed.bozo:
-                print(f"  Feed error: {raw_feed.bozo_exception}")
+            # Debug: test raw feed fetching
+            import requests
+            resp = requests.get(feed_config.url, headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+            }, timeout=30)
+            print(f"  HTTP status: {resp.status_code}")
+            print(f"  Content-Type: {resp.headers.get('content-type', 'unknown')}")
+            print(f"  Content starts with: {resp.text[:200]}")
 
             entries = monitor.fetch_feed(feed_config.url, feed_config.name)
             print(f"  Found {len(entries)} new entries")
