@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+  <channel>
+    <title>Feedcast - AI Safety Blog Summaries</title>
+    <description>AI-generated audio summaries of AI safety blog posts</description>
+    <language>en-us</language>
+    <link>https://tbuckworth.github.io/feedcast</link>
+    <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
+    <itunes:author>Feedcast Bot</itunes:author>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    <itunes:owner>
+      <itunes:name>Feedcast Bot</itunes:name>
+      <itunes:email>feedcast@example.com</itunes:email>
+    </itunes:owner>
+    <itunes:category text="Technology" />
+  </channel>
+</rss>
