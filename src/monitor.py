@@ -5,9 +5,9 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
-import time
 
 import feedparser
+import requests
 
 
 @dataclass
@@ -92,7 +92,12 @@ class FeedMonitor:
 
     def fetch_feed(self, url: str, feed_name: str) -> list[FeedEntry]:
         """Fetch and parse an RSS feed, returning new entries."""
-        feed = feedparser.parse(url)
+        # Use requests with a browser-like User-Agent to avoid blocks
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        }
+        response = requests.get(url, headers=headers, timeout=30)
+        feed = feedparser.parse(response.content)
         entries = []
 
         for entry in feed.entries:
