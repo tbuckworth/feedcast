@@ -25,6 +25,11 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
+      - name: Install pip and spacy model
+        run: |
+          uv pip install pip
+          uv run python -m spacy download en_core_web_sm
+
       - name: Run pipeline
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
