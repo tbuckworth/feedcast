@@ -15,13 +15,13 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
-      <title>Slightly Against The "Other People's Money" Argument Against Aid</title>
-      <description>Audio version of Slightly Against The "Other People's Money" Argument Against Aid from Scott Alexander</description>
-      <pubDate>Fri, 23 Jan 2026 00:26:56 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/slightly-against-the-other-peoples</guid>
-      <link>https://www.astralcodexten.com/p/slightly-against-the-other-peoples</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1d15c56c9836_slightly_against_the_other_peoples_money_argume.wav" type="audio/wav" length="0" />
-      <itunes:duration>00:21:53</itunes:duration>
+      <title>“AI #152: Brought To You By The Torment Nexus” by Zvi</title>
+      <description>Audio version of “AI #152: Brought To You By The Torment Nexus” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 22 Jan 2026 14:42:16 +0000</pubDate>
+      <guid>26fa91bf-db21-429b-8329-4955dbcd068d</guid>
+      <link>https://www.lesswrong.com/posts/pCkYfhYcwFLELoYQf/ai-152-brought-to-you-by-the-torment-nexus</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/540d06c7a340_ai_152_brought_to_you_by_the_torment_nexus_by.wav" type="audio/wav" length="0" />
+      <itunes:duration>00:02:45</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
