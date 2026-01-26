@@ -24,3 +24,9 @@ build/
 
 # Keep data directory structure but ignore contents
 # (we'll use .gitkeep files)
+
+# Voice samples - keep derek_perkins.wav input, ignore generated output
+voice_samples/output/
+# Ignore other celebrity voice samples (copyright concerns)
+voice_samples/*.wav
+!voice_samples/derek_perkins.wav
