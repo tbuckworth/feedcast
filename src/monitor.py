@@ -54,6 +54,15 @@ class FeedMonitor:
             )
             return cursor.fetchone() is not None
 
+    def delete_entry(self, entry_id: str) -> bool:
+        """Delete an entry from the database. Returns True if deleted."""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.execute(
+                "DELETE FROM processed_posts WHERE id = ?", (entry_id,)
+            )
+            conn.commit()
+            return cursor.rowcount > 0
+
     def mark_processed(
         self, entry: FeedEntry, audio_file: Optional[str] = None
     ) -> None:

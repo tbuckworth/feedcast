@@ -73,12 +73,25 @@ def main(config_path: Path | None = None) -> None:
     audio_dir = project_root / "data" / "audio"
     output_dir = project_root / "output"
 
+    # Check for reprocess request
+    reprocess_entry = os.environ.get("REPROCESS_ENTRY", "").strip()
+    if reprocess_entry:
+        print(f"Reprocess requested for: {reprocess_entry}")
+
     # Load configuration
     print(f"Loading configuration from {config_path}")
     config = load_config(config_path)
 
     # Initialize components
     monitor = FeedMonitor(db_path)
+
+    # Handle reprocess request - delete entry so it gets picked up again
+    if reprocess_entry:
+        if monitor.delete_entry(reprocess_entry):
+            print(f"  Deleted entry from database, will reprocess")
+        else:
+            print(f"  Entry not found in database (may be new)")
+
     processor = ContentProcessor(config.default_prompt)
     audio_gen = AudioGenerator(voice=config.tts.voice, speed=config.tts.speed)
     podcast_config = PodcastConfig(
