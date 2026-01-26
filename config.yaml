@@ -8,6 +8,8 @@ podcast:
   base_url: "https://tbuckworth.github.io/feedcast"
 
 tts:
+  # NOTE: Now using Chatterbox TTS with Derek Perkins voice cloning
+  # voice/speed params below are deprecated (kept for backward compatibility)
   voice: "bm_george"
   speed: 1.0
 
