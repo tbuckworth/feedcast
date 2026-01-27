@@ -37,6 +37,17 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Hidden Open Thread 417.5</title>
+      <description>Audio version of Hidden Open Thread 417.5 from Scott Alexander</description>
+      <pubDate>Thu, 22 Jan 2026 22:08:08 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/hidden-open-thread-4175</guid>
+      <link>https://www.astralcodexten.com/p/hidden-open-thread-4175</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/26af9753bb62_hidden_open_thread_4175.wav" type="audio/wav" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>“AI #152: Brought To You By The Torment Nexus” by Zvi</title>
       <description>Audio version of “AI #152: Brought To You By The Torment Nexus” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Thu, 22 Jan 2026 14:42:16 +0000</pubDate>
