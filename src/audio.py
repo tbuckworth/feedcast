@@ -86,6 +86,8 @@ def generate_with_deepinfra(text: str, voice_sample_path: Path, api_key: str) ->
     try:
         result = response.json()
         print(f"      JSON response keys: {list(result.keys())}")
+        if "output_format" in result:
+            print(f"      API returned output_format: {result['output_format']}")
     except Exception as e:
         raise RuntimeError(f"Failed to parse response: {e}, content-type: {content_type}, content: {response.text[:500]}")
 
@@ -143,6 +145,9 @@ class AudioGenerator:
         return safe.lower() or "audio"
 
     def generate(self, text: str, output_path: Path, title: str = "audio") -> Path:
+        import subprocess
+        import tempfile
+
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         if not self._voice_sample.exists():
@@ -152,51 +157,56 @@ class AudioGenerator:
         chunks = split_into_chunks(text)
         print(f"    Generating audio in {len(chunks)} chunks via DeepInfra API...")
 
-        audio_segments = []
-        for i, chunk in enumerate(chunks):
-            print(f"    Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
-            audio_bytes = generate_with_deepinfra(chunk, self._voice_sample, self._api_key)
-            if audio_bytes:
-                # Log the first few bytes to identify format
-                header = audio_bytes[:4]
-                print(f"      Audio header: {header}")
-                audio_segments.append(audio_bytes)
+        # Create temp directory for chunks
+        with tempfile.TemporaryDirectory() as tmpdir:
+            chunk_files = []
+            for i, chunk in enumerate(chunks):
+                print(f"    Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
+                audio_bytes = generate_with_deepinfra(chunk, self._voice_sample, self._api_key)
+                if audio_bytes:
+                    # Log the first few bytes to identify format
+                    header = audio_bytes[:4]
+                    print(f"      Audio header: {header}")
+                    # Save chunk to temp file
+                    chunk_path = Path(tmpdir) / f"chunk_{i:03d}.raw"
+                    with open(chunk_path, 'wb') as f:
+                        f.write(audio_bytes)
+                    chunk_files.append(chunk_path)
 
-        if not audio_segments:
-            raise ValueError("No audio generated from text")
+            if not chunk_files:
+                raise ValueError("No audio generated from text")
 
-        # Detect format from first segment header
-        first_header = audio_segments[0][:4]
-        if first_header[:3] == b'ID3' or first_header[:2] == b'\xff\xfb':
-            # MP3 format - concatenate directly
+            # Concatenate raw chunks
+            concat_raw = Path(tmpdir) / "concat.raw"
+            with open(concat_raw, 'wb') as outf:
+                for chunk_path in chunk_files:
+                    with open(chunk_path, 'rb') as inf:
+                        outf.write(inf.read())
+
+            # Convert to MP3 using ffmpeg
             mp3_path = output_path.with_suffix(".mp3")
-            with open(mp3_path, 'wb') as f:
-                for segment in audio_segments:
-                    f.write(segment)
-            print(f"      Saved as MP3: {mp3_path}")
-            return mp3_path
-        elif first_header == b'RIFF':
-            # WAV format - use wave module
-            import io
-            import wave
+            try:
+                # Try to auto-detect format and convert to mp3
+                result = subprocess.run(
+                    ["ffmpeg", "-y", "-i", str(concat_raw), "-acodec", "libmp3lame", "-q:a", "2", str(mp3_path)],
+                    capture_output=True,
+                    text=True,
+                    timeout=300,
+                )
+                if result.returncode == 0 and mp3_path.exists():
+                    print(f"      Converted to MP3: {mp3_path}")
+                    return mp3_path
+                else:
+                    print(f"      FFmpeg failed: {result.stderr[:500]}")
+            except Exception as e:
+                print(f"      FFmpeg error: {e}")
+
+            # If ffmpeg fails, try saving with .wav extension (some players handle this)
             wav_path = output_path.with_suffix(".wav")
-            with wave.open(io.BytesIO(audio_segments[0]), 'rb') as first_wav:
-                params = first_wav.getparams()
-            with wave.open(str(wav_path), 'wb') as output_wav:
-                output_wav.setparams(params)
-                for segment in audio_segments:
-                    with wave.open(io.BytesIO(segment), 'rb') as seg_wav:
-                        output_wav.writeframes(seg_wav.readframes(seg_wav.getnframes()))
-            print(f"      Saved as WAV: {wav_path}")
+            import shutil
+            shutil.copy(concat_raw, wav_path)
+            print(f"      Saved raw as WAV: {wav_path}")
             return wav_path
-        else:
-            # Unknown format - save as binary and hope for the best
-            print(f"      Unknown audio format, header: {first_header}")
-            audio_path = output_path.with_suffix(".audio")
-            with open(audio_path, 'wb') as f:
-                for segment in audio_segments:
-                    f.write(segment)
-            return audio_path
 
     def generate_episode(self, text: str, output_dir: Path, episode_id: str, title: str) -> Path:
         safe_title = self._sanitize_filename(title)
