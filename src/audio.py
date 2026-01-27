@@ -66,6 +66,7 @@ def generate_with_deepinfra(text: str, voice_sample_path: Path, api_key: str) ->
         json={
             "text": text,
             "audio_prompt": voice_b64,
+            "output_format": "mp3",
         },
         timeout=120,
     )
@@ -200,5 +201,5 @@ class AudioGenerator:
     def generate_episode(self, text: str, output_dir: Path, episode_id: str, title: str) -> Path:
         safe_title = self._sanitize_filename(title)
         filename = f"{episode_id}_{safe_title}"
-        output_path = output_dir / f"{filename}.wav"
+        output_path = output_dir / f"{filename}.mp3"
         return self.generate(text, output_path, title)
