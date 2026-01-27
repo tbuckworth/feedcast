@@ -61,7 +61,7 @@ def upload_voice_to_deepinfra(voice_path: Path, api_key: str, name: str = None) 
         response = requests.post(
             DEEPINFRA_VOICE_UPLOAD_URL,
             headers={"Authorization": f"Bearer {api_key}"},
-            files={"audio": (voice_path.name, f, "audio/wav")},
+            files={"files": (voice_path.name, f, "audio/wav")},
             data={"name": name, "description": f"Voice clone of {name}"},
             timeout=60,
         )
