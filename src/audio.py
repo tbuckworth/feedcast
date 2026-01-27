@@ -76,20 +76,25 @@ def generate_with_deepinfra(text: str, voice_sample_path: Path, api_key: str) ->
 
     # Check if response is raw audio (binary) or JSON
     content_type = response.headers.get("content-type", "")
+    print(f"      Response content-type: {content_type}")
+
     if "audio" in content_type:
+        print(f"      Got raw audio response: {len(response.content)} bytes")
         return response.content
 
     # Try to parse as JSON
     try:
         result = response.json()
+        print(f"      JSON response keys: {list(result.keys())}")
     except Exception as e:
-        raise RuntimeError(f"Failed to parse response: {e}, content: {response.text[:500]}")
+        raise RuntimeError(f"Failed to parse response: {e}, content-type: {content_type}, content: {response.text[:500]}")
 
     # Try different possible keys for audio data
     audio_data = None
     for key in ["audio", "audio_base64", "output", "data"]:
         if key in result:
             audio_data = result[key]
+            print(f"      Found audio in key '{key}', type: {type(audio_data).__name__}, len: {len(str(audio_data)[:100])}")
             break
 
     if audio_data is None:
@@ -97,11 +102,19 @@ def generate_with_deepinfra(text: str, voice_sample_path: Path, api_key: str) ->
 
     # Handle if audio_data is a dict with nested data
     if isinstance(audio_data, dict):
+        print(f"      Audio data is dict with keys: {list(audio_data.keys())}")
         audio_data = audio_data.get("audio") or audio_data.get("data")
 
     if not audio_data:
         raise RuntimeError(f"Empty audio data in response: {result}")
 
+    # Check if it's a URL instead of base64
+    if isinstance(audio_data, str) and audio_data.startswith("http"):
+        print(f"      Audio is URL: {audio_data[:100]}")
+        audio_response = requests.get(audio_data, timeout=60)
+        return audio_response.content
+
+    print(f"      Decoding base64 audio, length: {len(audio_data)}")
     return base64.b64decode(audio_data)
 
 
