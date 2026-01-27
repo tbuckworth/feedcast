@@ -72,7 +72,7 @@ def generate_with_deepinfra(text: str, voice_sample_path: Path, api_key: str) ->
                 json={
                     "text": text,
                     "audio_prompt": voice_b64,
-                    "output_format": "mp3",
+                    "output_format": "pcm",
                 },
                 timeout=300,  # 5 minute timeout per chunk
             )
@@ -218,18 +218,19 @@ class AudioGenerator:
 
                 print(f"      FFmpeg auto-detect failed, trying raw PCM formats...")
 
-                # Try raw PCM 24kHz mono (common for TTS)
-                for sample_rate in [24000, 22050, 16000, 44100]:
-                    result = subprocess.run(
-                        ["ffmpeg", "-y", "-f", "s16le", "-ar", str(sample_rate), "-ac", "1",
-                         "-i", str(concat_raw), "-acodec", "libmp3lame", "-q:a", "2", str(mp3_path)],
-                        capture_output=True,
-                        text=True,
-                        timeout=300,
-                    )
-                    if result.returncode == 0 and mp3_path.exists() and mp3_path.stat().st_size > 1000:
-                        print(f"      Converted raw PCM ({sample_rate}Hz) to MP3: {mp3_path}")
-                        return mp3_path
+                # Try f32le first (Chatterbox typically outputs float32), then s16le
+                for fmt in ["f32le", "s16le"]:
+                    for sample_rate in [24000, 22050, 16000, 44100]:
+                        result = subprocess.run(
+                            ["ffmpeg", "-y", "-f", fmt, "-ar", str(sample_rate), "-ac", "1",
+                             "-i", str(concat_raw), "-acodec", "libmp3lame", "-q:a", "2", str(mp3_path)],
+                            capture_output=True,
+                            text=True,
+                            timeout=300,
+                        )
+                        if result.returncode == 0 and mp3_path.exists() and mp3_path.stat().st_size > 1000:
+                            print(f"      Converted raw PCM ({fmt} {sample_rate}Hz) to MP3: {mp3_path}")
+                            return mp3_path
 
                 print(f"      All FFmpeg attempts failed: {result.stderr[:500]}")
             except Exception as e:

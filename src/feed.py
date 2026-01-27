@@ -129,7 +129,11 @@ class FeedGenerator:
             audio_url = f"{self.config.base_url}/audio/{episode.audio_file}"
             enclosure = ET.SubElement(item, "enclosure")
             enclosure.set("url", audio_url)
-            enclosure.set("type", "audio/wav")
+            # Detect MIME type from file extension
+            if episode.audio_file.endswith(".mp3"):
+                enclosure.set("type", "audio/mpeg")
+            else:
+                enclosure.set("type", "audio/wav")
             enclosure.set("length", "0")  # Could compute actual size
 
             # iTunes episode tags
