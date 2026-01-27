@@ -115,6 +115,10 @@ def generate_with_deepinfra(text: str, voice_sample_path: Path, api_key: str) ->
         return audio_response.content
 
     print(f"      Decoding base64 audio, length: {len(audio_data)}")
+    # Fix padding if needed (some APIs return base64 without proper padding)
+    padding_needed = len(audio_data) % 4
+    if padding_needed:
+        audio_data += "=" * (4 - padding_needed)
     return base64.b64decode(audio_data)
 
 
