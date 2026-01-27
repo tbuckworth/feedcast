@@ -186,18 +186,34 @@ class AudioGenerator:
             # Convert to MP3 using ffmpeg
             mp3_path = output_path.with_suffix(".mp3")
             try:
-                # Try to auto-detect format and convert to mp3
+                # Try different ffmpeg approaches
+                # First try auto-detection
                 result = subprocess.run(
                     ["ffmpeg", "-y", "-i", str(concat_raw), "-acodec", "libmp3lame", "-q:a", "2", str(mp3_path)],
                     capture_output=True,
                     text=True,
                     timeout=300,
                 )
-                if result.returncode == 0 and mp3_path.exists():
+                if result.returncode == 0 and mp3_path.exists() and mp3_path.stat().st_size > 1000:
                     print(f"      Converted to MP3: {mp3_path}")
                     return mp3_path
-                else:
-                    print(f"      FFmpeg failed: {result.stderr[:500]}")
+
+                print(f"      FFmpeg auto-detect failed, trying raw PCM formats...")
+
+                # Try raw PCM 24kHz mono (common for TTS)
+                for sample_rate in [24000, 22050, 16000, 44100]:
+                    result = subprocess.run(
+                        ["ffmpeg", "-y", "-f", "s16le", "-ar", str(sample_rate), "-ac", "1",
+                         "-i", str(concat_raw), "-acodec", "libmp3lame", "-q:a", "2", str(mp3_path)],
+                        capture_output=True,
+                        text=True,
+                        timeout=300,
+                    )
+                    if result.returncode == 0 and mp3_path.exists() and mp3_path.stat().st_size > 1000:
+                        print(f"      Converted raw PCM ({sample_rate}Hz) to MP3: {mp3_path}")
+                        return mp3_path
+
+                print(f"      All FFmpeg attempts failed: {result.stderr[:500]}")
             except Exception as e:
                 print(f"      FFmpeg error: {e}")
 
