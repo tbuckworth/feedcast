@@ -7,19 +7,10 @@ requires-python = ">=3.11,<3.13"
 dependencies = [
     "feedparser>=6.0.0",
     "anthropic>=0.40.0",
-    "kokoro>=0.9.0",
     "beautifulsoup4>=4.12.0",
     "pydantic>=2.0.0",
     "pyyaml>=6.0.0",
     "requests>=2.31.0",
-    "soundfile>=0.12.0",
-    "chatterbox-tts>=0.1.0",
-    "torchaudio>=2.0.0",
-    "numpy>=1.26.0",  # Force newer numpy compatible with Python 3.12+
-    "ml-dtypes>=0.4.0",  # Force newer ml-dtypes compatible with Python 3.12
-    "numba>=0.59.0",  # Force newer numba compatible with Python 3.12
-    "llvmlite>=0.42.0",  # Force newer llvmlite compatible with Python 3.12
-    "librosa>=0.10.0",  # Force newer librosa
 ]
 
 [build-system]
@@ -28,6 +19,3 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src"]
-
-[tool.uv.extra-build-dependencies]
-pkuseg = ["numpy"]
