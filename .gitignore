@@ -30,3 +30,6 @@ voice_samples/output/
 # Ignore other celebrity voice samples (copyright concerns)
 voice_samples/*.wav
 !voice_samples/derek_perkins.wav
+
+# Voice ID cache (API-specific, should not be shared)
+.voice_cache.json
