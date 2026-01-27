@@ -57,19 +57,29 @@ def generate_with_deepinfra(text: str, voice_sample_path: Path, api_key: str) ->
     with open(voice_sample_path, "rb") as f:
         voice_b64 = base64.b64encode(f.read()).decode()
 
-    response = requests.post(
-        DEEPINFRA_API_URL,
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        },
-        json={
-            "text": text,
-            "audio_prompt": voice_b64,
-            "output_format": "mp3",
-        },
-        timeout=120,
-    )
+    # Retry logic with longer timeout
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(
+                DEEPINFRA_API_URL,
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "text": text,
+                    "audio_prompt": voice_b64,
+                    "output_format": "mp3",
+                },
+                timeout=300,  # 5 minute timeout per chunk
+            )
+            break
+        except requests.exceptions.Timeout:
+            if attempt < max_retries - 1:
+                print(f"      Timeout, retrying ({attempt + 2}/{max_retries})...")
+                continue
+            raise
 
     if response.status_code != 200:
         raise RuntimeError(f"DeepInfra API error {response.status_code}: {response.text}")
