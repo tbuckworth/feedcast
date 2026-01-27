@@ -66,7 +66,6 @@ def generate_with_deepinfra(text: str, voice_sample_path: Path, api_key: str) ->
         json={
             "text": text,
             "audio_prompt": voice_b64,
-            "output_format": "wav",
         },
         timeout=120,
     )
@@ -143,8 +142,6 @@ class AudioGenerator:
         return safe.lower() or "audio"
 
     def generate(self, text: str, output_path: Path, title: str = "audio") -> Path:
-        import wave
-
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         if not self._voice_sample.exists():
@@ -159,27 +156,46 @@ class AudioGenerator:
             print(f"    Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
             audio_bytes = generate_with_deepinfra(chunk, self._voice_sample, self._api_key)
             if audio_bytes:
+                # Log the first few bytes to identify format
+                header = audio_bytes[:4]
+                print(f"      Audio header: {header}")
                 audio_segments.append(audio_bytes)
 
         if not audio_segments:
             raise ValueError("No audio generated from text")
 
-        # Concatenate WAV files
-        wav_path = output_path.with_suffix(".wav")
-
-        # Read first segment to get audio parameters
-        import io
-        with wave.open(io.BytesIO(audio_segments[0]), 'rb') as first_wav:
-            params = first_wav.getparams()
-
-        # Write concatenated audio
-        with wave.open(str(wav_path), 'wb') as output_wav:
-            output_wav.setparams(params)
-            for segment in audio_segments:
-                with wave.open(io.BytesIO(segment), 'rb') as seg_wav:
-                    output_wav.writeframes(seg_wav.readframes(seg_wav.getnframes()))
-
-        return wav_path
+        # Detect format from first segment header
+        first_header = audio_segments[0][:4]
+        if first_header[:3] == b'ID3' or first_header[:2] == b'\xff\xfb':
+            # MP3 format - concatenate directly
+            mp3_path = output_path.with_suffix(".mp3")
+            with open(mp3_path, 'wb') as f:
+                for segment in audio_segments:
+                    f.write(segment)
+            print(f"      Saved as MP3: {mp3_path}")
+            return mp3_path
+        elif first_header == b'RIFF':
+            # WAV format - use wave module
+            import io
+            import wave
+            wav_path = output_path.with_suffix(".wav")
+            with wave.open(io.BytesIO(audio_segments[0]), 'rb') as first_wav:
+                params = first_wav.getparams()
+            with wave.open(str(wav_path), 'wb') as output_wav:
+                output_wav.setparams(params)
+                for segment in audio_segments:
+                    with wave.open(io.BytesIO(segment), 'rb') as seg_wav:
+                        output_wav.writeframes(seg_wav.readframes(seg_wav.getnframes()))
+            print(f"      Saved as WAV: {wav_path}")
+            return wav_path
+        else:
+            # Unknown format - save as binary and hope for the best
+            print(f"      Unknown audio format, header: {first_header}")
+            audio_path = output_path.with_suffix(".audio")
+            with open(audio_path, 'wb') as f:
+                for segment in audio_segments:
+                    f.write(segment)
+            return audio_path
 
     def generate_episode(self, text: str, output_dir: Path, episode_id: str, title: str) -> Path:
         safe_title = self._sanitize_filename(title)
