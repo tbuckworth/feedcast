@@ -9,7 +9,7 @@ import requests
 
 DEFAULT_VOICE_SAMPLE = "voice_samples/derek_perkins.wav"
 MAX_CHUNK_CHARS = 1500  # Safe limit for Chatterbox TTS
-DEEPINFRA_API_URL = "https://api.deepinfra.com/v1/inference/ResembleAI/chatterbox"
+DEEPINFRA_API_URL = "https://api.deepinfra.com/v1/inference/ResembleAI/chatterbox-turbo"
 
 
 def split_into_chunks(text: str, max_chars: int = MAX_CHUNK_CHARS) -> list[str]:
@@ -59,10 +59,14 @@ def generate_with_deepinfra(text: str, voice_sample_path: Path, api_key: str) ->
 
     response = requests.post(
         DEEPINFRA_API_URL,
-        headers={"Authorization": f"Bearer {api_key}"},
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        },
         json={
             "text": text,
             "audio_prompt": voice_b64,
+            "output_format": "wav",
         },
         timeout=120,
     )
@@ -70,11 +74,35 @@ def generate_with_deepinfra(text: str, voice_sample_path: Path, api_key: str) ->
     if response.status_code != 200:
         raise RuntimeError(f"DeepInfra API error {response.status_code}: {response.text}")
 
-    result = response.json()
-    if "audio" not in result:
-        raise RuntimeError(f"No audio in response: {result}")
+    # Check if response is raw audio (binary) or JSON
+    content_type = response.headers.get("content-type", "")
+    if "audio" in content_type:
+        return response.content
 
-    return base64.b64decode(result["audio"])
+    # Try to parse as JSON
+    try:
+        result = response.json()
+    except Exception as e:
+        raise RuntimeError(f"Failed to parse response: {e}, content: {response.text[:500]}")
+
+    # Try different possible keys for audio data
+    audio_data = None
+    for key in ["audio", "audio_base64", "output", "data"]:
+        if key in result:
+            audio_data = result[key]
+            break
+
+    if audio_data is None:
+        raise RuntimeError(f"No audio in response. Keys: {list(result.keys())}, Response: {str(result)[:500]}")
+
+    # Handle if audio_data is a dict with nested data
+    if isinstance(audio_data, dict):
+        audio_data = audio_data.get("audio") or audio_data.get("data")
+
+    if not audio_data:
+        raise RuntimeError(f"Empty audio data in response: {result}")
+
+    return base64.b64decode(audio_data)
 
 
 class AudioGenerator:
