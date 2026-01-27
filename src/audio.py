@@ -57,6 +57,8 @@ def generate_with_deepinfra(text: str, voice_sample_path: Path, api_key: str) ->
     with open(voice_sample_path, "rb") as f:
         voice_b64 = base64.b64encode(f.read()).decode()
 
+    import time
+
     # Retry logic with longer timeout
     max_retries = 3
     for attempt in range(max_retries):
@@ -75,9 +77,11 @@ def generate_with_deepinfra(text: str, voice_sample_path: Path, api_key: str) ->
                 timeout=300,  # 5 minute timeout per chunk
             )
             break
-        except requests.exceptions.Timeout:
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
             if attempt < max_retries - 1:
-                print(f"      Timeout, retrying ({attempt + 2}/{max_retries})...")
+                wait_time = (attempt + 1) * 10  # 10s, 20s, 30s
+                print(f"      Connection error: {e}. Retrying in {wait_time}s ({attempt + 2}/{max_retries})...")
+                time.sleep(wait_time)
                 continue
             raise
 
@@ -168,10 +172,14 @@ class AudioGenerator:
         print(f"    Generating audio in {len(chunks)} chunks via DeepInfra API...")
 
         # Create temp directory for chunks
+        import time
         with tempfile.TemporaryDirectory() as tmpdir:
             chunk_files = []
             for i, chunk in enumerate(chunks):
                 print(f"    Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
+                # Add delay between API calls to avoid rate limiting
+                if i > 0:
+                    time.sleep(2)
                 audio_bytes = generate_with_deepinfra(chunk, self._voice_sample, self._api_key)
                 if audio_bytes:
                     # Log the first few bytes to identify format
