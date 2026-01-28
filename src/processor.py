@@ -9,6 +9,8 @@ from bs4 import BeautifulSoup
 
 from .monitor import FeedEntry
 
+AUTO_VERBATIM_LIMIT = 24000  # ~25 min of audio at ~0.063 sec/char
+
 
 class ContentProcessor:
     """Processes feed content - either summarizing with Claude or cleaning for verbatim."""
@@ -91,5 +93,15 @@ Content:
             return f"{intro}\n\n{summary}"
         elif mode == "verbatim":
             return self.process_verbatim(entry)
+        elif mode == "auto":
+            clean_text = self.clean_html(entry.content)
+            if len(clean_text) <= AUTO_VERBATIM_LIMIT:
+                print(f"    Auto mode: {len(clean_text)} chars ≤ {AUTO_VERBATIM_LIMIT} → verbatim")
+                return self.process_verbatim(entry)
+            else:
+                print(f"    Auto mode: {len(clean_text)} chars > {AUTO_VERBATIM_LIMIT} → summarize")
+                summary = self.summarize(entry, prompt)
+                intro = f"Summary of {entry.title} by {entry.author}."
+                return f"{intro}\n\n{summary}"
         else:
             raise ValueError(f"Unknown processing mode: {mode}")

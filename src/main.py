@@ -4,7 +4,7 @@ import hashlib
 import os
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 import yaml
 from pydantic import BaseModel
@@ -20,7 +20,7 @@ class FeedConfig(BaseModel):
 
     name: str
     url: str
-    mode: str = "summarize"
+    mode: Literal["summarize", "verbatim", "auto"] = "auto"
     prompt: str | None = None
 
 
@@ -78,6 +78,14 @@ def main(config_path: Path | None = None) -> None:
     if reprocess_entry:
         print(f"Reprocess requested for: {reprocess_entry}")
 
+    # Check for force-verbatim override
+    force_verbatim = os.environ.get("FORCE_VERBATIM", "").strip().lower() in ("true", "1", "yes")
+    if force_verbatim:
+        if not reprocess_entry:
+            print("Warning: FORCE_VERBATIM is set but no REPROCESS_ENTRY specified — flag will have no effect")
+        else:
+            print(f"Force verbatim enabled for: {reprocess_entry}")
+
     # Load configuration
     print(f"Loading configuration from {config_path}")
     config = load_config(config_path)
@@ -127,9 +135,13 @@ def main(config_path: Path | None = None) -> None:
 
                 try:
                     # Process content
+                    mode = feed_config.mode
+                    if force_verbatim and reprocess_entry and entry.id == reprocess_entry:
+                        print(f"    Overriding mode to verbatim (force_verbatim)")
+                        mode = "verbatim"
                     prompt = feed_config.prompt or config.default_prompt
                     processed_text = processor.process(
-                        entry, feed_config.mode, prompt
+                        entry, mode, prompt
                     )
                     print(f"    Processed text: {len(processed_text)} chars")
 
