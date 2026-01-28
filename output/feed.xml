@@ -15,6 +15,17 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>“The Claude Constitution’s Ethical Framework” by Zvi</title>
+      <description>Audio version of “The Claude Constitution’s Ethical Framework” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 27 Jan 2026 15:02:24 +0000</pubDate>
+      <guid>433a831d-740c-4d8b-85ba-2eaa3cd08ae7</guid>
+      <link>https://www.lesswrong.com/posts/w5Rdn6YK5ETqjPEAr/the-claude-constitution-s-ethical-framework</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/09fb31ee460d_the_claude_constitutions_ethical_framework_by_z.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Open Thread 418</title>
       <description>Audio version of Open Thread 418 from Scott Alexander</description>
       <pubDate>Mon, 26 Jan 2026 13:30:53 +0000</pubDate>
