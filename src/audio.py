@@ -10,6 +10,10 @@ import requests
 DEFAULT_VOICE_SAMPLE = "voice_samples/derek_perkins.wav"
 MAX_CHUNK_CHARS = 1500  # Safe limit for Chatterbox TTS
 
+# Delay after voice upload before inference (for replication)
+# Set via VOICE_UPLOAD_DELAY_SECONDS environment variable
+VOICE_UPLOAD_DELAY_SECONDS = int(os.environ.get("VOICE_UPLOAD_DELAY_SECONDS", "0"))
+
 # DeepInfra API endpoints
 DEEPINFRA_VOICE_UPLOAD_URL = "https://api.deepinfra.com/v1/voices/add"
 DEEPINFRA_API_URL = "https://api.deepinfra.com/v1/inference/ResembleAI/chatterbox-turbo"
@@ -32,10 +36,15 @@ def upload_voice_to_deepinfra(voice_path: Path, api_key: str) -> str:
             timeout=60,
         )
 
+    # Diagnostic logging for debugging voice cloning issues
+    print(f"    [DIAG] Upload response status: {response.status_code}")
+    print(f"    [DIAG] Upload response headers: {dict(response.headers)}")
+
     if response.status_code != 200:
         raise RuntimeError(f"Failed to upload voice: {response.status_code} - {response.text}")
 
     result = response.json()
+    print(f"    [DIAG] Upload response body: {result}")
     voice_id = result.get("voice_id")
 
     if not voice_id:
@@ -81,9 +90,13 @@ def split_into_chunks(text: str, max_chars: int = MAX_CHUNK_CHARS) -> list[str]:
     return [c for c in chunks if c]
 
 
-def generate_with_deepinfra(text: str, voice_id: str, api_key: str) -> bytes:
+def generate_with_deepinfra(text: str, voice_id: str, api_key: str, save_debug_wav: Path | None = None) -> bytes:
     """Generate audio using DeepInfra inference endpoint with voice cloning."""
     import time
+
+    # Diagnostic logging
+    print(f"      [DIAG] Generating with voice_id: {voice_id}")
+    print(f"      [DIAG] Text length: {len(text)} chars, preview: {text[:80]!r}...")
 
     max_retries = 3
     for attempt in range(max_retries):
@@ -109,6 +122,10 @@ def generate_with_deepinfra(text: str, voice_id: str, api_key: str) -> bytes:
                 continue
             raise
 
+    # Diagnostic logging for response
+    print(f"      [DIAG] Inference response status: {response.status_code}")
+    print(f"      [DIAG] Inference response headers: {dict(response.headers)}")
+
     if response.status_code != 200:
         raise RuntimeError(f"DeepInfra error {response.status_code}: {response.text}")
 
@@ -124,6 +141,14 @@ def generate_with_deepinfra(text: str, voice_id: str, api_key: str) -> bytes:
 
     audio_data = base64.b64decode(audio_b64)
     print(f"      Got {len(audio_data)} bytes of audio")
+
+    # Save debug WAV if requested
+    if save_debug_wav:
+        save_debug_wav.parent.mkdir(parents=True, exist_ok=True)
+        with open(save_debug_wav, 'wb') as f:
+            f.write(audio_data)
+        print(f"      [DIAG] Saved debug WAV to: {save_debug_wav}")
+
     return audio_data
 
 
@@ -147,6 +172,13 @@ class AudioGenerator:
         # Upload voice fresh each session (no caching - avoids cross-region issues)
         self._voice_id = upload_voice_to_deepinfra(self._voice_sample, self._api_key)
 
+        # Optional delay for voice replication across DeepInfra servers
+        if VOICE_UPLOAD_DELAY_SECONDS > 0:
+            import time
+            print(f"    [DIAG] Waiting {VOICE_UPLOAD_DELAY_SECONDS}s for voice replication...")
+            time.sleep(VOICE_UPLOAD_DELAY_SECONDS)
+            print(f"    [DIAG] Done waiting, proceeding with inference")
+
     def _sanitize_filename(self, text: str) -> str:
         safe = re.sub(r"[^a-zA-Z0-9\s-]", "", text[:50])
         safe = re.sub(r"\s+", "_", safe.strip())
@@ -162,6 +194,12 @@ class AudioGenerator:
 
         chunks = split_into_chunks(text)
         print(f"    Generating audio in {len(chunks)} chunks via DeepInfra API...")
+        print(f"    [DIAG] Total text length: {len(text)} chars")
+        for i, chunk in enumerate(chunks):
+            print(f"    [DIAG] Chunk {i}: {len(chunk)} chars, preview: {chunk[:60]!r}...")
+
+        save_debug = os.environ.get("SAVE_DEBUG_WAVS", "").lower() in ("1", "true", "yes")
+        debug_dir = output_path.parent / "debug_wavs" if save_debug else None
 
         with tempfile.TemporaryDirectory() as tmpdir:
             chunk_files = []
@@ -169,7 +207,8 @@ class AudioGenerator:
                 print(f"    Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
                 if i > 0:
                     time.sleep(2)
-                audio_bytes = generate_with_deepinfra(chunk, self._voice_id, self._api_key)
+                debug_path = debug_dir / f"chunk_{i:03d}.wav" if debug_dir else None
+                audio_bytes = generate_with_deepinfra(chunk, self._voice_id, self._api_key, save_debug_wav=debug_path)
                 if audio_bytes:
                     chunk_path = Path(tmpdir) / f"chunk_{i:03d}.wav"
                     with open(chunk_path, 'wb') as f:
