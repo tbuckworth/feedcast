@@ -31,5 +31,5 @@ voice_samples/output/
 voice_samples/*.wav
 !voice_samples/derek_perkins.wav
 
-# Voice ID cache (API-specific, should not be shared)
-.voice_cache.json
+# Voice ID cache - committed so GitHub Actions can reuse cloned voices
+# voice_samples/.voice_cache.json
