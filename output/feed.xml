@@ -26,6 +26,17 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>“Claude’s Constitutional Structure” by Zvi</title>
+      <description>Audio version of “Claude’s Constitutional Structure” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 26 Jan 2026 15:41:39 +0000</pubDate>
+      <guid>3a37a048-9778-4341-9342-756a1fb51ed7</guid>
+      <link>https://www.lesswrong.com/posts/ArNGbGfki7MNMnfGD/claude-s-constitutional-structure</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5abeb6781c95_claudes_constitutional_structure_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Open Thread 418</title>
       <description>Audio version of Open Thread 418 from Scott Alexander</description>
       <pubDate>Mon, 26 Jan 2026 13:30:53 +0000</pubDate>
