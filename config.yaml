@@ -36,3 +36,35 @@ feeds:
     url: "https://www.astralcodexten.com/feed"
     mode: "verbatim"
     prompt: null
+
+  # LessWrong author feeds
+  # URL pattern: https://www.lesswrong.com/feed.xml?view=community-rss&userId=<USER_ID>
+  # Find user IDs on their LessWrong profile page source.
+  # List authors BEFORE frontpage so deduplication preserves author attribution.
+
+  - name: "Owain Evans"
+    url: "https://www.lesswrong.com/feed.xml?view=community-rss&userId=spJZRySQgiKAFTtHp"
+    mode: "auto"
+    prompt: null
+
+  - name: "Buck Shlegeris"
+    url: "https://www.lesswrong.com/feed.xml?view=community-rss&userId=rx7xLaHCh3m7Po385"
+    mode: "auto"
+    prompt: null
+
+  - name: "Ryan Greenblatt"
+    url: "https://www.lesswrong.com/feed.xml?view=community-rss&userId=dfZAq9eZxs4BB4Ji5"
+    mode: "auto"
+    prompt: null
+
+  - name: "Daniel Kokotajlo"
+    url: "https://www.lesswrong.com/feed.xml?view=community-rss&userId=YLFQfGzNdGA4NFcKS"
+    mode: "auto"
+    prompt: null
+
+  # Aggregate feed — catches high-karma posts from any author.
+  # Must be AFTER individual authors for correct deduplication.
+  - name: "LessWrong Frontpage"
+    url: "https://www.lesswrong.com/feed.xml?view=frontpage-rss"
+    mode: "auto"
+    prompt: null
