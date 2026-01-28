@@ -15,6 +15,17 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>“Open Problems With Claude’s Constitution” by Zvi</title>
+      <description>Audio version of “Open Problems With Claude’s Constitution” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 28 Jan 2026 14:25:24 +0000</pubDate>
+      <guid>84f7c8d8-cbac-4021-8a49-37c1631437d2</guid>
+      <link>https://www.lesswrong.com/posts/vFAJxua3Qc6S8MbqG/open-problems-with-claude-s-constitution</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/64efeb7bb448_open_problems_with_claudes_constitution_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>“The Claude Constitution’s Ethical Framework” by Zvi</title>
       <description>Audio version of “The Claude Constitution’s Ethical Framework” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Tue, 27 Jan 2026 15:02:24 +0000</pubDate>
@@ -120,6 +131,17 @@
       <guid>dfd206b6-c484-456b-a6e0-10329d023052</guid>
       <link>https://www.lesswrong.com/posts/eg6GgEq6KWPJZQQYE/chatgpt-self-portrait</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/dfbaffb9883d_chatgpt_self_portrait_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Open Thread 417</title>
+      <description>Audio version of Open Thread 417 from Scott Alexander</description>
+      <pubDate>Mon, 19 Jan 2026 09:06:04 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/open-thread-417</guid>
+      <link>https://www.astralcodexten.com/p/open-thread-417</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bf35087dc567_open_thread_417.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
