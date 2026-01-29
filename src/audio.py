@@ -9,7 +9,7 @@ from pathlib import Path
 import httpx
 
 DEFAULT_VOICE_SAMPLE = "voice_samples/derek_perkins.wav"
-MAX_CHUNK_CHARS = 350  # Safe limit for Chatterbox TTS (gibberish above ~500 chars)
+MAX_CHUNK_CHARS = 500  # Tested: 650 works but 500 has better pacing (see tests/test_chunk_sizes.py)
 
 # Delay after voice upload before inference (for replication)
 # Set via VOICE_UPLOAD_DELAY_SECONDS environment variable
