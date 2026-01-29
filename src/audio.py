@@ -187,7 +187,7 @@ class AudioGenerator:
 
     async def generate(
         self, text: str, output_path: Path, title: str,
-        http_client: httpx.AsyncClient, semaphore: asyncio.Semaphore,
+        http_client: httpx.AsyncClient,
     ) -> Path:
         import subprocess
         import tempfile
@@ -205,14 +205,13 @@ class AudioGenerator:
 
         with tempfile.TemporaryDirectory() as tmpdir:
             async def gen_chunk(i: int, chunk: str) -> tuple[int, bytes | None]:
-                async with semaphore:
-                    print(f"    Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
-                    debug_path = debug_dir / f"chunk_{i:03d}.wav" if debug_dir else None
-                    audio_bytes = await generate_with_deepinfra_async(
-                        chunk, self._voice_id, self._api_key, http_client,
-                        save_debug_wav=debug_path,
-                    )
-                    return (i, audio_bytes)
+                print(f"    Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
+                debug_path = debug_dir / f"chunk_{i:03d}.wav" if debug_dir else None
+                audio_bytes = await generate_with_deepinfra_async(
+                    chunk, self._voice_id, self._api_key, http_client,
+                    save_debug_wav=debug_path,
+                )
+                return (i, audio_bytes)
 
             results = await asyncio.gather(*[gen_chunk(i, c) for i, c in enumerate(chunks)])
             results.sort(key=lambda x: x[0])
@@ -260,9 +259,9 @@ class AudioGenerator:
 
     async def generate_episode(
         self, text: str, output_dir: Path, episode_id: str, title: str,
-        http_client: httpx.AsyncClient, semaphore: asyncio.Semaphore,
+        http_client: httpx.AsyncClient,
     ) -> Path:
         safe_title = self._sanitize_filename(title)
         filename = f"{episode_id}_{safe_title}"
         output_path = output_dir / f"{filename}.mp3"
-        return await self.generate(text, output_path, title, http_client, semaphore)
+        return await self.generate(text, output_path, title, http_client)
