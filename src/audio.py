@@ -179,7 +179,7 @@ class AudioGenerator:
         self._voice_id = upload_voice_to_deepinfra(self._voice_sample, self._api_key)
 
         # Concurrency limit for TTS API calls (shared across all entries)
-        self._semaphore = asyncio.Semaphore(50)
+        self._semaphore = asyncio.Semaphore(10)
 
         # Optional delay for voice replication across DeepInfra servers
         if VOICE_UPLOAD_DELAY_SECONDS > 0:
