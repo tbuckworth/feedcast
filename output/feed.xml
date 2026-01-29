@@ -17,7 +17,7 @@
     <item>
       <title>How Articulate Are the Whales?</title>
       <description>Audio version of How Articulate Are the Whales? from LessWrong Frontpage</description>
-      <pubDate>Wed, 28 Jan 2026 21:24:19 +0000</pubDate>
+      <pubDate>Thu, 29 Jan 2026 01:08:09 +0000</pubDate>
       <guid>eZaDucBYmWgSrQot4</guid>
       <link>https://www.lesswrong.com/posts/eZaDucBYmWgSrQot4/how-articulate-are-the-whales</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7710046eb826_how_articulate_are_the_whales.mp3" type="audio/mpeg" length="0" />
@@ -197,6 +197,28 @@
       <guid>aYtrLhoZtCKZnfBvA</guid>
       <link>https://www.lesswrong.com/posts/aYtrLhoZtCKZnfBvA/recent-llms-can-do-2-hop-and-3-hop-latent-no-cot-reasoning</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Measuring no CoT math time horizon (single forward pass)</title>
+      <description>Audio version of Measuring no CoT math time horizon (single forward pass) from Ryan Greenblatt</description>
+      <pubDate>Fri, 26 Dec 2025 16:37:52 +0000</pubDate>
+      <guid>Ty5Bmg7P6Tciy2uj2</guid>
+      <link>https://www.lesswrong.com/posts/Ty5Bmg7P6Tciy2uj2/measuring-no-cot-math-time-horizon-single-forward-pass</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/68b09fa7e2a6_measuring_no_cot_math_time_horizon_single_forward.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Thinking Machines Tinker API is good news for AI control and security</title>
+      <description>Audio version of The Thinking Machines Tinker API is good news for AI control and security from Buck Shlegeris</description>
+      <pubDate>Thu, 09 Oct 2025 15:22:15 +0000</pubDate>
+      <guid>r68nCQK3veQtCdqGt</guid>
+      <link>https://www.lesswrong.com/posts/r68nCQK3veQtCdqGt/the-thinking-machines-tinker-api-is-good-news-for-ai-control</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/484b3eb83a9c_the_thinking_machines_tinker_api_is_good_news_for.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>

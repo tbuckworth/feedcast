@@ -4,7 +4,7 @@ import os
 import re
 from typing import Optional
 
-from anthropic import Anthropic
+from anthropic import AsyncAnthropic
 from bs4 import BeautifulSoup
 
 from .monitor import FeedEntry
@@ -16,7 +16,7 @@ class ContentProcessor:
     """Processes feed content - either summarizing with Claude or cleaning for verbatim."""
 
     def __init__(self, default_prompt: str):
-        self.client = Anthropic()
+        self.client = AsyncAnthropic()
         self.default_prompt = default_prompt
 
     def clean_html(self, html_content: str) -> str:
@@ -40,7 +40,7 @@ class ContentProcessor:
 
         return text.strip()
 
-    def summarize(
+    async def summarize(
         self, entry: FeedEntry, prompt: Optional[str] = None
     ) -> str:
         """Summarize content using Claude API."""
@@ -64,7 +64,7 @@ Content:
         if len(user_message) > max_chars:
             user_message = user_message[:max_chars] + "\n\n[Content truncated due to length]"
 
-        response = self.client.messages.create(
+        response = await self.client.messages.create(
             model="claude-sonnet-4-20250514",
             max_tokens=2000,
             system=system_prompt,
@@ -82,12 +82,12 @@ Content:
 
         return f"{intro}\n\n{clean_content}"
 
-    def process(
+    async def process(
         self, entry: FeedEntry, mode: str, prompt: Optional[str] = None
     ) -> str:
         """Process a feed entry based on mode (summarize or verbatim)."""
         if mode == "summarize":
-            summary = self.summarize(entry, prompt)
+            summary = await self.summarize(entry, prompt)
             # Add intro for context
             intro = f"Summary of {entry.title} by {entry.author}."
             return f"{intro}\n\n{summary}"
@@ -100,7 +100,7 @@ Content:
                 return self.process_verbatim(entry)
             else:
                 print(f"    Auto mode: {len(clean_text)} chars > {AUTO_VERBATIM_LIMIT} → summarize")
-                summary = self.summarize(entry, prompt)
+                summary = await self.summarize(entry, prompt)
                 intro = f"Summary of {entry.title} by {entry.author}."
                 return f"{intro}\n\n{summary}"
         else:
