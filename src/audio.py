@@ -100,7 +100,7 @@ async def generate_with_deepinfra_async(
     print(f"      [DIAG] Generating with voice_id: {voice_id}")
     print(f"      [DIAG] Text length: {len(text)} chars, preview: {text[:80]!r}...")
 
-    max_retries = 3
+    max_retries = 5
     for attempt in range(max_retries):
         try:
             response = await http_client.post(
@@ -114,7 +114,6 @@ async def generate_with_deepinfra_async(
                     "voice_id": voice_id,
                 },
             )
-            break
         except (httpx.TimeoutException, httpx.ConnectError) as e:
             if attempt < max_retries - 1:
                 wait_time = (attempt + 1) * 10
@@ -123,12 +122,18 @@ async def generate_with_deepinfra_async(
                 continue
             raise
 
-    # Diagnostic logging for response
-    print(f"      [DIAG] Inference response status: {response.status_code}")
-    print(f"      [DIAG] Inference response headers: {dict(response.headers)}")
+        # Retry on 429 rate limit
+        if response.status_code == 429:
+            if attempt < max_retries - 1:
+                wait_time = (attempt + 1) * 5
+                print(f"      Rate limited, retry {attempt + 2}/{max_retries} in {wait_time}s")
+                await asyncio.sleep(wait_time)
+                continue
+            raise RuntimeError(f"DeepInfra rate limited after {max_retries} retries")
 
-    if response.status_code != 200:
-        raise RuntimeError(f"DeepInfra error {response.status_code}: {response.text}")
+        if response.status_code != 200:
+            raise RuntimeError(f"DeepInfra error {response.status_code}: {response.text}")
+        break
 
     result = response.json()
     audio_b64 = result.get("audio", "")
@@ -173,6 +178,9 @@ class AudioGenerator:
         # Upload voice fresh each session (no caching - avoids cross-region issues)
         self._voice_id = upload_voice_to_deepinfra(self._voice_sample, self._api_key)
 
+        # Concurrency limit for TTS API calls (shared across all entries)
+        self._semaphore = asyncio.Semaphore(50)
+
         # Optional delay for voice replication across DeepInfra servers
         if VOICE_UPLOAD_DELAY_SECONDS > 0:
             import time
@@ -205,13 +213,14 @@ class AudioGenerator:
 
         with tempfile.TemporaryDirectory() as tmpdir:
             async def gen_chunk(i: int, chunk: str) -> tuple[int, bytes | None]:
-                print(f"    Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
-                debug_path = debug_dir / f"chunk_{i:03d}.wav" if debug_dir else None
-                audio_bytes = await generate_with_deepinfra_async(
-                    chunk, self._voice_id, self._api_key, http_client,
-                    save_debug_wav=debug_path,
-                )
-                return (i, audio_bytes)
+                async with self._semaphore:
+                    print(f"    Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
+                    debug_path = debug_dir / f"chunk_{i:03d}.wav" if debug_dir else None
+                    audio_bytes = await generate_with_deepinfra_async(
+                        chunk, self._voice_id, self._api_key, http_client,
+                        save_debug_wav=debug_path,
+                    )
+                    return (i, audio_bytes)
 
             results = await asyncio.gather(*[gen_chunk(i, c) for i, c in enumerate(chunks)])
             results.sort(key=lambda x: x[0])
