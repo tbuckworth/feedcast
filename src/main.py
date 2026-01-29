@@ -1,17 +1,18 @@
 """Main entry point for feedcast pipeline."""
 
+import asyncio
 import hashlib
 import os
-import sys
 from pathlib import Path
-from typing import Any, Literal
+from typing import Literal
 
+import httpx
 import yaml
 from pydantic import BaseModel
 
 from .audio import AudioGenerator
 from .feed import FeedGenerator, PodcastConfig
-from .monitor import FeedMonitor
+from .monitor import FeedEntry, FeedMonitor
 from .processor import ContentProcessor
 
 
@@ -64,8 +65,26 @@ def generate_episode_id(entry_id: str) -> str:
     return hashlib.sha256(entry_id.encode()).hexdigest()[:12]
 
 
-def main(config_path: Path | None = None) -> None:
-    """Run the feedcast pipeline."""
+async def process_entry(
+    entry: FeedEntry, mode: str, prompt: str,
+    processor: ContentProcessor, audio_gen: AudioGenerator,
+    audio_dir: Path, http_client: httpx.AsyncClient,
+) -> tuple[FeedEntry, Path]:
+    """Process one entry: content → audio. Runs concurrently with other entries."""
+    print(f"\n  Processing: {entry.title}")
+    processed_text = await processor.process(entry, mode, prompt)
+    print(f"    Processed text: {len(processed_text)} chars")
+
+    episode_id = generate_episode_id(entry.id)
+    audio_path = await audio_gen.generate_episode(
+        processed_text, audio_dir, episode_id, entry.title, http_client,
+    )
+    print(f"    Generated audio: {audio_path.name}")
+    return (entry, audio_path)
+
+
+async def async_main(config_path: Path | None = None) -> None:
+    """Run the feedcast pipeline with parallel processing."""
     # Determine paths
     project_root = Path(__file__).parent.parent
     config_path = config_path or project_root / "config.yaml"
@@ -113,56 +132,62 @@ def main(config_path: Path | None = None) -> None:
     )
     feed_gen = FeedGenerator(podcast_config)
 
-    # Process each configured feed
-    new_episodes = 0
-    for feed_config in config.feeds:
-        print(f"\nProcessing feed: {feed_config.name}")
-        print(f"  URL: {feed_config.url}")
-        print(f"  Mode: {feed_config.mode}")
+    # PHASE 1: Parallel feed fetching
+    print(f"\nPhase 1: Fetching {len(config.feeds)} feeds in parallel...")
 
-        try:
+    async def fetch_one(fc: FeedConfig) -> tuple[FeedConfig, list[FeedEntry]]:
+        print(f"  Fetching: {fc.name} ({fc.url})")
+        entries = await asyncio.to_thread(monitor.fetch_feed, fc.url, fc.name)
+        print(f"  {fc.name}: {len(entries)} new entries")
+        return (fc, entries)
 
-            entries = monitor.fetch_feed(feed_config.url, feed_config.name)
-            print(f"  Found {len(entries)} new entries")
+    feed_results = await asyncio.gather(*[fetch_one(fc) for fc in config.feeds])
 
-            # Only process the most recent entry per feed per run
-            if entries:
-                entries = [entries[-1]]
-                print(f"  Processing most recent entry only")
-
-            for entry in entries:
-                print(f"\n  Processing: {entry.title}")
-
-                try:
-                    # Process content
-                    mode = feed_config.mode
-                    if force_verbatim and reprocess_entry and entry.id == reprocess_entry:
-                        print(f"    Overriding mode to verbatim (force_verbatim)")
-                        mode = "verbatim"
-                    prompt = feed_config.prompt or config.default_prompt
-                    processed_text = processor.process(
-                        entry, mode, prompt
-                    )
-                    print(f"    Processed text: {len(processed_text)} chars")
-
-                    # Generate audio
-                    episode_id = generate_episode_id(entry.id)
-                    audio_path = audio_gen.generate_episode(
-                        processed_text, audio_dir, episode_id, entry.title
-                    )
-                    print(f"    Generated audio: {audio_path.name}")
-
-                    # Mark as processed
-                    monitor.mark_processed(entry, audio_path.name)
-                    new_episodes += 1
-
-                except Exception as e:
-                    print(f"    Error processing entry: {e}")
-                    continue
-
-        except Exception as e:
-            print(f"  Error fetching feed: {e}")
+    # Deduplicate — gather preserves config order, so author feeds win
+    seen_ids: set[str] = set()
+    entries_to_process: list[tuple[FeedEntry, str, str]] = []
+    for feed_config, entries in feed_results:
+        if not entries:
             continue
+        entry = entries[-1]  # most recent only
+        if entry.id in seen_ids:
+            print(f"  Skipping duplicate: {entry.title}")
+            continue
+        seen_ids.add(entry.id)
+        mode = feed_config.mode
+        if force_verbatim and reprocess_entry and entry.id == reprocess_entry:
+            print(f"    Overriding mode to verbatim (force_verbatim)")
+            mode = "verbatim"
+        prompt = feed_config.prompt or config.default_prompt
+        entries_to_process.append((entry, mode, prompt))
+
+    print(f"\n{len(entries_to_process)} entries to process")
+
+    if not entries_to_process:
+        print("No new entries to process.")
+    else:
+        # PHASE 2: Parallel processing (content + audio)
+        print(f"\nPhase 2: Processing {len(entries_to_process)} entries in parallel...")
+
+        async with httpx.AsyncClient(timeout=httpx.Timeout(90.0)) as http_client:
+            tasks = [
+                process_entry(e, m, p, processor, audio_gen, audio_dir, http_client)
+                for e, m, p in entries_to_process
+            ]
+            results = await asyncio.gather(*tasks, return_exceptions=True)
+
+        # PHASE 3: Sequential finalization
+        print(f"\nPhase 3: Finalizing...")
+        new_episodes = 0
+        for result in results:
+            if isinstance(result, Exception):
+                print(f"  Error processing entry: {type(result).__name__}: {result!r}")
+                continue
+            entry, audio_path = result
+            monitor.mark_processed(entry, audio_path.name)
+            new_episodes += 1
+
+        print(f"  {new_episodes} new episodes created")
 
     # Generate podcast feed
     print(f"\nGenerating podcast feed...")
@@ -177,7 +202,12 @@ def main(config_path: Path | None = None) -> None:
     if removed:
         print(f"  Cleaned up {removed} old entries")
 
-    print(f"\nPipeline complete. {new_episodes} new episodes created.")
+    print(f"\nPipeline complete.")
+
+
+def main(config_path: Path | None = None) -> None:
+    """Run the feedcast pipeline."""
+    asyncio.run(async_main(config_path))
 
 
 if __name__ == "__main__":

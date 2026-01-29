@@ -1,11 +1,12 @@
 """Audio generation using DeepInfra Chatterbox-Turbo API with voice cloning."""
 
+import asyncio
 import base64
 import os
 import re
 from pathlib import Path
 
-import requests
+import httpx
 
 DEFAULT_VOICE_SAMPLE = "voice_samples/derek_perkins.wav"
 MAX_CHUNK_CHARS = 350  # Safe limit for Chatterbox TTS (gibberish above ~500 chars)
@@ -28,7 +29,7 @@ def upload_voice_to_deepinfra(voice_path: Path, api_key: str) -> str:
     print(f"    Uploading voice sample: {voice_path.name}")
 
     with open(voice_path, "rb") as f:
-        response = requests.post(
+        response = httpx.post(
             DEEPINFRA_VOICE_UPLOAD_URL,
             headers={"Authorization": f"Bearer {api_key}"},
             files={"files": (voice_path.name, f, "audio/wav")},
@@ -90,18 +91,19 @@ def split_into_chunks(text: str, max_chars: int = MAX_CHUNK_CHARS) -> list[str]:
     return [c for c in chunks if c]
 
 
-def generate_with_deepinfra(text: str, voice_id: str, api_key: str, save_debug_wav: Path | None = None) -> bytes:
+async def generate_with_deepinfra_async(
+    text: str, voice_id: str, api_key: str, http_client: httpx.AsyncClient,
+    save_debug_wav: Path | None = None,
+) -> bytes:
     """Generate audio using DeepInfra inference endpoint with voice cloning."""
-    import time
-
     # Diagnostic logging
     print(f"      [DIAG] Generating with voice_id: {voice_id}")
     print(f"      [DIAG] Text length: {len(text)} chars, preview: {text[:80]!r}...")
 
-    max_retries = 3
+    max_retries = 5
     for attempt in range(max_retries):
         try:
-            response = requests.post(
+            response = await http_client.post(
                 DEEPINFRA_API_URL,
                 headers={
                     "Authorization": f"Bearer {api_key}",
@@ -111,23 +113,27 @@ def generate_with_deepinfra(text: str, voice_id: str, api_key: str, save_debug_w
                     "text": text,
                     "voice_id": voice_id,
                 },
-                timeout=300,
             )
-            break
-        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+        except (httpx.TimeoutException, httpx.ConnectError) as e:
             if attempt < max_retries - 1:
                 wait_time = (attempt + 1) * 10
                 print(f"      Retry {attempt + 2}/{max_retries} in {wait_time}s: {e}")
-                time.sleep(wait_time)
+                await asyncio.sleep(wait_time)
                 continue
             raise
 
-    # Diagnostic logging for response
-    print(f"      [DIAG] Inference response status: {response.status_code}")
-    print(f"      [DIAG] Inference response headers: {dict(response.headers)}")
+        # Retry on 429 rate limit
+        if response.status_code == 429:
+            if attempt < max_retries - 1:
+                wait_time = (attempt + 1) * 5
+                print(f"      Rate limited, retry {attempt + 2}/{max_retries} in {wait_time}s")
+                await asyncio.sleep(wait_time)
+                continue
+            raise RuntimeError(f"DeepInfra rate limited after {max_retries} retries")
 
-    if response.status_code != 200:
-        raise RuntimeError(f"DeepInfra error {response.status_code}: {response.text}")
+        if response.status_code != 200:
+            raise RuntimeError(f"DeepInfra error {response.status_code}: {response.text}")
+        break
 
     result = response.json()
     audio_b64 = result.get("audio", "")
@@ -172,6 +178,9 @@ class AudioGenerator:
         # Upload voice fresh each session (no caching - avoids cross-region issues)
         self._voice_id = upload_voice_to_deepinfra(self._voice_sample, self._api_key)
 
+        # Concurrency limit for TTS API calls (shared across all entries)
+        self._semaphore = asyncio.Semaphore(50)
+
         # Optional delay for voice replication across DeepInfra servers
         if VOICE_UPLOAD_DELAY_SECONDS > 0:
             import time
@@ -184,11 +193,12 @@ class AudioGenerator:
         safe = re.sub(r"\s+", "_", safe.strip())
         return safe.lower() or "audio"
 
-    def generate(self, text: str, output_path: Path, title: str = "audio") -> Path:
-        import shutil
+    async def generate(
+        self, text: str, output_path: Path, title: str,
+        http_client: httpx.AsyncClient,
+    ) -> Path:
         import subprocess
         import tempfile
-        import time
 
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -202,13 +212,21 @@ class AudioGenerator:
         debug_dir = output_path.parent / "debug_wavs" if save_debug else None
 
         with tempfile.TemporaryDirectory() as tmpdir:
+            async def gen_chunk(i: int, chunk: str) -> tuple[int, bytes | None]:
+                async with self._semaphore:
+                    print(f"    Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
+                    debug_path = debug_dir / f"chunk_{i:03d}.wav" if debug_dir else None
+                    audio_bytes = await generate_with_deepinfra_async(
+                        chunk, self._voice_id, self._api_key, http_client,
+                        save_debug_wav=debug_path,
+                    )
+                    return (i, audio_bytes)
+
+            results = await asyncio.gather(*[gen_chunk(i, c) for i, c in enumerate(chunks)])
+            results.sort(key=lambda x: x[0])
+
             chunk_files = []
-            for i, chunk in enumerate(chunks):
-                print(f"    Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
-                if i > 0:
-                    time.sleep(2)
-                debug_path = debug_dir / f"chunk_{i:03d}.wav" if debug_dir else None
-                audio_bytes = generate_with_deepinfra(chunk, self._voice_id, self._api_key, save_debug_wav=debug_path)
+            for i, audio_bytes in results:
                 if audio_bytes:
                     chunk_path = Path(tmpdir) / f"chunk_{i:03d}.wav"
                     with open(chunk_path, 'wb') as f:
@@ -221,8 +239,8 @@ class AudioGenerator:
             mp3_path = output_path.with_suffix(".mp3")
 
             if len(chunk_files) == 1:
-                # Single chunk: convert WAV to MP3
-                result = subprocess.run(
+                result = await asyncio.to_thread(
+                    subprocess.run,
                     ["ffmpeg", "-y", "-i", str(chunk_files[0]),
                      "-acodec", "libmp3lame", "-q:a", "2", str(mp3_path)],
                     capture_output=True, text=True, timeout=300,
@@ -231,13 +249,13 @@ class AudioGenerator:
                     print(f"      Saved: {mp3_path}")
                     return mp3_path
             else:
-                # Multiple chunks: concatenate and convert to MP3
                 list_file = Path(tmpdir) / "chunks.txt"
                 with open(list_file, 'w') as f:
                     for chunk_path in chunk_files:
                         f.write(f"file '{chunk_path}'\n")
 
-                result = subprocess.run(
+                result = await asyncio.to_thread(
+                    subprocess.run,
                     ["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(list_file),
                      "-acodec", "libmp3lame", "-q:a", "2", str(mp3_path)],
                     capture_output=True, text=True, timeout=300,
@@ -248,8 +266,11 @@ class AudioGenerator:
 
             raise RuntimeError(f"FFmpeg failed: {result.stderr}")
 
-    def generate_episode(self, text: str, output_dir: Path, episode_id: str, title: str) -> Path:
+    async def generate_episode(
+        self, text: str, output_dir: Path, episode_id: str, title: str,
+        http_client: httpx.AsyncClient,
+    ) -> Path:
         safe_title = self._sanitize_filename(title)
         filename = f"{episode_id}_{safe_title}"
         output_path = output_dir / f"{filename}.mp3"
-        return self.generate(text, output_path, title)
+        return await self.generate(text, output_path, title, http_client)
