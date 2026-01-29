@@ -155,7 +155,9 @@ async def async_main(config_path: Path | None = None) -> None:
             continue
         seen_ids.add(entry.id)
         mode = feed_config.mode
-        if force_verbatim and reprocess_entry and entry.id == reprocess_entry:
+        if force_verbatim and reprocess_entry and (
+            entry.id == reprocess_entry or entry.link == reprocess_entry
+        ):
             print(f"    Overriding mode to verbatim (force_verbatim)")
             mode = "verbatim"
         prompt = feed_config.prompt or config.default_prompt
@@ -169,7 +171,7 @@ async def async_main(config_path: Path | None = None) -> None:
         # PHASE 2: Parallel processing (content + audio)
         print(f"\nPhase 2: Processing {len(entries_to_process)} entries in parallel...")
 
-        async with httpx.AsyncClient(timeout=httpx.Timeout(90.0)) as http_client:
+        async with httpx.AsyncClient(timeout=httpx.Timeout(300.0)) as http_client:
             tasks = [
                 process_entry(e, m, p, processor, audio_gen, audio_dir, http_client)
                 for e, m, p in entries_to_process

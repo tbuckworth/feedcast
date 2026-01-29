@@ -58,7 +58,8 @@ class FeedMonitor:
         """Delete an entry from the database. Returns True if deleted."""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.execute(
-                "DELETE FROM processed_posts WHERE id = ?", (entry_id,)
+                "DELETE FROM processed_posts WHERE id = ? OR link = ?",
+                (entry_id, entry_id),
             )
             conn.commit()
             return cursor.rowcount > 0
