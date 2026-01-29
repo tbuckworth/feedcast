@@ -68,7 +68,7 @@ def generate_episode_id(entry_id: str) -> str:
 async def process_entry(
     entry: FeedEntry, mode: str, prompt: str,
     processor: ContentProcessor, audio_gen: AudioGenerator,
-    audio_dir: Path, http_client: httpx.AsyncClient, semaphore: asyncio.Semaphore,
+    audio_dir: Path, http_client: httpx.AsyncClient,
 ) -> tuple[FeedEntry, Path]:
     """Process one entry: content → audio. Runs concurrently with other entries."""
     print(f"\n  Processing: {entry.title}")
@@ -77,7 +77,7 @@ async def process_entry(
 
     episode_id = generate_episode_id(entry.id)
     audio_path = await audio_gen.generate_episode(
-        processed_text, audio_dir, episode_id, entry.title, http_client, semaphore,
+        processed_text, audio_dir, episode_id, entry.title, http_client,
     )
     print(f"    Generated audio: {audio_path.name}")
     return (entry, audio_path)
@@ -169,10 +169,9 @@ async def async_main(config_path: Path | None = None) -> None:
         # PHASE 2: Parallel processing (content + audio)
         print(f"\nPhase 2: Processing {len(entries_to_process)} entries in parallel...")
 
-        async with httpx.AsyncClient(timeout=httpx.Timeout(300.0)) as http_client:
-            semaphore = asyncio.Semaphore(5)
+        async with httpx.AsyncClient(timeout=httpx.Timeout(90.0)) as http_client:
             tasks = [
-                process_entry(e, m, p, processor, audio_gen, audio_dir, http_client, semaphore)
+                process_entry(e, m, p, processor, audio_gen, audio_dir, http_client)
                 for e, m, p in entries_to_process
             ]
             results = await asyncio.gather(*tasks, return_exceptions=True)
@@ -182,7 +181,7 @@ async def async_main(config_path: Path | None = None) -> None:
         new_episodes = 0
         for result in results:
             if isinstance(result, Exception):
-                print(f"  Error processing entry: {result}")
+                print(f"  Error processing entry: {type(result).__name__}: {result!r}")
                 continue
             entry, audio_path = result
             monitor.mark_processed(entry, audio_path.name)
