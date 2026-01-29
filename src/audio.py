@@ -249,10 +249,21 @@ class AudioGenerator:
                     print(f"      Saved: {mp3_path}")
                     return mp3_path
             else:
+                # Generate a short silence to insert between chunks
+                silence_path = Path(tmpdir) / "silence.wav"
+                await asyncio.to_thread(
+                    subprocess.run,
+                    ["ffmpeg", "-y", "-f", "lavfi", "-i", "anullsrc=r=24000:cl=mono",
+                     "-t", "0.35", str(silence_path)],
+                    capture_output=True, timeout=10,
+                )
+
                 list_file = Path(tmpdir) / "chunks.txt"
                 with open(list_file, 'w') as f:
-                    for chunk_path in chunk_files:
+                    for i, chunk_path in enumerate(chunk_files):
                         f.write(f"file '{chunk_path}'\n")
+                        if i < len(chunk_files) - 1:
+                            f.write(f"file '{silence_path}'\n")
 
                 result = await asyncio.to_thread(
                     subprocess.run,
