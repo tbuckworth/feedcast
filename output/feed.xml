@@ -15,17 +15,6 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
-      <title>“Open Problems With Claude’s Constitution” by Zvi</title>
-      <description>Audio version of “Open Problems With Claude’s Constitution” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 28 Jan 2026 14:25:24 +0000</pubDate>
-      <guid>84f7c8d8-cbac-4021-8a49-37c1631437d2</guid>
-      <link>https://www.lesswrong.com/posts/vFAJxua3Qc6S8MbqG/open-problems-with-claude-s-constitution</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/64efeb7bb448_open_problems_with_claudes_constitution_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“The Claude Constitution’s Ethical Framework” by Zvi</title>
       <description>Audio version of “The Claude Constitution’s Ethical Framework” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Tue, 27 Jan 2026 15:02:24 +0000</pubDate>
