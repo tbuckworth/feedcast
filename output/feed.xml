@@ -136,12 +136,45 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>“Medical Roundup #6” by Zvi</title>
+      <description>Audio version of “Medical Roundup #6” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 19 Jan 2026 21:22:35 +0000</pubDate>
+      <guid>b1396271-d933-4649-a182-aac896eaaf05</guid>
+      <link>https://www.lesswrong.com/posts/FBkJmFStydJbAJmry/medical-roundup-6</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/53c85acc565b_medical_roundup_6_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Open Thread 417</title>
       <description>Audio version of Open Thread 417 from Scott Alexander</description>
       <pubDate>Mon, 19 Jan 2026 09:06:04 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/open-thread-417</guid>
       <link>https://www.astralcodexten.com/p/open-thread-417</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/bf35087dc567_open_thread_417.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The inaugural Redwood Research podcast</title>
+      <description>Audio version of The inaugural Redwood Research podcast from Buck Shlegeris</description>
+      <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
+      <guid>p4iJpumHt6Ay9KnXT</guid>
+      <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts</title>
+      <description>Audio version of Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts from Ryan Greenblatt</description>
+      <pubDate>Thu, 01 Jan 2026 13:36:25 +0000</pubDate>
+      <guid>aYtrLhoZtCKZnfBvA</guid>
+      <link>https://www.lesswrong.com/posts/aYtrLhoZtCKZnfBvA/recent-llms-can-do-2-hop-and-3-hop-latent-no-cot-reasoning</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
