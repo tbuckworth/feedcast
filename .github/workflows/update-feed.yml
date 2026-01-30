@@ -2,7 +2,7 @@ name: Update Podcast Feed
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Daily at 8am UTC
+    - cron: '0 6 * * *'  # Daily at 6am UTC
   workflow_dispatch:
     inputs:
       entry_url:
@@ -42,7 +42,7 @@ jobs:
           REPROCESS_ENTRY: ${{ inputs.entry_url }}
           FORCE_VERBATIM: ${{ inputs.force_verbatim }}
           VOICE_UPLOAD_DELAY_SECONDS: "5"
-          SAVE_DEBUG_WAVS: "true"
+          SAVE_DEBUG_WAVS: "false"
         run: uv run python -m src.main
 
       - name: Upload debug WAVs
@@ -81,7 +81,7 @@ jobs:
       - name: Copy audio to output
         run: |
           mkdir -p output/audio
-          cp -r data/audio/* output/audio/ 2>/dev/null || true
+          cp data/audio/*.mp3 output/audio/ 2>/dev/null || true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

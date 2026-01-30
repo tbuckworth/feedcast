@@ -144,12 +144,25 @@ class FeedMonitor:
         entries.sort(key=lambda e: e.published)
         return entries
 
-    def cleanup_old_entries(self, days: int = 30) -> int:
-        """Remove entries older than specified days. Returns count removed."""
+    def cleanup_old_entries(
+        self, days: int = 30, audio_dir: Optional[Path] = None
+    ) -> int:
+        """Remove entries older than specified days and their audio files. Returns count removed."""
         cutoff = datetime.now().timestamp() - (days * 24 * 60 * 60)
         cutoff_date = datetime.fromtimestamp(cutoff).isoformat()
 
         with sqlite3.connect(self.db_path) as conn:
+            # Delete audio files before removing DB rows
+            if audio_dir:
+                cursor = conn.execute(
+                    "SELECT audio_file FROM processed_posts WHERE published < ? AND audio_file IS NOT NULL",
+                    (cutoff_date,),
+                )
+                for (audio_file,) in cursor.fetchall():
+                    path = audio_dir / audio_file
+                    if path.exists():
+                        path.unlink()
+
             cursor = conn.execute(
                 "DELETE FROM processed_posts WHERE published < ?", (cutoff_date,)
             )
