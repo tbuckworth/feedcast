@@ -15,6 +15,16 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-01-30</title>
+      <description>Audio version of Daily News Briefing - 2026-01-30 from Daily News Briefing</description>
+      <pubDate>Fri, 30 Jan 2026 02:20:29 +0000</pubDate>
+      <guid>news-briefing-2026-01-30</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/57a47e26d350_daily_news_briefing_-_2026-01-30.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Better evals are not enough to combat eval awareness</title>
       <description>Audio version of Better evals are not enough to combat eval awareness from LessWrong Frontpage</description>
       <pubDate>Thu, 29 Jan 2026 20:42:40 +0000</pubDate>
@@ -37,6 +47,17 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>ACX Classifieds 1/26</title>
+      <description>Audio version of ACX Classifieds 1/26 from Scott Alexander</description>
+      <pubDate>Thu, 29 Jan 2026 11:26:50 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/acx-classifieds-126</guid>
+      <link>https://www.astralcodexten.com/p/acx-classifieds-126</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/762f995f602c_acx_classifieds_126.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Thoughts on AGI and world government</title>
       <description>Audio version of Thoughts on AGI and world government from LessWrong Frontpage</description>
       <pubDate>Thu, 29 Jan 2026 07:22:31 +0000</pubDate>
@@ -54,6 +75,17 @@
       <guid>84f7c8d8-cbac-4021-8a49-37c1631437d2</guid>
       <link>https://www.lesswrong.com/posts/vFAJxua3Qc6S8MbqG/open-problems-with-claude-s-constitution</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/64efeb7bb448_open_problems_with_claudes_constitution_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Clarifying how our AI timelines forecasts have changed since AI 2027</title>
+      <description>Audio version of Clarifying how our AI timelines forecasts have changed since AI 2027 from AI Futures Project</description>
+      <pubDate>Tue, 27 Jan 2026 22:50:15 +0000</pubDate>
+      <guid>https://blog.ai-futures.org/p/clarifying-how-our-ai-timelines-forecasts</guid>
+      <link>https://blog.ai-futures.org/p/clarifying-how-our-ai-timelines-forecasts</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6ce1c19011d0_clarifying_how_our_ai_timelines_forecasts_have_cha.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -213,6 +245,17 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>“AI #151: While Claude Coworks” by Zvi</title>
+      <description>Audio version of “AI #151: While Claude Coworks” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 15 Jan 2026 14:31:37 +0000</pubDate>
+      <guid>8c20ee21-7b35-41d1-89dc-e3a134e241f6</guid>
+      <link>https://www.lesswrong.com/posts/L27yM3qBqDnigtxLM/ai-151-while-claude-coworks</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/104045e209cd_ai_151_while_claude_coworks_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Hidden Open Thread 416.5</title>
       <description>Audio version of Hidden Open Thread 416.5 from Scott Alexander</description>
       <pubDate>Wed, 14 Jan 2026 20:22:51 +0000</pubDate>
@@ -241,6 +284,39 @@
       <guid>aYtrLhoZtCKZnfBvA</guid>
       <link>https://www.lesswrong.com/posts/aYtrLhoZtCKZnfBvA/recent-llms-can-do-2-hop-and-3-hop-latent-no-cot-reasoning</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Measuring no CoT math time horizon (single forward pass)</title>
+      <description>Audio version of Measuring no CoT math time horizon (single forward pass) from Ryan Greenblatt</description>
+      <pubDate>Fri, 26 Dec 2025 16:37:52 +0000</pubDate>
+      <guid>Ty5Bmg7P6Tciy2uj2</guid>
+      <link>https://www.lesswrong.com/posts/Ty5Bmg7P6Tciy2uj2/measuring-no-cot-math-time-horizon-single-forward-pass</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/68b09fa7e2a6_measuring_no_cot_math_time_horizon_single_forward.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Thinking Machines Tinker API is good news for AI control and security</title>
+      <description>Audio version of The Thinking Machines Tinker API is good news for AI control and security from Buck Shlegeris</description>
+      <pubDate>Thu, 09 Oct 2025 15:22:15 +0000</pubDate>
+      <guid>r68nCQK3veQtCdqGt</guid>
+      <link>https://www.lesswrong.com/posts/r68nCQK3veQtCdqGt/the-thinking-machines-tinker-api-is-good-news-for-ai-control</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/484b3eb83a9c_the_thinking_machines_tinker_api_is_good_news_for.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>New, improved multiple-choice TruthfulQA</title>
+      <description>Audio version of New, improved multiple-choice TruthfulQA from Owain Evans</description>
+      <pubDate>Wed, 15 Jan 2025 23:32:09 +0000</pubDate>
+      <guid>Bunfwz6JsNd44kgLT</guid>
+      <link>https://www.lesswrong.com/posts/Bunfwz6JsNd44kgLT/new-improved-multiple-choice-truthfulqa</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/be18640f6d79_new_improved_multiple-choice_truthfulqa.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
