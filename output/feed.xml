@@ -15,6 +15,17 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>“On The Adolescence of Technology” by Zvi</title>
+      <description>Audio version of “On The Adolescence of Technology” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 30 Jan 2026 12:58:41 +0000</pubDate>
+      <guid>61704eb6-252b-4772-84cf-d45e0070acad</guid>
+      <link>https://www.lesswrong.com/posts/dho4JQytfHWXtTvkt/on-the-adolescence-of-technology</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1692f62662c1_on_the_adolescence_of_technology_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-01-30</title>
       <description>Audio version of Daily News Briefing - 2026-01-30 from Daily News Briefing</description>
       <pubDate>Fri, 30 Jan 2026 02:20:29 +0000</pubDate>
@@ -284,6 +295,17 @@
       <guid>ef629b53-1279-4097-b2d6-c198288619bb</guid>
       <link>https://www.lesswrong.com/posts/KAjhtrJggPtaophy7/when-will-they-take-our-jobs</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c4d14e82d89_when_will_they_take_our_jobs_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>What Happens When Superhuman AIs Compete for Control?</title>
+      <description>Audio version of What Happens When Superhuman AIs Compete for Control? from AI Futures Project</description>
+      <pubDate>Sun, 11 Jan 2026 14:02:41 +0000</pubDate>
+      <guid>https://blog.ai-futures.org/p/what-happens-when-superhuman-ais</guid>
+      <link>https://blog.ai-futures.org/p/what-happens-when-superhuman-ais</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ccbfcfc54d9f_what_happens_when_superhuman_ais_compete_for_contr.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
