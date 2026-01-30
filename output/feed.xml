@@ -223,6 +223,17 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Forecast how AI will progress in 2026</title>
+      <description>Audio version of Forecast how AI will progress in 2026 from AI Futures Project</description>
+      <pubDate>Sat, 17 Jan 2026 18:52:05 +0000</pubDate>
+      <guid>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</guid>
+      <link>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c126b899a465_forecast_how_ai_will_progress_in_2026.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>“Monthly Roundup #38: January 2026” by Zvi</title>
       <description>Audio version of “Monthly Roundup #38: January 2026” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Fri, 16 Jan 2026 15:15:50 +0000</pubDate>
@@ -267,6 +278,17 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>“When Will They Take Our Jobs?” by Zvi</title>
+      <description>Audio version of “When Will They Take Our Jobs?” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 14 Jan 2026 19:44:43 +0000</pubDate>
+      <guid>ef629b53-1279-4097-b2d6-c198288619bb</guid>
+      <link>https://www.lesswrong.com/posts/KAjhtrJggPtaophy7/when-will-they-take-our-jobs</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c4d14e82d89_when_will_they_take_our_jobs_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>The inaugural Redwood Research podcast</title>
       <description>Audio version of The inaugural Redwood Research podcast from Buck Shlegeris</description>
       <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
@@ -284,28 +306,6 @@
       <guid>aYtrLhoZtCKZnfBvA</guid>
       <link>https://www.lesswrong.com/posts/aYtrLhoZtCKZnfBvA/recent-llms-can-do-2-hop-and-3-hop-latent-no-cot-reasoning</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Measuring no CoT math time horizon (single forward pass)</title>
-      <description>Audio version of Measuring no CoT math time horizon (single forward pass) from Ryan Greenblatt</description>
-      <pubDate>Fri, 26 Dec 2025 16:37:52 +0000</pubDate>
-      <guid>Ty5Bmg7P6Tciy2uj2</guid>
-      <link>https://www.lesswrong.com/posts/Ty5Bmg7P6Tciy2uj2/measuring-no-cot-math-time-horizon-single-forward-pass</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/68b09fa7e2a6_measuring_no_cot_math_time_horizon_single_forward.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The Thinking Machines Tinker API is good news for AI control and security</title>
-      <description>Audio version of The Thinking Machines Tinker API is good news for AI control and security from Buck Shlegeris</description>
-      <pubDate>Thu, 09 Oct 2025 15:22:15 +0000</pubDate>
-      <guid>r68nCQK3veQtCdqGt</guid>
-      <link>https://www.lesswrong.com/posts/r68nCQK3veQtCdqGt/the-thinking-machines-tinker-api-is-good-news-for-ai-control</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/484b3eb83a9c_the_thinking_machines_tinker_api_is_good_news_for.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
