@@ -13,6 +13,7 @@ from pydantic import BaseModel
 from .audio import AudioGenerator
 from .feed import FeedGenerator, PodcastConfig
 from .monitor import FeedEntry, FeedMonitor
+from .news import NewsAggregator
 from .processor import ContentProcessor
 
 
@@ -44,6 +45,23 @@ class PodcastMetaConfig(BaseModel):
     image_url: str | None = None
 
 
+class NewsSource(BaseModel):
+    """A single news RSS source for the daily briefing."""
+
+    name: str
+    url: str
+    category: str
+
+
+class NewsBriefingConfig(BaseModel):
+    """Configuration for the daily news briefing."""
+
+    enabled: bool = True
+    lookback_hours: int = 48
+    prompt: str
+    sources: list[NewsSource]
+
+
 class Config(BaseModel):
     """Full application configuration."""
 
@@ -51,6 +69,7 @@ class Config(BaseModel):
     tts: TTSConfig
     default_prompt: str
     feeds: list[FeedConfig]
+    news_briefing: NewsBriefingConfig | None = None
 
 
 def load_config(config_path: Path) -> Config:
@@ -163,6 +182,19 @@ async def async_main(config_path: Path | None = None) -> None:
         prompt = feed_config.prompt or config.default_prompt
         entries_to_process.append((entry, mode, prompt))
 
+    # Generate daily news briefing if configured
+    if config.news_briefing and config.news_briefing.enabled:
+        aggregator = NewsAggregator(
+            sources=[s.model_dump() for s in config.news_briefing.sources],
+            prompt=config.news_briefing.prompt,
+            lookback_hours=config.news_briefing.lookback_hours,
+        )
+        briefing_entry = await aggregator.generate_briefing()
+        if briefing_entry and not monitor.is_processed(briefing_entry.id):
+            entries_to_process.insert(0, (briefing_entry, "verbatim", config.default_prompt))
+        elif briefing_entry:
+            print(f"  News briefing already processed today")
+
     print(f"\n{len(entries_to_process)} entries to process")
 
     if not entries_to_process:
@@ -200,7 +232,7 @@ async def async_main(config_path: Path | None = None) -> None:
     print(f"  Generated feed with {len(episodes)} episodes: {feed_path}")
 
     # Cleanup old entries (optional)
-    removed = monitor.cleanup_old_entries(days=30)
+    removed = monitor.cleanup_old_entries(days=30, audio_dir=audio_dir)
     if removed:
         print(f"  Cleaned up {removed} old entries")
 
