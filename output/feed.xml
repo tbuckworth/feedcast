@@ -311,6 +311,17 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>“Claude Coworks” by Zvi</title>
+      <description>Audio version of “Claude Coworks” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 13 Jan 2026 19:01:03 +0000</pubDate>
+      <guid>3f9a7f49-8dfb-4a32-ab58-9e453f303992</guid>
+      <link>https://www.lesswrong.com/posts/fm2N4cws8nbdmfGux/claude-coworks</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1f5869be9496_claude_coworks_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>What Happens When Superhuman AIs Compete for Control?</title>
       <description>Audio version of What Happens When Superhuman AIs Compete for Control? from AI Futures Project</description>
       <pubDate>Sun, 11 Jan 2026 14:02:41 +0000</pubDate>
@@ -344,12 +355,12 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>New, improved multiple-choice TruthfulQA</title>
-      <description>Audio version of New, improved multiple-choice TruthfulQA from Owain Evans</description>
-      <pubDate>Wed, 15 Jan 2025 23:32:09 +0000</pubDate>
-      <guid>Bunfwz6JsNd44kgLT</guid>
-      <link>https://www.lesswrong.com/posts/Bunfwz6JsNd44kgLT/new-improved-multiple-choice-truthfulqa</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/be18640f6d79_new_improved_multiple-choice_truthfulqa.mp3" type="audio/mpeg" length="0" />
+      <title>AI Futures Model: Dec 2025 Update</title>
+      <description>Audio version of AI Futures Model: Dec 2025 Update from AI Futures Project</description>
+      <pubDate>Wed, 31 Dec 2025 02:08:48 +0000</pubDate>
+      <guid>https://blog.ai-futures.org/p/ai-futures-model-dec-2025-update</guid>
+      <link>https://blog.ai-futures.org/p/ai-futures-model-dec-2025-update</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/564f971dd07e_ai_futures_model_dec_2025_update.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
