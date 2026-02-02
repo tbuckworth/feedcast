@@ -322,6 +322,17 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>“Dating Roundup #10: Gendered Expectations” by Zvi</title>
+      <description>Audio version of “Dating Roundup #10: Gendered Expectations” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 12 Jan 2026 20:31:40 +0000</pubDate>
+      <guid>f339176d-59b5-43cb-ad25-533eb483508c</guid>
+      <link>https://www.lesswrong.com/posts/zphaHyABxMEDqNQ7K/dating-roundup-10-gendered-expectations</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3ae63302078e_dating_roundup_10_gendered_expectations_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>What Happens When Superhuman AIs Compete for Control?</title>
       <description>Audio version of What Happens When Superhuman AIs Compete for Control? from AI Futures Project</description>
       <pubDate>Sun, 11 Jan 2026 14:02:41 +0000</pubDate>
@@ -339,17 +350,6 @@
       <guid>p4iJpumHt6Ay9KnXT</guid>
       <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts</title>
-      <description>Audio version of Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts from Ryan Greenblatt</description>
-      <pubDate>Thu, 01 Jan 2026 13:36:25 +0000</pubDate>
-      <guid>aYtrLhoZtCKZnfBvA</guid>
-      <link>https://www.lesswrong.com/posts/aYtrLhoZtCKZnfBvA/recent-llms-can-do-2-hop-and-3-hop-latent-no-cot-reasoning</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
