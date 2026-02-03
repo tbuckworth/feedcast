@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
-"""TTS provider comparison script for ElevenLabs British male voices.
-
-This script generates audio samples from ElevenLabs British male voices
-to help select the best one for the feedcast podcast.
+"""TTS provider comparison script for OpenAI male voices.
 
 Usage:
     uv run python scripts/test_tts.py
 
 Requires environment variables:
-    ELEVENLABS_API_KEY - ElevenLabs API key
+    OPENAI_API_KEY - OpenAI API key
 
 Output will be saved to voice_samples/tts_comparison/
 """
@@ -32,37 +29,33 @@ conclusion is something we'd never want an AI to do without checking with humans
 """.strip()
 
 
-async def generate_elevenlabs(
+async def generate_openai(
     text: str,
-    voice_id: str,
-    voice_name: str,
+    voice: str,
     api_key: str,
     output_path: Path,
+    model: str = "tts-1-hd",
 ) -> Path | None:
-    """Generate audio using ElevenLabs API."""
-    print(f"  Generating ElevenLabs sample with voice: {voice_name}...")
-
-    url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
+    """Generate audio using OpenAI TTS API."""
+    print(f"  Generating OpenAI {model} sample with voice: {voice}...")
 
     async with httpx.AsyncClient(timeout=120.0) as client:
         response = await client.post(
-            url,
+            "https://api.openai.com/v1/audio/speech",
             headers={
-                "xi-api-key": api_key,
+                "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json",
             },
             json={
-                "text": text,
-                "model_id": "eleven_multilingual_v2",
-                "voice_settings": {
-                    "stability": 0.5,
-                    "similarity_boost": 0.75,
-                },
+                "model": model,
+                "input": text,
+                "voice": voice,
+                "response_format": "mp3",
             },
         )
 
         if response.status_code != 200:
-            print(f"    ERROR: ElevenLabs returned {response.status_code}: {response.text[:200]}")
+            print(f"    ERROR: OpenAI returned {response.status_code}: {response.text[:200]}")
             return None
 
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -78,10 +71,10 @@ async def main():
     project_root = Path(__file__).parent.parent
     output_dir = project_root / "voice_samples" / "tts_comparison"
 
-    elevenlabs_key = os.environ.get("ELEVENLABS_API_KEY")
+    openai_key = os.environ.get("OPENAI_API_KEY")
 
-    if not elevenlabs_key:
-        print("ERROR: ELEVENLABS_API_KEY must be set")
+    if not openai_key:
+        print("ERROR: OPENAI_API_KEY must be set")
         return 1
 
     print(f"Output directory: {output_dir}")
@@ -91,22 +84,22 @@ async def main():
 
     results = []
 
-    # ElevenLabs British male voices
-    elevenlabs_voices = [
-        ("onwK4e9ZLuTAKqWW03F9", "daniel"),   # Daniel - British, deep, authoritative broadcaster
-        ("JBFqnCBsd6RMkjVDRZzb", "george"),   # George - British, warm, middle-aged narrator
-        ("N2lVS1w4EtoT3dr4eOWO", "callum"),   # Callum - British, hoarse, mature
-        ("TX3LPaxmHKxFdv7VOQHJ", "liam"),     # Liam - British, young, articulate
-        ("iP95p4xoKVk53GoZ742B", "chris"),    # Chris - British, casual, middle-aged
+    # OpenAI male voices (using tts-1-hd for best quality)
+    # fable is often noted as having a British quality
+    openai_voices = [
+        ("echo", "Echo - deep male"),
+        ("fable", "Fable - expressive male (often sounds British)"),
+        ("onyx", "Onyx - deep authoritative male"),
     ]
 
-    print("=== ElevenLabs British Male Voices ===")
-    for voice_id, voice_name in elevenlabs_voices:
-        output_path = output_dir / f"elevenlabs_{voice_name}.mp3"
-        result = await generate_elevenlabs(
-            TEST_TEXT, voice_id, voice_name, elevenlabs_key, output_path
+    print("=== OpenAI Male Voices (tts-1-hd) ===")
+    for voice, description in openai_voices:
+        print(f"  {description}")
+        output_path = output_dir / f"openai_{voice}.mp3"
+        result = await generate_openai(
+            TEST_TEXT, voice, openai_key, output_path, model="tts-1-hd"
         )
-        results.append((voice_name, result))
+        results.append((voice, result))
 
     # Summary
     print("\n" + "=" * 60)
@@ -128,6 +121,8 @@ async def main():
 
     print(f"\nOutput directory: {output_dir}")
     print("\nListen to each output and select your preferred voice!")
+    print("\nNote: OpenAI doesn't have explicit British accents.")
+    print("'fable' is often noted as having a somewhat British quality.")
 
     return 0
 
