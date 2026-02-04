@@ -15,6 +15,17 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>“Unless That Claw Is The Famous OpenClaw” by Zvi</title>
+      <description>Audio version of “Unless That Claw Is The Famous OpenClaw” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 03 Feb 2026 15:03:15 +0000</pubDate>
+      <guid>ce2b52ce-e113-44eb-9300-16b16145a0e4</guid>
+      <link>https://www.lesswrong.com/posts/aQKBMEvTj3Heidoir/unless-that-claw-is-the-famous-openclaw</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d65dc407c7aa_unless_that_claw_is_the_famous_openclaw_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>“Welcome to Moltbook” by Zvi</title>
       <description>Audio version of “Welcome to Moltbook” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Mon, 02 Feb 2026 14:32:31 +0000</pubDate>
@@ -377,12 +388,12 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>AI Futures Model: Dec 2025 Update</title>
-      <description>Audio version of AI Futures Model: Dec 2025 Update from AI Futures Project</description>
-      <pubDate>Wed, 31 Dec 2025 02:08:48 +0000</pubDate>
-      <guid>https://blog.ai-futures.org/p/ai-futures-model-dec-2025-update</guid>
-      <link>https://blog.ai-futures.org/p/ai-futures-model-dec-2025-update</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/564f971dd07e_ai_futures_model_dec_2025_update.mp3" type="audio/mpeg" length="0" />
+      <title>The Thinking Machines Tinker API is good news for AI control and security</title>
+      <description>Audio version of The Thinking Machines Tinker API is good news for AI control and security from Buck Shlegeris</description>
+      <pubDate>Thu, 09 Oct 2025 15:22:15 +0000</pubDate>
+      <guid>r68nCQK3veQtCdqGt</guid>
+      <link>https://www.lesswrong.com/posts/r68nCQK3veQtCdqGt/the-thinking-machines-tinker-api-is-good-news-for-ai-control</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/484b3eb83a9c_the_thinking_machines_tinker_api_is_good_news_for.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
