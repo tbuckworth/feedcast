@@ -112,6 +112,8 @@ async def generate_with_deepinfra_async(
                 json={
                     "text": text,
                     "voice_id": voice_id,
+                    "cfg_weight": 0.5,
+                    "exaggeration": 0.3,  # Lower exaggeration sounds more natural
                 },
             )
         except (httpx.TimeoutException, httpx.ConnectError, httpx.ReadError) as e:
