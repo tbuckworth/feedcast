@@ -15,6 +15,49 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-05</title>
+      <description>Audio version of Daily News Briefing - 2026-02-05 from Daily News Briefing</description>
+      <pubDate>Thu, 05 Feb 2026 22:51:01 +0000</pubDate>
+      <guid>news-briefing-2026-02-05</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c3a50701c850_daily_news_briefing_-_2026-02-05.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Agent Economics: a BOTEC on feasibility</title>
+      <description>Audio version of Agent Economics: a BOTEC on feasibility from LessWrong Frontpage</description>
+      <pubDate>Thu, 05 Feb 2026 20:43:17 +0000</pubDate>
+      <guid>NqNmNqtQCaqtpAeyX</guid>
+      <link>https://www.lesswrong.com/posts/NqNmNqtQCaqtpAeyX/agent-economics-a-botec-on-feasibility</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d744be5f1cc3_agent_economics_a_botec_on_feasibility.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #154: Claw Your Way To The Top” by Zvi</title>
+      <description>Audio version of “AI #154: Claw Your Way To The Top” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 05 Feb 2026 16:12:13 +0000</pubDate>
+      <guid>e585a6f8-ed0c-4e20-93fa-40a629be249c</guid>
+      <link>https://www.lesswrong.com/posts/AMLLKDzjohCNbrA6t/ai-154-claw-your-way-to-the-top</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a48dbe07cd6b_ai_154_claw_your_way_to_the_top_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Links For February 2026</title>
+      <description>Audio version of Links For February 2026 from Scott Alexander</description>
+      <pubDate>Thu, 05 Feb 2026 12:55:10 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/links-for-february-2026</guid>
+      <link>https://www.astralcodexten.com/p/links-for-february-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/37318b753d2d_links_for_february_2026.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Is Note-taking a favor or a burden to my future-self?</title>
       <description>Audio version of Is Note-taking a favor or a burden to my future-self? from LessWrong Frontpage</description>
       <pubDate>Thu, 05 Feb 2026 06:22:49 +0000</pubDate>
@@ -416,6 +459,28 @@
       <guid>https://blog.ai-futures.org/p/ai-futures-model-dec-2025-update</guid>
       <link>https://blog.ai-futures.org/p/ai-futures-model-dec-2025-update</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/564f971dd07e_ai_futures_model_dec_2025_update.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Vitalik's Response to AI 2027</title>
+      <description>Audio version of Vitalik's Response to AI 2027 from Daniel Kokotajlo</description>
+      <pubDate>Fri, 11 Jul 2025 21:43:36 +0000</pubDate>
+      <guid>zuuQwueBpv9ZCpNuX</guid>
+      <link>https://www.lesswrong.com/posts/zuuQwueBpv9ZCpNuX/vitalik-s-response-to-ai-2027</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a2b17c92c517_vitaliks_response_to_ai_2027.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>New, improved multiple-choice TruthfulQA</title>
+      <description>Audio version of New, improved multiple-choice TruthfulQA from Owain Evans</description>
+      <pubDate>Wed, 15 Jan 2025 23:32:09 +0000</pubDate>
+      <guid>Bunfwz6JsNd44kgLT</guid>
+      <link>https://www.lesswrong.com/posts/Bunfwz6JsNd44kgLT/new-improved-multiple-choice-truthfulqa</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/be18640f6d79_new_improved_multiple-choice_truthfulqa.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
