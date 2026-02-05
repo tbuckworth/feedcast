@@ -15,6 +15,28 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Is Note-taking a favor or a burden to my future-self?</title>
+      <description>Audio version of Is Note-taking a favor or a burden to my future-self? from LessWrong Frontpage</description>
+      <pubDate>Thu, 05 Feb 2026 06:22:49 +0000</pubDate>
+      <guid>5pu8oAia9dRst2Ejz</guid>
+      <link>https://www.lesswrong.com/posts/5pu8oAia9dRst2Ejz/is-note-taking-a-favor-or-a-burden-to-my-future-self</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ef6f3826c1a6_is_note-taking_a_favor_or_a_burden_to_my_future-se.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Kimi K2.5” by Zvi</title>
+      <description>Audio version of “Kimi K2.5” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 04 Feb 2026 15:31:47 +0000</pubDate>
+      <guid>e0ab7ce4-a64f-4aee-a987-80477de2bc63</guid>
+      <link>https://www.lesswrong.com/posts/omSudRiFDvtNRrxZS/kimi-k2-5</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/93b5b7825646_kimi_k25_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>“Unless That Claw Is The Famous OpenClaw” by Zvi</title>
       <description>Audio version of “Unless That Claw Is The Famous OpenClaw” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Tue, 03 Feb 2026 15:03:15 +0000</pubDate>
@@ -388,12 +410,12 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>The Thinking Machines Tinker API is good news for AI control and security</title>
-      <description>Audio version of The Thinking Machines Tinker API is good news for AI control and security from Buck Shlegeris</description>
-      <pubDate>Thu, 09 Oct 2025 15:22:15 +0000</pubDate>
-      <guid>r68nCQK3veQtCdqGt</guid>
-      <link>https://www.lesswrong.com/posts/r68nCQK3veQtCdqGt/the-thinking-machines-tinker-api-is-good-news-for-ai-control</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/484b3eb83a9c_the_thinking_machines_tinker_api_is_good_news_for.mp3" type="audio/mpeg" length="0" />
+      <title>AI Futures Model: Dec 2025 Update</title>
+      <description>Audio version of AI Futures Model: Dec 2025 Update from AI Futures Project</description>
+      <pubDate>Wed, 31 Dec 2025 02:08:48 +0000</pubDate>
+      <guid>https://blog.ai-futures.org/p/ai-futures-model-dec-2025-update</guid>
+      <link>https://blog.ai-futures.org/p/ai-futures-model-dec-2025-update</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/564f971dd07e_ai_futures_model_dec_2025_update.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
