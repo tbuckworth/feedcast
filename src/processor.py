@@ -65,7 +65,7 @@ Content:
             user_message = user_message[:max_chars] + "\n\n[Content truncated due to length]"
 
         response = await self.client.messages.create(
-            model="claude-sonnet-4-5-20250514",
+            model="claude-sonnet-4-5-20250929",
             max_tokens=2000,
             system=system_prompt,
             messages=[{"role": "user", "content": user_message}],
