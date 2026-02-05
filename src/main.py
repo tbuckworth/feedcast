@@ -91,7 +91,7 @@ async def process_entry(
 ) -> tuple[FeedEntry, Path]:
     """Process one entry: content → audio. Runs concurrently with other entries."""
     print(f"\n  Processing: {entry.title}")
-    processed_text = await processor.process(entry, mode, prompt)
+    processed_text = await processor.process(entry, mode, prompt, title=entry.title)
     print(f"    Processed text: {len(processed_text)} chars")
 
     episode_id = generate_episode_id(entry.id)
@@ -203,7 +203,9 @@ async def async_main(config_path: Path | None = None) -> None:
         # PHASE 2: Parallel processing (content + audio)
         print(f"\nPhase 2: Processing {len(entries_to_process)} entries in parallel...")
 
-        async with httpx.AsyncClient(timeout=httpx.Timeout(300.0)) as http_client:
+        # Configure connection limits to avoid ReadError issues with concurrent TTS requests
+        limits = httpx.Limits(max_keepalive_connections=5, max_connections=10)
+        async with httpx.AsyncClient(timeout=httpx.Timeout(300.0), limits=limits) as http_client:
             tasks = [
                 process_entry(e, m, p, processor, audio_gen, audio_dir, http_client)
                 for e, m, p in entries_to_process

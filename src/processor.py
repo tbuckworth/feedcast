@@ -65,7 +65,7 @@ Content:
             user_message = user_message[:max_chars] + "\n\n[Content truncated due to length]"
 
         response = await self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5-20250514",
             max_tokens=2000,
             system=system_prompt,
             messages=[{"role": "user", "content": user_message}],
@@ -83,25 +83,39 @@ Content:
         return f"{intro}\n\n{clean_content}"
 
     async def process(
-        self, entry: FeedEntry, mode: str, prompt: Optional[str] = None
+        self, entry: FeedEntry, mode: str, prompt: Optional[str] = None, title: Optional[str] = None
     ) -> str:
-        """Process a feed entry based on mode (summarize or verbatim)."""
+        """Process a feed entry based on mode (summarize or verbatim).
+
+        Args:
+            entry: The feed entry to process
+            mode: Processing mode - "summarize", "verbatim", or "auto"
+            prompt: Optional custom prompt for summarization
+            title: Title for the end announcement (defaults to entry.title)
+        """
+        # Use provided title or fall back to entry title
+        episode_title = title or entry.title
+
         if mode == "summarize":
             summary = await self.summarize(entry, prompt)
             # Add intro for context
             intro = f"Summary of {entry.title} by {entry.author}."
-            return f"{intro}\n\n{summary}"
+            text = f"{intro}\n\n{summary}"
         elif mode == "verbatim":
-            return self.process_verbatim(entry)
+            text = self.process_verbatim(entry)
         elif mode == "auto":
             clean_text = self.clean_html(entry.content)
             if len(clean_text) <= AUTO_VERBATIM_LIMIT:
                 print(f"    Auto mode: {len(clean_text)} chars ≤ {AUTO_VERBATIM_LIMIT} → verbatim")
-                return self.process_verbatim(entry)
+                text = self.process_verbatim(entry)
             else:
                 print(f"    Auto mode: {len(clean_text)} chars > {AUTO_VERBATIM_LIMIT} → summarize")
                 summary = await self.summarize(entry, prompt)
                 intro = f"Summary of {entry.title} by {entry.author}."
-                return f"{intro}\n\n{summary}"
+                text = f"{intro}\n\n{summary}"
         else:
             raise ValueError(f"Unknown processing mode: {mode}")
+
+        # Append end announcement
+        text = f"{text}\n\nEnd of {episode_title}."
+        return text

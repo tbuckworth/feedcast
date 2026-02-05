@@ -112,12 +112,14 @@ async def generate_with_deepinfra_async(
                 json={
                     "text": text,
                     "voice_id": voice_id,
+                    "cfg_weight": 0.5,
+                    "exaggeration": 0.3,  # Lower exaggeration sounds more natural
                 },
             )
-        except (httpx.TimeoutException, httpx.ConnectError) as e:
+        except (httpx.TimeoutException, httpx.ConnectError, httpx.ReadError) as e:
             if attempt < max_retries - 1:
                 wait_time = (attempt + 1) * 10
-                print(f"      Retry {attempt + 2}/{max_retries} in {wait_time}s: {e}")
+                print(f"      Retry {attempt + 2}/{max_retries} in {wait_time}s: {type(e).__name__}: {e}")
                 await asyncio.sleep(wait_time)
                 continue
             raise
@@ -179,7 +181,8 @@ class AudioGenerator:
         self._voice_id = upload_voice_to_deepinfra(self._voice_sample, self._api_key)
 
         # Concurrency limit for TTS API calls (shared across all entries)
-        self._semaphore = asyncio.Semaphore(10)
+        # Reduced from 10 to 5 to avoid httpx ReadError issues
+        self._semaphore = asyncio.Semaphore(5)
 
         # Optional delay for voice replication across DeepInfra servers
         if VOICE_UPLOAD_DELAY_SECONDS > 0:
@@ -238,10 +241,25 @@ class AudioGenerator:
 
             mp3_path = output_path.with_suffix(".mp3")
 
+            # Generate 2-second silence for episode start
+            intro_silence_path = Path(tmpdir) / "intro_silence.wav"
+            await asyncio.to_thread(
+                subprocess.run,
+                ["ffmpeg", "-y", "-f", "lavfi", "-i", "anullsrc=r=24000:cl=mono",
+                 "-t", "2.0", str(intro_silence_path)],
+                capture_output=True, timeout=10,
+            )
+
             if len(chunk_files) == 1:
+                # Still need to concat intro silence with single chunk
+                list_file = Path(tmpdir) / "chunks.txt"
+                with open(list_file, 'w') as f:
+                    f.write(f"file '{intro_silence_path}'\n")
+                    f.write(f"file '{chunk_files[0]}'\n")
+
                 result = await asyncio.to_thread(
                     subprocess.run,
-                    ["ffmpeg", "-y", "-i", str(chunk_files[0]),
+                    ["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(list_file),
                      "-acodec", "libmp3lame", "-q:a", "2", str(mp3_path)],
                     capture_output=True, text=True, timeout=300,
                 )
@@ -260,6 +278,8 @@ class AudioGenerator:
 
                 list_file = Path(tmpdir) / "chunks.txt"
                 with open(list_file, 'w') as f:
+                    # Start with 2-second intro silence
+                    f.write(f"file '{intro_silence_path}'\n")
                     for i, chunk_path in enumerate(chunk_files):
                         f.write(f"file '{chunk_path}'\n")
                         if i < len(chunk_files) - 1:

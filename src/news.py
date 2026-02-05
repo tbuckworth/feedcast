@@ -89,7 +89,7 @@ class NewsAggregator:
     async def synthesize_briefing(self, formatted_articles: str) -> str:
         """Call Claude to synthesize the briefing from formatted articles."""
         response = await self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5-20250514",
             max_tokens=4000,
             system=self.prompt,
             messages=[{"role": "user", "content": formatted_articles}],

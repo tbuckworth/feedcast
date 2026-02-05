@@ -27,6 +27,7 @@ build/
 
 # Voice samples - keep derek_perkins.wav input, ignore generated output
 voice_samples/output/
+voice_samples/tts_comparison/
 # Ignore other celebrity voice samples (copyright concerns)
 voice_samples/*.wav
 !voice_samples/derek_perkins.wav
