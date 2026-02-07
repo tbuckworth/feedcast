@@ -35,5 +35,8 @@ voice_samples/*.wav
 # Debug WAVs from TTS pipeline
 data/audio/debug_wavs/
 
+# Normalization test output
+data/normalization_test/
+
 # Voice ID cache - no longer needed (using audio_prompt approach)
 voice_samples/.voice_cache.json
