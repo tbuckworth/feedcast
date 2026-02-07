@@ -1,8 +1,9 @@
 """RSS feed monitoring with SQLite tracking."""
 
+import re
 import sqlite3
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
 
@@ -42,6 +43,13 @@ class FeedMonitor:
                     published TEXT NOT NULL,
                     processed_at TEXT NOT NULL,
                     audio_file TEXT
+                )
+            """)
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS news_briefings (
+                    date TEXT PRIMARY KEY,
+                    briefing_text TEXT NOT NULL,
+                    created_at TEXT NOT NULL
                 )
             """)
             conn.commit()
@@ -99,13 +107,18 @@ class FeedMonitor:
             )
             return [dict(row) for row in cursor.fetchall()]
 
-    def fetch_feed(self, url: str, feed_name: str) -> list[FeedEntry]:
+    def fetch_feed(self, url: str, feed_name: str, skip_patterns: list[str] | None = None) -> list[FeedEntry]:
         """Fetch and parse an RSS feed, returning new entries."""
         feed = feedparser.parse(url)
         entries = []
 
         for entry in feed.entries:
             entry_id = entry.get("id") or entry.get("link", "")
+
+            # Skip entries matching title patterns (e.g. ACX open threads)
+            title = entry.get("title", "Untitled")
+            if skip_patterns and any(re.search(p, title, re.IGNORECASE) for p in skip_patterns):
+                continue
 
             if self.is_processed(entry_id):
                 continue
@@ -143,6 +156,39 @@ class FeedMonitor:
         # Sort by published date (oldest first for processing)
         entries.sort(key=lambda e: e.published)
         return entries
+
+    def store_news_briefing(self, date: str, text: str) -> None:
+        """Store a news briefing for dedup across days."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute(
+                """
+                INSERT OR REPLACE INTO news_briefings (date, briefing_text, created_at)
+                VALUES (?, ?, ?)
+                """,
+                (date, text, datetime.now().isoformat()),
+            )
+            conn.commit()
+
+    def get_recent_briefings(self, days: int = 5) -> list[dict]:
+        """Get recent news briefings for dedup context."""
+        cutoff = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.execute(
+                "SELECT date, briefing_text FROM news_briefings WHERE date >= ? ORDER BY date DESC",
+                (cutoff,),
+            )
+            return [dict(row) for row in cursor.fetchall()]
+
+    def cleanup_old_briefings(self, days: int = 7) -> int:
+        """Remove news briefings older than specified days. Returns count removed."""
+        cutoff = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.execute(
+                "DELETE FROM news_briefings WHERE date < ?", (cutoff,)
+            )
+            conn.commit()
+            return cursor.rowcount
 
     def cleanup_old_entries(
         self, days: int = 30, audio_dir: Optional[Path] = None

@@ -5,7 +5,7 @@ import re
 from typing import Optional
 
 from anthropic import AsyncAnthropic
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 from .monitor import FeedEntry
 
@@ -40,11 +40,64 @@ class ContentProcessor:
 
         return text.strip()
 
+    def _table_to_prose_simple(self, table: Tag) -> str:
+        """Convert a small HTML table to inline prose (Header: value pairs)."""
+        rows = table.find_all("tr")
+        if not rows:
+            return ""
+
+        # Extract headers from first row
+        headers = [th.get_text(strip=True) for th in rows[0].find_all(["th", "td"])]
+
+        prose_parts = []
+        for row in rows[1:]:
+            cells = [td.get_text(strip=True) for td in row.find_all(["td", "th"])]
+            pairs = []
+            for i, cell in enumerate(cells):
+                if i < len(headers) and headers[i]:
+                    pairs.append(f"{headers[i]}: {cell}")
+                else:
+                    pairs.append(cell)
+            prose_parts.append(", ".join(pairs))
+
+        return ". ".join(prose_parts) + "."
+
+    async def process_tables(self, html_content: str) -> str:
+        """Convert HTML tables to prose before clean_html strips them."""
+        soup = BeautifulSoup(html_content, "html.parser")
+        tables = soup.find_all("table")
+        if not tables:
+            return html_content
+
+        for table in tables:
+            # Count data rows (excluding header row)
+            rows = table.find_all("tr")
+            data_rows = max(0, len(rows) - 1)
+
+            if data_rows <= 3:
+                prose = self._table_to_prose_simple(table)
+            else:
+                # Larger tables: use Claude Haiku to summarize
+                table_html = str(table)
+                response = await self.client.messages.create(
+                    model="claude-haiku-4-5-20251001",
+                    max_tokens=500,
+                    system="Convert this HTML table into natural spoken prose. Be concise but preserve all key data points. Do not use bullet points or formatting.",
+                    messages=[{"role": "user", "content": table_html}],
+                )
+                prose = response.content[0].text
+
+            replacement = f"Here is a summary of the following table. {prose} Now continuing with the article."
+            table.replace_with(BeautifulSoup(f"<p>{replacement}</p>", "html.parser"))
+
+        return str(soup)
+
     async def summarize(
         self, entry: FeedEntry, prompt: Optional[str] = None
     ) -> str:
         """Summarize content using Claude API."""
-        clean_content = self.clean_html(entry.content)
+        content_with_tables = await self.process_tables(entry.content)
+        clean_content = self.clean_html(content_with_tables)
 
         if not clean_content:
             return f"No content available for: {entry.title}"
@@ -73,9 +126,10 @@ Content:
 
         return response.content[0].text
 
-    def process_verbatim(self, entry: FeedEntry) -> str:
+    async def process_verbatim(self, entry: FeedEntry) -> str:
         """Process content for verbatim reading - clean and format for TTS."""
-        clean_content = self.clean_html(entry.content)
+        content_with_tables = await self.process_tables(entry.content)
+        clean_content = self.clean_html(content_with_tables)
 
         # Add intro
         intro = f"{entry.title}. By {entry.author}. Published {entry.published.strftime('%B %d, %Y')}."
@@ -95,19 +149,24 @@ Content:
         """
         # Use provided title or fall back to entry title
         episode_title = title or entry.title
+        is_news_briefing = entry.id.startswith("news-briefing-")
 
-        if mode == "summarize":
+        if is_news_briefing and mode == "verbatim":
+            # News briefings: Claude's output already opens with the date, skip redundant intro
+            content_with_tables = await self.process_tables(entry.content)
+            text = self.clean_html(content_with_tables)
+        elif mode == "summarize":
             summary = await self.summarize(entry, prompt)
             # Add intro for context
             intro = f"Summary of {entry.title} by {entry.author}."
             text = f"{intro}\n\n{summary}"
         elif mode == "verbatim":
-            text = self.process_verbatim(entry)
+            text = await self.process_verbatim(entry)
         elif mode == "auto":
             clean_text = self.clean_html(entry.content)
             if len(clean_text) <= AUTO_VERBATIM_LIMIT:
                 print(f"    Auto mode: {len(clean_text)} chars ≤ {AUTO_VERBATIM_LIMIT} → verbatim")
-                text = self.process_verbatim(entry)
+                text = await self.process_verbatim(entry)
             else:
                 print(f"    Auto mode: {len(clean_text)} chars > {AUTO_VERBATIM_LIMIT} → summarize")
                 summary = await self.summarize(entry, prompt)
@@ -117,5 +176,8 @@ Content:
             raise ValueError(f"Unknown processing mode: {mode}")
 
         # Append end announcement
-        text = f"{text}\n\nEnd of {episode_title}."
+        if is_news_briefing:
+            text = f"{text}\n\nEnd of daily news briefing."
+        else:
+            text = f"{text}\n\nEnd of {episode_title}."
         return text

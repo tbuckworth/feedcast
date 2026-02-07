@@ -26,6 +26,9 @@ default_prompt: |
 
   The listener already has technical context in ML and AI safety. Give them the headlines and substance, not background explanations.
 
+  - Write out numbers, dates, and percentages in spoken form (e.g., "forty-five percent" not "45%")
+  - Spell out abbreviations (e.g., "for example" not "e.g.")
+
 feeds:
   - name: "Zvi Mowshowitz"
     url: "https://podcast.lesswrong.com/users/zvi.rss"
@@ -36,6 +39,17 @@ feeds:
     url: "https://www.astralcodexten.com/feed"
     mode: "verbatim"
     prompt: null
+    skip_patterns:
+      - "^(Hidden )?Open Thread"
+      - "^Links [Ff]or \\w+ \\d{4}"
+      - "Classifieds"
+      - "^Meetups Everywhere"
+      - "^Mantic Monday"
+      - "^Highlights [Ff]rom [Tt]he [Cc]omments"
+      - "^ACX Survey$"
+      - "Contest Rules"
+      - "^Apply [Ff]or [Aa]n ACX Grant"
+      - "Forecasting Contest"
 
   # LessWrong author feeds
   # URL pattern: https://www.lesswrong.com/feed.xml?view=community-rss&userId=<USER_ID>
@@ -94,6 +108,8 @@ news_briefing:
 
     Prioritize: AI safety/policy > AI capabilities > geopolitics > economics > markets.
     Be factual. Attribute major claims to their source. Skip trivial or redundant articles.
+    Write out numbers, dates, and percentages in spoken form (e.g., "forty-five percent" not "45%").
+    Spell out abbreviations (e.g., "for example" not "e.g.").
 
   sources:
     - { name: "BBC World", url: "https://feeds.bbci.co.uk/news/world/rss.xml", category: "geopolitics" }
