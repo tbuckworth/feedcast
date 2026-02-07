@@ -15,6 +15,38 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-07</title>
+      <description>Audio version of Daily News Briefing - 2026-02-07 from Daily News Briefing</description>
+      <pubDate>Sat, 07 Feb 2026 06:31:46 +0000</pubDate>
+      <guid>news-briefing-2026-02-07</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/75fadc08796d_daily_news_briefing_-_2026-02-07.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Voting Results for the 2024 Review</title>
+      <description>Audio version of Voting Results for the 2024 Review from LessWrong Frontpage</description>
+      <pubDate>Sat, 07 Feb 2026 04:00:38 +0000</pubDate>
+      <guid>uk48L6j28iiAyvPKJ</guid>
+      <link>https://www.lesswrong.com/posts/uk48L6j28iiAyvPKJ/voting-results-for-the-2024-review</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ae3d7b5bf834_voting_results_for_the_2024_review.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Code #4: From The Before Times” by Zvi</title>
+      <description>Audio version of “Claude Code #4: From The Before Times” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 06 Feb 2026 18:02:58 +0000</pubDate>
+      <guid>8656ffea-5fcf-4d8e-9cb1-3e01739c6731</guid>
+      <link>https://www.lesswrong.com/posts/iwX2aJPKtyKAbLdip/claude-code-4-from-the-before-times</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1b5441b092e3_claude_code_4_from_the_before_times_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-06</title>
       <description>Audio version of Daily News Briefing - 2026-02-06 from Daily News Briefing</description>
       <pubDate>Fri, 06 Feb 2026 06:42:54 +0000</pubDate>
@@ -129,6 +161,17 @@
       <guid>2e18dd6c-6937-4bd4-9bb0-dc08ecb0a10e</guid>
       <link>https://www.lesswrong.com/posts/y66jnvmyJ4AFE4Z5h/welcome-to-moltbook</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/910860bb96d5_welcome_to_moltbook_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Moltbook: After The First Weekend</title>
+      <description>Audio version of Moltbook: After The First Weekend from Scott Alexander</description>
+      <pubDate>Mon, 02 Feb 2026 13:36:49 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/moltbook-after-the-first-weekend</guid>
+      <link>https://www.astralcodexten.com/p/moltbook-after-the-first-weekend</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d661044c1bb7_moltbook_after_the_first_weekend.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
