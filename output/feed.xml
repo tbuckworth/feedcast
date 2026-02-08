@@ -15,6 +15,27 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-08</title>
+      <description>Audio version of Daily News Briefing - 2026-02-08 from Daily News Briefing</description>
+      <pubDate>Sun, 08 Feb 2026 06:39:47 +0000</pubDate>
+      <guid>news-briefing-2026-02-08</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b52d8b5cc0b3_daily_news_briefing_-_2026-02-08.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>It Is Reasonable To Research How To Use Model Internals In Training</title>
+      <description>Audio version of It Is Reasonable To Research How To Use Model Internals In Training from LessWrong Frontpage</description>
+      <pubDate>Sun, 08 Feb 2026 03:44:07 +0000</pubDate>
+      <guid>G9HdpyREaCbFJjKu5</guid>
+      <link>https://www.lesswrong.com/posts/G9HdpyREaCbFJjKu5/it-is-reasonable-to-research-how-to-use-model-internals-in</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2ce2c8233a1a_it_is_reasonable_to_research_how_to_use_model_inte.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-07</title>
       <description>Audio version of Daily News Briefing - 2026-02-07 from Daily News Briefing</description>
       <pubDate>Sat, 07 Feb 2026 06:31:46 +0000</pubDate>
@@ -172,6 +193,17 @@
       <guid>https://www.astralcodexten.com/p/moltbook-after-the-first-weekend</guid>
       <link>https://www.astralcodexten.com/p/moltbook-after-the-first-weekend</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d661044c1bb7_moltbook_after_the_first_weekend.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Open Thread 419</title>
+      <description>Audio version of Open Thread 419 from Scott Alexander</description>
+      <pubDate>Mon, 02 Feb 2026 13:16:48 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/open-thread-419</guid>
+      <link>https://www.astralcodexten.com/p/open-thread-419</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5d87617fd08e_open_thread_419.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -512,6 +544,17 @@
       <guid>20b20d59-3d2b-4dde-8ef3-5ce2838b6c83</guid>
       <link>https://www.lesswrong.com/posts/MQGAMHQNTFyJTke2H/claude-codes</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/9a7d7671cb0c_claude_codes_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #150: While Claude Codes” by Zvi</title>
+      <description>Audio version of “AI #150: While Claude Codes” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 08 Jan 2026 15:01:35 +0000</pubDate>
+      <guid>ee9acce9-8fb8-439f-a2f2-e912c8dcbf87</guid>
+      <link>https://www.lesswrong.com/posts/fWJsqHXHBAEd8rq69/ai-150-while-claude-codes</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/877d430b783a_ai_150_while_claude_codes_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
