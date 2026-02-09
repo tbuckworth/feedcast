@@ -15,6 +15,27 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-09</title>
+      <description>Audio version of Daily News Briefing - 2026-02-09 from Daily News Briefing</description>
+      <pubDate>Mon, 09 Feb 2026 06:55:56 +0000</pubDate>
+      <guid>news-briefing-2026-02-09</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/86d77d246b39_daily_news_briefing_-_2026-02-09.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Three visions for diffuse control</title>
+      <description>Audio version of Three visions for diffuse control from LessWrong Frontpage</description>
+      <pubDate>Mon, 09 Feb 2026 06:41:09 +0000</pubDate>
+      <guid>LQAcP3sACtxSFqTsK</guid>
+      <link>https://www.lesswrong.com/posts/LQAcP3sACtxSFqTsK/three-visions-for-diffuse-control</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/eee92e4dd8ea_three_visions_for_diffuse_control.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-08</title>
       <description>Audio version of Daily News Briefing - 2026-02-08 from Daily News Briefing</description>
       <pubDate>Sun, 08 Feb 2026 06:39:47 +0000</pubDate>
@@ -215,6 +236,17 @@
       <guid>Z34QQL622Gb3MWfES</guid>
       <link>https://www.lesswrong.com/posts/Z34QQL622Gb3MWfES/attempting-base-model-inference-scaling-with-filler-tokens</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/b336a7d006ff_attempting_base_model_inference_scaling_with_fille.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Best Of Moltbook</title>
+      <description>Audio version of Best Of Moltbook from Scott Alexander</description>
+      <pubDate>Fri, 30 Jan 2026 13:32:10 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/best-of-moltbook</guid>
+      <link>https://www.astralcodexten.com/p/best-of-moltbook</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1ba6c6622f11_best_of_moltbook.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
