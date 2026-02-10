@@ -15,6 +15,49 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-10</title>
+      <description>Audio version of Daily News Briefing - 2026-02-10 from Daily News Briefing</description>
+      <pubDate>Tue, 10 Feb 2026 06:55:44 +0000</pubDate>
+      <guid>news-briefing-2026-02-10</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cfd1089b0958_daily_news_briefing_-_2026-02-10.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Monday AI Radar #12</title>
+      <description>Audio version of Monday AI Radar #12 from LessWrong Frontpage</description>
+      <pubDate>Tue, 10 Feb 2026 04:49:47 +0000</pubDate>
+      <guid>Myi3KDeNamrJoe2Ey</guid>
+      <link>https://www.lesswrong.com/posts/Myi3KDeNamrJoe2Ey/monday-ai-radar-12</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0df161623764_monday_ai_radar_12.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Opus 4.6: System Card Part 1: Mundane Alignment and Model Welfare” by Zvi</title>
+      <description>Audio version of “Claude Opus 4.6: System Card Part 1: Mundane Alignment and Model Welfare” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 09 Feb 2026 21:36:59 +0000</pubDate>
+      <guid>756ff51f-9151-4987-bda1-7167a52ab698</guid>
+      <link>https://www.lesswrong.com/posts/sWsSncqMLKyGZA9Ar/claude-opus-4-6-system-card-part-1-mundane-alignment-and</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/87a375f1180f_claude_opus_46_system_card_part_1_mundane_alig.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Open Thread 420</title>
+      <description>Audio version of Open Thread 420 from Scott Alexander</description>
+      <pubDate>Mon, 09 Feb 2026 13:00:37 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/open-thread-420</guid>
+      <link>https://www.astralcodexten.com/p/open-thread-420</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a4cb3fa6d863_open_thread_420.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-09</title>
       <description>Audio version of Daily News Briefing - 2026-02-09 from Daily News Briefing</description>
       <pubDate>Mon, 09 Feb 2026 06:55:56 +0000</pubDate>
@@ -565,28 +608,6 @@
       <guid>https://blog.ai-futures.org/p/what-happens-when-superhuman-ais</guid>
       <link>https://blog.ai-futures.org/p/what-happens-when-superhuman-ais</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ccbfcfc54d9f_what_happens_when_superhuman_ais_compete_for_contr.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Codes” by Zvi</title>
-      <description>Audio version of “Claude Codes” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 09 Jan 2026 17:12:12 +0000</pubDate>
-      <guid>20b20d59-3d2b-4dde-8ef3-5ce2838b6c83</guid>
-      <link>https://www.lesswrong.com/posts/MQGAMHQNTFyJTke2H/claude-codes</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9a7d7671cb0c_claude_codes_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #150: While Claude Codes” by Zvi</title>
-      <description>Audio version of “AI #150: While Claude Codes” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 08 Jan 2026 15:01:35 +0000</pubDate>
-      <guid>ee9acce9-8fb8-439f-a2f2-e912c8dcbf87</guid>
-      <link>https://www.lesswrong.com/posts/fWJsqHXHBAEd8rq69/ai-150-while-claude-codes</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/877d430b783a_ai_150_while_claude_codes_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
