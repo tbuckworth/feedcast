@@ -15,6 +15,38 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-11</title>
+      <description>Audio version of Daily News Briefing - 2026-02-11 from Daily News Briefing</description>
+      <pubDate>Wed, 11 Feb 2026 06:52:43 +0000</pubDate>
+      <guid>news-briefing-2026-02-11</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f088a08d5d37_daily_news_briefing_-_2026-02-11.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Designing Prediction Markets</title>
+      <description>Audio version of Designing Prediction Markets from LessWrong Frontpage</description>
+      <pubDate>Wed, 11 Feb 2026 05:38:23 +0000</pubDate>
+      <guid>ZrLZxkGGC4ms98iiD</guid>
+      <link>https://www.lesswrong.com/posts/ZrLZxkGGC4ms98iiD/designing-prediction-markets</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3dc9a0e246b1_designing_prediction_markets.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Opus 4.6: System Card Part 2: Frontier Alignment” by Zvi</title>
+      <description>Audio version of “Claude Opus 4.6: System Card Part 2: Frontier Alignment” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 10 Feb 2026 16:12:09 +0000</pubDate>
+      <guid>28830523-4434-4450-a262-64de0fa8a86a</guid>
+      <link>https://www.lesswrong.com/posts/togCQtFtfdF23xGNS/claude-opus-4-6-system-card-part-2-frontier-alignment</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/361b6a1f0c1f_claude_opus_46_system_card_part_2_frontier_ali.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-10</title>
       <description>Audio version of Daily News Briefing - 2026-02-10 from Daily News Briefing</description>
       <pubDate>Tue, 10 Feb 2026 06:55:44 +0000</pubDate>
@@ -575,6 +607,17 @@
       <guid>ef629b53-1279-4097-b2d6-c198288619bb</guid>
       <link>https://www.lesswrong.com/posts/KAjhtrJggPtaophy7/when-will-they-take-our-jobs</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c4d14e82d89_when_will_they_take_our_jobs_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>SOTA On Bay Area House Party</title>
+      <description>Audio version of SOTA On Bay Area House Party from Scott Alexander</description>
+      <pubDate>Tue, 13 Jan 2026 21:37:20 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/sota-on-bay-area-house-party</guid>
+      <link>https://www.astralcodexten.com/p/sota-on-bay-area-house-party</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e4ef34d6c221_sota_on_bay_area_house_party.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
