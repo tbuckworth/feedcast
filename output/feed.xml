@@ -15,6 +15,60 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-12</title>
+      <description>Audio version of Daily News Briefing - 2026-02-12 from Daily News Briefing</description>
+      <pubDate>Thu, 12 Feb 2026 06:52:40 +0000</pubDate>
+      <guid>news-briefing-2026-02-12</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7f8a94ffc509_daily_news_briefing_-_2026-02-12.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Three Worlds Collide assumes calibration is solved</title>
+      <description>Audio version of Three Worlds Collide assumes calibration is solved from LessWrong Frontpage</description>
+      <pubDate>Thu, 12 Feb 2026 04:40:03 +0000</pubDate>
+      <guid>NwdqWwTSCCti8dgCj</guid>
+      <link>https://www.lesswrong.com/posts/NwdqWwTSCCti8dgCj/three-worlds-collide-assumes-calibration-is-solved</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ed2e3d4f79c0_three_worlds_collide_assumes_calibration_is_solved.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Hidden Open Thread 420.5</title>
+      <description>Audio version of Hidden Open Thread 420.5 from Scott Alexander</description>
+      <pubDate>Thu, 12 Feb 2026 04:06:36 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/hidden-open-thread-4205</guid>
+      <link>https://www.astralcodexten.com/p/hidden-open-thread-4205</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/49b8df716b24_hidden_open_thread_4205.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Opus 4.6 Escalates Things Quickly” by Zvi</title>
+      <description>Audio version of “Claude Opus 4.6 Escalates Things Quickly” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 11 Feb 2026 21:22:00 +0000</pubDate>
+      <guid>b48a7ab5-6920-4c12-b41e-8c8516a7996f</guid>
+      <link>https://www.lesswrong.com/posts/5JNjHNn3DyxaGbv8B/claude-opus-4-6-escalates-things-quickly</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1332f5be4ce3_claude_opus_46_escalates_things_quickly_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Distinguish between inference scaling and "larger tasks use more compute"</title>
+      <description>Audio version of Distinguish between inference scaling and "larger tasks use more compute" from Ryan Greenblatt</description>
+      <pubDate>Wed, 11 Feb 2026 18:37:13 +0000</pubDate>
+      <guid>rRbDNQLfihiHbXytf</guid>
+      <link>https://www.lesswrong.com/posts/rRbDNQLfihiHbXytf/distinguish-between-inference-scaling-and-larger-tasks-use</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f14ce93e351f_distinguish_between_inference_scaling_and_larger.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-11</title>
       <description>Audio version of Daily News Briefing - 2026-02-11 from Daily News Briefing</description>
       <pubDate>Wed, 11 Feb 2026 06:52:43 +0000</pubDate>
@@ -662,28 +716,6 @@
       <guid>p4iJpumHt6Ay9KnXT</guid>
       <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts</title>
-      <description>Audio version of Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts from Ryan Greenblatt</description>
-      <pubDate>Thu, 01 Jan 2026 13:36:25 +0000</pubDate>
-      <guid>aYtrLhoZtCKZnfBvA</guid>
-      <link>https://www.lesswrong.com/posts/aYtrLhoZtCKZnfBvA/recent-llms-can-do-2-hop-and-3-hop-latent-no-cot-reasoning</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AI Futures Model: Dec 2025 Update</title>
-      <description>Audio version of AI Futures Model: Dec 2025 Update from AI Futures Project</description>
-      <pubDate>Wed, 31 Dec 2025 02:08:48 +0000</pubDate>
-      <guid>https://blog.ai-futures.org/p/ai-futures-model-dec-2025-update</guid>
-      <link>https://blog.ai-futures.org/p/ai-futures-model-dec-2025-update</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/564f971dd07e_ai_futures_model_dec_2025_update.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
