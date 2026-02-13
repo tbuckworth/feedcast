@@ -15,6 +15,39 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Is AI self-aware?</title>
+      <description>Audio version of Is AI self-aware? from LessWrong Frontpage</description>
+      <pubDate>Fri, 13 Feb 2026 16:33:43 +0000</pubDate>
+      <guid>KK7vXwQgPiDeGxTng</guid>
+      <link>https://www.lesswrong.com/posts/KK7vXwQgPiDeGxTng/is-ai-self-aware</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/417ec8f1f54e_is_ai_self-aware.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“ChatGPT-5.3-Codex Is Also Good At Coding” by Zvi</title>
+      <description>Audio version of “ChatGPT-5.3-Codex Is Also Good At Coding” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 13 Feb 2026 16:22:12 +0000</pubDate>
+      <guid>26bcaa61-535f-4d6b-af57-5b083c101342</guid>
+      <link>https://www.lesswrong.com/posts/CCDRjL7NZtNGtGheY/chatgpt-5-3-codex-is-also-good-at-coding</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/098abd12b085_chatgpt-53-codex_is_also_good_at_coding_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>AMA (Ask Machines Anything)</title>
+      <description>Audio version of AMA (Ask Machines Anything) from Scott Alexander</description>
+      <pubDate>Fri, 13 Feb 2026 13:22:31 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/ama-ask-machines-anything</guid>
+      <link>https://www.astralcodexten.com/p/ama-ask-machines-anything</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2beb672d19c1_ama_ask_machines_anything.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-13</title>
       <description>Audio version of Daily News Briefing - 2026-02-13 from Daily News Briefing</description>
       <pubDate>Fri, 13 Feb 2026 06:48:42 +0000</pubDate>
@@ -731,23 +764,12 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>SOTA On Bay Area House Party</title>
-      <description>Audio version of SOTA On Bay Area House Party from Scott Alexander</description>
-      <pubDate>Tue, 13 Jan 2026 21:37:20 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/sota-on-bay-area-house-party</guid>
-      <link>https://www.astralcodexten.com/p/sota-on-bay-area-house-party</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e4ef34d6c221_sota_on_bay_area_house_party.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Coworks” by Zvi</title>
-      <description>Audio version of “Claude Coworks” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 13 Jan 2026 19:01:03 +0000</pubDate>
-      <guid>3f9a7f49-8dfb-4a32-ab58-9e453f303992</guid>
-      <link>https://www.lesswrong.com/posts/fm2N4cws8nbdmfGux/claude-coworks</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1f5869be9496_claude_coworks_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <title>What Happens When Superhuman AIs Compete for Control?</title>
+      <description>Audio version of What Happens When Superhuman AIs Compete for Control? from AI Futures Project</description>
+      <pubDate>Sun, 11 Jan 2026 14:02:41 +0000</pubDate>
+      <guid>https://blog.ai-futures.org/p/what-happens-when-superhuman-ais</guid>
+      <link>https://blog.ai-futures.org/p/what-happens-when-superhuman-ais</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ccbfcfc54d9f_what_happens_when_superhuman_ais_compete_for_contr.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -759,6 +781,28 @@
       <guid>p4iJpumHt6Ay9KnXT</guid>
       <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts</title>
+      <description>Audio version of Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts from Ryan Greenblatt</description>
+      <pubDate>Thu, 01 Jan 2026 13:36:25 +0000</pubDate>
+      <guid>aYtrLhoZtCKZnfBvA</guid>
+      <link>https://www.lesswrong.com/posts/aYtrLhoZtCKZnfBvA/recent-llms-can-do-2-hop-and-3-hop-latent-no-cot-reasoning</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Vitalik's Response to AI 2027</title>
+      <description>Audio version of Vitalik's Response to AI 2027 from Daniel Kokotajlo</description>
+      <pubDate>Fri, 11 Jul 2025 21:43:36 +0000</pubDate>
+      <guid>zuuQwueBpv9ZCpNuX</guid>
+      <link>https://www.lesswrong.com/posts/zuuQwueBpv9ZCpNuX/vitalik-s-response-to-ai-2027</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a2b17c92c517_vitaliks_response_to_ai_2027.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
