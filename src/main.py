@@ -3,6 +3,7 @@
 import asyncio
 import hashlib
 import os
+from datetime import datetime
 from pathlib import Path
 from typing import Literal
 
@@ -14,6 +15,7 @@ from .audio import AudioGenerator
 from .feed import FeedGenerator, PodcastConfig
 from .monitor import FeedEntry, FeedMonitor
 from .news import NewsAggregator
+from .normalizer import TextNormalizer
 from .processor import ContentProcessor
 
 
@@ -24,6 +26,7 @@ class FeedConfig(BaseModel):
     url: str
     mode: Literal["summarize", "verbatim", "auto"] = "auto"
     prompt: str | None = None
+    skip_patterns: list[str] | None = None
 
 
 class TTSConfig(BaseModel):
@@ -87,12 +90,15 @@ def generate_episode_id(entry_id: str) -> str:
 async def process_entry(
     entry: FeedEntry, mode: str, prompt: str,
     processor: ContentProcessor, audio_gen: AudioGenerator,
+    normalizer: TextNormalizer,
     audio_dir: Path, http_client: httpx.AsyncClient,
 ) -> tuple[FeedEntry, Path]:
     """Process one entry: content → audio. Runs concurrently with other entries."""
     print(f"\n  Processing: {entry.title}")
     processed_text = await processor.process(entry, mode, prompt, title=entry.title)
     print(f"    Processed text: {len(processed_text)} chars")
+    processed_text = await normalizer.normalize_for_tts(processed_text)
+    print(f"    Normalized text: {len(processed_text)} chars")
 
     episode_id = generate_episode_id(entry.id)
     audio_path = await audio_gen.generate_episode(
@@ -139,6 +145,7 @@ async def async_main(config_path: Path | None = None) -> None:
             print(f"  Entry not found in database (may be new)")
 
     processor = ContentProcessor(config.default_prompt)
+    normalizer = TextNormalizer()
     audio_gen = AudioGenerator(voice=config.tts.voice, speed=config.tts.speed)
     podcast_config = PodcastConfig(
         title=config.podcast.title,
@@ -156,7 +163,7 @@ async def async_main(config_path: Path | None = None) -> None:
 
     async def fetch_one(fc: FeedConfig) -> tuple[FeedConfig, list[FeedEntry]]:
         print(f"  Fetching: {fc.name} ({fc.url})")
-        entries = await asyncio.to_thread(monitor.fetch_feed, fc.url, fc.name)
+        entries = await asyncio.to_thread(monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns)
         print(f"  {fc.name}: {len(entries)} new entries")
         return (fc, entries)
 
@@ -183,11 +190,14 @@ async def async_main(config_path: Path | None = None) -> None:
         entries_to_process.append((entry, mode, prompt))
 
     # Generate daily news briefing if configured
+    briefing_entry = None
     if config.news_briefing and config.news_briefing.enabled:
+        recent_briefings = monitor.get_recent_briefings(5)
         aggregator = NewsAggregator(
             sources=[s.model_dump() for s in config.news_briefing.sources],
             prompt=config.news_briefing.prompt,
             lookback_hours=config.news_briefing.lookback_hours,
+            recent_briefings=recent_briefings,
         )
         briefing_entry = await aggregator.generate_briefing()
         if briefing_entry and not monitor.is_processed(briefing_entry.id):
@@ -207,7 +217,7 @@ async def async_main(config_path: Path | None = None) -> None:
         limits = httpx.Limits(max_keepalive_connections=5, max_connections=10)
         async with httpx.AsyncClient(timeout=httpx.Timeout(300.0), limits=limits) as http_client:
             tasks = [
-                process_entry(e, m, p, processor, audio_gen, audio_dir, http_client)
+                process_entry(e, m, p, processor, audio_gen, normalizer, audio_dir, http_client)
                 for e, m, p in entries_to_process
             ]
             results = await asyncio.gather(*tasks, return_exceptions=True)
@@ -220,23 +230,31 @@ async def async_main(config_path: Path | None = None) -> None:
                 print(f"  Error processing entry: {type(result).__name__}: {result!r}")
                 continue
             entry, audio_path = result
-            monitor.mark_processed(entry, audio_path.name)
+            monitor.mark_processed(entry, audio_path.name, content=entry.content)
+            # Store news briefing text for future dedup context
+            if entry.id.startswith("news-briefing-") and briefing_entry:
+                today = datetime.now().strftime("%Y-%m-%d")
+                monitor.store_news_briefing(today, briefing_entry.content)
             new_episodes += 1
 
         print(f"  {new_episodes} new episodes created")
 
     # Generate podcast feed
     print(f"\nGenerating podcast feed...")
+    transcript_dir = output_dir / "transcripts"
     db_entries = monitor.get_processed_entries()
-    episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir)
+    episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir, transcript_dir)
     feed_path = output_dir / "feed.xml"
     feed_gen.generate(episodes, feed_path)
     print(f"  Generated feed with {len(episodes)} episodes: {feed_path}")
 
     # Cleanup old entries (optional)
-    removed = monitor.cleanup_old_entries(days=30, audio_dir=audio_dir)
+    removed = monitor.cleanup_old_entries(days=30, audio_dir=audio_dir, transcript_dir=transcript_dir)
     if removed:
         print(f"  Cleaned up {removed} old entries")
+    removed_briefings = monitor.cleanup_old_briefings(days=7)
+    if removed_briefings:
+        print(f"  Cleaned up {removed_briefings} old news briefings")
 
     print(f"\nPipeline complete.")
 

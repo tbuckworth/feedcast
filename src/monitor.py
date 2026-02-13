@@ -1,8 +1,9 @@
 """RSS feed monitoring with SQLite tracking."""
 
+import re
 import sqlite3
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
 
@@ -44,6 +45,18 @@ class FeedMonitor:
                     audio_file TEXT
                 )
             """)
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS news_briefings (
+                    date TEXT PRIMARY KEY,
+                    briefing_text TEXT NOT NULL,
+                    created_at TEXT NOT NULL
+                )
+            """)
+            # Migration: add content column if missing
+            try:
+                conn.execute("ALTER TABLE processed_posts ADD COLUMN content TEXT DEFAULT ''")
+            except sqlite3.OperationalError:
+                pass  # Column already exists
             conn.commit()
 
     def is_processed(self, entry_id: str) -> bool:
@@ -65,15 +78,16 @@ class FeedMonitor:
             return cursor.rowcount > 0
 
     def mark_processed(
-        self, entry: FeedEntry, audio_file: Optional[str] = None
+        self, entry: FeedEntry, audio_file: Optional[str] = None,
+        content: Optional[str] = None,
     ) -> None:
         """Mark a post as processed."""
         with sqlite3.connect(self.db_path) as conn:
             conn.execute(
                 """
                 INSERT OR REPLACE INTO processed_posts
-                (id, feed_name, title, link, published, processed_at, audio_file)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                (id, feed_name, title, link, published, processed_at, audio_file, content)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     entry.id,
@@ -83,6 +97,7 @@ class FeedMonitor:
                     entry.published.isoformat(),
                     datetime.now().isoformat(),
                     audio_file,
+                    content or "",
                 ),
             )
             conn.commit()
@@ -99,13 +114,18 @@ class FeedMonitor:
             )
             return [dict(row) for row in cursor.fetchall()]
 
-    def fetch_feed(self, url: str, feed_name: str) -> list[FeedEntry]:
+    def fetch_feed(self, url: str, feed_name: str, skip_patterns: list[str] | None = None) -> list[FeedEntry]:
         """Fetch and parse an RSS feed, returning new entries."""
         feed = feedparser.parse(url)
         entries = []
 
         for entry in feed.entries:
             entry_id = entry.get("id") or entry.get("link", "")
+
+            # Skip entries matching title patterns (e.g. ACX open threads)
+            title = entry.get("title", "Untitled")
+            if skip_patterns and any(re.search(p, title, re.IGNORECASE) for p in skip_patterns):
+                continue
 
             if self.is_processed(entry_id):
                 continue
@@ -144,24 +164,63 @@ class FeedMonitor:
         entries.sort(key=lambda e: e.published)
         return entries
 
+    def store_news_briefing(self, date: str, text: str) -> None:
+        """Store a news briefing for dedup across days."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute(
+                """
+                INSERT OR REPLACE INTO news_briefings (date, briefing_text, created_at)
+                VALUES (?, ?, ?)
+                """,
+                (date, text, datetime.now().isoformat()),
+            )
+            conn.commit()
+
+    def get_recent_briefings(self, days: int = 5) -> list[dict]:
+        """Get recent news briefings for dedup context."""
+        cutoff = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.execute(
+                "SELECT date, briefing_text FROM news_briefings WHERE date >= ? ORDER BY date DESC",
+                (cutoff,),
+            )
+            return [dict(row) for row in cursor.fetchall()]
+
+    def cleanup_old_briefings(self, days: int = 7) -> int:
+        """Remove news briefings older than specified days. Returns count removed."""
+        cutoff = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.execute(
+                "DELETE FROM news_briefings WHERE date < ?", (cutoff,)
+            )
+            conn.commit()
+            return cursor.rowcount
+
     def cleanup_old_entries(
-        self, days: int = 30, audio_dir: Optional[Path] = None
+        self, days: int = 30, audio_dir: Optional[Path] = None,
+        transcript_dir: Optional[Path] = None,
     ) -> int:
-        """Remove entries older than specified days and their audio files. Returns count removed."""
+        """Remove entries older than specified days and their audio/transcript files. Returns count removed."""
         cutoff = datetime.now().timestamp() - (days * 24 * 60 * 60)
         cutoff_date = datetime.fromtimestamp(cutoff).isoformat()
 
         with sqlite3.connect(self.db_path) as conn:
-            # Delete audio files before removing DB rows
-            if audio_dir:
+            # Delete associated files before removing DB rows
+            if audio_dir or transcript_dir:
                 cursor = conn.execute(
-                    "SELECT audio_file FROM processed_posts WHERE published < ? AND audio_file IS NOT NULL",
+                    "SELECT id, audio_file FROM processed_posts WHERE published < ?",
                     (cutoff_date,),
                 )
-                for (audio_file,) in cursor.fetchall():
-                    path = audio_dir / audio_file
-                    if path.exists():
-                        path.unlink()
+                for entry_id, audio_file in cursor.fetchall():
+                    if audio_dir and audio_file:
+                        path = audio_dir / audio_file
+                        if path.exists():
+                            path.unlink()
+                    if transcript_dir:
+                        txt_path = transcript_dir / f"{entry_id}.txt"
+                        if txt_path.exists():
+                            txt_path.unlink()
 
             cursor = conn.execute(
                 "DELETE FROM processed_posts WHERE published < ?", (cutoff_date,)

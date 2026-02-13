@@ -10,6 +10,7 @@ from typing import Optional
 # Register namespace prefixes
 ET.register_namespace("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd")
 ET.register_namespace("atom", "http://www.w3.org/2005/Atom")
+ET.register_namespace("podcast", "https://podcastindex.org/namespace/1.0")
 
 
 @dataclass
@@ -36,15 +37,38 @@ class Episode:
     published: datetime
     duration_seconds: int
     link: Optional[str] = None
+    transcript_url: Optional[str] = None
 
 
 class FeedGenerator:
     """Generates podcast RSS 2.0 XML feed."""
 
     ITUNES_NS = "http://www.itunes.com/dtds/podcast-1.0.dtd"
+    PODCAST_NS = "https://podcastindex.org/namespace/1.0"
 
     def __init__(self, config: PodcastConfig):
         self.config = config
+
+    @staticmethod
+    def _build_briefing_description(title: str, content: str) -> str:
+        """Build a rich description for news briefings with topic bullets."""
+        paragraphs = [p.strip() for p in content.split("\n\n") if p.strip()]
+        if len(paragraphs) <= 1:
+            return title
+
+        # Skip the first paragraph (date opener) and extract first sentence from each
+        bullets = []
+        for para in paragraphs[1:]:
+            first_sentence = para.split(". ")[0].rstrip(".")
+            if first_sentence:
+                bullets.append(f"- {first_sentence}")
+            if len(bullets) >= 6:
+                break
+
+        if not bullets:
+            return title
+
+        return f"{title}\n\nTopics covered:\n" + "\n".join(bullets)
 
     def _get_audio_duration(self, audio_path: Path) -> int:
         """Get duration of audio file in seconds."""
@@ -143,6 +167,12 @@ class FeedGenerator:
             ET.SubElement(item, f"{{{self.ITUNES_NS}}}explicit").text = "false"
             ET.SubElement(item, f"{{{self.ITUNES_NS}}}episodeType").text = "full"
 
+            # Podcast 2.0 transcript
+            if episode.transcript_url:
+                transcript = ET.SubElement(item, f"{{{self.PODCAST_NS}}}transcript")
+                transcript.set("url", episode.transcript_url)
+                transcript.set("type", "text/plain")
+
         # Write to file
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -152,7 +182,8 @@ class FeedGenerator:
         tree.write(output_path, encoding="utf-8", xml_declaration=True)
 
     def load_episodes_from_db(
-        self, db_entries: list[dict], audio_dir: Path
+        self, db_entries: list[dict], audio_dir: Path,
+        transcript_dir: Optional[Path] = None,
     ) -> list[Episode]:
         """Load episodes from database entries."""
         episodes = []
@@ -168,16 +199,33 @@ class FeedGenerator:
 
             duration = self._get_audio_duration(audio_path)
             published = datetime.fromisoformat(entry["published"])
+            content = entry.get("content", "")
+            is_briefing = entry["id"].startswith("news-briefing-")
+
+            # Build description
+            if is_briefing and content:
+                description = self._build_briefing_description(entry["title"], content)
+            else:
+                description = f"Audio version of {entry['title']} from {entry['feed_name']}"
+
+            # Write transcript and build URL for news briefings
+            transcript_url = None
+            if is_briefing and content and transcript_dir:
+                transcript_dir.mkdir(parents=True, exist_ok=True)
+                transcript_path = transcript_dir / f"{entry['id']}.txt"
+                transcript_path.write_text(content, encoding="utf-8")
+                transcript_url = f"{self.config.base_url}/transcripts/{entry['id']}.txt"
 
             episodes.append(
                 Episode(
                     id=entry["id"],
                     title=entry["title"],
-                    description=f"Audio version of {entry['title']} from {entry['feed_name']}",
+                    description=description,
                     audio_file=audio_file,
                     published=published,
                     duration_seconds=duration,
                     link=entry.get("link"),
+                    transcript_url=transcript_url,
                 )
             )
 
