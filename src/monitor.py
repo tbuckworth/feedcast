@@ -52,6 +52,11 @@ class FeedMonitor:
                     created_at TEXT NOT NULL
                 )
             """)
+            # Migration: add content column if missing
+            try:
+                conn.execute("ALTER TABLE processed_posts ADD COLUMN content TEXT DEFAULT ''")
+            except sqlite3.OperationalError:
+                pass  # Column already exists
             conn.commit()
 
     def is_processed(self, entry_id: str) -> bool:
@@ -73,15 +78,16 @@ class FeedMonitor:
             return cursor.rowcount > 0
 
     def mark_processed(
-        self, entry: FeedEntry, audio_file: Optional[str] = None
+        self, entry: FeedEntry, audio_file: Optional[str] = None,
+        content: Optional[str] = None,
     ) -> None:
         """Mark a post as processed."""
         with sqlite3.connect(self.db_path) as conn:
             conn.execute(
                 """
                 INSERT OR REPLACE INTO processed_posts
-                (id, feed_name, title, link, published, processed_at, audio_file)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                (id, feed_name, title, link, published, processed_at, audio_file, content)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     entry.id,
@@ -91,6 +97,7 @@ class FeedMonitor:
                     entry.published.isoformat(),
                     datetime.now().isoformat(),
                     audio_file,
+                    content or "",
                 ),
             )
             conn.commit()
@@ -191,23 +198,29 @@ class FeedMonitor:
             return cursor.rowcount
 
     def cleanup_old_entries(
-        self, days: int = 30, audio_dir: Optional[Path] = None
+        self, days: int = 30, audio_dir: Optional[Path] = None,
+        transcript_dir: Optional[Path] = None,
     ) -> int:
-        """Remove entries older than specified days and their audio files. Returns count removed."""
+        """Remove entries older than specified days and their audio/transcript files. Returns count removed."""
         cutoff = datetime.now().timestamp() - (days * 24 * 60 * 60)
         cutoff_date = datetime.fromtimestamp(cutoff).isoformat()
 
         with sqlite3.connect(self.db_path) as conn:
-            # Delete audio files before removing DB rows
-            if audio_dir:
+            # Delete associated files before removing DB rows
+            if audio_dir or transcript_dir:
                 cursor = conn.execute(
-                    "SELECT audio_file FROM processed_posts WHERE published < ? AND audio_file IS NOT NULL",
+                    "SELECT id, audio_file FROM processed_posts WHERE published < ?",
                     (cutoff_date,),
                 )
-                for (audio_file,) in cursor.fetchall():
-                    path = audio_dir / audio_file
-                    if path.exists():
-                        path.unlink()
+                for entry_id, audio_file in cursor.fetchall():
+                    if audio_dir and audio_file:
+                        path = audio_dir / audio_file
+                        if path.exists():
+                            path.unlink()
+                    if transcript_dir:
+                        txt_path = transcript_dir / f"{entry_id}.txt"
+                        if txt_path.exists():
+                            txt_path.unlink()
 
             cursor = conn.execute(
                 "DELETE FROM processed_posts WHERE published < ?", (cutoff_date,)
