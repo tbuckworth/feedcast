@@ -36,15 +36,16 @@ The pipeline runs in three async phases orchestrated by `src/main.py`:
 
 ### Key modules
 
-- **`src/monitor.py`** — `FeedMonitor`: RSS fetching with `feedparser`, SQLite-backed dedup tracking (`data/posts.db`, table `processed_posts`)
-- **`src/processor.py`** — `ContentProcessor`: HTML cleaning with BeautifulSoup, Claude API summarization. Auto mode uses 24,000 char threshold to decide summarize vs verbatim.
+- **`src/monitor.py`** — `FeedMonitor`: RSS fetching with `feedparser`, SQLite-backed dedup tracking (`data/posts.db`, tables `processed_posts` and `news_briefings`). Supports `skip_patterns` per feed for title-based filtering. Stores recent news briefings for cross-day dedup.
+- **`src/processor.py`** — `ContentProcessor`: HTML cleaning with BeautifulSoup, Claude API summarization. Auto mode uses 24,000 char threshold to decide summarize vs verbatim. Converts HTML tables to prose (small tables inline, large tables via Claude Haiku) before text extraction.
+- **`src/normalizer.py`** — `TextNormalizer`: Claude Haiku-powered text normalization for TTS. Converts numbers, dates, percentages, currency, abbreviations, and special characters to spoken form. Handles long texts by splitting into paragraph batches.
 - **`src/audio.py`** — `AudioGenerator`: Voice sample upload to DeepInfra (fresh each session), async TTS with retry/backoff for 429s, ffmpeg concatenation to MP3. Voice sample: `voice_samples/derek_perkins.wav`.
 - **`src/feed.py`** — `FeedGenerator`: RSS 2.0 XML generation with iTunes namespace tags.
-- **`src/news.py`** — `NewsAggregator`: Parallel RSS fetching of news sources, article filtering by recency (configurable lookback), Claude-powered synthesis into a daily briefing. Produces a date-keyed `FeedEntry` for idempotent daily processing.
+- **`src/news.py`** — `NewsAggregator`: Parallel RSS fetching of news sources, article filtering by recency (configurable lookback), Claude-powered synthesis into a daily briefing. Produces a date-keyed `FeedEntry` for idempotent daily processing. Accepts recent briefing context for cross-day dedup.
 
 ### Configuration
 
-`config.yaml` defines podcast metadata, the default summarization prompt, the feed list, and the optional `news_briefing` section. Each feed has a `mode` (`summarize`, `verbatim`, or `auto`) and optional custom prompt. The `news_briefing` section configures the daily briefing with `enabled`, `lookback_hours`, a synthesis `prompt`, and a list of `sources` (each with `name`, `url`, `category`).
+`config.yaml` defines podcast metadata, the default summarization prompt, the feed list, and the optional `news_briefing` section. Each feed has a `mode` (`summarize`, `verbatim`, or `auto`), optional custom prompt, and optional `skip_patterns` (list of regexes matched against entry titles to filter out non-article posts). The `news_briefing` section configures the daily briefing with `enabled`, `lookback_hours`, a synthesis `prompt`, and a list of `sources` (each with `name`, `url`, `category`).
 
 ### Environment variables
 
@@ -64,8 +65,10 @@ GitHub Actions workflow (`.github/workflows/update-feed.yml`) runs daily at 6am 
 ## Data Flow
 
 ```
-RSS feeds → feedparser → new entries (SQLite dedup)
+RSS feeds → feedparser → skip_patterns filter → new entries (SQLite dedup)
+    → table-to-prose conversion (small inline, large via Haiku)
     → Claude summarization OR HTML cleaning
+    → TTS normalization (numbers/dates/symbols → spoken form via Haiku)
     → text chunks (≤500 chars, sentence boundaries)
     → DeepInfra TTS per chunk (voice-cloned WAVs)
     → ffmpeg concat → MP3
@@ -73,6 +76,6 @@ RSS feeds → feedparser → new entries (SQLite dedup)
     → RSS XML feed generation → GitHub Pages
 
 News sources (RSS) → parallel fetch → filter last 48h
-    → group by category → Claude synthesis
+    → group by category → Claude synthesis (with recent briefing dedup context)
     → single briefing FeedEntry → same audio pipeline above
 ```

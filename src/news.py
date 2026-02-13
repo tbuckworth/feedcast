@@ -17,10 +17,12 @@ class NewsAggregator:
         sources: list[dict],
         prompt: str,
         lookback_hours: int = 48,
+        recent_briefings: list[dict] | None = None,
     ):
         self.sources = sources
         self.prompt = prompt
         self.lookback_hours = lookback_hours
+        self.recent_briefings = recent_briefings or []
         self.client = AsyncAnthropic()
 
     async def fetch_all_sources(self) -> list[dict]:
@@ -88,11 +90,27 @@ class NewsAggregator:
 
     async def synthesize_briefing(self, formatted_articles: str) -> str:
         """Call Claude to synthesize the briefing from formatted articles."""
+        # Build user message with dedup context from recent briefings
+        user_message_parts = []
+        if self.recent_briefings:
+            user_message_parts.append(
+                "## Previous briefings (do NOT repeat stories unless there is genuinely new information):"
+            )
+            for briefing in self.recent_briefings:
+                user_message_parts.append(f"### {briefing['date']}")
+                user_message_parts.append(briefing["briefing_text"])
+            user_message_parts.append("---")
+            user_message_parts.append("")
+
+        user_message_parts.append("## Today's articles:")
+        user_message_parts.append(formatted_articles)
+        user_message = "\n".join(user_message_parts)
+
         response = await self.client.messages.create(
             model="claude-sonnet-4-5-20250929",
             max_tokens=4000,
             system=self.prompt,
-            messages=[{"role": "user", "content": formatted_articles}],
+            messages=[{"role": "user", "content": user_message}],
         )
         return response.content[0].text
 
