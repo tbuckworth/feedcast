@@ -15,6 +15,71 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-13</title>
+      <description>Audio version of Daily News Briefing - 2026-02-13 from Daily News Briefing</description>
+      <pubDate>Fri, 13 Feb 2026 06:48:42 +0000</pubDate>
+      <guid>news-briefing-2026-02-13</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/caf7d9661bca_daily_news_briefing_-_2026-02-13.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Why You Don’t Believe in Xhosa Prophecies</title>
+      <description>Audio version of Why You Don’t Believe in Xhosa Prophecies from LessWrong Frontpage</description>
+      <pubDate>Fri, 13 Feb 2026 02:25:25 +0000</pubDate>
+      <guid>tz5AmWbEcMBQpiEjY</guid>
+      <link>https://www.lesswrong.com/posts/tz5AmWbEcMBQpiEjY/why-you-don-t-believe-in-xhosa-prophecies</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ea27aa2860eb_why_you_dont_believe_in_xhosa_prophecies.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Grading AI 2027's 2025 Predictions</title>
+      <description>Audio version of Grading AI 2027's 2025 Predictions from Daniel Kokotajlo</description>
+      <pubDate>Fri, 13 Feb 2026 00:18:41 +0000</pubDate>
+      <guid>JYGeAAh92hAwvseFk</guid>
+      <link>https://www.lesswrong.com/posts/JYGeAAh92hAwvseFk/grading-ai-2027-s-2025-predictions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8aad9aed9429_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Grading AI 2027’s 2025 Predictions</title>
+      <description>Audio version of Grading AI 2027’s 2025 Predictions from AI Futures Project</description>
+      <pubDate>Thu, 12 Feb 2026 23:56:07 +0000</pubDate>
+      <guid>https://blog.ai-futures.org/p/grading-ai-2027s-2025-predictions</guid>
+      <link>https://blog.ai-futures.org/p/grading-ai-2027s-2025-predictions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d59f6ddd9612_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>How do we (more) safely defer to AIs?</title>
+      <description>Audio version of How do we (more) safely defer to AIs? from Ryan Greenblatt</description>
+      <pubDate>Thu, 12 Feb 2026 16:55:52 +0000</pubDate>
+      <guid>vjAM7F8vMZS7oRrrh</guid>
+      <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>What Happened With Bio Anchors?</title>
+      <description>Audio version of What Happened With Bio Anchors? from Scott Alexander</description>
+      <pubDate>Thu, 12 Feb 2026 10:14:43 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/what-happened-with-bio-anchors</guid>
+      <link>https://www.astralcodexten.com/p/what-happened-with-bio-anchors</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/788306981fbd_what_happened_with_bio_anchors.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-12</title>
       <description>Audio version of Daily News Briefing - 2026-02-12 from Daily News Briefing</description>
       <pubDate>Thu, 12 Feb 2026 06:52:40 +0000</pubDate>
@@ -688,45 +753,12 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>“Dating Roundup #10: Gendered Expectations” by Zvi</title>
-      <description>Audio version of “Dating Roundup #10: Gendered Expectations” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 12 Jan 2026 20:31:40 +0000</pubDate>
-      <guid>f339176d-59b5-43cb-ad25-533eb483508c</guid>
-      <link>https://www.lesswrong.com/posts/zphaHyABxMEDqNQ7K/dating-roundup-10-gendered-expectations</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3ae63302078e_dating_roundup_10_gendered_expectations_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>What Happens When Superhuman AIs Compete for Control?</title>
-      <description>Audio version of What Happens When Superhuman AIs Compete for Control? from AI Futures Project</description>
-      <pubDate>Sun, 11 Jan 2026 14:02:41 +0000</pubDate>
-      <guid>https://blog.ai-futures.org/p/what-happens-when-superhuman-ais</guid>
-      <link>https://blog.ai-futures.org/p/what-happens-when-superhuman-ais</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ccbfcfc54d9f_what_happens_when_superhuman_ais_compete_for_contr.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>The inaugural Redwood Research podcast</title>
       <description>Audio version of The inaugural Redwood Research podcast from Buck Shlegeris</description>
       <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
       <guid>p4iJpumHt6Ay9KnXT</guid>
       <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Vitalik's Response to AI 2027</title>
-      <description>Audio version of Vitalik's Response to AI 2027 from Daniel Kokotajlo</description>
-      <pubDate>Fri, 11 Jul 2025 21:43:36 +0000</pubDate>
-      <guid>zuuQwueBpv9ZCpNuX</guid>
-      <link>https://www.lesswrong.com/posts/zuuQwueBpv9ZCpNuX/vitalik-s-response-to-ai-2027</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a2b17c92c517_vitaliks_response_to_ai_2027.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
