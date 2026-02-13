@@ -230,7 +230,7 @@ async def async_main(config_path: Path | None = None) -> None:
                 print(f"  Error processing entry: {type(result).__name__}: {result!r}")
                 continue
             entry, audio_path = result
-            monitor.mark_processed(entry, audio_path.name)
+            monitor.mark_processed(entry, audio_path.name, content=entry.content)
             # Store news briefing text for future dedup context
             if entry.id.startswith("news-briefing-") and briefing_entry:
                 today = datetime.now().strftime("%Y-%m-%d")
@@ -241,14 +241,15 @@ async def async_main(config_path: Path | None = None) -> None:
 
     # Generate podcast feed
     print(f"\nGenerating podcast feed...")
+    transcript_dir = output_dir / "transcripts"
     db_entries = monitor.get_processed_entries()
-    episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir)
+    episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir, transcript_dir)
     feed_path = output_dir / "feed.xml"
     feed_gen.generate(episodes, feed_path)
     print(f"  Generated feed with {len(episodes)} episodes: {feed_path}")
 
     # Cleanup old entries (optional)
-    removed = monitor.cleanup_old_entries(days=30, audio_dir=audio_dir)
+    removed = monitor.cleanup_old_entries(days=30, audio_dir=audio_dir, transcript_dir=transcript_dir)
     if removed:
         print(f"  Cleaned up {removed} old entries")
     removed_briefings = monitor.cleanup_old_briefings(days=7)
