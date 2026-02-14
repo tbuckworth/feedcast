@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://podcastindex.org/namespace/1.0" version="2.0">
   <channel>
     <title>Feedcast - AI Safety Blog Summaries</title>
     <description>AI-generated audio summaries of AI safety blog posts</description>
@@ -14,6 +14,36 @@
       <itunes:email>feedcast@example.com</itunes:email>
     </itunes:owner>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-02-14</title>
+      <description>Daily News Briefing - 2026-02-14
+
+Topics covered:
+- We begin with significant developments in artificial intelligence capabilities
+- OpenAI has also unveiled GPT five point three Codex Spark, which the company describes as its first real-time coding model
+- Turning to AI industry turbulence, there's been a remarkable exodus from Elon Musk's xAI over the past week
+- Meanwhile, OpenAI is facing its own internal reshuffling
+- In the competitive AI landscape, Canadian startup Cohere reported surpassing two hundred forty million dollars in annual recurring revenue in twenty twenty-five, signaling strong enterprise demand as the company positions itself for a potential IPO
+- On AI safety, researchers are grappling with a fundamental challenge as systems become more capable</description>
+      <pubDate>Sat, 14 Feb 2026 06:34:26 +0000</pubDate>
+      <guid>news-briefing-2026-02-14</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5eed0c825792_daily_news_briefing_-_2026-02-14.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-14.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Life at the Frontlines of Demographic Collapse</title>
+      <description>Audio version of Life at the Frontlines of Demographic Collapse from LessWrong Frontpage</description>
+      <pubDate>Sat, 14 Feb 2026 06:30:51 +0000</pubDate>
+      <guid>FreZTE9Bc7reNnap7</guid>
+      <link>https://www.lesswrong.com/posts/FreZTE9Bc7reNnap7/life-at-the-frontlines-of-demographic-collapse</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b462b5490756_life_at_the_frontlines_of_demographic_collapse.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Is AI self-aware?</title>
       <description>Audio version of Is AI self-aware? from LessWrong Frontpage</description>
@@ -167,6 +197,17 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Political Backflow From Europe</title>
+      <description>Audio version of Political Backflow From Europe from Scott Alexander</description>
+      <pubDate>Wed, 11 Feb 2026 11:23:56 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/political-backflow-from-europe</guid>
+      <link>https://www.astralcodexten.com/p/political-backflow-from-europe</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/51c504a08190_political_backflow_from_europe.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-11</title>
       <description>Audio version of Daily News Briefing - 2026-02-11 from Daily News Briefing</description>
       <pubDate>Wed, 11 Feb 2026 06:52:43 +0000</pubDate>
@@ -237,6 +278,17 @@
       <guid>https://www.astralcodexten.com/p/open-thread-420</guid>
       <link>https://www.astralcodexten.com/p/open-thread-420</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a4cb3fa6d863_open_thread_420.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Code #4: From The Before Times” by Zvi</title>
+      <description>Audio version of “Claude Code #4: From The Before Times” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 09 Feb 2026 09:39:31 +0000</pubDate>
+      <guid>9a063394-ea81-4dc0-af61-b603b3a548b6</guid>
+      <link>https://www.lesswrong.com/posts/iwX2aJPKtyKAbLdip/claude-code-4-from-the-before-times</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3eee95e9d78b_claude_code_4_from_the_before_times_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
