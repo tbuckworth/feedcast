@@ -15,6 +15,36 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-15</title>
+      <description>Daily News Briefing - 2026-02-15
+
+Topics covered:
+- We begin with a significant development in artificial intelligence capabilities and research methodology
+- These announcements come as the AI industry experiences continued turbulence
+- OpenAI continues its own internal restructuring
+- Meanwhile, evidence suggests that Anthropic's strategy of differentiating itself through more careful AI deployment may be paying off
+- Turning to AI safety research, a new episode of the AXRP podcast features Guive Assadi discussing an unconventional proposal: granting property rights to AI systems
+- Separately, researchers are exploring whether improving AI metacognitive skills, the ability to catch and correct one's own errors, could benefit both capabilities and alignment</description>
+      <pubDate>Sun, 15 Feb 2026 06:41:11 +0000</pubDate>
+      <guid>news-briefing-2026-02-15</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5fbb4c677b26_daily_news_briefing_-_2026-02-15.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-15.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Words That Belong to Someone</title>
+      <description>Audio version of Words That Belong to Someone from LessWrong Frontpage</description>
+      <pubDate>Sun, 15 Feb 2026 05:53:29 +0000</pubDate>
+      <guid>cvADabSXJfkQfLMYE</guid>
+      <link>https://www.lesswrong.com/posts/cvADabSXJfkQfLMYE/words-that-belong-to-someone-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f7a1ebc90162_words_that_belong_to_someone.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-14</title>
       <description>Daily News Briefing - 2026-02-14
 
@@ -794,23 +824,23 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Hidden Open Thread 416.5</title>
-      <description>Audio version of Hidden Open Thread 416.5 from Scott Alexander</description>
-      <pubDate>Wed, 14 Jan 2026 20:22:51 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/hidden-open-thread-4165</guid>
-      <link>https://www.astralcodexten.com/p/hidden-open-thread-4165</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/75b0b90e7ff0_hidden_open_thread_4165.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“When Will They Take Our Jobs?” by Zvi</title>
       <description>Audio version of “When Will They Take Our Jobs?” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Wed, 14 Jan 2026 19:44:43 +0000</pubDate>
       <guid>ef629b53-1279-4097-b2d6-c198288619bb</guid>
       <link>https://www.lesswrong.com/posts/KAjhtrJggPtaophy7/when-will-they-take-our-jobs</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c4d14e82d89_when_will_they_take_our_jobs_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>SOTA On Bay Area House Party</title>
+      <description>Audio version of SOTA On Bay Area House Party from Scott Alexander</description>
+      <pubDate>Tue, 13 Jan 2026 21:37:20 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/sota-on-bay-area-house-party</guid>
+      <link>https://www.astralcodexten.com/p/sota-on-bay-area-house-party</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e4ef34d6c221_sota_on_bay_area_house_party.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
