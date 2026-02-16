@@ -15,6 +15,36 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-16</title>
+      <description>Daily News Briefing - 2026-02-16
+
+Topics covered:
+- We begin with a significant personnel move in the artificial intelligence industry
+- This hiring comes amid continued turmoil at Elon Musk's xAI, where concerns about the company's direction are intensifying
+- The contrast between companies is becoming starker
+- Meanwhile, OpenAI continues expanding its global footprint
+- In the enterprise AI space, venture capital firm Peak XV has backed Indian startup C2i with fifteen million dollars to address a critical bottleneck: power delivery to AI data centers
+- The enterprise software landscape is evolving rapidly around AI</description>
+      <pubDate>Mon, 16 Feb 2026 06:54:36 +0000</pubDate>
+      <guid>news-briefing-2026-02-16</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/daee969453ca_daily_news_briefing_-_2026-02-16.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-16.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Introspective RSI vs Extrospective RSI</title>
+      <description>Audio version of Introspective RSI vs Extrospective RSI from LessWrong Frontpage</description>
+      <pubDate>Mon, 16 Feb 2026 02:36:41 +0000</pubDate>
+      <guid>tepA5KqEBYmRxm8tF</guid>
+      <link>https://www.lesswrong.com/posts/tepA5KqEBYmRxm8tF/introspective-rsi-vs-extrospective-rsi</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/832848b57b2c_introspective_rsi_vs_extrospective_rsi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-15</title>
       <description>Daily News Briefing - 2026-02-15
 
@@ -819,17 +849,6 @@ Topics covered:
       <guid>8c20ee21-7b35-41d1-89dc-e3a134e241f6</guid>
       <link>https://www.lesswrong.com/posts/L27yM3qBqDnigtxLM/ai-151-while-claude-coworks</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/104045e209cd_ai_151_while_claude_coworks_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“When Will They Take Our Jobs?” by Zvi</title>
-      <description>Audio version of “When Will They Take Our Jobs?” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 14 Jan 2026 19:44:43 +0000</pubDate>
-      <guid>ef629b53-1279-4097-b2d6-c198288619bb</guid>
-      <link>https://www.lesswrong.com/posts/KAjhtrJggPtaophy7/when-will-they-take-our-jobs</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c4d14e82d89_when_will_they_take_our_jobs_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
