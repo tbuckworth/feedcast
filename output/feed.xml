@@ -15,6 +15,47 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-17</title>
+      <description>Daily News Briefing - 2026-02-17
+
+Topics covered:
+- We begin with developments at ByteDance, which is backpedaling after its Seedance two point zero video generator sparked a major Hollywood backlash
+- This comes as OpenClaw founder Peter Steinberger joins OpenAI, with CEO Sam Altman announcing the hire and emphasizing that "the future is going to be extremely multi-agent." Altman said Steinberger has "a lot of amazing ideas" about getting AI agents to interact with each other, signaling OpenAI's strategic direction toward systems where multiple AI agents collaborate
+- Meanwhile, Anthropic and the Pentagon are reportedly in a dispute over acceptable uses of the Claude AI system
+- A particularly troubling legal development involves longtime NPR host David Greene, who is suing Google over its NotebookLM tool
+- The AI industry workforce continues to experience significant turbulence
+- In enterprise AI developments, this week's Equity podcast features Glean CEO Arvind Jain explaining his company's strategic shift from enterprise search tool to what he describes as a middleware layer for enterprise AI</description>
+      <pubDate>Tue, 17 Feb 2026 06:48:40 +0000</pubDate>
+      <guid>news-briefing-2026-02-17</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b19a9a14d408_daily_news_briefing_-_2026-02-17.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-17.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Is Everything Connected? A McLuhan Thought Experiment</title>
+      <description>Audio version of Is Everything Connected? A McLuhan Thought Experiment from LessWrong Frontpage</description>
+      <pubDate>Tue, 17 Feb 2026 00:57:18 +0000</pubDate>
+      <guid>vEFbid5EYA5XJoGSm</guid>
+      <link>https://www.lesswrong.com/posts/vEFbid5EYA5XJoGSm/is-everything-connected-a-mcluhan-thought-experiment</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cff56f52d8ed_is_everything_connected_a_mcluhan_thought_experim.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“On Dwarkesh Patel’s 2026 Podcast With Dario Amodei” by Zvi</title>
+      <description>Audio version of “On Dwarkesh Patel’s 2026 Podcast With Dario Amodei” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 16 Feb 2026 14:33:41 +0000</pubDate>
+      <guid>666c9fbf-5ea3-4296-9312-f6885b149431</guid>
+      <link>https://www.lesswrong.com/posts/jWCy6owAmqLv5BB8q/on-dwarkesh-patel-s-2026-podcast-with-dario-amodei</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/736691728638_on_dwarkesh_patels_2026_podcast_with_dario_amode.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-16</title>
       <description>Daily News Briefing - 2026-02-16
 
@@ -821,45 +862,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>“Monthly Roundup #38: January 2026” by Zvi</title>
-      <description>Audio version of “Monthly Roundup #38: January 2026” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 16 Jan 2026 15:15:50 +0000</pubDate>
-      <guid>bcb25c90-b2f2-478a-bc01-10835f53df36</guid>
-      <link>https://www.lesswrong.com/posts/wh5KpofdQHs2D2hEj/monthly-roundup-38-january-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f936ffd17eb3_monthly_roundup_38_january_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>The Dilbert Afterlife</title>
       <description>Audio version of The Dilbert Afterlife from Scott Alexander</description>
       <pubDate>Fri, 16 Jan 2026 14:02:08 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/the-dilbert-afterlife</guid>
       <link>https://www.astralcodexten.com/p/the-dilbert-afterlife</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/cc71aec59a17_the_dilbert_afterlife.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #151: While Claude Coworks” by Zvi</title>
-      <description>Audio version of “AI #151: While Claude Coworks” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 15 Jan 2026 14:31:37 +0000</pubDate>
-      <guid>8c20ee21-7b35-41d1-89dc-e3a134e241f6</guid>
-      <link>https://www.lesswrong.com/posts/L27yM3qBqDnigtxLM/ai-151-while-claude-coworks</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/104045e209cd_ai_151_while_claude_coworks_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>SOTA On Bay Area House Party</title>
-      <description>Audio version of SOTA On Bay Area House Party from Scott Alexander</description>
-      <pubDate>Tue, 13 Jan 2026 21:37:20 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/sota-on-bay-area-house-party</guid>
-      <link>https://www.astralcodexten.com/p/sota-on-bay-area-house-party</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e4ef34d6c221_sota_on_bay_area_house_party.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
