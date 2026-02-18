@@ -15,6 +15,47 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-18</title>
+      <description>Daily News Briefing - 2026-02-18
+
+Topics covered:
+- We begin with a major development in AI infrastructure
+- This comes as the AI industry grapples with a growing memory crisis
+- In AI model developments, Anthropic has released Sonnet four point six, keeping pace with its four-month update cycle
+- OpenAI faces legal challenges on multiple fronts
+- The AI wearables space is heating up significantly
+- In the enterprise AI sector, WordPress has added an AI Assistant that can edit content, adjust styles, create images, and make changes using natural language commands</description>
+      <pubDate>Wed, 18 Feb 2026 06:53:03 +0000</pubDate>
+      <guid>news-briefing-2026-02-18</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a5c189ff9bf5_daily_news_briefing_-_2026-02-18.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-18.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Statistical Literacy</title>
+      <description>Audio version of Statistical Literacy from LessWrong Frontpage</description>
+      <pubDate>Wed, 18 Feb 2026 06:50:07 +0000</pubDate>
+      <guid>uJqxbwKzXrQau2cCH</guid>
+      <link>https://www.lesswrong.com/posts/uJqxbwKzXrQau2cCH/statistical-literacy</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8e83d68f43e5_statistical_literacy.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“On Dwarkesh Patel’s 2026 Podcast With Elon Musk and Other Recent Elon Musk Things” by Zvi</title>
+      <description>Audio version of “On Dwarkesh Patel’s 2026 Podcast With Elon Musk and Other Recent Elon Musk Things” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 17 Feb 2026 15:30:56 +0000</pubDate>
+      <guid>554be5f3-2d19-4bc4-8c8e-9d98a4c2d56f</guid>
+      <link>https://www.lesswrong.com/posts/5yidbWsdWjNzWzLWZ/on-dwarkesh-patel-s-2026-podcast-with-elon-musk-and-other</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b88a0d9bf56d_on_dwarkesh_patels_2026_podcast_with_elon_musk_a.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-17</title>
       <description>Daily News Briefing - 2026-02-17
 
@@ -868,17 +909,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/the-dilbert-afterlife</guid>
       <link>https://www.astralcodexten.com/p/the-dilbert-afterlife</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/cc71aec59a17_the_dilbert_afterlife.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>What Happens When Superhuman AIs Compete for Control?</title>
-      <description>Audio version of What Happens When Superhuman AIs Compete for Control? from AI Futures Project</description>
-      <pubDate>Sun, 11 Jan 2026 14:02:41 +0000</pubDate>
-      <guid>https://blog.ai-futures.org/p/what-happens-when-superhuman-ais</guid>
-      <link>https://blog.ai-futures.org/p/what-happens-when-superhuman-ais</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ccbfcfc54d9f_what_happens_when_superhuman_ais_compete_for_contr.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
