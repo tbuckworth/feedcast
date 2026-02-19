@@ -108,7 +108,7 @@ class NewsAggregator:
 
         response = await self.client.messages.create(
             model="claude-sonnet-4-5-20250929",
-            max_tokens=4000,
+            max_tokens=1500,
             system=self.prompt,
             messages=[{"role": "user", "content": user_message}],
         )
