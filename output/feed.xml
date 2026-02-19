@@ -15,6 +15,39 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Cooperationism: first draft for a moral framework that does not require consciousness</title>
+      <description>Audio version of Cooperationism: first draft for a moral framework that does not require consciousness from LessWrong Frontpage</description>
+      <pubDate>Thu, 19 Feb 2026 21:08:02 +0000</pubDate>
+      <guid>MvJepRWhvdcvhL5fo</guid>
+      <link>https://www.lesswrong.com/posts/MvJepRWhvdcvhL5fo/cooperationism-first-draft-for-a-moral-framework-that-does</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7e482be20f04_cooperationism_first_draft_for_a_moral_framework.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #156 Part 1: They Do Mean The Effect On Jobs” by Zvi</title>
+      <description>Audio version of “AI #156 Part 1: They Do Mean The Effect On Jobs” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 19 Feb 2026 14:22:02 +0000</pubDate>
+      <guid>228243c5-72aa-4b3d-b802-6014cd161eea</guid>
+      <link>https://www.lesswrong.com/posts/jcAombEXyatqGhYeX/ai-156-part-1-they-do-mean-the-effect-on-jobs</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7a725ea6174d_ai_156_part_1_they_do_mean_the_effect_on_jobs.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Crime As Proxy For Disorder</title>
+      <description>Audio version of Crime As Proxy For Disorder from Scott Alexander</description>
+      <pubDate>Thu, 19 Feb 2026 10:27:22 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/crime-as-proxy-for-disorder</guid>
+      <link>https://www.astralcodexten.com/p/crime-as-proxy-for-disorder</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a61b0366b5df_crime_as_proxy_for_disorder.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-19</title>
       <description>Daily News Briefing - 2026-02-19
 
@@ -917,28 +950,6 @@ Topics covered:
       <guid>dfd206b6-c484-456b-a6e0-10329d023052</guid>
       <link>https://www.lesswrong.com/posts/eg6GgEq6KWPJZQQYE/chatgpt-self-portrait</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/dfbaffb9883d_chatgpt_self_portrait_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Medical Roundup #6” by Zvi</title>
-      <description>Audio version of “Medical Roundup #6” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 19 Jan 2026 21:22:35 +0000</pubDate>
-      <guid>b1396271-d933-4649-a182-aac896eaaf05</guid>
-      <link>https://www.lesswrong.com/posts/FBkJmFStydJbAJmry/medical-roundup-6</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/53c85acc565b_medical_roundup_6_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Open Thread 417</title>
-      <description>Audio version of Open Thread 417 from Scott Alexander</description>
-      <pubDate>Mon, 19 Jan 2026 09:06:04 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/open-thread-417</guid>
-      <link>https://www.astralcodexten.com/p/open-thread-417</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bf35087dc567_open_thread_417.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
