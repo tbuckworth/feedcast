@@ -15,6 +15,58 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-19</title>
+      <description>Daily News Briefing - 2026-02-19
+
+Topics covered:
+- We begin with major developments in AI infrastructure and India strategy
+- This comes as Meta has struck a multiyear deal with Nvidia to expand its data centers with millions of Grace and Vera CPUs alongside Blackwell and Rubin GPUs
+- However, infrastructure constraints continue to bite
+- In AI model developments, Google has integrated its Lyria three music generation model directly into the Gemini app
+- Several significant AI partnerships and acquisitions emerged
+- In enterprise AI developments, a startup called Kana has emerged from stealth with fifteen million dollars to build customizable agent-based marketing tools</description>
+      <pubDate>Thu, 19 Feb 2026 06:50:42 +0000</pubDate>
+      <guid>news-briefing-2026-02-19</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4e5ebad9ebc4_daily_news_briefing_-_2026-02-19.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-19.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Power Laws Are Not Enough</title>
+      <description>Audio version of Power Laws Are Not Enough from LessWrong Frontpage</description>
+      <pubDate>Thu, 19 Feb 2026 04:31:50 +0000</pubDate>
+      <guid>5x54xhX3K2TNY2L3T</guid>
+      <link>https://www.lesswrong.com/posts/5x54xhX3K2TNY2L3T/power-laws-are-not-enough</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5d0d38f6356d_power_laws_are_not_enough.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Monthly Roundup #39: February 2026” by Zvi</title>
+      <description>Audio version of “Monthly Roundup #39: February 2026” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 18 Feb 2026 20:34:12 +0000</pubDate>
+      <guid>466e50d2-0f75-40c6-bca6-f910693cf160</guid>
+      <link>https://www.lesswrong.com/posts/3QPoEGfzHaywGDWKr/monthly-roundup-39-february-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8fd2a11d98c7_monthly_roundup_39_february_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Record Low Crime Rates Are Real, Not Just Reporting Bias Or Improved Medical Care</title>
+      <description>Audio version of Record Low Crime Rates Are Real, Not Just Reporting Bias Or Improved Medical Care from Scott Alexander</description>
+      <pubDate>Wed, 18 Feb 2026 13:25:41 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</guid>
+      <link>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0b922652175e_record_low_crime_rates_are_real_not_just_reportin.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-18</title>
       <description>Daily News Briefing - 2026-02-18
 
@@ -898,17 +950,6 @@ Topics covered:
       <guid>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</guid>
       <link>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c126b899a465_forecast_how_ai_will_progress_in_2026.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The Dilbert Afterlife</title>
-      <description>Audio version of The Dilbert Afterlife from Scott Alexander</description>
-      <pubDate>Fri, 16 Jan 2026 14:02:08 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-dilbert-afterlife</guid>
-      <link>https://www.astralcodexten.com/p/the-dilbert-afterlife</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cc71aec59a17_the_dilbert_afterlife.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
