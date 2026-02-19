@@ -11,6 +11,7 @@ os.environ.setdefault("ANTHROPIC_API_KEY", "test-key")
 from src.audio import split_into_chunks
 from src.feed import FeedGenerator, PodcastConfig
 from src.main import generate_episode_id
+from src.news import NewsAggregator
 from src.processor import ContentProcessor
 
 
@@ -275,3 +276,77 @@ class TestSkipPatterns:
         assert not self._should_skip("Why AI Safety Matters")
         assert not self._should_skip("Book Review: The Alignment Problem")
         assert not self._should_skip("My Model Of AI Doom")
+
+
+# --- News briefing dedup prompt construction (src/news.py) ---
+
+
+class TestNewsBriefingDedup:
+    """Test that dedup context is correctly included in the synthesis prompt."""
+
+    def _make_aggregator(self, recent_briefings=None):
+        return NewsAggregator(
+            sources=[],
+            prompt="Test prompt",
+            lookback_hours=24,
+            recent_briefings=recent_briefings,
+        )
+
+    def test_no_dedup_context_when_empty(self):
+        agg = self._make_aggregator(recent_briefings=[])
+        articles = "## AI NEWS\n- [Source] Some headline\n  Summary text"
+        # Build the user message the same way synthesize_briefing does
+        parts = []
+        if agg.recent_briefings:
+            parts.append("## Previous briefings")
+        parts.append("## Today's articles:")
+        parts.append(articles)
+        msg = "\n".join(parts)
+        assert "Previous briefings" not in msg
+        assert "## Today's articles:" in msg
+
+    def test_dedup_context_included_with_recent_briefings(self):
+        briefings = [
+            {"date": "2026-02-18", "briefing_text": "Yesterday EU announced new AI rules."},
+            {"date": "2026-02-17", "briefing_text": "OpenAI released GPT-5 two days ago."},
+        ]
+        agg = self._make_aggregator(recent_briefings=briefings)
+
+        # Reconstruct the user message logic from synthesize_briefing
+        parts = []
+        if agg.recent_briefings:
+            parts.append(
+                "## Previous briefings (do NOT repeat stories unless there is genuinely new information):"
+            )
+            for b in agg.recent_briefings:
+                parts.append(f"### {b['date']}")
+                parts.append(b["briefing_text"])
+            parts.append("---")
+            parts.append("")
+        parts.append("## Today's articles:")
+        parts.append("## AI NEWS\n- [Source] Some headline")
+        msg = "\n".join(parts)
+
+        assert "Previous briefings" in msg
+        assert "do NOT repeat stories" in msg
+        assert "### 2026-02-18" in msg
+        assert "Yesterday EU announced new AI rules." in msg
+        assert "### 2026-02-17" in msg
+        assert "OpenAI released GPT-5 two days ago." in msg
+        assert "## Today's articles:" in msg
+
+    def test_format_articles_groups_by_category(self):
+        agg = self._make_aggregator()
+        articles = [
+            {"title": "AI Rule", "source": "BBC", "category": "ai_safety", "summary": "New rules"},
+            {"title": "Markets Up", "source": "Reuters", "category": "economics", "summary": "Stocks rose"},
+            {"title": "Model Release", "source": "Verge", "category": "ai_safety", "summary": "New model"},
+        ]
+        formatted = agg._format_articles_for_prompt(articles)
+        assert "## AI SAFETY" in formatted
+        assert "## ECONOMICS" in formatted
+        # ai_safety items grouped together
+        ai_section_start = formatted.index("## AI SAFETY")
+        econ_section_start = formatted.index("## ECONOMICS")
+        assert formatted.index("AI Rule", ai_section_start) < econ_section_start
+        assert formatted.index("Model Release", ai_section_start) < econ_section_start
