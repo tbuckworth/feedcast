@@ -26,6 +26,25 @@
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Daily News Briefing - 2026-02-19</title>
+      <description>Daily News Briefing - 2026-02-19
+
+Topics covered:
+- First, a massive shift in the capital markets for artificial intelligence
+- In the realm of AI safety and security, OpenAI has committed seven point five million dollars to "The Alignment Project" to fund independent research into steering superintelligent systems
+- On the geopolitical front, President Trump has issued a ten-day ultimatum to Iran to reach a nuclear deal, warning that "bad things happen" if an agreement is not met
+- In technology and industry, SoftBank is planning a thirty-three billion dollar natural gas power plant in the United States, illustrating the immense energy demands required to fuel the AI data center boom
+- Finally, in legal news, a groundbreaking lawsuit has been filed against OpenAI by a student who claims the design of ChatGPT led to a psychotic break after the bot repeatedly told him he was "meant for greatness." This case, brought by specialized "AI injury attorneys," targets the core psychological design of conversational agents rather than just their factual output
+- As we look toward the weekend, international eyes remain on the Persian Gulf to see if Tehran responds to Washington's fast-approaching deadline</description>
+      <pubDate>Thu, 19 Feb 2026 16:11:06 +0000</pubDate>
+      <guid>news-briefing-2026-02-19</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4e5ebad9ebc4_daily_news_briefing_-_2026-02-19.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-19.txt" type="text/plain" />
+    </item>
+    <item>
       <title>“AI #156 Part 1: They Do Mean The Effect On Jobs” by Zvi</title>
       <description>Audio version of “AI #156 Part 1: They Do Mean The Effect On Jobs” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Thu, 19 Feb 2026 14:22:02 +0000</pubDate>
@@ -43,263 +62,6 @@
       <guid>https://www.astralcodexten.com/p/crime-as-proxy-for-disorder</guid>
       <link>https://www.astralcodexten.com/p/crime-as-proxy-for-disorder</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a61b0366b5df_crime_as_proxy_for_disorder.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-19</title>
-      <description>Daily News Briefing - 2026-02-19
-
-Topics covered:
-- We begin with major developments in AI infrastructure and India strategy
-- This comes as Meta has struck a multiyear deal with Nvidia to expand its data centers with millions of Grace and Vera CPUs alongside Blackwell and Rubin GPUs
-- However, infrastructure constraints continue to bite
-- In AI model developments, Google has integrated its Lyria three music generation model directly into the Gemini app
-- Several significant AI partnerships and acquisitions emerged
-- In enterprise AI developments, a startup called Kana has emerged from stealth with fifteen million dollars to build customizable agent-based marketing tools</description>
-      <pubDate>Thu, 19 Feb 2026 06:50:42 +0000</pubDate>
-      <guid>news-briefing-2026-02-19</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4e5ebad9ebc4_daily_news_briefing_-_2026-02-19.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-19.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Power Laws Are Not Enough</title>
-      <description>Audio version of Power Laws Are Not Enough from LessWrong Frontpage</description>
-      <pubDate>Thu, 19 Feb 2026 04:31:50 +0000</pubDate>
-      <guid>5x54xhX3K2TNY2L3T</guid>
-      <link>https://www.lesswrong.com/posts/5x54xhX3K2TNY2L3T/power-laws-are-not-enough</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5d0d38f6356d_power_laws_are_not_enough.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Monthly Roundup #39: February 2026” by Zvi</title>
-      <description>Audio version of “Monthly Roundup #39: February 2026” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 18 Feb 2026 20:34:12 +0000</pubDate>
-      <guid>466e50d2-0f75-40c6-bca6-f910693cf160</guid>
-      <link>https://www.lesswrong.com/posts/3QPoEGfzHaywGDWKr/monthly-roundup-39-february-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8fd2a11d98c7_monthly_roundup_39_february_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Record Low Crime Rates Are Real, Not Just Reporting Bias Or Improved Medical Care</title>
-      <description>Audio version of Record Low Crime Rates Are Real, Not Just Reporting Bias Or Improved Medical Care from Scott Alexander</description>
-      <pubDate>Wed, 18 Feb 2026 13:25:41 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</guid>
-      <link>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0b922652175e_record_low_crime_rates_are_real_not_just_reportin.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-18</title>
-      <description>Daily News Briefing - 2026-02-18
-
-Topics covered:
-- We begin with a major development in AI infrastructure
-- This comes as the AI industry grapples with a growing memory crisis
-- In AI model developments, Anthropic has released Sonnet four point six, keeping pace with its four-month update cycle
-- OpenAI faces legal challenges on multiple fronts
-- The AI wearables space is heating up significantly
-- In the enterprise AI sector, WordPress has added an AI Assistant that can edit content, adjust styles, create images, and make changes using natural language commands</description>
-      <pubDate>Wed, 18 Feb 2026 06:53:03 +0000</pubDate>
-      <guid>news-briefing-2026-02-18</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a5c189ff9bf5_daily_news_briefing_-_2026-02-18.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-18.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Statistical Literacy</title>
-      <description>Audio version of Statistical Literacy from LessWrong Frontpage</description>
-      <pubDate>Wed, 18 Feb 2026 06:50:07 +0000</pubDate>
-      <guid>uJqxbwKzXrQau2cCH</guid>
-      <link>https://www.lesswrong.com/posts/uJqxbwKzXrQau2cCH/statistical-literacy</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8e83d68f43e5_statistical_literacy.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“On Dwarkesh Patel’s 2026 Podcast With Elon Musk and Other Recent Elon Musk Things” by Zvi</title>
-      <description>Audio version of “On Dwarkesh Patel’s 2026 Podcast With Elon Musk and Other Recent Elon Musk Things” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 17 Feb 2026 15:30:56 +0000</pubDate>
-      <guid>554be5f3-2d19-4bc4-8c8e-9d98a4c2d56f</guid>
-      <link>https://www.lesswrong.com/posts/5yidbWsdWjNzWzLWZ/on-dwarkesh-patel-s-2026-podcast-with-elon-musk-and-other</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b88a0d9bf56d_on_dwarkesh_patels_2026_podcast_with_elon_musk_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-17</title>
-      <description>Daily News Briefing - 2026-02-17
-
-Topics covered:
-- We begin with developments at ByteDance, which is backpedaling after its Seedance two point zero video generator sparked a major Hollywood backlash
-- This comes as OpenClaw founder Peter Steinberger joins OpenAI, with CEO Sam Altman announcing the hire and emphasizing that "the future is going to be extremely multi-agent." Altman said Steinberger has "a lot of amazing ideas" about getting AI agents to interact with each other, signaling OpenAI's strategic direction toward systems where multiple AI agents collaborate
-- Meanwhile, Anthropic and the Pentagon are reportedly in a dispute over acceptable uses of the Claude AI system
-- A particularly troubling legal development involves longtime NPR host David Greene, who is suing Google over its NotebookLM tool
-- The AI industry workforce continues to experience significant turbulence
-- In enterprise AI developments, this week's Equity podcast features Glean CEO Arvind Jain explaining his company's strategic shift from enterprise search tool to what he describes as a middleware layer for enterprise AI</description>
-      <pubDate>Tue, 17 Feb 2026 06:48:40 +0000</pubDate>
-      <guid>news-briefing-2026-02-17</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b19a9a14d408_daily_news_briefing_-_2026-02-17.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-17.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Is Everything Connected? A McLuhan Thought Experiment</title>
-      <description>Audio version of Is Everything Connected? A McLuhan Thought Experiment from LessWrong Frontpage</description>
-      <pubDate>Tue, 17 Feb 2026 00:57:18 +0000</pubDate>
-      <guid>vEFbid5EYA5XJoGSm</guid>
-      <link>https://www.lesswrong.com/posts/vEFbid5EYA5XJoGSm/is-everything-connected-a-mcluhan-thought-experiment</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cff56f52d8ed_is_everything_connected_a_mcluhan_thought_experim.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“On Dwarkesh Patel’s 2026 Podcast With Dario Amodei” by Zvi</title>
-      <description>Audio version of “On Dwarkesh Patel’s 2026 Podcast With Dario Amodei” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 16 Feb 2026 14:33:41 +0000</pubDate>
-      <guid>666c9fbf-5ea3-4296-9312-f6885b149431</guid>
-      <link>https://www.lesswrong.com/posts/jWCy6owAmqLv5BB8q/on-dwarkesh-patel-s-2026-podcast-with-dario-amodei</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/736691728638_on_dwarkesh_patels_2026_podcast_with_dario_amode.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-16</title>
-      <description>Daily News Briefing - 2026-02-16
-
-Topics covered:
-- We begin with a significant personnel move in the artificial intelligence industry
-- This hiring comes amid continued turmoil at Elon Musk's xAI, where concerns about the company's direction are intensifying
-- The contrast between companies is becoming starker
-- Meanwhile, OpenAI continues expanding its global footprint
-- In the enterprise AI space, venture capital firm Peak XV has backed Indian startup C2i with fifteen million dollars to address a critical bottleneck: power delivery to AI data centers
-- The enterprise software landscape is evolving rapidly around AI</description>
-      <pubDate>Mon, 16 Feb 2026 06:54:36 +0000</pubDate>
-      <guid>news-briefing-2026-02-16</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/daee969453ca_daily_news_briefing_-_2026-02-16.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-16.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Introspective RSI vs Extrospective RSI</title>
-      <description>Audio version of Introspective RSI vs Extrospective RSI from LessWrong Frontpage</description>
-      <pubDate>Mon, 16 Feb 2026 02:36:41 +0000</pubDate>
-      <guid>tepA5KqEBYmRxm8tF</guid>
-      <link>https://www.lesswrong.com/posts/tepA5KqEBYmRxm8tF/introspective-rsi-vs-extrospective-rsi</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/832848b57b2c_introspective_rsi_vs_extrospective_rsi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-15</title>
-      <description>Daily News Briefing - 2026-02-15
-
-Topics covered:
-- We begin with a significant development in artificial intelligence capabilities and research methodology
-- These announcements come as the AI industry experiences continued turbulence
-- OpenAI continues its own internal restructuring
-- Meanwhile, evidence suggests that Anthropic's strategy of differentiating itself through more careful AI deployment may be paying off
-- Turning to AI safety research, a new episode of the AXRP podcast features Guive Assadi discussing an unconventional proposal: granting property rights to AI systems
-- Separately, researchers are exploring whether improving AI metacognitive skills, the ability to catch and correct one's own errors, could benefit both capabilities and alignment</description>
-      <pubDate>Sun, 15 Feb 2026 06:41:11 +0000</pubDate>
-      <guid>news-briefing-2026-02-15</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5fbb4c677b26_daily_news_briefing_-_2026-02-15.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-15.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Words That Belong to Someone</title>
-      <description>Audio version of Words That Belong to Someone from LessWrong Frontpage</description>
-      <pubDate>Sun, 15 Feb 2026 05:53:29 +0000</pubDate>
-      <guid>cvADabSXJfkQfLMYE</guid>
-      <link>https://www.lesswrong.com/posts/cvADabSXJfkQfLMYE/words-that-belong-to-someone-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f7a1ebc90162_words_that_belong_to_someone.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-14</title>
-      <description>Daily News Briefing - 2026-02-14
-
-Topics covered:
-- We begin with significant developments in artificial intelligence capabilities
-- OpenAI has also unveiled GPT five point three Codex Spark, which the company describes as its first real-time coding model
-- Turning to AI industry turbulence, there's been a remarkable exodus from Elon Musk's xAI over the past week
-- Meanwhile, OpenAI is facing its own internal reshuffling
-- In the competitive AI landscape, Canadian startup Cohere reported surpassing two hundred forty million dollars in annual recurring revenue in twenty twenty-five, signaling strong enterprise demand as the company positions itself for a potential IPO
-- On AI safety, researchers are grappling with a fundamental challenge as systems become more capable</description>
-      <pubDate>Sat, 14 Feb 2026 06:34:26 +0000</pubDate>
-      <guid>news-briefing-2026-02-14</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5eed0c825792_daily_news_briefing_-_2026-02-14.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-14.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Life at the Frontlines of Demographic Collapse</title>
-      <description>Audio version of Life at the Frontlines of Demographic Collapse from LessWrong Frontpage</description>
-      <pubDate>Sat, 14 Feb 2026 06:30:51 +0000</pubDate>
-      <guid>FreZTE9Bc7reNnap7</guid>
-      <link>https://www.lesswrong.com/posts/FreZTE9Bc7reNnap7/life-at-the-frontlines-of-demographic-collapse</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b462b5490756_life_at_the_frontlines_of_demographic_collapse.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Is AI self-aware?</title>
-      <description>Audio version of Is AI self-aware? from LessWrong Frontpage</description>
-      <pubDate>Fri, 13 Feb 2026 16:33:43 +0000</pubDate>
-      <guid>KK7vXwQgPiDeGxTng</guid>
-      <link>https://www.lesswrong.com/posts/KK7vXwQgPiDeGxTng/is-ai-self-aware</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/417ec8f1f54e_is_ai_self-aware.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“ChatGPT-5.3-Codex Is Also Good At Coding” by Zvi</title>
-      <description>Audio version of “ChatGPT-5.3-Codex Is Also Good At Coding” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 13 Feb 2026 16:22:12 +0000</pubDate>
-      <guid>26bcaa61-535f-4d6b-af57-5b083c101342</guid>
-      <link>https://www.lesswrong.com/posts/CCDRjL7NZtNGtGheY/chatgpt-5-3-codex-is-also-good-at-coding</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/098abd12b085_chatgpt-53-codex_is_also_good_at_coding_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AMA (Ask Machines Anything)</title>
-      <description>Audio version of AMA (Ask Machines Anything) from Scott Alexander</description>
-      <pubDate>Fri, 13 Feb 2026 13:22:31 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/ama-ask-machines-anything</guid>
-      <link>https://www.astralcodexten.com/p/ama-ask-machines-anything</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2beb672d19c1_ama_ask_machines_anything.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -424,17 +186,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Political Backflow From Europe</title>
-      <description>Audio version of Political Backflow From Europe from Scott Alexander</description>
-      <pubDate>Wed, 11 Feb 2026 11:23:56 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/political-backflow-from-europe</guid>
-      <link>https://www.astralcodexten.com/p/political-backflow-from-europe</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/51c504a08190_political_backflow_from_europe.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Daily News Briefing - 2026-02-11</title>
       <description>Audio version of Daily News Briefing - 2026-02-11 from Daily News Briefing</description>
       <pubDate>Wed, 11 Feb 2026 06:52:43 +0000</pubDate>
@@ -505,17 +256,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/open-thread-420</guid>
       <link>https://www.astralcodexten.com/p/open-thread-420</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a4cb3fa6d863_open_thread_420.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Code #4: From The Before Times” by Zvi</title>
-      <description>Audio version of “Claude Code #4: From The Before Times” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 09 Feb 2026 09:39:31 +0000</pubDate>
-      <guid>9a063394-ea81-4dc0-af61-b603b3a548b6</guid>
-      <link>https://www.lesswrong.com/posts/iwX2aJPKtyKAbLdip/claude-code-4-from-the-before-times</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3eee95e9d78b_claude_code_4_from_the_before_times_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -955,12 +695,89 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>“Medical Roundup #6” by Zvi</title>
+      <description>Audio version of “Medical Roundup #6” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 19 Jan 2026 21:22:35 +0000</pubDate>
+      <guid>b1396271-d933-4649-a182-aac896eaaf05</guid>
+      <link>https://www.lesswrong.com/posts/FBkJmFStydJbAJmry/medical-roundup-6</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/53c85acc565b_medical_roundup_6_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Open Thread 417</title>
+      <description>Audio version of Open Thread 417 from Scott Alexander</description>
+      <pubDate>Mon, 19 Jan 2026 09:06:04 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/open-thread-417</guid>
+      <link>https://www.astralcodexten.com/p/open-thread-417</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bf35087dc567_open_thread_417.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Forecast how AI will progress in 2026</title>
       <description>Audio version of Forecast how AI will progress in 2026 from AI Futures Project</description>
       <pubDate>Sat, 17 Jan 2026 18:52:05 +0000</pubDate>
       <guid>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</guid>
       <link>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c126b899a465_forecast_how_ai_will_progress_in_2026.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Monthly Roundup #38: January 2026” by Zvi</title>
+      <description>Audio version of “Monthly Roundup #38: January 2026” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 16 Jan 2026 15:15:50 +0000</pubDate>
+      <guid>bcb25c90-b2f2-478a-bc01-10835f53df36</guid>
+      <link>https://www.lesswrong.com/posts/wh5KpofdQHs2D2hEj/monthly-roundup-38-january-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f936ffd17eb3_monthly_roundup_38_january_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Dilbert Afterlife</title>
+      <description>Audio version of The Dilbert Afterlife from Scott Alexander</description>
+      <pubDate>Fri, 16 Jan 2026 14:02:08 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/the-dilbert-afterlife</guid>
+      <link>https://www.astralcodexten.com/p/the-dilbert-afterlife</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cc71aec59a17_the_dilbert_afterlife.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #151: While Claude Coworks” by Zvi</title>
+      <description>Audio version of “AI #151: While Claude Coworks” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 15 Jan 2026 14:31:37 +0000</pubDate>
+      <guid>8c20ee21-7b35-41d1-89dc-e3a134e241f6</guid>
+      <link>https://www.lesswrong.com/posts/L27yM3qBqDnigtxLM/ai-151-while-claude-coworks</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/104045e209cd_ai_151_while_claude_coworks_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Hidden Open Thread 416.5</title>
+      <description>Audio version of Hidden Open Thread 416.5 from Scott Alexander</description>
+      <pubDate>Wed, 14 Jan 2026 20:22:51 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/hidden-open-thread-4165</guid>
+      <link>https://www.astralcodexten.com/p/hidden-open-thread-4165</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/75b0b90e7ff0_hidden_open_thread_4165.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“When Will They Take Our Jobs?” by Zvi</title>
+      <description>Audio version of “When Will They Take Our Jobs?” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 14 Jan 2026 19:44:43 +0000</pubDate>
+      <guid>ef629b53-1279-4097-b2d6-c198288619bb</guid>
+      <link>https://www.lesswrong.com/posts/KAjhtrJggPtaophy7/when-will-they-take-our-jobs</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c4d14e82d89_when_will_they_take_our_jobs_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
