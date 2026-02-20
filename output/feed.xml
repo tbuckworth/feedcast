@@ -15,6 +15,47 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-20</title>
+      <description>Daily News Briefing - 2026-02-20
+
+Topics covered:
+- The standoff between Washington and Tehran has reached a critical inflection point as the ten-day ultimatum issued by President Trump draws closer
+- In the technology sector, Google has announced Gemini three point one Pro, claiming record-breaking benchmark scores and a significant leap in complex problem-solving
+- Despite the rapid leap in capabilities, Google’s top AI official used the Impact Summit in Delhi to sound a note of caution, calling for urgent research into emergent AI threats
+- In cybersecurity, the "OpenClaw" incident reported yesterday has evolved into a broader warning regarding autonomous agents
+- Finally, President Trump has directed the federal government to prepare for the release of classified files regarding unidentified aerial phenomena and extraterrestrials
+- As we head into the weekend, the world remains focused on the Persian Gulf to see if the deadline on Iran’s nuclear program leads to a diplomatic breakthrough or a regional escalation</description>
+      <pubDate>Fri, 20 Feb 2026 15:48:05 +0000</pubDate>
+      <guid>news-briefing-2026-02-20</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e384ec08ade5_daily_news_briefing_-_2026-02-20.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-20.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>On Steven Byrnes' ruthless ASI, (dis)analogies with humans and alignment proposals</title>
+      <description>Audio version of On Steven Byrnes' ruthless ASI, (dis)analogies with humans and alignment proposals from LessWrong Frontpage</description>
+      <pubDate>Fri, 20 Feb 2026 15:32:25 +0000</pubDate>
+      <guid>YfvJP6h7gjtFqA27J</guid>
+      <link>https://www.lesswrong.com/posts/YfvJP6h7gjtFqA27J/on-steven-byrnes-ruthless-asi-dis-analogies-with-humans-and</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0421367ff55b_on_steven_byrnes_ruthless_asi_disanalogies_wit.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #156 Part 2: Errors in Rhetoric” by Zvi</title>
+      <description>Audio version of “AI #156 Part 2: Errors in Rhetoric” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 20 Feb 2026 14:32:53 +0000</pubDate>
+      <guid>c28c99da-5008-41f2-bb42-af46b7b7960b</guid>
+      <link>https://www.lesswrong.com/posts/obqmuRxwFyy8ziPrB/ai-156-part-2-errors-in-rhetoric</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/909cc2c00e77_ai_156_part_2_errors_in_rhetoric_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Cooperationism: first draft for a moral framework that does not require consciousness</title>
       <description>Audio version of Cooperationism: first draft for a moral framework that does not require consciousness from LessWrong Frontpage</description>
       <pubDate>Thu, 19 Feb 2026 21:08:02 +0000</pubDate>
@@ -62,6 +103,17 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/crime-as-proxy-for-disorder</guid>
       <link>https://www.astralcodexten.com/p/crime-as-proxy-for-disorder</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a61b0366b5df_crime_as_proxy_for_disorder.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Record Low Crime Rates Are Real, Not Just Reporting Bias Or Improved Medical Care</title>
+      <description>Audio version of Record Low Crime Rates Are Real, Not Just Reporting Bias Or Improved Medical Care from Scott Alexander</description>
+      <pubDate>Wed, 18 Feb 2026 13:25:41 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</guid>
+      <link>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0b922652175e_record_low_crime_rates_are_real_not_just_reportin.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -684,111 +736,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>“ChatGPT Self Portrait” by Zvi</title>
-      <description>Audio version of “ChatGPT Self Portrait” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 20 Jan 2026 16:32:15 +0000</pubDate>
-      <guid>dfd206b6-c484-456b-a6e0-10329d023052</guid>
-      <link>https://www.lesswrong.com/posts/eg6GgEq6KWPJZQQYE/chatgpt-self-portrait</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/dfbaffb9883d_chatgpt_self_portrait_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Medical Roundup #6” by Zvi</title>
-      <description>Audio version of “Medical Roundup #6” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 19 Jan 2026 21:22:35 +0000</pubDate>
-      <guid>b1396271-d933-4649-a182-aac896eaaf05</guid>
-      <link>https://www.lesswrong.com/posts/FBkJmFStydJbAJmry/medical-roundup-6</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/53c85acc565b_medical_roundup_6_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Open Thread 417</title>
-      <description>Audio version of Open Thread 417 from Scott Alexander</description>
-      <pubDate>Mon, 19 Jan 2026 09:06:04 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/open-thread-417</guid>
-      <link>https://www.astralcodexten.com/p/open-thread-417</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bf35087dc567_open_thread_417.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Forecast how AI will progress in 2026</title>
       <description>Audio version of Forecast how AI will progress in 2026 from AI Futures Project</description>
       <pubDate>Sat, 17 Jan 2026 18:52:05 +0000</pubDate>
       <guid>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</guid>
       <link>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c126b899a465_forecast_how_ai_will_progress_in_2026.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Monthly Roundup #38: January 2026” by Zvi</title>
-      <description>Audio version of “Monthly Roundup #38: January 2026” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 16 Jan 2026 15:15:50 +0000</pubDate>
-      <guid>bcb25c90-b2f2-478a-bc01-10835f53df36</guid>
-      <link>https://www.lesswrong.com/posts/wh5KpofdQHs2D2hEj/monthly-roundup-38-january-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f936ffd17eb3_monthly_roundup_38_january_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The Dilbert Afterlife</title>
-      <description>Audio version of The Dilbert Afterlife from Scott Alexander</description>
-      <pubDate>Fri, 16 Jan 2026 14:02:08 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-dilbert-afterlife</guid>
-      <link>https://www.astralcodexten.com/p/the-dilbert-afterlife</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cc71aec59a17_the_dilbert_afterlife.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #151: While Claude Coworks” by Zvi</title>
-      <description>Audio version of “AI #151: While Claude Coworks” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 15 Jan 2026 14:31:37 +0000</pubDate>
-      <guid>8c20ee21-7b35-41d1-89dc-e3a134e241f6</guid>
-      <link>https://www.lesswrong.com/posts/L27yM3qBqDnigtxLM/ai-151-while-claude-coworks</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/104045e209cd_ai_151_while_claude_coworks_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Hidden Open Thread 416.5</title>
-      <description>Audio version of Hidden Open Thread 416.5 from Scott Alexander</description>
-      <pubDate>Wed, 14 Jan 2026 20:22:51 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/hidden-open-thread-4165</guid>
-      <link>https://www.astralcodexten.com/p/hidden-open-thread-4165</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/75b0b90e7ff0_hidden_open_thread_4165.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“When Will They Take Our Jobs?” by Zvi</title>
-      <description>Audio version of “When Will They Take Our Jobs?” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 14 Jan 2026 19:44:43 +0000</pubDate>
-      <guid>ef629b53-1279-4097-b2d6-c198288619bb</guid>
-      <link>https://www.lesswrong.com/posts/KAjhtrJggPtaophy7/when-will-they-take-our-jobs</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c4d14e82d89_when_will_they_take_our_jobs_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The inaugural Redwood Research podcast</title>
-      <description>Audio version of The inaugural Redwood Research podcast from Buck Shlegeris</description>
-      <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
-      <guid>p4iJpumHt6Ay9KnXT</guid>
-      <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
