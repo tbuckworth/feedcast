@@ -5,7 +5,7 @@ import os
 from openai import AsyncOpenAI
 
 MODEL_STRONG = "google/gemini-3-flash-preview"
-MODEL_CHEAP = "google/gemini-2.5-flash"
+MODEL_CHEAP = "google/gemini-3-flash-preview"
 
 
 def get_client() -> AsyncOpenAI:
