@@ -1,6 +1,6 @@
-"""TTS text normalization using Claude Haiku."""
+"""TTS text normalization using LLM."""
 
-from anthropic import AsyncAnthropic
+from .llm import get_client, MODEL_CHEAP
 
 NORMALIZE_PROMPT = """\
 You are a text normalizer preparing written text for text-to-speech (TTS) synthesis.
@@ -25,7 +25,7 @@ class TextNormalizer:
     """Normalizes text for TTS using Claude Haiku."""
 
     def __init__(self):
-        self.client = AsyncAnthropic()
+        self.client = get_client()
 
     async def normalize_for_tts(self, text: str) -> str:
         """Normalize text for TTS: convert numbers, dates, symbols to spoken form."""
@@ -40,13 +40,15 @@ class TextNormalizer:
 
     async def _normalize_chunk(self, text: str) -> str:
         """Normalize a single chunk of text."""
-        response = await self.client.messages.create(
-            model="claude-haiku-4-5-20251001",
+        response = await self.client.chat.completions.create(
+            model=MODEL_CHEAP,
             max_tokens=8000,
-            system=NORMALIZE_PROMPT,
-            messages=[{"role": "user", "content": text}],
+            messages=[
+                {"role": "system", "content": NORMALIZE_PROMPT},
+                {"role": "user", "content": text},
+            ],
         )
-        return response.content[0].text
+        return response.choices[0].message.content
 
     async def _normalize_in_batches(self, text: str) -> str:
         """Split long text into paragraph batches and normalize each."""

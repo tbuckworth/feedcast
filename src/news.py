@@ -1,11 +1,11 @@
-"""Daily news briefing via RSS aggregation and Claude synthesis."""
+"""Daily news briefing via RSS aggregation and LLM synthesis."""
 
 import asyncio
 from datetime import datetime, timedelta, timezone
 
 import feedparser
-from anthropic import AsyncAnthropic
 
+from .llm import get_client, MODEL_STRONG
 from .monitor import FeedEntry
 
 
@@ -23,7 +23,7 @@ class NewsAggregator:
         self.prompt = prompt
         self.lookback_hours = lookback_hours
         self.recent_briefings = recent_briefings or []
-        self.client = AsyncAnthropic()
+        self.client = get_client()
 
     async def fetch_all_sources(self) -> list[dict]:
         """Fetch all RSS sources in parallel, filtering to recent articles."""
@@ -106,13 +106,15 @@ class NewsAggregator:
         user_message_parts.append(formatted_articles)
         user_message = "\n".join(user_message_parts)
 
-        response = await self.client.messages.create(
-            model="claude-sonnet-4-5-20250929",
+        response = await self.client.chat.completions.create(
+            model=MODEL_STRONG,
             max_tokens=1500,
-            system=self.prompt,
-            messages=[{"role": "user", "content": user_message}],
+            messages=[
+                {"role": "system", "content": self.prompt},
+                {"role": "user", "content": user_message},
+            ],
         )
-        return response.content[0].text
+        return response.choices[0].message.content
 
     async def generate_briefing(self) -> FeedEntry | None:
         """Orchestrate fetch → format → synthesize, return a FeedEntry or None."""
@@ -126,7 +128,7 @@ class NewsAggregator:
         print(f"  Found {len(articles)} recent articles across {len(self.sources)} sources")
 
         formatted = self._format_articles_for_prompt(articles)
-        print("  Synthesizing briefing via Claude...")
+        print("  Synthesizing briefing via LLM...")
         briefing_text = await self.synthesize_briefing(formatted)
 
         today = datetime.now().strftime("%Y-%m-%d")
