@@ -1,12 +1,12 @@
-"""Content processing with Claude API for summarization."""
+"""Content processing with LLM API for summarization."""
 
 import os
 import re
 from typing import Optional
 
-from anthropic import AsyncAnthropic
 from bs4 import BeautifulSoup, Tag
 
+from .llm import get_client, MODEL_STRONG, MODEL_CHEAP
 from .monitor import FeedEntry
 
 AUTO_VERBATIM_LIMIT = 24000  # ~25 min of audio at ~0.063 sec/char
@@ -16,7 +16,7 @@ class ContentProcessor:
     """Processes feed content - either summarizing with Claude or cleaning for verbatim."""
 
     def __init__(self, default_prompt: str):
-        self.client = AsyncAnthropic()
+        self.client = get_client()
         self.default_prompt = default_prompt
 
     def clean_html(self, html_content: str) -> str:
@@ -79,13 +79,15 @@ class ContentProcessor:
             else:
                 # Larger tables: use Claude Haiku to summarize
                 table_html = str(table)
-                response = await self.client.messages.create(
-                    model="claude-haiku-4-5-20251001",
+                response = await self.client.chat.completions.create(
+                    model=MODEL_CHEAP,
                     max_tokens=500,
-                    system="Convert this HTML table into natural spoken prose. Be concise but preserve all key data points. Do not use bullet points or formatting.",
-                    messages=[{"role": "user", "content": table_html}],
+                    messages=[
+                        {"role": "system", "content": "Convert this HTML table into natural spoken prose. Be concise but preserve all key data points. Do not use bullet points or formatting."},
+                        {"role": "user", "content": table_html},
+                    ],
                 )
-                prose = response.content[0].text
+                prose = response.choices[0].message.content
 
             replacement = f"Here is a summary of the following table. {prose} Now continuing with the article."
             table.replace_with(BeautifulSoup(f"<p>{replacement}</p>", "html.parser"))
@@ -117,14 +119,16 @@ Content:
         if len(user_message) > max_chars:
             user_message = user_message[:max_chars] + "\n\n[Content truncated due to length]"
 
-        response = await self.client.messages.create(
-            model="claude-sonnet-4-5-20250929",
+        response = await self.client.chat.completions.create(
+            model=MODEL_STRONG,
             max_tokens=2000,
-            system=system_prompt,
-            messages=[{"role": "user", "content": user_message}],
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message},
+            ],
         )
 
-        return response.content[0].text
+        return response.choices[0].message.content
 
     async def process_verbatim(self, entry: FeedEntry) -> str:
         """Process content for verbatim reading - clean and format for TTS."""
