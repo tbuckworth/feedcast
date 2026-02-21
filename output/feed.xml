@@ -15,6 +15,47 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-21</title>
+      <description>Daily News Briefing - 2026-02-21
+
+Topics covered:
+- The United States Supreme Court has delivered a major blow to the Trump administration’s economic agenda, striking down the president's sweeping global import taxes
+- On the geopolitical front, the ten-day ultimatum issued to Tehran has entered a more aggressive phase
+- In the technology sector, the risks of autonomous AI agents have moved from theory to corporate liability
+- In the realm of frontier capabilities, OpenAI has released "First Proof," highlighting its models' ability to solve research-grade mathematics problems that require expert-level reasoning
+- Finally, NASA has officially set a launch date of March sixth for the Artemis Two mission
+- As we look toward the start of the week, the global community is watching for any signs of a diplomatic exit ramp in the Persian Gulf as the president's deadline for Iran draws to a close</description>
+      <pubDate>Sat, 21 Feb 2026 06:31:06 +0000</pubDate>
+      <guid>news-briefing-2026-02-21</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/db4a4bff5704_daily_news_briefing_-_2026-02-21.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-21.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Alignment to Evil</title>
+      <description>Audio version of Alignment to Evil from LessWrong Frontpage</description>
+      <pubDate>Sat, 21 Feb 2026 03:29:51 +0000</pubDate>
+      <guid>SLkxaGT8ghTskNz2r</guid>
+      <link>https://www.lesswrong.com/posts/SLkxaGT8ghTskNz2r/alignment-to-evil</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/488f364ece35_alignment_to_evil.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #155: Welcome to Recursive Self-Improvement” by Zvi</title>
+      <description>Audio version of “AI #155: Welcome to Recursive Self-Improvement” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 20 Feb 2026 19:21:33 +0000</pubDate>
+      <guid>a83b4e73-6638-4a7d-a7c3-546660c93372</guid>
+      <link>https://www.lesswrong.com/posts/cytxHuLc8oHRq7sNE/ai-155-welcome-to-recursive-self-improvement</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/13f8a9fdd95a_ai_155_welcome_to_recursive_self-improvement_b.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-20</title>
       <description>Daily News Briefing - 2026-02-20
 
@@ -114,6 +155,17 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</guid>
       <link>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0b922652175e_record_low_crime_rates_are_real_not_just_reportin.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>AMA (Ask Machines Anything)</title>
+      <description>Audio version of AMA (Ask Machines Anything) from Scott Alexander</description>
+      <pubDate>Fri, 13 Feb 2026 13:22:31 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/ama-ask-machines-anything</guid>
+      <link>https://www.astralcodexten.com/p/ama-ask-machines-anything</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2beb672d19c1_ama_ask_machines_anything.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -725,23 +777,23 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Highlights From The Comments On Scott Adams</title>
-      <description>Audio version of Highlights From The Comments On Scott Adams from Scott Alexander</description>
-      <pubDate>Wed, 21 Jan 2026 05:03:24 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/highlights-from-the-comments-on-scott</guid>
-      <link>https://www.astralcodexten.com/p/highlights-from-the-comments-on-scott</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/073f83e71b18_highlights_from_the_comments_on_scott_adams.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Forecast how AI will progress in 2026</title>
       <description>Audio version of Forecast how AI will progress in 2026 from AI Futures Project</description>
       <pubDate>Sat, 17 Jan 2026 18:52:05 +0000</pubDate>
       <guid>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</guid>
       <link>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c126b899a465_forecast_how_ai_will_progress_in_2026.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The inaugural Redwood Research podcast</title>
+      <description>Audio version of The inaugural Redwood Research podcast from Buck Shlegeris</description>
+      <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
+      <guid>p4iJpumHt6Ay9KnXT</guid>
+      <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
