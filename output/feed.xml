@@ -15,6 +15,36 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-22</title>
+      <description>Daily News Briefing - 2026-02-22
+
+Topics covered:
+- The intersection of AI safety and public security is under intense scrutiny following revelations regarding the mass shooting in Tumbler Ridge, British Columbia
+- In space exploration, the much-anticipated Artemis Two mission has hit a significant technical snag
+- The geopolitical situation continues to deteriorate in the Middle East and South America
+- In the technology sector, a strategic shift is occurring in the AI startup ecosystem
+- Finally, Wikipedia has took the rare step of blacklisting "Archive-dot-today." Editors for the online encyclopedia removed more than six hundred and ninety-five thousand links to the service, alleging it was used as a vector for distributed denial-of-service attacks
+- As we move into the new week, all eyes remain on the Persian Gulf as the deadline for a nuclear agreement with Iran expires</description>
+      <pubDate>Sun, 22 Feb 2026 06:36:33 +0000</pubDate>
+      <guid>news-briefing-2026-02-22</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/849f6a2b385a_daily_news_briefing_-_2026-02-22.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-22.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Multiple Independent Semantic Axes in Gemma 3 270M</title>
+      <description>Audio version of Multiple Independent Semantic Axes in Gemma 3 270M from LessWrong Frontpage</description>
+      <pubDate>Sun, 22 Feb 2026 02:02:44 +0000</pubDate>
+      <guid>LgSwswkRi8HHvzvz2</guid>
+      <link>https://www.lesswrong.com/posts/LgSwswkRi8HHvzvz2/multiple-independent-semantic-axes-in-gemma-3-270m</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b78b37640ee7_multiple_independent_semantic_axes_in_gemma_3_270m.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-21</title>
       <description>Daily News Briefing - 2026-02-21
 
@@ -144,6 +174,17 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/crime-as-proxy-for-disorder</guid>
       <link>https://www.astralcodexten.com/p/crime-as-proxy-for-disorder</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a61b0366b5df_crime_as_proxy_for_disorder.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Monthly Roundup #39: February 2026” by Zvi</title>
+      <description>Audio version of “Monthly Roundup #39: February 2026” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 18 Feb 2026 20:34:12 +0000</pubDate>
+      <guid>466e50d2-0f75-40c6-bca6-f910693cf160</guid>
+      <link>https://www.lesswrong.com/posts/3QPoEGfzHaywGDWKr/monthly-roundup-39-february-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8fd2a11d98c7_monthly_roundup_39_february_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -285,6 +326,17 @@ Topics covered:
       <guid>rRbDNQLfihiHbXytf</guid>
       <link>https://www.lesswrong.com/posts/rRbDNQLfihiHbXytf/distinguish-between-inference-scaling-and-larger-tasks-use</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f14ce93e351f_distinguish_between_inference_scaling_and_larger.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Political Backflow From Europe</title>
+      <description>Audio version of Political Backflow From Europe from Scott Alexander</description>
+      <pubDate>Wed, 11 Feb 2026 11:23:56 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/political-backflow-from-europe</guid>
+      <link>https://www.astralcodexten.com/p/political-backflow-from-europe</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/51c504a08190_political_backflow_from_europe.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -761,17 +813,6 @@ Topics covered:
       <guid>26fa91bf-db21-429b-8329-4955dbcd068d</guid>
       <link>https://www.lesswrong.com/posts/pCkYfhYcwFLELoYQf/ai-152-brought-to-you-by-the-torment-nexus</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/540d06c7a340_ai_152_brought_to_you_by_the_torment_nexus_by.wav" type="audio/wav" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Codes #3” by Zvi</title>
-      <description>Audio version of “Claude Codes #3” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 21 Jan 2026 19:52:42 +0000</pubDate>
-      <guid>9e7c962b-1719-420e-8d85-7e343f81d3ca</guid>
-      <link>https://www.lesswrong.com/posts/rCf8KLrpzdtFoFTJD/claude-codes-3</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/344b9c6b9020_claude_codes_3_by_zvi.wav" type="audio/wav" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
