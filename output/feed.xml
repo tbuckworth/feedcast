@@ -15,6 +15,36 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-23</title>
+      <description>Daily News Briefing - 2026-02-23
+
+Topics covered:
+- The geopolitical situation continues to escalate on multiple fronts, beginning with a significant breach of security at President Trump’s Mar-a-Lago residence
+- This diplomatic deadlock coincides with a stark warning from Ukrainian President Volodymyr Zelensky
+- In North America, Mexico has been plunged into a wave of retaliatory violence following the death of Nemesio Oseguera Cervantes, known as "El Mencho." The leader of the Jalisco New Generation Cartel was killed in an operation assisted by United States intelligence
+- In the technology sector, the move toward "multi-agent" ecosystems is accelerating
+- Meanwhile, the "India A.I
+- In the venture capital space, despite concerns over an "A.I</description>
+      <pubDate>Mon, 23 Feb 2026 06:54:39 +0000</pubDate>
+      <guid>news-briefing-2026-02-23</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3d5612141abc_daily_news_briefing_-_2026-02-23.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-23.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Was It Owl a Dream?</title>
+      <description>Audio version of Was It Owl a Dream? from LessWrong Frontpage</description>
+      <pubDate>Mon, 23 Feb 2026 05:07:45 +0000</pubDate>
+      <guid>kFiQciPym6DQdWJJ2</guid>
+      <link>https://www.lesswrong.com/posts/kFiQciPym6DQdWJJ2/was-it-owl-a-dream-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9bda9c29cd93_was_it_owl_a_dream.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-22</title>
       <description>Daily News Briefing - 2026-02-22
 
@@ -196,6 +226,17 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</guid>
       <link>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0b922652175e_record_low_crime_rates_are_real_not_just_reportin.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“On Dwarkesh Patel’s 2026 Podcast With Elon Musk and Other Recent Elon Musk Things” by Zvi</title>
+      <description>Audio version of “On Dwarkesh Patel’s 2026 Podcast With Elon Musk and Other Recent Elon Musk Things” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 17 Feb 2026 15:30:56 +0000</pubDate>
+      <guid>554be5f3-2d19-4bc4-8c8e-9d98a4c2d56f</guid>
+      <link>https://www.lesswrong.com/posts/5yidbWsdWjNzWzLWZ/on-dwarkesh-patel-s-2026-podcast-with-elon-musk-and-other</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b88a0d9bf56d_on_dwarkesh_patels_2026_podcast_with_elon_musk_a.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -791,28 +832,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/slightly-against-the-other-peoples</guid>
       <link>https://www.astralcodexten.com/p/slightly-against-the-other-peoples</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/1d15c56c9836_slightly_against_the_other_peoples_money_argume.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Hidden Open Thread 417.5</title>
-      <description>Audio version of Hidden Open Thread 417.5 from Scott Alexander</description>
-      <pubDate>Thu, 22 Jan 2026 22:08:08 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/hidden-open-thread-4175</guid>
-      <link>https://www.astralcodexten.com/p/hidden-open-thread-4175</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/26af9753bb62_hidden_open_thread_4175.wav" type="audio/wav" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #152: Brought To You By The Torment Nexus” by Zvi</title>
-      <description>Audio version of “AI #152: Brought To You By The Torment Nexus” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 22 Jan 2026 14:42:16 +0000</pubDate>
-      <guid>26fa91bf-db21-429b-8329-4955dbcd068d</guid>
-      <link>https://www.lesswrong.com/posts/pCkYfhYcwFLELoYQf/ai-152-brought-to-you-by-the-torment-nexus</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/540d06c7a340_ai_152_brought_to_you_by_the_torment_nexus_by.wav" type="audio/wav" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
