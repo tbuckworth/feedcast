@@ -15,6 +15,17 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Two memos from 2024</title>
+      <description>Audio version of Two memos from 2024 from LessWrong Frontpage</description>
+      <pubDate>Tue, 24 Feb 2026 07:19:53 +0000</pubDate>
+      <guid>2BrPy2bF8uvo6HMwJ</guid>
+      <link>https://www.lesswrong.com/posts/2BrPy2bF8uvo6HMwJ/two-memos-from-2024</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e4e006dd1175_two_memos_from_2024.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-24</title>
       <description>Daily News Briefing - 2026-02-24
 
@@ -278,6 +289,17 @@ Topics covered:
       <guid>554be5f3-2d19-4bc4-8c8e-9d98a4c2d56f</guid>
       <link>https://www.lesswrong.com/posts/5yidbWsdWjNzWzLWZ/on-dwarkesh-patel-s-2026-podcast-with-elon-musk-and-other</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/b88a0d9bf56d_on_dwarkesh_patels_2026_podcast_with_elon_musk_a.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“On Dwarkesh Patel’s 2026 Podcast With Dario Amodei” by Zvi</title>
+      <description>Audio version of “On Dwarkesh Patel’s 2026 Podcast With Dario Amodei” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 16 Feb 2026 14:33:41 +0000</pubDate>
+      <guid>666c9fbf-5ea3-4296-9312-f6885b149431</guid>
+      <link>https://www.lesswrong.com/posts/jWCy6owAmqLv5BB8q/on-dwarkesh-patel-s-2026-podcast-with-dario-amodei</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/736691728638_on_dwarkesh_patels_2026_podcast_with_dario_amode.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
