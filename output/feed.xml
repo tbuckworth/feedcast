@@ -15,6 +15,58 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-25</title>
+      <description>Daily News Briefing - 2026-02-25
+
+Topics covered:
+- The standoff between Anthropic and the Pentagon has reached a critical impasse
+- In a legal victory for OpenAI, a federal judge has dismissed a trade secrets lawsuit filed by Elon Musk’s x-A.I
+- The semiconductor and infrastructure landscape is seeing massive shifts as tech giants secure their A.I
+- In geopolitics, the security situation in Mexico remains volatile following the death of "El Mencho." Armed groups yesterday rammed a prison gate in Puerto Vallarta, successfully freeing twenty-three inmates
+- In markets and enterprise tech, Anthropic has launched "Claude Cowork," a suite of plug-ins that allow its A.I
+- As we look toward tomorrow, the tech industry is bracing for a potential earthquake in the payments sector, as reports intensify that Stripe is exploring a deal to acquire some or all of PayPal</description>
+      <pubDate>Wed, 25 Feb 2026 07:02:51 +0000</pubDate>
+      <guid>news-briefing-2026-02-25</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ad8dc940dcb8_daily_news_briefing_-_2026-02-25.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-25.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The Iron Kaleidoscope</title>
+      <description>Audio version of The Iron Kaleidoscope from LessWrong Frontpage</description>
+      <pubDate>Wed, 25 Feb 2026 06:24:17 +0000</pubDate>
+      <guid>ZeDY64pvusZQzjRqJ</guid>
+      <link>https://www.lesswrong.com/posts/ZeDY64pvusZQzjRqJ/the-iron-kaleidoscope</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4f3d4f1f90cc_the_iron_kaleidoscope.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Citrini’s Scenario Is A Great But Deeply Flawed Thought Experiment” by Zvi</title>
+      <description>Audio version of “Citrini’s Scenario Is A Great But Deeply Flawed Thought Experiment” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 24 Feb 2026 15:41:51 +0000</pubDate>
+      <guid>a88ba975-a8f3-49c2-9d0d-36bce3ea050f</guid>
+      <link>https://www.lesswrong.com/posts/bKrpLhqcoN6WycrFp/citrini-s-scenario-is-a-great-but-deeply-flawed-thought</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/40061b30b6d4_citrinis_scenario_is_a_great_but_deeply_flawed_t.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Malicious Streetlight Effects Vs. "Directional Correctness" - A Semi-Non-Apology</title>
+      <description>Audio version of Malicious Streetlight Effects Vs. "Directional Correctness" - A Semi-Non-Apology from Scott Alexander</description>
+      <pubDate>Tue, 24 Feb 2026 15:36:48 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/malicious-streetlight-effects-vs</guid>
+      <link>https://www.astralcodexten.com/p/malicious-streetlight-effects-vs</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/caa87c87f62f_malicious_streetlight_effects_vs_directional_cor.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Two memos from 2024</title>
       <description>Audio version of Two memos from 2024 from LessWrong Frontpage</description>
       <pubDate>Tue, 24 Feb 2026 07:19:53 +0000</pubDate>
@@ -873,17 +925,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/open-thread-418</guid>
       <link>https://www.astralcodexten.com/p/open-thread-418</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d5d1fd222a27_open_thread_418.wav" type="audio/wav" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Slightly Against The "Other People's Money" Argument Against Aid</title>
-      <description>Audio version of Slightly Against The "Other People's Money" Argument Against Aid from Scott Alexander</description>
-      <pubDate>Fri, 23 Jan 2026 00:26:56 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/slightly-against-the-other-peoples</guid>
-      <link>https://www.astralcodexten.com/p/slightly-against-the-other-peoples</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1d15c56c9836_slightly_against_the_other_peoples_money_argume.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
