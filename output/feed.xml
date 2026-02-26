@@ -15,6 +15,69 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-26</title>
+      <description>Daily News Briefing - 2026-02-26
+
+Topics covered:
+- The standoff between the Pentagon and the A.I
+- In a milestone for autonomous systems, Google and Samsung have unveiled "agentic" capabilities that move beyond simple chat
+- On the corporate front, Nvidia has once again shattered expectations, reporting another record-breaking quarter fueled by what C.E.O
+- In geopolitics, the world is waiting for the outcome of high-stakes, last-ditch nuclear talks between the United States and Iran scheduled for tomorrow in Geneva
+- Finally, in a curious cultural shift within the industry, Anthropic executives are increasingly leaning into the philosophical implications of their work
+- As we look toward tomorrow, all eyes are on Geneva for the results of the final U.S.-Iran diplomatic summit</description>
+      <pubDate>Thu, 26 Feb 2026 06:48:31 +0000</pubDate>
+      <guid>news-briefing-2026-02-26</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f4a07515e731_daily_news_briefing_-_2026-02-26.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-26.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Next-Token Predictor Is An AI's Job, Not Its Species</title>
+      <description>Audio version of Next-Token Predictor Is An AI's Job, Not Its Species from Scott Alexander</description>
+      <pubDate>Thu, 26 Feb 2026 05:24:27 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/next-token-predictor-is-an-ais-job</guid>
+      <link>https://www.astralcodexten.com/p/next-token-predictor-is-an-ais-job</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8d51e0bb5891_next-token_predictor_is_an_ais_job_not_its_speci.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>What is Claude?</title>
+      <description>Audio version of What is Claude? from LessWrong Frontpage</description>
+      <pubDate>Thu, 26 Feb 2026 04:44:32 +0000</pubDate>
+      <guid>pEPGquGcA9uYKzPtA</guid>
+      <link>https://www.lesswrong.com/posts/pEPGquGcA9uYKzPtA/what-is-claude-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/260bece1c882_what_is_claude.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Announcing ControlConf 2026</title>
+      <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
+      <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
+      <guid>tN5mgBAinwFe5c67c</guid>
+      <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Anthropic and the Department of War” by Zvi</title>
+      <description>Audio version of “Anthropic and the Department of War” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 25 Feb 2026 21:02:37 +0000</pubDate>
+      <guid>e8215af2-87de-4d34-9725-06c6de4bb2fc</guid>
+      <link>https://www.lesswrong.com/posts/rmYB4a7Pskw7DLpCh/anthropic-and-the-department-of-war</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aba12c99494d_anthropic_and_the_department_of_war_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-25</title>
       <description>Daily News Briefing - 2026-02-25
 
@@ -936,17 +999,6 @@ Topics covered:
       <guid>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</guid>
       <link>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c126b899a465_forecast_how_ai_will_progress_in_2026.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The inaugural Redwood Research podcast</title>
-      <description>Audio version of The inaugural Redwood Research podcast from Buck Shlegeris</description>
-      <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
-      <guid>p4iJpumHt6Ay9KnXT</guid>
-      <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
