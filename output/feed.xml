@@ -15,6 +15,47 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-27</title>
+      <description>Daily News Briefing - 2026-02-27
+
+Topics covered:
+- The high-stakes standoff between the Pentagon and Anthropic has reached a breaking point
+- In a move that mirrors the aggressive restructuring seen at X under Elon Musk, Jack Dorsey’s fintech firm, Block, has announced it is cutting its workforce by nearly half
+- On the technical front, Microsoft and Perplexity have both unveiled "agentic" systems that move beyond simple chat interfaces
+- Google is also tightening its grip on the physical A.I
+- In geopolitics, indirect nuclear talks between the United States and Iran in Geneva have concluded with what mediators call "significant progress." While a final deal remains elusive, the report suggests a potential "de-escalation" that could prevent the immediate military strikes threatened by the White House earlier this week
+- As we look toward the weekend, the tech industry is bracing for the fallout of Anthropic’s refusal to meet the Pentagon’s ultimatum and the resulting impact on national security policy</description>
+      <pubDate>Fri, 27 Feb 2026 06:40:58 +0000</pubDate>
+      <guid>news-briefing-2026-02-27</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0bca292724e4_daily_news_briefing_-_2026-02-27.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-27.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>What I Got From 1.5 Years In Slightly-Competitive Debate</title>
+      <description>Audio version of What I Got From 1.5 Years In Slightly-Competitive Debate from LessWrong Frontpage</description>
+      <pubDate>Fri, 27 Feb 2026 05:37:59 +0000</pubDate>
+      <guid>xkFLbcknoDaJXsQiH</guid>
+      <link>https://www.lesswrong.com/posts/xkFLbcknoDaJXsQiH/what-i-got-from-1-5-years-in-slightly-competitive-debate</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ec4b00c8e64d_what_i_got_from_15_years_in_slightly-competitive.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #157: Burn the Boats” by Zvi</title>
+      <description>Audio version of “AI #157: Burn the Boats” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 26 Feb 2026 13:31:46 +0000</pubDate>
+      <guid>a3e1e221-9636-420a-84fb-6c0c73d7f3b1</guid>
+      <link>https://www.lesswrong.com/posts/zC3Rtrj6RXwEde9h6/ai-157-burn-the-boats</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/118f66ce40e7_ai_157_burn_the_boats_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-26</title>
       <description>Daily News Briefing - 2026-02-26
 
@@ -73,6 +114,17 @@ Topics covered:
       <guid>e8215af2-87de-4d34-9725-06c6de4bb2fc</guid>
       <link>https://www.lesswrong.com/posts/rmYB4a7Pskw7DLpCh/anthropic-and-the-department-of-war</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/aba12c99494d_anthropic_and_the_department_of_war_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Pentagon Threatens Anthropic</title>
+      <description>Audio version of The Pentagon Threatens Anthropic from Scott Alexander</description>
+      <pubDate>Wed, 25 Feb 2026 17:46:56 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/the-pentagon-threatens-anthropic</guid>
+      <link>https://www.astralcodexten.com/p/the-pentagon-threatens-anthropic</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6f9dcee7c72a_the_pentagon_threatens_anthropic.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -971,34 +1023,23 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>“Claude’s Constitutional Structure” by Zvi</title>
-      <description>Audio version of “Claude’s Constitutional Structure” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 26 Jan 2026 15:41:39 +0000</pubDate>
-      <guid>3a37a048-9778-4341-9342-756a1fb51ed7</guid>
-      <link>https://www.lesswrong.com/posts/ArNGbGfki7MNMnfGD/claude-s-constitutional-structure</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5abeb6781c95_claudes_constitutional_structure_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Open Thread 418</title>
-      <description>Audio version of Open Thread 418 from Scott Alexander</description>
-      <pubDate>Mon, 26 Jan 2026 13:30:53 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/open-thread-418</guid>
-      <link>https://www.astralcodexten.com/p/open-thread-418</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d5d1fd222a27_open_thread_418.wav" type="audio/wav" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Forecast how AI will progress in 2026</title>
       <description>Audio version of Forecast how AI will progress in 2026 from AI Futures Project</description>
       <pubDate>Sat, 17 Jan 2026 18:52:05 +0000</pubDate>
       <guid>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</guid>
       <link>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c126b899a465_forecast_how_ai_will_progress_in_2026.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The inaugural Redwood Research podcast</title>
+      <description>Audio version of The inaugural Redwood Research podcast from Buck Shlegeris</description>
+      <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
+      <guid>p4iJpumHt6Ay9KnXT</guid>
+      <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
