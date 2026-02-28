@@ -15,6 +15,47 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-02-28</title>
+      <description>Daily News Briefing - 2026-02-28
+
+Topics covered:
+- The standoff between the White House and the A.I
+- While one lab faces federal exile, OpenAI has secured a staggering capital infusion that redraws the industry’s financial map
+- In geopolitics, the threat of conflict in the Middle East remains high but paused
+- In technology and markets, Block, the fintech firm led by Jack Dorsey, has followed through on its radical restructuring by laying off forty percent of its workforce
+- In the media sector, the landscape has been clarified as Netflix officially withdrew its interest in Warner Brothers Discovery, citing the deal as no longer "financially attractive." This cements the path for a merger between Paramount and Warner Brothers Discovery, creating a legacy media titan tasked with competing against the dominant streaming and A.I
+- As we look toward the new week, all eyes are on the judiciary to see how quickly Anthropic’s legal challenge to its "supply chain risk" designation will move through the courts</description>
+      <pubDate>Sat, 28 Feb 2026 06:26:37 +0000</pubDate>
+      <guid>news-briefing-2026-02-28</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3541e60ee024_daily_news_briefing_-_2026-02-28.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-28.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Schelling Goodness, and Shared Morality as a Goal</title>
+      <description>Audio version of Schelling Goodness, and Shared Morality as a Goal from LessWrong Frontpage</description>
+      <pubDate>Sat, 28 Feb 2026 06:02:32 +0000</pubDate>
+      <guid>TkBCR8XRGw7qmao6z</guid>
+      <link>https://www.lesswrong.com/posts/TkBCR8XRGw7qmao6z/schelling-goodness-and-shared-morality-as-a-goal</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c7a81f024fe4_schelling_goodness_and_shared_morality_as_a_goal.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Anthropic and the DoW: Anthropic Responds” by Zvi</title>
+      <description>Audio version of “Anthropic and the DoW: Anthropic Responds” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 27 Feb 2026 20:51:35 +0000</pubDate>
+      <guid>23cf9adc-0e8f-432b-97c9-a4e92a5bac14</guid>
+      <link>https://www.lesswrong.com/posts/ppj7v4sSCbJjLye3D/anthropic-and-the-dow-anthropic-responds</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7be18d064d1d_anthropic_and_the_dow_anthropic_responds_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-27</title>
       <description>Daily News Briefing - 2026-02-27
 
@@ -1007,28 +1048,6 @@ Topics covered:
       <guid>https://blog.ai-futures.org/p/clarifying-how-our-ai-timelines-forecasts</guid>
       <link>https://blog.ai-futures.org/p/clarifying-how-our-ai-timelines-forecasts</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/6ce1c19011d0_clarifying_how_our_ai_timelines_forecasts_have_cha.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“The Claude Constitution’s Ethical Framework” by Zvi</title>
-      <description>Audio version of “The Claude Constitution’s Ethical Framework” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 27 Jan 2026 15:02:24 +0000</pubDate>
-      <guid>433a831d-740c-4d8b-85ba-2eaa3cd08ae7</guid>
-      <link>https://www.lesswrong.com/posts/w5Rdn6YK5ETqjPEAr/the-claude-constitution-s-ethical-framework</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/09fb31ee460d_the_claude_constitutions_ethical_framework_by_z.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Forecast how AI will progress in 2026</title>
-      <description>Audio version of Forecast how AI will progress in 2026 from AI Futures Project</description>
-      <pubDate>Sat, 17 Jan 2026 18:52:05 +0000</pubDate>
-      <guid>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</guid>
-      <link>https://blog.ai-futures.org/p/forecast-how-ai-will-progress-in</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c126b899a465_forecast_how_ai_will_progress_in_2026.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
