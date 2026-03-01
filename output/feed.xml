@@ -15,6 +15,36 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-01</title>
+      <description>Daily News Briefing - 2026-03-01
+
+Topics covered:
+- The most significant story today is the commencement of major combat operations in the Middle East
+- In the fallout of the Anthropic blacklisting reported yesterday, OpenAI has moved swiftly to fill the vacuum in federal A.I
+- The domestic fallout for Anthropic continues as the Trump administration moves to finalize a total ban on the company’s products within the U.S
+- In the media and telecommunications sector, the landscape has solidified following Netflix’s exit from the bidding war for Warner Brothers Discovery
+- Finally, in hardware and global competition, China’s humanoid robot industry is reportedly beginning to outpace U.S
+- As we look toward tomorrow, the global economy braces for the market reaction to the unfolding conflict in the Middle East and the death of Iran’s Supreme Leader</description>
+      <pubDate>Sun, 01 Mar 2026 06:35:38 +0000</pubDate>
+      <guid>news-briefing-2026-03-01</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/58eb995973d0_daily_news_briefing_-_2026-03-01.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-01.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>How much information does an optimal policy contain about its environment?</title>
+      <description>Audio version of How much information does an optimal policy contain about its environment? from LessWrong Frontpage</description>
+      <pubDate>Sun, 01 Mar 2026 06:32:05 +0000</pubDate>
+      <guid>cgWuXSFLQELA8Fy5X</guid>
+      <link>https://www.lesswrong.com/posts/cgWuXSFLQELA8Fy5X/how-much-information-does-an-optimal-policy-contain-about</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a2658762d0f5_how_much_information_does_an_optimal_policy_contai.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-28</title>
       <description>Daily News Briefing - 2026-02-28
 
@@ -508,6 +538,17 @@ Topics covered:
       <guid>666c9fbf-5ea3-4296-9312-f6885b149431</guid>
       <link>https://www.lesswrong.com/posts/jWCy6owAmqLv5BB8q/on-dwarkesh-patel-s-2026-podcast-with-dario-amodei</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/736691728638_on_dwarkesh_patels_2026_podcast_with_dario_amode.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“ChatGPT-5.3-Codex Is Also Good At Coding” by Zvi</title>
+      <description>Audio version of “ChatGPT-5.3-Codex Is Also Good At Coding” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 13 Feb 2026 16:22:12 +0000</pubDate>
+      <guid>26bcaa61-535f-4d6b-af57-5b083c101342</guid>
+      <link>https://www.lesswrong.com/posts/CCDRjL7NZtNGtGheY/chatgpt-5-3-codex-is-also-good-at-coding</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/098abd12b085_chatgpt-53-codex_is_also_good_at_coding_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1026,17 +1067,6 @@ Topics covered:
       <guid>bq8wQMiXACnFJrD7x</guid>
       <link>https://www.lesswrong.com/posts/bq8wQMiXACnFJrD7x/thoughts-on-agi-and-world-government</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/b56dccc40780_thoughts_on_agi_and_world_government.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Open Problems With Claude’s Constitution” by Zvi</title>
-      <description>Audio version of “Open Problems With Claude’s Constitution” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 28 Jan 2026 14:25:24 +0000</pubDate>
-      <guid>84f7c8d8-cbac-4021-8a49-37c1631437d2</guid>
-      <link>https://www.lesswrong.com/posts/vFAJxua3Qc6S8MbqG/open-problems-with-claude-s-constitution</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/64efeb7bb448_open_problems_with_claudes_constitution_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
