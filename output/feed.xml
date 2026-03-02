@@ -15,6 +15,47 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-02</title>
+      <description>Daily News Briefing - 2026-03-02
+
+Topics covered:
+- The primary focus remains the rapidly escalating conflict in the Middle East
+- On the ground in Iran, the humanitarian toll is mounting
+- In the technology sector, the fallout from the federal blacklisting of Anthropic has taken an unexpected turn
+- The intersection of geopolitics and prediction markets has also reached a new milestone
+- In hardware and robotics, Chinese manufacturers are using the Mobile World Congress in Barcelona to showcase a new category of "embodied A.I." The firm Honor revealed a "robot phone" featuring a movable camera arm that can autonomously track subjects and respond to environmental cues without user commands
+- As we look toward tomorrow, the global community is watching for a potential ground escalation in the Middle East and the resulting impact on the three-hundred-and-fifty-billion-dollar daily trade flow through the Strait of Hormuz</description>
+      <pubDate>Mon, 02 Mar 2026 06:44:55 +0000</pubDate>
+      <guid>news-briefing-2026-03-02</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/52d6673f0afa_daily_news_briefing_-_2026-03-02.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-02.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Context Awareness: Constitutional AI can mitigate Emergent Misalignement</title>
+      <description>Audio version of Context Awareness: Constitutional AI can mitigate Emergent Misalignement from LessWrong Frontpage</description>
+      <pubDate>Mon, 02 Mar 2026 05:22:03 +0000</pubDate>
+      <guid>yA2hquLrFFSFDtcoE</guid>
+      <link>https://www.lesswrong.com/posts/yA2hquLrFFSFDtcoE/context-awareness-constitutional-ai-can-mitigate-emergent</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a0bd5675c650_context_awareness_constitutional_ai_can_mitigate.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>"All Lawful Use": Much More Than You Wanted To Know</title>
+      <description>Audio version of "All Lawful Use": Much More Than You Wanted To Know from Scott Alexander</description>
+      <pubDate>Sun, 01 Mar 2026 19:52:04 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/all-lawful-use-much-more-than-you</guid>
+      <link>https://www.astralcodexten.com/p/all-lawful-use-much-more-than-you</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/316e046fa476_all_lawful_use_much_more_than_you_wanted_to_kno.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-01</title>
       <description>Daily News Briefing - 2026-03-01
 
@@ -770,6 +811,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>“Claude Code #4: From The Before Times” by Zvi</title>
+      <description>Audio version of “Claude Code #4: From The Before Times” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 09 Feb 2026 09:39:31 +0000</pubDate>
+      <guid>9a063394-ea81-4dc0-af61-b603b3a548b6</guid>
+      <link>https://www.lesswrong.com/posts/iwX2aJPKtyKAbLdip/claude-code-4-from-the-before-times</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3eee95e9d78b_claude_code_4_from_the_before_times_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-09</title>
       <description>Audio version of Daily News Briefing - 2026-02-09 from Daily News Briefing</description>
       <pubDate>Mon, 09 Feb 2026 06:55:56 +0000</pubDate>
@@ -1013,60 +1065,6 @@ Topics covered:
       <guid>61704eb6-252b-4772-84cf-d45e0070acad</guid>
       <link>https://www.lesswrong.com/posts/dho4JQytfHWXtTvkt/on-the-adolescence-of-technology</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/1692f62662c1_on_the_adolescence_of_technology_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-01-30</title>
-      <description>Audio version of Daily News Briefing - 2026-01-30 from Daily News Briefing</description>
-      <pubDate>Fri, 30 Jan 2026 02:20:29 +0000</pubDate>
-      <guid>news-briefing-2026-01-30</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/57a47e26d350_daily_news_briefing_-_2026-01-30.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Better evals are not enough to combat eval awareness</title>
-      <description>Audio version of Better evals are not enough to combat eval awareness from LessWrong Frontpage</description>
-      <pubDate>Thu, 29 Jan 2026 20:42:40 +0000</pubDate>
-      <guid>TeLLtMjtcoB9qCoL3</guid>
-      <link>https://www.lesswrong.com/posts/TeLLtMjtcoB9qCoL3/better-evals-are-not-enough-to-combat-eval-awareness</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c62a88d77ce9_better_evals_are_not_enough_to_combat_eval_awarene.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #153: Living Documents” by Zvi</title>
-      <description>Audio version of “AI #153: Living Documents” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 29 Jan 2026 14:27:24 +0000</pubDate>
-      <guid>15daca9d-730d-4076-b26f-57be2c6b9807</guid>
-      <link>https://www.lesswrong.com/posts/bSQagZoSLdQKnS5zF/ai-153-living-documents</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/096592988f31_ai_153_living_documents_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>ACX Classifieds 1/26</title>
-      <description>Audio version of ACX Classifieds 1/26 from Scott Alexander</description>
-      <pubDate>Thu, 29 Jan 2026 11:26:50 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/acx-classifieds-126</guid>
-      <link>https://www.astralcodexten.com/p/acx-classifieds-126</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/762f995f602c_acx_classifieds_126.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Thoughts on AGI and world government</title>
-      <description>Audio version of Thoughts on AGI and world government from LessWrong Frontpage</description>
-      <pubDate>Thu, 29 Jan 2026 07:22:31 +0000</pubDate>
-      <guid>bq8wQMiXACnFJrD7x</guid>
-      <link>https://www.lesswrong.com/posts/bq8wQMiXACnFJrD7x/thoughts-on-agi-and-world-government</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b56dccc40780_thoughts_on_agi_and_world_government.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
