@@ -40,3 +40,4 @@ data/normalization_test/
 
 # Voice ID cache - no longer needed (using audio_prompt approach)
 voice_samples/.voice_cache.json
+worker/node_modules/
