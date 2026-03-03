@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedcast</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" href="icon-192.png" type="image/png">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f8fafc; color: #1e293b; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 24px 16px; }
+    h1 { font-size: 20px; margin-bottom: 20px; }
+    .card { background: white; border-radius: 12px; padding: 20px; width: 100%; max-width: 400px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 6px; }
+    input[type="url"], input[type="password"] { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; margin-bottom: 14px; font-family: monospace; }
+    select { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; margin-bottom: 14px; background: white; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; }
+    button:active { background: #1d4ed8; }
+    button:disabled { background: #94a3b8; }
+    .status { margin-top: 12px; padding: 10px; border-radius: 8px; font-size: 14px; display: none; }
+    .status.success { display: block; background: #dcfce7; color: #166534; }
+    .status.error { display: block; background: #fef2f2; color: #991b1b; }
+    .settings { margin-top: 16px; width: 100%; max-width: 400px; }
+    .settings summary { cursor: pointer; color: #64748b; font-size: 13px; }
+    .settings-body { margin-top: 12px; }
+    .save-note { color: #166534; font-size: 13px; margin-top: 6px; display: none; }
+  </style>
+</head>
+<body>
+  <h1>Feedcast</h1>
+
+  <div class="card">
+    <label for="url">URL</label>
+    <input type="url" id="url" placeholder="https://example.com/article">
+
+    <label for="mode">Mode</label>
+    <select id="mode">
+      <option value="auto">Auto</option>
+      <option value="summarize">Summarize</option>
+      <option value="verbatim">Verbatim</option>
+    </select>
+
+    <button id="send">Send to Podcast</button>
+    <div class="status" id="status"></div>
+  </div>
+
+  <details class="settings card" style="margin-top:16px;">
+    <summary>Settings</summary>
+    <div class="settings-body">
+      <label for="workerUrl">Worker URL</label>
+      <input type="url" id="workerUrl" placeholder="https://feedcast-worker.xxx.workers.dev">
+      <label for="token">Auth Token</label>
+      <input type="password" id="token" placeholder="Your FEEDCAST_TOKEN">
+      <button id="saveSettings" style="background:#475569;">Save Settings</button>
+      <div class="save-note" id="saveNote">Saved!</div>
+    </div>
+  </details>
+
+  <script>
+    // Register service worker for installability
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js");
+    }
+
+    const urlEl = document.getElementById("url");
+    const modeEl = document.getElementById("mode");
+    const sendBtn = document.getElementById("send");
+    const statusEl = document.getElementById("status");
+
+    // Read shared URL from query params (Android share target)
+    const params = new URLSearchParams(location.search);
+    const sharedUrl = params.get("url") || params.get("text") || "";
+    if (sharedUrl) {
+      // Extract URL from shared text (Android sometimes shares "Title - URL")
+      const urlMatch = sharedUrl.match(/https?:\/\/\S+/);
+      urlEl.value = urlMatch ? urlMatch[0] : sharedUrl;
+    }
+
+    // Settings
+    const workerUrlEl = document.getElementById("workerUrl");
+    const tokenEl = document.getElementById("token");
+    const saveBtn = document.getElementById("saveSettings");
+    const saveNote = document.getElementById("saveNote");
+
+    workerUrlEl.value = localStorage.getItem("feedcast_worker_url") || "";
+    tokenEl.value = localStorage.getItem("feedcast_token") || "";
+
+    saveBtn.addEventListener("click", () => {
+      localStorage.setItem("feedcast_worker_url", workerUrlEl.value.trim());
+      localStorage.setItem("feedcast_token", tokenEl.value.trim());
+      saveNote.style.display = "block";
+      setTimeout(() => { saveNote.style.display = "none"; }, 2000);
+    });
+
+    // Send
+    sendBtn.addEventListener("click", async () => {
+      const workerUrl = localStorage.getItem("feedcast_worker_url");
+      const token = localStorage.getItem("feedcast_token");
+
+      if (!workerUrl || !token) {
+        statusEl.className = "status error";
+        statusEl.textContent = "Configure Worker URL and token in Settings first.";
+        statusEl.style.display = "block";
+        return;
+      }
+
+      if (!urlEl.value.trim()) {
+        statusEl.className = "status error";
+        statusEl.textContent = "Enter a URL.";
+        statusEl.style.display = "block";
+        return;
+      }
+
+      sendBtn.disabled = true;
+      sendBtn.textContent = "Sending...";
+      statusEl.style.display = "none";
+
+      try {
+        const resp = await fetch(workerUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+          body: JSON.stringify({ url: urlEl.value.trim(), mode: modeEl.value }),
+        });
+
+        const data = await resp.json();
+
+        if (resp.ok) {
+          statusEl.className = "status success";
+          statusEl.textContent = "Queued! You'll get a notification when it's ready.";
+        } else {
+          statusEl.className = "status error";
+          statusEl.textContent = data.error || `Error: ${resp.status}`;
+        }
+      } catch (err) {
+        statusEl.className = "status error";
+        statusEl.textContent = `Network error: ${err.message}`;
+      }
+
+      statusEl.style.display = "block";
+      sendBtn.disabled = false;
+      sendBtn.textContent = "Send to Podcast";
+    });
+  </script>
+</body>
+</html>
