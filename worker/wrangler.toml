@@ -1,0 +1,8 @@
+name = "feedcast-worker"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+# Secrets (set via `wrangler secret put`):
+#   FEEDCAST_TOKEN  - Bearer token shared with clients
+#   GITHUB_PAT      - GitHub PAT with actions:write scope
+#   GITHUB_REPO     - e.g. "tbuckworth/feedcast"
