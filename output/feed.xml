@@ -15,6 +15,47 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-03</title>
+      <description>Daily News Briefing - 2026-03-03
+
+Topics covered:
+- The conflict in the Middle East has entered a third day of high-intensity operations, with the United States and Israel continuing strikes across Iran
+- In the technology sector, the fallout from OpenAI’s partnership with the Department of Defense has triggered a massive consumer migration
+- On the regulatory front, the United States Supreme Court has declined to hear a landmark case regarding A.I.-generated art
+- In hardware and infrastructure, Nvidia has announced a four-billion-dollar investment in silicon photonics, split between the firms Lumentum and Coherent
+- Finally, in a major shift for the European security architecture, French President Emmanuel Macron announced today that France will expand its "nuclear umbrella" to protect eight other European allies
+- As we look toward tomorrow, markets are bracing for a potential further spike in energy costs as shipping insurance rates for the Persian Gulf continue to climb</description>
+      <pubDate>Tue, 03 Mar 2026 06:39:26 +0000</pubDate>
+      <guid>news-briefing-2026-03-03</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cb1d35396901_daily_news_briefing_-_2026-03-03.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-03.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Monday AI Radar #15</title>
+      <description>Audio version of Monday AI Radar #15 from LessWrong Frontpage</description>
+      <pubDate>Tue, 03 Mar 2026 05:23:46 +0000</pubDate>
+      <guid>LihodhGu4T5Anpnuj</guid>
+      <link>https://www.lesswrong.com/posts/LihodhGu4T5Anpnuj/monday-ai-radar-15</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ff654f851ac9_monday_ai_radar_15.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Secretary of War Tweets That Anthropic is Now a Supply Chain Risk” by Zvi</title>
+      <description>Audio version of “Secretary of War Tweets That Anthropic is Now a Supply Chain Risk” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 02 Mar 2026 14:05:45 +0000</pubDate>
+      <guid>b3837e06-1836-4d28-ae27-e61a3fd6fb3d</guid>
+      <link>https://www.lesswrong.com/posts/Wpdivf3iNJDzBcbzJ/secretary-of-war-tweets-that-anthropic-is-now-a-supply-chain</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/97154183a374_secretary_of_war_tweets_that_anthropic_is_now_a_s.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-02</title>
       <description>Daily News Briefing - 2026-03-02
 
@@ -1032,39 +1073,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/open-thread-419</guid>
       <link>https://www.astralcodexten.com/p/open-thread-419</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5d87617fd08e_open_thread_419.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Attempting base model inference scaling with filler tokens</title>
-      <description>Audio version of Attempting base model inference scaling with filler tokens from LessWrong Frontpage</description>
-      <pubDate>Sat, 31 Jan 2026 04:09:55 +0000</pubDate>
-      <guid>Z34QQL622Gb3MWfES</guid>
-      <link>https://www.lesswrong.com/posts/Z34QQL622Gb3MWfES/attempting-base-model-inference-scaling-with-filler-tokens</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b336a7d006ff_attempting_base_model_inference_scaling_with_fille.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Best Of Moltbook</title>
-      <description>Audio version of Best Of Moltbook from Scott Alexander</description>
-      <pubDate>Fri, 30 Jan 2026 13:32:10 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/best-of-moltbook</guid>
-      <link>https://www.astralcodexten.com/p/best-of-moltbook</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1ba6c6622f11_best_of_moltbook.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“On The Adolescence of Technology” by Zvi</title>
-      <description>Audio version of “On The Adolescence of Technology” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 30 Jan 2026 12:58:41 +0000</pubDate>
-      <guid>61704eb6-252b-4772-84cf-d45e0070acad</guid>
-      <link>https://www.lesswrong.com/posts/dho4JQytfHWXtTvkt/on-the-adolescence-of-technology</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1692f62662c1_on_the_adolescence_of_technology_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
