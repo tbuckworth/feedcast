@@ -15,6 +15,17 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>OpenAI’s surveillance language has many potential loopholes and they can do better</title>
+      <description>Audio version of OpenAI’s surveillance language has many potential loopholes and they can do better from LessWrong Frontpage</description>
+      <pubDate>Wed, 04 Mar 2026 04:25:46 +0000</pubDate>
+      <guid>FSGfzDLFdFtRDADF4</guid>
+      <link>https://www.lesswrong.com/posts/FSGfzDLFdFtRDADF4/openai-s-surveillance-language-has-many-potential-loopholes</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/efea1e84ab09_openais_surveillance_language_has_many_potential.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-04</title>
       <description>Daily News Briefing - 2026-03-04
 
@@ -1114,6 +1125,17 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/open-thread-419</guid>
       <link>https://www.astralcodexten.com/p/open-thread-419</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5d87617fd08e_open_thread_419.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“On The Adolescence of Technology” by Zvi</title>
+      <description>Audio version of “On The Adolescence of Technology” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 30 Jan 2026 12:58:41 +0000</pubDate>
+      <guid>61704eb6-252b-4772-84cf-d45e0070acad</guid>
+      <link>https://www.lesswrong.com/posts/dho4JQytfHWXtTvkt/on-the-adolescence-of-technology</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1692f62662c1_on_the_adolescence_of_technology_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
