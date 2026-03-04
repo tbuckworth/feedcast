@@ -15,6 +15,47 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-04</title>
+      <description>Daily News Briefing - 2026-03-04
+
+Topics covered:
+- The conflict in the Middle East has escalated into a direct multi-front war following the weekend’s joint United States and Israeli strikes
+- In the artificial intelligence sector, OpenAI has made a significant pivot to address the fallout from its recent military partnership
+- Apple has also entered the A.I
+- Google is expanding its agentic capabilities by integrating its Gemini assistant more deeply into the physical world
+- Finally, in a warning for the digital information environment, security researchers report that the conflict in Iran is being flooded with sophisticated deepfakes
+- As we look toward tomorrow, the United Nations is expected to hold an emergency session to address the widening theater of war and the mounting humanitarian crisis in Lebanon and Iran</description>
+      <pubDate>Wed, 04 Mar 2026 02:07:53 +0000</pubDate>
+      <guid>news-briefing-2026-03-04</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7db5121019c0_daily_news_briefing_-_2026-03-04.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-04.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Milder temperature makes a hell stable</title>
+      <description>Audio version of Milder temperature makes a hell stable from LessWrong Frontpage</description>
+      <pubDate>Tue, 03 Mar 2026 22:25:58 +0000</pubDate>
+      <guid>oNgqTwKJqncm7ujHw</guid>
+      <link>https://www.lesswrong.com/posts/oNgqTwKJqncm7ujHw/milder-temperature-makes-a-hell-stable</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3f5e8f7c49b0_milder_temperature_makes_a_hell_stable.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“A Tale of Three Contracts” by Zvi</title>
+      <description>Audio version of “A Tale of Three Contracts” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 03 Mar 2026 20:34:21 +0000</pubDate>
+      <guid>3a62a0de-bffc-428b-91db-1ce5e72664ad</guid>
+      <link>https://www.lesswrong.com/posts/PBrggrw4mhgbksoYY/a-tale-of-three-contracts</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a6eac4635f26_a_tale_of_three_contracts_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-03</title>
       <description>Daily News Briefing - 2026-03-03
 
