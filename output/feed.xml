@@ -469,6 +469,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>164</title>
+      <description>Audio version of 164 from www.lesswrong.com</description>
+      <pubDate>Mon, 23 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>injected-ba6b112f06a6f3ab</guid>
+      <link>https://www.lesswrong.com/posts/dfoty34sT7CSKeJNn#sNM9TcTACcgaHdcfF</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9892654af99c_164.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-02-22</title>
       <description>Daily News Briefing - 2026-02-22
 
@@ -1125,72 +1136,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/open-thread-419</guid>
       <link>https://www.astralcodexten.com/p/open-thread-419</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5d87617fd08e_open_thread_419.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“On The Adolescence of Technology” by Zvi</title>
-      <description>Audio version of “On The Adolescence of Technology” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 30 Jan 2026 12:58:41 +0000</pubDate>
-      <guid>61704eb6-252b-4772-84cf-d45e0070acad</guid>
-      <link>https://www.lesswrong.com/posts/dho4JQytfHWXtTvkt/on-the-adolescence-of-technology</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1692f62662c1_on_the_adolescence_of_technology_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Clarifying how our AI timelines forecasts have changed since AI 2027</title>
-      <description>Audio version of Clarifying how our AI timelines forecasts have changed since AI 2027 from AI Futures Project</description>
-      <pubDate>Tue, 27 Jan 2026 22:50:15 +0000</pubDate>
-      <guid>https://blog.ai-futures.org/p/clarifying-how-our-ai-timelines-forecasts</guid>
-      <link>https://blog.ai-futures.org/p/clarifying-how-our-ai-timelines-forecasts</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6ce1c19011d0_clarifying_how_our_ai_timelines_forecasts_have_cha.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The inaugural Redwood Research podcast</title>
-      <description>Audio version of The inaugural Redwood Research podcast from Buck Shlegeris</description>
-      <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
-      <guid>p4iJpumHt6Ay9KnXT</guid>
-      <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts</title>
-      <description>Audio version of Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts from Ryan Greenblatt</description>
-      <pubDate>Thu, 01 Jan 2026 13:36:25 +0000</pubDate>
-      <guid>aYtrLhoZtCKZnfBvA</guid>
-      <link>https://www.lesswrong.com/posts/aYtrLhoZtCKZnfBvA/recent-llms-can-do-2-hop-and-3-hop-latent-no-cot-reasoning</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Vitalik's Response to AI 2027</title>
-      <description>Audio version of Vitalik's Response to AI 2027 from Daniel Kokotajlo</description>
-      <pubDate>Fri, 11 Jul 2025 21:43:36 +0000</pubDate>
-      <guid>zuuQwueBpv9ZCpNuX</guid>
-      <link>https://www.lesswrong.com/posts/zuuQwueBpv9ZCpNuX/vitalik-s-response-to-ai-2027</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a2b17c92c517_vitaliks_response_to_ai_2027.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>New, improved multiple-choice TruthfulQA</title>
-      <description>Audio version of New, improved multiple-choice TruthfulQA from Owain Evans</description>
-      <pubDate>Wed, 15 Jan 2025 23:32:09 +0000</pubDate>
-      <guid>Bunfwz6JsNd44kgLT</guid>
-      <link>https://www.lesswrong.com/posts/Bunfwz6JsNd44kgLT/new-improved-multiple-choice-truthfulqa</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/be18640f6d79_new_improved_multiple-choice_truthfulqa.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
