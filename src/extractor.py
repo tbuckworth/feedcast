@@ -75,7 +75,7 @@ def url_to_feed_entry(url: str) -> FeedEntry:
         title=article["title"],
         link=url,
         content=article["text"],
-        published=article["date"] or datetime.now(),
+        published=datetime.now(),  # Always use now — article dates can be old, causing cleanup to delete fresh episodes
         author=article["author"],
         feed_name=domain,
     )
