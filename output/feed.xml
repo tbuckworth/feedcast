@@ -1108,34 +1108,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>“Welcome to Moltbook” by Zvi</title>
-      <description>Audio version of “Welcome to Moltbook” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 02 Feb 2026 14:32:31 +0000</pubDate>
-      <guid>2e18dd6c-6937-4bd4-9bb0-dc08ecb0a10e</guid>
-      <link>https://www.lesswrong.com/posts/y66jnvmyJ4AFE4Z5h/welcome-to-moltbook</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/910860bb96d5_welcome_to_moltbook_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Moltbook: After The First Weekend</title>
-      <description>Audio version of Moltbook: After The First Weekend from Scott Alexander</description>
-      <pubDate>Mon, 02 Feb 2026 13:36:49 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/moltbook-after-the-first-weekend</guid>
-      <link>https://www.astralcodexten.com/p/moltbook-after-the-first-weekend</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d661044c1bb7_moltbook_after_the_first_weekend.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Open Thread 419</title>
-      <description>Audio version of Open Thread 419 from Scott Alexander</description>
-      <pubDate>Mon, 02 Feb 2026 13:16:48 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/open-thread-419</guid>
-      <link>https://www.astralcodexten.com/p/open-thread-419</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5d87617fd08e_open_thread_419.mp3" type="audio/mpeg" length="0" />
+      <title>Ω 52</title>
+      <description>Audio version of Ω 52 from www.lesswrong.com</description>
+      <pubDate>Tue, 02 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>injected-b3f26d01de2e4652</guid>
+      <link>https://www.lesswrong.com/posts/33emJkmw5bMAXZHHt/covert-malicious-finetuning-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b40ffa53ab3d_52.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
