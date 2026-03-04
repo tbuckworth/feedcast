@@ -15,23 +15,23 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>The persona selection model</title>
+      <description>Audio version of The persona selection model from www.lesswrong.com</description>
+      <pubDate>Wed, 04 Mar 2026 19:40:44 +0000</pubDate>
+      <guid>injected-ba6b112f06a6f3ab</guid>
+      <link>https://www.lesswrong.com/posts/dfoty34sT7CSKeJNn#sNM9TcTACcgaHdcfF</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9892654af99c_the_persona_selection_model.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Ω 52</title>
       <description>Audio version of Ω 52 from www.lesswrong.com</description>
       <pubDate>Wed, 04 Mar 2026 19:15:52 +0000</pubDate>
       <guid>injected-b3f26d01de2e4652</guid>
       <link>https://www.lesswrong.com/posts/33emJkmw5bMAXZHHt/covert-malicious-finetuning-1</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/b40ffa53ab3d_52.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>164</title>
-      <description>Audio version of 164 from www.lesswrong.com</description>
-      <pubDate>Wed, 04 Mar 2026 19:11:41 +0000</pubDate>
-      <guid>injected-ba6b112f06a6f3ab</guid>
-      <link>https://www.lesswrong.com/posts/dfoty34sT7CSKeJNn#sNM9TcTACcgaHdcfF</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9892654af99c_164.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
