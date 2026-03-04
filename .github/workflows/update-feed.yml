@@ -14,6 +14,23 @@ on:
         required: false
         type: boolean
         default: false
+      inject_url:
+        description: 'Arbitrary URL to extract and process as a new episode'
+        required: false
+        type: string
+      inject_mode:
+        description: 'Processing mode for injected URL'
+        required: false
+        type: choice
+        options:
+          - auto
+          - summarize
+          - verbatim
+        default: auto
+
+concurrency:
+  group: feedcast-pipeline
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -42,6 +59,9 @@ jobs:
           DEEPINFRA_API_KEY: ${{ secrets.DEEPINFRA_API_KEY }}
           REPROCESS_ENTRY: ${{ inputs.entry_url }}
           FORCE_VERBATIM: ${{ inputs.force_verbatim }}
+          INJECT_URL: ${{ inputs.inject_url }}
+          INJECT_MODE: ${{ inputs.inject_mode }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           VOICE_UPLOAD_DELAY_SECONDS: "5"
           SAVE_DEBUG_WAVS: "false"
         run: uv run python -m src.main
@@ -60,6 +80,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add output/ data/
           git diff --staged --quiet || git commit -m "Update podcast feed"
+          git pull --rebase origin main
           git push
 
   deploy:

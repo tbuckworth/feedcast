@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { width: 360px; padding: 20px; font-family: system-ui, sans-serif; font-size: 14px; }
+    h2 { margin: 0 0 16px; font-size: 16px; }
+    label { font-weight: 600; display: block; margin-bottom: 4px; }
+    input { width: 100%; padding: 8px; margin-bottom: 14px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-family: monospace; font-size: 13px; }
+    button { padding: 8px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #1d4ed8; }
+    .saved { color: #166534; margin-left: 10px; display: none; }
+  </style>
+</head>
+<body>
+  <h2>Feedcast Settings</h2>
+  <label for="workerUrl">Worker URL</label>
+  <input type="url" id="workerUrl" placeholder="https://feedcast-worker.your-account.workers.dev">
+  <label for="token">Auth Token</label>
+  <input type="password" id="token" placeholder="Your FEEDCAST_TOKEN">
+  <button id="save">Save</button>
+  <span class="saved" id="saved">Saved!</span>
+  <script src="options.js"></script>
+</body>
+</html>
