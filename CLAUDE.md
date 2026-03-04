@@ -20,6 +20,9 @@ REPROCESS_ENTRY="<entry-id-or-url>" uv run python -m src.main
 
 # Force verbatim mode when reprocessing
 REPROCESS_ENTRY="<entry-id-or-url>" FORCE_VERBATIM=true uv run python -m src.main
+
+# Inject an arbitrary URL (any webpage, not just RSS feeds)
+INJECT_URL="https://example.com/article" INJECT_MODE="auto" uv run python -m src.main
 ```
 
 System dependency: `ffmpeg` is required for audio concatenation and MP3 encoding.
@@ -28,15 +31,18 @@ System dependency: `ffmpeg` is required for audio concatenation and MP3 encoding
 
 The pipeline runs in three async phases orchestrated by `src/main.py`:
 
-1. **Phase 1 — Parallel feed fetching**: All RSS feeds fetched concurrently via `asyncio.gather`. Author-specific feeds are listed before aggregate feeds in `config.yaml` so deduplication preserves author attribution (order matters). After dedup, a daily news briefing is generated (if configured) by `NewsAggregator`: it fetches news RSS sources, filters to recent articles, and synthesizes them via Gemini Flash (OpenRouter) into a single briefing entry.
+1. **Phase 1 — Parallel feed fetching** (skipped in inject mode): All RSS feeds fetched concurrently via `asyncio.gather`. Author-specific feeds are listed before aggregate feeds in `config.yaml` so deduplication preserves author attribution (order matters). After dedup, a daily news briefing is generated (if configured) by `NewsAggregator`: it fetches news RSS sources, filters to recent articles, and synthesizes them via Gemini Flash (OpenRouter) into a single briefing entry.
+
+   **Inject mode** (`INJECT_URL`): Skips Phase 1 entirely. Uses trafilatura to fetch and extract content from any arbitrary URL, then feeds it into Phases 2 and 3. Re-injecting the same URL deletes the previous entry.
 
 2. **Phase 2 — Parallel content + audio**: For each new entry, `ContentProcessor` either summarizes via Gemini 3 Flash (OpenRouter) or cleans HTML for verbatim reading, then `AudioGenerator` chunks the text (max 500 chars, split at sentence boundaries), calls DeepInfra Chatterbox TTS with voice cloning for each chunk, and concatenates with ffmpeg. A semaphore (limit 10) controls TTS concurrency.
 
-3. **Phase 3 — Sequential finalization**: Marks entries as processed in SQLite, generates `output/feed.xml`, and cleans up entries older than 30 days (including deleting associated audio files).
+3. **Phase 3 — Sequential finalization**: Marks entries as processed in SQLite, generates `output/feed.xml`, and cleans up entries older than 30 days (including deleting associated audio files). In inject mode, sends a push notification via ntfy.sh on success or failure.
 
 ### Key modules
 
-- **`src/monitor.py`** — `FeedMonitor`: RSS fetching with `feedparser`, SQLite-backed dedup tracking (`data/posts.db`, tables `processed_posts` and `news_briefings`). Supports `skip_patterns` per feed for title-based filtering. Stores recent news briefings for cross-day dedup.
+- **`src/monitor.py`** — `FeedMonitor`: RSS fetching with `feedparser`, SQLite-backed dedup tracking (`data/posts.db`, tables `processed_posts` and `news_briefings`). Supports `skip_patterns` per feed for title-based filtering. Stores recent news briefings for cross-day dedup. `is_processed_by_link()` provides link-based dedup for injected URLs.
+- **`src/extractor.py`** — `url_to_feed_entry()`: Fetches any URL via trafilatura, extracts article text + metadata (title, author, date). Entry IDs use `injected-{sha256(url)[:16]}` format. Rejects content under 200 chars (quality gate for JS-rendered/paywalled pages).
 - **`src/llm.py`** — OpenRouter client factory (`get_client()`) and model constants (`MODEL_STRONG` = Gemini 3 Flash, `MODEL_CHEAP` = Gemini 2.5 Flash). All LLM calls use the OpenAI SDK against OpenRouter.
 - **`src/processor.py`** — `ContentProcessor`: HTML cleaning with BeautifulSoup, LLM summarization via Gemini 3 Flash. Auto mode uses 24,000 char threshold to decide summarize vs verbatim. Converts HTML tables to prose (small tables inline, large tables via Gemini 2.5 Flash) before text extraction.
 - **`src/normalizer.py`** — `TextNormalizer`: Gemini 2.5 Flash-powered text normalization for TTS. Converts numbers, dates, percentages, currency, abbreviations, and special characters to spoken form. Handles long texts by splitting into paragraph batches.
@@ -57,12 +63,30 @@ The pipeline runs in three async phases orchestrated by `src/main.py`:
 | `ANTHROPIC_API_KEY` | No | Legacy Claude API key (kept as fallback) |
 | `REPROCESS_ENTRY` | No | Entry ID/URL to reprocess |
 | `FORCE_VERBATIM` | No | Force verbatim for reprocessed entry |
+| `INJECT_URL` | No | Arbitrary URL to extract and process as a new episode (skips RSS fetching) |
+| `INJECT_MODE` | No | Processing mode for injected URL: `auto` (default), `summarize`, or `verbatim` |
+| `NTFY_TOPIC` | No | ntfy.sh topic for push notifications on inject success/failure (e.g. `feedcast-titus`) |
 | `VOICE_UPLOAD_DELAY_SECONDS` | No | Delay after voice upload for cross-region replication (CI uses 5) |
 | `SAVE_DEBUG_WAVS` | No | Save intermediate WAV chunks for debugging |
 
+### URL Injection (Send Any URL)
+
+The inject system allows sending any URL to feedcast from a browser or phone:
+
+```
+[Chrome Extension]  ──┐
+                      ├──▶ [Cloudflare Worker] ──▶ [GitHub Actions] ──▶ [Pipeline] ──▶ feed.xml
+[Android PWA Share] ──┘   (auth + rate limit)      (workflow_dispatch)
+```
+
+- **Cloudflare Worker** (`worker/`): Auth proxy at `https://feedcast-worker.feedcast-worker.workers.dev`. Validates bearer token, rate limits (20/hr), triggers GHA `workflow_dispatch` with `inject_url`/`inject_mode` inputs. Secrets: `FEEDCAST_TOKEN`, `GITHUB_PAT`, `GITHUB_REPO`.
+- **Chrome Extension** (`chrome-extension/`): Manifest V3. Click on any page → pick mode → Send. Settings store Worker URL + token in `chrome.storage.sync`. Load unpacked from `chrome://extensions/`.
+- **PWA Share Target** (`output/app/`): Installable PWA hosted on GitHub Pages. On Android, appears in the Share menu after "Add to Home Screen". Auth token stored in `localStorage`.
+- **Notifications**: Pipeline sends push notifications via ntfy.sh (`NTFY_TOPIC` secret). Install the ntfy app and subscribe to the topic.
+
 ### CI/CD
 
-GitHub Actions workflow (`.github/workflows/update-feed.yml`) runs daily at 6am UTC. It runs the pipeline, commits results, then deploys `output/` to GitHub Pages. Manual dispatch supports `entry_url` and `force_verbatim` inputs.
+GitHub Actions workflow (`.github/workflows/update-feed.yml`) runs daily at 6am UTC. It runs the pipeline, commits results, then deploys `output/` to GitHub Pages. Manual dispatch supports `entry_url`, `force_verbatim`, `inject_url`, and `inject_mode` inputs. A `concurrency` group (`feedcast-pipeline`) prevents race conditions between scheduled and injected runs. The commit step uses `git pull --rebase` to handle sequential runs cleanly.
 
 ## Data Flow
 
@@ -80,4 +104,10 @@ RSS feeds → feedparser → skip_patterns filter → new entries (SQLite dedup)
 News sources (RSS) → parallel fetch → filter last 48h
     → group by category → Gemini 3 Flash synthesis (with recent briefing dedup context)
     → single briefing FeedEntry → same audio pipeline above
+
+Injected URL (via Chrome extension / Android PWA / CLI)
+    → Cloudflare Worker (auth + rate limit) → GitHub Actions workflow_dispatch
+    → trafilatura fetch + extract (200-char quality gate)
+    → same audio pipeline above (skips Phase 1 RSS fetching)
+    → ntfy.sh push notification on completion
 ```
