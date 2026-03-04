@@ -67,6 +67,14 @@ class FeedMonitor:
             )
             return cursor.fetchone() is not None
 
+    def is_processed_by_link(self, link: str) -> bool:
+        """Check if any entry with this link has been processed."""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.execute(
+                "SELECT 1 FROM processed_posts WHERE link = ?", (link,)
+            )
+            return cursor.fetchone() is not None
+
     def delete_entry(self, entry_id: str) -> bool:
         """Delete an entry from the database. Returns True if deleted."""
         with sqlite3.connect(self.db_path) as conn:

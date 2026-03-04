@@ -12,6 +12,7 @@ import yaml
 from pydantic import BaseModel
 
 from .audio import AudioGenerator
+from .extractor import ExtractionError, url_to_feed_entry
 from .feed import FeedGenerator, PodcastConfig
 from .monitor import FeedEntry, FeedMonitor
 from .news import NewsAggregator
@@ -130,6 +131,12 @@ async def async_main(config_path: Path | None = None) -> None:
         else:
             print(f"Force verbatim enabled for: {reprocess_entry}")
 
+    # Check for URL injection (arbitrary URL processing)
+    inject_url = os.environ.get("INJECT_URL", "").strip()
+    inject_mode = os.environ.get("INJECT_MODE", "auto").strip().lower()
+    if inject_url:
+        print(f"URL injection requested: {inject_url} (mode: {inject_mode})")
+
     # Load configuration
     print(f"Loading configuration from {config_path}")
     config = load_config(config_path)
@@ -158,52 +165,73 @@ async def async_main(config_path: Path | None = None) -> None:
     )
     feed_gen = FeedGenerator(podcast_config)
 
-    # PHASE 1: Parallel feed fetching
-    print(f"\nPhase 1: Fetching {len(config.feeds)} feeds in parallel...")
-
-    async def fetch_one(fc: FeedConfig) -> tuple[FeedConfig, list[FeedEntry]]:
-        print(f"  Fetching: {fc.name} ({fc.url})")
-        entries = await asyncio.to_thread(monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns)
-        print(f"  {fc.name}: {len(entries)} new entries")
-        return (fc, entries)
-
-    feed_results = await asyncio.gather(*[fetch_one(fc) for fc in config.feeds])
-
-    # Deduplicate — gather preserves config order, so author feeds win
-    seen_ids: set[str] = set()
     entries_to_process: list[tuple[FeedEntry, str, str]] = []
-    for feed_config, entries in feed_results:
-        if not entries:
-            continue
-        entry = entries[-1]  # most recent only
-        if entry.id in seen_ids:
-            print(f"  Skipping duplicate: {entry.title}")
-            continue
-        seen_ids.add(entry.id)
-        mode = feed_config.mode
-        if force_verbatim and reprocess_entry and (
-            entry.id == reprocess_entry or entry.link == reprocess_entry
-        ):
-            print(f"    Overriding mode to verbatim (force_verbatim)")
-            mode = "verbatim"
-        prompt = feed_config.prompt or config.default_prompt
-        entries_to_process.append((entry, mode, prompt))
-
-    # Generate daily news briefing if configured
     briefing_entry = None
-    if config.news_briefing and config.news_briefing.enabled:
-        recent_briefings = monitor.get_recent_briefings(5)
-        aggregator = NewsAggregator(
-            sources=[s.model_dump() for s in config.news_briefing.sources],
-            prompt=config.news_briefing.prompt,
-            lookback_hours=config.news_briefing.lookback_hours,
-            recent_briefings=recent_briefings,
-        )
-        briefing_entry = await aggregator.generate_briefing()
-        if briefing_entry and not monitor.is_processed(briefing_entry.id):
-            entries_to_process.insert(0, (briefing_entry, "verbatim", config.default_prompt))
-        elif briefing_entry:
-            print(f"  News briefing already processed today")
+
+    if inject_url:
+        # INJECT MODE: Skip Phase 1, extract content from arbitrary URL
+        print(f"\nInjecting URL (skipping RSS feeds)...")
+        try:
+            entry = await asyncio.to_thread(url_to_feed_entry, inject_url)
+        except ExtractionError as e:
+            print(f"  Extraction failed: {e}")
+            ntfy_topic = os.environ.get("NTFY_TOPIC", "").strip()
+            if ntfy_topic:
+                await _send_ntfy_error(ntfy_topic, inject_url, str(e))
+            raise
+        print(f"  Extracted: {entry.title} ({len(entry.content)} chars)")
+
+        # Dedup: check both entry ID and link
+        if monitor.is_processed(entry.id) or monitor.is_processed_by_link(inject_url):
+            print(f"  URL already processed, deleting for re-injection...")
+            monitor.delete_entry(entry.id)
+
+        entries_to_process = [(entry, inject_mode, config.default_prompt)]
+    else:
+        # NORMAL MODE: Phase 1 — Parallel feed fetching
+        print(f"\nPhase 1: Fetching {len(config.feeds)} feeds in parallel...")
+
+        async def fetch_one(fc: FeedConfig) -> tuple[FeedConfig, list[FeedEntry]]:
+            print(f"  Fetching: {fc.name} ({fc.url})")
+            entries = await asyncio.to_thread(monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns)
+            print(f"  {fc.name}: {len(entries)} new entries")
+            return (fc, entries)
+
+        feed_results = await asyncio.gather(*[fetch_one(fc) for fc in config.feeds])
+
+        # Deduplicate — gather preserves config order, so author feeds win
+        seen_ids: set[str] = set()
+        for feed_config, entries in feed_results:
+            if not entries:
+                continue
+            entry = entries[-1]  # most recent only
+            if entry.id in seen_ids:
+                print(f"  Skipping duplicate: {entry.title}")
+                continue
+            seen_ids.add(entry.id)
+            mode = feed_config.mode
+            if force_verbatim and reprocess_entry and (
+                entry.id == reprocess_entry or entry.link == reprocess_entry
+            ):
+                print(f"    Overriding mode to verbatim (force_verbatim)")
+                mode = "verbatim"
+            prompt = feed_config.prompt or config.default_prompt
+            entries_to_process.append((entry, mode, prompt))
+
+        # Generate daily news briefing if configured
+        if config.news_briefing and config.news_briefing.enabled:
+            recent_briefings = monitor.get_recent_briefings(5)
+            aggregator = NewsAggregator(
+                sources=[s.model_dump() for s in config.news_briefing.sources],
+                prompt=config.news_briefing.prompt,
+                lookback_hours=config.news_briefing.lookback_hours,
+                recent_briefings=recent_briefings,
+            )
+            briefing_entry = await aggregator.generate_briefing()
+            if briefing_entry and not monitor.is_processed(briefing_entry.id):
+                entries_to_process.insert(0, (briefing_entry, "verbatim", config.default_prompt))
+            elif briefing_entry:
+                print(f"  News briefing already processed today")
 
     print(f"\n{len(entries_to_process)} entries to process")
 
@@ -256,7 +284,48 @@ async def async_main(config_path: Path | None = None) -> None:
     if removed_briefings:
         print(f"  Cleaned up {removed_briefings} old news briefings")
 
+    # Send ntfy notification for injected URLs
+    if inject_url:
+        ntfy_topic = os.environ.get("NTFY_TOPIC", "").strip()
+        if ntfy_topic:
+            await _send_ntfy(ntfy_topic, inject_url, entries_to_process)
+
     print(f"\nPipeline complete.")
+
+
+async def _send_ntfy(
+    topic: str, url: str, entries: list[tuple[FeedEntry, str, str]],
+) -> None:
+    """Send ntfy push notification about injection result."""
+    try:
+        if entries:
+            title = entries[0][0].title
+            message = f"New episode: {title}"
+            tags = "white_check_mark"
+        else:
+            message = f"No new content from: {url}"
+            tags = "warning"
+        async with httpx.AsyncClient() as client:
+            await client.post(
+                f"https://ntfy.sh/{topic}",
+                content=message,
+                headers={"Title": "Feedcast", "Tags": tags},
+            )
+    except Exception as e:
+        print(f"  ntfy notification failed: {e}")
+
+
+async def _send_ntfy_error(topic: str, url: str, error: str) -> None:
+    """Send ntfy push notification about injection failure."""
+    try:
+        async with httpx.AsyncClient() as client:
+            await client.post(
+                f"https://ntfy.sh/{topic}",
+                content=f"Failed to process: {url}\n{error}",
+                headers={"Title": "Feedcast", "Tags": "x"},
+            )
+    except Exception as e:
+        print(f"  ntfy notification failed: {e}")
 
 
 def main(config_path: Path | None = None) -> None:
