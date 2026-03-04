@@ -15,6 +15,17 @@
     </itunes:owner>
     <itunes:category text="Technology" />
     <item>
+      <title>164</title>
+      <description>Audio version of 164 from www.lesswrong.com</description>
+      <pubDate>Wed, 04 Mar 2026 19:11:41 +0000</pubDate>
+      <guid>injected-ba6b112f06a6f3ab</guid>
+      <link>https://www.lesswrong.com/posts/dfoty34sT7CSKeJNn#sNM9TcTACcgaHdcfF</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9892654af99c_164.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>OpenAI’s surveillance language has many potential loopholes and they can do better</title>
       <description>Audio version of OpenAI’s surveillance language has many potential loopholes and they can do better from LessWrong Frontpage</description>
       <pubDate>Wed, 04 Mar 2026 04:25:46 +0000</pubDate>
@@ -464,17 +475,6 @@ Topics covered:
       <guid>kFiQciPym6DQdWJJ2</guid>
       <link>https://www.lesswrong.com/posts/kFiQciPym6DQdWJJ2/was-it-owl-a-dream-1</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/9bda9c29cd93_was_it_owl_a_dream.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>164</title>
-      <description>Audio version of 164 from www.lesswrong.com</description>
-      <pubDate>Mon, 23 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>injected-ba6b112f06a6f3ab</guid>
-      <link>https://www.lesswrong.com/posts/dfoty34sT7CSKeJNn#sNM9TcTACcgaHdcfF</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9892654af99c_164.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1103,17 +1103,6 @@ Topics covered:
       <guid>ce2b52ce-e113-44eb-9300-16b16145a0e4</guid>
       <link>https://www.lesswrong.com/posts/aQKBMEvTj3Heidoir/unless-that-claw-is-the-famous-openclaw</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d65dc407c7aa_unless_that_claw_is_the_famous_openclaw_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Ω 52</title>
-      <description>Audio version of Ω 52 from www.lesswrong.com</description>
-      <pubDate>Tue, 02 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>injected-b3f26d01de2e4652</guid>
-      <link>https://www.lesswrong.com/posts/33emJkmw5bMAXZHHt/covert-malicious-finetuning-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b40ffa53ab3d_52.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
