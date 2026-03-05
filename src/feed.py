@@ -133,6 +133,12 @@ class FeedGenerator:
             image = ET.SubElement(channel, f"{{{self.ITUNES_NS}}}image")
             image.set("href", self.config.image_url)
 
+            # Standard RSS <image> for broader player compatibility
+            rss_image = ET.SubElement(channel, "image")
+            ET.SubElement(rss_image, "url").text = self.config.image_url
+            ET.SubElement(rss_image, "title").text = self.config.title
+            ET.SubElement(rss_image, "link").text = self.config.base_url
+
         # Category
         category = ET.SubElement(channel, f"{{{self.ITUNES_NS}}}category")
         category.set("text", "Technology")
