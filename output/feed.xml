@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-06</title>
+      <description>Daily News Briefing - 2026-03-06
+
+Topics covered:
+- The Department of Defense has officially designated Anthropic as a "supply-chain risk," making it the first American company to receive a label typically reserved for hostile foreign entities
+- OpenAI is moving rapidly to capitalize on its rival’s regulatory trouble, today launching GPT-five-point-four
+- In the Middle East, the theater of war is widening beyond Iran's borders
+- A major privacy scandal is engulfing Meta today following an investigation by Swedish outlets Svenska Dagbladet and Göteborgs-Posten
+- In other technology news, Netflix has made a strategic acquisition in the A.I
+- Finally, in China, the automotive giant B-Y-D has unveiled its "Blade Battery two-point-zero," which claims to support "five-minute flash charging" at speeds of up to one-point-five megawatts</description>
+      <pubDate>Fri, 06 Mar 2026 06:39:24 +0000</pubDate>
+      <guid>news-briefing-2026-03-06</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/14618801f4ef_daily_news_briefing_-_2026-03-06.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-06.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Reasoning Models Struggle to Control Their Chains of Thought</title>
+      <description>Audio version of Reasoning Models Struggle to Control Their Chains of Thought from LessWrong Frontpage</description>
+      <pubDate>Fri, 06 Mar 2026 06:33:59 +0000</pubDate>
+      <guid>qTH9QrwJjPDWKQfDG</guid>
+      <link>https://www.lesswrong.com/posts/qTH9QrwJjPDWKQfDG/reasoning-models-struggle-to-control-their-chains-of-thought</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/de02d10ff26f_reasoning_models_struggle_to_control_their_chains.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #158: The Department of War” by Zvi</title>
+      <description>Audio version of “AI #158: The Department of War” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 05 Mar 2026 16:12:19 +0000</pubDate>
+      <guid>33622e30-5e88-448a-91a7-9c4961e6ed3a</guid>
+      <link>https://www.lesswrong.com/posts/YTnzcZSbA69fMCjNo/ai-158-the-department-of-war</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9f7811a3757d_ai_158_the_department_of_war_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-05</title>
       <description>Daily News Briefing - 2026-03-05
 
