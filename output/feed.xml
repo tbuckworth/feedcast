@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-07</title>
+      <description>Daily News Briefing - 2026-03-07
+
+Topics covered:
+- The conflict in the Middle East has entered its seventh day with a significant escalation on the ground
+- In the artificial intelligence sector, the fallout from the Pentagon’s designation of Anthropic as a "supply-chain risk" has created a stark market divide
+- OpenAI is moving to counter its recent PR challenges by expanding its enterprise and developer utility
+- The hardware sector is reeling from the compounding effects of the ongoing war and trade volatility
+- Finally, a new era of digital restriction for minors is gaining momentum globally
+- As we look toward tomorrow, the United Nations Security Council is scheduled to meet to discuss the potential for a humanitarian corridor in Beirut as Israeli forces prepare to move across the border</description>
+      <pubDate>Sat, 07 Mar 2026 06:27:56 +0000</pubDate>
+      <guid>news-briefing-2026-03-07</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c8c9075ff938_daily_news_briefing_-_2026-03-07.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-07.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Your Causal Variables Are Irreducibly Subjective</title>
+      <description>Audio version of Your Causal Variables Are Irreducibly Subjective from LessWrong Frontpage</description>
+      <pubDate>Sat, 07 Mar 2026 03:11:12 +0000</pubDate>
+      <guid>NbQR95tgonXW2xMcQ</guid>
+      <link>https://www.lesswrong.com/posts/NbQR95tgonXW2xMcQ/your-causal-variables-are-irreducibly-subjective-3</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a8f7320fae12_your_causal_variables_are_irreducibly_subjective.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Anthropic Officially, Arbitrarily and Capriciously Designated a Supply Chain Risk” by Zvi</title>
+      <description>Audio version of “Anthropic Officially, Arbitrarily and Capriciously Designated a Supply Chain Risk” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 06 Mar 2026 18:11:56 +0000</pubDate>
+      <guid>ef6361c4-c5a3-4683-9950-e010b50cab40</guid>
+      <link>https://www.lesswrong.com/posts/EL8uxnWMEZXc7Wh9A/anthropic-officially-arbitrarily-and-capriciously-designated</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/83c357ca0dc2_anthropic_officially_arbitrarily_and_capriciousl.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>SEIU Delenda Est</title>
+      <description>Audio version of SEIU Delenda Est from Scott Alexander</description>
+      <pubDate>Fri, 06 Mar 2026 14:04:21 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/seiu-delenda-est</guid>
+      <link>https://www.astralcodexten.com/p/seiu-delenda-est</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/da8ecd999ac9_seiu_delenda_est.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-06</title>
       <description>Daily News Briefing - 2026-03-06
 
@@ -1202,28 +1254,6 @@ Topics covered:
       <guid>e0ab7ce4-a64f-4aee-a987-80477de2bc63</guid>
       <link>https://www.lesswrong.com/posts/omSudRiFDvtNRrxZS/kimi-k2-5</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/93b5b7825646_kimi_k25_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Unless That Claw Is The Famous OpenClaw” by Zvi</title>
-      <description>Audio version of “Unless That Claw Is The Famous OpenClaw” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 03 Feb 2026 15:03:15 +0000</pubDate>
-      <guid>ce2b52ce-e113-44eb-9300-16b16145a0e4</guid>
-      <link>https://www.lesswrong.com/posts/aQKBMEvTj3Heidoir/unless-that-claw-is-the-famous-openclaw</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d65dc407c7aa_unless_that_claw_is_the_famous_openclaw_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Clarifying how our AI timelines forecasts have changed since AI 2027</title>
-      <description>Audio version of Clarifying how our AI timelines forecasts have changed since AI 2027 from AI Futures Project</description>
-      <pubDate>Tue, 27 Jan 2026 22:50:15 +0000</pubDate>
-      <guid>https://blog.ai-futures.org/p/clarifying-how-our-ai-timelines-forecasts</guid>
-      <link>https://blog.ai-futures.org/p/clarifying-how-our-ai-timelines-forecasts</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6ce1c19011d0_clarifying_how_our_ai_timelines_forecasts_have_cha.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
