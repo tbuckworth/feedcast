@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-08</title>
+      <description>Daily News Briefing - 2026-03-08
+
+Topics covered:
+- The war in the Middle East has reached a harrowing new inflection point
+- Internal divisions at OpenAI have reached the executive level following the company’s recent pivot toward military applications
+- In the corporate sector, Google has signaled its long-term bet on autonomous systems by granting Chief Executive Officer Sundar Pichai a massive six-hundred-and-ninety-two million dollar pay package
+- The hardware world is facing a new challenge in its effort to bridge the digital divide
+- Closer to home, the United States is dealing with a dual-threat of domestic instability and natural disaster
+- As we look toward tomorrow, tech analysts are monitoring the "ClawCon" enthusiast gathering in Manhattan, where the growing community of Anthropic loyalists is meeting to define a new "pro-human" roadmap for A.I</description>
+      <pubDate>Sun, 08 Mar 2026 06:31:58 +0000</pubDate>
+      <guid>news-briefing-2026-03-08</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e05e6e6fedef_daily_news_briefing_-_2026-03-08.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-08.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Why Many Ambitious (and Altruistic) People Probably Undervalue Their Happiness</title>
+      <description>Audio version of Why Many Ambitious (and Altruistic) People Probably Undervalue Their Happiness from LessWrong Frontpage</description>
+      <pubDate>Sun, 08 Mar 2026 02:31:05 +0000</pubDate>
+      <guid>ZvgHobDeJZcirGF5e</guid>
+      <link>https://www.lesswrong.com/posts/ZvgHobDeJZcirGF5e/why-many-ambitious-and-altruistic-people-probably-undervalue</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f9c99039dcf_why_many_ambitious_and_altruistic_people_probabl.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-07</title>
       <description>Daily News Briefing - 2026-03-07
 
@@ -1237,23 +1267,23 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Is Note-taking a favor or a burden to my future-self?</title>
-      <description>Audio version of Is Note-taking a favor or a burden to my future-self? from LessWrong Frontpage</description>
-      <pubDate>Thu, 05 Feb 2026 06:22:49 +0000</pubDate>
-      <guid>5pu8oAia9dRst2Ejz</guid>
-      <link>https://www.lesswrong.com/posts/5pu8oAia9dRst2Ejz/is-note-taking-a-favor-or-a-burden-to-my-future-self</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ef6f3826c1a6_is_note-taking_a_favor_or_a_burden_to_my_future-se.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Kimi K2.5” by Zvi</title>
       <description>Audio version of “Kimi K2.5” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Wed, 04 Feb 2026 15:31:47 +0000</pubDate>
       <guid>e0ab7ce4-a64f-4aee-a987-80477de2bc63</guid>
       <link>https://www.lesswrong.com/posts/omSudRiFDvtNRrxZS/kimi-k2-5</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/93b5b7825646_kimi_k25_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Clarifying how our AI timelines forecasts have changed since AI 2027</title>
+      <description>Audio version of Clarifying how our AI timelines forecasts have changed since AI 2027 from AI Futures Project</description>
+      <pubDate>Tue, 27 Jan 2026 22:50:15 +0000</pubDate>
+      <guid>https://blog.ai-futures.org/p/clarifying-how-our-ai-timelines-forecasts</guid>
+      <link>https://blog.ai-futures.org/p/clarifying-how-our-ai-timelines-forecasts</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6ce1c19011d0_clarifying_how_our_ai_timelines_forecasts_have_cha.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
