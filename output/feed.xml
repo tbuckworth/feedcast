@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-09</title>
+      <description>Daily News Briefing - 2026-03-09
+
+Topics covered:
+- The leadership of the Islamic Republic of Iran has officially transitioned following the death of Ayatollah Khamenei
+- The diplomatic rift between the United Kingdom and the United States has deepened further
+- In the technology sector, the fallout from the Pentagon’s blacklisting of Anthropic as a "supply chain risk" is causing a chilling effect across the startup ecosystem
+- The physical infrastructure of artificial intelligence is taking on a rugged new form
+- In the consumer hardware space, Palmer Luckey—the founder of Oculus and Anduril—is reportedly seeking a one billion dollar valuation for his retro-gaming startup, ModRetro
+- Finally, a significant regulatory shift is taking place in the Pacific</description>
+      <pubDate>Mon, 09 Mar 2026 06:50:59 +0000</pubDate>
+      <guid>news-briefing-2026-03-09</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7074a0887099_daily_news_briefing_-_2026-03-09.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-09.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Prologue to Terrified Comments on Claude's Constitution</title>
+      <description>Audio version of Prologue to Terrified Comments on Claude's Constitution from LessWrong Frontpage</description>
+      <pubDate>Mon, 09 Mar 2026 06:46:35 +0000</pubDate>
+      <guid>o7e5C2Ev8JyyxHKNk</guid>
+      <link>https://www.lesswrong.com/posts/o7e5C2Ev8JyyxHKNk/prologue-to-terrified-comments-on-claude-s-constitution</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1584cd77f50a_prologue_to_terrified_comments_on_claudes_constit.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-08</title>
       <description>Daily News Briefing - 2026-03-08
 
@@ -1192,87 +1222,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-02-06</title>
-      <description>Audio version of Daily News Briefing - 2026-02-06 from Daily News Briefing</description>
-      <pubDate>Fri, 06 Feb 2026 06:42:54 +0000</pubDate>
-      <guid>news-briefing-2026-02-06</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/53b75447e6f5_daily_news_briefing_-_2026-02-06.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Claude Opus 4.6 is Driven</title>
-      <description>Audio version of Claude Opus 4.6 is Driven from LessWrong Frontpage</description>
-      <pubDate>Fri, 06 Feb 2026 04:15:54 +0000</pubDate>
-      <guid>btAn3hydqfgYFyHGW</guid>
-      <link>https://www.lesswrong.com/posts/btAn3hydqfgYFyHGW/claude-opus-4-6-is-driven</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c4797ed9f992_claude_opus_46_is_driven.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-05</title>
-      <description>Audio version of Daily News Briefing - 2026-02-05 from Daily News Briefing</description>
-      <pubDate>Thu, 05 Feb 2026 22:51:01 +0000</pubDate>
-      <guid>news-briefing-2026-02-05</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c3a50701c850_daily_news_briefing_-_2026-02-05.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Agent Economics: a BOTEC on feasibility</title>
-      <description>Audio version of Agent Economics: a BOTEC on feasibility from LessWrong Frontpage</description>
-      <pubDate>Thu, 05 Feb 2026 20:43:17 +0000</pubDate>
-      <guid>NqNmNqtQCaqtpAeyX</guid>
-      <link>https://www.lesswrong.com/posts/NqNmNqtQCaqtpAeyX/agent-economics-a-botec-on-feasibility</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d744be5f1cc3_agent_economics_a_botec_on_feasibility.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“AI #154: Claw Your Way To The Top” by Zvi</title>
       <description>Audio version of “AI #154: Claw Your Way To The Top” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Thu, 05 Feb 2026 16:12:13 +0000</pubDate>
       <guid>e585a6f8-ed0c-4e20-93fa-40a629be249c</guid>
       <link>https://www.lesswrong.com/posts/AMLLKDzjohCNbrA6t/ai-154-claw-your-way-to-the-top</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a48dbe07cd6b_ai_154_claw_your_way_to_the_top_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Links For February 2026</title>
-      <description>Audio version of Links For February 2026 from Scott Alexander</description>
-      <pubDate>Thu, 05 Feb 2026 12:55:10 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/links-for-february-2026</guid>
-      <link>https://www.astralcodexten.com/p/links-for-february-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/37318b753d2d_links_for_february_2026.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Hidden Open Thread 419.5</title>
-      <description>Audio version of Hidden Open Thread 419.5 from Scott Alexander</description>
-      <pubDate>Thu, 05 Feb 2026 09:13:53 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/hidden-open-thread-4195</guid>
-      <link>https://www.astralcodexten.com/p/hidden-open-thread-4195</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a0bf2179f3cb_hidden_open_thread_4195.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Kimi K2.5” by Zvi</title>
-      <description>Audio version of “Kimi K2.5” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 04 Feb 2026 15:31:47 +0000</pubDate>
-      <guid>e0ab7ce4-a64f-4aee-a987-80477de2bc63</guid>
-      <link>https://www.lesswrong.com/posts/omSudRiFDvtNRrxZS/kimi-k2-5</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/93b5b7825646_kimi_k25_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
