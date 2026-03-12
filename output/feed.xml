@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-12</title>
+      <description>Daily News Briefing - 2026-03-12
+
+Topics covered:
+- The geopolitical crisis in the Middle East has entered a dangerous new phase of economic and cyber warfare
+- In the realm of AI policy and safety, Anthropic is doubling down on its independence following its recent blacklisting by the Pentagon
+- In legal developments, Grammarly has abruptly disabled its "Expert Review" feature following intense backlash and a class-action lawsuit filed by journalist Julia Angwin
+- OpenAI is pivoting toward deeper system integration with the announcement that its Sora video generator will soon be built directly into ChatGPT
+- Finally, the hardware and venture markets are showing extreme concentration around "vibe-coding" and autonomous systems
+- As we look toward tomorrow, markets will be reacting to the G7 oil release as the first tankers attempt to navigate the heightened tensions in the Persian Gulf</description>
+      <pubDate>Thu, 12 Mar 2026 06:42:13 +0000</pubDate>
+      <guid>news-briefing-2026-03-12</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e4ce331169ba_daily_news_briefing_-_2026-03-12.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-12.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Today's Ring Signatures and Related Tools</title>
+      <description>Audio version of Today's Ring Signatures and Related Tools from LessWrong Frontpage</description>
+      <pubDate>Thu, 12 Mar 2026 05:20:43 +0000</pubDate>
+      <guid>4Kf6iPeApg8DtqD2m</guid>
+      <link>https://www.lesswrong.com/posts/4Kf6iPeApg8DtqD2m/today-s-ring-signatures-and-related-tools</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8a2e61c4a659_todays_ring_signatures_and_related_tools.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Lines Composed In A Fake Sequoia Forest</title>
+      <description>Audio version of Lines Composed In A Fake Sequoia Forest from Scott Alexander</description>
+      <pubDate>Wed, 11 Mar 2026 20:46:55 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/lines-composed-in-a-fake-sequoia</guid>
+      <link>https://www.astralcodexten.com/p/lines-composed-in-a-fake-sequoia</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8290e40b3bac_lines_composed_in_a_fake_sequoia_forest.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“GPT-5.4 Is A Substantial Upgrade” by Zvi</title>
+      <description>Audio version of “GPT-5.4 Is A Substantial Upgrade” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 11 Mar 2026 14:04:07 +0000</pubDate>
+      <guid>8c8186a8-ff8c-4624-abbd-714eed4ac591</guid>
+      <link>https://www.lesswrong.com/posts/sKCYLEN5EYLuokDft/gpt-5-4-is-a-substantial-upgrade</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d1ad89448759_gpt-54_is_a_substantial_upgrade_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-11</title>
       <description>Daily News Briefing - 2026-03-11
 
@@ -1206,27 +1258,6 @@ Topics covered:
       <guid>9a063394-ea81-4dc0-af61-b603b3a548b6</guid>
       <link>https://www.lesswrong.com/posts/iwX2aJPKtyKAbLdip/claude-code-4-from-the-before-times</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3eee95e9d78b_claude_code_4_from_the_before_times_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-09</title>
-      <description>Audio version of Daily News Briefing - 2026-02-09 from Daily News Briefing</description>
-      <pubDate>Mon, 09 Feb 2026 06:55:56 +0000</pubDate>
-      <guid>news-briefing-2026-02-09</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/86d77d246b39_daily_news_briefing_-_2026-02-09.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Three visions for diffuse control</title>
-      <description>Audio version of Three visions for diffuse control from LessWrong Frontpage</description>
-      <pubDate>Mon, 09 Feb 2026 06:41:09 +0000</pubDate>
-      <guid>LQAcP3sACtxSFqTsK</guid>
-      <link>https://www.lesswrong.com/posts/LQAcP3sACtxSFqTsK/three-visions-for-diffuse-control</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/eee92e4dd8ea_three_visions_for_diffuse_control.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
