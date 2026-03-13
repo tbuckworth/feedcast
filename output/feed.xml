@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-13</title>
+      <description>Daily News Briefing - 2026-03-13
+
+Topics covered:
+- The geopolitical crisis in the Middle East has entered a period of entrenched hostility following the formal succession of Iran's leadership
+- In the escalating conflict between the federal government and the AI industry, the legal battle over Anthropic’s "supply chain risk" designation is intensifying
+- In the realm of multimodal capabilities, Anthropic has updated its Claude models to natively generate charts, diagrams, and flowcharts directly within the chat interface
+- The business of AI-driven labor is seeing a wave of aggressive valuations and corporate restructuring
+- Finally, in hardware, the electric vehicle market is seeing a massive retreat from the American manufacturing sector
+- As we look toward Monday, the tech world will be focused on Nvidia’s flagship conference where CEO Jensen Huang is expected to debut the next generation of silicon designed specifically to power the "agentic" workflows currently being deployed by Google and Perplexity</description>
+      <pubDate>Fri, 13 Mar 2026 06:41:41 +0000</pubDate>
+      <guid>news-briefing-2026-03-13</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/46fa27a5614c_daily_news_briefing_-_2026-03-13.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-13.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Spring Meetups Everywhere 2026 - Call For Organizers</title>
+      <description>Audio version of Spring Meetups Everywhere 2026 - Call For Organizers from Scott Alexander</description>
+      <pubDate>Fri, 13 Mar 2026 04:39:25 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/spring-meetups-everywhere-2026-call</guid>
+      <link>https://www.astralcodexten.com/p/spring-meetups-everywhere-2026-call</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d0160544eda1_spring_meetups_everywhere_2026_-_call_for_organize.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Power Steering: Behavior Steering via Layer-to-Layer Jacobian Singular Vectors</title>
+      <description>Audio version of Power Steering: Behavior Steering via Layer-to-Layer Jacobian Singular Vectors from LessWrong Frontpage</description>
+      <pubDate>Fri, 13 Mar 2026 04:05:29 +0000</pubDate>
+      <guid>EAE9u4YnE75eoiWDg</guid>
+      <link>https://www.lesswrong.com/posts/EAE9u4YnE75eoiWDg/power-steering-behavior-steering-via-layer-to-layer-jacobian</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2789c041c114_power_steering_behavior_steering_via_layer-to-lay.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #159: See You In Court” by Zvi</title>
+      <description>Audio version of “AI #159: See You In Court” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 12 Mar 2026 14:42:24 +0000</pubDate>
+      <guid>921f57f4-e5c8-473c-a087-367949be452b</guid>
+      <link>https://www.lesswrong.com/posts/DnrjKZTZwHGjdDB4u/ai-159-see-you-in-court</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7a13ee91c9f1_ai_159_see_you_in_court_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-12</title>
       <description>Daily News Briefing - 2026-03-12
 
@@ -1204,60 +1256,6 @@ Topics covered:
       <guid>28830523-4434-4450-a262-64de0fa8a86a</guid>
       <link>https://www.lesswrong.com/posts/togCQtFtfdF23xGNS/claude-opus-4-6-system-card-part-2-frontier-alignment</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/361b6a1f0c1f_claude_opus_46_system_card_part_2_frontier_ali.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-10</title>
-      <description>Audio version of Daily News Briefing - 2026-02-10 from Daily News Briefing</description>
-      <pubDate>Tue, 10 Feb 2026 06:55:44 +0000</pubDate>
-      <guid>news-briefing-2026-02-10</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cfd1089b0958_daily_news_briefing_-_2026-02-10.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Monday AI Radar #12</title>
-      <description>Audio version of Monday AI Radar #12 from LessWrong Frontpage</description>
-      <pubDate>Tue, 10 Feb 2026 04:49:47 +0000</pubDate>
-      <guid>Myi3KDeNamrJoe2Ey</guid>
-      <link>https://www.lesswrong.com/posts/Myi3KDeNamrJoe2Ey/monday-ai-radar-12</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0df161623764_monday_ai_radar_12.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Opus 4.6: System Card Part 1: Mundane Alignment and Model Welfare” by Zvi</title>
-      <description>Audio version of “Claude Opus 4.6: System Card Part 1: Mundane Alignment and Model Welfare” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 09 Feb 2026 21:36:59 +0000</pubDate>
-      <guid>756ff51f-9151-4987-bda1-7167a52ab698</guid>
-      <link>https://www.lesswrong.com/posts/sWsSncqMLKyGZA9Ar/claude-opus-4-6-system-card-part-1-mundane-alignment-and</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/87a375f1180f_claude_opus_46_system_card_part_1_mundane_alig.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Open Thread 420</title>
-      <description>Audio version of Open Thread 420 from Scott Alexander</description>
-      <pubDate>Mon, 09 Feb 2026 13:00:37 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/open-thread-420</guid>
-      <link>https://www.astralcodexten.com/p/open-thread-420</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a4cb3fa6d863_open_thread_420.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Code #4: From The Before Times” by Zvi</title>
-      <description>Audio version of “Claude Code #4: From The Before Times” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 09 Feb 2026 09:39:31 +0000</pubDate>
-      <guid>9a063394-ea81-4dc0-af61-b603b3a548b6</guid>
-      <link>https://www.lesswrong.com/posts/iwX2aJPKtyKAbLdip/claude-code-4-from-the-before-times</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3eee95e9d78b_claude_code_4_from_the_before_times_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
