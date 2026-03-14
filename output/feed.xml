@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-14</title>
+      <description>Daily News Briefing - 2026-03-14
+
+Topics covered:
+- The regional conflict in the Middle East has entered a period of sustained naval and aerial attrition
+- The high-stakes consolidation of the artificial intelligence and cloud sectors reached a milestone as Google finalized its thirty-two billion dollar acquisition of the cybersecurity firm Wiz
+- In architectural developments, Elon Musk’s xAI is reportedly "starting over" on its autonomous coding tools
+- Microsoft is making a major push to integrate AI into the gaming ecosystem
+- On the regulatory front, Adobe has agreed to pay a seventy-five million dollar penalty to settle a Department of Justice lawsuit regarding hidden cancellation fees and difficult-to-navigate subscription models
+- As we look toward next week, attention turns to the United Nations as Cuba confirmed it has entered negotiations with the United States to address the crippling effects of the ongoing regional oil blockade</description>
+      <pubDate>Sat, 14 Mar 2026 06:35:43 +0000</pubDate>
+      <guid>news-briefing-2026-03-14</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d8f87560778b_daily_news_briefing_-_2026-03-14.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-14.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>All technical alignment plans are steps in the dark</title>
+      <description>Audio version of All technical alignment plans are steps in the dark from LessWrong Frontpage</description>
+      <pubDate>Sat, 14 Mar 2026 04:50:14 +0000</pubDate>
+      <guid>QygXWZbncbveZhWqH</guid>
+      <link>https://www.lesswrong.com/posts/QygXWZbncbveZhWqH/all-technical-alignment-plans-are-steps-in-the-dark</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0f314b3c7de3_all_technical_alignment_plans_are_steps_in_the_dar.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-13</title>
       <description>Daily News Briefing - 2026-03-13
 
@@ -1224,27 +1254,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/political-backflow-from-europe</guid>
       <link>https://www.astralcodexten.com/p/political-backflow-from-europe</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/51c504a08190_political_backflow_from_europe.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-11</title>
-      <description>Audio version of Daily News Briefing - 2026-02-11 from Daily News Briefing</description>
-      <pubDate>Wed, 11 Feb 2026 06:52:43 +0000</pubDate>
-      <guid>news-briefing-2026-02-11</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f088a08d5d37_daily_news_briefing_-_2026-02-11.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Designing Prediction Markets</title>
-      <description>Audio version of Designing Prediction Markets from LessWrong Frontpage</description>
-      <pubDate>Wed, 11 Feb 2026 05:38:23 +0000</pubDate>
-      <guid>ZrLZxkGGC4ms98iiD</guid>
-      <link>https://www.lesswrong.com/posts/ZrLZxkGGC4ms98iiD/designing-prediction-markets</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3dc9a0e246b1_designing_prediction_markets.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
