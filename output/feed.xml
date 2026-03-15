@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-15</title>
+      <description>Daily News Briefing - 2026-03-15
+
+Topics covered:
+- The conflict in the Middle East has reached a critical inflection point as the United States moves to internationalize the defense of global trade
+- In the defense sector, the United States Army has signaled a massive shift toward autonomous systems by awarding Anduril a contract worth up to twenty billion dollars
+- The artificial intelligence sector is experiencing significant internal volatility
+- In consumer hardware, iFixit has labeled Apple’s new five-hundred-and-ninety-nine-dollar MacBook Neo the company's "most repairable" laptop in fourteen years
+- On the digital front, OpenAI has finalized several major integrations for ChatGPT, allowing the assistant to directly execute tasks within DoorDash, Spotify, Uber, and Canva
+- As we look toward tomorrow, the focus shifts to the ninety-eighth Academy Awards, where the film industry will attempt to navigate a ceremony overshadowed by the most significant regional war and technological disruption of the decade</description>
+      <pubDate>Sun, 15 Mar 2026 06:45:03 +0000</pubDate>
+      <guid>news-briefing-2026-03-15</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d17d193f897b_daily_news_briefing_-_2026-03-15.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-15.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>When do intuitions need to be reliable?</title>
+      <description>Audio version of When do intuitions need to be reliable? from LessWrong Frontpage</description>
+      <pubDate>Sun, 15 Mar 2026 04:18:41 +0000</pubDate>
+      <guid>j8EM23RCEcYR7wLhv</guid>
+      <link>https://www.lesswrong.com/posts/j8EM23RCEcYR7wLhv/when-do-intuitions-need-to-be-reliable</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c482fa0cddc1_when_do_intuitions_need_to_be_reliable.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-14</title>
       <description>Daily News Briefing - 2026-03-14
 
@@ -1194,38 +1224,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-02-12</title>
-      <description>Audio version of Daily News Briefing - 2026-02-12 from Daily News Briefing</description>
-      <pubDate>Thu, 12 Feb 2026 06:52:40 +0000</pubDate>
-      <guid>news-briefing-2026-02-12</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7f8a94ffc509_daily_news_briefing_-_2026-02-12.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Three Worlds Collide assumes calibration is solved</title>
-      <description>Audio version of Three Worlds Collide assumes calibration is solved from LessWrong Frontpage</description>
-      <pubDate>Thu, 12 Feb 2026 04:40:03 +0000</pubDate>
-      <guid>NwdqWwTSCCti8dgCj</guid>
-      <link>https://www.lesswrong.com/posts/NwdqWwTSCCti8dgCj/three-worlds-collide-assumes-calibration-is-solved</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ed2e3d4f79c0_three_worlds_collide_assumes_calibration_is_solved.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Hidden Open Thread 420.5</title>
-      <description>Audio version of Hidden Open Thread 420.5 from Scott Alexander</description>
-      <pubDate>Thu, 12 Feb 2026 04:06:36 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/hidden-open-thread-4205</guid>
-      <link>https://www.astralcodexten.com/p/hidden-open-thread-4205</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/49b8df716b24_hidden_open_thread_4205.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Claude Opus 4.6 Escalates Things Quickly” by Zvi</title>
       <description>Audio version of “Claude Opus 4.6 Escalates Things Quickly” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Wed, 11 Feb 2026 21:22:00 +0000</pubDate>
@@ -1248,28 +1246,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Political Backflow From Europe</title>
-      <description>Audio version of Political Backflow From Europe from Scott Alexander</description>
-      <pubDate>Wed, 11 Feb 2026 11:23:56 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/political-backflow-from-europe</guid>
-      <link>https://www.astralcodexten.com/p/political-backflow-from-europe</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/51c504a08190_political_backflow_from_europe.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Opus 4.6: System Card Part 2: Frontier Alignment” by Zvi</title>
-      <description>Audio version of “Claude Opus 4.6: System Card Part 2: Frontier Alignment” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 10 Feb 2026 16:12:09 +0000</pubDate>
-      <guid>28830523-4434-4450-a262-64de0fa8a86a</guid>
-      <link>https://www.lesswrong.com/posts/togCQtFtfdF23xGNS/claude-opus-4-6-system-card-part-2-frontier-alignment</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/361b6a1f0c1f_claude_opus_46_system_card_part_2_frontier_ali.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Clarifying how our AI timelines forecasts have changed since AI 2027</title>
       <description>Audio version of Clarifying how our AI timelines forecasts have changed since AI 2027 from AI Futures Project</description>
       <pubDate>Tue, 27 Jan 2026 22:50:15 +0000</pubDate>
@@ -1287,17 +1263,6 @@ Topics covered:
       <guid>p4iJpumHt6Ay9KnXT</guid>
       <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts</title>
-      <description>Audio version of Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts from Ryan Greenblatt</description>
-      <pubDate>Thu, 01 Jan 2026 13:36:25 +0000</pubDate>
-      <guid>aYtrLhoZtCKZnfBvA</guid>
-      <link>https://www.lesswrong.com/posts/aYtrLhoZtCKZnfBvA/recent-llms-can-do-2-hop-and-3-hop-latent-no-cot-reasoning</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
