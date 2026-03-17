@@ -21,6 +21,69 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-17</title>
+      <description>Daily News Briefing - 2026-03-17
+
+Topics covered:
+- The primary focus of the technology sector is currently fixed on Nvidia’s GTC conference, where CEO Jensen Huang announced a suite of products that signal a transition from generative text to generative physics and enterprise-scale agents
+- As AI labs push toward more personalized and "human" interactions, they are facing a severe legal and ethical backlash
+- The intellectual property battle defining the training era of AI has expanded to include the foundational records of human knowledge
+- In the Middle East, the conflict has escalated to a direct assault on the world’s energy infrastructure
+- On the domestic front, the White House is increasing pressure on the media regarding the portrayal of the war
+- In consumer hardware, Apple has refreshed its premium audio line with the quiet launch of the AirPods Max 2</description>
+      <pubDate>Tue, 17 Mar 2026 06:53:38 +0000</pubDate>
+      <guid>news-briefing-2026-03-17</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/da0dadb53a4c_daily_news_briefing_-_2026-03-17.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-17.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Monday AI Radar #17</title>
+      <description>Audio version of Monday AI Radar #17 from LessWrong Frontpage</description>
+      <pubDate>Tue, 17 Mar 2026 04:42:45 +0000</pubDate>
+      <guid>ifLDLFWXvTyvWHAhv</guid>
+      <link>https://www.lesswrong.com/posts/ifLDLFWXvTyvWHAhv/monday-ai-radar-17</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5e0bda15a6f1_monday_ai_radar_17.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Types of Handoff to AIs</title>
+      <description>Audio version of Types of Handoff to AIs from Daniel Kokotajlo</description>
+      <pubDate>Mon, 16 Mar 2026 22:24:25 +0000</pubDate>
+      <guid>YuMr6kbstuieQHkGj</guid>
+      <link>https://www.lesswrong.com/posts/YuMr6kbstuieQHkGj/types-of-handoff-to-ais</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/186d63bf34b6_types_of_handoff_to_ais.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Shameless Guesses, Not Hallucinations</title>
+      <description>Audio version of Shameless Guesses, Not Hallucinations from Scott Alexander</description>
+      <pubDate>Mon, 16 Mar 2026 20:25:24 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/shameless-guesses-not-hallucinations</guid>
+      <link>https://www.astralcodexten.com/p/shameless-guesses-not-hallucinations</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9d6e9b975f76_shameless_guesses_not_hallucinations.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Monthly Roundup #40: March 2026” by Zvi</title>
+      <description>Audio version of “Monthly Roundup #40: March 2026” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 16 Mar 2026 12:22:10 +0000</pubDate>
+      <guid>e69224c4-8e1e-4885-bfc2-0e9fb288a59d</guid>
+      <link>https://www.lesswrong.com/posts/Y8c4kh6fjkWu7Auxp/monthly-roundup-40-march-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f6cc1158cb4_monthly_roundup_40_march_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-16</title>
       <description>Daily News Briefing - 2026-03-16
 
@@ -1167,28 +1230,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>“ChatGPT-5.3-Codex Is Also Good At Coding” by Zvi</title>
-      <description>Audio version of “ChatGPT-5.3-Codex Is Also Good At Coding” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 13 Feb 2026 16:22:12 +0000</pubDate>
-      <guid>26bcaa61-535f-4d6b-af57-5b083c101342</guid>
-      <link>https://www.lesswrong.com/posts/CCDRjL7NZtNGtGheY/chatgpt-5-3-codex-is-also-good-at-coding</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/098abd12b085_chatgpt-53-codex_is_also_good_at_coding_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AMA (Ask Machines Anything)</title>
-      <description>Audio version of AMA (Ask Machines Anything) from Scott Alexander</description>
-      <pubDate>Fri, 13 Feb 2026 13:22:31 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/ama-ask-machines-anything</guid>
-      <link>https://www.astralcodexten.com/p/ama-ask-machines-anything</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2beb672d19c1_ama_ask_machines_anything.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Grading AI 2027’s 2025 Predictions</title>
       <description>Audio version of Grading AI 2027’s 2025 Predictions from AI Futures Project</description>
       <pubDate>Thu, 12 Feb 2026 23:56:07 +0000</pubDate>
@@ -1206,17 +1247,6 @@ Topics covered:
       <guid>vjAM7F8vMZS7oRrrh</guid>
       <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Opus 4.6 Escalates Things Quickly” by Zvi</title>
-      <description>Audio version of “Claude Opus 4.6 Escalates Things Quickly” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 11 Feb 2026 21:22:00 +0000</pubDate>
-      <guid>b48a7ab5-6920-4c12-b41e-8c8516a7996f</guid>
-      <link>https://www.lesswrong.com/posts/5JNjHNn3DyxaGbv8B/claude-opus-4-6-escalates-things-quickly</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1332f5be4ce3_claude_opus_46_escalates_things_quickly_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
