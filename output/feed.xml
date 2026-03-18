@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-18</title>
+      <description>Daily News Briefing - 2026-03-18
+
+Topics covered:
+- The conflict in the Middle East has reached a moment of internal collapse within the Iranian leadership and significant domestic fallout in the United States
+- The war has also triggered the first major kinetic cyberattack on American soil
+- In the artificial intelligence sector, the race for efficiency is moving to the "edge." OpenAI has unveiled GPT-five-point-four mini and nano, compact versions of its flagship model optimized for high-volume API workloads and sub-agent automation
+- While the capabilities of these models expand, the hardware designed to run them is facing a "quality crisis" among power users
+- The legal landscape for digital disruption is also tightening
+- On the hardware front, Samsung has abruptly ended sales of its high-concept Galaxy Z Tri-Fold just three months after its debut</description>
+      <pubDate>Wed, 18 Mar 2026 06:52:32 +0000</pubDate>
+      <guid>news-briefing-2026-03-18</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7484aa6c183a_daily_news_briefing_-_2026-03-18.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-18.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The tech bro ethos, and the end of my job</title>
+      <description>Audio version of The tech bro ethos, and the end of my job from LessWrong Frontpage</description>
+      <pubDate>Wed, 18 Mar 2026 05:59:48 +0000</pubDate>
+      <guid>2T8r9EGLnkqgQ9Gni</guid>
+      <link>https://www.lesswrong.com/posts/2T8r9EGLnkqgQ9Gni/the-tech-bro-ethos-and-the-end-of-my-job</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2f86d8b55be0_the_tech_bro_ethos_and_the_end_of_my_job.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Support Your Local Collaborator</title>
+      <description>Audio version of Support Your Local Collaborator from Scott Alexander</description>
+      <pubDate>Wed, 18 Mar 2026 02:47:37 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/support-your-local-collaborator</guid>
+      <link>https://www.astralcodexten.com/p/support-your-local-collaborator</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c80f0ecd59e3_support_your_local_collaborator.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Medical Roundup #7” by Zvi</title>
+      <description>Audio version of “Medical Roundup #7” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 17 Mar 2026 13:24:51 +0000</pubDate>
+      <guid>fc213ade-30fa-425b-8aaf-919801a8e0c9</guid>
+      <link>https://www.lesswrong.com/posts/ypnYfPmn6FqAyxCpJ/medical-roundup-7</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f405c30d637b_medical_roundup_7_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-17</title>
       <description>Daily News Briefing - 2026-03-17
 
@@ -1225,6 +1277,17 @@ Topics covered:
       <guid>666c9fbf-5ea3-4296-9312-f6885b149431</guid>
       <link>https://www.lesswrong.com/posts/jWCy6owAmqLv5BB8q/on-dwarkesh-patel-s-2026-podcast-with-dario-amodei</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/736691728638_on_dwarkesh_patels_2026_podcast_with_dario_amode.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Grading AI 2027's 2025 Predictions</title>
+      <description>Audio version of Grading AI 2027's 2025 Predictions from Daniel Kokotajlo</description>
+      <pubDate>Fri, 13 Feb 2026 00:18:41 +0000</pubDate>
+      <guid>JYGeAAh92hAwvseFk</guid>
+      <link>https://www.lesswrong.com/posts/JYGeAAh92hAwvseFk/grading-ai-2027-s-2025-predictions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8aad9aed9429_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
