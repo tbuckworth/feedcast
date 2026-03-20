@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-20</title>
+      <description>Daily News Briefing - 2026-03-20
+
+Topics covered:
+- The geopolitical landscape remains volatile as President Trump publicly urged Israel to cease further strikes on Iranian energy infrastructure following the successful hit on a major gas field
+- In the artificial intelligence sector, OpenAI is preparing a significant structural shift
+- The transition to agentic AI is already proving technically hazardous
+- In the broader technology and health sectors, the impact of federal policy shifts is becoming visible
+- On the hardware and industrial front, Jeff Bezos is reportedly seeking one hundred billion dollars to acquire and "AI-ify" legacy manufacturing firms, signaling a massive bet on bringing frontier intelligence to heavy industry
+- Looking toward tomorrow, all eyes are on NASA as the Artemis moon rocket returns to the launch pad for a final checkout ahead of its historic crewed mission scheduled for April</description>
+      <pubDate>Fri, 20 Mar 2026 06:42:54 +0000</pubDate>
+      <guid>news-briefing-2026-03-20</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9e8bf6459961_daily_news_briefing_-_2026-03-20.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-20.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>No, You Don't Need Self-Locating Evidence.</title>
+      <description>Audio version of No, You Don't Need Self-Locating Evidence. from LessWrong Frontpage</description>
+      <pubDate>Fri, 20 Mar 2026 05:38:37 +0000</pubDate>
+      <guid>H8YKiQtRjhumfKgqZ</guid>
+      <link>https://www.lesswrong.com/posts/H8YKiQtRjhumfKgqZ/no-you-don-t-need-self-locating-evidence</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a116cfb3b5f1_no_you_dont_need_self-locating_evidence.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #160: What Passes For a Pause” by Zvi</title>
+      <description>Audio version of “AI #160: What Passes For a Pause” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 19 Mar 2026 14:41:20 +0000</pubDate>
+      <guid>50a7b8bd-4b68-4023-82e1-7a293956db89</guid>
+      <link>https://www.lesswrong.com/posts/LXRqeAW6G9tang8vF/ai-160-what-passes-for-a-pause</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1f32c2822d72_ai_160_what_passes_for_a_pause_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-19</title>
       <description>Daily News Briefing - 2026-03-19
 
@@ -1318,17 +1359,6 @@ Topics covered:
       <guid>554be5f3-2d19-4bc4-8c8e-9d98a4c2d56f</guid>
       <link>https://www.lesswrong.com/posts/5yidbWsdWjNzWzLWZ/on-dwarkesh-patel-s-2026-podcast-with-elon-musk-and-other</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/b88a0d9bf56d_on_dwarkesh_patels_2026_podcast_with_elon_musk_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“On Dwarkesh Patel’s 2026 Podcast With Dario Amodei” by Zvi</title>
-      <description>Audio version of “On Dwarkesh Patel’s 2026 Podcast With Dario Amodei” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 16 Feb 2026 14:33:41 +0000</pubDate>
-      <guid>666c9fbf-5ea3-4296-9312-f6885b149431</guid>
-      <link>https://www.lesswrong.com/posts/jWCy6owAmqLv5BB8q/on-dwarkesh-patel-s-2026-podcast-with-dario-amodei</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/736691728638_on_dwarkesh_patels_2026_podcast_with_dario_amode.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
