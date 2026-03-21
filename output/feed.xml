@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-21</title>
+      <description>Daily News Briefing - 2026-03-21
+
+Topics covered:
+- The Trump administration has unveiled a new seven-point legislative blueprint for artificial intelligence that seeks to centralize control in Washington
+- In a significant shift to stabilize the global economy, Treasury Secretary Scott Bessent has officially lifted sanctions on a portion of Iranian oil
+- In the AI sector, Amazon is reportedly returning to the smartphone market over a decade after the failure of its Fire Phone
+- The boundary between search and original content is also dissolving as Google begins using AI to replace news headlines in search results
+- Finally, the scale of AI infrastructure is moving into orbit
+- Looking toward tomorrow, focus shifts to Nevada, where a court-ordered temporary ban on the prediction market Kalshi is set to take effect, potentially reshaping the legal landscape for high-stakes political wagering</description>
+      <pubDate>Sat, 21 Mar 2026 06:32:17 +0000</pubDate>
+      <guid>news-briefing-2026-03-21</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d5d02c695f18_daily_news_briefing_-_2026-03-21.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-21.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Untrusted monitoring: extra bits</title>
+      <description>Audio version of Untrusted monitoring: extra bits from LessWrong Frontpage</description>
+      <pubDate>Sat, 21 Mar 2026 02:32:44 +0000</pubDate>
+      <guid>WFkPrPy2r27rknLtw</guid>
+      <link>https://www.lesswrong.com/posts/WFkPrPy2r27rknLtw/untrusted-monitoring-extra-bits</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5cab866c3faf_untrusted_monitoring_extra_bits.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“The Federal AI Policy Framework: An Improvement, But My Offer Is (Still Almost) Nothing” by Zvi</title>
+      <description>Audio version of “The Federal AI Policy Framework: An Improvement, But My Offer Is (Still Almost) Nothing” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 20 Mar 2026 16:52:23 +0000</pubDate>
+      <guid>98b32db1-f069-457e-99da-b8bf41424c94</guid>
+      <link>https://www.lesswrong.com/posts/tcoNLbvrpv9KcxzvM/the-federal-ai-policy-framework-an-improvement-but-my-offer</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/663e89bf4df1_the_federal_ai_policy_framework_an_improvement.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-20</title>
       <description>Daily News Briefing - 2026-03-20
 
@@ -1348,17 +1389,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</guid>
       <link>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0b922652175e_record_low_crime_rates_are_real_not_just_reportin.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“On Dwarkesh Patel’s 2026 Podcast With Elon Musk and Other Recent Elon Musk Things” by Zvi</title>
-      <description>Audio version of “On Dwarkesh Patel’s 2026 Podcast With Elon Musk and Other Recent Elon Musk Things” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 17 Feb 2026 15:30:56 +0000</pubDate>
-      <guid>554be5f3-2d19-4bc4-8c8e-9d98a4c2d56f</guid>
-      <link>https://www.lesswrong.com/posts/5yidbWsdWjNzWzLWZ/on-dwarkesh-patel-s-2026-podcast-with-elon-musk-and-other</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b88a0d9bf56d_on_dwarkesh_patels_2026_podcast_with_elon_musk_a.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
