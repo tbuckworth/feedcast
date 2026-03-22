@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-22</title>
+      <description>Daily News Briefing - 2026-03-22
+
+Topics covered:
+- The conflict in the Middle East has entered a dangerous operational phase as Iran and Israel trade strikes near sensitive nuclear infrastructure
+- In Washington, the Trump administration’s Department of Government Efficiency, or DOGE, is initiating a radical overhaul of the nation’s nuclear energy sector
+- The transition to agentic AI has moved from lab testing to real-world deployment on mobile hardware
+- On the domestic security front, a partial government shutdown has prompted President Trump to threaten the deployment of Immigration and Customs Enforcement agents into major American airports
+- Finally, we pause to note the passing of two figures who shaped the modern American landscape
+- Looking toward tomorrow, the focus shifts to the Pacific as Hawaii prepares for its worst flooding in twenty years, with thousands already evacuated as a major storm system moves across Oahu and Maui</description>
+      <pubDate>Sun, 22 Mar 2026 06:39:36 +0000</pubDate>
+      <guid>news-briefing-2026-03-22</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9ffc363ee2ae_daily_news_briefing_-_2026-03-22.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-22.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The Toy Story Saga is not yet finished</title>
+      <description>Audio version of The Toy Story Saga is not yet finished from LessWrong Frontpage</description>
+      <pubDate>Sun, 22 Mar 2026 03:53:49 +0000</pubDate>
+      <guid>ra289RT2LJ9GfdpDQ</guid>
+      <link>https://www.lesswrong.com/posts/ra289RT2LJ9GfdpDQ/the-toy-story-saga-is-not-yet-finished</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/eefb1362e9e6_the_toy_story_saga_is_not_yet_finished.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-21</title>
       <description>Daily News Briefing - 2026-03-21
 
@@ -1378,17 +1408,6 @@ Topics covered:
       <guid>466e50d2-0f75-40c6-bca6-f910693cf160</guid>
       <link>https://www.lesswrong.com/posts/3QPoEGfzHaywGDWKr/monthly-roundup-39-february-2026</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/8fd2a11d98c7_monthly_roundup_39_february_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Record Low Crime Rates Are Real, Not Just Reporting Bias Or Improved Medical Care</title>
-      <description>Audio version of Record Low Crime Rates Are Real, Not Just Reporting Bias Or Improved Medical Care from Scott Alexander</description>
-      <pubDate>Wed, 18 Feb 2026 13:25:41 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</guid>
-      <link>https://www.astralcodexten.com/p/record-low-crime-rates-are-real-not</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0b922652175e_record_low_crime_rates_are_real_not_just_reportin.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
