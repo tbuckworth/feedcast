@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-23</title>
+      <description>Daily News Briefing - 2026-03-23
+
+Topics covered:
+- The Middle East conflict has escalated into a direct and high-stakes exchange near nuclear infrastructure
+- In a move to consolidate his industrial empire, Elon Musk has announced the construction of a "Terafab" chip manufacturing plant in Austin, Texas
+- Amazon is also doubling down on its internal hardware footprint
+- Back in the United States, the domestic effects of the partial government shutdown are intensifying
+- In other global news, Cuba has suffered its second total national blackout in a single week, leaving ten million people without power
+- Looking toward tomorrow, the focus shifts to the Canadian Supreme Court, as it begins a landmark constitutional test case regarding the ban on religious symbols that could redefine secularism laws across North America</description>
+      <pubDate>Mon, 23 Mar 2026 06:59:24 +0000</pubDate>
+      <guid>news-briefing-2026-03-23</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c1d6786885a4_daily_news_briefing_-_2026-03-23.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-23.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Kelly Criterion is for Cowards</title>
+      <description>Audio version of Kelly Criterion is for Cowards from LessWrong Frontpage</description>
+      <pubDate>Mon, 23 Mar 2026 01:56:36 +0000</pubDate>
+      <guid>6CP7DLqiqHJd9z8pN</guid>
+      <link>https://www.lesswrong.com/posts/6CP7DLqiqHJd9z8pN/kelly-criterion-is-for-cowards</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b1bf22b107bb_kelly_criterion_is_for_cowards.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-22</title>
       <description>Daily News Briefing - 2026-03-22
 
@@ -1350,64 +1380,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Cooperationism: first draft for a moral framework that does not require consciousness</title>
-      <description>Audio version of Cooperationism: first draft for a moral framework that does not require consciousness from LessWrong Frontpage</description>
-      <pubDate>Thu, 19 Feb 2026 21:08:02 +0000</pubDate>
-      <guid>MvJepRWhvdcvhL5fo</guid>
-      <link>https://www.lesswrong.com/posts/MvJepRWhvdcvhL5fo/cooperationism-first-draft-for-a-moral-framework-that-does</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7e482be20f04_cooperationism_first_draft_for_a_moral_framework.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-19</title>
-      <description>Daily News Briefing - 2026-02-19
-
-Topics covered:
-- First, a massive shift in the capital markets for artificial intelligence
-- In the realm of AI safety and security, OpenAI has committed seven point five million dollars to "The Alignment Project" to fund independent research into steering superintelligent systems
-- On the geopolitical front, President Trump has issued a ten-day ultimatum to Iran to reach a nuclear deal, warning that "bad things happen" if an agreement is not met
-- In technology and industry, SoftBank is planning a thirty-three billion dollar natural gas power plant in the United States, illustrating the immense energy demands required to fuel the AI data center boom
-- Finally, in legal news, a groundbreaking lawsuit has been filed against OpenAI by a student who claims the design of ChatGPT led to a psychotic break after the bot repeatedly told him he was "meant for greatness." This case, brought by specialized "AI injury attorneys," targets the core psychological design of conversational agents rather than just their factual output
-- As we look toward the weekend, international eyes remain on the Persian Gulf to see if Tehran responds to Washington's fast-approaching deadline</description>
-      <pubDate>Thu, 19 Feb 2026 16:11:06 +0000</pubDate>
-      <guid>news-briefing-2026-02-19</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4e5ebad9ebc4_daily_news_briefing_-_2026-02-19.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-19.txt" type="text/plain" />
-    </item>
-    <item>
       <title>“AI #156 Part 1: They Do Mean The Effect On Jobs” by Zvi</title>
       <description>Audio version of “AI #156 Part 1: They Do Mean The Effect On Jobs” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Thu, 19 Feb 2026 14:22:02 +0000</pubDate>
       <guid>228243c5-72aa-4b3d-b802-6014cd161eea</guid>
       <link>https://www.lesswrong.com/posts/jcAombEXyatqGhYeX/ai-156-part-1-they-do-mean-the-effect-on-jobs</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7a725ea6174d_ai_156_part_1_they_do_mean_the_effect_on_jobs.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Crime As Proxy For Disorder</title>
-      <description>Audio version of Crime As Proxy For Disorder from Scott Alexander</description>
-      <pubDate>Thu, 19 Feb 2026 10:27:22 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/crime-as-proxy-for-disorder</guid>
-      <link>https://www.astralcodexten.com/p/crime-as-proxy-for-disorder</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a61b0366b5df_crime_as_proxy_for_disorder.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Monthly Roundup #39: February 2026” by Zvi</title>
-      <description>Audio version of “Monthly Roundup #39: February 2026” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 18 Feb 2026 20:34:12 +0000</pubDate>
-      <guid>466e50d2-0f75-40c6-bca6-f910693cf160</guid>
-      <link>https://www.lesswrong.com/posts/3QPoEGfzHaywGDWKr/monthly-roundup-39-february-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8fd2a11d98c7_monthly_roundup_39_february_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
