@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-24</title>
+      <description>Daily News Briefing - 2026-03-24
+
+Topics covered:
+- In a significant milestone for the industry, Nvidia Chief Executive Officer Jensen Huang stated on the Lex Fridman podcast that he believes Artificial General Intelligence, or A-G-I, has now been achieved
+- The geopolitical tension between the Pentagon and the AI sector is intensifying
+- There are signs of a potential diplomatic breakthrough in the Middle East
+- On the domestic security front, the Department of Homeland Security is undergoing a rapid transition under new leadership
+- In hardware and cybersecurity news, a major exploit kit known as "DarkSword" has been leaked publicly on GitHub
+- Finally, we note the passing of Leonid Radvinsky, the billionaire owner of OnlyFans, who has died at the age of forty-three following a battle with cancer</description>
+      <pubDate>Tue, 24 Mar 2026 06:54:04 +0000</pubDate>
+      <guid>news-briefing-2026-03-24</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2f81041bc073_daily_news_briefing_-_2026-03-24.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-24.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Information Overdose</title>
+      <description>Audio version of Information Overdose from LessWrong Frontpage</description>
+      <pubDate>Tue, 24 Mar 2026 04:45:50 +0000</pubDate>
+      <guid>am5oFrRGAe8KXMCDB</guid>
+      <link>https://www.lesswrong.com/posts/am5oFrRGAe8KXMCDB/information-overdose-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4d0bd83ceab6_information_overdose.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-23</title>
       <description>Daily News Briefing - 2026-03-23
 
@@ -1298,94 +1328,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-02-21</title>
-      <description>Daily News Briefing - 2026-02-21
-
-Topics covered:
-- The United States Supreme Court has delivered a major blow to the Trump administration’s economic agenda, striking down the president's sweeping global import taxes
-- On the geopolitical front, the ten-day ultimatum issued to Tehran has entered a more aggressive phase
-- In the technology sector, the risks of autonomous AI agents have moved from theory to corporate liability
-- In the realm of frontier capabilities, OpenAI has released "First Proof," highlighting its models' ability to solve research-grade mathematics problems that require expert-level reasoning
-- Finally, NASA has officially set a launch date of March sixth for the Artemis Two mission
-- As we look toward the start of the week, the global community is watching for any signs of a diplomatic exit ramp in the Persian Gulf as the president's deadline for Iran draws to a close</description>
-      <pubDate>Sat, 21 Feb 2026 06:31:06 +0000</pubDate>
-      <guid>news-briefing-2026-02-21</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/db4a4bff5704_daily_news_briefing_-_2026-02-21.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-21.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Alignment to Evil</title>
-      <description>Audio version of Alignment to Evil from LessWrong Frontpage</description>
-      <pubDate>Sat, 21 Feb 2026 03:29:51 +0000</pubDate>
-      <guid>SLkxaGT8ghTskNz2r</guid>
-      <link>https://www.lesswrong.com/posts/SLkxaGT8ghTskNz2r/alignment-to-evil</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/488f364ece35_alignment_to_evil.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“AI #155: Welcome to Recursive Self-Improvement” by Zvi</title>
       <description>Audio version of “AI #155: Welcome to Recursive Self-Improvement” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Fri, 20 Feb 2026 19:21:33 +0000</pubDate>
       <guid>a83b4e73-6638-4a7d-a7c3-546660c93372</guid>
       <link>https://www.lesswrong.com/posts/cytxHuLc8oHRq7sNE/ai-155-welcome-to-recursive-self-improvement</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/13f8a9fdd95a_ai_155_welcome_to_recursive_self-improvement_b.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-20</title>
-      <description>Daily News Briefing - 2026-02-20
-
-Topics covered:
-- The standoff between Washington and Tehran has reached a critical inflection point as the ten-day ultimatum issued by President Trump draws closer
-- In the technology sector, Google has announced Gemini three point one Pro, claiming record-breaking benchmark scores and a significant leap in complex problem-solving
-- Despite the rapid leap in capabilities, Google’s top AI official used the Impact Summit in Delhi to sound a note of caution, calling for urgent research into emergent AI threats
-- In cybersecurity, the "OpenClaw" incident reported yesterday has evolved into a broader warning regarding autonomous agents
-- Finally, President Trump has directed the federal government to prepare for the release of classified files regarding unidentified aerial phenomena and extraterrestrials
-- As we head into the weekend, the world remains focused on the Persian Gulf to see if the deadline on Iran’s nuclear program leads to a diplomatic breakthrough or a regional escalation</description>
-      <pubDate>Fri, 20 Feb 2026 15:48:05 +0000</pubDate>
-      <guid>news-briefing-2026-02-20</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e384ec08ade5_daily_news_briefing_-_2026-02-20.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-20.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>On Steven Byrnes' ruthless ASI, (dis)analogies with humans and alignment proposals</title>
-      <description>Audio version of On Steven Byrnes' ruthless ASI, (dis)analogies with humans and alignment proposals from LessWrong Frontpage</description>
-      <pubDate>Fri, 20 Feb 2026 15:32:25 +0000</pubDate>
-      <guid>YfvJP6h7gjtFqA27J</guid>
-      <link>https://www.lesswrong.com/posts/YfvJP6h7gjtFqA27J/on-steven-byrnes-ruthless-asi-dis-analogies-with-humans-and</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0421367ff55b_on_steven_byrnes_ruthless_asi_disanalogies_wit.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #156 Part 2: Errors in Rhetoric” by Zvi</title>
-      <description>Audio version of “AI #156 Part 2: Errors in Rhetoric” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 20 Feb 2026 14:32:53 +0000</pubDate>
-      <guid>c28c99da-5008-41f2-bb42-af46b7b7960b</guid>
-      <link>https://www.lesswrong.com/posts/obqmuRxwFyy8ziPrB/ai-156-part-2-errors-in-rhetoric</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/909cc2c00e77_ai_156_part_2_errors_in_rhetoric_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #156 Part 1: They Do Mean The Effect On Jobs” by Zvi</title>
-      <description>Audio version of “AI #156 Part 1: They Do Mean The Effect On Jobs” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 19 Feb 2026 14:22:02 +0000</pubDate>
-      <guid>228243c5-72aa-4b3d-b802-6014cd161eea</guid>
-      <link>https://www.lesswrong.com/posts/jcAombEXyatqGhYeX/ai-156-part-1-they-do-mean-the-effect-on-jobs</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7a725ea6174d_ai_156_part_1_they_do_mean_the_effect_on_jobs.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
