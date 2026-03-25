@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-25</title>
+      <description>Daily News Briefing - 2026-03-25
+
+Topics covered:
+- In a stunning reversal for the generative video sector, OpenAI has announced it is shutting down Sora, less than two years after the tool's debut sent shockwaves through the media industry
+- While OpenAI retreats from video, the race for agentic commerce is accelerating
+- In a landmark shift for the semiconductor industry, Arm has unveiled its first-ever in-house triple-A-G-I central processing unit
+- The geopolitical and legal pressure on Big Tech is reaching a new peak
+- Finally, international tensions continue to escalate as Russia launched nearly nine hundred and fifty drones at Ukraine over a twenty-four-hour period, the largest such attack of the war
+- Looking toward tomorrow, keep an eye on the American court system, where a series of challenges to Elon Musk’s Department of Government Efficiency could potentially freeze the administration's regulatory overhaul following a surge in litigation</description>
+      <pubDate>Wed, 25 Mar 2026 06:52:50 +0000</pubDate>
+      <guid>news-briefing-2026-03-25</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/65929e6538b8_daily_news_briefing_-_2026-03-25.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-25.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Book Review: Open Socrates (Part 2)</title>
+      <description>Audio version of Book Review: Open Socrates (Part 2) from LessWrong Frontpage</description>
+      <pubDate>Wed, 25 Mar 2026 02:26:09 +0000</pubDate>
+      <guid>Ky2DSh4sGYCLWXMmy</guid>
+      <link>https://www.lesswrong.com/posts/Ky2DSh4sGYCLWXMmy/book-review-open-socrates-part-2</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b677fee909f4_book_review_open_socrates_part_2.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Book Review: Open Socrates (Part 1)” by Zvi</title>
+      <description>Audio version of “Book Review: Open Socrates (Part 1)” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 24 Mar 2026 22:25:00 +0000</pubDate>
+      <guid>0ed9bfff-1d18-4a22-a073-c89b43d6f993</guid>
+      <link>https://www.lesswrong.com/posts/hc2swmyS8mz4jc79J/book-review-open-socrates-part-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3f710bf76015_book_review_open_socrates_part_1_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-24</title>
       <description>Daily News Briefing - 2026-03-24
 
@@ -1293,47 +1334,6 @@ Topics covered:
       <guid>kFiQciPym6DQdWJJ2</guid>
       <link>https://www.lesswrong.com/posts/kFiQciPym6DQdWJJ2/was-it-owl-a-dream-1</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/9bda9c29cd93_was_it_owl_a_dream.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-22</title>
-      <description>Daily News Briefing - 2026-02-22
-
-Topics covered:
-- The intersection of AI safety and public security is under intense scrutiny following revelations regarding the mass shooting in Tumbler Ridge, British Columbia
-- In space exploration, the much-anticipated Artemis Two mission has hit a significant technical snag
-- The geopolitical situation continues to deteriorate in the Middle East and South America
-- In the technology sector, a strategic shift is occurring in the AI startup ecosystem
-- Finally, Wikipedia has took the rare step of blacklisting "Archive-dot-today." Editors for the online encyclopedia removed more than six hundred and ninety-five thousand links to the service, alleging it was used as a vector for distributed denial-of-service attacks
-- As we move into the new week, all eyes remain on the Persian Gulf as the deadline for a nuclear agreement with Iran expires</description>
-      <pubDate>Sun, 22 Feb 2026 06:36:33 +0000</pubDate>
-      <guid>news-briefing-2026-02-22</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/849f6a2b385a_daily_news_briefing_-_2026-02-22.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-22.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Multiple Independent Semantic Axes in Gemma 3 270M</title>
-      <description>Audio version of Multiple Independent Semantic Axes in Gemma 3 270M from LessWrong Frontpage</description>
-      <pubDate>Sun, 22 Feb 2026 02:02:44 +0000</pubDate>
-      <guid>LgSwswkRi8HHvzvz2</guid>
-      <link>https://www.lesswrong.com/posts/LgSwswkRi8HHvzvz2/multiple-independent-semantic-axes-in-gemma-3-270m</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b78b37640ee7_multiple_independent_semantic_axes_in_gemma_3_270m.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #155: Welcome to Recursive Self-Improvement” by Zvi</title>
-      <description>Audio version of “AI #155: Welcome to Recursive Self-Improvement” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 20 Feb 2026 19:21:33 +0000</pubDate>
-      <guid>a83b4e73-6638-4a7d-a7c3-546660c93372</guid>
-      <link>https://www.lesswrong.com/posts/cytxHuLc8oHRq7sNE/ai-155-welcome-to-recursive-self-improvement</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/13f8a9fdd95a_ai_155_welcome_to_recursive_self-improvement_b.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
