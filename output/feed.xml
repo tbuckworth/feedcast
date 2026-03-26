@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-26</title>
+      <description>Daily News Briefing - 2026-03-26
+
+Topics covered:
+- The Trump administration has officially named the first four members of the President’s Council of Advisors on Science and Technology, signaling a shift toward corporate-led policy
+- In a dual blow to Big Tech’s liability protections, a jury in New Mexico has found Meta and YouTube liable for social media addiction, awarding a plaintiff six million dollars
+- The generative AI landscape is experiencing a sharp correction in both personnel and product strategy
+- On the legislative front, Senate Democrats are moving to "codify" safety boundaries for AI
+- Finally, in a significant security warning, Google has moved the deadline for "Q-Day"—the point at which quantum computers could crack current encryption—up to twenty-twenty-nine
+- Looking toward tomorrow, keep an eye on the Philippines as it begins emergency procurement of one million barrels of oil to stabilize its energy grid following the latest disruptions in Middle Eastern supply lines</description>
+      <pubDate>Thu, 26 Mar 2026 07:15:05 +0000</pubDate>
+      <guid>news-briefing-2026-03-26</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2e563f09388b_daily_news_briefing_-_2026-03-26.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-26.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Label By Usable Volume</title>
+      <description>Audio version of Label By Usable Volume from LessWrong Frontpage</description>
+      <pubDate>Thu, 26 Mar 2026 02:30:12 +0000</pubDate>
+      <guid>JCDSYcQnNLZsvvdM8</guid>
+      <link>https://www.lesswrong.com/posts/JCDSYcQnNLZsvvdM8/label-by-usable-volume</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c909e6ec0187_label_by_usable_volume.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Every Debate On Pausing AI</title>
+      <description>Audio version of Every Debate On Pausing AI from Scott Alexander</description>
+      <pubDate>Wed, 25 Mar 2026 15:26:07 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/every-debate-on-pausing-ai</guid>
+      <link>https://www.astralcodexten.com/p/every-debate-on-pausing-ai</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/362a01032bc7_every_debate_on_pausing_ai.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Code, Cowork and Codex #6: Claude Code Auto Use and Full Cowork Computer Use” by Zvi</title>
+      <description>Audio version of “Claude Code, Cowork and Codex #6: Claude Code Auto Use and Full Cowork Computer Use” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 25 Mar 2026 15:13:34 +0000</pubDate>
+      <guid>99eccc15-80ad-4aff-b3d3-9c45fc1d55dc</guid>
+      <link>https://www.lesswrong.com/posts/8c3TED7ewqrbvheKy/claude-code-cowork-and-codex-6-claude-code-auto-use-and-full</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5dd0a48117dc_claude_code_cowork_and_codex_6_claude_code_aut.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-25</title>
       <description>Daily News Briefing - 2026-03-25
 
@@ -1304,36 +1356,6 @@ Topics covered:
       <guid>865ec8e2-b7b1-4def-9b1c-e9c6b86cbd85</guid>
       <link>https://www.lesswrong.com/posts/u2vFY4wefyqPwwDH8/claude-sonnet-4-6-gives-you-flexibility</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a6de0e53fdde_claude_sonnet_46_gives_you_flexibility_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-23</title>
-      <description>Daily News Briefing - 2026-02-23
-
-Topics covered:
-- The geopolitical situation continues to escalate on multiple fronts, beginning with a significant breach of security at President Trump’s Mar-a-Lago residence
-- This diplomatic deadlock coincides with a stark warning from Ukrainian President Volodymyr Zelensky
-- In North America, Mexico has been plunged into a wave of retaliatory violence following the death of Nemesio Oseguera Cervantes, known as "El Mencho." The leader of the Jalisco New Generation Cartel was killed in an operation assisted by United States intelligence
-- In the technology sector, the move toward "multi-agent" ecosystems is accelerating
-- Meanwhile, the "India A.I
-- In the venture capital space, despite concerns over an "A.I</description>
-      <pubDate>Mon, 23 Feb 2026 06:54:39 +0000</pubDate>
-      <guid>news-briefing-2026-02-23</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3d5612141abc_daily_news_briefing_-_2026-02-23.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-23.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Was It Owl a Dream?</title>
-      <description>Audio version of Was It Owl a Dream? from LessWrong Frontpage</description>
-      <pubDate>Mon, 23 Feb 2026 05:07:45 +0000</pubDate>
-      <guid>kFiQciPym6DQdWJJ2</guid>
-      <link>https://www.lesswrong.com/posts/kFiQciPym6DQdWJJ2/was-it-owl-a-dream-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9bda9c29cd93_was_it_owl_a_dream.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
