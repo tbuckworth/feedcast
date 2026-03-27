@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-27</title>
+      <description>Daily News Briefing - 2026-03-27
+
+Topics covered:
+- In a major legal reversal, a federal judge has granted Anthropic a preliminary injunction, temporarily blocking the Pentagon’s attempt to blacklist the AI firm
+- The White House AI landscape is also seeing a shift in leadership
+- On Capitol Hill, a bipartisan effort is targeting the physical infrastructure of the AI boom
+- In the private sector, the race for "AI stickiness" is heating up as Google and Apple move to lower the barriers between competing assistants
+- Meanwhile, the industry is seeing a quiet "culling" of speculative or controversial features
+- Finally, the global energy crisis continues to ripple through domestic stability</description>
+      <pubDate>Fri, 27 Mar 2026 06:57:37 +0000</pubDate>
+      <guid>news-briefing-2026-03-27</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/13502f49c516_daily_news_briefing_-_2026-03-27.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-27.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>COT control: The Word Disappears, but the Thought Does Not</title>
+      <description>Audio version of COT control: The Word Disappears, but the Thought Does Not from LessWrong Frontpage</description>
+      <pubDate>Fri, 27 Mar 2026 06:54:09 +0000</pubDate>
+      <guid>CWecvQoLDGWt6d35v</guid>
+      <link>https://www.lesswrong.com/posts/CWecvQoLDGWt6d35v/cot-control-the-word-disappears-but-the-thought-does-not</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2fb35c31b2e5_cot_control_the_word_disappears_but_the_thought.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Book Review: The White King Of La Gonave</title>
+      <description>Audio version of Book Review: The White King Of La Gonave from Scott Alexander</description>
+      <pubDate>Fri, 27 Mar 2026 00:26:19 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/book-review-the-white-king-of-la</guid>
+      <link>https://www.astralcodexten.com/p/book-review-the-white-king-of-la</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9fe0e9af58d2_book_review_the_white_king_of_la_gonave.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #161 Part 1: 80,000 Interviews” by Zvi</title>
+      <description>Audio version of “AI #161 Part 1: 80,000 Interviews” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 26 Mar 2026 13:21:40 +0000</pubDate>
+      <guid>8b428175-dfe1-4c48-a81d-b2e976a7f5d3</guid>
+      <link>https://www.lesswrong.com/posts/sw3inhvNrpuGdTyCR/ai-161-part-1-80-000-interviews</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/91e1b50684d9_ai_161_part_1_80000_interviews_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-26</title>
       <description>Daily News Briefing - 2026-03-26
 
@@ -1304,58 +1356,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/malicious-streetlight-effects-vs</guid>
       <link>https://www.astralcodexten.com/p/malicious-streetlight-effects-vs</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/caa87c87f62f_malicious_streetlight_effects_vs_directional_cor.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Two memos from 2024</title>
-      <description>Audio version of Two memos from 2024 from LessWrong Frontpage</description>
-      <pubDate>Tue, 24 Feb 2026 07:19:53 +0000</pubDate>
-      <guid>2BrPy2bF8uvo6HMwJ</guid>
-      <link>https://www.lesswrong.com/posts/2BrPy2bF8uvo6HMwJ/two-memos-from-2024</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e4e006dd1175_two_memos_from_2024.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-24</title>
-      <description>Daily News Briefing - 2026-02-24
-
-Topics covered:
-- The primary story today is a significant escalation in the artificial intelligence trade war
-- In a related and highly unusual move, Defense Secretary Pete Hegseth has summoned Anthropic C.E.O
-- On the technical front, OpenAI has announced it will stop using "S.W.E.-bench Verified" to measure the coding progress of its frontier models
-- In geopolitics, the domestic security situation in Mexico has reached a crisis point
-- Finally, in the markets, the venture capital landscape is seeing a total breakdown of traditional "conflict of interest" norms
-- As we look toward tomorrow, the world anticipates the official expiration of the nuclear ultimatum issued to Iran, with U.S</description>
-      <pubDate>Tue, 24 Feb 2026 06:49:24 +0000</pubDate>
-      <guid>news-briefing-2026-02-24</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c9c03f686046_daily_news_briefing_-_2026-02-24.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-24.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>What is computational mechanics? An explainer</title>
-      <description>Audio version of What is computational mechanics? An explainer from LessWrong Frontpage</description>
-      <pubDate>Tue, 24 Feb 2026 06:39:57 +0000</pubDate>
-      <guid>X4R7vhLCuwGfGkRyg</guid>
-      <link>https://www.lesswrong.com/posts/X4R7vhLCuwGfGkRyg/what-is-computational-mechanics-an-explainer</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1742e1012ab8_what_is_computational_mechanics_an_explainer.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Sonnet 4.6 Gives You Flexibility” by Zvi</title>
-      <description>Audio version of “Claude Sonnet 4.6 Gives You Flexibility” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 23 Feb 2026 20:30:53 +0000</pubDate>
-      <guid>865ec8e2-b7b1-4def-9b1c-e9c6b86cbd85</guid>
-      <link>https://www.lesswrong.com/posts/u2vFY4wefyqPwwDH8/claude-sonnet-4-6-gives-you-flexibility</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a6de0e53fdde_claude_sonnet_46_gives_you_flexibility_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
