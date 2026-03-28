@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-28</title>
+      <description>Daily News Briefing - 2026-03-28
+
+Topics covered:
+- A federal judge has formally rebuked the administration’s attempt to blacklist the AI firm Anthropic, stating that Defense Secretary Pete Hegseth and President Trump exceeded their legal authority
+- The cybersecurity landscape has been shaken by a confirmed breach of F-B-I Director Kash Patel’s personal email account
+- In the Middle East, Senator Marco Rubio states the United States expects to "finish" the war with Iran within the next couple of weeks
+- The hardware sector is facing a severe supply crunch known as "RAM-mageddon," which is now driving up prices for consumers
+- OpenAI is moving to evolve its business model beyond simple chat interfaces
+- Looking toward tomorrow, keep an eye on the United States House of Representatives, where a high-stakes vote on Department of Homeland Security funding is scheduled in an attempt to end the government shutdown and relieve the mounting chaos at national airports</description>
+      <pubDate>Sat, 28 Mar 2026 06:56:54 +0000</pubDate>
+      <guid>news-briefing-2026-03-28</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/179489befd63_daily_news_briefing_-_2026-03-28.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-28.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Just Use Bayes: Sleeping Beauty and Monty Hall</title>
+      <description>Audio version of Just Use Bayes: Sleeping Beauty and Monty Hall from LessWrong Frontpage</description>
+      <pubDate>Sat, 28 Mar 2026 02:59:59 +0000</pubDate>
+      <guid>zvdqNxsgKzqrtjkdA</guid>
+      <link>https://www.lesswrong.com/posts/zvdqNxsgKzqrtjkdA/just-use-bayes-sleeping-beauty-and-monty-hall</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f9990a7bc025_just_use_bayes_sleeping_beauty_and_monty_hall.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>A Buddhist Sun Miracle?</title>
+      <description>Audio version of A Buddhist Sun Miracle? from Scott Alexander</description>
+      <pubDate>Fri, 27 Mar 2026 15:21:05 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/a-buddhist-sun-miracle</guid>
+      <link>https://www.astralcodexten.com/p/a-buddhist-sun-miracle</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b71543b40735_a_buddhist_sun_miracle.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Anthropic vs. DoW #6: The Court Rules” by Zvi</title>
+      <description>Audio version of “Anthropic vs. DoW #6: The Court Rules” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 27 Mar 2026 11:45:02 +0000</pubDate>
+      <guid>20d48f54-1bba-467e-996f-9db76da9157f</guid>
+      <link>https://www.lesswrong.com/posts/jdWHwsj8GvwgJSxF7/anthropic-vs-dow-6-the-court-rules</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9d49002b1e77_anthropic_vs_dow_6_the_court_rules_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-27</title>
       <description>Daily News Briefing - 2026-03-27
 
@@ -1304,58 +1356,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/the-pentagon-threatens-anthropic</guid>
       <link>https://www.astralcodexten.com/p/the-pentagon-threatens-anthropic</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/6f9dcee7c72a_the_pentagon_threatens_anthropic.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-25</title>
-      <description>Daily News Briefing - 2026-02-25
-
-Topics covered:
-- The standoff between Anthropic and the Pentagon has reached a critical impasse
-- In a legal victory for OpenAI, a federal judge has dismissed a trade secrets lawsuit filed by Elon Musk’s x-A.I
-- The semiconductor and infrastructure landscape is seeing massive shifts as tech giants secure their A.I
-- In geopolitics, the security situation in Mexico remains volatile following the death of "El Mencho." Armed groups yesterday rammed a prison gate in Puerto Vallarta, successfully freeing twenty-three inmates
-- In markets and enterprise tech, Anthropic has launched "Claude Cowork," a suite of plug-ins that allow its A.I
-- As we look toward tomorrow, the tech industry is bracing for a potential earthquake in the payments sector, as reports intensify that Stripe is exploring a deal to acquire some or all of PayPal</description>
-      <pubDate>Wed, 25 Feb 2026 07:02:51 +0000</pubDate>
-      <guid>news-briefing-2026-02-25</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ad8dc940dcb8_daily_news_briefing_-_2026-02-25.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-25.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The Iron Kaleidoscope</title>
-      <description>Audio version of The Iron Kaleidoscope from LessWrong Frontpage</description>
-      <pubDate>Wed, 25 Feb 2026 06:24:17 +0000</pubDate>
-      <guid>ZeDY64pvusZQzjRqJ</guid>
-      <link>https://www.lesswrong.com/posts/ZeDY64pvusZQzjRqJ/the-iron-kaleidoscope</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4f3d4f1f90cc_the_iron_kaleidoscope.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Citrini’s Scenario Is A Great But Deeply Flawed Thought Experiment” by Zvi</title>
-      <description>Audio version of “Citrini’s Scenario Is A Great But Deeply Flawed Thought Experiment” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 24 Feb 2026 15:41:51 +0000</pubDate>
-      <guid>a88ba975-a8f3-49c2-9d0d-36bce3ea050f</guid>
-      <link>https://www.lesswrong.com/posts/bKrpLhqcoN6WycrFp/citrini-s-scenario-is-a-great-but-deeply-flawed-thought</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/40061b30b6d4_citrinis_scenario_is_a_great_but_deeply_flawed_t.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Malicious Streetlight Effects Vs. "Directional Correctness" - A Semi-Non-Apology</title>
-      <description>Audio version of Malicious Streetlight Effects Vs. "Directional Correctness" - A Semi-Non-Apology from Scott Alexander</description>
-      <pubDate>Tue, 24 Feb 2026 15:36:48 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/malicious-streetlight-effects-vs</guid>
-      <link>https://www.astralcodexten.com/p/malicious-streetlight-effects-vs</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/caa87c87f62f_malicious_streetlight_effects_vs_directional_cor.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
