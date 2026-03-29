@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-29</title>
+      <description>Daily News Briefing - 2026-03-29
+
+Topics covered:
+- The crisis within the United States government has intensified as House Republicans officially rejected a Senate-brokered deal to restore funding
+- In the artificial intelligence sector, new details have emerged regarding OpenAI’s abrupt decision to kill its Sora video project
+- While OpenAI narrows its focus, its primary rival Anthropic is seeing a surge in commercial adoption
+- In the hardware and energy sector, the global power crunch is hitting new extremes
+- Finally, the relationship between the administration and Silicon Valley continues to shift toward a formal alliance
+- Looking toward tomorrow, watch for the impact of new fuel protests in Europe as more nations consider the hard-line rationing measures already seen in Slovenia and Egypt</description>
+      <pubDate>Sun, 29 Mar 2026 06:54:07 +0000</pubDate>
+      <guid>news-briefing-2026-03-29</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9a1918f57238_daily_news_briefing_-_2026-03-29.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-29.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>"Path to Victory"</title>
+      <description>Audio version of "Path to Victory" from LessWrong Frontpage</description>
+      <pubDate>Sun, 29 Mar 2026 06:23:59 +0000</pubDate>
+      <guid>o4hPCzYvtMr3m3vYv</guid>
+      <link>https://www.lesswrong.com/posts/o4hPCzYvtMr3m3vYv/path-to-victory</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/22505ba1f8fe_path_to_victory.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-28</title>
       <description>Daily News Briefing - 2026-03-28
 
@@ -125,6 +155,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>How Natural Tradeoff And Failure Components?</title>
+      <description>Audio version of How Natural Tradeoff And Failure Components? from Scott Alexander</description>
+      <pubDate>Thu, 26 Mar 2026 11:17:22 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/how-natural-tradeoff-and-failure</guid>
+      <link>https://www.astralcodexten.com/p/how-natural-tradeoff-and-failure</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f3ab376813b5_how_natural_tradeoff_and_failure_components.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-26</title>
       <description>Daily News Briefing - 2026-03-26
 
@@ -213,6 +254,17 @@ Topics covered:
       <guid>0ed9bfff-1d18-4a22-a073-c89b43d6f993</guid>
       <link>https://www.lesswrong.com/posts/hc2swmyS8mz4jc79J/book-review-open-socrates-part-1</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3f710bf76015_book_review_open_socrates_part_1_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Book Review: Open Socrates (Part 2)” by Zvi</title>
+      <description>Audio version of “Book Review: Open Socrates (Part 2)” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 24 Mar 2026 22:22:57 +0000</pubDate>
+      <guid>57a39052-d3cf-40f3-a5a8-0444f9eda11a</guid>
+      <link>https://www.lesswrong.com/posts/Ky2DSh4sGYCLWXMmy/book-review-open-socrates-part-2</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c38985142464_book_review_open_socrates_part_2_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1287,75 +1339,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-02-26</title>
-      <description>Daily News Briefing - 2026-02-26
-
-Topics covered:
-- The standoff between the Pentagon and the A.I
-- In a milestone for autonomous systems, Google and Samsung have unveiled "agentic" capabilities that move beyond simple chat
-- On the corporate front, Nvidia has once again shattered expectations, reporting another record-breaking quarter fueled by what C.E.O
-- In geopolitics, the world is waiting for the outcome of high-stakes, last-ditch nuclear talks between the United States and Iran scheduled for tomorrow in Geneva
-- Finally, in a curious cultural shift within the industry, Anthropic executives are increasingly leaning into the philosophical implications of their work
-- As we look toward tomorrow, all eyes are on Geneva for the results of the final U.S.-Iran diplomatic summit</description>
-      <pubDate>Thu, 26 Feb 2026 06:48:31 +0000</pubDate>
-      <guid>news-briefing-2026-02-26</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f4a07515e731_daily_news_briefing_-_2026-02-26.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-26.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Next-Token Predictor Is An AI's Job, Not Its Species</title>
-      <description>Audio version of Next-Token Predictor Is An AI's Job, Not Its Species from Scott Alexander</description>
-      <pubDate>Thu, 26 Feb 2026 05:24:27 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/next-token-predictor-is-an-ais-job</guid>
-      <link>https://www.astralcodexten.com/p/next-token-predictor-is-an-ais-job</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8d51e0bb5891_next-token_predictor_is_an_ais_job_not_its_speci.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>What is Claude?</title>
-      <description>Audio version of What is Claude? from LessWrong Frontpage</description>
-      <pubDate>Thu, 26 Feb 2026 04:44:32 +0000</pubDate>
-      <guid>pEPGquGcA9uYKzPtA</guid>
-      <link>https://www.lesswrong.com/posts/pEPGquGcA9uYKzPtA/what-is-claude-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/260bece1c882_what_is_claude.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Announcing ControlConf 2026</title>
       <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
       <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
       <guid>tN5mgBAinwFe5c67c</guid>
       <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Anthropic and the Department of War” by Zvi</title>
-      <description>Audio version of “Anthropic and the Department of War” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 25 Feb 2026 21:02:37 +0000</pubDate>
-      <guid>e8215af2-87de-4d34-9725-06c6de4bb2fc</guid>
-      <link>https://www.lesswrong.com/posts/rmYB4a7Pskw7DLpCh/anthropic-and-the-department-of-war</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aba12c99494d_anthropic_and_the_department_of_war_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The Pentagon Threatens Anthropic</title>
-      <description>Audio version of The Pentagon Threatens Anthropic from Scott Alexander</description>
-      <pubDate>Wed, 25 Feb 2026 17:46:56 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-pentagon-threatens-anthropic</guid>
-      <link>https://www.astralcodexten.com/p/the-pentagon-threatens-anthropic</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6f9dcee7c72a_the_pentagon_threatens_anthropic.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1389,17 +1378,6 @@ Topics covered:
       <guid>vjAM7F8vMZS7oRrrh</guid>
       <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The inaugural Redwood Research podcast</title>
-      <description>Audio version of The inaugural Redwood Research podcast from Buck Shlegeris</description>
-      <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
-      <guid>p4iJpumHt6Ay9KnXT</guid>
-      <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
