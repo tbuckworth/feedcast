@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-30</title>
+      <description>Daily News Briefing - 2026-03-30
+
+Topics covered:
+- The Middle East conflict has escalated into a direct campaign against regional industrial infrastructure
+- In the artificial intelligence sector, the narrative surrounding OpenAI’s decision to kill its Sora video project is shifting toward data privacy concerns
+- Despite the pullback in video, the "agentic" era of AI is expanding into social media architecture
+- On the domestic front, the "No Kings" protest movement against the administration has reached a new peak of cultural visibility
+- Finally, in a sign of the times for political engagement and forecasting, the prediction market Polymarket has opened a physical "Situation Room" pop-up bar in Washington, D-C
+- Looking toward tomorrow, maritime insurers are expected to release updated risk premiums for the Persian Gulf following the latest strikes on industrial sites in the Emirates and Bahrain</description>
+      <pubDate>Mon, 30 Mar 2026 07:16:49 +0000</pubDate>
+      <guid>news-briefing-2026-03-30</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/05edce9c0e52_daily_news_briefing_-_2026-03-30.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-30.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The Skill of Using AI Agents Well</title>
+      <description>Audio version of The Skill of Using AI Agents Well from LessWrong Frontpage</description>
+      <pubDate>Sun, 29 Mar 2026 18:45:33 +0000</pubDate>
+      <guid>9xAwybDhtgzGYPnbs</guid>
+      <link>https://www.lesswrong.com/posts/9xAwybDhtgzGYPnbs/the-skill-of-using-ai-agents-well</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/af7330d36999_the_skill_of_using_ai_agents_well.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-29</title>
       <description>Daily News Briefing - 2026-03-29
 
@@ -1293,36 +1323,6 @@ Topics covered:
       <guid>23cf9adc-0e8f-432b-97c9-a4e92a5bac14</guid>
       <link>https://www.lesswrong.com/posts/ppj7v4sSCbJjLye3D/anthropic-and-the-dow-anthropic-responds</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7be18d064d1d_anthropic_and_the_dow_anthropic_responds_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-02-27</title>
-      <description>Daily News Briefing - 2026-02-27
-
-Topics covered:
-- The high-stakes standoff between the Pentagon and Anthropic has reached a breaking point
-- In a move that mirrors the aggressive restructuring seen at X under Elon Musk, Jack Dorsey’s fintech firm, Block, has announced it is cutting its workforce by nearly half
-- On the technical front, Microsoft and Perplexity have both unveiled "agentic" systems that move beyond simple chat interfaces
-- Google is also tightening its grip on the physical A.I
-- In geopolitics, indirect nuclear talks between the United States and Iran in Geneva have concluded with what mediators call "significant progress." While a final deal remains elusive, the report suggests a potential "de-escalation" that could prevent the immediate military strikes threatened by the White House earlier this week
-- As we look toward the weekend, the tech industry is bracing for the fallout of Anthropic’s refusal to meet the Pentagon’s ultimatum and the resulting impact on national security policy</description>
-      <pubDate>Fri, 27 Feb 2026 06:40:58 +0000</pubDate>
-      <guid>news-briefing-2026-02-27</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0bca292724e4_daily_news_briefing_-_2026-02-27.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-27.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>What I Got From 1.5 Years In Slightly-Competitive Debate</title>
-      <description>Audio version of What I Got From 1.5 Years In Slightly-Competitive Debate from LessWrong Frontpage</description>
-      <pubDate>Fri, 27 Feb 2026 05:37:59 +0000</pubDate>
-      <guid>xkFLbcknoDaJXsQiH</guid>
-      <link>https://www.lesswrong.com/posts/xkFLbcknoDaJXsQiH/what-i-got-from-1-5-years-in-slightly-competitive-debate</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ec4b00c8e64d_what_i_got_from_15_years_in_slightly-competitive.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
