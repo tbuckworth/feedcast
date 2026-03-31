@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-03-31</title>
+      <description>Daily News Briefing - 2026-03-31
+
+Topics covered:
+- The geopolitical landscape regarding the conflict with Iran has shifted significantly as Spain officially closed its airspace to United States aircraft involved in the war
+- In the artificial intelligence sector, a new study from the United Kingdom’s AI Security Institute warns of "emergent misalignment" in reinforcement learning models
+- While the "agentic" era progresses, it faces a steep climb in public trust
+- In the hardware and infrastructure race, the scale of investment continues to hit unprecedented levels
+- Finally, the United States military is facing a major setback in its foundational technology
+- Looking toward tomorrow, keep an eye on the United States Army's investigation into Kid Rock, following a controversial Black Hawk helicopter flyby at the artist's private residence</description>
+      <pubDate>Tue, 31 Mar 2026 07:03:21 +0000</pubDate>
+      <guid>news-briefing-2026-03-31</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0a89efe60e90_daily_news_briefing_-_2026-03-31.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-31.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Why Corrigibility Matters (If It Matters At All)</title>
+      <description>Audio version of Why Corrigibility Matters (If It Matters At All) from LessWrong Frontpage</description>
+      <pubDate>Tue, 31 Mar 2026 03:27:11 +0000</pubDate>
+      <guid>LkK2kEPhdEtZfw28K</guid>
+      <link>https://www.lesswrong.com/posts/LkK2kEPhdEtZfw28K/why-corrigibility-matters-if-it-matters-at-all</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e1792bcd07c9_why_corrigibility_matters_if_it_matters_at_all.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #161 Part 2: Every Debate on AI” by Zvi</title>
+      <description>Audio version of “AI #161 Part 2: Every Debate on AI” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 30 Mar 2026 13:41:47 +0000</pubDate>
+      <guid>c41ac065-b5f8-4283-918d-4b8923f88006</guid>
+      <link>https://www.lesswrong.com/posts/y6HogrdSeFyGDuYYN/ai-161-part-2-every-debate-on-ai</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a9d403a27c8f_ai_161_part_2_every_debate_on_ai_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-30</title>
       <description>Daily News Briefing - 2026-03-30
 
@@ -1287,58 +1328,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-02-28</title>
-      <description>Daily News Briefing - 2026-02-28
-
-Topics covered:
-- The standoff between the White House and the A.I
-- While one lab faces federal exile, OpenAI has secured a staggering capital infusion that redraws the industry’s financial map
-- In geopolitics, the threat of conflict in the Middle East remains high but paused
-- In technology and markets, Block, the fintech firm led by Jack Dorsey, has followed through on its radical restructuring by laying off forty percent of its workforce
-- In the media sector, the landscape has been clarified as Netflix officially withdrew its interest in Warner Brothers Discovery, citing the deal as no longer "financially attractive." This cements the path for a merger between Paramount and Warner Brothers Discovery, creating a legacy media titan tasked with competing against the dominant streaming and A.I
-- As we look toward the new week, all eyes are on the judiciary to see how quickly Anthropic’s legal challenge to its "supply chain risk" designation will move through the courts</description>
-      <pubDate>Sat, 28 Feb 2026 06:26:37 +0000</pubDate>
-      <guid>news-briefing-2026-02-28</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3541e60ee024_daily_news_briefing_-_2026-02-28.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-02-28.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Schelling Goodness, and Shared Morality as a Goal</title>
-      <description>Audio version of Schelling Goodness, and Shared Morality as a Goal from LessWrong Frontpage</description>
-      <pubDate>Sat, 28 Feb 2026 06:02:32 +0000</pubDate>
-      <guid>TkBCR8XRGw7qmao6z</guid>
-      <link>https://www.lesswrong.com/posts/TkBCR8XRGw7qmao6z/schelling-goodness-and-shared-morality-as-a-goal</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c7a81f024fe4_schelling_goodness_and_shared_morality_as_a_goal.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Anthropic and the DoW: Anthropic Responds” by Zvi</title>
-      <description>Audio version of “Anthropic and the DoW: Anthropic Responds” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 27 Feb 2026 20:51:35 +0000</pubDate>
-      <guid>23cf9adc-0e8f-432b-97c9-a4e92a5bac14</guid>
-      <link>https://www.lesswrong.com/posts/ppj7v4sSCbJjLye3D/anthropic-and-the-dow-anthropic-responds</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7be18d064d1d_anthropic_and_the_dow_anthropic_responds_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #157: Burn the Boats” by Zvi</title>
-      <description>Audio version of “AI #157: Burn the Boats” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 26 Feb 2026 13:31:46 +0000</pubDate>
-      <guid>a3e1e221-9636-420a-84fb-6c0c73d7f3b1</guid>
-      <link>https://www.lesswrong.com/posts/zC3Rtrj6RXwEde9h6/ai-157-burn-the-boats</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/118f66ce40e7_ai_157_burn_the_boats_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Announcing ControlConf 2026</title>
       <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
       <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
@@ -1364,9 +1353,9 @@ Topics covered:
       <title>Grading AI 2027’s 2025 Predictions</title>
       <description>Audio version of Grading AI 2027’s 2025 Predictions from AI Futures Project</description>
       <pubDate>Thu, 12 Feb 2026 23:56:07 +0000</pubDate>
-      <guid>https://blog.ai-futures.org/p/grading-ai-2027s-2025-predictions</guid>
-      <link>https://blog.ai-futures.org/p/grading-ai-2027s-2025-predictions</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d59f6ddd9612_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
+      <guid>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</guid>
+      <link>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
