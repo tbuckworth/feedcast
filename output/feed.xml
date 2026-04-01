@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-01</title>
+      <description>Daily News Briefing - 2026-04-01
+
+Topics covered:
+- The artificial intelligence sector has reached a new financial stratosphere as OpenAI confirmed a massive one hundred and twenty-two billion dollar funding round
+- While OpenAI consolidates capital, its chief rival, Anthropic, is dealing with a significant technical exposure
+- The tension in the Middle East has escalated into a grim new phase as reports from Tehran indicate that Iran has begun deploying children to man security checkpoints during the ongoing conflict
+- In the realm of national security and infrastructure, NASA and the United States military are locked in a countdown for the Artemis Two mission, which could return humans to the moon’s vicinity this week for the first time in over fifty years
+- Finally, in a major demographic milestone, India has officially begun its massive national census
+- Looking toward tomorrow, maritime markets will be watching for the arrival of a Russian oil tanker in Cuba, a delivery expected to provide the first major relief to the island after months of a near-total energy blockade</description>
+      <pubDate>Wed, 01 Apr 2026 07:09:39 +0000</pubDate>
+      <guid>news-briefing-2026-04-01</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1b7c66330105_daily_news_briefing_-_2026-04-01.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-01.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Review of Kawabata's "Palm of the Hand" stories and their translation into English</title>
+      <description>Audio version of Review of Kawabata's "Palm of the Hand" stories and their translation into English from LessWrong Frontpage</description>
+      <pubDate>Wed, 01 Apr 2026 04:47:04 +0000</pubDate>
+      <guid>QSHQWesKzFsHk3zHD</guid>
+      <link>https://www.lesswrong.com/posts/QSHQWesKzFsHk3zHD/review-of-kawabata-s-palm-of-the-hand-stories-and-their</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bd201b1b2957_review_of_kawabatas_palm_of_the_hand_stories_an.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Movie Review: The AI Doc” by Zvi</title>
+      <description>Audio version of “Movie Review: The AI Doc” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 31 Mar 2026 11:41:56 +0000</pubDate>
+      <guid>ae5f3331-bed5-49b3-9650-3bd93824cf11</guid>
+      <link>https://www.lesswrong.com/posts/ppC6geY4FxGYifrWx/movie-review-the-ai-doc</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5aafe864e02a_movie_review_the_ai_doc_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Against The Concept Of Telescopic Altruism</title>
+      <description>Audio version of Against The Concept Of Telescopic Altruism from Scott Alexander</description>
+      <pubDate>Tue, 31 Mar 2026 11:32:53 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/against-the-concept-of-telescopic</guid>
+      <link>https://www.astralcodexten.com/p/against-the-concept-of-telescopic</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/64e0b1695a56_against_the_concept_of_telescopic_altruism.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-03-31</title>
       <description>Daily News Briefing - 2026-03-31
 
@@ -1293,36 +1345,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/all-lawful-use-much-more-than-you</guid>
       <link>https://www.astralcodexten.com/p/all-lawful-use-much-more-than-you</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/316e046fa476_all_lawful_use_much_more_than_you_wanted_to_kno.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-03-01</title>
-      <description>Daily News Briefing - 2026-03-01
-
-Topics covered:
-- The most significant story today is the commencement of major combat operations in the Middle East
-- In the fallout of the Anthropic blacklisting reported yesterday, OpenAI has moved swiftly to fill the vacuum in federal A.I
-- The domestic fallout for Anthropic continues as the Trump administration moves to finalize a total ban on the company’s products within the U.S
-- In the media and telecommunications sector, the landscape has solidified following Netflix’s exit from the bidding war for Warner Brothers Discovery
-- Finally, in hardware and global competition, China’s humanoid robot industry is reportedly beginning to outpace U.S
-- As we look toward tomorrow, the global economy braces for the market reaction to the unfolding conflict in the Middle East and the death of Iran’s Supreme Leader</description>
-      <pubDate>Sun, 01 Mar 2026 06:35:38 +0000</pubDate>
-      <guid>news-briefing-2026-03-01</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/58eb995973d0_daily_news_briefing_-_2026-03-01.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-01.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>How much information does an optimal policy contain about its environment?</title>
-      <description>Audio version of How much information does an optimal policy contain about its environment? from LessWrong Frontpage</description>
-      <pubDate>Sun, 01 Mar 2026 06:32:05 +0000</pubDate>
-      <guid>cgWuXSFLQELA8Fy5X</guid>
-      <link>https://www.lesswrong.com/posts/cgWuXSFLQELA8Fy5X/how-much-information-does-an-optimal-policy-contain-about</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a2658762d0f5_how_much_information_does_an_optimal_policy_contai.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
