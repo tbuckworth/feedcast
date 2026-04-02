@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-02</title>
+      <description>Daily News Briefing - 2026-04-02
+
+Topics covered:
+- The second space age has officially begun as NASA’s Artemis Two mission successfully vaulted into Earth orbit from the Kennedy Space Center
+- In the private sector, SpaceX has filed a confidential submission with the Securities and Exchange Commission for what is expected to be the largest initial public offering in history
+- In the artificial intelligence sector, a technical "system failure" paralyzed Baidu’s Apollo Go robotaxi fleet in Wuhan, China
+- The security fallout from the Anthropic "Claude Code" leak continues to widen
+- On the geopolitical front, President Trump delivered a primetime address intended to calm markets regarding the escalating war with Iran
+- Finally, the United States Supreme Court today appeared skeptical of the administration’s plan to limit birthright citizenship</description>
+      <pubDate>Thu, 02 Apr 2026 07:01:51 +0000</pubDate>
+      <guid>news-briefing-2026-04-02</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bdce5597f28b_daily_news_briefing_-_2026-04-02.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-02.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Have an Unreasonably Specific Story About The Future</title>
+      <description>Audio version of Have an Unreasonably Specific Story About The Future from LessWrong Frontpage</description>
+      <pubDate>Thu, 02 Apr 2026 06:11:16 +0000</pubDate>
+      <guid>8t8jdTyq6X2B7D8St</guid>
+      <link>https://www.lesswrong.com/posts/8t8jdTyq6X2B7D8St/have-an-unreasonably-specific-story-about-the-future</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/71c7d6aba298_have_an_unreasonably_specific_story_about_the_futu.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Anthropic Responsible Scaling Policy v3: A Matter of Trust” by Zvi</title>
+      <description>Audio version of “Anthropic Responsible Scaling Policy v3: A Matter of Trust” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 01 Apr 2026 18:13:41 +0000</pubDate>
+      <guid>6fb122c9-b53d-4407-9bfd-8ca60cf7f138</guid>
+      <link>https://www.lesswrong.com/posts/AkzauoTt2Lwn2yAvj/anthropic-responsible-scaling-policy-v3-a-matter-of-trust</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/42757f91ecfa_anthropic_responsible_scaling_policy_v3_a_matter.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-01</title>
       <description>Daily News Briefing - 2026-04-01
 
@@ -1304,47 +1345,6 @@ Topics covered:
       <guid>b3837e06-1836-4d28-ae27-e61a3fd6fb3d</guid>
       <link>https://www.lesswrong.com/posts/Wpdivf3iNJDzBcbzJ/secretary-of-war-tweets-that-anthropic-is-now-a-supply-chain</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/97154183a374_secretary_of_war_tweets_that_anthropic_is_now_a_s.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-03-02</title>
-      <description>Daily News Briefing - 2026-03-02
-
-Topics covered:
-- The primary focus remains the rapidly escalating conflict in the Middle East
-- On the ground in Iran, the humanitarian toll is mounting
-- In the technology sector, the fallout from the federal blacklisting of Anthropic has taken an unexpected turn
-- The intersection of geopolitics and prediction markets has also reached a new milestone
-- In hardware and robotics, Chinese manufacturers are using the Mobile World Congress in Barcelona to showcase a new category of "embodied A.I." The firm Honor revealed a "robot phone" featuring a movable camera arm that can autonomously track subjects and respond to environmental cues without user commands
-- As we look toward tomorrow, the global community is watching for a potential ground escalation in the Middle East and the resulting impact on the three-hundred-and-fifty-billion-dollar daily trade flow through the Strait of Hormuz</description>
-      <pubDate>Mon, 02 Mar 2026 06:44:55 +0000</pubDate>
-      <guid>news-briefing-2026-03-02</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/52d6673f0afa_daily_news_briefing_-_2026-03-02.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-02.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Context Awareness: Constitutional AI can mitigate Emergent Misalignement</title>
-      <description>Audio version of Context Awareness: Constitutional AI can mitigate Emergent Misalignement from LessWrong Frontpage</description>
-      <pubDate>Mon, 02 Mar 2026 05:22:03 +0000</pubDate>
-      <guid>yA2hquLrFFSFDtcoE</guid>
-      <link>https://www.lesswrong.com/posts/yA2hquLrFFSFDtcoE/context-awareness-constitutional-ai-can-mitigate-emergent</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a0bd5675c650_context_awareness_constitutional_ai_can_mitigate.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>"All Lawful Use": Much More Than You Wanted To Know</title>
-      <description>Audio version of "All Lawful Use": Much More Than You Wanted To Know from Scott Alexander</description>
-      <pubDate>Sun, 01 Mar 2026 19:52:04 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/all-lawful-use-much-more-than-you</guid>
-      <link>https://www.astralcodexten.com/p/all-lawful-use-much-more-than-you</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/316e046fa476_all_lawful_use_much_more_than_you_wanted_to_kno.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
