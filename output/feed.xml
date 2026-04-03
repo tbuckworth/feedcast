@@ -21,6 +21,80 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-03</title>
+      <description>Daily News Briefing - 2026-04-03
+
+Topics covered:
+- The second space age has officially accelerated as the four-person crew of Artemis Two transitioned from Earth orbit to a lunar trajectory
+- In a significant move to control the narrative surrounding the industry, OpenAI has acquired the "Technical Buffalo Podcast Network," or T-B-P-N
+- The geopolitical strain of the war with Iran is now manifesting in global supply chains and domestic leadership
+- The "agentic" A-I shift is meeting stiff resistance from both the legal system and technical reality
+- On the security front, researchers have demonstrated a new class of hardware vulnerability called "G-D-D-R-Hammer." By exploiting the memory-refresh patterns of Nvidia graphics cards, attackers can gain complete control over a host machine's central processor
+- Looking toward tomorrow, maritime markets are bracing for Amazon's new "fuel surcharge," a temporary tax on all third-party sellers designed to offset the rising logistics costs sparked by the conflict in the Middle East</description>
+      <pubDate>Fri, 03 Apr 2026 06:58:46 +0000</pubDate>
+      <guid>news-briefing-2026-04-03</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4000a5bb7394_daily_news_briefing_-_2026-04-03.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-03.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The PauseAI Protest: A Photo-Essay</title>
+      <description>Audio version of The PauseAI Protest: A Photo-Essay from Scott Alexander</description>
+      <pubDate>Fri, 03 Apr 2026 05:23:46 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/the-pauseai-protest-a-photo-essay</guid>
+      <link>https://www.astralcodexten.com/p/the-pauseai-protest-a-photo-essay</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b99a6badbfdb_the_pauseai_protest_a_photo-essay.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Common research advice #2: say precisely what you want to say</title>
+      <description>Audio version of Common research advice #2: say precisely what you want to say from LessWrong Frontpage</description>
+      <pubDate>Fri, 03 Apr 2026 04:28:37 +0000</pubDate>
+      <guid>wX8JniiTpbYBdWopD</guid>
+      <link>https://www.lesswrong.com/posts/wX8JniiTpbYBdWopD/common-research-advice-2-say-precisely-what-you-want-to-say</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3ded9b303d8c_common_research_advice_2_say_precisely_what_you.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Q1 2026 Timelines Update</title>
+      <description>Audio version of Q1 2026 Timelines Update from Daniel Kokotajlo</description>
+      <pubDate>Thu, 02 Apr 2026 22:23:54 +0000</pubDate>
+      <guid>XLLjqMxETva3ABtsK</guid>
+      <link>https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e146da8ae513_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Q1 2026 Timelines Update</title>
+      <description>Audio version of Q1 2026 Timelines Update from AI Futures Project</description>
+      <pubDate>Thu, 02 Apr 2026 18:10:18 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
+      <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #162: Visions of Mythos” by Zvi</title>
+      <description>Audio version of “AI #162: Visions of Mythos” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 02 Apr 2026 12:22:13 +0000</pubDate>
+      <guid>f2dcb1a2-4ef7-4905-817f-ae6a1574b529</guid>
+      <link>https://www.lesswrong.com/posts/iBeTkFuQwjaRPo3Ad/ai-162-visions-of-mythos</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/858125ec4e06_ai_162_visions_of_mythos_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-02</title>
       <description>Daily News Briefing - 2026-04-02
 
@@ -1309,75 +1383,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-03</title>
-      <description>Daily News Briefing - 2026-03-03
-
-Topics covered:
-- The conflict in the Middle East has entered a third day of high-intensity operations, with the United States and Israel continuing strikes across Iran
-- In the technology sector, the fallout from OpenAI’s partnership with the Department of Defense has triggered a massive consumer migration
-- On the regulatory front, the United States Supreme Court has declined to hear a landmark case regarding A.I.-generated art
-- In hardware and infrastructure, Nvidia has announced a four-billion-dollar investment in silicon photonics, split between the firms Lumentum and Coherent
-- Finally, in a major shift for the European security architecture, French President Emmanuel Macron announced today that France will expand its "nuclear umbrella" to protect eight other European allies
-- As we look toward tomorrow, markets are bracing for a potential further spike in energy costs as shipping insurance rates for the Persian Gulf continue to climb</description>
-      <pubDate>Tue, 03 Mar 2026 06:39:26 +0000</pubDate>
-      <guid>news-briefing-2026-03-03</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cb1d35396901_daily_news_briefing_-_2026-03-03.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-03.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Monday AI Radar #15</title>
-      <description>Audio version of Monday AI Radar #15 from LessWrong Frontpage</description>
-      <pubDate>Tue, 03 Mar 2026 05:23:46 +0000</pubDate>
-      <guid>LihodhGu4T5Anpnuj</guid>
-      <link>https://www.lesswrong.com/posts/LihodhGu4T5Anpnuj/monday-ai-radar-15</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ff654f851ac9_monday_ai_radar_15.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Secretary of War Tweets That Anthropic is Now a Supply Chain Risk” by Zvi</title>
-      <description>Audio version of “Secretary of War Tweets That Anthropic is Now a Supply Chain Risk” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 02 Mar 2026 14:05:45 +0000</pubDate>
-      <guid>b3837e06-1836-4d28-ae27-e61a3fd6fb3d</guid>
-      <link>https://www.lesswrong.com/posts/Wpdivf3iNJDzBcbzJ/secretary-of-war-tweets-that-anthropic-is-now-a-supply-chain</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/97154183a374_secretary_of_war_tweets_that_anthropic_is_now_a_s.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Announcing ControlConf 2026</title>
       <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
       <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
       <guid>tN5mgBAinwFe5c67c</guid>
       <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Grading AI 2027's 2025 Predictions</title>
-      <description>Audio version of Grading AI 2027's 2025 Predictions from Daniel Kokotajlo</description>
-      <pubDate>Fri, 13 Feb 2026 00:18:41 +0000</pubDate>
-      <guid>JYGeAAh92hAwvseFk</guid>
-      <link>https://www.lesswrong.com/posts/JYGeAAh92hAwvseFk/grading-ai-2027-s-2025-predictions</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8aad9aed9429_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Grading AI 2027’s 2025 Predictions</title>
-      <description>Audio version of Grading AI 2027’s 2025 Predictions from AI Futures Project</description>
-      <pubDate>Thu, 12 Feb 2026 23:56:07 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</guid>
-      <link>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
