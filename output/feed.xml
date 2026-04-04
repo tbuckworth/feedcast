@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-04</title>
+      <description>Daily News Briefing - 2026-04-04
+
+Topics covered:
+- The push for artificial intelligence to take on high-stakes clinical roles has reached a new milestone in Utah
+- Within the industry, Anthropic is aggressively moving to consolidate its ecosystem and expand its reach into biotechnology
+- The internal structure of OpenAI is also shifting as the company manages significant executive turnover
+- In Washington, President Trump has unveiled a one point five trillion dollar defense budget that seeks to fundamentally realign federal spending
+- Finally, the geopolitical situation surrounding Iran remains volatile following a series of strikes on industrial infrastructure
+- Looking toward tomorrow, keep an eye on the European energy markets as leaders meet to discuss reviving nuclear power projects to offset the massive gas and fuel spikes caused by the ongoing war</description>
+      <pubDate>Sat, 04 Apr 2026 06:49:05 +0000</pubDate>
+      <guid>news-briefing-2026-04-04</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/126d5437ff53_daily_news_briefing_-_2026-04-04.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-04.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Democracy Dies With The Rifleman</title>
+      <description>Audio version of Democracy Dies With The Rifleman from LessWrong Frontpage</description>
+      <pubDate>Sat, 04 Apr 2026 06:40:02 +0000</pubDate>
+      <guid>ntqpAuHTrphYzv4EG</guid>
+      <link>https://www.lesswrong.com/posts/ntqpAuHTrphYzv4EG/democracy-dies-with-the-rifleman</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5807fc909865_democracy_dies_with_the_rifleman.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Anthropic Responsible Scaling Policy v3: Dive Into The Details” by Zvi</title>
+      <description>Audio version of “Anthropic Responsible Scaling Policy v3: Dive Into The Details” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 03 Apr 2026 13:49:15 +0000</pubDate>
+      <guid>462ed734-c138-4c3e-bb30-2a887c1526e5</guid>
+      <link>https://www.lesswrong.com/posts/RtQxa5MoKk9bwEEEd/anthropic-responsible-scaling-policy-v3-dive-into-the</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a30c9f3817c8_anthropic_responsible_scaling_policy_v3_dive_int.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-03</title>
       <description>Daily News Briefing - 2026-04-03
 
@@ -1331,64 +1372,34 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>OpenAI’s surveillance language has many potential loopholes and they can do better</title>
-      <description>Audio version of OpenAI’s surveillance language has many potential loopholes and they can do better from LessWrong Frontpage</description>
-      <pubDate>Wed, 04 Mar 2026 04:25:46 +0000</pubDate>
-      <guid>FSGfzDLFdFtRDADF4</guid>
-      <link>https://www.lesswrong.com/posts/FSGfzDLFdFtRDADF4/openai-s-surveillance-language-has-many-potential-loopholes</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/efea1e84ab09_openais_surveillance_language_has_many_potential.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-03-04</title>
-      <description>Daily News Briefing - 2026-03-04
-
-Topics covered:
-- The conflict in the Middle East has escalated into a direct multi-front war following the weekend’s joint United States and Israeli strikes
-- In the artificial intelligence sector, OpenAI has made a significant pivot to address the fallout from its recent military partnership
-- Apple has also entered the A.I
-- Google is expanding its agentic capabilities by integrating its Gemini assistant more deeply into the physical world
-- Finally, in a warning for the digital information environment, security researchers report that the conflict in Iran is being flooded with sophisticated deepfakes
-- As we look toward tomorrow, the United Nations is expected to hold an emergency session to address the widening theater of war and the mounting humanitarian crisis in Lebanon and Iran</description>
-      <pubDate>Wed, 04 Mar 2026 02:07:53 +0000</pubDate>
-      <guid>news-briefing-2026-03-04</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7db5121019c0_daily_news_briefing_-_2026-03-04.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-04.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Milder temperature makes a hell stable</title>
-      <description>Audio version of Milder temperature makes a hell stable from LessWrong Frontpage</description>
-      <pubDate>Tue, 03 Mar 2026 22:25:58 +0000</pubDate>
-      <guid>oNgqTwKJqncm7ujHw</guid>
-      <link>https://www.lesswrong.com/posts/oNgqTwKJqncm7ujHw/milder-temperature-makes-a-hell-stable</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3f5e8f7c49b0_milder_temperature_makes_a_hell_stable.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“A Tale of Three Contracts” by Zvi</title>
-      <description>Audio version of “A Tale of Three Contracts” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 03 Mar 2026 20:34:21 +0000</pubDate>
-      <guid>3a62a0de-bffc-428b-91db-1ce5e72664ad</guid>
-      <link>https://www.lesswrong.com/posts/PBrggrw4mhgbksoYY/a-tale-of-three-contracts</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a6eac4635f26_a_tale_of_three_contracts_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Announcing ControlConf 2026</title>
       <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
       <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
       <guid>tN5mgBAinwFe5c67c</guid>
       <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Grading AI 2027's 2025 Predictions</title>
+      <description>Audio version of Grading AI 2027's 2025 Predictions from Daniel Kokotajlo</description>
+      <pubDate>Fri, 13 Feb 2026 00:18:41 +0000</pubDate>
+      <guid>JYGeAAh92hAwvseFk</guid>
+      <link>https://www.lesswrong.com/posts/JYGeAAh92hAwvseFk/grading-ai-2027-s-2025-predictions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8aad9aed9429_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Grading AI 2027’s 2025 Predictions</title>
+      <description>Audio version of Grading AI 2027’s 2025 Predictions from AI Futures Project</description>
+      <pubDate>Thu, 12 Feb 2026 23:56:07 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</guid>
+      <link>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
