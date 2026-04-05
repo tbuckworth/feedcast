@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-05</title>
+      <description>Daily News Briefing - 2026-04-05
+
+Topics covered:
+- The fallout from the downed United States fighter jet over Iran is intensifying as search and rescue operations enter a critical phase
+- In a move targeting the symbolic legacy of the Iranian military, United States Immigration and Customs Enforcement has arrested the niece and grand-niece of the late Iranian General Qasem Soleimani
+- The Artemis Two mission continues its historic transit toward the Moon, with NASA reporting that all primary systems remain nominal
+- Within the artificial intelligence sector, the push for automated safety protocols is gaining momentum
+- Finally, in the private tech sector, the elite startup accelerator Y Combinator has "parted ways" with the compliance startup Delve
+- Looking toward tomorrow, keep an eye on the German legislature as it reviews a new proposal that would require men under forty-five to seek military approval before traveling abroad for long periods</description>
+      <pubDate>Sun, 05 Apr 2026 06:55:42 +0000</pubDate>
+      <guid>news-briefing-2026-04-05</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5cc8d25d37fc_daily_news_briefing_-_2026-04-05.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-05.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Academic Proof-of-Work in the Age of LLMs</title>
+      <description>Audio version of Academic Proof-of-Work in the Age of LLMs from LessWrong Frontpage</description>
+      <pubDate>Sun, 05 Apr 2026 06:49:55 +0000</pubDate>
+      <guid>Tfixo2RhNXgHzLwZx</guid>
+      <link>https://www.lesswrong.com/posts/Tfixo2RhNXgHzLwZx/academic-proof-of-work-in-the-age-of-llms</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/134790f62ba4_academic_proof-of-work_in_the_age_of_llms.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-04</title>
       <description>Daily News Briefing - 2026-04-04
 
@@ -1298,75 +1328,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-05</title>
-      <description>Daily News Briefing - 2026-03-05
-
-Topics covered:
-- The conflict in the Middle East has intensified as the United States Navy confirmed a submarine sank an Iranian warship in the Indian Ocean
-- In the artificial intelligence sector, a major power pact was signed today at the White House
-- The battle for artificial intelligence supremacy has turned into a public war of words
-- Apple has officially launched the "MacBook Neo," a colorful, five-hundred-and-ninety-nine-dollar laptop aimed directly at the education and entry-level markets
-- Finally, in China, the government has set an economic growth target of "around five percent," its lowest since nineteen-ninety-one
-- As we look toward tomorrow, all eyes are on the Mediterranean, where Greek and Italian authorities are on high alert following a suspicious explosion that sank a Russian tanker off the coast of Libya</description>
-      <pubDate>Thu, 05 Mar 2026 06:38:59 +0000</pubDate>
-      <guid>news-briefing-2026-03-05</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/23886fe14854_daily_news_briefing_-_2026-03-05.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-05.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Maybe there's a pattern here?</title>
-      <description>Audio version of Maybe there's a pattern here? from LessWrong Frontpage</description>
-      <pubDate>Thu, 05 Mar 2026 05:38:49 +0000</pubDate>
-      <guid>TjcvjwaDsuea8bmbR</guid>
-      <link>https://www.lesswrong.com/posts/TjcvjwaDsuea8bmbR/maybe-there-s-a-pattern-here</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ff3a55832def_maybe_theres_a_pattern_here.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Open Hidden Open Thread 423.5</title>
-      <description>Audio version of Open Hidden Open Thread 423.5 from Scott Alexander</description>
-      <pubDate>Wed, 04 Mar 2026 23:16:58 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/open-hidden-open-thread-4235</guid>
-      <link>https://www.astralcodexten.com/p/open-hidden-open-thread-4235</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/688cf7610532_open_hidden_open_thread_4235.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Gemini 3.1 Pro Aces Benchmarks, I Suppose” by Zvi</title>
       <description>Audio version of “Gemini 3.1 Pro Aces Benchmarks, I Suppose” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Wed, 04 Mar 2026 20:12:19 +0000</pubDate>
       <guid>fbd05939-c7a8-46be-87e3-79d31d60ca41</guid>
       <link>https://www.lesswrong.com/posts/82zizPyyPgaEswbxz/gemini-3-1-pro-aces-benchmarks-i-suppose</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/addcfd032709_gemini_31_pro_aces_benchmarks_i_suppose_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Covert Malicious Finetuning</title>
-      <description>Audio version of Covert Malicious Finetuning from www.lesswrong.com</description>
-      <pubDate>Wed, 04 Mar 2026 19:49:36 +0000</pubDate>
-      <guid>injected-b3f26d01de2e4652</guid>
-      <link>https://www.lesswrong.com/posts/33emJkmw5bMAXZHHt/covert-malicious-finetuning-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b40ffa53ab3d_covert_malicious_finetuning.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The persona selection model</title>
-      <description>Audio version of The persona selection model from www.lesswrong.com</description>
-      <pubDate>Wed, 04 Mar 2026 19:40:44 +0000</pubDate>
-      <guid>injected-ba6b112f06a6f3ab</guid>
-      <link>https://www.lesswrong.com/posts/dfoty34sT7CSKeJNn#sNM9TcTACcgaHdcfF</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9892654af99c_the_persona_selection_model.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
