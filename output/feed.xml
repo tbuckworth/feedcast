@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-07</title>
+      <description>Daily News Briefing - 2026-04-07
+
+Topics covered:
+- The geopolitical tension between the United States and Iran has reached a critical digital flashpoint
+- On the technical front, a prominent shift in A-I development timelines is circulating within the research community
+- Mirroring this internal push for safety, OpenAI is also floating a radical social vision to combat the "bad vibes" and distrust reportedly brewing among its own staff regarding C-E-O Sam Altman
+- In the robotics sector, a new model known as G-E-N-One has achieved a ninety-nine percent reliability rate in performing complex physical tasks, such as fixing vacuums and folding boxes
+- In Washington, the Trump administration is doubling down on its "defense-first" fiscal realignment
+- Finally, a major legal ruling has stabilized the "Web Three" landscape</description>
+      <pubDate>Tue, 07 Apr 2026 07:04:42 +0000</pubDate>
+      <guid>news-briefing-2026-04-07</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/216b6750652b_daily_news_briefing_-_2026-04-07.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-07.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>We're actually running out of benchmarks to upper bound AI capabilities</title>
+      <description>Audio version of We're actually running out of benchmarks to upper bound AI capabilities from LessWrong Frontpage</description>
+      <pubDate>Tue, 07 Apr 2026 06:47:17 +0000</pubDate>
+      <guid>gfkJp8Mr9sBm83Rcz</guid>
+      <link>https://www.lesswrong.com/posts/gfkJp8Mr9sBm83Rcz/we-re-actually-running-out-of-benchmarks-to-upper-bound-ai</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8253cb762519_were_actually_running_out_of_benchmarks_to_upper.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Housing Roundup #13: More Dakka” by Zvi</title>
+      <description>Audio version of “Housing Roundup #13: More Dakka” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 06 Apr 2026 18:14:07 +0000</pubDate>
+      <guid>934b6489-5c48-474a-898b-3472f613a425</guid>
+      <link>https://www.lesswrong.com/posts/eSwdsDTnqigQJPfkw/housing-roundup-13-more-dakka</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/81d033774451_housing_roundup_13_more_dakka_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>AIs can now often do massive easy-to-verify SWE tasks and I've updated towards shorter timelines</title>
+      <description>Audio version of AIs can now often do massive easy-to-verify SWE tasks and I've updated towards shorter timelines from Ryan Greenblatt</description>
+      <pubDate>Mon, 06 Apr 2026 16:01:56 +0000</pubDate>
+      <guid>dKpC6wHFqDrGZwnah</guid>
+      <link>https://www.lesswrong.com/posts/dKpC6wHFqDrGZwnah/ais-can-now-often-do-massive-easy-to-verify-swe-tasks-and-i</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/008c42fcff1f_ais_can_now_often_do_massive_easy-to-verify_swe_ta.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-06</title>
       <description>Daily News Briefing - 2026-04-06
 
@@ -1265,69 +1317,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-07</title>
-      <description>Daily News Briefing - 2026-03-07
-
-Topics covered:
-- The conflict in the Middle East has entered its seventh day with a significant escalation on the ground
-- In the artificial intelligence sector, the fallout from the Pentagon’s designation of Anthropic as a "supply-chain risk" has created a stark market divide
-- OpenAI is moving to counter its recent PR challenges by expanding its enterprise and developer utility
-- The hardware sector is reeling from the compounding effects of the ongoing war and trade volatility
-- Finally, a new era of digital restriction for minors is gaining momentum globally
-- As we look toward tomorrow, the United Nations Security Council is scheduled to meet to discuss the potential for a humanitarian corridor in Beirut as Israeli forces prepare to move across the border</description>
-      <pubDate>Sat, 07 Mar 2026 06:27:56 +0000</pubDate>
-      <guid>news-briefing-2026-03-07</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c8c9075ff938_daily_news_briefing_-_2026-03-07.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-07.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Your Causal Variables Are Irreducibly Subjective</title>
-      <description>Audio version of Your Causal Variables Are Irreducibly Subjective from LessWrong Frontpage</description>
-      <pubDate>Sat, 07 Mar 2026 03:11:12 +0000</pubDate>
-      <guid>NbQR95tgonXW2xMcQ</guid>
-      <link>https://www.lesswrong.com/posts/NbQR95tgonXW2xMcQ/your-causal-variables-are-irreducibly-subjective-3</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a8f7320fae12_your_causal_variables_are_irreducibly_subjective.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Anthropic Officially, Arbitrarily and Capriciously Designated a Supply Chain Risk” by Zvi</title>
-      <description>Audio version of “Anthropic Officially, Arbitrarily and Capriciously Designated a Supply Chain Risk” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 06 Mar 2026 18:11:56 +0000</pubDate>
-      <guid>ef6361c4-c5a3-4683-9950-e010b50cab40</guid>
-      <link>https://www.lesswrong.com/posts/EL8uxnWMEZXc7Wh9A/anthropic-officially-arbitrarily-and-capriciously-designated</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/83c357ca0dc2_anthropic_officially_arbitrarily_and_capriciousl.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>SEIU Delenda Est</title>
-      <description>Audio version of SEIU Delenda Est from Scott Alexander</description>
-      <pubDate>Fri, 06 Mar 2026 14:04:21 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/seiu-delenda-est</guid>
-      <link>https://www.astralcodexten.com/p/seiu-delenda-est</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/da8ecd999ac9_seiu_delenda_est.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #158: The Department of War” by Zvi</title>
-      <description>Audio version of “AI #158: The Department of War” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 05 Mar 2026 16:12:19 +0000</pubDate>
-      <guid>33622e30-5e88-448a-91a7-9c4961e6ed3a</guid>
-      <link>https://www.lesswrong.com/posts/YTnzcZSbA69fMCjNo/ai-158-the-department-of-war</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9f7811a3757d_ai_158_the_department_of_war_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Announcing ControlConf 2026</title>
       <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
       <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
@@ -1356,17 +1345,6 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</guid>
       <link>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>How do we (more) safely defer to AIs?</title>
-      <description>Audio version of How do we (more) safely defer to AIs? from Ryan Greenblatt</description>
-      <pubDate>Thu, 12 Feb 2026 16:55:52 +0000</pubDate>
-      <guid>vjAM7F8vMZS7oRrrh</guid>
-      <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
