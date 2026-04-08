@@ -21,6 +21,69 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-08</title>
+      <description>Daily News Briefing - 2026-04-08
+
+Topics covered:
+- The month-long military escalation between the United States and Iran has reached a significant turning point with the announcement of a two-week provisional ceasefire
+- On the technical front, Anthropic has unveiled a new flagship model under the code name "Project Glasswing" as part of a high-stakes cybersecurity initiative
+- Infrastructure for the next generation of A-I is also seeing a shift in its industrial foundation
+- In Washington, the Trump administration has proposed a seven hundred million dollar budget cut for the Cybersecurity and Infrastructure Security Agency, known as CISA
+- In the consumer tech sector, Google is facing increased legal pressure over A-I safety
+- Finally, the Artemis Two mission has reached its furthest distance from Earth, successfully transmitting high-resolution imagery of the lunar far side</description>
+      <pubDate>Wed, 08 Apr 2026 07:07:21 +0000</pubDate>
+      <guid>news-briefing-2026-04-08</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/44465ad9076e_daily_news_briefing_-_2026-04-08.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-08.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Alignment vs. Safety, part 2: Alignment</title>
+      <description>Audio version of Alignment vs. Safety, part 2: Alignment from LessWrong Frontpage</description>
+      <pubDate>Wed, 08 Apr 2026 06:40:23 +0000</pubDate>
+      <guid>jzSMt555GvfwxWtQo</guid>
+      <link>https://www.lesswrong.com/posts/jzSMt555GvfwxWtQo/alignment-vs-safety-part-2-alignment</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fb9befcc2f2b_alignment_vs_safety_part_2_alignment.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Zagreb Meetup This Friday</title>
+      <description>Audio version of Zagreb Meetup This Friday from Scott Alexander</description>
+      <pubDate>Tue, 07 Apr 2026 20:51:24 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/zagreb-meetup-this-friday</guid>
+      <link>https://www.astralcodexten.com/p/zagreb-meetup-this-friday</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ce88cddeba6d_zagreb_meetup_this_friday.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“OpenAI #16: A History and a Proposal” by Zvi</title>
+      <description>Audio version of “OpenAI #16: A History and a Proposal” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 07 Apr 2026 19:12:23 +0000</pubDate>
+      <guid>7657fe95-49cc-415a-8dd1-583c0c4a9097</guid>
+      <link>https://www.lesswrong.com/posts/QSgBhcDKi9j5iSi9s/openai-16-a-history-and-a-proposal</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aef835967e92_openai_16_a_history_and_a_proposal_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>My picture of the present in AI</title>
+      <description>Audio version of My picture of the present in AI from Ryan Greenblatt</description>
+      <pubDate>Tue, 07 Apr 2026 16:44:58 +0000</pubDate>
+      <guid>WjaGAA4xCAXeFpyWm</guid>
+      <link>https://www.lesswrong.com/posts/WjaGAA4xCAXeFpyWm/my-picture-of-the-present-in-ai</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/edfbb161e75d_my_picture_of_the_present_in_ai.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-07</title>
       <description>Daily News Briefing - 2026-04-07
 
@@ -1282,36 +1345,6 @@ Topics covered:
       <guid>o7e5C2Ev8JyyxHKNk</guid>
       <link>https://www.lesswrong.com/posts/o7e5C2Ev8JyyxHKNk/prologue-to-terrified-comments-on-claude-s-constitution</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/1584cd77f50a_prologue_to_terrified_comments_on_claudes_constit.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-03-08</title>
-      <description>Daily News Briefing - 2026-03-08
-
-Topics covered:
-- The war in the Middle East has reached a harrowing new inflection point
-- Internal divisions at OpenAI have reached the executive level following the company’s recent pivot toward military applications
-- In the corporate sector, Google has signaled its long-term bet on autonomous systems by granting Chief Executive Officer Sundar Pichai a massive six-hundred-and-ninety-two million dollar pay package
-- The hardware world is facing a new challenge in its effort to bridge the digital divide
-- Closer to home, the United States is dealing with a dual-threat of domestic instability and natural disaster
-- As we look toward tomorrow, tech analysts are monitoring the "ClawCon" enthusiast gathering in Manhattan, where the growing community of Anthropic loyalists is meeting to define a new "pro-human" roadmap for A.I</description>
-      <pubDate>Sun, 08 Mar 2026 06:31:58 +0000</pubDate>
-      <guid>news-briefing-2026-03-08</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e05e6e6fedef_daily_news_briefing_-_2026-03-08.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-08.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Why Many Ambitious (and Altruistic) People Probably Undervalue Their Happiness</title>
-      <description>Audio version of Why Many Ambitious (and Altruistic) People Probably Undervalue Their Happiness from LessWrong Frontpage</description>
-      <pubDate>Sun, 08 Mar 2026 02:31:05 +0000</pubDate>
-      <guid>ZvgHobDeJZcirGF5e</guid>
-      <link>https://www.lesswrong.com/posts/ZvgHobDeJZcirGF5e/why-many-ambitious-and-altruistic-people-probably-undervalue</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f9c99039dcf_why_many_ambitious_and_altruistic_people_probabl.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
