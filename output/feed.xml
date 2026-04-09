@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-09</title>
+      <description>Daily News Briefing - 2026-04-09
+
+Topics covered:
+- The two-week provisional ceasefire between the United States and Iran has officially taken effect, bringing a fragile pause to a month of kinetic escalation
+- In a move that signals a widening rift in Western alliances, President Trump has publicly criticized N-A-T-O, stating the alliance "wasn't there when we needed them" during the height of the Iran hostilities
+- In the A-I sector, Meta has officially re-entered the frontier model race with the launch of "Muse Spark." Developed by the newly formed Meta Superintelligence Labs, the model is now integrated across WhatsApp, Instagram, and Facebook
+- Google is also expanding its A-I ecosystem with the introduction of "notebooks" for its Gemini chatbot
+- Finally, the Artemis Two crew is preparing for a scheduled splashdown this Saturday
+- Looking toward tomorrow, keep an eye on Seoul as the K-pop group B-T-S kicks off their first global tour in four years, a massive logistical undertaking that will serve as a high-profile test for international travel and security protocols in the wake of the recent Middle Eastern de-escalation</description>
+      <pubDate>Thu, 09 Apr 2026 07:11:17 +0000</pubDate>
+      <guid>news-briefing-2026-04-09</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/49569b717110_daily_news_briefing_-_2026-04-09.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-09.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Have we already lost? Part 1: The Plan in 2024</title>
+      <description>Audio version of Have we already lost? Part 1: The Plan in 2024 from LessWrong Frontpage</description>
+      <pubDate>Thu, 09 Apr 2026 06:47:55 +0000</pubDate>
+      <guid>tjZWbmuCE9tjYQsrf</guid>
+      <link>https://www.lesswrong.com/posts/tjZWbmuCE9tjYQsrf/have-we-already-lost-part-1-the-plan-in-2024</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/dd4076e1371e_have_we_already_lost_part_1_the_plan_in_2024.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #163: Mythos Quest” by Zvi</title>
+      <description>Audio version of “AI #163: Mythos Quest” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 08 Apr 2026 12:42:00 +0000</pubDate>
+      <guid>03f87a9f-477e-4bd0-9949-cf81fb95a864</guid>
+      <link>https://www.lesswrong.com/posts/5Dsuw9gGzkbjS4ubx/ai-163-mythos-quest</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/29fecf0d5acc_ai_163_mythos_quest_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-08</title>
       <description>Daily News Briefing - 2026-04-08
 
@@ -1320,36 +1361,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-09</title>
-      <description>Daily News Briefing - 2026-03-09
-
-Topics covered:
-- The leadership of the Islamic Republic of Iran has officially transitioned following the death of Ayatollah Khamenei
-- The diplomatic rift between the United Kingdom and the United States has deepened further
-- In the technology sector, the fallout from the Pentagon’s blacklisting of Anthropic as a "supply chain risk" is causing a chilling effect across the startup ecosystem
-- The physical infrastructure of artificial intelligence is taking on a rugged new form
-- In the consumer hardware space, Palmer Luckey—the founder of Oculus and Anduril—is reportedly seeking a one billion dollar valuation for his retro-gaming startup, ModRetro
-- Finally, a significant regulatory shift is taking place in the Pacific</description>
-      <pubDate>Mon, 09 Mar 2026 06:50:59 +0000</pubDate>
-      <guid>news-briefing-2026-03-09</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7074a0887099_daily_news_briefing_-_2026-03-09.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-09.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Prologue to Terrified Comments on Claude's Constitution</title>
-      <description>Audio version of Prologue to Terrified Comments on Claude's Constitution from LessWrong Frontpage</description>
-      <pubDate>Mon, 09 Mar 2026 06:46:35 +0000</pubDate>
-      <guid>o7e5C2Ev8JyyxHKNk</guid>
-      <link>https://www.lesswrong.com/posts/o7e5C2Ev8JyyxHKNk/prologue-to-terrified-comments-on-claude-s-constitution</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1584cd77f50a_prologue_to_terrified_comments_on_claudes_constit.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Announcing ControlConf 2026</title>
       <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
       <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
@@ -1378,6 +1389,17 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</guid>
       <link>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>How do we (more) safely defer to AIs?</title>
+      <description>Audio version of How do we (more) safely defer to AIs? from Ryan Greenblatt</description>
+      <pubDate>Thu, 12 Feb 2026 16:55:52 +0000</pubDate>
+      <guid>vjAM7F8vMZS7oRrrh</guid>
+      <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
