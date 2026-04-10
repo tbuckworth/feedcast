@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-10</title>
+      <description>Daily News Briefing - 2026-04-10
+
+Topics covered:
+- The artificial intelligence sector is shifting toward high-value monetization and specialized capabilities
+- The legal and regulatory pressure on A-I labs is intensifying at the state level
+- In human-centric tech, Google has upgraded its Gemini assistant to generate interactive three-dimensional models and simulations
+- Geopolitically, the fragile two-week ceasefire between the United States and Iran is under immense strain
+- In Washington, health policy is undergoing a radical shift
+- Finally, NASA engineers have determined that a persistent helium leak on the Orion spacecraft—similar to the one that delayed Artemis One—is not a threat to the Artemis Two crew's upcoming splashdown</description>
+      <pubDate>Fri, 10 Apr 2026 07:16:07 +0000</pubDate>
+      <guid>news-briefing-2026-04-10</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/310b6c207753_daily_news_briefing_-_2026-04-10.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-10.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Have we already lost? Part 2: Reasons for Doom</title>
+      <description>Audio version of Have we already lost? Part 2: Reasons for Doom from LessWrong Frontpage</description>
+      <pubDate>Fri, 10 Apr 2026 06:56:37 +0000</pubDate>
+      <guid>hefTFru3bCw2NkpKS</guid>
+      <link>https://www.lesswrong.com/posts/hefTFru3bCw2NkpKS/have-we-already-lost-part-2-reasons-for-doom</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/87f37803e7e3_have_we_already_lost_part_2_reasons_for_doom.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Mythos: The System Card” by Zvi</title>
+      <description>Audio version of “Claude Mythos: The System Card” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 09 Apr 2026 21:41:52 +0000</pubDate>
+      <guid>60a6fec7-daf4-46d3-8058-120a645b23b2</guid>
+      <link>https://www.lesswrong.com/posts/EDQhwLTyTnNmaxRGq/claude-mythos-the-system-card</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a6060056175e_claude_mythos_the_system_card_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-09</title>
       <description>Daily News Briefing - 2026-04-09
 
@@ -1334,28 +1375,6 @@ Topics covered:
       <guid>RyKDbBkemNuRezTvt</guid>
       <link>https://www.lesswrong.com/posts/RyKDbBkemNuRezTvt/the-case-for-ai-safety-capacity-building-work</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c325c41e152c_the_case_for_ai_safety_capacity-building_work.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Contra Myself on Free Will</title>
-      <description>Audio version of Contra Myself on Free Will from LessWrong Frontpage</description>
-      <pubDate>Tue, 10 Mar 2026 06:29:45 +0000</pubDate>
-      <guid>EqLJBksk29BWkEmML</guid>
-      <link>https://www.lesswrong.com/posts/EqLJBksk29BWkEmML/contra-myself-on-free-will-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ab7ba6145707_contra_myself_on_free_will.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Code, Claude Cowork and Codex #5” by Zvi</title>
-      <description>Audio version of “Claude Code, Claude Cowork and Codex #5” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 09 Mar 2026 19:44:01 +0000</pubDate>
-      <guid>980703aa-87ad-4132-ab19-eec86fbf4c86</guid>
-      <link>https://www.lesswrong.com/posts/rNes65r9TKegdLowb/claude-code-claude-cowork-and-codex-5</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f26cc63f4a70_claude_code_claude_cowork_and_codex_5_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
