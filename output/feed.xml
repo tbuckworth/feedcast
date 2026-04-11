@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-11</title>
+      <description>Daily News Briefing - 2026-04-11
+
+Topics covered:
+- The safety and security of artificial intelligence leadership has moved from theoretical risk to physical threat
+- In the Middle East, the fragile geopolitical landscape is shifting toward high-stakes diplomacy
+- On the technical front, Microsoft has begun a quiet retreat from its aggressive global integration of A-I assistants
+- In a significant milestone for space exploration, the Artemis Two mission has concluded with a successful splashdown in the Pacific Ocean
+- Finally, the Trump administration’s use of legal pressure on tech platforms has expanded to include domestic critics
+- Looking toward tomorrow, all eyes are on the Pakistani city of Lahore as the United States and Iran begin their historic high-level peace talks</description>
+      <pubDate>Sat, 11 Apr 2026 06:50:45 +0000</pubDate>
+      <guid>news-briefing-2026-04-11</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8d419d4cc08f_daily_news_briefing_-_2026-04-11.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-11.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Dario probably doesn't believe in superintelligence</title>
+      <description>Audio version of Dario probably doesn't believe in superintelligence from LessWrong Frontpage</description>
+      <pubDate>Sat, 11 Apr 2026 05:58:17 +0000</pubDate>
+      <guid>Fnty2JpQ6WBD9FWo5</guid>
+      <link>https://www.lesswrong.com/posts/Fnty2JpQ6WBD9FWo5/dario-probably-doesn-t-believe-in-superintelligence</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7997e0f4051b_dario_probably_doesnt_believe_in_superintelligenc.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines</title>
+      <description>Audio version of If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines from Ryan Greenblatt</description>
+      <pubDate>Sat, 11 Apr 2026 00:38:52 +0000</pubDate>
+      <guid>Jga7PHMzfZf4fbdyo</guid>
+      <link>https://www.lesswrong.com/posts/Jga7PHMzfZf4fbdyo/if-mythos-actually-made-anthropic-employees-4x-more</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0aaf520ae940_if_mythos_actually_made_anthropic_employees_4x_mor.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Mythos #2: Cybersecurity and Project Glasswing” by Zvi</title>
+      <description>Audio version of “Claude Mythos #2: Cybersecurity and Project Glasswing” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 10 Apr 2026 18:53:57 +0000</pubDate>
+      <guid>2a44bf53-a056-4eca-8349-725f1c6cfd05</guid>
+      <link>https://www.lesswrong.com/posts/GEgNYn5myreQRHggQ/claude-mythos-2-cybersecurity-and-project-glasswing</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/224996fc6126_claude_mythos_2_cybersecurity_and_project_glass.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-10</title>
       <description>Daily News Briefing - 2026-04-10
 
@@ -1339,47 +1391,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-11</title>
-      <description>Daily News Briefing - 2026-03-11
-
-Topics covered:
-- The conflict in the Middle East has escalated to a state of total war as Israeli air strikes targeted central Beirut for the first time, striking a luxury hotel
-- In a rapidly escalating legal and political battle, Anthropic has filed a lawsuit against the United States government over its recent "supply-chain risk" blacklisting
-- Meta has made a significant strategic acquisition, purchasing Moltbook, a viral social network where A.I
-- The push toward agentic A.I
-- In hardware and infrastructure, Google and Tesla have announced a rare partnership called "Utilize" to overhaul the American electrical grid as A.I
-- As we look toward tomorrow, the tech industry will be watching the first court filings in the Anthropic case for clues on how the executive branch plans to regulate A.I</description>
-      <pubDate>Wed, 11 Mar 2026 06:40:29 +0000</pubDate>
-      <guid>news-briefing-2026-03-11</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a3a9631da701_daily_news_briefing_-_2026-03-11.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-11.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Last Rights</title>
-      <description>Audio version of Last Rights from Scott Alexander</description>
-      <pubDate>Wed, 11 Mar 2026 05:01:45 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/last-rights</guid>
-      <link>https://www.astralcodexten.com/p/last-rights</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/07dfdd0e7fa5_last_rights.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The case for AI safety capacity-building work</title>
-      <description>Audio version of The case for AI safety capacity-building work from LessWrong Frontpage</description>
-      <pubDate>Wed, 11 Mar 2026 04:49:24 +0000</pubDate>
-      <guid>RyKDbBkemNuRezTvt</guid>
-      <link>https://www.lesswrong.com/posts/RyKDbBkemNuRezTvt/the-case-for-ai-safety-capacity-building-work</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c325c41e152c_the_case_for_ai_safety_capacity-building_work.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Announcing ControlConf 2026</title>
       <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
       <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
@@ -1408,17 +1419,6 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</guid>
       <link>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>How do we (more) safely defer to AIs?</title>
-      <description>Audio version of How do we (more) safely defer to AIs? from Ryan Greenblatt</description>
-      <pubDate>Thu, 12 Feb 2026 16:55:52 +0000</pubDate>
-      <guid>vjAM7F8vMZS7oRrrh</guid>
-      <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
