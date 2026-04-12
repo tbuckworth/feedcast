@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-12</title>
+      <description>Daily News Briefing - 2026-04-12
+
+Topics covered:
+- The security crisis surrounding artificial intelligence leadership has intensified following the attempted firebombing of Sam Altman’s home
+- In the Middle East, a new front has opened in the information war between the United States and Iran
+- On the technical hardware front, Nvidia-backed SiFive has reached a valuation of three billion, six hundred and fifty million dollars
+- The Artemis Two crew has returned to Houston following their historic splashdown in the Pacific
+- Globally, two major elections are testing the stability of long-standing regimes
+- Looking toward tomorrow, the historic high-level peace talks between United States and Iranian officials are set to begin in Lahore, Pakistan</description>
+      <pubDate>Sun, 12 Apr 2026 07:04:01 +0000</pubDate>
+      <guid>news-briefing-2026-04-12</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/870010cf1462_daily_news_briefing_-_2026-04-12.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-12.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Have we already lost? Part 3: Reasons for Optimism</title>
+      <description>Audio version of Have we already lost? Part 3: Reasons for Optimism from LessWrong Frontpage</description>
+      <pubDate>Sun, 12 Apr 2026 06:48:10 +0000</pubDate>
+      <guid>ZimWxECcHtjZAycGS</guid>
+      <link>https://www.lesswrong.com/posts/ZimWxECcHtjZAycGS/have-we-already-lost-part-3-reasons-for-optimism</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ca27ed6f7429_have_we_already_lost_part_3_reasons_for_optimism.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-11</title>
       <description>Daily News Briefing - 2026-04-11
 
@@ -1339,47 +1369,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-12</title>
-      <description>Daily News Briefing - 2026-03-12
-
-Topics covered:
-- The geopolitical crisis in the Middle East has entered a dangerous new phase of economic and cyber warfare
-- In the realm of AI policy and safety, Anthropic is doubling down on its independence following its recent blacklisting by the Pentagon
-- In legal developments, Grammarly has abruptly disabled its "Expert Review" feature following intense backlash and a class-action lawsuit filed by journalist Julia Angwin
-- OpenAI is pivoting toward deeper system integration with the announcement that its Sora video generator will soon be built directly into ChatGPT
-- Finally, the hardware and venture markets are showing extreme concentration around "vibe-coding" and autonomous systems
-- As we look toward tomorrow, markets will be reacting to the G7 oil release as the first tankers attempt to navigate the heightened tensions in the Persian Gulf</description>
-      <pubDate>Thu, 12 Mar 2026 06:42:13 +0000</pubDate>
-      <guid>news-briefing-2026-03-12</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e4ce331169ba_daily_news_briefing_-_2026-03-12.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-12.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Today's Ring Signatures and Related Tools</title>
-      <description>Audio version of Today's Ring Signatures and Related Tools from LessWrong Frontpage</description>
-      <pubDate>Thu, 12 Mar 2026 05:20:43 +0000</pubDate>
-      <guid>4Kf6iPeApg8DtqD2m</guid>
-      <link>https://www.lesswrong.com/posts/4Kf6iPeApg8DtqD2m/today-s-ring-signatures-and-related-tools</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8a2e61c4a659_todays_ring_signatures_and_related_tools.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Lines Composed In A Fake Sequoia Forest</title>
-      <description>Audio version of Lines Composed In A Fake Sequoia Forest from Scott Alexander</description>
-      <pubDate>Wed, 11 Mar 2026 20:46:55 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/lines-composed-in-a-fake-sequoia</guid>
-      <link>https://www.astralcodexten.com/p/lines-composed-in-a-fake-sequoia</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8290e40b3bac_lines_composed_in_a_fake_sequoia_forest.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“GPT-5.4 Is A Substantial Upgrade” by Zvi</title>
       <description>Audio version of “GPT-5.4 Is A Substantial Upgrade” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Wed, 11 Mar 2026 14:04:07 +0000</pubDate>
@@ -1419,6 +1408,17 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</guid>
       <link>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>How do we (more) safely defer to AIs?</title>
+      <description>Audio version of How do we (more) safely defer to AIs? from Ryan Greenblatt</description>
+      <pubDate>Thu, 12 Feb 2026 16:55:52 +0000</pubDate>
+      <guid>vjAM7F8vMZS7oRrrh</guid>
+      <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
