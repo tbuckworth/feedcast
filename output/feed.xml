@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-13</title>
+      <description>Daily News Briefing - 2026-04-13
+
+Topics covered:
+- The historic peace talks in Lahore have ended in failure, plunging the Middle East back into a state of high-intensity conflict
+- In Europe, the geopolitical landscape has been fundamentally reshaped by a landslide election in Hungary
+- In the artificial intelligence sector, a surprising policy shift is emerging regarding Anthropic’s new "Mythos" model
+- The frontier of high-performance computing has officially extended into orbit
+- Finally, in a major shift for the digital creator economy, the platform X is aggressively cutting back payments to accounts that rely on clickbait and rapid-fire news aggregation
+- Looking toward tomorrow, maritime insurers and global shipping hubs are bracing for the first impacts of the announced blockade on the world’s most critical energy transit point</description>
+      <pubDate>Mon, 13 Apr 2026 07:48:58 +0000</pubDate>
+      <guid>news-briefing-2026-04-13</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/41b342ed2374_daily_news_briefing_-_2026-04-13.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-13.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Treaties, Regulations, and Research can be Complements</title>
+      <description>Audio version of Treaties, Regulations, and Research can be Complements from LessWrong Frontpage</description>
+      <pubDate>Mon, 13 Apr 2026 07:04:08 +0000</pubDate>
+      <guid>7CLL4Kpruf63GfBc3</guid>
+      <link>https://www.lesswrong.com/posts/7CLL4Kpruf63GfBc3/treaties-regulations-and-research-can-be-complements</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9c48a30a28fc_treaties_regulations_and_research_can_be_complem.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-12</title>
       <description>Daily News Briefing - 2026-04-12
 
@@ -1317,25 +1347,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-13</title>
-      <description>Daily News Briefing - 2026-03-13
-
-Topics covered:
-- The geopolitical crisis in the Middle East has entered a period of entrenched hostility following the formal succession of Iran's leadership
-- In the escalating conflict between the federal government and the AI industry, the legal battle over Anthropic’s "supply chain risk" designation is intensifying
-- In the realm of multimodal capabilities, Anthropic has updated its Claude models to natively generate charts, diagrams, and flowcharts directly within the chat interface
-- The business of AI-driven labor is seeing a wave of aggressive valuations and corporate restructuring
-- Finally, in hardware, the electric vehicle market is seeing a massive retreat from the American manufacturing sector
-- As we look toward Monday, the tech world will be focused on Nvidia’s flagship conference where CEO Jensen Huang is expected to debut the next generation of silicon designed specifically to power the "agentic" workflows currently being deployed by Google and Perplexity</description>
-      <pubDate>Fri, 13 Mar 2026 06:41:41 +0000</pubDate>
-      <guid>news-briefing-2026-03-13</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/46fa27a5614c_daily_news_briefing_-_2026-03-13.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-13.txt" type="text/plain" />
-    </item>
-    <item>
       <title>Spring Meetups Everywhere 2026 - Call For Organizers</title>
       <description>Audio version of Spring Meetups Everywhere 2026 - Call For Organizers from Scott Alexander</description>
       <pubDate>Fri, 13 Mar 2026 04:39:25 +0000</pubDate>
@@ -1347,34 +1358,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Power Steering: Behavior Steering via Layer-to-Layer Jacobian Singular Vectors</title>
-      <description>Audio version of Power Steering: Behavior Steering via Layer-to-Layer Jacobian Singular Vectors from LessWrong Frontpage</description>
-      <pubDate>Fri, 13 Mar 2026 04:05:29 +0000</pubDate>
-      <guid>EAE9u4YnE75eoiWDg</guid>
-      <link>https://www.lesswrong.com/posts/EAE9u4YnE75eoiWDg/power-steering-behavior-steering-via-layer-to-layer-jacobian</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2789c041c114_power_steering_behavior_steering_via_layer-to-lay.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“AI #159: See You In Court” by Zvi</title>
       <description>Audio version of “AI #159: See You In Court” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Thu, 12 Mar 2026 14:42:24 +0000</pubDate>
       <guid>921f57f4-e5c8-473c-a087-367949be452b</guid>
       <link>https://www.lesswrong.com/posts/DnrjKZTZwHGjdDB4u/ai-159-see-you-in-court</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7a13ee91c9f1_ai_159_see_you_in_court_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“GPT-5.4 Is A Substantial Upgrade” by Zvi</title>
-      <description>Audio version of “GPT-5.4 Is A Substantial Upgrade” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 11 Mar 2026 14:04:07 +0000</pubDate>
-      <guid>8c8186a8-ff8c-4624-abbd-714eed4ac591</guid>
-      <link>https://www.lesswrong.com/posts/sKCYLEN5EYLuokDft/gpt-5-4-is-a-substantial-upgrade</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d1ad89448759_gpt-54_is_a_substantial_upgrade_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
