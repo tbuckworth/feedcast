@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-14</title>
+      <description>Daily News Briefing - 2026-04-14
+
+Topics covered:
+- The security situation for artificial intelligence leadership has escalated from legal threats to repeated physical violence
+- In a significant setback for A-I safety protocols, Anthropic has admitted to a recurring technical failure during the training of its new "Mythos" model
+- In the corporate sector, the Trump administration has secured its first major win in its "Civil Rights Fraud Initiative" targeting diversity, equity, and inclusion programs
+- On the product front, the race to develop autonomous A-I agents is accelerating
+- Geopolitically, the focus remains on the fallout of the naval blockade in the Strait of Hormuz
+- Looking toward tomorrow, all eyes are on the global financial markets to see if the U.S</description>
+      <pubDate>Tue, 14 Apr 2026 07:18:52 +0000</pubDate>
+      <guid>news-briefing-2026-04-14</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/27a317887894_daily_news_briefing_-_2026-04-14.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-14.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>A Retrospective of Richard Ngo's 2022 List of Conceptual Alignment Projects</title>
+      <description>Audio version of A Retrospective of Richard Ngo's 2022 List of Conceptual Alignment Projects from LessWrong Frontpage</description>
+      <pubDate>Tue, 14 Apr 2026 06:58:28 +0000</pubDate>
+      <guid>M3qB2BGgMNuG5oRTB</guid>
+      <link>https://www.lesswrong.com/posts/M3qB2BGgMNuG5oRTB/a-retrospective-of-richard-ngo-s-2022-list-of-conceptual</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/efc7b1b2b7a4_a_retrospective_of_richard_ngos_2022_list_of_conc.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Political Violence Is Never Acceptable” by Zvi</title>
+      <description>Audio version of “Political Violence Is Never Acceptable” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 13 Apr 2026 15:22:42 +0000</pubDate>
+      <guid>b60c6bdb-594d-4ed9-a96d-d2c340c19a5b</guid>
+      <link>https://www.lesswrong.com/posts/dsaEB4u2dxp9BdhdS/political-violence-is-never-acceptable</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5a01053baada_political_violence_is_never_acceptable_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-13</title>
       <description>Daily News Briefing - 2026-04-13
 
@@ -1312,58 +1353,6 @@ Topics covered:
       <guid>j8EM23RCEcYR7wLhv</guid>
       <link>https://www.lesswrong.com/posts/j8EM23RCEcYR7wLhv/when-do-intuitions-need-to-be-reliable</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c482fa0cddc1_when_do_intuitions_need_to_be_reliable.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-03-14</title>
-      <description>Daily News Briefing - 2026-03-14
-
-Topics covered:
-- The regional conflict in the Middle East has entered a period of sustained naval and aerial attrition
-- The high-stakes consolidation of the artificial intelligence and cloud sectors reached a milestone as Google finalized its thirty-two billion dollar acquisition of the cybersecurity firm Wiz
-- In architectural developments, Elon Musk’s xAI is reportedly "starting over" on its autonomous coding tools
-- Microsoft is making a major push to integrate AI into the gaming ecosystem
-- On the regulatory front, Adobe has agreed to pay a seventy-five million dollar penalty to settle a Department of Justice lawsuit regarding hidden cancellation fees and difficult-to-navigate subscription models
-- As we look toward next week, attention turns to the United Nations as Cuba confirmed it has entered negotiations with the United States to address the crippling effects of the ongoing regional oil blockade</description>
-      <pubDate>Sat, 14 Mar 2026 06:35:43 +0000</pubDate>
-      <guid>news-briefing-2026-03-14</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d8f87560778b_daily_news_briefing_-_2026-03-14.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-14.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>All technical alignment plans are steps in the dark</title>
-      <description>Audio version of All technical alignment plans are steps in the dark from LessWrong Frontpage</description>
-      <pubDate>Sat, 14 Mar 2026 04:50:14 +0000</pubDate>
-      <guid>QygXWZbncbveZhWqH</guid>
-      <link>https://www.lesswrong.com/posts/QygXWZbncbveZhWqH/all-technical-alignment-plans-are-steps-in-the-dark</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0f314b3c7de3_all_technical_alignment_plans_are_steps_in_the_dar.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Spring Meetups Everywhere 2026 - Call For Organizers</title>
-      <description>Audio version of Spring Meetups Everywhere 2026 - Call For Organizers from Scott Alexander</description>
-      <pubDate>Fri, 13 Mar 2026 04:39:25 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/spring-meetups-everywhere-2026-call</guid>
-      <link>https://www.astralcodexten.com/p/spring-meetups-everywhere-2026-call</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d0160544eda1_spring_meetups_everywhere_2026_-_call_for_organize.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #159: See You In Court” by Zvi</title>
-      <description>Audio version of “AI #159: See You In Court” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 12 Mar 2026 14:42:24 +0000</pubDate>
-      <guid>921f57f4-e5c8-473c-a087-367949be452b</guid>
-      <link>https://www.lesswrong.com/posts/DnrjKZTZwHGjdDB4u/ai-159-see-you-in-court</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7a13ee91c9f1_ai_159_see_you_in_court_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
