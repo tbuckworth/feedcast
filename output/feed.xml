@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-15</title>
+      <description>Daily News Briefing - 2026-04-15
+
+Topics covered:
+- The physical threat to artificial intelligence leadership has become a primary national security concern
+- In the A-I capabilities race, the divide between OpenAI and Anthropic is shifting from technical to financial
+- Geopolitically, the United States has doubled down on its naval blockade of the Strait of Hormuz
+- In the corporate technology sector, Amazon has made a massive eleven billion, six hundred million dollar move to dominate satellite communications by acquiring Globalstar
+- On the software front, Google is attempting to turn A-I from a chatbot into a functional operating system
+- Looking toward tomorrow, the focus shifts to the United Nations as member states react to China’s formal protest of the American naval blockade, which could trigger a vote on international maritime intervention</description>
+      <pubDate>Wed, 15 Apr 2026 07:19:03 +0000</pubDate>
+      <guid>news-briefing-2026-04-15</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/882368124191_daily_news_briefing_-_2026-04-15.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-15.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>For with what judgment we shall be judged</title>
+      <description>Audio version of For with what judgment we shall be judged from LessWrong Frontpage</description>
+      <pubDate>Wed, 15 Apr 2026 06:52:27 +0000</pubDate>
+      <guid>rLzx65jQami9bK5CC</guid>
+      <link>https://www.lesswrong.com/posts/rLzx65jQami9bK5CC/for-with-what-judgment-we-shall-be-judged</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8a622e1952bf_for_with_what_judgment_we_shall_be_judged.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Mythos #3: Capabilities and Additions” by Zvi</title>
+      <description>Audio version of “Claude Mythos #3: Capabilities and Additions” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 14 Apr 2026 13:01:36 +0000</pubDate>
+      <guid>9af2cca2-2349-422a-9b53-58cc25cd5f89</guid>
+      <link>https://www.lesswrong.com/posts/2ziYGFK7QmbbLgBoP/claude-mythos-3-capabilities-and-additions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5d8001e95374_claude_mythos_3_capabilities_and_additions_by.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-14</title>
       <description>Daily News Briefing - 2026-04-14
 
@@ -1323,36 +1364,6 @@ Topics covered:
       <guid>bahjihMy2YzddLuo6</guid>
       <link>https://www.lesswrong.com/posts/bahjihMy2YzddLuo6/hidden-role-games-as-a-trusted-model-eval</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/175364d7a1b2_hidden_role_games_as_a_trusted_model_eval.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-03-15</title>
-      <description>Daily News Briefing - 2026-03-15
-
-Topics covered:
-- The conflict in the Middle East has reached a critical inflection point as the United States moves to internationalize the defense of global trade
-- In the defense sector, the United States Army has signaled a massive shift toward autonomous systems by awarding Anduril a contract worth up to twenty billion dollars
-- The artificial intelligence sector is experiencing significant internal volatility
-- In consumer hardware, iFixit has labeled Apple’s new five-hundred-and-ninety-nine-dollar MacBook Neo the company's "most repairable" laptop in fourteen years
-- On the digital front, OpenAI has finalized several major integrations for ChatGPT, allowing the assistant to directly execute tasks within DoorDash, Spotify, Uber, and Canva
-- As we look toward tomorrow, the focus shifts to the ninety-eighth Academy Awards, where the film industry will attempt to navigate a ceremony overshadowed by the most significant regional war and technological disruption of the decade</description>
-      <pubDate>Sun, 15 Mar 2026 06:45:03 +0000</pubDate>
-      <guid>news-briefing-2026-03-15</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d17d193f897b_daily_news_briefing_-_2026-03-15.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-15.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>When do intuitions need to be reliable?</title>
-      <description>Audio version of When do intuitions need to be reliable? from LessWrong Frontpage</description>
-      <pubDate>Sun, 15 Mar 2026 04:18:41 +0000</pubDate>
-      <guid>j8EM23RCEcYR7wLhv</guid>
-      <link>https://www.lesswrong.com/posts/j8EM23RCEcYR7wLhv/when-do-intuitions-need-to-be-reliable</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c482fa0cddc1_when_do_intuitions_need_to_be_reliable.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
