@@ -21,6 +21,69 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-16</title>
+      <description>Daily News Briefing - 2026-04-16
+
+Topics covered:
+- The global energy and shipping crisis has intensified following the American naval blockade of the Strait of Hormuz
+- In the artificial intelligence sector, the race to provide functional desktop integration has reached a new milestone
+- The market's obsession with artificial intelligence reached a point of absurdity today as the footwear company Allbirds rebranded to "NewBird AI." After losing half its sales and selling off its shoe assets for thirty-nine million dollars, the company announced a pivot to building A-I compute infrastructure
+- OpenAI is doubling down on the "agentic" future of software with a major update to its Agents Software Development Kit
+- In a landmark decision for the American entertainment industry, a federal jury has found that Live Nation and its subsidiary Ticketmaster operate as an illegal monopoly
+- On the domestic political front, President Trump has escalated his confrontation with the Federal Reserve, threatening to fire Chair Jerome Powell if he does not voluntarily resign by May</description>
+      <pubDate>Thu, 16 Apr 2026 07:20:07 +0000</pubDate>
+      <guid>news-briefing-2026-04-16</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8d5b4f9bb618_daily_news_briefing_-_2026-04-16.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-16.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Post-Scarcity is bullshit</title>
+      <description>Audio version of Post-Scarcity is bullshit from LessWrong Frontpage</description>
+      <pubDate>Thu, 16 Apr 2026 07:00:37 +0000</pubDate>
+      <guid>S2hpq3Tw9CadfjQxT</guid>
+      <link>https://www.lesswrong.com/posts/S2hpq3Tw9CadfjQxT/post-scarcity-is-bullshit</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a0d3e7dfbbe7_post-scarcity_is_bullshit.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Orban Was Bad, Even Though We Don't Have A Perfect Word For His Badness</title>
+      <description>Audio version of Orban Was Bad, Even Though We Don't Have A Perfect Word For His Badness from Scott Alexander</description>
+      <pubDate>Thu, 16 Apr 2026 01:51:55 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/orban-was-bad-even-though-we-dont</guid>
+      <link>https://www.astralcodexten.com/p/orban-was-bad-even-though-we-dont</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/11aba52ef545_orban_was_bad_even_though_we_dont_have_a_perfect.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Current AIs seem pretty misaligned to me</title>
+      <description>Audio version of Current AIs seem pretty misaligned to me from Ryan Greenblatt</description>
+      <pubDate>Wed, 15 Apr 2026 15:14:11 +0000</pubDate>
+      <guid>WewsByywWNhX9rtwi</guid>
+      <link>https://www.lesswrong.com/posts/WewsByywWNhX9rtwi/current-ais-seem-pretty-misaligned-to-me</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e3c3d13e4326_current_ais_seem_pretty_misaligned_to_me.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Code, Codex and Agentic Coding #7: Auto Mode” by Zvi</title>
+      <description>Audio version of “Claude Code, Codex and Agentic Coding #7: Auto Mode” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 15 Apr 2026 14:42:19 +0000</pubDate>
+      <guid>18eac2ec-7d70-4cb0-9af2-a6122ce0c607</guid>
+      <link>https://www.lesswrong.com/posts/w8misLX7KCmLxJM2K/claude-code-codex-and-agentic-coding-7-auto-mode</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f1fcf91891a8_claude_code_codex_and_agentic_coding_7_auto_mo.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-15</title>
       <description>Daily News Briefing - 2026-04-15
 
@@ -1339,36 +1402,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-16</title>
-      <description>Daily News Briefing - 2026-03-16
-
-Topics covered:
-- The ninety-eighth Academy Awards concluded last night, serving as a cultural barometer for the current technological and geopolitical climate
-- In the Middle East, the war in Iran is shifting toward a period of domestic containment
-- The AI industry is moving beyond text and code into the complex territory of human emotion
-- In a significant shift for the venture capital landscape, ByteDance has reportedly paused the global launch of its Seedance two-point-zero video generator
-- Finally, in the transportation sector, Rivian CEO RJ Scaringe has unveiled his latest venture, Mind Robotics
-- As we look toward tomorrow, the focus turns to the International Monetary Fund as Ukraine enters urgent negotiations for a new funding package to offset the costs of its ongoing pipeline dispute with the European Union</description>
-      <pubDate>Mon, 16 Mar 2026 07:05:56 +0000</pubDate>
-      <guid>news-briefing-2026-03-16</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdd32126ec35_daily_news_briefing_-_2026-03-16.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-16.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Hidden Role Games as a Trusted Model Eval</title>
-      <description>Audio version of Hidden Role Games as a Trusted Model Eval from LessWrong Frontpage</description>
-      <pubDate>Mon, 16 Mar 2026 04:46:15 +0000</pubDate>
-      <guid>bahjihMy2YzddLuo6</guid>
-      <link>https://www.lesswrong.com/posts/bahjihMy2YzddLuo6/hidden-role-games-as-a-trusted-model-eval</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/175364d7a1b2_hidden_role_games_as_a_trusted_model_eval.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Announcing ControlConf 2026</title>
       <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
       <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
@@ -1397,17 +1430,6 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</guid>
       <link>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>How do we (more) safely defer to AIs?</title>
-      <description>Audio version of How do we (more) safely defer to AIs? from Ryan Greenblatt</description>
-      <pubDate>Thu, 12 Feb 2026 16:55:52 +0000</pubDate>
-      <guid>vjAM7F8vMZS7oRrrh</guid>
-      <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
