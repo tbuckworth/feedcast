@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-17</title>
+      <description>Daily News Briefing - 2026-04-17
+
+Topics covered:
+- The race for agentic artificial intelligence has entered a new phase as OpenAI and Anthropic released major technical updates today
+- Concerns regarding the safety and security of these frontier models are mounting among global regulators
+- In the Middle East, a surprise ten-day truce between Israel and Lebanon has gone into effect
+- In the corporate sector, the "AI agent" boom is triggering a massive consolidation of capital and a shift in software dynamics
+- Finally, OpenAI is expanding its reach into specialized scientific domains with the launch of "GPT-Rosalind." This new model is specifically tuned for biology workflows and is currently in closed access
+- Looking toward tomorrow, the focus remains on the Strait of Hormuz to see if the ten-day Lebanon ceasefire leads to any softening of the American naval blockade</description>
+      <pubDate>Fri, 17 Apr 2026 07:20:36 +0000</pubDate>
+      <guid>news-briefing-2026-04-17</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/71b6bca82eff_daily_news_briefing_-_2026-04-17.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-17.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Let goodness conquer all that it can defend</title>
+      <description>Audio version of Let goodness conquer all that it can defend from LessWrong Frontpage</description>
+      <pubDate>Fri, 17 Apr 2026 06:55:19 +0000</pubDate>
+      <guid>w3MJcDueo77D3Ldta</guid>
+      <link>https://www.lesswrong.com/posts/w3MJcDueo77D3Ldta/let-goodness-conquer-all-that-it-can-defend</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7da5158fbe3c_let_goodness_conquer_all_that_it_can_defend.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-16</title>
       <description>Daily News Briefing - 2026-04-16
 
@@ -1339,36 +1369,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-17</title>
-      <description>Daily News Briefing - 2026-03-17
-
-Topics covered:
-- The primary focus of the technology sector is currently fixed on Nvidia’s GTC conference, where CEO Jensen Huang announced a suite of products that signal a transition from generative text to generative physics and enterprise-scale agents
-- As AI labs push toward more personalized and "human" interactions, they are facing a severe legal and ethical backlash
-- The intellectual property battle defining the training era of AI has expanded to include the foundational records of human knowledge
-- In the Middle East, the conflict has escalated to a direct assault on the world’s energy infrastructure
-- On the domestic front, the White House is increasing pressure on the media regarding the portrayal of the war
-- In consumer hardware, Apple has refreshed its premium audio line with the quiet launch of the AirPods Max 2</description>
-      <pubDate>Tue, 17 Mar 2026 06:53:38 +0000</pubDate>
-      <guid>news-briefing-2026-03-17</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/da0dadb53a4c_daily_news_briefing_-_2026-03-17.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-17.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Monday AI Radar #17</title>
-      <description>Audio version of Monday AI Radar #17 from LessWrong Frontpage</description>
-      <pubDate>Tue, 17 Mar 2026 04:42:45 +0000</pubDate>
-      <guid>ifLDLFWXvTyvWHAhv</guid>
-      <link>https://www.lesswrong.com/posts/ifLDLFWXvTyvWHAhv/monday-ai-radar-17</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5e0bda15a6f1_monday_ai_radar_17.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Types of Handoff to AIs</title>
       <description>Audio version of Types of Handoff to AIs from Daniel Kokotajlo</description>
       <pubDate>Mon, 16 Mar 2026 22:24:25 +0000</pubDate>
@@ -1413,23 +1413,23 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Grading AI 2027's 2025 Predictions</title>
-      <description>Audio version of Grading AI 2027's 2025 Predictions from Daniel Kokotajlo</description>
-      <pubDate>Fri, 13 Feb 2026 00:18:41 +0000</pubDate>
-      <guid>JYGeAAh92hAwvseFk</guid>
-      <link>https://www.lesswrong.com/posts/JYGeAAh92hAwvseFk/grading-ai-2027-s-2025-predictions</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8aad9aed9429_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Grading AI 2027’s 2025 Predictions</title>
       <description>Audio version of Grading AI 2027’s 2025 Predictions from AI Futures Project</description>
       <pubDate>Thu, 12 Feb 2026 23:56:07 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</guid>
       <link>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>How do we (more) safely defer to AIs?</title>
+      <description>Audio version of How do we (more) safely defer to AIs? from Ryan Greenblatt</description>
+      <pubDate>Thu, 12 Feb 2026 16:55:52 +0000</pubDate>
+      <guid>vjAM7F8vMZS7oRrrh</guid>
+      <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
