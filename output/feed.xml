@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-18</title>
+      <description>Daily News Briefing - 2026-04-18
+
+Topics covered:
+- The geopolitical tension in the Middle East has seen a dramatic, if fragile, shift
+- In the artificial intelligence sector, OpenAI is undergoing a significant strategic contraction
+- Simultaneously, Sam Altman’s identity-verification project, "World," is rapidly expanding into the consumer mainstream
+- The relationship between the Trump administration and Anthropic is showing signs of a thaw, driven by national security interests
+- Finally, the physical infrastructure of the A-I boom is hitting a significant bottleneck
+- Looking toward tomorrow, all eyes are on the first commercial tankers attempting to transit the Strait of Hormuz to see if Iran’s commitment to an open waterway holds</description>
+      <pubDate>Sat, 18 Apr 2026 06:57:37 +0000</pubDate>
+      <guid>news-briefing-2026-04-18</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7c999be817e1_daily_news_briefing_-_2026-04-18.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-18.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Vladimir Putin's CEV is probably pretty good</title>
+      <description>Audio version of Vladimir Putin's CEV is probably pretty good from LessWrong Frontpage</description>
+      <pubDate>Sat, 18 Apr 2026 06:42:09 +0000</pubDate>
+      <guid>FGpDwLwtPfJ3qYbea</guid>
+      <link>https://www.lesswrong.com/posts/FGpDwLwtPfJ3qYbea/vladimir-putin-s-cev-is-probably-pretty-good</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9b3fbe48bf44_vladimir_putins_cev_is_probably_pretty_good.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #164: Pre Opus” by Zvi</title>
+      <description>Audio version of “AI #164: Pre Opus” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 17 Apr 2026 13:13:20 +0000</pubDate>
+      <guid>f34cd36a-3c03-4a7f-aeda-7cb20d466faa</guid>
+      <link>https://www.lesswrong.com/posts/Mf2sbJ3zacTPaGySg/ai-164-pre-opus</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4948b6d9f391_ai_164_pre_opus_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-17</title>
       <description>Daily News Briefing - 2026-04-17
 
@@ -1317,36 +1358,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-18</title>
-      <description>Daily News Briefing - 2026-03-18
-
-Topics covered:
-- The conflict in the Middle East has reached a moment of internal collapse within the Iranian leadership and significant domestic fallout in the United States
-- The war has also triggered the first major kinetic cyberattack on American soil
-- In the artificial intelligence sector, the race for efficiency is moving to the "edge." OpenAI has unveiled GPT-five-point-four mini and nano, compact versions of its flagship model optimized for high-volume API workloads and sub-agent automation
-- While the capabilities of these models expand, the hardware designed to run them is facing a "quality crisis" among power users
-- The legal landscape for digital disruption is also tightening
-- On the hardware front, Samsung has abruptly ended sales of its high-concept Galaxy Z Tri-Fold just three months after its debut</description>
-      <pubDate>Wed, 18 Mar 2026 06:52:32 +0000</pubDate>
-      <guid>news-briefing-2026-03-18</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7484aa6c183a_daily_news_briefing_-_2026-03-18.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-18.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The tech bro ethos, and the end of my job</title>
-      <description>Audio version of The tech bro ethos, and the end of my job from LessWrong Frontpage</description>
-      <pubDate>Wed, 18 Mar 2026 05:59:48 +0000</pubDate>
-      <guid>2T8r9EGLnkqgQ9Gni</guid>
-      <link>https://www.lesswrong.com/posts/2T8r9EGLnkqgQ9Gni/the-tech-bro-ethos-and-the-end-of-my-job</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2f86d8b55be0_the_tech_bro_ethos_and_the_end_of_my_job.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Support Your Local Collaborator</title>
       <description>Audio version of Support Your Local Collaborator from Scott Alexander</description>
       <pubDate>Wed, 18 Mar 2026 02:47:37 +0000</pubDate>
@@ -1358,45 +1369,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>“Medical Roundup #7” by Zvi</title>
-      <description>Audio version of “Medical Roundup #7” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 17 Mar 2026 13:24:51 +0000</pubDate>
-      <guid>fc213ade-30fa-425b-8aaf-919801a8e0c9</guid>
-      <link>https://www.lesswrong.com/posts/ypnYfPmn6FqAyxCpJ/medical-roundup-7</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f405c30d637b_medical_roundup_7_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Types of Handoff to AIs</title>
       <description>Audio version of Types of Handoff to AIs from Daniel Kokotajlo</description>
       <pubDate>Mon, 16 Mar 2026 22:24:25 +0000</pubDate>
       <guid>YuMr6kbstuieQHkGj</guid>
       <link>https://www.lesswrong.com/posts/YuMr6kbstuieQHkGj/types-of-handoff-to-ais</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/186d63bf34b6_types_of_handoff_to_ais.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Shameless Guesses, Not Hallucinations</title>
-      <description>Audio version of Shameless Guesses, Not Hallucinations from Scott Alexander</description>
-      <pubDate>Mon, 16 Mar 2026 20:25:24 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/shameless-guesses-not-hallucinations</guid>
-      <link>https://www.astralcodexten.com/p/shameless-guesses-not-hallucinations</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9d6e9b975f76_shameless_guesses_not_hallucinations.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Monthly Roundup #40: March 2026” by Zvi</title>
-      <description>Audio version of “Monthly Roundup #40: March 2026” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 16 Mar 2026 12:22:10 +0000</pubDate>
-      <guid>e69224c4-8e1e-4885-bfc2-0e9fb288a59d</guid>
-      <link>https://www.lesswrong.com/posts/Y8c4kh6fjkWu7Auxp/monthly-roundup-40-march-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f6cc1158cb4_monthly_roundup_40_march_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
