@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-19</title>
+      <description>Daily News Briefing - 2026-04-19
+
+Topics covered:
+- The hardware foundation of the artificial intelligence boom is facing a multi-year crisis
+- In the public markets, the A-I hardware landscape is set for a major shakeup as chip startup Cerebras has officially filed for its initial public offering
+- The fragile de-escalation in the Middle East has faced its first major setback during the second day of the Israel-Hezbollah ceasefire
+- In the autonomous vehicle sector, Tesla is aggressively expanding its Texas-based footprint
+- On the software front, the mobile ecosystem is experiencing a significant resurgence
+- Looking toward tomorrow, the focus remains on Lebanon as international monitors wait to see if the killing of a French peacekeeper triggers a military response that could end the regional ceasefire</description>
+      <pubDate>Sun, 19 Apr 2026 07:07:54 +0000</pubDate>
+      <guid>news-briefing-2026-04-19</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1ec4f0a550f5_daily_news_briefing_-_2026-04-19.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-19.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Summarizing and Reviewing my earliest ML research paper, 7 years later</title>
+      <description>Audio version of Summarizing and Reviewing my earliest ML research paper, 7 years later from LessWrong Frontpage</description>
+      <pubDate>Sun, 19 Apr 2026 06:55:48 +0000</pubDate>
+      <guid>s23gcSGmWh3YwDBdW</guid>
+      <link>https://www.lesswrong.com/posts/s23gcSGmWh3YwDBdW/summarizing-and-reviewing-my-earliest-ml-research-paper-7</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/258e7e7a0a7e_summarizing_and_reviewing_my_earliest_ml_research.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-18</title>
       <description>Daily News Briefing - 2026-04-18
 
@@ -57,6 +87,17 @@ Topics covered:
       <guid>f34cd36a-3c03-4a7f-aeda-7cb20d466faa</guid>
       <link>https://www.lesswrong.com/posts/Mf2sbJ3zacTPaGySg/ai-164-pre-opus</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/4948b6d9f391_ai_164_pre_opus_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“On Dwarkesh Patel’s Podcast With Nvidia CEO Jensen Huang” by Zvi</title>
+      <description>Audio version of “On Dwarkesh Patel’s Podcast With Nvidia CEO Jensen Huang” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 17 Apr 2026 09:08:08 +0000</pubDate>
+      <guid>43931996-57f0-4b9e-80bd-e49e78e8ac71</guid>
+      <link>https://www.lesswrong.com/posts/RBBChvuPHP7LfWyME/on-dwarkesh-patel-s-podcast-with-nvidia-ceo-jensen-huang</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3daf3c7df3ef_on_dwarkesh_patels_podcast_with_nvidia_ceo_jense.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1306,64 +1347,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-19</title>
-      <description>Daily News Briefing - 2026-03-19
-
-Topics covered:
-- The conflict in the Middle East has entered a critical new phase following the assassination of Iran’s Intelligence Minister, Esmail Khatib
-- The war is now exerting severe pressure on global energy and financial markets
-- In the artificial intelligence sector, a major rift has opened between the Pentagon and the private sector
-- On the architectural front, the transition to "agentic" AI is uncovering new vulnerabilities
-- Nvidia’s DLSS 5 launch continues to face a significant "quality crisis." Early adopters are rejecting the new "three-D guided neural rendering," colloquially labeling the AI-enhanced visuals as "yassified" or "slop." Despite the consumer backlash, Nvidia’s business model is diversifying rapidly; the company’s networking division, which manages the massive data throughput for AI clusters, reportedly generated eleven billion dollars last quarter, rivaling its core chip business in importance
-- In domestic surveillance and privacy, F-B-I Director Kash Patel confirmed to lawmakers that the agency is actively purchasing commercially available location data</description>
-      <pubDate>Thu, 19 Mar 2026 06:48:10 +0000</pubDate>
-      <guid>news-briefing-2026-03-19</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/40a34a0ccad0_daily_news_briefing_-_2026-03-19.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-19.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>"We've been fine before, so we'll be fine again" is a fallacy (in the more dangerous direction).</title>
-      <description>Audio version of "We've been fine before, so we'll be fine again" is a fallacy (in the more dangerous direction). from LessWrong Frontpage</description>
-      <pubDate>Thu, 19 Mar 2026 04:57:14 +0000</pubDate>
-      <guid>F2vbhGq6niunL9mcD</guid>
-      <link>https://www.lesswrong.com/posts/F2vbhGq6niunL9mcD/we-ve-been-fine-before-so-we-ll-be-fine-again-is-a-fallacy</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cae7357a8c5c_weve_been_fine_before_so_well_be_fine_again_i.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Being John Rawls</title>
       <description>Audio version of Being John Rawls from Scott Alexander</description>
       <pubDate>Thu, 19 Mar 2026 03:31:17 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/being-john-rawls</guid>
       <link>https://www.astralcodexten.com/p/being-john-rawls</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de1dbe00e16_being_john_rawls.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Anthropic vs. DoW #5: Motions Filed” by Zvi</title>
-      <description>Audio version of “Anthropic vs. DoW #5: Motions Filed” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 18 Mar 2026 19:01:15 +0000</pubDate>
-      <guid>29197fb5-2a22-45ec-83f4-2b3ba84a8938</guid>
-      <link>https://www.lesswrong.com/posts/o9M5RGrjM45aNq8jN/anthropic-vs-dow-5-motions-filed</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bbe4f8cd5250_anthropic_vs_dow_5_motions_filed_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Support Your Local Collaborator</title>
-      <description>Audio version of Support Your Local Collaborator from Scott Alexander</description>
-      <pubDate>Wed, 18 Mar 2026 02:47:37 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/support-your-local-collaborator</guid>
-      <link>https://www.astralcodexten.com/p/support-your-local-collaborator</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c80f0ecd59e3_support_your_local_collaborator.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
