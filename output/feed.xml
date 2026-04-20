@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-20</title>
+      <description>Daily News Briefing - 2026-04-20
+
+Topics covered:
+- The maritime crisis in the Middle East has escalated into direct military confrontation
+- In response to the resulting energy crunch, the United States has extended a sanctions waiver for Russian energy, a move that provides some relief to global supply but has drawn sharp condemnation from Ukrainian President Volodymyr Zelensky
+- In the artificial intelligence and software sector, a major security breach has hit Vercel, a critical cloud platform used to deploy and host web applications
+- The aerospace industry saw a mixed milestone today as Blue Origin attempted a major flight of its New Glenn heavy-lift rocket
+- In a display of accelerating robotics capabilities, autonomous machines dominated the Beijing half-marathon this weekend
+- Finally, Palantir has issued a "mini-manifesto" explicitly denouncing what it calls "regressive" corporate cultures and traditional inclusivity initiatives</description>
+      <pubDate>Mon, 20 Apr 2026 07:51:47 +0000</pubDate>
+      <guid>news-briefing-2026-04-20</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b4d8bd9878c4_daily_news_briefing_-_2026-04-20.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-20.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Quality Matters Most When Stakes are Highest</title>
+      <description>Audio version of Quality Matters Most When Stakes are Highest from LessWrong Frontpage</description>
+      <pubDate>Mon, 20 Apr 2026 06:53:19 +0000</pubDate>
+      <guid>GNjDC6jtjr2iiE45i</guid>
+      <link>https://www.lesswrong.com/posts/GNjDC6jtjr2iiE45i/quality-matters-most-when-stakes-are-highest</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c9c5b8774bd_quality_matters_most_when_stakes_are_highest.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-19</title>
       <description>Daily News Briefing - 2026-04-19
 
@@ -1301,36 +1331,6 @@ Topics covered:
       <guid>98b32db1-f069-457e-99da-b8bf41424c94</guid>
       <link>https://www.lesswrong.com/posts/tcoNLbvrpv9KcxzvM/the-federal-ai-policy-framework-an-improvement-but-my-offer</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/663e89bf4df1_the_federal_ai_policy_framework_an_improvement.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-03-20</title>
-      <description>Daily News Briefing - 2026-03-20
-
-Topics covered:
-- The geopolitical landscape remains volatile as President Trump publicly urged Israel to cease further strikes on Iranian energy infrastructure following the successful hit on a major gas field
-- In the artificial intelligence sector, OpenAI is preparing a significant structural shift
-- The transition to agentic AI is already proving technically hazardous
-- In the broader technology and health sectors, the impact of federal policy shifts is becoming visible
-- On the hardware and industrial front, Jeff Bezos is reportedly seeking one hundred billion dollars to acquire and "AI-ify" legacy manufacturing firms, signaling a massive bet on bringing frontier intelligence to heavy industry
-- Looking toward tomorrow, all eyes are on NASA as the Artemis moon rocket returns to the launch pad for a final checkout ahead of its historic crewed mission scheduled for April</description>
-      <pubDate>Fri, 20 Mar 2026 06:42:54 +0000</pubDate>
-      <guid>news-briefing-2026-03-20</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9e8bf6459961_daily_news_briefing_-_2026-03-20.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-20.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>No, You Don't Need Self-Locating Evidence.</title>
-      <description>Audio version of No, You Don't Need Self-Locating Evidence. from LessWrong Frontpage</description>
-      <pubDate>Fri, 20 Mar 2026 05:38:37 +0000</pubDate>
-      <guid>H8YKiQtRjhumfKgqZ</guid>
-      <link>https://www.lesswrong.com/posts/H8YKiQtRjhumfKgqZ/no-you-don-t-need-self-locating-evidence</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a116cfb3b5f1_no_you_dont_need_self-locating_evidence.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
