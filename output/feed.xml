@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-22</title>
+      <description>Daily News Briefing - 2026-04-22
+
+Topics covered:
+- The race for high-end developer tools has taken a massive leap as Elon Musk’s SpaceX and xAI have entered a strategic agreement to potentially acquire Cursor, the automated programming platform, for sixty billion dollars
+- In the artificial intelligence sector, a major narrative of skepticism is emerging from both corporate corridors and the federal government
+- In geopolitics, President Trump has secured a fragile diplomatic window, backing off threats of immediate military escalation to allow more time for a comprehensive deal with Iran
+- On the hardware front, the Pentagon is requesting an unprecedented fifty-four billion dollars for drone technology, a figure that exceeds the entire military budgets of most sovereign nations
+- Finally, YouTube is providing a new defense for public figures in the era of deepfakes
+- Looking toward tomorrow, focus shifts to the United States Congress, as lawmakers face a looming April thirtieth deadline to renew or reform Section Seven-Zero-Two spy powers amidst a fierce debate over warrantless surveillance of American citizens</description>
+      <pubDate>Wed, 22 Apr 2026 07:20:59 +0000</pubDate>
+      <guid>news-briefing-2026-04-22</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/57a15e04598c_daily_news_briefing_-_2026-04-22.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-22.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>10 posts I don't have time to write</title>
+      <description>Audio version of 10 posts I don't have time to write from LessWrong Frontpage</description>
+      <pubDate>Wed, 22 Apr 2026 06:29:44 +0000</pubDate>
+      <guid>MqgwHJ93pJpaeHXs6</guid>
+      <link>https://www.lesswrong.com/posts/MqgwHJ93pJpaeHXs6/10-posts-i-don-t-have-time-to-write</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/56803b8e1c70_10_posts_i_dont_have_time_to_write.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Opus 4.7 Part 2: Capabilities and Reactions” by Zvi</title>
+      <description>Audio version of “Opus 4.7 Part 2: Capabilities and Reactions” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 21 Apr 2026 21:31:26 +0000</pubDate>
+      <guid>afbf0f84-50b1-4724-9a11-09f371af6123</guid>
+      <link>https://www.lesswrong.com/posts/w2HrwkQgsLQHtEJsJ/opus-4-7-part-2-capabilities-and-reactions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/51caa2214c7f_opus_47_part_2_capabilities_and_reactions_by_z.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Half A Month Of Consolation Writing Advice</title>
+      <description>Audio version of Half A Month Of Consolation Writing Advice from Scott Alexander</description>
+      <pubDate>Tue, 21 Apr 2026 15:14:10 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/half-a-month-of-consolation-writing</guid>
+      <link>https://www.astralcodexten.com/p/half-a-month-of-consolation-writing</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b42014b8d0fe_half_a_month_of_consolation_writing_advice.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-21</title>
       <description>Daily News Briefing - 2026-04-21
 
@@ -1301,47 +1353,6 @@ Topics covered:
       <guid>6CP7DLqiqHJd9z8pN</guid>
       <link>https://www.lesswrong.com/posts/6CP7DLqiqHJd9z8pN/kelly-criterion-is-for-cowards</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/b1bf22b107bb_kelly_criterion_is_for_cowards.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-03-22</title>
-      <description>Daily News Briefing - 2026-03-22
-
-Topics covered:
-- The conflict in the Middle East has entered a dangerous operational phase as Iran and Israel trade strikes near sensitive nuclear infrastructure
-- In Washington, the Trump administration’s Department of Government Efficiency, or DOGE, is initiating a radical overhaul of the nation’s nuclear energy sector
-- The transition to agentic AI has moved from lab testing to real-world deployment on mobile hardware
-- On the domestic security front, a partial government shutdown has prompted President Trump to threaten the deployment of Immigration and Customs Enforcement agents into major American airports
-- Finally, we pause to note the passing of two figures who shaped the modern American landscape
-- Looking toward tomorrow, the focus shifts to the Pacific as Hawaii prepares for its worst flooding in twenty years, with thousands already evacuated as a major storm system moves across Oahu and Maui</description>
-      <pubDate>Sun, 22 Mar 2026 06:39:36 +0000</pubDate>
-      <guid>news-briefing-2026-03-22</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9ffc363ee2ae_daily_news_briefing_-_2026-03-22.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-22.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The Toy Story Saga is not yet finished</title>
-      <description>Audio version of The Toy Story Saga is not yet finished from LessWrong Frontpage</description>
-      <pubDate>Sun, 22 Mar 2026 03:53:49 +0000</pubDate>
-      <guid>ra289RT2LJ9GfdpDQ</guid>
-      <link>https://www.lesswrong.com/posts/ra289RT2LJ9GfdpDQ/the-toy-story-saga-is-not-yet-finished</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/eefb1362e9e6_the_toy_story_saga_is_not_yet_finished.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Being John Rawls</title>
-      <description>Audio version of Being John Rawls from Scott Alexander</description>
-      <pubDate>Thu, 19 Mar 2026 03:31:17 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/being-john-rawls</guid>
-      <link>https://www.astralcodexten.com/p/being-john-rawls</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de1dbe00e16_being_john_rawls.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
