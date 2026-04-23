@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-23</title>
+      <description>Daily News Briefing - 2026-04-23
+
+Topics covered:
+- The transition to an agentic economy has accelerated today as OpenAI and Google launched competing platforms to automate enterprise workflows
+- In a significant security lapse, Anthropic’s high-stakes "Mythos" cybersecurity model has reportedly been accessed by unauthorized users
+- The geopolitical standoff in the Middle East is reaching a critical inflection point as the ten-day ceasefire window closes
+- Tesla’s first-quarter earnings report has revealed a pivot toward massive capital expenditure as the company enters what CEO Elon Musk calls its "robotics era." Tesla plans to spend twenty-five billion dollars this year—triple its historical average—on artificial intelligence clusters and its own chip fabrication facilities
+- Finally, the military leadership of the United States is seeing further turnover during this period of high kinetic activity
+- Looking toward tomorrow, focus shifts to the financial markets as investors digest the implications of Tesla’s negative free cash flow and the potential for increased volatility in the tech sector</description>
+      <pubDate>Thu, 23 Apr 2026 07:23:01 +0000</pubDate>
+      <guid>news-briefing-2026-04-23</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0c346578abac_daily_news_briefing_-_2026-04-23.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-23.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Thought Experiments on Continuity of Consciousness</title>
+      <description>Audio version of Thought Experiments on Continuity of Consciousness from LessWrong Frontpage</description>
+      <pubDate>Thu, 23 Apr 2026 07:22:48 +0000</pubDate>
+      <guid>CchB8MMNDAR3KtkLH</guid>
+      <link>https://www.lesswrong.com/posts/CchB8MMNDAR3KtkLH/thought-experiments-on-continuity-of-consciousness</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fb298e0a0e36_thought_experiments_on_continuity_of_consciousness.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Opus 4.7 Part 3: Model Welfare” by Zvi</title>
+      <description>Audio version of “Opus 4.7 Part 3: Model Welfare” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 22 Apr 2026 21:41:19 +0000</pubDate>
+      <guid>c804459a-2963-4a47-9f5d-97d872d6c639</guid>
+      <link>https://www.lesswrong.com/posts/gD3bEgMo878eCHGbw/opus-4-7-part-3-model-welfare</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8cdfda758627_opus_47_part_3_model_welfare_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-22</title>
       <description>Daily News Briefing - 2026-04-22
 
@@ -1328,31 +1369,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-23</title>
-      <description>Daily News Briefing - 2026-03-23
-
-Topics covered:
-- The Middle East conflict has escalated into a direct and high-stakes exchange near nuclear infrastructure
-- In a move to consolidate his industrial empire, Elon Musk has announced the construction of a "Terafab" chip manufacturing plant in Austin, Texas
-- Amazon is also doubling down on its internal hardware footprint
-- Back in the United States, the domestic effects of the partial government shutdown are intensifying
-- In other global news, Cuba has suffered its second total national blackout in a single week, leaving ten million people without power
-- Looking toward tomorrow, the focus shifts to the Canadian Supreme Court, as it begins a landmark constitutional test case regarding the ban on religious symbols that could redefine secularism laws across North America</description>
-      <pubDate>Mon, 23 Mar 2026 06:59:24 +0000</pubDate>
-      <guid>news-briefing-2026-03-23</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c1d6786885a4_daily_news_briefing_-_2026-03-23.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-23.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Kelly Criterion is for Cowards</title>
-      <description>Audio version of Kelly Criterion is for Cowards from LessWrong Frontpage</description>
-      <pubDate>Mon, 23 Mar 2026 01:56:36 +0000</pubDate>
-      <guid>6CP7DLqiqHJd9z8pN</guid>
-      <link>https://www.lesswrong.com/posts/6CP7DLqiqHJd9z8pN/kelly-criterion-is-for-cowards</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b1bf22b107bb_kelly_criterion_is_for_cowards.mp3" type="audio/mpeg" length="0" />
+      <title>Being John Rawls</title>
+      <description>Audio version of Being John Rawls from Scott Alexander</description>
+      <pubDate>Thu, 19 Mar 2026 03:31:17 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/being-john-rawls</guid>
+      <link>https://www.astralcodexten.com/p/being-john-rawls</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de1dbe00e16_being_john_rawls.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
