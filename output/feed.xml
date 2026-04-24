@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-24</title>
+      <description>Daily News Briefing - 2026-04-24
+
+Topics covered:
+- OpenAI has launched GPT-five-point-five, a surprise successor to the model it released just last month
+- In a direct response to this push for autonomy, Anthropic is expanding its integration into the personal sphere
+- The competitive landscape is seeing a brutal re-alignment as Meta announced plans to lay off ten percent of its workforce, approximately eight thousand employees, this May
+- Geopolitical tensions over technology have reached a boiling point as the White House issued a memo accusing Chinese firms of "industrial-scale" theft of American AI models
+- In cybersecurity, the fallout from the Anthropic "Mythos" breach continues to widen
+- Finally, in a significant shift for the domestic economy, the Trump administration has officially reclassified cannabis as a less dangerous drug under federal law</description>
+      <pubDate>Fri, 24 Apr 2026 07:49:23 +0000</pubDate>
+      <guid>news-briefing-2026-04-24</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c904c63568cb_daily_news_briefing_-_2026-04-24.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-24.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Communicating with people who disagree on "obvious" things</title>
+      <description>Audio version of Communicating with people who disagree on "obvious" things from LessWrong Frontpage</description>
+      <pubDate>Fri, 24 Apr 2026 06:56:31 +0000</pubDate>
+      <guid>fmLbAPLKJcrz8jvBf</guid>
+      <link>https://www.lesswrong.com/posts/fmLbAPLKJcrz8jvBf/communicating-with-people-who-disagree-on-obvious-things</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f10f6319aa82_communicating_with_people_who_disagree_on_obvious.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #165: In Our Image” by Zvi</title>
+      <description>Audio version of “AI #165: In Our Image” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 23 Apr 2026 13:43:11 +0000</pubDate>
+      <guid>fae6ff63-418d-45e9-99db-8b6d4676feef</guid>
+      <link>https://www.lesswrong.com/posts/AMGPDMgvXvfmomLsc/ai-165-in-our-image</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/238faf6df739_ai_165_in_our_image_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-23</title>
       <description>Daily News Briefing - 2026-04-23
 
@@ -1334,36 +1375,6 @@ Topics covered:
       <guid>57a39052-d3cf-40f3-a5a8-0444f9eda11a</guid>
       <link>https://www.lesswrong.com/posts/Ky2DSh4sGYCLWXMmy/book-review-open-socrates-part-2</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c38985142464_book_review_open_socrates_part_2_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-03-24</title>
-      <description>Daily News Briefing - 2026-03-24
-
-Topics covered:
-- In a significant milestone for the industry, Nvidia Chief Executive Officer Jensen Huang stated on the Lex Fridman podcast that he believes Artificial General Intelligence, or A-G-I, has now been achieved
-- The geopolitical tension between the Pentagon and the AI sector is intensifying
-- There are signs of a potential diplomatic breakthrough in the Middle East
-- On the domestic security front, the Department of Homeland Security is undergoing a rapid transition under new leadership
-- In hardware and cybersecurity news, a major exploit kit known as "DarkSword" has been leaked publicly on GitHub
-- Finally, we note the passing of Leonid Radvinsky, the billionaire owner of OnlyFans, who has died at the age of forty-three following a battle with cancer</description>
-      <pubDate>Tue, 24 Mar 2026 06:54:04 +0000</pubDate>
-      <guid>news-briefing-2026-03-24</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2f81041bc073_daily_news_briefing_-_2026-03-24.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-24.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Information Overdose</title>
-      <description>Audio version of Information Overdose from LessWrong Frontpage</description>
-      <pubDate>Tue, 24 Mar 2026 04:45:50 +0000</pubDate>
-      <guid>am5oFrRGAe8KXMCDB</guid>
-      <link>https://www.lesswrong.com/posts/am5oFrRGAe8KXMCDB/information-overdose-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4d0bd83ceab6_information_overdose.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
