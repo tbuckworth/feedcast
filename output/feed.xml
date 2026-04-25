@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-25</title>
+      <description>Daily News Briefing - 2026-04-25
+
+Topics covered:
+- Artificial intelligence has fundamentally transformed the speed of warfare, with United States military officials revealing that "Project Maven" AI systems were used to strike over one thousand targets in the first twenty-four hours of the assault on Iran
+- The capital expenditure race reached a staggering new peak today as Google announced plans to invest up to forty billion dollars in Anthropic
+- In a move that signals a shift in hardware requirements for the "agentic era," Meta has signed a massive deal to acquire millions of Amazon’s homegrown central processing units
+- The geopolitical alliance between the United States and Europe is facing its most severe strain in years
+- Domestically, the Trump administration has taken a series of hardline actions in the legal and financial sectors
+- Finally, a developing story in the space sector confirms that the primary modules for the Lunar Gateway, NASA's planned orbiting moon station, are suffering from significant corrosion</description>
+      <pubDate>Sat, 25 Apr 2026 07:03:03 +0000</pubDate>
+      <guid>news-briefing-2026-04-25</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c64d0e79574f_daily_news_briefing_-_2026-04-25.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-25.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Quick Paper Review: "There Will Be a Scientific Theory of Deep Learning"</title>
+      <description>Audio version of Quick Paper Review: "There Will Be a Scientific Theory of Deep Learning" from LessWrong Frontpage</description>
+      <pubDate>Sat, 25 Apr 2026 06:55:30 +0000</pubDate>
+      <guid>2WkeiYFT5p3ph8Pkf</guid>
+      <link>https://www.lesswrong.com/posts/2WkeiYFT5p3ph8Pkf/quick-paper-review-there-will-be-a-scientific-theory-of-deep</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f0f89018a3ba_quick_paper_review_there_will_be_a_scientific_th.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Monthly Roundup #41: April 2025” by Zvi</title>
+      <description>Audio version of “Monthly Roundup #41: April 2025” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 24 Apr 2026 13:24:20 +0000</pubDate>
+      <guid>58f6cba3-5312-4017-b270-dfcf983c08b9</guid>
+      <link>https://www.lesswrong.com/posts/Bo4FbDxb3YrZwap3J/monthly-roundup-41-april-2025</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/38e8f26108a9_monthly_roundup_41_april_2025_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-24</title>
       <description>Daily News Briefing - 2026-04-24
 
@@ -1323,58 +1364,6 @@ Topics covered:
       <guid>99eccc15-80ad-4aff-b3d3-9c45fc1d55dc</guid>
       <link>https://www.lesswrong.com/posts/8c3TED7ewqrbvheKy/claude-code-cowork-and-codex-6-claude-code-auto-use-and-full</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5dd0a48117dc_claude_code_cowork_and_codex_6_claude_code_aut.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-03-25</title>
-      <description>Daily News Briefing - 2026-03-25
-
-Topics covered:
-- In a stunning reversal for the generative video sector, OpenAI has announced it is shutting down Sora, less than two years after the tool's debut sent shockwaves through the media industry
-- While OpenAI retreats from video, the race for agentic commerce is accelerating
-- In a landmark shift for the semiconductor industry, Arm has unveiled its first-ever in-house triple-A-G-I central processing unit
-- The geopolitical and legal pressure on Big Tech is reaching a new peak
-- Finally, international tensions continue to escalate as Russia launched nearly nine hundred and fifty drones at Ukraine over a twenty-four-hour period, the largest such attack of the war
-- Looking toward tomorrow, keep an eye on the American court system, where a series of challenges to Elon Musk’s Department of Government Efficiency could potentially freeze the administration's regulatory overhaul following a surge in litigation</description>
-      <pubDate>Wed, 25 Mar 2026 06:52:50 +0000</pubDate>
-      <guid>news-briefing-2026-03-25</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/65929e6538b8_daily_news_briefing_-_2026-03-25.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-25.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Book Review: Open Socrates (Part 2)</title>
-      <description>Audio version of Book Review: Open Socrates (Part 2) from LessWrong Frontpage</description>
-      <pubDate>Wed, 25 Mar 2026 02:26:09 +0000</pubDate>
-      <guid>Ky2DSh4sGYCLWXMmy</guid>
-      <link>https://www.lesswrong.com/posts/Ky2DSh4sGYCLWXMmy/book-review-open-socrates-part-2</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b677fee909f4_book_review_open_socrates_part_2.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Book Review: Open Socrates (Part 1)” by Zvi</title>
-      <description>Audio version of “Book Review: Open Socrates (Part 1)” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 24 Mar 2026 22:25:00 +0000</pubDate>
-      <guid>0ed9bfff-1d18-4a22-a073-c89b43d6f993</guid>
-      <link>https://www.lesswrong.com/posts/hc2swmyS8mz4jc79J/book-review-open-socrates-part-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3f710bf76015_book_review_open_socrates_part_1_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Book Review: Open Socrates (Part 2)” by Zvi</title>
-      <description>Audio version of “Book Review: Open Socrates (Part 2)” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 24 Mar 2026 22:22:57 +0000</pubDate>
-      <guid>57a39052-d3cf-40f3-a5a8-0444f9eda11a</guid>
-      <link>https://www.lesswrong.com/posts/Ky2DSh4sGYCLWXMmy/book-review-open-socrates-part-2</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c38985142464_book_review_open_socrates_part_2_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
