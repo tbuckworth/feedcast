@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-26</title>
+      <description>Daily News Briefing - 2026-04-26
+
+Topics covered:
+- The most critical development in the artificial intelligence sector is a strategic consolidation in Europe, where the Canadian firm Cohere has announced a merger with Germany's Aleph Alpha
+- In a landmark experiment in agentic economics, Anthropic has successfully deployed a test marketplace where autonomous A-I agents conducted end-to-end commerce
+- The geopolitical landscape was rocked this weekend by an assassination attempt at the White House Correspondents’ Dinner
+- Internal tensions at Palantir have reached a breaking point, as leaked internal Slack messages and employee interviews reveal a staff in turmoil over what they describe as the company’s "descent into fascism." The friction stems from Palantir’s deep integration with the Trump administration’s immigration and military policies, highlighting a growing cultural schism between the Silicon Valley workforce and the executive leadership of major defense contractors
+- In infrastructure news, Maine’s governor has vetoed what would have been the first statewide moratorium on new data centers in the United States
+- Finally, the Artemis Two mission has officially broken the distance record for human spaceflight previously held by Apollo thirteen’s Fred Haise</description>
+      <pubDate>Sun, 26 Apr 2026 07:17:30 +0000</pubDate>
+      <guid>news-briefing-2026-04-26</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bd2acea0ef29_daily_news_briefing_-_2026-04-26.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-26.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The paper that killed deep learning theory</title>
+      <description>Audio version of The paper that killed deep learning theory from LessWrong Frontpage</description>
+      <pubDate>Sun, 26 Apr 2026 06:55:03 +0000</pubDate>
+      <guid>ZvQfcLbcNHYqmvWyo</guid>
+      <link>https://www.lesswrong.com/posts/ZvQfcLbcNHYqmvWyo/the-paper-that-killed-deep-learning-theory</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/417abcd8a1cc_the_paper_that_killed_deep_learning_theory.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-25</title>
       <description>Daily News Briefing - 2026-04-25
 
@@ -1317,36 +1347,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-26</title>
-      <description>Daily News Briefing - 2026-03-26
-
-Topics covered:
-- The Trump administration has officially named the first four members of the President’s Council of Advisors on Science and Technology, signaling a shift toward corporate-led policy
-- In a dual blow to Big Tech’s liability protections, a jury in New Mexico has found Meta and YouTube liable for social media addiction, awarding a plaintiff six million dollars
-- The generative AI landscape is experiencing a sharp correction in both personnel and product strategy
-- On the legislative front, Senate Democrats are moving to "codify" safety boundaries for AI
-- Finally, in a significant security warning, Google has moved the deadline for "Q-Day"—the point at which quantum computers could crack current encryption—up to twenty-twenty-nine
-- Looking toward tomorrow, keep an eye on the Philippines as it begins emergency procurement of one million barrels of oil to stabilize its energy grid following the latest disruptions in Middle Eastern supply lines</description>
-      <pubDate>Thu, 26 Mar 2026 07:15:05 +0000</pubDate>
-      <guid>news-briefing-2026-03-26</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2e563f09388b_daily_news_briefing_-_2026-03-26.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-26.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Label By Usable Volume</title>
-      <description>Audio version of Label By Usable Volume from LessWrong Frontpage</description>
-      <pubDate>Thu, 26 Mar 2026 02:30:12 +0000</pubDate>
-      <guid>JCDSYcQnNLZsvvdM8</guid>
-      <link>https://www.lesswrong.com/posts/JCDSYcQnNLZsvvdM8/label-by-usable-volume</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c909e6ec0187_label_by_usable_volume.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Every Debate On Pausing AI</title>
       <description>Audio version of Every Debate On Pausing AI from Scott Alexander</description>
       <pubDate>Wed, 25 Mar 2026 15:26:07 +0000</pubDate>
@@ -1364,17 +1364,6 @@ Topics covered:
       <guid>99eccc15-80ad-4aff-b3d3-9c45fc1d55dc</guid>
       <link>https://www.lesswrong.com/posts/8c3TED7ewqrbvheKy/claude-code-cowork-and-codex-6-claude-code-auto-use-and-full</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5dd0a48117dc_claude_code_cowork_and_codex_6_claude_code_aut.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Being John Rawls</title>
-      <description>Audio version of Being John Rawls from Scott Alexander</description>
-      <pubDate>Thu, 19 Mar 2026 03:31:17 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/being-john-rawls</guid>
-      <link>https://www.astralcodexten.com/p/being-john-rawls</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de1dbe00e16_being_john_rawls.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
