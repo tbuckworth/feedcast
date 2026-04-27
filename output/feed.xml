@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-27</title>
+      <description>Daily News Briefing - 2026-04-27
+
+Topics covered:
+- The geopolitical standoff between the United States and Iran has intensified following the cancellation of high-level peace talks
+- The security breach at the White House Correspondents’ Dinner is now being treated as a domestic terror investigation
+- In the artificial intelligence sector, OpenAI has released a formal set of five guiding principles authored by Sam Altman
+- The economic footprint of AI is now beginning to warp the traditional real estate market
+- In hardware and robotics news, researchers have developed new cross-platform control software that allows different robotic systems to learn from one another regardless of their physical design
+- Looking toward tomorrow, the focus remains on the London Marathon’s historic results, where Sabastian Sawe’s sub-two-hour run has set a new benchmark for human performance, sparking debate over whether advanced footwear technology has fundamentally altered the parity of competitive athletics</description>
+      <pubDate>Mon, 27 Apr 2026 08:05:33 +0000</pubDate>
+      <guid>news-briefing-2026-04-27</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/17ac231da619_daily_news_briefing_-_2026-04-27.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-27.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The other paper that killed deep learning theory</title>
+      <description>Audio version of The other paper that killed deep learning theory from LessWrong Frontpage</description>
+      <pubDate>Mon, 27 Apr 2026 06:57:14 +0000</pubDate>
+      <guid>zcGmdQHX66NhC69v6</guid>
+      <link>https://www.lesswrong.com/posts/zcGmdQHX66NhC69v6/the-other-paper-that-killed-deep-learning-theory</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c3c36d500bc6_the_other_paper_that_killed_deep_learning_theory.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-26</title>
       <description>Daily News Briefing - 2026-04-26
 
@@ -1284,36 +1314,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-27</title>
-      <description>Daily News Briefing - 2026-03-27
-
-Topics covered:
-- In a major legal reversal, a federal judge has granted Anthropic a preliminary injunction, temporarily blocking the Pentagon’s attempt to blacklist the AI firm
-- The White House AI landscape is also seeing a shift in leadership
-- On Capitol Hill, a bipartisan effort is targeting the physical infrastructure of the AI boom
-- In the private sector, the race for "AI stickiness" is heating up as Google and Apple move to lower the barriers between competing assistants
-- Meanwhile, the industry is seeing a quiet "culling" of speculative or controversial features
-- Finally, the global energy crisis continues to ripple through domestic stability</description>
-      <pubDate>Fri, 27 Mar 2026 06:57:37 +0000</pubDate>
-      <guid>news-briefing-2026-03-27</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/13502f49c516_daily_news_briefing_-_2026-03-27.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-27.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>COT control: The Word Disappears, but the Thought Does Not</title>
-      <description>Audio version of COT control: The Word Disappears, but the Thought Does Not from LessWrong Frontpage</description>
-      <pubDate>Fri, 27 Mar 2026 06:54:09 +0000</pubDate>
-      <guid>CWecvQoLDGWt6d35v</guid>
-      <link>https://www.lesswrong.com/posts/CWecvQoLDGWt6d35v/cot-control-the-word-disappears-but-the-thought-does-not</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2fb35c31b2e5_cot_control_the_word_disappears_but_the_thought.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Book Review: The White King Of La Gonave</title>
       <description>Audio version of Book Review: The White King Of La Gonave from Scott Alexander</description>
       <pubDate>Fri, 27 Mar 2026 00:26:19 +0000</pubDate>
@@ -1331,39 +1331,6 @@ Topics covered:
       <guid>8b428175-dfe1-4c48-a81d-b2e976a7f5d3</guid>
       <link>https://www.lesswrong.com/posts/sw3inhvNrpuGdTyCR/ai-161-part-1-80-000-interviews</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/91e1b50684d9_ai_161_part_1_80000_interviews_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>How Natural Tradeoff And Failure Components?</title>
-      <description>Audio version of How Natural Tradeoff And Failure Components? from Scott Alexander</description>
-      <pubDate>Thu, 26 Mar 2026 11:17:22 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/how-natural-tradeoff-and-failure</guid>
-      <link>https://www.astralcodexten.com/p/how-natural-tradeoff-and-failure</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f3ab376813b5_how_natural_tradeoff_and_failure_components.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Every Debate On Pausing AI</title>
-      <description>Audio version of Every Debate On Pausing AI from Scott Alexander</description>
-      <pubDate>Wed, 25 Mar 2026 15:26:07 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/every-debate-on-pausing-ai</guid>
-      <link>https://www.astralcodexten.com/p/every-debate-on-pausing-ai</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/362a01032bc7_every_debate_on_pausing_ai.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Code, Cowork and Codex #6: Claude Code Auto Use and Full Cowork Computer Use” by Zvi</title>
-      <description>Audio version of “Claude Code, Cowork and Codex #6: Claude Code Auto Use and Full Cowork Computer Use” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 25 Mar 2026 15:13:34 +0000</pubDate>
-      <guid>99eccc15-80ad-4aff-b3d3-9c45fc1d55dc</guid>
-      <link>https://www.lesswrong.com/posts/8c3TED7ewqrbvheKy/claude-code-cowork-and-codex-6-claude-code-auto-use-and-full</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5dd0a48117dc_claude_code_cowork_and_codex_6_claude_code_aut.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
