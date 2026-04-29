@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-04-29</title>
+      <description>Daily News Briefing - 2026-04-29
+
+Topics covered:
+- The high-stakes legal battle between Elon Musk and OpenAI moved into open court yesterday as Musk took the stand in San Francisco
+- In a major shift for defense technology, Google has reportedly signed a classified deal allowing the United States Department of Defense to use its artificial intelligence models for "any lawful government purpose." According to reports from The Information, this agreement was reached less than twenty-four hours after over six hundred Google employees signed a formal protest against the militarization of their work
+- Within the hardware and infrastructure space, Amazon has wasted no time capitalizing on its newly expanded partnership with OpenAI
+- On the geopolitical front, the United Arab Emirates has officially exited the Organization of the Petroleum Exporting Countries, or OPEC
+- Domestically, the Trump administration has escalated its scrutiny of the media and former federal officials
+- In a technical development for the creative sector, Anthropic has released new "connectors" that allow its Claude AI to plug directly into industry-standard software like Photoshop, Blender, and Ableton</description>
+      <pubDate>Wed, 29 Apr 2026 08:00:54 +0000</pubDate>
+      <guid>news-briefing-2026-04-29</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f0cd0a7e56ce_daily_news_briefing_-_2026-04-29.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-29.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>SecureMaxx: A Lightweight  Sequence Screening Tool for Agents</title>
+      <description>Audio version of SecureMaxx: A Lightweight  Sequence Screening Tool for Agents from LessWrong Frontpage</description>
+      <pubDate>Wed, 29 Apr 2026 07:49:11 +0000</pubDate>
+      <guid>jaBQM5pyPaicF3pfA</guid>
+      <link>https://www.lesswrong.com/posts/jaBQM5pyPaicF3pfA/securemaxx-a-lightweight-sequence-screening-tool-for-agents-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/70d69f3720b0_securemaxx_a_lightweight_sequence_screening_tool.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Your Attempt To Solve Debate Will Not Work</title>
+      <description>Audio version of Your Attempt To Solve Debate Will Not Work from Scott Alexander</description>
+      <pubDate>Tue, 28 Apr 2026 19:55:10 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/your-attempt-to-solve-debate-will</guid>
+      <link>https://www.astralcodexten.com/p/your-attempt-to-solve-debate-will</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3210325e4333_your_attempt_to_solve_debate_will_not_work.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“GPT-5.5: Capabilities and Reactions” by Zvi</title>
+      <description>Audio version of “GPT-5.5: Capabilities and Reactions” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 28 Apr 2026 14:33:06 +0000</pubDate>
+      <guid>1c73ad33-f2d3-41d8-8694-a814aa24ebb8</guid>
+      <link>https://www.lesswrong.com/posts/5ytcFayxqZsXN8rNw/gpt-5-5-capabilities-and-reactions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e4f82d1cf53e_gpt-55_capabilities_and_reactions_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-28</title>
       <description>Daily News Briefing - 2026-04-28
 
@@ -1284,47 +1336,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-03-29</title>
-      <description>Daily News Briefing - 2026-03-29
-
-Topics covered:
-- The crisis within the United States government has intensified as House Republicans officially rejected a Senate-brokered deal to restore funding
-- In the artificial intelligence sector, new details have emerged regarding OpenAI’s abrupt decision to kill its Sora video project
-- While OpenAI narrows its focus, its primary rival Anthropic is seeing a surge in commercial adoption
-- In the hardware and energy sector, the global power crunch is hitting new extremes
-- Finally, the relationship between the administration and Silicon Valley continues to shift toward a formal alliance
-- Looking toward tomorrow, watch for the impact of new fuel protests in Europe as more nations consider the hard-line rationing measures already seen in Slovenia and Egypt</description>
-      <pubDate>Sun, 29 Mar 2026 06:54:07 +0000</pubDate>
-      <guid>news-briefing-2026-03-29</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9a1918f57238_daily_news_briefing_-_2026-03-29.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-29.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>"Path to Victory"</title>
-      <description>Audio version of "Path to Victory" from LessWrong Frontpage</description>
-      <pubDate>Sun, 29 Mar 2026 06:23:59 +0000</pubDate>
-      <guid>o4hPCzYvtMr3m3vYv</guid>
-      <link>https://www.lesswrong.com/posts/o4hPCzYvtMr3m3vYv/path-to-victory</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/22505ba1f8fe_path_to_victory.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>A Buddhist Sun Miracle?</title>
-      <description>Audio version of A Buddhist Sun Miracle? from Scott Alexander</description>
-      <pubDate>Fri, 27 Mar 2026 15:21:05 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/a-buddhist-sun-miracle</guid>
-      <link>https://www.astralcodexten.com/p/a-buddhist-sun-miracle</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b71543b40735_a_buddhist_sun_miracle.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Types of Handoff to AIs</title>
       <description>Audio version of Types of Handoff to AIs from Daniel Kokotajlo</description>
       <pubDate>Mon, 16 Mar 2026 22:24:25 +0000</pubDate>
@@ -1353,6 +1364,17 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</guid>
       <link>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>How do we (more) safely defer to AIs?</title>
+      <description>Audio version of How do we (more) safely defer to AIs? from Ryan Greenblatt</description>
+      <pubDate>Thu, 12 Feb 2026 16:55:52 +0000</pubDate>
+      <guid>vjAM7F8vMZS7oRrrh</guid>
+      <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
