@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-01</title>
+      <description>Daily News Briefing - 2026-05-01
+
+Topics covered:
+- The high-stakes legal battle between Elon Musk and OpenAI reached a pivotal moment in a California federal courtroom yesterday
+- In the AI capability and finance space, Anthropic is moving at a breakneck pace to solidify its market position
+- The geopolitical landscape has shifted toward high alert as global oil prices hit their highest levels since twenty-twenty-two
+- In cybersecurity, a severe Linux vulnerability known as "Copy-Fail" has caught the industry flat-footed
+- On the infrastructure front, the "RAM-ageddon" chip shortage is beginning to impact the world's largest consumer tech firm
+- Looking toward tomorrow, the focus shifts to the upcoming Anthropic "mega-round" closure and whether the reported United States military options for Iran trigger further volatility in the global commodities market</description>
+      <pubDate>Fri, 01 May 2026 08:02:19 +0000</pubDate>
+      <guid>news-briefing-2026-05-01</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7d7ad0b10a28_daily_news_briefing_-_2026-05-01.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-01.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>11 ways to be less deferential</title>
+      <description>Audio version of 11 ways to be less deferential from LessWrong Frontpage</description>
+      <pubDate>Fri, 01 May 2026 08:00:45 +0000</pubDate>
+      <guid>cyBQwfR6HPXB8QH9C</guid>
+      <link>https://www.lesswrong.com/posts/cyBQwfR6HPXB8QH9C/11-ways-to-be-less-deferential</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/29af56390b27_11_ways_to_be_less_deferential.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>What Deontological Bars?</title>
+      <description>Audio version of What Deontological Bars? from Scott Alexander</description>
+      <pubDate>Thu, 30 Apr 2026 23:11:09 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/what-deontological-bars</guid>
+      <link>https://www.astralcodexten.com/p/what-deontological-bars</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/16257619400e_what_deontological_bars.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #166: Google Sells Out” by Zvi</title>
+      <description>Audio version of “AI #166: Google Sells Out” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 30 Apr 2026 16:24:44 +0000</pubDate>
+      <guid>884be03e-9c20-4b39-bfd1-3572085933bc</guid>
+      <link>https://www.lesswrong.com/posts/zGyzyJJkTxbhReZP7/ai-166-google-sells-out</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1dddf103a932_ai_166_google_sells_out_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-04-30</title>
       <description>Daily News Briefing - 2026-04-30
 
@@ -1301,58 +1353,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/against-the-concept-of-telescopic</guid>
       <link>https://www.astralcodexten.com/p/against-the-concept-of-telescopic</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/64e0b1695a56_against_the_concept_of_telescopic_altruism.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-03-31</title>
-      <description>Daily News Briefing - 2026-03-31
-
-Topics covered:
-- The geopolitical landscape regarding the conflict with Iran has shifted significantly as Spain officially closed its airspace to United States aircraft involved in the war
-- In the artificial intelligence sector, a new study from the United Kingdom’s AI Security Institute warns of "emergent misalignment" in reinforcement learning models
-- While the "agentic" era progresses, it faces a steep climb in public trust
-- In the hardware and infrastructure race, the scale of investment continues to hit unprecedented levels
-- Finally, the United States military is facing a major setback in its foundational technology
-- Looking toward tomorrow, keep an eye on the United States Army's investigation into Kid Rock, following a controversial Black Hawk helicopter flyby at the artist's private residence</description>
-      <pubDate>Tue, 31 Mar 2026 07:03:21 +0000</pubDate>
-      <guid>news-briefing-2026-03-31</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0a89efe60e90_daily_news_briefing_-_2026-03-31.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-03-31.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Why Corrigibility Matters (If It Matters At All)</title>
-      <description>Audio version of Why Corrigibility Matters (If It Matters At All) from LessWrong Frontpage</description>
-      <pubDate>Tue, 31 Mar 2026 03:27:11 +0000</pubDate>
-      <guid>LkK2kEPhdEtZfw28K</guid>
-      <link>https://www.lesswrong.com/posts/LkK2kEPhdEtZfw28K/why-corrigibility-matters-if-it-matters-at-all</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e1792bcd07c9_why_corrigibility_matters_if_it_matters_at_all.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #161 Part 2: Every Debate on AI” by Zvi</title>
-      <description>Audio version of “AI #161 Part 2: Every Debate on AI” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 30 Mar 2026 13:41:47 +0000</pubDate>
-      <guid>c41ac065-b5f8-4283-918d-4b8923f88006</guid>
-      <link>https://www.lesswrong.com/posts/y6HogrdSeFyGDuYYN/ai-161-part-2-every-debate-on-ai</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a9d403a27c8f_ai_161_part_2_every_debate_on_ai_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>A Buddhist Sun Miracle?</title>
-      <description>Audio version of A Buddhist Sun Miracle? from Scott Alexander</description>
-      <pubDate>Fri, 27 Mar 2026 15:21:05 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/a-buddhist-sun-miracle</guid>
-      <link>https://www.astralcodexten.com/p/a-buddhist-sun-miracle</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b71543b40735_a_buddhist_sun_miracle.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
