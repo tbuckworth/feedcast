@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-02</title>
+      <description>Daily News Briefing - 2026-05-02
+
+Topics covered:
+- The Pentagon has formalized its transition into the era of algorithmic warfare by striking classified deals with OpenAI, Google, Nvidia, Microsoft, Amazon, xAI, and Reflection
+- In the ongoing legal battle of Musk versus Altman, the week concluded with significant setbacks for Elon Musk
+- On the technical capability front, OpenAI’s upcoming GPT-five point five has matched the heavily hyped "Mythos Preview" from Anthropic in recent cybersecurity benchmarks
+- The geopolitical situation remains volatile as President Trump informed Congress that he no longer requires their authorization for military action against Iran, arguing that a recent ceasefire has technically "terminated" prior hostilities
+- In infrastructure and security, the Linux community is struggling with a massive outage of Ubuntu services following a distributed denial-of-service attack
+- Looking toward tomorrow, the focus will be on the closing of Anthropic’s nine-hundred-billion-dollar funding round and the potential for further volatility in the fertilizer and commodities markets</description>
+      <pubDate>Sat, 02 May 2026 07:20:06 +0000</pubDate>
+      <guid>news-briefing-2026-05-02</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a49b09276779_daily_news_briefing_-_2026-05-02.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-02.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Primary Care Physicians are Incompetent. We Need More of Them.</title>
+      <description>Audio version of Primary Care Physicians are Incompetent. We Need More of Them. from LessWrong Frontpage</description>
+      <pubDate>Sat, 02 May 2026 05:47:46 +0000</pubDate>
+      <guid>QYyBAXqGgNADJDhcP</guid>
+      <link>https://www.lesswrong.com/posts/QYyBAXqGgNADJDhcP/primary-care-physicians-are-incompetent-we-need-more-of-them</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d27dd53c441a_primary_care_physicians_are_incompetent_we_need_m.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Housing Roundup #14: You Can’t Build That” by Zvi</title>
+      <description>Audio version of “Housing Roundup #14: You Can’t Build That” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 01 May 2026 16:55:40 +0000</pubDate>
+      <guid>1956045b-2ec5-422a-8d5c-e93237c736d0</guid>
+      <link>https://www.lesswrong.com/posts/WC69ZpLJ2LYdSMXqb/housing-roundup-14-you-can-t-build-that</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/482fdd3e259b_housing_roundup_14_you_cant_build_that_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-01</title>
       <description>Daily News Briefing - 2026-05-01
 
@@ -1301,47 +1342,6 @@ Topics covered:
       <guid>6fb122c9-b53d-4407-9bfd-8ca60cf7f138</guid>
       <link>https://www.lesswrong.com/posts/AkzauoTt2Lwn2yAvj/anthropic-responsible-scaling-policy-v3-a-matter-of-trust</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/42757f91ecfa_anthropic_responsible_scaling_policy_v3_a_matter.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-04-01</title>
-      <description>Daily News Briefing - 2026-04-01
-
-Topics covered:
-- The artificial intelligence sector has reached a new financial stratosphere as OpenAI confirmed a massive one hundred and twenty-two billion dollar funding round
-- While OpenAI consolidates capital, its chief rival, Anthropic, is dealing with a significant technical exposure
-- The tension in the Middle East has escalated into a grim new phase as reports from Tehran indicate that Iran has begun deploying children to man security checkpoints during the ongoing conflict
-- In the realm of national security and infrastructure, NASA and the United States military are locked in a countdown for the Artemis Two mission, which could return humans to the moon’s vicinity this week for the first time in over fifty years
-- Finally, in a major demographic milestone, India has officially begun its massive national census
-- Looking toward tomorrow, maritime markets will be watching for the arrival of a Russian oil tanker in Cuba, a delivery expected to provide the first major relief to the island after months of a near-total energy blockade</description>
-      <pubDate>Wed, 01 Apr 2026 07:09:39 +0000</pubDate>
-      <guid>news-briefing-2026-04-01</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1b7c66330105_daily_news_briefing_-_2026-04-01.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-01.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Review of Kawabata's "Palm of the Hand" stories and their translation into English</title>
-      <description>Audio version of Review of Kawabata's "Palm of the Hand" stories and their translation into English from LessWrong Frontpage</description>
-      <pubDate>Wed, 01 Apr 2026 04:47:04 +0000</pubDate>
-      <guid>QSHQWesKzFsHk3zHD</guid>
-      <link>https://www.lesswrong.com/posts/QSHQWesKzFsHk3zHD/review-of-kawabata-s-palm-of-the-hand-stories-and-their</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bd201b1b2957_review_of_kawabatas_palm_of_the_hand_stories_an.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Movie Review: The AI Doc” by Zvi</title>
-      <description>Audio version of “Movie Review: The AI Doc” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 31 Mar 2026 11:41:56 +0000</pubDate>
-      <guid>ae5f3331-bed5-49b3-9650-3bd93824cf11</guid>
-      <link>https://www.lesswrong.com/posts/ppC6geY4FxGYifrWx/movie-review-the-ai-doc</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5aafe864e02a_movie_review_the_ai_doc_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
