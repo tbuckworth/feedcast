@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-03</title>
+      <description>Daily News Briefing - 2026-05-03
+
+Topics covered:
+- In a move that fundamentally redefines executive power over the military, President Trump has informed Congress that a temporary ceasefire with Iran has technically terminated hostilities, thereby bypassing the need for congressional authorization for future strikes
+- On the European and North American front, a major geopolitical rift is widening as the United States begins withdrawing five thousand troops from Germany following a diplomatic split with Chancellor Merz
+- In a critical blow to historical internet infrastructure, the search pioneer Ask dot com is shutting down
+- Within the hardware and infrastructure sector, the Linux community’s "Copy-Fail" crisis has been exacerbated by a massive distributed denial-of-service attack on Ubuntu’s servers
+- In energy and technical research, acoustic fire suppression has moved from the laboratory to commercial viability
+- Looking toward tomorrow, the focus will be on whether the United States Supreme Court grants the administration's emergency request to restore full mail-order access to the abortion pill mifepristone, a decision with profound implications for constitutional law and the pharmaceutical supply chain</description>
+      <pubDate>Sun, 03 May 2026 07:48:20 +0000</pubDate>
+      <guid>news-briefing-2026-05-03</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7d1997df3775_daily_news_briefing_-_2026-05-03.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-03.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Notes on equanimity from the inside</title>
+      <description>Audio version of Notes on equanimity from the inside from LessWrong Frontpage</description>
+      <pubDate>Sun, 03 May 2026 01:59:58 +0000</pubDate>
+      <guid>MNFEhMHpEsgqxjBa2</guid>
+      <link>https://www.lesswrong.com/posts/MNFEhMHpEsgqxjBa2/notes-on-equanimity-from-the-inside</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9b19d0e91033_notes_on_equanimity_from_the_inside.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-02</title>
       <description>Daily News Briefing - 2026-05-02
 
@@ -57,6 +87,17 @@ Topics covered:
       <guid>1956045b-2ec5-422a-8d5c-e93237c736d0</guid>
       <link>https://www.lesswrong.com/posts/WC69ZpLJ2LYdSMXqb/housing-roundup-14-you-can-t-build-that</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/482fdd3e259b_housing_roundup_14_you_cant_build_that_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Housing Roundup #13: More Dakka” by Zvi</title>
+      <description>Audio version of “Housing Roundup #13: More Dakka” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 01 May 2026 13:10:59 +0000</pubDate>
+      <guid>ef5510ab-8146-4ce9-8f88-0c6f168e8e60</guid>
+      <link>https://www.lesswrong.com/posts/dwNgPrBtAHye2vuwS/housing-roundup-13-more-dakka-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/54930e465aad_housing_roundup_13_more_dakka_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1301,47 +1342,6 @@ Topics covered:
       <guid>f2dcb1a2-4ef7-4905-817f-ae6a1574b529</guid>
       <link>https://www.lesswrong.com/posts/iBeTkFuQwjaRPo3Ad/ai-162-visions-of-mythos</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/858125ec4e06_ai_162_visions_of_mythos_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-04-02</title>
-      <description>Daily News Briefing - 2026-04-02
-
-Topics covered:
-- The second space age has officially begun as NASA’s Artemis Two mission successfully vaulted into Earth orbit from the Kennedy Space Center
-- In the private sector, SpaceX has filed a confidential submission with the Securities and Exchange Commission for what is expected to be the largest initial public offering in history
-- In the artificial intelligence sector, a technical "system failure" paralyzed Baidu’s Apollo Go robotaxi fleet in Wuhan, China
-- The security fallout from the Anthropic "Claude Code" leak continues to widen
-- On the geopolitical front, President Trump delivered a primetime address intended to calm markets regarding the escalating war with Iran
-- Finally, the United States Supreme Court today appeared skeptical of the administration’s plan to limit birthright citizenship</description>
-      <pubDate>Thu, 02 Apr 2026 07:01:51 +0000</pubDate>
-      <guid>news-briefing-2026-04-02</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bdce5597f28b_daily_news_briefing_-_2026-04-02.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-02.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Have an Unreasonably Specific Story About The Future</title>
-      <description>Audio version of Have an Unreasonably Specific Story About The Future from LessWrong Frontpage</description>
-      <pubDate>Thu, 02 Apr 2026 06:11:16 +0000</pubDate>
-      <guid>8t8jdTyq6X2B7D8St</guid>
-      <link>https://www.lesswrong.com/posts/8t8jdTyq6X2B7D8St/have-an-unreasonably-specific-story-about-the-future</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/71c7d6aba298_have_an_unreasonably_specific_story_about_the_futu.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Anthropic Responsible Scaling Policy v3: A Matter of Trust” by Zvi</title>
-      <description>Audio version of “Anthropic Responsible Scaling Policy v3: A Matter of Trust” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 01 Apr 2026 18:13:41 +0000</pubDate>
-      <guid>6fb122c9-b53d-4407-9bfd-8ca60cf7f138</guid>
-      <link>https://www.lesswrong.com/posts/AkzauoTt2Lwn2yAvj/anthropic-responsible-scaling-policy-v3-a-matter-of-trust</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/42757f91ecfa_anthropic_responsible_scaling_policy_v3_a_matter.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
