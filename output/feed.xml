@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-05</title>
+      <description>Daily News Briefing - 2026-05-05
+
+Topics covered:
+- The high-stakes legal battle between Elon Musk and OpenAI has intensified in a California federal court, revealing aggressive private communications from the billionaire
+- On the infrastructure front, the United States Cybersecurity and Infrastructure Security Agency has issued an urgent warning regarding the "Copy-Fail" bug
+- The race for the "agentic economy" is moving into corporate finance as OpenAI announced a major collaboration with P-w-C
+- In global security and health, a Ukrainian drone strike on an upmarket Moscow high-rise has shattered a unilateral Russian ceasefire intended for Victory Day celebrations
+- In a move that could disrupt the global e-commerce landscape, GameStop has made a five-hundred-fifty-five-billion-dollar takeover offer for eBay
+- Looking toward tomorrow, the focus will be on the Kremlin’s response to the Moscow drone strike and whether the Treasury Department intervenes in the highly irregular GameStop-eBay merger proposal</description>
+      <pubDate>Tue, 05 May 2026 07:54:50 +0000</pubDate>
+      <guid>news-briefing-2026-05-05</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/21f436747c42_daily_news_briefing_-_2026-05-05.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-05.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Training Model to Predict Its Own Generalization: A Preliminary Study</title>
+      <description>Audio version of Training Model to Predict Its Own Generalization: A Preliminary Study from LessWrong Frontpage</description>
+      <pubDate>Tue, 05 May 2026 05:50:30 +0000</pubDate>
+      <guid>BLHBhpJcusmsNjGio</guid>
+      <link>https://www.lesswrong.com/posts/BLHBhpJcusmsNjGio/training-model-to-predict-its-own-generalization-a</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f89803762db6_training_model_to_predict_its_own_generalization.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Housing Roundup #15: The War Against Renters” by Zvi</title>
+      <description>Audio version of “Housing Roundup #15: The War Against Renters” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 04 May 2026 20:02:41 +0000</pubDate>
+      <guid>e9f3ca4f-65ce-4a24-879c-a980baf4ecab</guid>
+      <link>https://www.lesswrong.com/posts/jW4TeNZhxBA9Fzdim/housing-roundup-15-the-war-against-renters</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/926aa57c3d9a_housing_roundup_15_the_war_against_renters_by.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-04</title>
       <description>Daily News Briefing - 2026-05-04
 
@@ -1262,47 +1303,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-04</title>
-      <description>Daily News Briefing - 2026-04-04
-
-Topics covered:
-- The push for artificial intelligence to take on high-stakes clinical roles has reached a new milestone in Utah
-- Within the industry, Anthropic is aggressively moving to consolidate its ecosystem and expand its reach into biotechnology
-- The internal structure of OpenAI is also shifting as the company manages significant executive turnover
-- In Washington, President Trump has unveiled a one point five trillion dollar defense budget that seeks to fundamentally realign federal spending
-- Finally, the geopolitical situation surrounding Iran remains volatile following a series of strikes on industrial infrastructure
-- Looking toward tomorrow, keep an eye on the European energy markets as leaders meet to discuss reviving nuclear power projects to offset the massive gas and fuel spikes caused by the ongoing war</description>
-      <pubDate>Sat, 04 Apr 2026 06:49:05 +0000</pubDate>
-      <guid>news-briefing-2026-04-04</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/126d5437ff53_daily_news_briefing_-_2026-04-04.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-04.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Democracy Dies With The Rifleman</title>
-      <description>Audio version of Democracy Dies With The Rifleman from LessWrong Frontpage</description>
-      <pubDate>Sat, 04 Apr 2026 06:40:02 +0000</pubDate>
-      <guid>ntqpAuHTrphYzv4EG</guid>
-      <link>https://www.lesswrong.com/posts/ntqpAuHTrphYzv4EG/democracy-dies-with-the-rifleman</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5807fc909865_democracy_dies_with_the_rifleman.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Anthropic Responsible Scaling Policy v3: Dive Into The Details” by Zvi</title>
-      <description>Audio version of “Anthropic Responsible Scaling Policy v3: Dive Into The Details” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 03 Apr 2026 13:49:15 +0000</pubDate>
-      <guid>462ed734-c138-4c3e-bb30-2a887c1526e5</guid>
-      <link>https://www.lesswrong.com/posts/RtQxa5MoKk9bwEEEd/anthropic-responsible-scaling-policy-v3-dive-into-the</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a30c9f3817c8_anthropic_responsible_scaling_policy_v3_dive_int.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>The PauseAI Protest: A Photo-Essay</title>
       <description>Audio version of The PauseAI Protest: A Photo-Essay from Scott Alexander</description>
       <pubDate>Fri, 03 Apr 2026 05:23:46 +0000</pubDate>
@@ -1331,17 +1331,6 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
       <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #162: Visions of Mythos” by Zvi</title>
-      <description>Audio version of “AI #162: Visions of Mythos” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 02 Apr 2026 12:22:13 +0000</pubDate>
-      <guid>f2dcb1a2-4ef7-4905-817f-ae6a1574b529</guid>
-      <link>https://www.lesswrong.com/posts/iBeTkFuQwjaRPo3Ad/ai-162-visions-of-mythos</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/858125ec4e06_ai_162_visions_of_mythos_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
