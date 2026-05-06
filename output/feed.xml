@@ -21,6 +21,17 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>There is no evidence you should reapply sunscreen every 2 hours.</title>
+      <description>Audio version of There is no evidence you should reapply sunscreen every 2 hours. from LessWrong Frontpage</description>
+      <pubDate>Wed, 06 May 2026 09:19:32 +0000</pubDate>
+      <guid>daTGKn3pXzs75nSB7</guid>
+      <link>https://www.lesswrong.com/posts/daTGKn3pXzs75nSB7/there-is-no-evidence-you-should-reapply-sunscreen-every-2</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d09166886235_there_is_no_evidence_you_should_reapply_sunscreen.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-06</title>
       <description>Daily News Briefing - 2026-05-06
 
@@ -1284,31 +1295,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-06</title>
-      <description>Daily News Briefing - 2026-04-06
-
-Topics covered:
-- The successful extraction of a downed United States pilot from remote, hostile territory in Iran has shifted the geopolitical calculus for the Trump administration
-- In a controversial intersection of technology and war, the decentralized prediction market Polymarket has pulled wagers related to the rescue efforts
-- On the technical front, Microsoft has updated its service terms with a startling disclaimer, explicitly stating that its A-I Copilot is "for entertainment purposes only." This legal framing is a direct attempt to shield the company from liability as users increasingly rely on A-I for professional and high-stakes tasks
-- In Europe, Hungary is reporting a potential sabotage plot against its primary gas pipeline just one week before national elections
-- Finally, a major security lapse has been identified involving the United States Customs and Border Protection
-- Looking toward tomorrow, keep an eye on the Artemis Two mission as NASA begins transmitting a new series of high-resolution lunar images that the agency hopes will maintain public support amidst looming budget battles in Washington</description>
-      <pubDate>Mon, 06 Apr 2026 07:18:42 +0000</pubDate>
-      <guid>news-briefing-2026-04-06</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/393d1dfdb997_daily_news_briefing_-_2026-04-06.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-06.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Contra The Usual Interpretation Of “The Whispering Earring”</title>
-      <description>Audio version of Contra The Usual Interpretation Of “The Whispering Earring” from LessWrong Frontpage</description>
-      <pubDate>Mon, 06 Apr 2026 06:53:36 +0000</pubDate>
-      <guid>t5psGMdgReuRucEkr</guid>
-      <link>https://www.lesswrong.com/posts/t5psGMdgReuRucEkr/contra-the-usual-interpretation-of-the-whispering-earring</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3b6223384403_contra_the_usual_interpretation_of_the_whispering.mp3" type="audio/mpeg" length="0" />
+      <title>“Anthropic Responsible Scaling Policy v3: Dive Into The Details” by Zvi</title>
+      <description>Audio version of “Anthropic Responsible Scaling Policy v3: Dive Into The Details” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 03 Apr 2026 13:49:15 +0000</pubDate>
+      <guid>462ed734-c138-4c3e-bb30-2a887c1526e5</guid>
+      <link>https://www.lesswrong.com/posts/RtQxa5MoKk9bwEEEd/anthropic-responsible-scaling-policy-v3-dive-into-the</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a30c9f3817c8_anthropic_responsible_scaling_policy_v3_dive_int.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
