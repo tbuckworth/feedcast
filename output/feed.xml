@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-07</title>
+      <description>Daily News Briefing - 2026-05-07
+
+Topics covered:
+- The landmark Musk versus OpenAI trial has shifted from philosophical debates to damaging formal testimony
+- In the hardware and infrastructure sector, SpaceX is making a massive, vertical leap into the semiconductor market
+- In the software layer, Google has abruptly shuttered Project Mariner, its experimental agent designed to autonomously navigate the web
+- Geopolitically, the prospects for a de-escalation in the Middle East have brightened
+- Finally, the AI safety community is on high alert after Braintrust, a core provider of evaluation tools for AI engineers, confirmed a breach of its Amazon cloud environment
+- Looking toward tomorrow, all eyes are on the Canary Islands as the hantavirus-hit cruise ship approaches port for a potential mass quarantine and further medical evacuations</description>
+      <pubDate>Thu, 07 May 2026 08:21:15 +0000</pubDate>
+      <guid>news-briefing-2026-05-07</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b4e3a0996bb1_daily_news_briefing_-_2026-05-07.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-07.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Contra Everyone On Taste</title>
+      <description>Audio version of Contra Everyone On Taste from Scott Alexander</description>
+      <pubDate>Thu, 07 May 2026 06:04:44 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/contra-everyone-on-taste</guid>
+      <link>https://www.astralcodexten.com/p/contra-everyone-on-taste</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/70fa37f9196d_contra_everyone_on_taste.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Sculpted Interaction: a Design-First Approach to AI Alignment</title>
+      <description>Audio version of Sculpted Interaction: a Design-First Approach to AI Alignment from LessWrong Frontpage</description>
+      <pubDate>Wed, 06 May 2026 23:47:11 +0000</pubDate>
+      <guid>rMzb2dFwfAx6QH8ZH</guid>
+      <link>https://www.lesswrong.com/posts/rMzb2dFwfAx6QH8ZH/sculpted-interaction-a-design-first-approach-to-ai-alignment</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a6dcc5258b92_sculpted_interaction_a_design-first_approach_to_a.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“What is Anthropic?” by Zvi</title>
+      <description>Audio version of “What is Anthropic?” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 06 May 2026 13:33:19 +0000</pubDate>
+      <guid>d3c81927-076b-4bc9-8208-eaa15c2027d7</guid>
+      <link>https://www.lesswrong.com/posts/6wbLXhkQAPcunrYnq/what-is-anthropic</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c65d1c8fbd3_what_is_anthropic_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>There is no evidence you should reapply sunscreen every 2 hours.</title>
       <description>Audio version of There is no evidence you should reapply sunscreen every 2 hours. from LessWrong Frontpage</description>
       <pubDate>Wed, 06 May 2026 09:19:32 +0000</pubDate>
@@ -1290,28 +1342,6 @@ Topics covered:
       <guid>dKpC6wHFqDrGZwnah</guid>
       <link>https://www.lesswrong.com/posts/dKpC6wHFqDrGZwnah/ais-can-now-often-do-massive-easy-to-verify-swe-tasks-and-i</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/008c42fcff1f_ais_can_now_often_do_massive_easy-to-verify_swe_ta.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Anthropic Responsible Scaling Policy v3: Dive Into The Details” by Zvi</title>
-      <description>Audio version of “Anthropic Responsible Scaling Policy v3: Dive Into The Details” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 03 Apr 2026 13:49:15 +0000</pubDate>
-      <guid>462ed734-c138-4c3e-bb30-2a887c1526e5</guid>
-      <link>https://www.lesswrong.com/posts/RtQxa5MoKk9bwEEEd/anthropic-responsible-scaling-policy-v3-dive-into-the</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a30c9f3817c8_anthropic_responsible_scaling_policy_v3_dive_int.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The PauseAI Protest: A Photo-Essay</title>
-      <description>Audio version of The PauseAI Protest: A Photo-Essay from Scott Alexander</description>
-      <pubDate>Fri, 03 Apr 2026 05:23:46 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-pauseai-protest-a-photo-essay</guid>
-      <link>https://www.astralcodexten.com/p/the-pauseai-protest-a-photo-essay</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b99a6badbfdb_the_pauseai_protest_a_photo-essay.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
