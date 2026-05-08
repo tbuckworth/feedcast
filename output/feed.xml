@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-08</title>
+      <description>Daily News Briefing - 2026-05-08
+
+Topics covered:
+- The legal battle between Elon Musk and OpenAI has entered a critical new phase as witness testimony reveals that Musk attempted to take control of the company years before his current lawsuit
+- In the hardware and infrastructure sector, the scale of internal capacity building has reached unprecedented levels
+- Underlining its push into deeper cognitive capabilities, OpenAI has introduced a suite of "Advanced Voice" features to its API
+- Geopolitically, the situation in the Middle East remains volatile
+- In the wearable market, Google and Apple are racing toward "body-centric" AI
+- Looking toward tomorrow, the focus will be on Tenerife as the hantavirus-hit cruise ship MV Hondius begins a controversial disembarkation process amid local protests over potential quarantine breaches</description>
+      <pubDate>Fri, 08 May 2026 07:16:25 +0000</pubDate>
+      <guid>news-briefing-2026-05-08</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c14b245e921c_daily_news_briefing_-_2026-05-08.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-08.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Investigating the consequences of accidentally grading CoT during RL</title>
+      <description>Audio version of Investigating the consequences of accidentally grading CoT during RL from LessWrong Frontpage</description>
+      <pubDate>Fri, 08 May 2026 06:17:31 +0000</pubDate>
+      <guid>kSMXPdf3NDi9jkHm3</guid>
+      <link>https://www.lesswrong.com/posts/kSMXPdf3NDi9jkHm3/investigating-the-consequences-of-accidentally-grading-cot</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d3c0d79c7677_investigating_the_consequences_of_accidentally_gra.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>A review of “Investigating the consequences of accidentally grading CoT during RL”</title>
+      <description>Audio version of A review of “Investigating the consequences of accidentally grading CoT during RL” from Buck Shlegeris</description>
+      <pubDate>Thu, 07 May 2026 18:06:54 +0000</pubDate>
+      <guid>juCHTdZpZBGooHKW4</guid>
+      <link>https://www.lesswrong.com/posts/juCHTdZpZBGooHKW4/a-review-of-investigating-the-consequences-of-accidentally</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4ecd1a723aad_a_review_of_investigating_the_consequences_of_acc.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #167: The Prior Restraint Era Begins” by Zvi</title>
+      <description>Audio version of “AI #167: The Prior Restraint Era Begins” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 07 May 2026 13:53:42 +0000</pubDate>
+      <guid>23068fb1-52d0-46f3-a869-6e98240a8922</guid>
+      <link>https://www.lesswrong.com/posts/rn3iKuDcE4SiSg4DW/ai-167-the-prior-restraint-era-begins</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ef128693780b_ai_167_the_prior_restraint_era_begins_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-07</title>
       <description>Daily News Briefing - 2026-05-07
 
@@ -1295,53 +1347,23 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-07</title>
-      <description>Daily News Briefing - 2026-04-07
-
-Topics covered:
-- The geopolitical tension between the United States and Iran has reached a critical digital flashpoint
-- On the technical front, a prominent shift in A-I development timelines is circulating within the research community
-- Mirroring this internal push for safety, OpenAI is also floating a radical social vision to combat the "bad vibes" and distrust reportedly brewing among its own staff regarding C-E-O Sam Altman
-- In the robotics sector, a new model known as G-E-N-One has achieved a ninety-nine percent reliability rate in performing complex physical tasks, such as fixing vacuums and folding boxes
-- In Washington, the Trump administration is doubling down on its "defense-first" fiscal realignment
-- Finally, a major legal ruling has stabilized the "Web Three" landscape</description>
-      <pubDate>Tue, 07 Apr 2026 07:04:42 +0000</pubDate>
-      <guid>news-briefing-2026-04-07</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/216b6750652b_daily_news_briefing_-_2026-04-07.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-07.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>We're actually running out of benchmarks to upper bound AI capabilities</title>
-      <description>Audio version of We're actually running out of benchmarks to upper bound AI capabilities from LessWrong Frontpage</description>
-      <pubDate>Tue, 07 Apr 2026 06:47:17 +0000</pubDate>
-      <guid>gfkJp8Mr9sBm83Rcz</guid>
-      <link>https://www.lesswrong.com/posts/gfkJp8Mr9sBm83Rcz/we-re-actually-running-out-of-benchmarks-to-upper-bound-ai</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8253cb762519_were_actually_running_out_of_benchmarks_to_upper.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Housing Roundup #13: More Dakka” by Zvi</title>
-      <description>Audio version of “Housing Roundup #13: More Dakka” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 06 Apr 2026 18:14:07 +0000</pubDate>
-      <guid>934b6489-5c48-474a-898b-3472f613a425</guid>
-      <link>https://www.lesswrong.com/posts/eSwdsDTnqigQJPfkw/housing-roundup-13-more-dakka</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/81d033774451_housing_roundup_13_more_dakka_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>AIs can now often do massive easy-to-verify SWE tasks and I've updated towards shorter timelines</title>
       <description>Audio version of AIs can now often do massive easy-to-verify SWE tasks and I've updated towards shorter timelines from Ryan Greenblatt</description>
       <pubDate>Mon, 06 Apr 2026 16:01:56 +0000</pubDate>
       <guid>dKpC6wHFqDrGZwnah</guid>
       <link>https://www.lesswrong.com/posts/dKpC6wHFqDrGZwnah/ais-can-now-often-do-massive-easy-to-verify-swe-tasks-and-i</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/008c42fcff1f_ais_can_now_often_do_massive_easy-to-verify_swe_ta.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The PauseAI Protest: A Photo-Essay</title>
+      <description>Audio version of The PauseAI Protest: A Photo-Essay from Scott Alexander</description>
+      <pubDate>Fri, 03 Apr 2026 05:23:46 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/the-pauseai-protest-a-photo-essay</guid>
+      <link>https://www.astralcodexten.com/p/the-pauseai-protest-a-photo-essay</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b99a6badbfdb_the_pauseai_protest_a_photo-essay.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1364,28 +1386,6 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
       <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Announcing ControlConf 2026</title>
-      <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
-      <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
-      <guid>tN5mgBAinwFe5c67c</guid>
-      <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>How do we (more) safely defer to AIs?</title>
-      <description>Audio version of How do we (more) safely defer to AIs? from Ryan Greenblatt</description>
-      <pubDate>Thu, 12 Feb 2026 16:55:52 +0000</pubDate>
-      <guid>vjAM7F8vMZS7oRrrh</guid>
-      <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
