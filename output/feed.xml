@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-09</title>
+      <description>Daily News Briefing - 2026-05-09
+
+Topics covered:
+- The global infrastructure supporting the artificial intelligence boom is facing a dual crisis of physical energy constraints and targeted cyber-sabotage
+- In a rare glimpse into the early power dynamics of the industry, unsealed court documents from the Musk versus OpenAI trial reveal deep-seated anxieties within Microsoft
+- As model deployment scales, OpenAI has released a technical breakdown of its "Codex Safety" framework
+- Geopolitically, the situation in Eurasia has taken an unexpected turn
+- On the health front, the maritime crisis in the Atlantic has reached the Canary Islands
+- In the hardware market, price volatility is increasing</description>
+      <pubDate>Sat, 09 May 2026 07:43:46 +0000</pubDate>
+      <guid>news-briefing-2026-05-09</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/89304c886cf2_daily_news_briefing_-_2026-05-09.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-09.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Does Opus 4.7 Generate Deceptive Denials About Its Own Guardrails?</title>
+      <description>Audio version of Does Opus 4.7 Generate Deceptive Denials About Its Own Guardrails? from LessWrong Frontpage</description>
+      <pubDate>Sat, 09 May 2026 04:20:08 +0000</pubDate>
+      <guid>sjEi9ADtNpNvAfz5E</guid>
+      <link>https://www.lesswrong.com/posts/sjEi9ADtNpNvAfz5E/does-opus-4-7-generate-deceptive-denials-about-its-own</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/24fe6144ec9c_does_opus_47_generate_deceptive_denials_about_its.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Code, Codex and Agentic Coding #8” by Zvi</title>
+      <description>Audio version of “Claude Code, Codex and Agentic Coding #8” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 08 May 2026 16:43:27 +0000</pubDate>
+      <guid>a8b6b0e3-a542-4071-a294-ee74f9f7cfc7</guid>
+      <link>https://www.lesswrong.com/posts/BS27ZWW2qwDEq5anx/claude-code-codex-and-agentic-coding-8</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/713e271f35fe_claude_code_codex_and_agentic_coding_8_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Three Model Organisms For Taste</title>
+      <description>Audio version of Three Model Organisms For Taste from Scott Alexander</description>
+      <pubDate>Fri, 08 May 2026 08:50:41 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/three-model-organisms-for-taste</guid>
+      <link>https://www.astralcodexten.com/p/three-model-organisms-for-taste</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f6cf2a019238_three_model_organisms_for_taste.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-08</title>
       <description>Daily News Briefing - 2026-05-08
 
@@ -1284,86 +1336,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-08</title>
-      <description>Daily News Briefing - 2026-04-08
-
-Topics covered:
-- The month-long military escalation between the United States and Iran has reached a significant turning point with the announcement of a two-week provisional ceasefire
-- On the technical front, Anthropic has unveiled a new flagship model under the code name "Project Glasswing" as part of a high-stakes cybersecurity initiative
-- Infrastructure for the next generation of A-I is also seeing a shift in its industrial foundation
-- In Washington, the Trump administration has proposed a seven hundred million dollar budget cut for the Cybersecurity and Infrastructure Security Agency, known as CISA
-- In the consumer tech sector, Google is facing increased legal pressure over A-I safety
-- Finally, the Artemis Two mission has reached its furthest distance from Earth, successfully transmitting high-resolution imagery of the lunar far side</description>
-      <pubDate>Wed, 08 Apr 2026 07:07:21 +0000</pubDate>
-      <guid>news-briefing-2026-04-08</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/44465ad9076e_daily_news_briefing_-_2026-04-08.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-08.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Alignment vs. Safety, part 2: Alignment</title>
-      <description>Audio version of Alignment vs. Safety, part 2: Alignment from LessWrong Frontpage</description>
-      <pubDate>Wed, 08 Apr 2026 06:40:23 +0000</pubDate>
-      <guid>jzSMt555GvfwxWtQo</guid>
-      <link>https://www.lesswrong.com/posts/jzSMt555GvfwxWtQo/alignment-vs-safety-part-2-alignment</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fb9befcc2f2b_alignment_vs_safety_part_2_alignment.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Zagreb Meetup This Friday</title>
-      <description>Audio version of Zagreb Meetup This Friday from Scott Alexander</description>
-      <pubDate>Tue, 07 Apr 2026 20:51:24 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/zagreb-meetup-this-friday</guid>
-      <link>https://www.astralcodexten.com/p/zagreb-meetup-this-friday</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ce88cddeba6d_zagreb_meetup_this_friday.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“OpenAI #16: A History and a Proposal” by Zvi</title>
-      <description>Audio version of “OpenAI #16: A History and a Proposal” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 07 Apr 2026 19:12:23 +0000</pubDate>
-      <guid>7657fe95-49cc-415a-8dd1-583c0c4a9097</guid>
-      <link>https://www.lesswrong.com/posts/QSgBhcDKi9j5iSi9s/openai-16-a-history-and-a-proposal</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aef835967e92_openai_16_a_history_and_a_proposal_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>My picture of the present in AI</title>
       <description>Audio version of My picture of the present in AI from Ryan Greenblatt</description>
       <pubDate>Tue, 07 Apr 2026 16:44:58 +0000</pubDate>
       <guid>WjaGAA4xCAXeFpyWm</guid>
       <link>https://www.lesswrong.com/posts/WjaGAA4xCAXeFpyWm/my-picture-of-the-present-in-ai</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/edfbb161e75d_my_picture_of_the_present_in_ai.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AIs can now often do massive easy-to-verify SWE tasks and I've updated towards shorter timelines</title>
-      <description>Audio version of AIs can now often do massive easy-to-verify SWE tasks and I've updated towards shorter timelines from Ryan Greenblatt</description>
-      <pubDate>Mon, 06 Apr 2026 16:01:56 +0000</pubDate>
-      <guid>dKpC6wHFqDrGZwnah</guid>
-      <link>https://www.lesswrong.com/posts/dKpC6wHFqDrGZwnah/ais-can-now-often-do-massive-easy-to-verify-swe-tasks-and-i</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/008c42fcff1f_ais_can_now_often_do_massive_easy-to-verify_swe_ta.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The PauseAI Protest: A Photo-Essay</title>
-      <description>Audio version of The PauseAI Protest: A Photo-Essay from Scott Alexander</description>
-      <pubDate>Fri, 03 Apr 2026 05:23:46 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-pauseai-protest-a-photo-essay</guid>
-      <link>https://www.astralcodexten.com/p/the-pauseai-protest-a-photo-essay</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b99a6badbfdb_the_pauseai_protest_a_photo-essay.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1386,6 +1364,17 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
       <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Announcing ControlConf 2026</title>
+      <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
+      <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
+      <guid>tN5mgBAinwFe5c67c</guid>
+      <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
