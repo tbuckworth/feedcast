@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-10</title>
+      <description>Daily News Briefing - 2026-05-10
+
+Topics covered:
+- The global race for artificial intelligence dominance is being fueled by an unprecedented surge in capital, led by Nvidia
+- In a significant shift in European politics, Péter Magyar was sworn in today as the Prime Minister of Hungary
+- Regarding the conflict in Ukraine, the geopolitical landscape remains contradictory following the conclusion of Victory Day
+- The maritime health crisis in the Atlantic has reached a critical juncture as the MV Hondius docked in Tenerife
+- In the technology and privacy sector, General Motors has agreed to a twelve point seven five million dollar settlement with California law enforcement
+- Looking toward tomorrow, all eyes will be on the international response to Péter Magyar’s first executive orders in Hungary as the European Union recalibrates its eastern strategy</description>
+      <pubDate>Sun, 10 May 2026 07:57:05 +0000</pubDate>
+      <guid>news-briefing-2026-05-10</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ff47f3a75204_daily_news_briefing_-_2026-05-10.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-10.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The AI Industrial Explosion — Part 2: Transition Dynamics</title>
+      <description>Audio version of The AI Industrial Explosion — Part 2: Transition Dynamics from LessWrong Frontpage</description>
+      <pubDate>Sun, 10 May 2026 01:02:23 +0000</pubDate>
+      <guid>HHrwDFhwZFmACeBRS</guid>
+      <link>https://www.lesswrong.com/posts/HHrwDFhwZFmACeBRS/the-ai-industrial-explosion-part-2-transition-dynamics</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cc8a8da3aff1_the_ai_industrial_explosion_part_2_transition_d.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-09</title>
       <description>Daily News Briefing - 2026-05-09
 
@@ -1295,42 +1325,23 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-09</title>
-      <description>Daily News Briefing - 2026-04-09
-
-Topics covered:
-- The two-week provisional ceasefire between the United States and Iran has officially taken effect, bringing a fragile pause to a month of kinetic escalation
-- In a move that signals a widening rift in Western alliances, President Trump has publicly criticized N-A-T-O, stating the alliance "wasn't there when we needed them" during the height of the Iran hostilities
-- In the A-I sector, Meta has officially re-entered the frontier model race with the launch of "Muse Spark." Developed by the newly formed Meta Superintelligence Labs, the model is now integrated across WhatsApp, Instagram, and Facebook
-- Google is also expanding its A-I ecosystem with the introduction of "notebooks" for its Gemini chatbot
-- Finally, the Artemis Two crew is preparing for a scheduled splashdown this Saturday
-- Looking toward tomorrow, keep an eye on Seoul as the K-pop group B-T-S kicks off their first global tour in four years, a massive logistical undertaking that will serve as a high-profile test for international travel and security protocols in the wake of the recent Middle Eastern de-escalation</description>
-      <pubDate>Thu, 09 Apr 2026 07:11:17 +0000</pubDate>
-      <guid>news-briefing-2026-04-09</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/49569b717110_daily_news_briefing_-_2026-04-09.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-09.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Have we already lost? Part 1: The Plan in 2024</title>
-      <description>Audio version of Have we already lost? Part 1: The Plan in 2024 from LessWrong Frontpage</description>
-      <pubDate>Thu, 09 Apr 2026 06:47:55 +0000</pubDate>
-      <guid>tjZWbmuCE9tjYQsrf</guid>
-      <link>https://www.lesswrong.com/posts/tjZWbmuCE9tjYQsrf/have-we-already-lost-part-1-the-plan-in-2024</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/dd4076e1371e_have_we_already_lost_part_1_the_plan_in_2024.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“AI #163: Mythos Quest” by Zvi</title>
       <description>Audio version of “AI #163: Mythos Quest” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Wed, 08 Apr 2026 12:42:00 +0000</pubDate>
       <guid>03f87a9f-477e-4bd0-9949-cf81fb95a864</guid>
       <link>https://www.lesswrong.com/posts/5Dsuw9gGzkbjS4ubx/ai-163-mythos-quest</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/29fecf0d5acc_ai_163_mythos_quest_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Zagreb Meetup This Friday</title>
+      <description>Audio version of Zagreb Meetup This Friday from Scott Alexander</description>
+      <pubDate>Tue, 07 Apr 2026 20:51:24 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/zagreb-meetup-this-friday</guid>
+      <link>https://www.astralcodexten.com/p/zagreb-meetup-this-friday</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ce88cddeba6d_zagreb_meetup_this_friday.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
