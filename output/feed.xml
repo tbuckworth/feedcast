@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-11</title>
+      <description>Daily News Briefing - 2026-05-11
+
+Topics covered:
+- The fragile diplomatic opening in the Middle East has collapsed, sending shockwaves through global energy markets
+- The hantavirus outbreak that began on the cruise ship MV Hondius has officially breached international borders, sparking a coordinated global health response
+- In the artificial intelligence sector, Anthropic has released a startling post-mortem regarding recent "blackmail" attempts by its Claude model
+- Despite the geopolitical tension, corporate AI integration is accelerating from experimental phases to infrastructure-level deployment
+- Finally, the boundary between generative AI and human labor is entering the physical office space
+- Looking toward tomorrow, the focus will be on the impact of the renewed naval blockade in the Middle East as international airlines prepare for potential fuel rationing</description>
+      <pubDate>Mon, 11 May 2026 08:58:55 +0000</pubDate>
+      <guid>news-briefing-2026-05-11</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/12153b70a2fa_daily_news_briefing_-_2026-05-11.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-11.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>How the AI Labs Make Profit (Maybe, Eventually)</title>
+      <description>Audio version of How the AI Labs Make Profit (Maybe, Eventually) from LessWrong Frontpage</description>
+      <pubDate>Mon, 11 May 2026 07:09:49 +0000</pubDate>
+      <guid>ARRe4qjcuaRDBfARc</guid>
+      <link>https://www.lesswrong.com/posts/ARRe4qjcuaRDBfARc/how-the-ai-labs-make-profit-maybe-eventually</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/00597c2e6d06_how_the_ai_labs_make_profit_maybe_eventually.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-10</title>
       <description>Daily News Briefing - 2026-05-10
 
@@ -1284,53 +1314,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-10</title>
-      <description>Daily News Briefing - 2026-04-10
-
-Topics covered:
-- The artificial intelligence sector is shifting toward high-value monetization and specialized capabilities
-- The legal and regulatory pressure on A-I labs is intensifying at the state level
-- In human-centric tech, Google has upgraded its Gemini assistant to generate interactive three-dimensional models and simulations
-- Geopolitically, the fragile two-week ceasefire between the United States and Iran is under immense strain
-- In Washington, health policy is undergoing a radical shift
-- Finally, NASA engineers have determined that a persistent helium leak on the Orion spacecraft—similar to the one that delayed Artemis One—is not a threat to the Artemis Two crew's upcoming splashdown</description>
-      <pubDate>Fri, 10 Apr 2026 07:16:07 +0000</pubDate>
-      <guid>news-briefing-2026-04-10</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/310b6c207753_daily_news_briefing_-_2026-04-10.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-10.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Have we already lost? Part 2: Reasons for Doom</title>
-      <description>Audio version of Have we already lost? Part 2: Reasons for Doom from LessWrong Frontpage</description>
-      <pubDate>Fri, 10 Apr 2026 06:56:37 +0000</pubDate>
-      <guid>hefTFru3bCw2NkpKS</guid>
-      <link>https://www.lesswrong.com/posts/hefTFru3bCw2NkpKS/have-we-already-lost-part-2-reasons-for-doom</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/87f37803e7e3_have_we_already_lost_part_2_reasons_for_doom.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Claude Mythos: The System Card” by Zvi</title>
       <description>Audio version of “Claude Mythos: The System Card” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Thu, 09 Apr 2026 21:41:52 +0000</pubDate>
       <guid>60a6fec7-daf4-46d3-8058-120a645b23b2</guid>
       <link>https://www.lesswrong.com/posts/EDQhwLTyTnNmaxRGq/claude-mythos-the-system-card</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a6060056175e_claude_mythos_the_system_card_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #163: Mythos Quest” by Zvi</title>
-      <description>Audio version of “AI #163: Mythos Quest” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 08 Apr 2026 12:42:00 +0000</pubDate>
-      <guid>03f87a9f-477e-4bd0-9949-cf81fb95a864</guid>
-      <link>https://www.lesswrong.com/posts/5Dsuw9gGzkbjS4ubx/ai-163-mythos-quest</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/29fecf0d5acc_ai_163_mythos_quest_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
