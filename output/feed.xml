@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-12</title>
+      <description>Daily News Briefing - 2026-05-12
+
+Topics covered:
+- The cyber security landscape has shifted toward automated warfare as both defensive and offensive AI capabilities reach critical milestones
+- In the artificial intelligence sector, the race for fluid, multimodal interaction is intensifying
+- The legal and corporate fallout from the rapid move toward AI integration is accelerating
+- Geopolitically, the month-long ceasefire in the Middle East is on "massive life support." President Trump today characterized the current diplomatic status as "unbelievably weak" following an Iranian counteroffer that he dismissed as a non-starter
+- Finally, on the technology and policy front, a long-standing barrier in digital communication has fallen
+- Looking toward tomorrow, the focus will be on the initial meetings of the United States trade delegation in Beijing as the "Terafab" initiative faces its first real test of diplomatic feasibility</description>
+      <pubDate>Tue, 12 May 2026 08:39:21 +0000</pubDate>
+      <guid>news-briefing-2026-05-12</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9fde104a3a69_daily_news_briefing_-_2026-05-12.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-12.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Verbalised evaluation awareness in language models has little effect on their behaviour</title>
+      <description>Audio version of Verbalised evaluation awareness in language models has little effect on their behaviour from LessWrong Frontpage</description>
+      <pubDate>Tue, 12 May 2026 06:15:27 +0000</pubDate>
+      <guid>YXPAjK6keLuebpjz2</guid>
+      <link>https://www.lesswrong.com/posts/YXPAjK6keLuebpjz2/verbalised-evaluation-awareness-in-language-models-has</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/58458e32e265_verbalised_evaluation_awareness_in_language_models.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Childhood And Education #17: Is Our Children Reading” by Zvi</title>
+      <description>Audio version of “Childhood And Education #17: Is Our Children Reading” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 11 May 2026 19:13:40 +0000</pubDate>
+      <guid>e5407311-b7de-4421-9e80-fcf736ba72d9</guid>
+      <link>https://www.lesswrong.com/posts/dm2vQZPZcSKb8FhWw/childhood-and-education-17-is-our-children-reading</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/60114c6a38d3_childhood_and_education_17_is_our_children_read.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>How useful is the information you get from working inside an AI company?</title>
+      <description>Audio version of How useful is the information you get from working inside an AI company? from Buck Shlegeris</description>
+      <pubDate>Mon, 11 May 2026 15:29:03 +0000</pubDate>
+      <guid>84TtjdeLcDTtCLYaP</guid>
+      <link>https://www.lesswrong.com/posts/84TtjdeLcDTtCLYaP/how-useful-is-the-information-you-get-from-working-inside-an-2</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e2475b0bd330_how_useful_is_the_information_you_get_from_working.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-11</title>
       <description>Daily News Briefing - 2026-05-11
 
@@ -1262,36 +1314,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-11</title>
-      <description>Daily News Briefing - 2026-04-11
-
-Topics covered:
-- The safety and security of artificial intelligence leadership has moved from theoretical risk to physical threat
-- In the Middle East, the fragile geopolitical landscape is shifting toward high-stakes diplomacy
-- On the technical front, Microsoft has begun a quiet retreat from its aggressive global integration of A-I assistants
-- In a significant milestone for space exploration, the Artemis Two mission has concluded with a successful splashdown in the Pacific Ocean
-- Finally, the Trump administration’s use of legal pressure on tech platforms has expanded to include domestic critics
-- Looking toward tomorrow, all eyes are on the Pakistani city of Lahore as the United States and Iran begin their historic high-level peace talks</description>
-      <pubDate>Sat, 11 Apr 2026 06:50:45 +0000</pubDate>
-      <guid>news-briefing-2026-04-11</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8d419d4cc08f_daily_news_briefing_-_2026-04-11.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-11.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Dario probably doesn't believe in superintelligence</title>
-      <description>Audio version of Dario probably doesn't believe in superintelligence from LessWrong Frontpage</description>
-      <pubDate>Sat, 11 Apr 2026 05:58:17 +0000</pubDate>
-      <guid>Fnty2JpQ6WBD9FWo5</guid>
-      <link>https://www.lesswrong.com/posts/Fnty2JpQ6WBD9FWo5/dario-probably-doesn-t-believe-in-superintelligence</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7997e0f4051b_dario_probably_doesnt_believe_in_superintelligenc.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines</title>
       <description>Audio version of If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines from Ryan Greenblatt</description>
       <pubDate>Sat, 11 Apr 2026 00:38:52 +0000</pubDate>
@@ -1303,45 +1325,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>“Claude Mythos #2: Cybersecurity and Project Glasswing” by Zvi</title>
-      <description>Audio version of “Claude Mythos #2: Cybersecurity and Project Glasswing” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 10 Apr 2026 18:53:57 +0000</pubDate>
-      <guid>2a44bf53-a056-4eca-8349-725f1c6cfd05</guid>
-      <link>https://www.lesswrong.com/posts/GEgNYn5myreQRHggQ/claude-mythos-2-cybersecurity-and-project-glasswing</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/224996fc6126_claude_mythos_2_cybersecurity_and_project_glass.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Mythos: The System Card” by Zvi</title>
-      <description>Audio version of “Claude Mythos: The System Card” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 09 Apr 2026 21:41:52 +0000</pubDate>
-      <guid>60a6fec7-daf4-46d3-8058-120a645b23b2</guid>
-      <link>https://www.lesswrong.com/posts/EDQhwLTyTnNmaxRGq/claude-mythos-the-system-card</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a6060056175e_claude_mythos_the_system_card_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Zagreb Meetup This Friday</title>
       <description>Audio version of Zagreb Meetup This Friday from Scott Alexander</description>
       <pubDate>Tue, 07 Apr 2026 20:51:24 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/zagreb-meetup-this-friday</guid>
       <link>https://www.astralcodexten.com/p/zagreb-meetup-this-friday</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ce88cddeba6d_zagreb_meetup_this_friday.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>My picture of the present in AI</title>
-      <description>Audio version of My picture of the present in AI from Ryan Greenblatt</description>
-      <pubDate>Tue, 07 Apr 2026 16:44:58 +0000</pubDate>
-      <guid>WjaGAA4xCAXeFpyWm</guid>
-      <link>https://www.lesswrong.com/posts/WjaGAA4xCAXeFpyWm/my-picture-of-the-present-in-ai</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/edfbb161e75d_my_picture_of_the_present_in_ai.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1364,17 +1353,6 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
       <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Announcing ControlConf 2026</title>
-      <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
-      <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
-      <guid>tN5mgBAinwFe5c67c</guid>
-      <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
