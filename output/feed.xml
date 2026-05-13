@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-13</title>
+      <description>Daily News Briefing - 2026-05-13
+
+Topics covered:
+- The high-stakes trial between Elon Musk and OpenAI reached a fever pitch today as CEO Sam Altman took the stand
+- However, the legal pressure is now shifting toward OpenAI’s consumer safety record
+- In the mobile sector, Google has preemptively unveiled a massive overhaul of the Android ecosystem ahead of its annual developer conference
+- Geopolitically, the economic fallout from the war in Iran is now visibly impacting global consumers
+- In the markets, the online auction giant eBay has officially rejected a fifty-five billion dollar hostile takeover bid from GameStop
+- Looking toward tomorrow, the focus remains on Beijing as the Trump-Xi summit begins, with high-level negotiations expected to determine the future of global semiconductor trade amid a deepening regional crisis</description>
+      <pubDate>Wed, 13 May 2026 06:52:33 +0000</pubDate>
+      <guid>news-briefing-2026-05-13</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d55f84c7eb75_daily_news_briefing_-_2026-05-13.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-13.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>SVD on Weight Differences for Model Auditing</title>
+      <description>Audio version of SVD on Weight Differences for Model Auditing from LessWrong Frontpage</description>
+      <pubDate>Wed, 13 May 2026 05:56:28 +0000</pubDate>
+      <guid>FWacQnfHJkYhAn7wR</guid>
+      <link>https://www.lesswrong.com/posts/FWacQnfHJkYhAn7wR/svd-on-weight-differences-for-model-auditing</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/afa690076869_svd_on_weight_differences_for_model_auditing.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Childhood and Education #18: Do The Math” by Zvi</title>
+      <description>Audio version of “Childhood and Education #18: Do The Math” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 12 May 2026 18:22:26 +0000</pubDate>
+      <guid>5dc749d6-4284-4d05-8dbe-98a7ad9b63c4</guid>
+      <link>https://www.lesswrong.com/posts/ZGGgxy6SNPAy9Hj7v/childhood-and-education-18-do-the-math</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/347aa8a5dad7_childhood_and_education_18_do_the_math_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-12</title>
       <description>Daily News Briefing - 2026-05-12
 
@@ -1284,36 +1325,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-12</title>
-      <description>Daily News Briefing - 2026-04-12
-
-Topics covered:
-- The security crisis surrounding artificial intelligence leadership has intensified following the attempted firebombing of Sam Altman’s home
-- In the Middle East, a new front has opened in the information war between the United States and Iran
-- On the technical hardware front, Nvidia-backed SiFive has reached a valuation of three billion, six hundred and fifty million dollars
-- The Artemis Two crew has returned to Houston following their historic splashdown in the Pacific
-- Globally, two major elections are testing the stability of long-standing regimes
-- Looking toward tomorrow, the historic high-level peace talks between United States and Iranian officials are set to begin in Lahore, Pakistan</description>
-      <pubDate>Sun, 12 Apr 2026 07:04:01 +0000</pubDate>
-      <guid>news-briefing-2026-04-12</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/870010cf1462_daily_news_briefing_-_2026-04-12.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-12.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Have we already lost? Part 3: Reasons for Optimism</title>
-      <description>Audio version of Have we already lost? Part 3: Reasons for Optimism from LessWrong Frontpage</description>
-      <pubDate>Sun, 12 Apr 2026 06:48:10 +0000</pubDate>
-      <guid>ZimWxECcHtjZAycGS</guid>
-      <link>https://www.lesswrong.com/posts/ZimWxECcHtjZAycGS/have-we-already-lost-part-3-reasons-for-optimism</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ca27ed6f7429_have_we_already_lost_part_3_reasons_for_optimism.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines</title>
       <description>Audio version of If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines from Ryan Greenblatt</description>
       <pubDate>Sat, 11 Apr 2026 00:38:52 +0000</pubDate>
@@ -1353,6 +1364,17 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
       <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Announcing ControlConf 2026</title>
+      <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
+      <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
+      <guid>tN5mgBAinwFe5c67c</guid>
+      <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
