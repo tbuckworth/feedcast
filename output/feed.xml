@@ -21,6 +21,28 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Why am I sleeping so well lately?</title>
+      <description>Audio version of Why am I sleeping so well lately? from LessWrong Frontpage</description>
+      <pubDate>Thu, 14 May 2026 04:46:34 +0000</pubDate>
+      <guid>3BnuxJcEcDEigMex8</guid>
+      <link>https://www.lesswrong.com/posts/3BnuxJcEcDEigMex8/why-am-i-sleeping-so-well-lately</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9096e2b8c0db_why_am_i_sleeping_so_well_lately.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Cyber Lack of Security and AI Governance” by Zvi</title>
+      <description>Audio version of “Cyber Lack of Security and AI Governance” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 13 May 2026 20:22:06 +0000</pubDate>
+      <guid>7c2455fb-f8bb-4282-b4ff-e03c1c8b7d52</guid>
+      <link>https://www.lesswrong.com/posts/pzjGXSKrkHGdGbtrW/cyber-lack-of-security-and-ai-governance</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4926737a0e37_cyber_lack_of_security_and_ai_governance_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-13</title>
       <description>Daily News Briefing - 2026-05-13
 
@@ -1314,34 +1336,12 @@ Topics covered:
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-13.txt" type="text/plain" />
     </item>
     <item>
-      <title>Treaties, Regulations, and Research can be Complements</title>
-      <description>Audio version of Treaties, Regulations, and Research can be Complements from LessWrong Frontpage</description>
-      <pubDate>Mon, 13 Apr 2026 07:04:08 +0000</pubDate>
-      <guid>7CLL4Kpruf63GfBc3</guid>
-      <link>https://www.lesswrong.com/posts/7CLL4Kpruf63GfBc3/treaties-regulations-and-research-can-be-complements</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9c48a30a28fc_treaties_regulations_and_research_can_be_complem.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines</title>
       <description>Audio version of If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines from Ryan Greenblatt</description>
       <pubDate>Sat, 11 Apr 2026 00:38:52 +0000</pubDate>
       <guid>Jga7PHMzfZf4fbdyo</guid>
       <link>https://www.lesswrong.com/posts/Jga7PHMzfZf4fbdyo/if-mythos-actually-made-anthropic-employees-4x-more</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0aaf520ae940_if_mythos_actually_made_anthropic_employees_4x_mor.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Zagreb Meetup This Friday</title>
-      <description>Audio version of Zagreb Meetup This Friday from Scott Alexander</description>
-      <pubDate>Tue, 07 Apr 2026 20:51:24 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/zagreb-meetup-this-friday</guid>
-      <link>https://www.astralcodexten.com/p/zagreb-meetup-this-friday</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ce88cddeba6d_zagreb_meetup_this_friday.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
