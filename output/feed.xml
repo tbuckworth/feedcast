@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-15</title>
+      <description>Daily News Briefing - 2026-05-15
+
+Topics covered:
+- The landmark trial between Elon Musk and Sam Altman reached a dramatic conclusion today with closing arguments that saw Musk’s legal team struggle to maintain their narrative
+- In the AI sector, OpenAI is aggressively expanding its "agentic" capabilities to counter competition from Anthropic’s Claude Code
+- The physical infrastructure of AI is facing an unprecedented backlash from the American public
+- Geopolitically, the focus has shifted to Beijing as President Trump arrived for a high-stakes summit with President Xi Jinping
+- On the security and safety front, a critical vulnerability has been discovered in Windows eleven that completely defeats default BitLocker disk encryption, prompting an urgent investigation by Microsoft
+- Looking toward tomorrow, all eyes remain on the Beijing summit as the first round of trade negotiations concludes, potentially resetting the global balance of power for high-end AI hardware</description>
+      <pubDate>Fri, 15 May 2026 07:30:10 +0000</pubDate>
+      <guid>news-briefing-2026-05-15</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f9023688ed0e_daily_news_briefing_-_2026-05-15.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-15.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Don’t be too Clever to Take Obvious Advice</title>
+      <description>Audio version of Don’t be too Clever to Take Obvious Advice from LessWrong Frontpage</description>
+      <pubDate>Fri, 15 May 2026 03:01:24 +0000</pubDate>
+      <guid>J5L3PxKYv7XctQyQK</guid>
+      <link>https://www.lesswrong.com/posts/J5L3PxKYv7XctQyQK/don-t-be-too-clever-to-take-obvious-advice</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/86616b11277a_dont_be_too_clever_to_take_obvious_advice.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #168: Not Leading the Future” by Zvi</title>
+      <description>Audio version of “AI #168: Not Leading the Future” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 14 May 2026 14:12:18 +0000</pubDate>
+      <guid>9927fdbe-606e-481f-a1f4-33599b0baf3d</guid>
+      <link>https://www.lesswrong.com/posts/E4uEiMSpnYRotfzJX/ai-168-not-leading-the-future</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2a1f3f8ca465_ai_168_not_leading_the_future_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Every Magazine Piece On The SF AI Scene</title>
+      <description>Audio version of Every Magazine Piece On The SF AI Scene from Scott Alexander</description>
+      <pubDate>Thu, 14 May 2026 05:40:29 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/every-magazine-piece-on-the-sf-ai</guid>
+      <link>https://www.astralcodexten.com/p/every-magazine-piece-on-the-sf-ai</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2213281237d7_every_magazine_piece_on_the_sf_ai_scene.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Why am I sleeping so well lately?</title>
       <description>Audio version of Why am I sleeping so well lately? from LessWrong Frontpage</description>
       <pubDate>Thu, 14 May 2026 04:46:34 +0000</pubDate>
@@ -1274,66 +1326,6 @@ Topics covered:
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-04-14</title>
-      <description>Daily News Briefing - 2026-04-14
-
-Topics covered:
-- The security situation for artificial intelligence leadership has escalated from legal threats to repeated physical violence
-- In a significant setback for A-I safety protocols, Anthropic has admitted to a recurring technical failure during the training of its new "Mythos" model
-- In the corporate sector, the Trump administration has secured its first major win in its "Civil Rights Fraud Initiative" targeting diversity, equity, and inclusion programs
-- On the product front, the race to develop autonomous A-I agents is accelerating
-- Geopolitically, the focus remains on the fallout of the naval blockade in the Strait of Hormuz
-- Looking toward tomorrow, all eyes are on the global financial markets to see if the U.S</description>
-      <pubDate>Tue, 14 Apr 2026 07:18:52 +0000</pubDate>
-      <guid>news-briefing-2026-04-14</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/27a317887894_daily_news_briefing_-_2026-04-14.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-14.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>A Retrospective of Richard Ngo's 2022 List of Conceptual Alignment Projects</title>
-      <description>Audio version of A Retrospective of Richard Ngo's 2022 List of Conceptual Alignment Projects from LessWrong Frontpage</description>
-      <pubDate>Tue, 14 Apr 2026 06:58:28 +0000</pubDate>
-      <guid>M3qB2BGgMNuG5oRTB</guid>
-      <link>https://www.lesswrong.com/posts/M3qB2BGgMNuG5oRTB/a-retrospective-of-richard-ngo-s-2022-list-of-conceptual</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/efc7b1b2b7a4_a_retrospective_of_richard_ngos_2022_list_of_conc.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Political Violence Is Never Acceptable” by Zvi</title>
-      <description>Audio version of “Political Violence Is Never Acceptable” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 13 Apr 2026 15:22:42 +0000</pubDate>
-      <guid>b60c6bdb-594d-4ed9-a96d-d2c340c19a5b</guid>
-      <link>https://www.lesswrong.com/posts/dsaEB4u2dxp9BdhdS/political-violence-is-never-acceptable</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5a01053baada_political_violence_is_never_acceptable_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-04-13</title>
-      <description>Daily News Briefing - 2026-04-13
-
-Topics covered:
-- The historic peace talks in Lahore have ended in failure, plunging the Middle East back into a state of high-intensity conflict
-- In Europe, the geopolitical landscape has been fundamentally reshaped by a landslide election in Hungary
-- In the artificial intelligence sector, a surprising policy shift is emerging regarding Anthropic’s new "Mythos" model
-- The frontier of high-performance computing has officially extended into orbit
-- Finally, in a major shift for the digital creator economy, the platform X is aggressively cutting back payments to accounts that rely on clickbait and rapid-fire news aggregation
-- Looking toward tomorrow, maritime insurers and global shipping hubs are bracing for the first impacts of the announced blockade on the world’s most critical energy transit point</description>
-      <pubDate>Mon, 13 Apr 2026 07:48:58 +0000</pubDate>
-      <guid>news-briefing-2026-04-13</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/41b342ed2374_daily_news_briefing_-_2026-04-13.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-13.txt" type="text/plain" />
     </item>
     <item>
       <title>If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines</title>
