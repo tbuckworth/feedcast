@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-16</title>
+      <description>Daily News Briefing - 2026-05-16
+
+Topics covered:
+- The high-stakes summit in Beijing between President Trump and President Xi Jinping has concluded with a sense of cautious stability but few concrete breakthroughs
+- OpenAI is undergoing a major executive reorganization to pivot the company toward "autonomous agents." President Greg Brockman has been named the official lead of all product initiatives, consolidating several teams to streamline the development of AI systems capable of executing complex tasks without human oversight
+- The academic community is moving to purge AI-generated "slop" from the scientific record
+- In the public safety and security sector, YouTube has expanded its AI likeness detection tool to all users over eighteen
+- Geopolitically, the administration has signaled a potential shift in Middle Eastern policy, with President Trump suggesting that a twenty-year suspension of Iran's nuclear program would be sufficient to end the current naval blockade
+- Looking toward Monday, SpaceX is preparing for a landmark test of its upgraded Starship, which could prove critical for the "Terafab" initiative's goal of moving high-compute infrastructure into orbit</description>
+      <pubDate>Sat, 16 May 2026 06:27:27 +0000</pubDate>
+      <guid>news-briefing-2026-05-16</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/79b34e536df7_daily_news_briefing_-_2026-05-16.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-16.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>NLA Verbalizations on AuditBench: Llama 70B</title>
+      <description>Audio version of NLA Verbalizations on AuditBench: Llama 70B from LessWrong Frontpage</description>
+      <pubDate>Sat, 16 May 2026 05:25:42 +0000</pubDate>
+      <guid>xmmBTkogixvAbyQFk</guid>
+      <link>https://www.lesswrong.com/posts/xmmBTkogixvAbyQFk/nla-verbalizations-on-auditbench-llama-70b</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5c6419df6918_nla_verbalizations_on_auditbench_llama_70b.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Monthly Roundup #42: May 2026” by Zvi</title>
+      <description>Audio version of “Monthly Roundup #42: May 2026” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 15 May 2026 16:52:00 +0000</pubDate>
+      <guid>dabf5b50-e544-462b-89b3-cf74577d6e1a</guid>
+      <link>https://www.lesswrong.com/posts/gZHNLmHkQ7GjnWsYh/monthly-roundup-42-may-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5b75ef76d2b4_monthly_roundup_42_may_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Sigmoids Won't Save You</title>
+      <description>Audio version of The Sigmoids Won't Save You from Scott Alexander</description>
+      <pubDate>Fri, 15 May 2026 08:55:10 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/the-sigmoids-wont-save-you</guid>
+      <link>https://www.astralcodexten.com/p/the-sigmoids-wont-save-you</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/73834b611b4d_the_sigmoids_wont_save_you.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-15</title>
       <description>Daily News Briefing - 2026-05-15
 
@@ -1282,47 +1334,6 @@ Topics covered:
       <guid>18eac2ec-7d70-4cb0-9af2-a6122ce0c607</guid>
       <link>https://www.lesswrong.com/posts/w8misLX7KCmLxJM2K/claude-code-codex-and-agentic-coding-7-auto-mode</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f1fcf91891a8_claude_code_codex_and_agentic_coding_7_auto_mo.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-04-15</title>
-      <description>Daily News Briefing - 2026-04-15
-
-Topics covered:
-- The physical threat to artificial intelligence leadership has become a primary national security concern
-- In the A-I capabilities race, the divide between OpenAI and Anthropic is shifting from technical to financial
-- Geopolitically, the United States has doubled down on its naval blockade of the Strait of Hormuz
-- In the corporate technology sector, Amazon has made a massive eleven billion, six hundred million dollar move to dominate satellite communications by acquiring Globalstar
-- On the software front, Google is attempting to turn A-I from a chatbot into a functional operating system
-- Looking toward tomorrow, the focus shifts to the United Nations as member states react to China’s formal protest of the American naval blockade, which could trigger a vote on international maritime intervention</description>
-      <pubDate>Wed, 15 Apr 2026 07:19:03 +0000</pubDate>
-      <guid>news-briefing-2026-04-15</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/882368124191_daily_news_briefing_-_2026-04-15.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-15.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>For with what judgment we shall be judged</title>
-      <description>Audio version of For with what judgment we shall be judged from LessWrong Frontpage</description>
-      <pubDate>Wed, 15 Apr 2026 06:52:27 +0000</pubDate>
-      <guid>rLzx65jQami9bK5CC</guid>
-      <link>https://www.lesswrong.com/posts/rLzx65jQami9bK5CC/for-with-what-judgment-we-shall-be-judged</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8a622e1952bf_for_with_what_judgment_we_shall_be_judged.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Mythos #3: Capabilities and Additions” by Zvi</title>
-      <description>Audio version of “Claude Mythos #3: Capabilities and Additions” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 14 Apr 2026 13:01:36 +0000</pubDate>
-      <guid>9af2cca2-2349-422a-9b53-58cc25cd5f89</guid>
-      <link>https://www.lesswrong.com/posts/2ziYGFK7QmbbLgBoP/claude-mythos-3-capabilities-and-additions</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5d8001e95374_claude_mythos_3_capabilities_and_additions_by.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
