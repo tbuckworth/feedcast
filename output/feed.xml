@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-17</title>
+      <description>Daily News Briefing - 2026-05-17
+
+Topics covered:
+- The geopolitical fallout from the Beijing summit has intensified as Taiwan officially rejected President Trump’s recent warning against declaring independence
+- In the AI sector, OpenAI has finalized its executive pivot toward "agentic" systems by placing co-founder Greg Brockman in charge of all product strategy
+- On the regulatory and academic front, the crackdown on AI-generated content is entering a punitive phase
+- In global security, the United States and Nigerian forces have confirmed the elimination of Abu-Bilal al-Minuki, identified as a senior Islamic State leader and, according to President Trump, "the most active terrorist in the world." However, this victory is tempered by a deepening crisis in West Africa
+- On the front lines of modern warfare, BBC Verify has released an analysis of new tactical footage showing Hezbollah’s use of fiber-optic-controlled drones against Israel
+- Looking toward tomorrow, markets will be watching for the first flight data from SpaceX’s Starship test, which aims to prove the viability of orbital compute clusters for the next generation of AI infrastructure</description>
+      <pubDate>Sun, 17 May 2026 06:50:09 +0000</pubDate>
+      <guid>news-briefing-2026-05-17</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/96550dbd949c_daily_news_briefing_-_2026-05-17.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-17.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>How to Reason about Your Health Issues</title>
+      <description>Audio version of How to Reason about Your Health Issues from LessWrong Frontpage</description>
+      <pubDate>Sun, 17 May 2026 05:10:37 +0000</pubDate>
+      <guid>WiRrHDd3EiaRd6gsu</guid>
+      <link>https://www.lesswrong.com/posts/WiRrHDd3EiaRd6gsu/how-to-reason-about-your-health-issues</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8b5ad0cba057_how_to_reason_about_your_health_issues.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-16</title>
       <description>Daily News Briefing - 2026-05-16
 
@@ -142,6 +172,17 @@ Topics covered:
       <guid>7c2455fb-f8bb-4282-b4ff-e03c1c8b7d52</guid>
       <link>https://www.lesswrong.com/posts/pzjGXSKrkHGdGbtrW/cyber-lack-of-security-and-ai-governance</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/4926737a0e37_cyber_lack_of_security_and_ai_governance_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Nostalgebraist's Hydrogen Jukeboxes</title>
+      <description>Audio version of Nostalgebraist's Hydrogen Jukeboxes from Scott Alexander</description>
+      <pubDate>Wed, 13 May 2026 12:16:41 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/nostalgebraists-hydrogen-jukeboxes</guid>
+      <link>https://www.astralcodexten.com/p/nostalgebraists-hydrogen-jukeboxes</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/246af900a213_nostalgebraists_hydrogen_jukeboxes.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1306,17 +1347,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Orban Was Bad, Even Though We Don't Have A Perfect Word For His Badness</title>
-      <description>Audio version of Orban Was Bad, Even Though We Don't Have A Perfect Word For His Badness from Scott Alexander</description>
-      <pubDate>Thu, 16 Apr 2026 01:51:55 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/orban-was-bad-even-though-we-dont</guid>
-      <link>https://www.astralcodexten.com/p/orban-was-bad-even-though-we-dont</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/11aba52ef545_orban_was_bad_even_though_we_dont_have_a_perfect.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Current AIs seem pretty misaligned to me</title>
       <description>Audio version of Current AIs seem pretty misaligned to me from Ryan Greenblatt</description>
       <pubDate>Wed, 15 Apr 2026 15:14:11 +0000</pubDate>
@@ -1334,17 +1364,6 @@ Topics covered:
       <guid>18eac2ec-7d70-4cb0-9af2-a6122ce0c607</guid>
       <link>https://www.lesswrong.com/posts/w8misLX7KCmLxJM2K/claude-code-codex-and-agentic-coding-7-auto-mode</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f1fcf91891a8_claude_code_codex_and_agentic_coding_7_auto_mo.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines</title>
-      <description>Audio version of If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines from Ryan Greenblatt</description>
-      <pubDate>Sat, 11 Apr 2026 00:38:52 +0000</pubDate>
-      <guid>Jga7PHMzfZf4fbdyo</guid>
-      <link>https://www.lesswrong.com/posts/Jga7PHMzfZf4fbdyo/if-mythos-actually-made-anthropic-employees-4x-more</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0aaf520ae940_if_mythos_actually_made_anthropic_employees_4x_mor.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
