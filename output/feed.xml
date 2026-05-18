@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-18</title>
+      <description>Daily News Briefing - 2026-05-18
+
+Topics covered:
+- Geopolitical tensions have escalated sharply in the Middle East following a suspected strike near the United Arab Emirates’ Barakah nuclear power plant
+- In East Asia, Taiwanese President Lai Ching-te issued his first direct response to last week’s Beijing summit, asserting that Taiwan will neither provoke conflict nor relinquish its sovereignty
+- In the AI sector, Apple is preparing a significant strategic pivot for its upcoming mobile operating system, iOS twenty-seven
+- The high-stakes legal battle between Elon Musk and OpenAI is now in the hands of the jury, following closing arguments that focused heavily on CEO Sam Altman’s credibility
+- On the global health front, the World Health Organization has officially declared the Ebola outbreak in the Democratic Republic of Congo an international emergency
+- Looking toward tomorrow, all eyes will be on the jury in the OpenAI trial, as their decision could trigger a series of immediate executive shifts at the world’s most prominent AI laboratory</description>
+      <pubDate>Mon, 18 May 2026 08:10:59 +0000</pubDate>
+      <guid>news-briefing-2026-05-18</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/68b639d5c492_daily_news_briefing_-_2026-05-18.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-18.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Links #1: 2026/05 Part 1</title>
+      <description>Audio version of Links #1: 2026/05 Part 1 from LessWrong Frontpage</description>
+      <pubDate>Mon, 18 May 2026 05:04:17 +0000</pubDate>
+      <guid>7EBNE2gfxpySXiREs</guid>
+      <link>https://www.lesswrong.com/posts/7EBNE2gfxpySXiREs/links-1-2026-05-part-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1df4d618e67b_links_1_202605_part_1.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-17</title>
       <description>Daily News Briefing - 2026-05-17
 
@@ -1306,42 +1336,12 @@ Topics covered:
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-17.txt" type="text/plain" />
     </item>
     <item>
-      <title>Let goodness conquer all that it can defend</title>
-      <description>Audio version of Let goodness conquer all that it can defend from LessWrong Frontpage</description>
-      <pubDate>Fri, 17 Apr 2026 06:55:19 +0000</pubDate>
-      <guid>w3MJcDueo77D3Ldta</guid>
-      <link>https://www.lesswrong.com/posts/w3MJcDueo77D3Ldta/let-goodness-conquer-all-that-it-can-defend</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7da5158fbe3c_let_goodness_conquer_all_that_it_can_defend.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-04-16</title>
-      <description>Daily News Briefing - 2026-04-16
-
-Topics covered:
-- The global energy and shipping crisis has intensified following the American naval blockade of the Strait of Hormuz
-- In the artificial intelligence sector, the race to provide functional desktop integration has reached a new milestone
-- The market's obsession with artificial intelligence reached a point of absurdity today as the footwear company Allbirds rebranded to "NewBird AI." After losing half its sales and selling off its shoe assets for thirty-nine million dollars, the company announced a pivot to building A-I compute infrastructure
-- OpenAI is doubling down on the "agentic" future of software with a major update to its Agents Software Development Kit
-- In a landmark decision for the American entertainment industry, a federal jury has found that Live Nation and its subsidiary Ticketmaster operate as an illegal monopoly
-- On the domestic political front, President Trump has escalated his confrontation with the Federal Reserve, threatening to fire Chair Jerome Powell if he does not voluntarily resign by May</description>
-      <pubDate>Thu, 16 Apr 2026 07:20:07 +0000</pubDate>
-      <guid>news-briefing-2026-04-16</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8d5b4f9bb618_daily_news_briefing_-_2026-04-16.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-16.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Post-Scarcity is bullshit</title>
-      <description>Audio version of Post-Scarcity is bullshit from LessWrong Frontpage</description>
-      <pubDate>Thu, 16 Apr 2026 07:00:37 +0000</pubDate>
-      <guid>S2hpq3Tw9CadfjQxT</guid>
-      <link>https://www.lesswrong.com/posts/S2hpq3Tw9CadfjQxT/post-scarcity-is-bullshit</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a0d3e7dfbbe7_post-scarcity_is_bullshit.mp3" type="audio/mpeg" length="0" />
+      <title>Orban Was Bad, Even Though We Don't Have A Perfect Word For His Badness</title>
+      <description>Audio version of Orban Was Bad, Even Though We Don't Have A Perfect Word For His Badness from Scott Alexander</description>
+      <pubDate>Thu, 16 Apr 2026 01:51:55 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/orban-was-bad-even-though-we-dont</guid>
+      <link>https://www.astralcodexten.com/p/orban-was-bad-even-though-we-dont</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/11aba52ef545_orban_was_bad_even_though_we_dont_have_a_perfect.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
