@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-19</title>
+      <description>Daily News Briefing - 2026-05-19
+
+Topics covered:
+- The most anticipated legal battle in the technology sector has reached a swift conclusion
+- In a move to capture the enterprise market, OpenAI has partnered with Dell to bring its Codex programming model to on-premise and hybrid cloud environments
+- The consumer AI landscape is also shifting as Amazon announced that its upgraded Alexa Plus assistant can now generate entire AI-hosted podcasts on demand
+- On the geopolitical front, President Trump announced he has delayed a planned military strike on Iran at the request of Gulf state allies
+- The global health crisis in Central Africa is worsening
+- The domestic fallout from the AI boom continues to manifest in public hostility</description>
+      <pubDate>Tue, 19 May 2026 07:53:29 +0000</pubDate>
+      <guid>news-briefing-2026-05-19</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d522e36d723f_daily_news_briefing_-_2026-05-19.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-19.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Let's have more partial insiders.</title>
+      <description>Audio version of Let's have more partial insiders. from LessWrong Frontpage</description>
+      <pubDate>Tue, 19 May 2026 07:24:59 +0000</pubDate>
+      <guid>ezE6iaifkMSwPdrG8</guid>
+      <link>https://www.lesswrong.com/posts/ezE6iaifkMSwPdrG8/let-s-have-more-partial-insiders</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1904f58302bc_lets_have_more_partial_insiders.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Dating Roundup #12: Sex and Violence” by Zvi</title>
+      <description>Audio version of “Dating Roundup #12: Sex and Violence” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 18 May 2026 19:21:20 +0000</pubDate>
+      <guid>d6b2e36b-438b-4ebc-be8c-57c15c59ad4f</guid>
+      <link>https://www.lesswrong.com/posts/znzZyvxAvSSkep4tL/dating-roundup-12-sex-and-violence</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0ab6260f4ede_dating_roundup_12_sex_and_violence_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-18</title>
       <description>Daily News Briefing - 2026-05-18
 
@@ -1265,77 +1306,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-18</title>
-      <description>Daily News Briefing - 2026-04-18
-
-Topics covered:
-- The geopolitical tension in the Middle East has seen a dramatic, if fragile, shift
-- In the artificial intelligence sector, OpenAI is undergoing a significant strategic contraction
-- Simultaneously, Sam Altman’s identity-verification project, "World," is rapidly expanding into the consumer mainstream
-- The relationship between the Trump administration and Anthropic is showing signs of a thaw, driven by national security interests
-- Finally, the physical infrastructure of the A-I boom is hitting a significant bottleneck
-- Looking toward tomorrow, all eyes are on the first commercial tankers attempting to transit the Strait of Hormuz to see if Iran’s commitment to an open waterway holds</description>
-      <pubDate>Sat, 18 Apr 2026 06:57:37 +0000</pubDate>
-      <guid>news-briefing-2026-04-18</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7c999be817e1_daily_news_briefing_-_2026-04-18.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-18.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Vladimir Putin's CEV is probably pretty good</title>
-      <description>Audio version of Vladimir Putin's CEV is probably pretty good from LessWrong Frontpage</description>
-      <pubDate>Sat, 18 Apr 2026 06:42:09 +0000</pubDate>
-      <guid>FGpDwLwtPfJ3qYbea</guid>
-      <link>https://www.lesswrong.com/posts/FGpDwLwtPfJ3qYbea/vladimir-putin-s-cev-is-probably-pretty-good</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9b3fbe48bf44_vladimir_putins_cev_is_probably_pretty_good.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #164: Pre Opus” by Zvi</title>
-      <description>Audio version of “AI #164: Pre Opus” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 17 Apr 2026 13:13:20 +0000</pubDate>
-      <guid>f34cd36a-3c03-4a7f-aeda-7cb20d466faa</guid>
-      <link>https://www.lesswrong.com/posts/Mf2sbJ3zacTPaGySg/ai-164-pre-opus</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4948b6d9f391_ai_164_pre_opus_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“On Dwarkesh Patel’s Podcast With Nvidia CEO Jensen Huang” by Zvi</title>
-      <description>Audio version of “On Dwarkesh Patel’s Podcast With Nvidia CEO Jensen Huang” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 17 Apr 2026 09:08:08 +0000</pubDate>
-      <guid>43931996-57f0-4b9e-80bd-e49e78e8ac71</guid>
-      <link>https://www.lesswrong.com/posts/RBBChvuPHP7LfWyME/on-dwarkesh-patel-s-podcast-with-nvidia-ceo-jensen-huang</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3daf3c7df3ef_on_dwarkesh_patels_podcast_with_nvidia_ceo_jense.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-04-17</title>
-      <description>Daily News Briefing - 2026-04-17
-
-Topics covered:
-- The race for agentic artificial intelligence has entered a new phase as OpenAI and Anthropic released major technical updates today
-- Concerns regarding the safety and security of these frontier models are mounting among global regulators
-- In the Middle East, a surprise ten-day truce between Israel and Lebanon has gone into effect
-- In the corporate sector, the "AI agent" boom is triggering a massive consolidation of capital and a shift in software dynamics
-- Finally, OpenAI is expanding its reach into specialized scientific domains with the launch of "GPT-Rosalind." This new model is specifically tuned for biology workflows and is currently in closed access
-- Looking toward tomorrow, the focus remains on the Strait of Hormuz to see if the ten-day Lebanon ceasefire leads to any softening of the American naval blockade</description>
-      <pubDate>Fri, 17 Apr 2026 07:20:36 +0000</pubDate>
-      <guid>news-briefing-2026-04-17</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/71b6bca82eff_daily_news_briefing_-_2026-04-17.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-17.txt" type="text/plain" />
-    </item>
-    <item>
       <title>Orban Was Bad, Even Though We Don't Have A Perfect Word For His Badness</title>
       <description>Audio version of Orban Was Bad, Even Though We Don't Have A Perfect Word For His Badness from Scott Alexander</description>
       <pubDate>Thu, 16 Apr 2026 01:51:55 +0000</pubDate>
@@ -1353,17 +1323,6 @@ Topics covered:
       <guid>WewsByywWNhX9rtwi</guid>
       <link>https://www.lesswrong.com/posts/WewsByywWNhX9rtwi/current-ais-seem-pretty-misaligned-to-me</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e3c3d13e4326_current_ais_seem_pretty_misaligned_to_me.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Code, Codex and Agentic Coding #7: Auto Mode” by Zvi</title>
-      <description>Audio version of “Claude Code, Codex and Agentic Coding #7: Auto Mode” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 15 Apr 2026 14:42:19 +0000</pubDate>
-      <guid>18eac2ec-7d70-4cb0-9af2-a6122ce0c607</guid>
-      <link>https://www.lesswrong.com/posts/w8misLX7KCmLxJM2K/claude-code-codex-and-agentic-coding-7-auto-mode</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f1fcf91891a8_claude_code_codex_and_agentic_coding_7_auto_mo.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
