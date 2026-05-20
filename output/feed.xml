@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-20</title>
+      <description>Daily News Briefing - 2026-05-20
+
+Topics covered:
+- The primary focus of the technology sector today is Google I/O twenty-six, where the company signaled a fundamental shift from search engine to "agentic" platform
+- In a move to standardize AI safety and authenticity, OpenAI and Nvidia have joined Google in adopting SynthID, a watermarking technology for AI-generated content
+- The race for AI-driven software development has also intensified
+- Geopolitically, the Strait of Hormuz has emerged as a new theater for digital conflict
+- In Central Africa, the health crisis continues to weigh on the global supply chain for critical minerals
+- Looking toward tomorrow, the financial markets will be assessing the impact of a blockbuster utility merger between NextEra and Dominion, a multi-billion dollar deal driven almost entirely by the unprecedented electricity demands of the AI data center boom</description>
+      <pubDate>Wed, 20 May 2026 07:52:24 +0000</pubDate>
+      <guid>news-briefing-2026-05-20</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/98af5ba7f17b_daily_news_briefing_-_2026-05-20.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-20.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>If AI is normal technology, history is not reassuring.</title>
+      <description>Audio version of If AI is normal technology, history is not reassuring. from LessWrong Frontpage</description>
+      <pubDate>Wed, 20 May 2026 07:21:52 +0000</pubDate>
+      <guid>4MCuvdsZFEBAaGCsb</guid>
+      <link>https://www.lesswrong.com/posts/4MCuvdsZFEBAaGCsb/if-ai-is-normal-technology-history-is-not-reassuring</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a67927799ed0_if_ai_is_normal_technology_history_is_not_reassur.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Childhood And Education #19: Letting Kids Be Kids #2” by Zvi</title>
+      <description>Audio version of “Childhood And Education #19: Letting Kids Be Kids #2” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 19 May 2026 22:23:51 +0000</pubDate>
+      <guid>c33c218f-9608-4624-8f2e-253cf6f896e5</guid>
+      <link>https://www.lesswrong.com/posts/ytoLzgKHutaKxkRZr/childhood-and-education-19-letting-kids-be-kids-2</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/dc37c88013f8_childhood_and_education_19_letting_kids_be_kids.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Types Of Candidate You Find In The California Gubernatorial Race</title>
+      <description>Audio version of The Types Of Candidate You Find In The California Gubernatorial Race from Scott Alexander</description>
+      <pubDate>Tue, 19 May 2026 10:19:35 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/the-types-of-candidate-you-find-in</guid>
+      <link>https://www.astralcodexten.com/p/the-types-of-candidate-you-find-in</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aff8017317e8_the_types_of_candidate_you_find_in_the_california.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-19</title>
       <description>Daily News Briefing - 2026-05-19
 
@@ -1271,47 +1323,6 @@ Topics covered:
       <guid>GNjDC6jtjr2iiE45i</guid>
       <link>https://www.lesswrong.com/posts/GNjDC6jtjr2iiE45i/quality-matters-most-when-stakes-are-highest</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c9c5b8774bd_quality_matters_most_when_stakes_are_highest.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-04-19</title>
-      <description>Daily News Briefing - 2026-04-19
-
-Topics covered:
-- The hardware foundation of the artificial intelligence boom is facing a multi-year crisis
-- In the public markets, the A-I hardware landscape is set for a major shakeup as chip startup Cerebras has officially filed for its initial public offering
-- The fragile de-escalation in the Middle East has faced its first major setback during the second day of the Israel-Hezbollah ceasefire
-- In the autonomous vehicle sector, Tesla is aggressively expanding its Texas-based footprint
-- On the software front, the mobile ecosystem is experiencing a significant resurgence
-- Looking toward tomorrow, the focus remains on Lebanon as international monitors wait to see if the killing of a French peacekeeper triggers a military response that could end the regional ceasefire</description>
-      <pubDate>Sun, 19 Apr 2026 07:07:54 +0000</pubDate>
-      <guid>news-briefing-2026-04-19</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1ec4f0a550f5_daily_news_briefing_-_2026-04-19.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-19.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Summarizing and Reviewing my earliest ML research paper, 7 years later</title>
-      <description>Audio version of Summarizing and Reviewing my earliest ML research paper, 7 years later from LessWrong Frontpage</description>
-      <pubDate>Sun, 19 Apr 2026 06:55:48 +0000</pubDate>
-      <guid>s23gcSGmWh3YwDBdW</guid>
-      <link>https://www.lesswrong.com/posts/s23gcSGmWh3YwDBdW/summarizing-and-reviewing-my-earliest-ml-research-paper-7</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/258e7e7a0a7e_summarizing_and_reviewing_my_earliest_ml_research.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Orban Was Bad, Even Though We Don't Have A Perfect Word For His Badness</title>
-      <description>Audio version of Orban Was Bad, Even Though We Don't Have A Perfect Word For His Badness from Scott Alexander</description>
-      <pubDate>Thu, 16 Apr 2026 01:51:55 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/orban-was-bad-even-though-we-dont</guid>
-      <link>https://www.astralcodexten.com/p/orban-was-bad-even-though-we-dont</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/11aba52ef545_orban_was_bad_even_though_we_dont_have_a_perfect.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
