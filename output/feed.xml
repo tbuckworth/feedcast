@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-21</title>
+      <description>Daily News Briefing - 2026-05-21
+
+Topics covered:
+- The long-awaited initial public offering of SpaceX has officially moved into the public eye, revealing the first comprehensive look at Elon Musk’s integrated business empire
+- In the AI capability race, OpenAI appears to have achieved a milestone in machine reasoning
+- Google is moving to monetize its new "agentic" search interface by integrating Al-generated advertising directly into Gemini conversational flows
+- Geopolitically, the "no-limits" partnership between Russia and China is showing its first signs of visible friction
+- The global health crisis continues to worsen in the Democratic Republic of Congo
+- Looking toward tomorrow, tech regulators will be monitoring the first day of a landmark trial regarding the "right to tweak" smart TV software, a case that could determine whether consumers have the legal right to strip advertising and tracking code from their own devices</description>
+      <pubDate>Thu, 21 May 2026 07:59:31 +0000</pubDate>
+      <guid>news-briefing-2026-05-21</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b7854ebf5cc5_daily_news_briefing_-_2026-05-21.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-21.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Numb mental state shifts</title>
+      <description>Audio version of Numb mental state shifts from LessWrong Frontpage</description>
+      <pubDate>Thu, 21 May 2026 03:50:15 +0000</pubDate>
+      <guid>3uDvQivMiGAtn5qen</guid>
+      <link>https://www.lesswrong.com/posts/3uDvQivMiGAtn5qen/numb-mental-state-shifts</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6f847fd28ea9_numb_mental_state_shifts.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-20</title>
       <description>Daily News Briefing - 2026-05-20
 
@@ -57,6 +87,17 @@ Topics covered:
       <guid>c33c218f-9608-4624-8f2e-253cf6f896e5</guid>
       <link>https://www.lesswrong.com/posts/ytoLzgKHutaKxkRZr/childhood-and-education-19-letting-kids-be-kids-2</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/dc37c88013f8_childhood_and_education_19_letting_kids_be_kids.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Housing Roundup #15: The War Against Renters” by Zvi</title>
+      <description>Audio version of “Housing Roundup #15: The War Against Renters” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 19 May 2026 21:41:37 +0000</pubDate>
+      <guid>db957820-bfa0-45b6-b01e-d8b5c2e0bcc4</guid>
+      <link>https://www.lesswrong.com/posts/7FH3EzsLdb7NxL785/housing-roundup-15-the-war-against-renters-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e992e79bf84f_housing_roundup_15_the_war_against_renters_by.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1298,31 +1339,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-20</title>
-      <description>Daily News Briefing - 2026-04-20
-
-Topics covered:
-- The maritime crisis in the Middle East has escalated into direct military confrontation
-- In response to the resulting energy crunch, the United States has extended a sanctions waiver for Russian energy, a move that provides some relief to global supply but has drawn sharp condemnation from Ukrainian President Volodymyr Zelensky
-- In the artificial intelligence and software sector, a major security breach has hit Vercel, a critical cloud platform used to deploy and host web applications
-- The aerospace industry saw a mixed milestone today as Blue Origin attempted a major flight of its New Glenn heavy-lift rocket
-- In a display of accelerating robotics capabilities, autonomous machines dominated the Beijing half-marathon this weekend
-- Finally, Palantir has issued a "mini-manifesto" explicitly denouncing what it calls "regressive" corporate cultures and traditional inclusivity initiatives</description>
-      <pubDate>Mon, 20 Apr 2026 07:51:47 +0000</pubDate>
-      <guid>news-briefing-2026-04-20</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b4d8bd9878c4_daily_news_briefing_-_2026-04-20.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-20.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Quality Matters Most When Stakes are Highest</title>
-      <description>Audio version of Quality Matters Most When Stakes are Highest from LessWrong Frontpage</description>
-      <pubDate>Mon, 20 Apr 2026 06:53:19 +0000</pubDate>
-      <guid>GNjDC6jtjr2iiE45i</guid>
-      <link>https://www.lesswrong.com/posts/GNjDC6jtjr2iiE45i/quality-matters-most-when-stakes-are-highest</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c9c5b8774bd_quality_matters_most_when_stakes_are_highest.mp3" type="audio/mpeg" length="0" />
+      <title>Orban Was Bad, Even Though We Don't Have A Perfect Word For His Badness</title>
+      <description>Audio version of Orban Was Bad, Even Though We Don't Have A Perfect Word For His Badness from Scott Alexander</description>
+      <pubDate>Thu, 16 Apr 2026 01:51:55 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/orban-was-bad-even-though-we-dont</guid>
+      <link>https://www.astralcodexten.com/p/orban-was-bad-even-though-we-dont</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/11aba52ef545_orban_was_bad_even_though_we_dont_have_a_perfect.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
