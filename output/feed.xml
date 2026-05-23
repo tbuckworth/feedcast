@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-23</title>
+      <description>Daily News Briefing - 2026-05-23
+
+Topics covered:
+- SpaceX has officially filed for its highly anticipated initial public offering, providing the first detailed look at the financial interconnectivity of Elon Musk’s companies
+- In Washington, President Trump has abruptly canceled a scheduled signing event for an executive order on artificial intelligence safety
+- Google’s transition to an "agentic" search interface is facing significant technical hurdles following its recent redesign
+- Geopolitically, Russia has escalated tensions with Ukraine after President Vladimir Putin accused Kyiv of striking a student dormitory
+- The global health crisis in the Democratic Republic of Congo has entered a more dangerous phase
+- Looking toward tomorrow, market analysts will be parsing the three dozen pages of risk factors in the SpaceX filing to determine if Musk’s complex cross-company financial "shuffling" will dampen investor appetite for the world's most valuable private company</description>
+      <pubDate>Sat, 23 May 2026 06:39:02 +0000</pubDate>
+      <guid>news-briefing-2026-05-23</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5035bfaba922_daily_news_briefing_-_2026-05-23.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-23.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Out-of-Context Reasoning (OOCR) in LLMs: A Short Primer and Reading List</title>
+      <description>Audio version of Out-of-Context Reasoning (OOCR) in LLMs: A Short Primer and Reading List from Owain Evans</description>
+      <pubDate>Sat, 23 May 2026 02:46:14 +0000</pubDate>
+      <guid>wXioQSLmEiPTmHyf4</guid>
+      <link>https://www.lesswrong.com/posts/wXioQSLmEiPTmHyf4/out-of-context-reasoning-oocr-in-llms-a-short-primer-and</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f95e173256ea_out-of-context_reasoning_oocr_in_llms_a_short_p.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Gemini 3.5 Flash Looks Good For How Fast It Is” by Zvi</title>
+      <description>Audio version of “Gemini 3.5 Flash Looks Good For How Fast It Is” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 22 May 2026 17:35:09 +0000</pubDate>
+      <guid>86d89800-05d9-4e19-91b4-d72fc59f040d</guid>
+      <link>https://www.lesswrong.com/posts/WMZpPxqWEkZBBcaxf/gemini-3-5-flash-looks-good-for-how-fast-it-is</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bfb4fec95d99_gemini_35_flash_looks_good_for_how_fast_it_is_b.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>New Paradigms Won't Save You</title>
+      <description>Audio version of New Paradigms Won't Save You from Scott Alexander</description>
+      <pubDate>Fri, 22 May 2026 08:49:25 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/new-paradigms-wont-save-you</guid>
+      <link>https://www.astralcodexten.com/p/new-paradigms-wont-save-you</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3435fa25d4c9_new_paradigms_wont_save_you.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-21</title>
       <description>Daily News Briefing - 2026-05-21
 
@@ -1246,53 +1298,45 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-22</title>
-      <description>Daily News Briefing - 2026-04-22
-
-Topics covered:
-- The race for high-end developer tools has taken a massive leap as Elon Musk’s SpaceX and xAI have entered a strategic agreement to potentially acquire Cursor, the automated programming platform, for sixty billion dollars
-- In the artificial intelligence sector, a major narrative of skepticism is emerging from both corporate corridors and the federal government
-- In geopolitics, President Trump has secured a fragile diplomatic window, backing off threats of immediate military escalation to allow more time for a comprehensive deal with Iran
-- On the hardware front, the Pentagon is requesting an unprecedented fifty-four billion dollars for drone technology, a figure that exceeds the entire military budgets of most sovereign nations
-- Finally, YouTube is providing a new defense for public figures in the era of deepfakes
-- Looking toward tomorrow, focus shifts to the United States Congress, as lawmakers face a looming April thirtieth deadline to renew or reform Section Seven-Zero-Two spy powers amidst a fierce debate over warrantless surveillance of American citizens</description>
-      <pubDate>Wed, 22 Apr 2026 07:20:59 +0000</pubDate>
-      <guid>news-briefing-2026-04-22</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/57a15e04598c_daily_news_briefing_-_2026-04-22.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-22.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>10 posts I don't have time to write</title>
-      <description>Audio version of 10 posts I don't have time to write from LessWrong Frontpage</description>
-      <pubDate>Wed, 22 Apr 2026 06:29:44 +0000</pubDate>
-      <guid>MqgwHJ93pJpaeHXs6</guid>
-      <link>https://www.lesswrong.com/posts/MqgwHJ93pJpaeHXs6/10-posts-i-don-t-have-time-to-write</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/56803b8e1c70_10_posts_i_dont_have_time_to_write.mp3" type="audio/mpeg" length="0" />
+      <title>Current AIs seem pretty misaligned to me</title>
+      <description>Audio version of Current AIs seem pretty misaligned to me from Ryan Greenblatt</description>
+      <pubDate>Wed, 15 Apr 2026 15:14:11 +0000</pubDate>
+      <guid>WewsByywWNhX9rtwi</guid>
+      <link>https://www.lesswrong.com/posts/WewsByywWNhX9rtwi/current-ais-seem-pretty-misaligned-to-me</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e3c3d13e4326_current_ais_seem_pretty_misaligned_to_me.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>“Opus 4.7 Part 2: Capabilities and Reactions” by Zvi</title>
-      <description>Audio version of “Opus 4.7 Part 2: Capabilities and Reactions” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 21 Apr 2026 21:31:26 +0000</pubDate>
-      <guid>afbf0f84-50b1-4724-9a11-09f371af6123</guid>
-      <link>https://www.lesswrong.com/posts/w2HrwkQgsLQHtEJsJ/opus-4-7-part-2-capabilities-and-reactions</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/51caa2214c7f_opus_47_part_2_capabilities_and_reactions_by_z.mp3" type="audio/mpeg" length="0" />
+      <title>Q1 2026 Timelines Update</title>
+      <description>Audio version of Q1 2026 Timelines Update from Daniel Kokotajlo</description>
+      <pubDate>Thu, 02 Apr 2026 22:23:54 +0000</pubDate>
+      <guid>XLLjqMxETva3ABtsK</guid>
+      <link>https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e146da8ae513_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Half A Month Of Consolation Writing Advice</title>
-      <description>Audio version of Half A Month Of Consolation Writing Advice from Scott Alexander</description>
-      <pubDate>Tue, 21 Apr 2026 15:14:10 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/half-a-month-of-consolation-writing</guid>
-      <link>https://www.astralcodexten.com/p/half-a-month-of-consolation-writing</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b42014b8d0fe_half_a_month_of_consolation_writing_advice.mp3" type="audio/mpeg" length="0" />
+      <title>Q1 2026 Timelines Update</title>
+      <description>Audio version of Q1 2026 Timelines Update from AI Futures Project</description>
+      <pubDate>Thu, 02 Apr 2026 18:10:18 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
+      <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Announcing ControlConf 2026</title>
+      <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
+      <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
+      <guid>tN5mgBAinwFe5c67c</guid>
+      <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
