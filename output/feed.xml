@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-24</title>
+      <description>Daily News Briefing - 2026-05-24
+
+Topics covered:
+- Negotiations to end the regional conflict in the Middle East have reached a critical inflection point
+- In domestic security, a suspect was killed by United States Secret Service agents today after opening fire at a security checkpoint near the White House
+- Geopolitical tensions between Russia and Ukraine have escalated following a series of deadly strikes in occupied territories
+- The global health crisis in the Democratic Republic of Congo is significantly impacting international activity
+- In the technology sector, the focus has shifted from green energy to heavy infrastructure
+- Looking toward tomorrow, the first-ever "Enhanced Games" will begin in Las Vegas, a controversial sporting event where athletes are permitted to use performance-enhancing drugs, testing the limits of human biology and sports ethics</description>
+      <pubDate>Sun, 24 May 2026 07:25:59 +0000</pubDate>
+      <guid>news-briefing-2026-05-24</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/62d55984f70a_daily_news_briefing_-_2026-05-24.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-24.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Heretical Pasta</title>
+      <description>Audio version of Heretical Pasta from LessWrong Frontpage</description>
+      <pubDate>Sun, 24 May 2026 01:50:08 +0000</pubDate>
+      <guid>bG4ZhaH5NoxExiEDv</guid>
+      <link>https://www.lesswrong.com/posts/bG4ZhaH5NoxExiEDv/heretical-pasta</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/24b869872abb_heretical_pasta.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-23</title>
       <description>Daily News Briefing - 2026-05-23
 
@@ -68,6 +98,17 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/new-paradigms-wont-save-you</guid>
       <link>https://www.astralcodexten.com/p/new-paradigms-wont-save-you</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3435fa25d4c9_new_paradigms_wont_save_you.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #169: New Knowledge” by Zvi</title>
+      <description>Audio version of “AI #169: New Knowledge” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 21 May 2026 13:21:53 +0000</pubDate>
+      <guid>f233ece3-15b0-42f4-900a-977cfc2e17fa</guid>
+      <link>https://www.lesswrong.com/posts/xWsBwrboYDEMdj8TC/ai-169-new-knowledge</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7eb24f5860b3_ai_169_new_knowledge_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1287,12 +1328,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>“Opus 4.7 Part 3: Model Welfare” by Zvi</title>
-      <description>Audio version of “Opus 4.7 Part 3: Model Welfare” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 22 Apr 2026 21:41:19 +0000</pubDate>
-      <guid>c804459a-2963-4a47-9f5d-97d872d6c639</guid>
-      <link>https://www.lesswrong.com/posts/gD3bEgMo878eCHGbw/opus-4-7-part-3-model-welfare</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8cdfda758627_opus_47_part_3_model_welfare_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <title>Half A Month Of Consolation Writing Advice</title>
+      <description>Audio version of Half A Month Of Consolation Writing Advice from Scott Alexander</description>
+      <pubDate>Tue, 21 Apr 2026 15:14:10 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/half-a-month-of-consolation-writing</guid>
+      <link>https://www.astralcodexten.com/p/half-a-month-of-consolation-writing</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b42014b8d0fe_half_a_month_of_consolation_writing_advice.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1337,6 +1378,17 @@ Topics covered:
       <guid>tN5mgBAinwFe5c67c</guid>
       <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>New, improved multiple-choice TruthfulQA</title>
+      <description>Audio version of New, improved multiple-choice TruthfulQA from Owain Evans</description>
+      <pubDate>Wed, 15 Jan 2025 23:32:09 +0000</pubDate>
+      <guid>Bunfwz6JsNd44kgLT</guid>
+      <link>https://www.lesswrong.com/posts/Bunfwz6JsNd44kgLT/new-improved-multiple-choice-truthfulqa</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/be18640f6d79_new_improved_multiple-choice_truthfulqa.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
