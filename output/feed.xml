@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-25</title>
+      <description>Daily News Briefing - 2026-05-25
+
+Topics covered:
+- The primary focus today is a potential diplomatic breakthrough in the Middle East
+- In the realm of AI security, a new class of "personality-based" exploits is emerging
+- Geopolitical tensions escalated sharply in Eastern Europe today as Russia launched a massive strike across Ukraine
+- In South Asia, a deadly bombing has targeted a passenger train in Pakistan, killing at least twenty people
+- Finally, the health crisis in the Democratic Republic of Congo has reached a critical bottleneck
+- Looking toward tomorrow, market observers will be watching the opening bell to see if the anticipated Iran deal can sustain the downward pressure on global energy prices</description>
+      <pubDate>Mon, 25 May 2026 08:25:59 +0000</pubDate>
+      <guid>news-briefing-2026-05-25</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/45a0bb1d9480_daily_news_briefing_-_2026-05-25.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-25.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Insurance Premiums To The Moon</title>
+      <description>Audio version of Insurance Premiums To The Moon from LessWrong Frontpage</description>
+      <pubDate>Mon, 25 May 2026 00:09:37 +0000</pubDate>
+      <guid>4qHAarKCr3ANpAAgj</guid>
+      <link>https://www.lesswrong.com/posts/4qHAarKCr3ANpAAgj/insurance-premiums-to-the-moon</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/863980ce16dc_insurance_premiums_to_the_moon.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-24</title>
       <description>Daily News Briefing - 2026-05-24
 
@@ -1276,53 +1306,12 @@ Topics covered:
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-24.txt" type="text/plain" />
     </item>
     <item>
-      <title>Communicating with people who disagree on "obvious" things</title>
-      <description>Audio version of Communicating with people who disagree on "obvious" things from LessWrong Frontpage</description>
-      <pubDate>Fri, 24 Apr 2026 06:56:31 +0000</pubDate>
-      <guid>fmLbAPLKJcrz8jvBf</guid>
-      <link>https://www.lesswrong.com/posts/fmLbAPLKJcrz8jvBf/communicating-with-people-who-disagree-on-obvious-things</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f10f6319aa82_communicating_with_people_who_disagree_on_obvious.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“AI #165: In Our Image” by Zvi</title>
       <description>Audio version of “AI #165: In Our Image” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Thu, 23 Apr 2026 13:43:11 +0000</pubDate>
       <guid>fae6ff63-418d-45e9-99db-8b6d4676feef</guid>
       <link>https://www.lesswrong.com/posts/AMGPDMgvXvfmomLsc/ai-165-in-our-image</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/238faf6df739_ai_165_in_our_image_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-04-23</title>
-      <description>Daily News Briefing - 2026-04-23
-
-Topics covered:
-- The transition to an agentic economy has accelerated today as OpenAI and Google launched competing platforms to automate enterprise workflows
-- In a significant security lapse, Anthropic’s high-stakes "Mythos" cybersecurity model has reportedly been accessed by unauthorized users
-- The geopolitical standoff in the Middle East is reaching a critical inflection point as the ten-day ceasefire window closes
-- Tesla’s first-quarter earnings report has revealed a pivot toward massive capital expenditure as the company enters what CEO Elon Musk calls its "robotics era." Tesla plans to spend twenty-five billion dollars this year—triple its historical average—on artificial intelligence clusters and its own chip fabrication facilities
-- Finally, the military leadership of the United States is seeing further turnover during this period of high kinetic activity
-- Looking toward tomorrow, focus shifts to the financial markets as investors digest the implications of Tesla’s negative free cash flow and the potential for increased volatility in the tech sector</description>
-      <pubDate>Thu, 23 Apr 2026 07:23:01 +0000</pubDate>
-      <guid>news-briefing-2026-04-23</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0c346578abac_daily_news_briefing_-_2026-04-23.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-23.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Thought Experiments on Continuity of Consciousness</title>
-      <description>Audio version of Thought Experiments on Continuity of Consciousness from LessWrong Frontpage</description>
-      <pubDate>Thu, 23 Apr 2026 07:22:48 +0000</pubDate>
-      <guid>CchB8MMNDAR3KtkLH</guid>
-      <link>https://www.lesswrong.com/posts/CchB8MMNDAR3KtkLH/thought-experiments-on-continuity-of-consciousness</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fb298e0a0e36_thought_experiments_on_continuity_of_consciousness.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
