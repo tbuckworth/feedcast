@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-26</title>
+      <description>Daily News Briefing - 2026-05-26
+
+Topics covered:
+- The anticipated diplomatic de-escalation in the Middle East faced an immediate setback today
+- In the technology sector, a significant shift in corporate labor strategy is emerging
+- Pope Leo the fourteenth has entered the global debate on AI safety with the release of his first major encyclical, titled Magnifica Humanitas
+- Geopolitical stability in Eastern Europe and Asia continues to deteriorate
+- In other tech news, the first day of the "Enhanced Games" in Las Vegas produced its first major controversy
+- Looking toward tomorrow, tech observers will be watching for the closing of Startup Battlefield applications to see if the recent wave of AI-driven labor shifts spurs a new surge in "agent-first" business models</description>
+      <pubDate>Tue, 26 May 2026 07:56:31 +0000</pubDate>
+      <guid>news-briefing-2026-05-26</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/667fa989fba5_daily_news_briefing_-_2026-05-26.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-26.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Many portions of Magnifica Humanitas appear to be AI-written</title>
+      <description>Audio version of Many portions of Magnifica Humanitas appear to be AI-written from LessWrong Frontpage</description>
+      <pubDate>Tue, 26 May 2026 07:41:00 +0000</pubDate>
+      <guid>GbWwesBnetyiomxEH</guid>
+      <link>https://www.lesswrong.com/posts/GbWwesBnetyiomxEH/many-portions-of-magnifica-humanitas-appear-to-be-ai-written</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/51f7189efd34_many_portions_of_magnifica_humanitas_appear_to_be.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-25</title>
       <description>Daily News Briefing - 2026-05-25
 
@@ -1246,72 +1276,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-25</title>
-      <description>Daily News Briefing - 2026-04-25
-
-Topics covered:
-- Artificial intelligence has fundamentally transformed the speed of warfare, with United States military officials revealing that "Project Maven" AI systems were used to strike over one thousand targets in the first twenty-four hours of the assault on Iran
-- The capital expenditure race reached a staggering new peak today as Google announced plans to invest up to forty billion dollars in Anthropic
-- In a move that signals a shift in hardware requirements for the "agentic era," Meta has signed a massive deal to acquire millions of Amazon’s homegrown central processing units
-- The geopolitical alliance between the United States and Europe is facing its most severe strain in years
-- Domestically, the Trump administration has taken a series of hardline actions in the legal and financial sectors
-- Finally, a developing story in the space sector confirms that the primary modules for the Lunar Gateway, NASA's planned orbiting moon station, are suffering from significant corrosion</description>
-      <pubDate>Sat, 25 Apr 2026 07:03:03 +0000</pubDate>
-      <guid>news-briefing-2026-04-25</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c64d0e79574f_daily_news_briefing_-_2026-04-25.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-25.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Quick Paper Review: "There Will Be a Scientific Theory of Deep Learning"</title>
-      <description>Audio version of Quick Paper Review: "There Will Be a Scientific Theory of Deep Learning" from LessWrong Frontpage</description>
-      <pubDate>Sat, 25 Apr 2026 06:55:30 +0000</pubDate>
-      <guid>2WkeiYFT5p3ph8Pkf</guid>
-      <link>https://www.lesswrong.com/posts/2WkeiYFT5p3ph8Pkf/quick-paper-review-there-will-be-a-scientific-theory-of-deep</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f0f89018a3ba_quick_paper_review_there_will_be_a_scientific_th.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Monthly Roundup #41: April 2025” by Zvi</title>
       <description>Audio version of “Monthly Roundup #41: April 2025” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Fri, 24 Apr 2026 13:24:20 +0000</pubDate>
       <guid>58f6cba3-5312-4017-b270-dfcf983c08b9</guid>
       <link>https://www.lesswrong.com/posts/Bo4FbDxb3YrZwap3J/monthly-roundup-41-april-2025</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/38e8f26108a9_monthly_roundup_41_april_2025_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-04-24</title>
-      <description>Daily News Briefing - 2026-04-24
-
-Topics covered:
-- OpenAI has launched GPT-five-point-five, a surprise successor to the model it released just last month
-- In a direct response to this push for autonomy, Anthropic is expanding its integration into the personal sphere
-- The competitive landscape is seeing a brutal re-alignment as Meta announced plans to lay off ten percent of its workforce, approximately eight thousand employees, this May
-- Geopolitical tensions over technology have reached a boiling point as the White House issued a memo accusing Chinese firms of "industrial-scale" theft of American AI models
-- In cybersecurity, the fallout from the Anthropic "Mythos" breach continues to widen
-- Finally, in a significant shift for the domestic economy, the Trump administration has officially reclassified cannabis as a less dangerous drug under federal law</description>
-      <pubDate>Fri, 24 Apr 2026 07:49:23 +0000</pubDate>
-      <guid>news-briefing-2026-04-24</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c904c63568cb_daily_news_briefing_-_2026-04-24.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-24.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“AI #165: In Our Image” by Zvi</title>
-      <description>Audio version of “AI #165: In Our Image” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 23 Apr 2026 13:43:11 +0000</pubDate>
-      <guid>fae6ff63-418d-45e9-99db-8b6d4676feef</guid>
-      <link>https://www.lesswrong.com/posts/AMGPDMgvXvfmomLsc/ai-165-in-our-image</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/238faf6df739_ai_165_in_our_image_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
