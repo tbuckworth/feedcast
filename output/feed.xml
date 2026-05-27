@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-27</title>
+      <description>Daily News Briefing - 2026-05-27
+
+Topics covered:
+- The diplomatic landscape in the Middle East has shifted into a volatile paradox
+- In the technology sector, the aggressive pivot to agentic AI is facing its first major economic and security reality check
+- Public pushback against AI-integrated services is beginning to drive market shifts
+- In space and defense news, Elon Musk has publicly accused the United States military of violating SpaceX terms of service
+- Domestically, the Trump administration has signaled a radical shift in energy and trade policy
+- Looking toward tomorrow, all eyes will be on the closing of Startup Battlefield applications to see if the venture community continues to double down on agentic AI despite growing corporate skepticism</description>
+      <pubDate>Wed, 27 May 2026 08:08:59 +0000</pubDate>
+      <guid>news-briefing-2026-05-27</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4882b43541d2_daily_news_briefing_-_2026-05-27.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-27.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Thinking outside the box? LLM analysis of simplified cooperative poker</title>
+      <description>Audio version of Thinking outside the box? LLM analysis of simplified cooperative poker from LessWrong Frontpage</description>
+      <pubDate>Wed, 27 May 2026 07:28:24 +0000</pubDate>
+      <guid>ovBeqqeoCRWcjZfKQ</guid>
+      <link>https://www.lesswrong.com/posts/ovBeqqeoCRWcjZfKQ/thinking-outside-the-box-llm-analysis-of-simplified</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f1c75458aa29_thinking_outside_the_box_llm_analysis_of_simplifi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Use AI This Election</title>
+      <description>Audio version of Use AI This Election from Scott Alexander</description>
+      <pubDate>Tue, 26 May 2026 20:22:30 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/use-ai-this-election</guid>
+      <link>https://www.astralcodexten.com/p/use-ai-this-election</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d018a4de7d8a_use_ai_this_election.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“RTMH: Pope Leo’s Magnifica Humanitas on AI” by Zvi</title>
+      <description>Audio version of “RTMH: Pope Leo’s Magnifica Humanitas on AI” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 26 May 2026 13:24:10 +0000</pubDate>
+      <guid>efe9ec0c-af23-425d-b354-ffb1c4258f66</guid>
+      <link>https://www.lesswrong.com/posts/RZeg98Tdrq47vbjva/rtmh-pope-leo-s-magnifica-humanitas-on-ai</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aa6eb1101ff4_rtmh_pope_leos_magnifica_humanitas_on_ai_by_zv.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-26</title>
       <description>Daily News Briefing - 2026-05-26
 
@@ -1241,58 +1293,6 @@ Topics covered:
       <guid>zcGmdQHX66NhC69v6</guid>
       <link>https://www.lesswrong.com/posts/zcGmdQHX66NhC69v6/the-other-paper-that-killed-deep-learning-theory</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c3c36d500bc6_the_other_paper_that_killed_deep_learning_theory.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-04-26</title>
-      <description>Daily News Briefing - 2026-04-26
-
-Topics covered:
-- The most critical development in the artificial intelligence sector is a strategic consolidation in Europe, where the Canadian firm Cohere has announced a merger with Germany's Aleph Alpha
-- In a landmark experiment in agentic economics, Anthropic has successfully deployed a test marketplace where autonomous A-I agents conducted end-to-end commerce
-- The geopolitical landscape was rocked this weekend by an assassination attempt at the White House Correspondents’ Dinner
-- Internal tensions at Palantir have reached a breaking point, as leaked internal Slack messages and employee interviews reveal a staff in turmoil over what they describe as the company’s "descent into fascism." The friction stems from Palantir’s deep integration with the Trump administration’s immigration and military policies, highlighting a growing cultural schism between the Silicon Valley workforce and the executive leadership of major defense contractors
-- In infrastructure news, Maine’s governor has vetoed what would have been the first statewide moratorium on new data centers in the United States
-- Finally, the Artemis Two mission has officially broken the distance record for human spaceflight previously held by Apollo thirteen’s Fred Haise</description>
-      <pubDate>Sun, 26 Apr 2026 07:17:30 +0000</pubDate>
-      <guid>news-briefing-2026-04-26</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bd2acea0ef29_daily_news_briefing_-_2026-04-26.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-26.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The paper that killed deep learning theory</title>
-      <description>Audio version of The paper that killed deep learning theory from LessWrong Frontpage</description>
-      <pubDate>Sun, 26 Apr 2026 06:55:03 +0000</pubDate>
-      <guid>ZvQfcLbcNHYqmvWyo</guid>
-      <link>https://www.lesswrong.com/posts/ZvQfcLbcNHYqmvWyo/the-paper-that-killed-deep-learning-theory</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/417abcd8a1cc_the_paper_that_killed_deep_learning_theory.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Monthly Roundup #41: April 2025” by Zvi</title>
-      <description>Audio version of “Monthly Roundup #41: April 2025” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 24 Apr 2026 13:24:20 +0000</pubDate>
-      <guid>58f6cba3-5312-4017-b270-dfcf983c08b9</guid>
-      <link>https://www.lesswrong.com/posts/Bo4FbDxb3YrZwap3J/monthly-roundup-41-april-2025</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/38e8f26108a9_monthly_roundup_41_april_2025_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Half A Month Of Consolation Writing Advice</title>
-      <description>Audio version of Half A Month Of Consolation Writing Advice from Scott Alexander</description>
-      <pubDate>Tue, 21 Apr 2026 15:14:10 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/half-a-month-of-consolation-writing</guid>
-      <link>https://www.astralcodexten.com/p/half-a-month-of-consolation-writing</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b42014b8d0fe_half_a_month_of_consolation_writing_advice.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
