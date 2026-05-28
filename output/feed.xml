@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-28</title>
+      <description>Daily News Briefing - 2026-05-28
+
+Topics covered:
+- The fragile diplomatic framework in the Middle East has been shaken by a direct military exchange between the United States and Iran
+- In a landmark move for autonomous finance, Robinhood has announced it will allow users to deploy AI agents to trade stocks
+- The technology landscape is shifting away from United States-centric manufacturing as Nvidia announced a massive one hundred fifty billion dollar annual investment in Taiwan
+- AI safety and policy have reached a new level of public visibility through a series of interventions and regulatory shifts
+- Domestically, the Trump administration is preparing a controversial public health response to the Ebola outbreak in the Democratic Republic of Congo
+- Looking toward tomorrow, the Federal Aviation Administration will begin its formal investigation into SpaceX’s Starship booster failure, a process that will keep the heavy-lift vehicle grounded during a critical period for its upcoming initial public offering</description>
+      <pubDate>Thu, 28 May 2026 08:07:01 +0000</pubDate>
+      <guid>news-briefing-2026-05-28</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/14f2253d0f59_daily_news_briefing_-_2026-05-28.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-28.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Using Bayesian Reasoning to Resolve Probability Paradoxes</title>
+      <description>Audio version of Using Bayesian Reasoning to Resolve Probability Paradoxes from LessWrong Frontpage</description>
+      <pubDate>Thu, 28 May 2026 01:37:34 +0000</pubDate>
+      <guid>eaXHaRvXmpJvFdv4c</guid>
+      <link>https://www.lesswrong.com/posts/eaXHaRvXmpJvFdv4c/using-bayesian-reasoning-to-resolve-probability-paradoxes</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/20dea2acb051_using_bayesian_reasoning_to_resolve_probability_pa.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Full automation of AI R&amp;D probably yields a large speed up even without a software-only singularity</title>
+      <description>Audio version of Full automation of AI R&amp;D probably yields a large speed up even without a software-only singularity from Ryan Greenblatt</description>
+      <pubDate>Wed, 27 May 2026 18:16:34 +0000</pubDate>
+      <guid>jfwhvd43sbpkGTLyn</guid>
+      <link>https://www.lesswrong.com/posts/jfwhvd43sbpkGTLyn/full-automation-of-ai-r-and-d-probably-yields-a-large-speed</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8826178be6ba_full_automation_of_ai_rd_probably_yields_a_large.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-27</title>
       <description>Daily News Briefing - 2026-05-27
 
@@ -1268,42 +1309,23 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-27</title>
-      <description>Daily News Briefing - 2026-04-27
-
-Topics covered:
-- The geopolitical standoff between the United States and Iran has intensified following the cancellation of high-level peace talks
-- The security breach at the White House Correspondents’ Dinner is now being treated as a domestic terror investigation
-- In the artificial intelligence sector, OpenAI has released a formal set of five guiding principles authored by Sam Altman
-- The economic footprint of AI is now beginning to warp the traditional real estate market
-- In hardware and robotics news, researchers have developed new cross-platform control software that allows different robotic systems to learn from one another regardless of their physical design
-- Looking toward tomorrow, the focus remains on the London Marathon’s historic results, where Sabastian Sawe’s sub-two-hour run has set a new benchmark for human performance, sparking debate over whether advanced footwear technology has fundamentally altered the parity of competitive athletics</description>
-      <pubDate>Mon, 27 Apr 2026 08:05:33 +0000</pubDate>
-      <guid>news-briefing-2026-04-27</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/17ac231da619_daily_news_briefing_-_2026-04-27.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-27.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The other paper that killed deep learning theory</title>
-      <description>Audio version of The other paper that killed deep learning theory from LessWrong Frontpage</description>
-      <pubDate>Mon, 27 Apr 2026 06:57:14 +0000</pubDate>
-      <guid>zcGmdQHX66NhC69v6</guid>
-      <link>https://www.lesswrong.com/posts/zcGmdQHX66NhC69v6/the-other-paper-that-killed-deep-learning-theory</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c3c36d500bc6_the_other_paper_that_killed_deep_learning_theory.mp3" type="audio/mpeg" length="0" />
+      <title>“Monthly Roundup #41: April 2025” by Zvi</title>
+      <description>Audio version of “Monthly Roundup #41: April 2025” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 24 Apr 2026 13:24:20 +0000</pubDate>
+      <guid>58f6cba3-5312-4017-b270-dfcf983c08b9</guid>
+      <link>https://www.lesswrong.com/posts/Bo4FbDxb3YrZwap3J/monthly-roundup-41-april-2025</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/38e8f26108a9_monthly_roundup_41_april_2025_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Current AIs seem pretty misaligned to me</title>
-      <description>Audio version of Current AIs seem pretty misaligned to me from Ryan Greenblatt</description>
-      <pubDate>Wed, 15 Apr 2026 15:14:11 +0000</pubDate>
-      <guid>WewsByywWNhX9rtwi</guid>
-      <link>https://www.lesswrong.com/posts/WewsByywWNhX9rtwi/current-ais-seem-pretty-misaligned-to-me</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e3c3d13e4326_current_ais_seem_pretty_misaligned_to_me.mp3" type="audio/mpeg" length="0" />
+      <title>Half A Month Of Consolation Writing Advice</title>
+      <description>Audio version of Half A Month Of Consolation Writing Advice from Scott Alexander</description>
+      <pubDate>Tue, 21 Apr 2026 15:14:10 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/half-a-month-of-consolation-writing</guid>
+      <link>https://www.astralcodexten.com/p/half-a-month-of-consolation-writing</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b42014b8d0fe_half_a_month_of_consolation_writing_advice.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
