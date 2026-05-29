@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-29</title>
+      <description>Daily News Briefing - 2026-05-29
+
+Topics covered:
+- The primary focus today is a catastrophic failure in the private space sector
+- In the AI sector, Anthropic has dominated the headlines with two massive announcements
+- On the policy and safety front, the Illinois legislature has passed a landmark AI safety law, effectively seizing regulatory momentum as the federal government remains stalled
+- Geopolitical tensions in the Middle East remain at a knife-edge
+- In technology infrastructure, the "agentic" shift is beginning to change how the internet is built
+- Looking toward tomorrow, all eyes will be on the Romanian government’s emergency meeting following a Russian drone strike on an apartment block, which has drawn a sharp condemnation from NATO for Moscow’s "recklessness."</description>
+      <pubDate>Fri, 29 May 2026 08:03:08 +0000</pubDate>
+      <guid>news-briefing-2026-05-29</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1fa67a1de8f1_daily_news_briefing_-_2026-05-29.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-29.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Trees are mostly made of air and a generalizable lesson for AI safety</title>
+      <description>Audio version of Trees are mostly made of air and a generalizable lesson for AI safety from LessWrong Frontpage</description>
+      <pubDate>Fri, 29 May 2026 04:08:06 +0000</pubDate>
+      <guid>xiTBpBDwubnr4MLRe</guid>
+      <link>https://www.lesswrong.com/posts/xiTBpBDwubnr4MLRe/trees-are-mostly-made-of-air-and-a-generalizable-lesson-for</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a378ac42db7a_trees_are_mostly_made_of_air_and_a_generalizable_l.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #170: Lack of Executive Order” by Zvi</title>
+      <description>Audio version of “AI #170: Lack of Executive Order” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 28 May 2026 14:22:27 +0000</pubDate>
+      <guid>22728e38-cca2-4ffb-a17c-77783bd23050</guid>
+      <link>https://www.lesswrong.com/posts/cRapLxTByFqF5xxdN/ai-170-lack-of-executive-order</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cb8356155172_ai_170_lack_of_executive_order_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-28</title>
       <description>Daily News Briefing - 2026-05-28
 
@@ -1257,64 +1298,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-28</title>
-      <description>Daily News Briefing - 2026-04-28
-
-Topics covered:
-- The long-standing exclusive partnership between OpenAI and Microsoft has officially ended
-- Simultaneously, jury selection began yesterday in the high-stakes lawsuit brought by Elon Musk against OpenAI and Sam Altman
-- In a major escalation of the domestic security crisis, thirty-one-year-old Cole Tomas Allen has been officially charged with the attempted assassination of President Trump at the White House Correspondents’ Dinner
-- Within the tech sector, labor tensions are rising over the militarization of AI
-- On the geopolitical technology front, China has officially blocked Meta’s two-billion-dollar acquisition of the AI firm Manus
-- In space and infrastructure, NASA has pushed the Artemis Three lunar landing to late twenty-twenty-seven at the earliest, as SpaceX and Blue Origin struggle to finalize lander development</description>
-      <pubDate>Tue, 28 Apr 2026 08:07:33 +0000</pubDate>
-      <guid>news-briefing-2026-04-28</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/30848cab0ad6_daily_news_briefing_-_2026-04-28.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-28.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Latent reasoning models might be a good thing?</title>
-      <description>Audio version of Latent reasoning models might be a good thing? from LessWrong Frontpage</description>
-      <pubDate>Tue, 28 Apr 2026 06:46:25 +0000</pubDate>
-      <guid>JAYYFKYMwoq6zd4S3</guid>
-      <link>https://www.lesswrong.com/posts/JAYYFKYMwoq6zd4S3/latent-reasoning-models-might-be-a-good-thing</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bd330fc258f6_latent_reasoning_models_might_be_a_good_thing.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“GPT 5.5: The System Card” by Zvi</title>
-      <description>Audio version of “GPT 5.5: The System Card” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 27 Apr 2026 15:51:44 +0000</pubDate>
-      <guid>c0644999-c400-4a7c-bce4-8f292d66dc01</guid>
-      <link>https://www.lesswrong.com/posts/86zcwvuBpE4vxAeQz/gpt-5-5-the-system-card</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8834b1f6695d_gpt_55_the_system_card_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>AI companies should publish security assessments</title>
       <description>Audio version of AI companies should publish security assessments from Ryan Greenblatt</description>
       <pubDate>Mon, 27 Apr 2026 14:39:00 +0000</pubDate>
       <guid>smCHhegyxEAh3Gygg</guid>
       <link>https://www.lesswrong.com/posts/smCHhegyxEAh3Gygg/ai-companies-should-publish-security-assessments</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/2f29ef8ffb83_ai_companies_should_publish_security_assessments.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Monthly Roundup #41: April 2025” by Zvi</title>
-      <description>Audio version of “Monthly Roundup #41: April 2025” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 24 Apr 2026 13:24:20 +0000</pubDate>
-      <guid>58f6cba3-5312-4017-b270-dfcf983c08b9</guid>
-      <link>https://www.lesswrong.com/posts/Bo4FbDxb3YrZwap3J/monthly-roundup-41-april-2025</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/38e8f26108a9_monthly_roundup_41_april_2025_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
