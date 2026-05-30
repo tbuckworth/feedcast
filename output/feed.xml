@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-30</title>
+      <description>Daily News Briefing - 2026-05-30
+
+Topics covered:
+- The fallout from the New Glenn rocket explosion at Cape Canaveral is intensifying
+- In the Middle East, the anticipated "final determination" on an Iran ceasefire has stalled
+- The search for high-quality training data has taken a literal turn into the domestic sphere
+- On the AI safety and research front, DeepMind and the AI Alignment Forum have released new findings on "scheming tendencies" in Gemini models
+- Domestically, the Trump administration is facing a legal rebuke over its public health strategy
+- Looking toward tomorrow, the Romanian government and NATO allies will continue to assess the wreckage of a Russian drone that struck a residential block, an incident that has pushed regional tensions to their highest point since the invasion began</description>
+      <pubDate>Sat, 30 May 2026 06:51:51 +0000</pubDate>
+      <guid>news-briefing-2026-05-30</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/db59fcbb0d53_daily_news_briefing_-_2026-05-30.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-30.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>A new approach to interpretability: round-trip neural network compilation-decompilation</title>
+      <description>Audio version of A new approach to interpretability: round-trip neural network compilation-decompilation from LessWrong Frontpage</description>
+      <pubDate>Fri, 29 May 2026 22:41:08 +0000</pubDate>
+      <guid>CCcDbSLBj5T7HzJKv</guid>
+      <link>https://www.lesswrong.com/posts/CCcDbSLBj5T7HzJKv/a-new-approach-to-interpretability-round-trip-neural-network</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6e58cfdb9226_a_new_approach_to_interpretability_round-trip_neu.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Opus 4.8: The System Card” by Zvi</title>
+      <description>Audio version of “Claude Opus 4.8: The System Card” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 29 May 2026 20:52:00 +0000</pubDate>
+      <guid>5088be46-8997-4621-bcf2-ce040b4699da</guid>
+      <link>https://www.lesswrong.com/posts/Gx6cJ6cG9JfeSNcLB/claude-opus-4-8-the-system-card</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c19a63b8d8d0_claude_opus_48_the_system_card_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Book Review: The Dialectical Imagination</title>
+      <description>Audio version of Book Review: The Dialectical Imagination from Scott Alexander</description>
+      <pubDate>Fri, 29 May 2026 08:14:27 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/book-review-the-dialectical-imagination</guid>
+      <link>https://www.astralcodexten.com/p/book-review-the-dialectical-imagination</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b1bb0283f327_book_review_the_dialectical_imagination.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-29</title>
       <description>Daily News Briefing - 2026-05-29
 
@@ -1246,75 +1298,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-04-29</title>
-      <description>Daily News Briefing - 2026-04-29
-
-Topics covered:
-- The high-stakes legal battle between Elon Musk and OpenAI moved into open court yesterday as Musk took the stand in San Francisco
-- In a major shift for defense technology, Google has reportedly signed a classified deal allowing the United States Department of Defense to use its artificial intelligence models for "any lawful government purpose." According to reports from The Information, this agreement was reached less than twenty-four hours after over six hundred Google employees signed a formal protest against the militarization of their work
-- Within the hardware and infrastructure space, Amazon has wasted no time capitalizing on its newly expanded partnership with OpenAI
-- On the geopolitical front, the United Arab Emirates has officially exited the Organization of the Petroleum Exporting Countries, or OPEC
-- Domestically, the Trump administration has escalated its scrutiny of the media and former federal officials
-- In a technical development for the creative sector, Anthropic has released new "connectors" that allow its Claude AI to plug directly into industry-standard software like Photoshop, Blender, and Ableton</description>
-      <pubDate>Wed, 29 Apr 2026 08:00:54 +0000</pubDate>
-      <guid>news-briefing-2026-04-29</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f0cd0a7e56ce_daily_news_briefing_-_2026-04-29.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-29.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>SecureMaxx: A Lightweight  Sequence Screening Tool for Agents</title>
-      <description>Audio version of SecureMaxx: A Lightweight  Sequence Screening Tool for Agents from LessWrong Frontpage</description>
-      <pubDate>Wed, 29 Apr 2026 07:49:11 +0000</pubDate>
-      <guid>jaBQM5pyPaicF3pfA</guid>
-      <link>https://www.lesswrong.com/posts/jaBQM5pyPaicF3pfA/securemaxx-a-lightweight-sequence-screening-tool-for-agents-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/70d69f3720b0_securemaxx_a_lightweight_sequence_screening_tool.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Your Attempt To Solve Debate Will Not Work</title>
-      <description>Audio version of Your Attempt To Solve Debate Will Not Work from Scott Alexander</description>
-      <pubDate>Tue, 28 Apr 2026 19:55:10 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-attempt-to-solve-debate-will</guid>
-      <link>https://www.astralcodexten.com/p/your-attempt-to-solve-debate-will</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3210325e4333_your_attempt_to_solve_debate_will_not_work.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“GPT-5.5: Capabilities and Reactions” by Zvi</title>
-      <description>Audio version of “GPT-5.5: Capabilities and Reactions” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 28 Apr 2026 14:33:06 +0000</pubDate>
-      <guid>1c73ad33-f2d3-41d8-8694-a814aa24ebb8</guid>
-      <link>https://www.lesswrong.com/posts/5ytcFayxqZsXN8rNw/gpt-5-5-capabilities-and-reactions</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e4f82d1cf53e_gpt-55_capabilities_and_reactions_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>AI companies should publish security assessments</title>
       <description>Audio version of AI companies should publish security assessments from Ryan Greenblatt</description>
       <pubDate>Mon, 27 Apr 2026 14:39:00 +0000</pubDate>
       <guid>smCHhegyxEAh3Gygg</guid>
       <link>https://www.lesswrong.com/posts/smCHhegyxEAh3Gygg/ai-companies-should-publish-security-assessments</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/2f29ef8ffb83_ai_companies_should_publish_security_assessments.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Half A Month Of Consolation Writing Advice</title>
-      <description>Audio version of Half A Month Of Consolation Writing Advice from Scott Alexander</description>
-      <pubDate>Tue, 21 Apr 2026 15:14:10 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/half-a-month-of-consolation-writing</guid>
-      <link>https://www.astralcodexten.com/p/half-a-month-of-consolation-writing</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b42014b8d0fe_half_a_month_of_consolation_writing_advice.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
