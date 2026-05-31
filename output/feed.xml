@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-05-31</title>
+      <description>Daily News Briefing - 2026-05-31
+
+Topics covered:
+- The primary focus today is on the strategic fortification of artificial intelligence infrastructure and the technical challenges of long-term autonomy
+- In the realm of AI research, new technical analyses from the AI Alignment Forum suggest that the full automation of AI research and development could lead to a massive acceleration in progress, even without achieving a "software-only singularity." Researchers argue that AI-driven algorithmic improvements can overcome diminishing returns, potentially delivering four years of traditional progress within a single calendar year
+- Domestically, a significant shift in the developer ecosystem is causing friction
+- On the geopolitical front, the AUKUS security pact—comprising the United States, United Kingdom, and Australia—is expanding into subsea warfare
+- In the Middle East, the "final determination" on an Iran ceasefire remains elusive despite high-level meetings
+- Finally, in space and finance, the formal filings for the SpaceX initial public offering have drawn sharp criticism</description>
+      <pubDate>Sun, 31 May 2026 07:50:33 +0000</pubDate>
+      <guid>news-briefing-2026-05-31</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/473d0a0bdafb_daily_news_briefing_-_2026-05-31.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-31.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Fundamental Uncertainty: Alternate Framework and Pointwise Reduction</title>
+      <description>Audio version of Fundamental Uncertainty: Alternate Framework and Pointwise Reduction from LessWrong Frontpage</description>
+      <pubDate>Sun, 31 May 2026 03:47:07 +0000</pubDate>
+      <guid>jECkQzProayWhGmNi</guid>
+      <link>https://www.lesswrong.com/posts/jECkQzProayWhGmNi/fundamental-uncertainty-alternate-framework-and-pointwise</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d9bedbd5ea5e_fundamental_uncertainty_alternate_framework_and_p.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-30</title>
       <description>Daily News Briefing - 2026-05-30
 
@@ -1276,23 +1306,23 @@ Topics covered:
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-30.txt" type="text/plain" />
     </item>
     <item>
-      <title>Maybe I was too harsh on deep learning theory (three days ago)</title>
-      <description>Audio version of Maybe I was too harsh on deep learning theory (three days ago) from LessWrong Frontpage</description>
-      <pubDate>Thu, 30 Apr 2026 06:57:34 +0000</pubDate>
-      <guid>6SRq7mZ97Dwuavwb6</guid>
-      <link>https://www.lesswrong.com/posts/6SRq7mZ97Dwuavwb6/maybe-i-was-too-harsh-on-deep-learning-theory-three-days-ago</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7d93c6c3f591_maybe_i_was_too_harsh_on_deep_learning_theory_thr.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“The Most Important Charts In The World” by Zvi</title>
       <description>Audio version of “The Most Important Charts In The World” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Wed, 29 Apr 2026 14:11:41 +0000</pubDate>
       <guid>2901c1af-7407-487b-b9d7-55b6f4aeab0e</guid>
       <link>https://www.lesswrong.com/posts/vi9KSXWXrPtap9mfR/the-most-important-charts-in-the-world</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/840ba11f68fc_the_most_important_charts_in_the_world_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Your Attempt To Solve Debate Will Not Work</title>
+      <description>Audio version of Your Attempt To Solve Debate Will Not Work from Scott Alexander</description>
+      <pubDate>Tue, 28 Apr 2026 19:55:10 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/your-attempt-to-solve-debate-will</guid>
+      <link>https://www.astralcodexten.com/p/your-attempt-to-solve-debate-will</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3210325e4333_your_attempt_to_solve_debate_will_not_work.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
