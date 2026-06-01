@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-01</title>
+      <description>Daily News Briefing - 2026-06-01
+
+Topics covered:
+- The situation in the Middle East has entered a phase of high-intensity kinetic exchange that is severely complicating ongoing diplomatic efforts
+- The health crisis in the Democratic Republic of Congo has crossed a critical threshold into the Americas
+- On the AI safety and technical front, the industry is shifting focus from raw performance metrics to "behavioral evaluations." A new framework published on the AI Alignment Forum argues that standard capability tests—like coding or math benchmarks—fail to capture the most dangerous risks
+- In the global energy and environmental landscape, activist Erin Brockovich has launched a new campaign targeting the "secrecy" surrounding data center operations
+- Finally, the trend of "human enhancement" is making a formal transition from Silicon Valley ideology to the sporting arena
+- Looking toward tomorrow, maritime insurers will be recalibrating risk premiums as the requested changes to the Iran nuclear framework leave the security of the Strait of Hormuz in a state of high uncertainty</description>
+      <pubDate>Mon, 01 Jun 2026 09:31:25 +0000</pubDate>
+      <guid>news-briefing-2026-06-01</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/617e9ccee1df_daily_news_briefing_-_2026-06-01.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-01.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Lean, not backpressure</title>
+      <description>Audio version of Lean, not backpressure from LessWrong Frontpage</description>
+      <pubDate>Mon, 01 Jun 2026 07:57:26 +0000</pubDate>
+      <guid>uRvyWtrJfaLQt32dv</guid>
+      <link>https://www.lesswrong.com/posts/uRvyWtrJfaLQt32dv/lean-not-backpressure</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f1c7403342cc_lean_not_backpressure.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Notes on axes of variation in third-party risk assessment</title>
+      <description>Audio version of Notes on axes of variation in third-party risk assessment from Buck Shlegeris</description>
+      <pubDate>Sun, 31 May 2026 20:48:06 +0000</pubDate>
+      <guid>oGTajcGwxxFG4Z7eN</guid>
+      <link>https://www.lesswrong.com/posts/oGTajcGwxxFG4Z7eN/notes-on-axes-of-variation-in-third-party-risk-assessment</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fc9f1752bdd7_notes_on_axes_of_variation_in_third-party_risk_ass.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-05-31</title>
       <description>Daily News Briefing - 2026-05-31
 
@@ -1235,36 +1276,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-05-01</title>
-      <description>Daily News Briefing - 2026-05-01
-
-Topics covered:
-- The high-stakes legal battle between Elon Musk and OpenAI reached a pivotal moment in a California federal courtroom yesterday
-- In the AI capability and finance space, Anthropic is moving at a breakneck pace to solidify its market position
-- The geopolitical landscape has shifted toward high alert as global oil prices hit their highest levels since twenty-twenty-two
-- In cybersecurity, a severe Linux vulnerability known as "Copy-Fail" has caught the industry flat-footed
-- On the infrastructure front, the "RAM-ageddon" chip shortage is beginning to impact the world's largest consumer tech firm
-- Looking toward tomorrow, the focus shifts to the upcoming Anthropic "mega-round" closure and whether the reported United States military options for Iran trigger further volatility in the global commodities market</description>
-      <pubDate>Fri, 01 May 2026 08:02:19 +0000</pubDate>
-      <guid>news-briefing-2026-05-01</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7d7ad0b10a28_daily_news_briefing_-_2026-05-01.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-01.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>11 ways to be less deferential</title>
-      <description>Audio version of 11 ways to be less deferential from LessWrong Frontpage</description>
-      <pubDate>Fri, 01 May 2026 08:00:45 +0000</pubDate>
-      <guid>cyBQwfR6HPXB8QH9C</guid>
-      <link>https://www.lesswrong.com/posts/cyBQwfR6HPXB8QH9C/11-ways-to-be-less-deferential</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/29af56390b27_11_ways_to_be_less_deferential.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>What Deontological Bars?</title>
       <description>Audio version of What Deontological Bars? from Scott Alexander</description>
       <pubDate>Thu, 30 Apr 2026 23:11:09 +0000</pubDate>
@@ -1282,47 +1293,6 @@ Topics covered:
       <guid>884be03e-9c20-4b39-bfd1-3572085933bc</guid>
       <link>https://www.lesswrong.com/posts/zGyzyJJkTxbhReZP7/ai-166-google-sells-out</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/1dddf103a932_ai_166_google_sells_out_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-04-30</title>
-      <description>Daily News Briefing - 2026-04-30
-
-Topics covered:
-- The legal standoff between Elon Musk and OpenAI reached a fever pitch in a San Francisco courtroom yesterday
-- In the AI capability space, technical details regarding GPT-five have surfaced via leaked internal system prompts
-- Alphabet’s first-quarter earnings report has defied "AI fatigue" narratives, with C-E-O Sundar Pichai announcing that Search queries have hit an all-time high
-- On the geopolitical and security front, global oil prices have jumped to their highest levels since twenty-twenty-two
-- In hardware and infrastructure, the risk of "algorithmic warfare" is beginning to impact physical assets
-- Looking toward tomorrow, the focus shifts to the United Nations as global leaders respond to the American naval blockade, and energy analysts wait to see if the U-A-E’s exit from OPEC triggers a broader price war</description>
-      <pubDate>Thu, 30 Apr 2026 08:04:37 +0000</pubDate>
-      <guid>news-briefing-2026-04-30</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/613eb797d19c_daily_news_briefing_-_2026-04-30.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-04-30.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“The Most Important Charts In The World” by Zvi</title>
-      <description>Audio version of “The Most Important Charts In The World” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 29 Apr 2026 14:11:41 +0000</pubDate>
-      <guid>2901c1af-7407-487b-b9d7-55b6f4aeab0e</guid>
-      <link>https://www.lesswrong.com/posts/vi9KSXWXrPtap9mfR/the-most-important-charts-in-the-world</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/840ba11f68fc_the_most_important_charts_in_the_world_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Your Attempt To Solve Debate Will Not Work</title>
-      <description>Audio version of Your Attempt To Solve Debate Will Not Work from Scott Alexander</description>
-      <pubDate>Tue, 28 Apr 2026 19:55:10 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-attempt-to-solve-debate-will</guid>
-      <link>https://www.astralcodexten.com/p/your-attempt-to-solve-debate-will</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3210325e4333_your_attempt_to_solve_debate_will_not_work.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1356,17 +1326,6 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
       <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Announcing ControlConf 2026</title>
-      <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
-      <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
-      <guid>tN5mgBAinwFe5c67c</guid>
-      <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
