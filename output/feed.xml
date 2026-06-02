@@ -21,6 +21,28 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Wood Screws and the Methods of Rationality</title>
+      <description>Audio version of Wood Screws and the Methods of Rationality from LessWrong Frontpage</description>
+      <pubDate>Tue, 02 Jun 2026 07:49:54 +0000</pubDate>
+      <guid>2mwFLvJBkfitmR2tu</guid>
+      <link>https://www.lesswrong.com/posts/2mwFLvJBkfitmR2tu/wood-screws-and-the-methods-of-rationality</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9afef6d23047_wood_screws_and_the_methods_of_rationality.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Opus 4.8 Part 2: Model Welfare” by Zvi</title>
+      <description>Audio version of “Opus 4.8 Part 2: Model Welfare” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 01 Jun 2026 15:12:47 +0000</pubDate>
+      <guid>4c81feaa-6eed-402d-898f-e1960c5cf372</guid>
+      <link>https://www.lesswrong.com/posts/2Ln5G6Jso3fMrgPEv/opus-4-8-part-2-model-welfare</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f5822b54c068_opus_48_part_2_model_welfare_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-01</title>
       <description>Daily News Briefing - 2026-06-01
 
@@ -1224,97 +1246,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-05-02</title>
-      <description>Daily News Briefing - 2026-05-02
-
-Topics covered:
-- The Pentagon has formalized its transition into the era of algorithmic warfare by striking classified deals with OpenAI, Google, Nvidia, Microsoft, Amazon, xAI, and Reflection
-- In the ongoing legal battle of Musk versus Altman, the week concluded with significant setbacks for Elon Musk
-- On the technical capability front, OpenAI’s upcoming GPT-five point five has matched the heavily hyped "Mythos Preview" from Anthropic in recent cybersecurity benchmarks
-- The geopolitical situation remains volatile as President Trump informed Congress that he no longer requires their authorization for military action against Iran, arguing that a recent ceasefire has technically "terminated" prior hostilities
-- In infrastructure and security, the Linux community is struggling with a massive outage of Ubuntu services following a distributed denial-of-service attack
-- Looking toward tomorrow, the focus will be on the closing of Anthropic’s nine-hundred-billion-dollar funding round and the potential for further volatility in the fertilizer and commodities markets</description>
-      <pubDate>Sat, 02 May 2026 07:20:06 +0000</pubDate>
-      <guid>news-briefing-2026-05-02</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a49b09276779_daily_news_briefing_-_2026-05-02.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-02.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Primary Care Physicians are Incompetent. We Need More of Them.</title>
-      <description>Audio version of Primary Care Physicians are Incompetent. We Need More of Them. from LessWrong Frontpage</description>
-      <pubDate>Sat, 02 May 2026 05:47:46 +0000</pubDate>
-      <guid>QYyBAXqGgNADJDhcP</guid>
-      <link>https://www.lesswrong.com/posts/QYyBAXqGgNADJDhcP/primary-care-physicians-are-incompetent-we-need-more-of-them</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d27dd53c441a_primary_care_physicians_are_incompetent_we_need_m.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Housing Roundup #14: You Can’t Build That” by Zvi</title>
-      <description>Audio version of “Housing Roundup #14: You Can’t Build That” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 01 May 2026 16:55:40 +0000</pubDate>
-      <guid>1956045b-2ec5-422a-8d5c-e93237c736d0</guid>
-      <link>https://www.lesswrong.com/posts/WC69ZpLJ2LYdSMXqb/housing-roundup-14-you-can-t-build-that</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/482fdd3e259b_housing_roundup_14_you_cant_build_that_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Housing Roundup #13: More Dakka” by Zvi</title>
-      <description>Audio version of “Housing Roundup #13: More Dakka” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 01 May 2026 13:10:59 +0000</pubDate>
-      <guid>ef5510ab-8146-4ce9-8f88-0c6f168e8e60</guid>
-      <link>https://www.lesswrong.com/posts/dwNgPrBtAHye2vuwS/housing-roundup-13-more-dakka-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/54930e465aad_housing_roundup_13_more_dakka_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>What Deontological Bars?</title>
-      <description>Audio version of What Deontological Bars? from Scott Alexander</description>
-      <pubDate>Thu, 30 Apr 2026 23:11:09 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/what-deontological-bars</guid>
-      <link>https://www.astralcodexten.com/p/what-deontological-bars</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/16257619400e_what_deontological_bars.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #166: Google Sells Out” by Zvi</title>
-      <description>Audio version of “AI #166: Google Sells Out” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 30 Apr 2026 16:24:44 +0000</pubDate>
-      <guid>884be03e-9c20-4b39-bfd1-3572085933bc</guid>
-      <link>https://www.lesswrong.com/posts/zGyzyJJkTxbhReZP7/ai-166-google-sells-out</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1dddf103a932_ai_166_google_sells_out_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>AI companies should publish security assessments</title>
       <description>Audio version of AI companies should publish security assessments from Ryan Greenblatt</description>
       <pubDate>Mon, 27 Apr 2026 14:39:00 +0000</pubDate>
       <guid>smCHhegyxEAh3Gygg</guid>
       <link>https://www.lesswrong.com/posts/smCHhegyxEAh3Gygg/ai-companies-should-publish-security-assessments</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/2f29ef8ffb83_ai_companies_should_publish_security_assessments.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Q1 2026 Timelines Update</title>
-      <description>Audio version of Q1 2026 Timelines Update from Daniel Kokotajlo</description>
-      <pubDate>Thu, 02 Apr 2026 22:23:54 +0000</pubDate>
-      <guid>XLLjqMxETva3ABtsK</guid>
-      <link>https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e146da8ae513_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
