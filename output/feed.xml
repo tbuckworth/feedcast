@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-03</title>
+      <description>Daily News Briefing - 2026-06-03
+
+Topics covered:
+- The primary focus today is a major strategic pivot by Microsoft at its annual Build conference, signaling an aggressive push for sovereignty in the AI stack
+- On the policy front, President Trump has signed a new executive order creating a voluntary framework for AI safety
+- In the global landscape, the Middle East conflict has expanded into new territory
+- In the realm of technical safety and standards, the Alignment Research Center has launched the White-Box Estimation Challenge
+- Finally, in the energy and hardware sectors, the race for next-generation power and compute continues to attract massive capital
+- Looking toward tomorrow, the focus will stay on the "Build" ecosystem as developers begin stress-testing Microsoft’s new "Scout" assistant, an always-on agent built on the OpenClaw framework</description>
+      <pubDate>Wed, 03 Jun 2026 08:59:46 +0000</pubDate>
+      <guid>news-briefing-2026-06-03</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f88ef04d4a20_daily_news_briefing_-_2026-06-03.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-03.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Don’t Edit Your Ideas Before Having Them</title>
+      <description>Audio version of Don’t Edit Your Ideas Before Having Them from LessWrong Frontpage</description>
+      <pubDate>Wed, 03 Jun 2026 08:09:43 +0000</pubDate>
+      <guid>p79pNyuPHzW3QtHpy</guid>
+      <link>https://www.lesswrong.com/posts/p79pNyuPHzW3QtHpy/don-t-edit-your-ideas-before-having-them</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c3d57e5d71f2_dont_edit_your_ideas_before_having_them.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Opus 4.8: Capabilities and Reactions” by Zvi</title>
+      <description>Audio version of “Claude Opus 4.8: Capabilities and Reactions” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 02 Jun 2026 14:11:58 +0000</pubDate>
+      <guid>7e037da5-5ddc-47ae-8787-fd37df5e23be</guid>
+      <link>https://www.lesswrong.com/posts/AfLGv6u9eZNuFHb4c/claude-opus-4-8-capabilities-and-reactions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a283b0843236_claude_opus_48_capabilities_and_reactions_by_z.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Wood Screws and the Methods of Rationality</title>
       <description>Audio version of Wood Screws and the Methods of Rationality from LessWrong Frontpage</description>
       <pubDate>Tue, 02 Jun 2026 07:49:54 +0000</pubDate>
@@ -1216,31 +1257,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-05-03</title>
-      <description>Daily News Briefing - 2026-05-03
-
-Topics covered:
-- In a move that fundamentally redefines executive power over the military, President Trump has informed Congress that a temporary ceasefire with Iran has technically terminated hostilities, thereby bypassing the need for congressional authorization for future strikes
-- On the European and North American front, a major geopolitical rift is widening as the United States begins withdrawing five thousand troops from Germany following a diplomatic split with Chancellor Merz
-- In a critical blow to historical internet infrastructure, the search pioneer Ask dot com is shutting down
-- Within the hardware and infrastructure sector, the Linux community’s "Copy-Fail" crisis has been exacerbated by a massive distributed denial-of-service attack on Ubuntu’s servers
-- In energy and technical research, acoustic fire suppression has moved from the laboratory to commercial viability
-- Looking toward tomorrow, the focus will be on whether the United States Supreme Court grants the administration's emergency request to restore full mail-order access to the abortion pill mifepristone, a decision with profound implications for constitutional law and the pharmaceutical supply chain</description>
-      <pubDate>Sun, 03 May 2026 07:48:20 +0000</pubDate>
-      <guid>news-briefing-2026-05-03</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7d1997df3775_daily_news_briefing_-_2026-05-03.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-03.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Notes on equanimity from the inside</title>
-      <description>Audio version of Notes on equanimity from the inside from LessWrong Frontpage</description>
-      <pubDate>Sun, 03 May 2026 01:59:58 +0000</pubDate>
-      <guid>MNFEhMHpEsgqxjBa2</guid>
-      <link>https://www.lesswrong.com/posts/MNFEhMHpEsgqxjBa2/notes-on-equanimity-from-the-inside</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9b19d0e91033_notes_on_equanimity_from_the_inside.mp3" type="audio/mpeg" length="0" />
+      <title>What Deontological Bars?</title>
+      <description>Audio version of What Deontological Bars? from Scott Alexander</description>
+      <pubDate>Thu, 30 Apr 2026 23:11:09 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/what-deontological-bars</guid>
+      <link>https://www.astralcodexten.com/p/what-deontological-bars</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/16257619400e_what_deontological_bars.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1258,11 +1280,33 @@ Topics covered:
     </item>
     <item>
       <title>Q1 2026 Timelines Update</title>
+      <description>Audio version of Q1 2026 Timelines Update from Daniel Kokotajlo</description>
+      <pubDate>Thu, 02 Apr 2026 22:23:54 +0000</pubDate>
+      <guid>XLLjqMxETva3ABtsK</guid>
+      <link>https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e146da8ae513_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Q1 2026 Timelines Update</title>
       <description>Audio version of Q1 2026 Timelines Update from AI Futures Project</description>
       <pubDate>Thu, 02 Apr 2026 18:10:18 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
       <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Announcing ControlConf 2026</title>
+      <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
+      <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
+      <guid>tN5mgBAinwFe5c67c</guid>
+      <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
