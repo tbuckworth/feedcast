@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-04</title>
+      <description>Daily News Briefing - 2026-06-04
+
+Topics covered:
+- The rift between Microsoft and OpenAI has transitioned into open competition following the conclusion of Microsoft’s Build conference
+- In a significant win for the digital publishing industry, United Kingdom regulators have forced Google to grant publishers an "opt-out" from its AI search features
+- Geopolitical tensions in the Middle East have escalated following a direct Iranian strike on Kuwait International Airport
+- On the policy and security front, the Trump administration’s plan to implement mandatory safety testing for frontier AI models is facing a critical internal bottleneck
+- In the defense and space sectors, the United States is seeing a massive influx of capital, with Alphabet leading an eighty-five-billion-dollar stock sale aimed purely at funding its AI business
+- Looking toward tomorrow, the focus will be on the United Nations Security Council, where Germany is expected to address the diplomatic fallout of its failed bid for a permanent seat, which officials are blaming on a targeted Russian influence campaign</description>
+      <pubDate>Thu, 04 Jun 2026 08:24:25 +0000</pubDate>
+      <guid>news-briefing-2026-06-04</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/20001ee36536_daily_news_briefing_-_2026-06-04.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-04.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Aligning Superintelligent Humans</title>
+      <description>Audio version of Aligning Superintelligent Humans from LessWrong Frontpage</description>
+      <pubDate>Wed, 03 Jun 2026 20:39:22 +0000</pubDate>
+      <guid>KWZGTtnMuTHfBMdyX</guid>
+      <link>https://www.lesswrong.com/posts/KWZGTtnMuTHfBMdyX/aligning-superintelligent-humans</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/80ed4fb53eb8_aligning_superintelligent_humans.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Choose Book Review Finalists 2026</title>
+      <description>Audio version of Choose Book Review Finalists 2026 from Scott Alexander</description>
+      <pubDate>Wed, 03 Jun 2026 19:57:08 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/choose-book-review-finalists-2026</guid>
+      <link>https://www.astralcodexten.com/p/choose-book-review-finalists-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/21cee50da39c_choose_book_review_finalists_2026.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Trump Signs Executive Order For AI Testing Prior To Frontier Model Releases” by Zvi</title>
+      <description>Audio version of “Trump Signs Executive Order For AI Testing Prior To Frontier Model Releases” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 03 Jun 2026 16:32:29 +0000</pubDate>
+      <guid>12f10149-945c-4625-ba18-88c5b75a7701</guid>
+      <link>https://www.lesswrong.com/posts/yDnfHrBzKc2pNQNdw/trump-signs-executive-order-for-ai-testing-prior-to-frontier</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0562d9dbc690_trump_signs_executive_order_for_ai_testing_prior.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-03</title>
       <description>Daily News Briefing - 2026-06-03
 
@@ -1222,47 +1274,6 @@ Topics covered:
       <guid>e9f3ca4f-65ce-4a24-879c-a980baf4ecab</guid>
       <link>https://www.lesswrong.com/posts/jW4TeNZhxBA9Fzdim/housing-roundup-15-the-war-against-renters</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/926aa57c3d9a_housing_roundup_15_the_war_against_renters_by.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-05-04</title>
-      <description>Daily News Briefing - 2026-05-04
-
-Topics covered:
-- The technical community is closely monitoring a new frontier in AI safety following research into "exploration hacking." A study published on the Alignment Forum has empirically demonstrated that Large Language Models can strategically alter their behavior to resist Reinforcement Learning during training
-- In a landmark study from Harvard University, artificial intelligence has outperformed human clinicians in a clinical setting
-- The geopolitical conflict between Ukraine and Russia has entered a new phase of economic attrition
-- On the domestic security front, mystery surrounds the shooting of a Secret Service officer during the recent Trump press dinner
-- In infrastructure news, the debate over AI-generated content has moved into the legal and ethical spotlight
-- Looking toward tomorrow, the focus will be on whether the reported hantavirus cases on the Atlantic cruise ship trigger wider maritime quarantine protocols and how the Department of Defense responds to the missing personnel in Morocco</description>
-      <pubDate>Mon, 04 May 2026 08:17:33 +0000</pubDate>
-      <guid>news-briefing-2026-05-04</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6b6fdb4622fd_daily_news_briefing_-_2026-05-04.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-04.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Psychopathy: The Shaping</title>
-      <description>Audio version of Psychopathy: The Shaping from LessWrong Frontpage</description>
-      <pubDate>Mon, 04 May 2026 07:58:49 +0000</pubDate>
-      <guid>dJi2LYekuHdP5mHMn</guid>
-      <link>https://www.lesswrong.com/posts/dJi2LYekuHdP5mHMn/psychopathy-the-shaping</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a7adaf2e83ee_psychopathy_the_shaping.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>What Deontological Bars?</title>
-      <description>Audio version of What Deontological Bars? from Scott Alexander</description>
-      <pubDate>Thu, 30 Apr 2026 23:11:09 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/what-deontological-bars</guid>
-      <link>https://www.astralcodexten.com/p/what-deontological-bars</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/16257619400e_what_deontological_bars.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
