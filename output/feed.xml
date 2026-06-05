@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-05</title>
+      <description>Daily News Briefing - 2026-06-05
+
+Topics covered:
+- The primary focus today is a rare unified front from the artificial intelligence industry regarding biosecurity
+- In the hardware and infrastructure sector, the physical limits of the AI boom are becoming increasingly apparent
+- The financial landscape for AI continues to reach unprecedented heights
+- On the product front, the user experience is shifting toward persistence and agency
+- In geopolitics, the Middle East remains a flashpoint as Hezbollah has officially rejected the latest United States-brokered ceasefire agreement
+- Looking toward tomorrow, all eyes will be on the Korean Peninsula as Xi Jinping arrives in North Korea for a rare summit with Kim Jong Un, a move seen as a major recalibration of regional power dynamics following Xi’s recent meetings with Western leaders</description>
+      <pubDate>Fri, 05 Jun 2026 08:12:31 +0000</pubDate>
+      <guid>news-briefing-2026-06-05</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/403d6d16b1e1_daily_news_briefing_-_2026-06-05.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-05.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“AI #171: False Flag” by Zvi</title>
+      <description>Audio version of “AI #171: False Flag” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 04 Jun 2026 15:55:29 +0000</pubDate>
+      <guid>3a647a23-1338-4096-ba75-6302ea8e67a7</guid>
+      <link>https://www.lesswrong.com/posts/LzxoR5GakceQFtbta/ai-171-false-flag</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1d5c41b117d5_ai_171_false_flag_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-04</title>
       <description>Daily News Briefing - 2026-06-04
 
@@ -1233,47 +1263,6 @@ Topics covered:
       <guid>4ba3475b-a988-4b92-b757-51cf77500b8c</guid>
       <link>https://www.lesswrong.com/posts/QX2ZCfkpWGqkyvStN/the-ai-ad-hoc-prior-restraint-era-begins</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/2c8260cfde75_the_ai_ad-hoc_prior_restraint_era_begins_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-05-05</title>
-      <description>Daily News Briefing - 2026-05-05
-
-Topics covered:
-- The high-stakes legal battle between Elon Musk and OpenAI has intensified in a California federal court, revealing aggressive private communications from the billionaire
-- On the infrastructure front, the United States Cybersecurity and Infrastructure Security Agency has issued an urgent warning regarding the "Copy-Fail" bug
-- The race for the "agentic economy" is moving into corporate finance as OpenAI announced a major collaboration with P-w-C
-- In global security and health, a Ukrainian drone strike on an upmarket Moscow high-rise has shattered a unilateral Russian ceasefire intended for Victory Day celebrations
-- In a move that could disrupt the global e-commerce landscape, GameStop has made a five-hundred-fifty-five-billion-dollar takeover offer for eBay
-- Looking toward tomorrow, the focus will be on the Kremlin’s response to the Moscow drone strike and whether the Treasury Department intervenes in the highly irregular GameStop-eBay merger proposal</description>
-      <pubDate>Tue, 05 May 2026 07:54:50 +0000</pubDate>
-      <guid>news-briefing-2026-05-05</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/21f436747c42_daily_news_briefing_-_2026-05-05.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-05.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Training Model to Predict Its Own Generalization: A Preliminary Study</title>
-      <description>Audio version of Training Model to Predict Its Own Generalization: A Preliminary Study from LessWrong Frontpage</description>
-      <pubDate>Tue, 05 May 2026 05:50:30 +0000</pubDate>
-      <guid>BLHBhpJcusmsNjGio</guid>
-      <link>https://www.lesswrong.com/posts/BLHBhpJcusmsNjGio/training-model-to-predict-its-own-generalization-a</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f89803762db6_training_model_to_predict_its_own_generalization.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Housing Roundup #15: The War Against Renters” by Zvi</title>
-      <description>Audio version of “Housing Roundup #15: The War Against Renters” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 04 May 2026 20:02:41 +0000</pubDate>
-      <guid>e9f3ca4f-65ce-4a24-879c-a980baf4ecab</guid>
-      <link>https://www.lesswrong.com/posts/jW4TeNZhxBA9Fzdim/housing-roundup-15-the-war-against-renters</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/926aa57c3d9a_housing_roundup_15_the_war_against_renters_by.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
