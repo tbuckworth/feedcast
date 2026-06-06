@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-06</title>
+      <description>Daily News Briefing - 2026-06-06
+
+Topics covered:
+- The most critical escalation in the Middle East occurred overnight as the United States and Iran traded direct kinetic strikes across the Persian Gulf
+- The infrastructure required to sustain the AI boom is facing its first major domestic legal blockade
+- In the corporate sector, the high costs of AI are causing a strategic recalibration in the relationship between major players
+- Regarding technical safety and the future of compute, a new research agenda published on the AI Alignment Forum argues that the industry must shift toward "mechanistic detail" to predict failure modes in what researchers call the "first transformative AI." This push for transparency is gaining urgency as a vulnerability was discovered in Sound Blaster hardware that shows how AI-enabled USB peripherals can infect PCs without any user interaction
+- On the geopolitical front, Vladimir Putin has officially rejected President Zelensky’s request for face-to-face talks, stating there is "no point" in a meeting to end the war in Ukraine
+- Looking toward tomorrow, maritime insurers and logistics firms will be bracing for further disruptions in the Gulf following the strikes on Bahrain and Kuwait, even as the first Iranian World Cup athletes arrive in Los Angeles under heightened security</description>
+      <pubDate>Sat, 06 Jun 2026 06:57:39 +0000</pubDate>
+      <guid>news-briefing-2026-06-06</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3bb2556f730c_daily_news_briefing_-_2026-06-06.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-06.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“OpenAI Offers A New Policy Blueprint” by Zvi</title>
+      <description>Audio version of “OpenAI Offers A New Policy Blueprint” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 05 Jun 2026 11:44:34 +0000</pubDate>
+      <guid>60e02fdd-e833-4b91-a489-5411e7173151</guid>
+      <link>https://www.lesswrong.com/posts/uvbpTpn6uoMuTbojX/openai-offers-a-new-policy-blueprint</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f1d95b795371_openai_offers_a_new_policy_blueprint_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-05</title>
       <description>Daily News Briefing - 2026-06-05
 
@@ -1222,47 +1252,6 @@ Topics covered:
       <guid>daTGKn3pXzs75nSB7</guid>
       <link>https://www.lesswrong.com/posts/daTGKn3pXzs75nSB7/there-is-no-evidence-you-should-reapply-sunscreen-every-2</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d09166886235_there_is_no_evidence_you_should_reapply_sunscreen.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-05-06</title>
-      <description>Daily News Briefing - 2026-05-06
-
-Topics covered:
-- The landscape of frontier AI development shifted today as the United States government secured a major oversight victory
-- In the commercial sector, the "breakthrough" race continues as OpenAI launched G-P-T-five point five Instant
-- Apple, meanwhile, is facing immediate financial and strategic pressure
-- The legal battle between Elon Musk and OpenAI reached a personal crescendo in a California court today
-- In infrastructure security, a month-long supply-chain attack has compromised the widely used Daemon Tools disk application
-- Geopolitically, energy markets have stabilized slightly after President Trump paused "Project Freedom" in the Strait of Hormuz to seek a renewed deal with Iran</description>
-      <pubDate>Wed, 06 May 2026 08:09:59 +0000</pubDate>
-      <guid>news-briefing-2026-05-06</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ba12761e3fee_daily_news_briefing_-_2026-05-06.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-06.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Psychopathy: The Types</title>
-      <description>Audio version of Psychopathy: The Types from LessWrong Frontpage</description>
-      <pubDate>Wed, 06 May 2026 07:35:44 +0000</pubDate>
-      <guid>tGwE5fjR9mhiHrMH9</guid>
-      <link>https://www.lesswrong.com/posts/tGwE5fjR9mhiHrMH9/psychopathy-the-types</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e44fa2a2898b_psychopathy_the_types.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“The AI Ad-Hoc Prior Restraint Era Begins” by Zvi</title>
-      <description>Audio version of “The AI Ad-Hoc Prior Restraint Era Begins” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 05 May 2026 19:31:52 +0000</pubDate>
-      <guid>4ba3475b-a988-4b92-b757-51cf77500b8c</guid>
-      <link>https://www.lesswrong.com/posts/QX2ZCfkpWGqkyvStN/the-ai-ad-hoc-prior-restraint-era-begins</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2c8260cfde75_the_ai_ad-hoc_prior_restraint_era_begins_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
