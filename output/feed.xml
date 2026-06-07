@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-07</title>
+      <description>Daily News Briefing - 2026-06-07
+
+Topics covered:
+- The geopolitical crisis in the Persian Gulf has escalated into a direct military confrontation between Washington and Tehran
+- In Washington, a major shift in the relationship between the federal government and the private AI sector is underway
+- On the technical front, OpenAI has introduced "Lockdown Mode" to address the persistent threat of prompt injection attacks
+- In the physical world, the friction between AI infrastructure and local communities is turning increasingly hostile
+- Finally, in broader international news, Ukrainian drone attacks have targeted Saint Petersburg, overshadowing Vladimir Putin’s flagship economic forum
+- Looking toward tomorrow, the focus will be on California as Apple’s Worldwide Developers Conference begins, likely determining the roadmap for AI integration on nearly two billion consumer devices</description>
+      <pubDate>Sun, 07 Jun 2026 07:58:29 +0000</pubDate>
+      <guid>news-briefing-2026-06-07</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bf5ef9d9ab69_daily_news_briefing_-_2026-06-07.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-07.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Can activation verbalizers surface an internal chain of thought?</title>
+      <description>Audio version of Can activation verbalizers surface an internal chain of thought? from LessWrong Frontpage</description>
+      <pubDate>Sun, 07 Jun 2026 04:24:07 +0000</pubDate>
+      <guid>QQQAcKuWK6k98FivY</guid>
+      <link>https://www.lesswrong.com/posts/QQQAcKuWK6k98FivY/can-activation-verbalizers-surface-an-internal-chain-of-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d787395ec3fb_can_activation_verbalizers_surface_an_internal_cha.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-06</title>
       <description>Daily News Briefing - 2026-06-06
 
@@ -1194,25 +1224,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-05-07</title>
-      <description>Daily News Briefing - 2026-05-07
-
-Topics covered:
-- The landmark Musk versus OpenAI trial has shifted from philosophical debates to damaging formal testimony
-- In the hardware and infrastructure sector, SpaceX is making a massive, vertical leap into the semiconductor market
-- In the software layer, Google has abruptly shuttered Project Mariner, its experimental agent designed to autonomously navigate the web
-- Geopolitically, the prospects for a de-escalation in the Middle East have brightened
-- Finally, the AI safety community is on high alert after Braintrust, a core provider of evaluation tools for AI engineers, confirmed a breach of its Amazon cloud environment
-- Looking toward tomorrow, all eyes are on the Canary Islands as the hantavirus-hit cruise ship approaches port for a potential mass quarantine and further medical evacuations</description>
-      <pubDate>Thu, 07 May 2026 08:21:15 +0000</pubDate>
-      <guid>news-briefing-2026-05-07</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b4e3a0996bb1_daily_news_briefing_-_2026-05-07.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-07.txt" type="text/plain" />
-    </item>
-    <item>
       <title>Contra Everyone On Taste</title>
       <description>Audio version of Contra Everyone On Taste from Scott Alexander</description>
       <pubDate>Thu, 07 May 2026 06:04:44 +0000</pubDate>
@@ -1224,34 +1235,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Sculpted Interaction: a Design-First Approach to AI Alignment</title>
-      <description>Audio version of Sculpted Interaction: a Design-First Approach to AI Alignment from LessWrong Frontpage</description>
-      <pubDate>Wed, 06 May 2026 23:47:11 +0000</pubDate>
-      <guid>rMzb2dFwfAx6QH8ZH</guid>
-      <link>https://www.lesswrong.com/posts/rMzb2dFwfAx6QH8ZH/sculpted-interaction-a-design-first-approach-to-ai-alignment</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a6dcc5258b92_sculpted_interaction_a_design-first_approach_to_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“What is Anthropic?” by Zvi</title>
       <description>Audio version of “What is Anthropic?” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Wed, 06 May 2026 13:33:19 +0000</pubDate>
       <guid>d3c81927-076b-4bc9-8208-eaa15c2027d7</guid>
       <link>https://www.lesswrong.com/posts/6wbLXhkQAPcunrYnq/what-is-anthropic</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c65d1c8fbd3_what_is_anthropic_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>There is no evidence you should reapply sunscreen every 2 hours.</title>
-      <description>Audio version of There is no evidence you should reapply sunscreen every 2 hours. from LessWrong Frontpage</description>
-      <pubDate>Wed, 06 May 2026 09:19:32 +0000</pubDate>
-      <guid>daTGKn3pXzs75nSB7</guid>
-      <link>https://www.lesswrong.com/posts/daTGKn3pXzs75nSB7/there-is-no-evidence-you-should-reapply-sunscreen-every-2</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d09166886235_there_is_no_evidence_you_should_reapply_sunscreen.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
