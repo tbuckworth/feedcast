@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-08</title>
+      <description>Daily News Briefing - 2026-06-08
+
+Topics covered:
+- The escalating military conflict between the United States and Iran has triggered a significant global market correction
+- As the United States prepares to host the World Cup later this month, geopolitical tensions are bleeding into the sporting world
+- In Europe, a coalition of President Zelensky’s closest allies has released a five-point framework for peace talks with Russia
+- On the technical and corporate front, the AI industry is facing a period of financial and operational turbulence
+- Finally, in cybersecurity news, a retrospective of the first half of twenty-twenty-six reveals a staggering volume of high-level breaches
+- Looking toward tomorrow, the focus will shift to California for the opening of Apple’s Worldwide Developers Conference, which is expected to provide the first look at the company’s long-awaited integration of agentic AI into the iOS ecosystem</description>
+      <pubDate>Mon, 08 Jun 2026 08:59:06 +0000</pubDate>
+      <guid>news-briefing-2026-06-08</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c744f39099ae_daily_news_briefing_-_2026-06-08.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-08.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Bun's Migration from Zig to Rust as a Potential Case Study for Gradual Disempowerment</title>
+      <description>Audio version of Bun's Migration from Zig to Rust as a Potential Case Study for Gradual Disempowerment from LessWrong Frontpage</description>
+      <pubDate>Mon, 08 Jun 2026 07:06:07 +0000</pubDate>
+      <guid>qEbqPitYhWHthwFNu</guid>
+      <link>https://www.lesswrong.com/posts/qEbqPitYhWHthwFNu/bun-s-migration-from-zig-to-rust-as-a-potential-case-study</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/abccbc9d62c7_buns_migration_from_zig_to_rust_as_a_potential_ca.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-07</title>
       <description>Daily News Briefing - 2026-06-07
 
@@ -1161,47 +1191,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Three Model Organisms For Taste</title>
-      <description>Audio version of Three Model Organisms For Taste from Scott Alexander</description>
-      <pubDate>Fri, 08 May 2026 08:50:41 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/three-model-organisms-for-taste</guid>
-      <link>https://www.astralcodexten.com/p/three-model-organisms-for-taste</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f6cf2a019238_three_model_organisms_for_taste.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-05-08</title>
-      <description>Daily News Briefing - 2026-05-08
-
-Topics covered:
-- The legal battle between Elon Musk and OpenAI has entered a critical new phase as witness testimony reveals that Musk attempted to take control of the company years before his current lawsuit
-- In the hardware and infrastructure sector, the scale of internal capacity building has reached unprecedented levels
-- Underlining its push into deeper cognitive capabilities, OpenAI has introduced a suite of "Advanced Voice" features to its API
-- Geopolitically, the situation in the Middle East remains volatile
-- In the wearable market, Google and Apple are racing toward "body-centric" AI
-- Looking toward tomorrow, the focus will be on Tenerife as the hantavirus-hit cruise ship MV Hondius begins a controversial disembarkation process amid local protests over potential quarantine breaches</description>
-      <pubDate>Fri, 08 May 2026 07:16:25 +0000</pubDate>
-      <guid>news-briefing-2026-05-08</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c14b245e921c_daily_news_briefing_-_2026-05-08.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-08.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Investigating the consequences of accidentally grading CoT during RL</title>
-      <description>Audio version of Investigating the consequences of accidentally grading CoT during RL from LessWrong Frontpage</description>
-      <pubDate>Fri, 08 May 2026 06:17:31 +0000</pubDate>
-      <guid>kSMXPdf3NDi9jkHm3</guid>
-      <link>https://www.lesswrong.com/posts/kSMXPdf3NDi9jkHm3/investigating-the-consequences-of-accidentally-grading-cot</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d3c0d79c7677_investigating_the_consequences_of_accidentally_gra.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>A review of “Investigating the consequences of accidentally grading CoT during RL”</title>
       <description>Audio version of A review of “Investigating the consequences of accidentally grading CoT during RL” from Buck Shlegeris</description>
       <pubDate>Thu, 07 May 2026 18:06:54 +0000</pubDate>
@@ -1219,28 +1208,6 @@ Topics covered:
       <guid>23068fb1-52d0-46f3-a869-6e98240a8922</guid>
       <link>https://www.lesswrong.com/posts/rn3iKuDcE4SiSg4DW/ai-167-the-prior-restraint-era-begins</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ef128693780b_ai_167_the_prior_restraint_era_begins_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Contra Everyone On Taste</title>
-      <description>Audio version of Contra Everyone On Taste from Scott Alexander</description>
-      <pubDate>Thu, 07 May 2026 06:04:44 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/contra-everyone-on-taste</guid>
-      <link>https://www.astralcodexten.com/p/contra-everyone-on-taste</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/70fa37f9196d_contra_everyone_on_taste.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“What is Anthropic?” by Zvi</title>
-      <description>Audio version of “What is Anthropic?” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 06 May 2026 13:33:19 +0000</pubDate>
-      <guid>d3c81927-076b-4bc9-8208-eaa15c2027d7</guid>
-      <link>https://www.lesswrong.com/posts/6wbLXhkQAPcunrYnq/what-is-anthropic</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c65d1c8fbd3_what_is_anthropic_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1274,17 +1241,6 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
       <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Announcing ControlConf 2026</title>
-      <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
-      <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
-      <guid>tN5mgBAinwFe5c67c</guid>
-      <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
