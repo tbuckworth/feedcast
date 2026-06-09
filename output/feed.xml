@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-09</title>
+      <description>Daily News Briefing - 2026-06-09
+
+Topics covered:
+- The race for artificial intelligence dominance has moved from the laboratory to the public markets
+- In California, Apple officially kicked off its Worldwide Developers Conference by unveiling the long-awaited "Siri AI." This new iteration marks a total overhaul and a dedicated app for the assistant, which Apple claims is now more conversational and deeply integrated into the operating system
+- Security vulnerabilities in the AI supply chain are becoming increasingly sophisticated
+- On the geopolitical front, the direct conflict between the United States and Iran has created a diplomatic vacuum in other regions
+- In broader news, a magnitude seven-point-eight earthquake has struck the southern Philippines, claiming at least thirty-five lives and triggering tsunami warnings across the region
+- Looking toward tomorrow, all eyes remain on the Persian Gulf as maritime insurers assess the risk of continued strikes on Kuwaiti and Bahraini infrastructure</description>
+      <pubDate>Tue, 09 Jun 2026 07:56:26 +0000</pubDate>
+      <guid>news-briefing-2026-06-09</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/05bd1c7f3ea5_daily_news_briefing_-_2026-06-09.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-09.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>LLMs and almost good code</title>
+      <description>Audio version of LLMs and almost good code from LessWrong Frontpage</description>
+      <pubDate>Tue, 09 Jun 2026 07:21:32 +0000</pubDate>
+      <guid>CMHRjrue4mnGnssc6</guid>
+      <link>https://www.lesswrong.com/posts/CMHRjrue4mnGnssc6/llms-and-almost-good-code</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/91f878ff3508_llms_and_almost_good_code.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Berkeley Meetup This Wednesday</title>
+      <description>Audio version of Berkeley Meetup This Wednesday from Scott Alexander</description>
+      <pubDate>Mon, 08 Jun 2026 23:12:38 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/berkeley-meetup-this-wednesday-77b</guid>
+      <link>https://www.astralcodexten.com/p/berkeley-meetup-this-wednesday-77b</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4282236d7cdf_berkeley_meetup_this_wednesday.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Efficient tradeoffs and the safety-usefulness tradeoff model</title>
+      <description>Audio version of Efficient tradeoffs and the safety-usefulness tradeoff model from Buck Shlegeris</description>
+      <pubDate>Mon, 08 Jun 2026 20:28:17 +0000</pubDate>
+      <guid>mBsZTZxtjgCdN4CDA</guid>
+      <link>https://www.lesswrong.com/posts/mBsZTZxtjgCdN4CDA/efficient-tradeoffs-and-the-safety-usefulness-tradeoff-model</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ae1ba4cf0d4f_efficient_tradeoffs_and_the_safety-usefulness_trad.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-08</title>
       <description>Daily News Briefing - 2026-06-08
 
@@ -1150,64 +1202,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-05-09</title>
-      <description>Daily News Briefing - 2026-05-09
-
-Topics covered:
-- The global infrastructure supporting the artificial intelligence boom is facing a dual crisis of physical energy constraints and targeted cyber-sabotage
-- In a rare glimpse into the early power dynamics of the industry, unsealed court documents from the Musk versus OpenAI trial reveal deep-seated anxieties within Microsoft
-- As model deployment scales, OpenAI has released a technical breakdown of its "Codex Safety" framework
-- Geopolitically, the situation in Eurasia has taken an unexpected turn
-- On the health front, the maritime crisis in the Atlantic has reached the Canary Islands
-- In the hardware market, price volatility is increasing</description>
-      <pubDate>Sat, 09 May 2026 07:43:46 +0000</pubDate>
-      <guid>news-briefing-2026-05-09</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/89304c886cf2_daily_news_briefing_-_2026-05-09.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-09.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Does Opus 4.7 Generate Deceptive Denials About Its Own Guardrails?</title>
-      <description>Audio version of Does Opus 4.7 Generate Deceptive Denials About Its Own Guardrails? from LessWrong Frontpage</description>
-      <pubDate>Sat, 09 May 2026 04:20:08 +0000</pubDate>
-      <guid>sjEi9ADtNpNvAfz5E</guid>
-      <link>https://www.lesswrong.com/posts/sjEi9ADtNpNvAfz5E/does-opus-4-7-generate-deceptive-denials-about-its-own</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/24fe6144ec9c_does_opus_47_generate_deceptive_denials_about_its.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Claude Code, Codex and Agentic Coding #8” by Zvi</title>
       <description>Audio version of “Claude Code, Codex and Agentic Coding #8” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Fri, 08 May 2026 16:43:27 +0000</pubDate>
       <guid>a8b6b0e3-a542-4071-a294-ee74f9f7cfc7</guid>
       <link>https://www.lesswrong.com/posts/BS27ZWW2qwDEq5anx/claude-code-codex-and-agentic-coding-8</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/713e271f35fe_claude_code_codex_and_agentic_coding_8_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>A review of “Investigating the consequences of accidentally grading CoT during RL”</title>
-      <description>Audio version of A review of “Investigating the consequences of accidentally grading CoT during RL” from Buck Shlegeris</description>
-      <pubDate>Thu, 07 May 2026 18:06:54 +0000</pubDate>
-      <guid>juCHTdZpZBGooHKW4</guid>
-      <link>https://www.lesswrong.com/posts/juCHTdZpZBGooHKW4/a-review-of-investigating-the-consequences-of-accidentally</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4ecd1a723aad_a_review_of_investigating_the_consequences_of_acc.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #167: The Prior Restraint Era Begins” by Zvi</title>
-      <description>Audio version of “AI #167: The Prior Restraint Era Begins” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 07 May 2026 13:53:42 +0000</pubDate>
-      <guid>23068fb1-52d0-46f3-a869-6e98240a8922</guid>
-      <link>https://www.lesswrong.com/posts/rn3iKuDcE4SiSg4DW/ai-167-the-prior-restraint-era-begins</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ef128693780b_ai_167_the_prior_restraint_era_begins_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
