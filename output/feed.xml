@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-15</title>
+      <description>Daily News Briefing - 2026-06-15
+
+Topics covered:
+- The lead story today concerns a potential high-level breach of American frontier artificial intelligence
+- In the realm of AI safety, new research from Google DeepMind’s Interpretability team explores why standard safety filtering often fails during fine-tuning
+- Turning to geopolitics and global energy markets, crude oil prices have fallen and global stock indices have jumped following President Trump’s announcement of a deal with Iran
+- On the corporate front, OpenAI has launched the "OpenAI Partner Network" and committed one hundred fifty million dollars to accelerate the adoption of enterprise AI
+- Finally, the technology sector is bracing for social friction as the "AI layoff wave" continues
+- Investors will be watching the opening of the Asian markets tonight to see if the downward trend in oil prices holds as the specifics of the Iran deal are analyzed</description>
+      <pubDate>Mon, 15 Jun 2026 10:28:49 +0000</pubDate>
+      <guid>news-briefing-2026-06-15</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/41519bcb187a_daily_news_briefing_-_2026-06-15.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-15.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>On Responsibility and Death: Can We See Reality for What It Is or Will It Break Us</title>
+      <description>Audio version of On Responsibility and Death: Can We See Reality for What It Is or Will It Break Us from LessWrong Frontpage</description>
+      <pubDate>Mon, 15 Jun 2026 10:14:26 +0000</pubDate>
+      <guid>LGKLDJobggH2GebAX</guid>
+      <link>https://www.lesswrong.com/posts/LGKLDJobggH2GebAX/on-responsibility-and-death-can-we-see-reality-for-what-it</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/27f845ed7050_on_responsibility_and_death_can_we_see_reality_fo.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“American Government Takes Down Claude Fable” by Zvi</title>
+      <description>Audio version of “American Government Takes Down Claude Fable” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sat, 13 Jun 2026 19:41:43 +0000</pubDate>
+      <guid>a164c5b8-5b8f-4f1b-8d3f-3cd024dce6b1</guid>
+      <link>https://www.lesswrong.com/posts/DQNSqCzuoeutoQ5RG/american-government-takes-down-claude-fable</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/83334f5cb3b0_american_government_takes_down_claude_fable_by_z.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>My AI Opinions</title>
+      <description>Audio version of My AI Opinions from Scott Alexander</description>
+      <pubDate>Thu, 11 Jun 2026 20:50:39 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/my-ai-opinions</guid>
+      <link>https://www.astralcodexten.com/p/my-ai-opinions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9058e518f287_my_ai_opinions.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-09</title>
       <description>Daily News Briefing - 2026-06-09
 
@@ -1172,42 +1224,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-05-10</title>
-      <description>Daily News Briefing - 2026-05-10
-
-Topics covered:
-- The global race for artificial intelligence dominance is being fueled by an unprecedented surge in capital, led by Nvidia
-- In a significant shift in European politics, Péter Magyar was sworn in today as the Prime Minister of Hungary
-- Regarding the conflict in Ukraine, the geopolitical landscape remains contradictory following the conclusion of Victory Day
-- The maritime health crisis in the Atlantic has reached a critical juncture as the MV Hondius docked in Tenerife
-- In the technology and privacy sector, General Motors has agreed to a twelve point seven five million dollar settlement with California law enforcement
-- Looking toward tomorrow, all eyes will be on the international response to Péter Magyar’s first executive orders in Hungary as the European Union recalibrates its eastern strategy</description>
-      <pubDate>Sun, 10 May 2026 07:57:05 +0000</pubDate>
-      <guid>news-briefing-2026-05-10</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ff47f3a75204_daily_news_briefing_-_2026-05-10.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-10.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The AI Industrial Explosion — Part 2: Transition Dynamics</title>
-      <description>Audio version of The AI Industrial Explosion — Part 2: Transition Dynamics from LessWrong Frontpage</description>
-      <pubDate>Sun, 10 May 2026 01:02:23 +0000</pubDate>
-      <guid>HHrwDFhwZFmACeBRS</guid>
-      <link>https://www.lesswrong.com/posts/HHrwDFhwZFmACeBRS/the-ai-industrial-explosion-part-2-transition-dynamics</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cc8a8da3aff1_the_ai_industrial_explosion_part_2_transition_d.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Code, Codex and Agentic Coding #8” by Zvi</title>
-      <description>Audio version of “Claude Code, Codex and Agentic Coding #8” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 08 May 2026 16:43:27 +0000</pubDate>
-      <guid>a8b6b0e3-a542-4071-a294-ee74f9f7cfc7</guid>
-      <link>https://www.lesswrong.com/posts/BS27ZWW2qwDEq5anx/claude-code-codex-and-agentic-coding-8</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/713e271f35fe_claude_code_codex_and_agentic_coding_8_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <title>A review of “Investigating the consequences of accidentally grading CoT during RL”</title>
+      <description>Audio version of A review of “Investigating the consequences of accidentally grading CoT during RL” from Buck Shlegeris</description>
+      <pubDate>Thu, 07 May 2026 18:06:54 +0000</pubDate>
+      <guid>juCHTdZpZBGooHKW4</guid>
+      <link>https://www.lesswrong.com/posts/juCHTdZpZBGooHKW4/a-review-of-investigating-the-consequences-of-accidentally</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4ecd1a723aad_a_review_of_investigating_the_consequences_of_acc.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
