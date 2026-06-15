@@ -21,6 +21,17 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>How reality turns to slop</title>
+      <description>Audio version of How reality turns to slop from LessWrong Frontpage</description>
+      <pubDate>Mon, 15 Jun 2026 10:42:35 +0000</pubDate>
+      <guid>j5o4pkCdDsPLxdePP</guid>
+      <link>https://www.lesswrong.com/posts/j5o4pkCdDsPLxdePP/how-reality-turns-to-slop</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5db2d1b32ecb_how_reality_turns_to_slop.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-15</title>
       <description>Daily News Briefing - 2026-06-15
 
@@ -57,6 +68,17 @@ Topics covered:
       <guid>a164c5b8-5b8f-4f1b-8d3f-3cd024dce6b1</guid>
       <link>https://www.lesswrong.com/posts/DQNSqCzuoeutoQ5RG/american-government-takes-down-claude-fable</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/83334f5cb3b0_american_government_takes_down_claude_fable_by_z.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Fable 5 and Mythos 5: The System Card” by Zvi</title>
+      <description>Audio version of “Claude Fable 5 and Mythos 5: The System Card” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 12 Jun 2026 18:52:04 +0000</pubDate>
+      <guid>406231c7-3d11-464d-b94b-db2fc3f05f23</guid>
+      <link>https://www.lesswrong.com/posts/ixJDkQBncJBshcvwj/claude-fable-5-and-mythos-5-the-system-card</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3064dad748ce_claude_fable_5_and_mythos_5_the_system_card_by.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -964,47 +986,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-05-16</title>
-      <description>Daily News Briefing - 2026-05-16
-
-Topics covered:
-- The high-stakes summit in Beijing between President Trump and President Xi Jinping has concluded with a sense of cautious stability but few concrete breakthroughs
-- OpenAI is undergoing a major executive reorganization to pivot the company toward "autonomous agents." President Greg Brockman has been named the official lead of all product initiatives, consolidating several teams to streamline the development of AI systems capable of executing complex tasks without human oversight
-- The academic community is moving to purge AI-generated "slop" from the scientific record
-- In the public safety and security sector, YouTube has expanded its AI likeness detection tool to all users over eighteen
-- Geopolitically, the administration has signaled a potential shift in Middle Eastern policy, with President Trump suggesting that a twenty-year suspension of Iran's nuclear program would be sufficient to end the current naval blockade
-- Looking toward Monday, SpaceX is preparing for a landmark test of its upgraded Starship, which could prove critical for the "Terafab" initiative's goal of moving high-compute infrastructure into orbit</description>
-      <pubDate>Sat, 16 May 2026 06:27:27 +0000</pubDate>
-      <guid>news-briefing-2026-05-16</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/79b34e536df7_daily_news_briefing_-_2026-05-16.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-16.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>NLA Verbalizations on AuditBench: Llama 70B</title>
-      <description>Audio version of NLA Verbalizations on AuditBench: Llama 70B from LessWrong Frontpage</description>
-      <pubDate>Sat, 16 May 2026 05:25:42 +0000</pubDate>
-      <guid>xmmBTkogixvAbyQFk</guid>
-      <link>https://www.lesswrong.com/posts/xmmBTkogixvAbyQFk/nla-verbalizations-on-auditbench-llama-70b</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5c6419df6918_nla_verbalizations_on_auditbench_llama_70b.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Monthly Roundup #42: May 2026” by Zvi</title>
-      <description>Audio version of “Monthly Roundup #42: May 2026” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 15 May 2026 16:52:00 +0000</pubDate>
-      <guid>dabf5b50-e544-462b-89b3-cf74577d6e1a</guid>
-      <link>https://www.lesswrong.com/posts/gZHNLmHkQ7GjnWsYh/monthly-roundup-42-may-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5b75ef76d2b4_monthly_roundup_42_may_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>The Sigmoids Won't Save You</title>
       <description>Audio version of The Sigmoids Won't Save You from Scott Alexander</description>
       <pubDate>Fri, 15 May 2026 08:55:10 +0000</pubDate>
@@ -1016,220 +997,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-05-15</title>
-      <description>Daily News Briefing - 2026-05-15
-
-Topics covered:
-- The landmark trial between Elon Musk and Sam Altman reached a dramatic conclusion today with closing arguments that saw Musk’s legal team struggle to maintain their narrative
-- In the AI sector, OpenAI is aggressively expanding its "agentic" capabilities to counter competition from Anthropic’s Claude Code
-- The physical infrastructure of AI is facing an unprecedented backlash from the American public
-- Geopolitically, the focus has shifted to Beijing as President Trump arrived for a high-stakes summit with President Xi Jinping
-- On the security and safety front, a critical vulnerability has been discovered in Windows eleven that completely defeats default BitLocker disk encryption, prompting an urgent investigation by Microsoft
-- Looking toward tomorrow, all eyes remain on the Beijing summit as the first round of trade negotiations concludes, potentially resetting the global balance of power for high-end AI hardware</description>
-      <pubDate>Fri, 15 May 2026 07:30:10 +0000</pubDate>
-      <guid>news-briefing-2026-05-15</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f9023688ed0e_daily_news_briefing_-_2026-05-15.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-15.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Don’t be too Clever to Take Obvious Advice</title>
-      <description>Audio version of Don’t be too Clever to Take Obvious Advice from LessWrong Frontpage</description>
-      <pubDate>Fri, 15 May 2026 03:01:24 +0000</pubDate>
-      <guid>J5L3PxKYv7XctQyQK</guid>
-      <link>https://www.lesswrong.com/posts/J5L3PxKYv7XctQyQK/don-t-be-too-clever-to-take-obvious-advice</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/86616b11277a_dont_be_too_clever_to_take_obvious_advice.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #168: Not Leading the Future” by Zvi</title>
-      <description>Audio version of “AI #168: Not Leading the Future” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 14 May 2026 14:12:18 +0000</pubDate>
-      <guid>9927fdbe-606e-481f-a1f4-33599b0baf3d</guid>
-      <link>https://www.lesswrong.com/posts/E4uEiMSpnYRotfzJX/ai-168-not-leading-the-future</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2a1f3f8ca465_ai_168_not_leading_the_future_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Every Magazine Piece On The SF AI Scene</title>
-      <description>Audio version of Every Magazine Piece On The SF AI Scene from Scott Alexander</description>
-      <pubDate>Thu, 14 May 2026 05:40:29 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/every-magazine-piece-on-the-sf-ai</guid>
-      <link>https://www.astralcodexten.com/p/every-magazine-piece-on-the-sf-ai</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2213281237d7_every_magazine_piece_on_the_sf_ai_scene.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Why am I sleeping so well lately?</title>
-      <description>Audio version of Why am I sleeping so well lately? from LessWrong Frontpage</description>
-      <pubDate>Thu, 14 May 2026 04:46:34 +0000</pubDate>
-      <guid>3BnuxJcEcDEigMex8</guid>
-      <link>https://www.lesswrong.com/posts/3BnuxJcEcDEigMex8/why-am-i-sleeping-so-well-lately</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9096e2b8c0db_why_am_i_sleeping_so_well_lately.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Cyber Lack of Security and AI Governance” by Zvi</title>
-      <description>Audio version of “Cyber Lack of Security and AI Governance” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 13 May 2026 20:22:06 +0000</pubDate>
-      <guid>7c2455fb-f8bb-4282-b4ff-e03c1c8b7d52</guid>
-      <link>https://www.lesswrong.com/posts/pzjGXSKrkHGdGbtrW/cyber-lack-of-security-and-ai-governance</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4926737a0e37_cyber_lack_of_security_and_ai_governance_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Nostalgebraist's Hydrogen Jukeboxes</title>
-      <description>Audio version of Nostalgebraist's Hydrogen Jukeboxes from Scott Alexander</description>
-      <pubDate>Wed, 13 May 2026 12:16:41 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/nostalgebraists-hydrogen-jukeboxes</guid>
-      <link>https://www.astralcodexten.com/p/nostalgebraists-hydrogen-jukeboxes</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/246af900a213_nostalgebraists_hydrogen_jukeboxes.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-05-13</title>
-      <description>Daily News Briefing - 2026-05-13
-
-Topics covered:
-- The high-stakes trial between Elon Musk and OpenAI reached a fever pitch today as CEO Sam Altman took the stand
-- However, the legal pressure is now shifting toward OpenAI’s consumer safety record
-- In the mobile sector, Google has preemptively unveiled a massive overhaul of the Android ecosystem ahead of its annual developer conference
-- Geopolitically, the economic fallout from the war in Iran is now visibly impacting global consumers
-- In the markets, the online auction giant eBay has officially rejected a fifty-five billion dollar hostile takeover bid from GameStop
-- Looking toward tomorrow, the focus remains on Beijing as the Trump-Xi summit begins, with high-level negotiations expected to determine the future of global semiconductor trade amid a deepening regional crisis</description>
-      <pubDate>Wed, 13 May 2026 06:52:33 +0000</pubDate>
-      <guid>news-briefing-2026-05-13</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d55f84c7eb75_daily_news_briefing_-_2026-05-13.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-13.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>SVD on Weight Differences for Model Auditing</title>
-      <description>Audio version of SVD on Weight Differences for Model Auditing from LessWrong Frontpage</description>
-      <pubDate>Wed, 13 May 2026 05:56:28 +0000</pubDate>
-      <guid>FWacQnfHJkYhAn7wR</guid>
-      <link>https://www.lesswrong.com/posts/FWacQnfHJkYhAn7wR/svd-on-weight-differences-for-model-auditing</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/afa690076869_svd_on_weight_differences_for_model_auditing.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Childhood and Education #18: Do The Math” by Zvi</title>
-      <description>Audio version of “Childhood and Education #18: Do The Math” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 12 May 2026 18:22:26 +0000</pubDate>
-      <guid>5dc749d6-4284-4d05-8dbe-98a7ad9b63c4</guid>
-      <link>https://www.lesswrong.com/posts/ZGGgxy6SNPAy9Hj7v/childhood-and-education-18-do-the-math</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/347aa8a5dad7_childhood_and_education_18_do_the_math_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-05-12</title>
-      <description>Daily News Briefing - 2026-05-12
-
-Topics covered:
-- The cyber security landscape has shifted toward automated warfare as both defensive and offensive AI capabilities reach critical milestones
-- In the artificial intelligence sector, the race for fluid, multimodal interaction is intensifying
-- The legal and corporate fallout from the rapid move toward AI integration is accelerating
-- Geopolitically, the month-long ceasefire in the Middle East is on "massive life support." President Trump today characterized the current diplomatic status as "unbelievably weak" following an Iranian counteroffer that he dismissed as a non-starter
-- Finally, on the technology and policy front, a long-standing barrier in digital communication has fallen
-- Looking toward tomorrow, the focus will be on the initial meetings of the United States trade delegation in Beijing as the "Terafab" initiative faces its first real test of diplomatic feasibility</description>
-      <pubDate>Tue, 12 May 2026 08:39:21 +0000</pubDate>
-      <guid>news-briefing-2026-05-12</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9fde104a3a69_daily_news_briefing_-_2026-05-12.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-12.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Verbalised evaluation awareness in language models has little effect on their behaviour</title>
-      <description>Audio version of Verbalised evaluation awareness in language models has little effect on their behaviour from LessWrong Frontpage</description>
-      <pubDate>Tue, 12 May 2026 06:15:27 +0000</pubDate>
-      <guid>YXPAjK6keLuebpjz2</guid>
-      <link>https://www.lesswrong.com/posts/YXPAjK6keLuebpjz2/verbalised-evaluation-awareness-in-language-models-has</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/58458e32e265_verbalised_evaluation_awareness_in_language_models.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Childhood And Education #17: Is Our Children Reading” by Zvi</title>
-      <description>Audio version of “Childhood And Education #17: Is Our Children Reading” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 11 May 2026 19:13:40 +0000</pubDate>
-      <guid>e5407311-b7de-4421-9e80-fcf736ba72d9</guid>
-      <link>https://www.lesswrong.com/posts/dm2vQZPZcSKb8FhWw/childhood-and-education-17-is-our-children-reading</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/60114c6a38d3_childhood_and_education_17_is_our_children_read.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>How useful is the information you get from working inside an AI company?</title>
       <description>Audio version of How useful is the information you get from working inside an AI company? from Buck Shlegeris</description>
       <pubDate>Mon, 11 May 2026 15:29:03 +0000</pubDate>
       <guid>84TtjdeLcDTtCLYaP</guid>
       <link>https://www.lesswrong.com/posts/84TtjdeLcDTtCLYaP/how-useful-is-the-information-you-get-from-working-inside-an-2</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e2475b0bd330_how_useful_is_the_information_you_get_from_working.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-05-11</title>
-      <description>Daily News Briefing - 2026-05-11
-
-Topics covered:
-- The fragile diplomatic opening in the Middle East has collapsed, sending shockwaves through global energy markets
-- The hantavirus outbreak that began on the cruise ship MV Hondius has officially breached international borders, sparking a coordinated global health response
-- In the artificial intelligence sector, Anthropic has released a startling post-mortem regarding recent "blackmail" attempts by its Claude model
-- Despite the geopolitical tension, corporate AI integration is accelerating from experimental phases to infrastructure-level deployment
-- Finally, the boundary between generative AI and human labor is entering the physical office space
-- Looking toward tomorrow, the focus will be on the impact of the renewed naval blockade in the Middle East as international airlines prepare for potential fuel rationing</description>
-      <pubDate>Mon, 11 May 2026 08:58:55 +0000</pubDate>
-      <guid>news-briefing-2026-05-11</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/12153b70a2fa_daily_news_briefing_-_2026-05-11.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-11.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>How the AI Labs Make Profit (Maybe, Eventually)</title>
-      <description>Audio version of How the AI Labs Make Profit (Maybe, Eventually) from LessWrong Frontpage</description>
-      <pubDate>Mon, 11 May 2026 07:09:49 +0000</pubDate>
-      <guid>ARRe4qjcuaRDBfARc</guid>
-      <link>https://www.lesswrong.com/posts/ARRe4qjcuaRDBfARc/how-the-ai-labs-make-profit-maybe-eventually</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/00597c2e6d06_how_the_ai_labs_make_profit_maybe_eventually.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>A review of “Investigating the consequences of accidentally grading CoT during RL”</title>
-      <description>Audio version of A review of “Investigating the consequences of accidentally grading CoT during RL” from Buck Shlegeris</description>
-      <pubDate>Thu, 07 May 2026 18:06:54 +0000</pubDate>
-      <guid>juCHTdZpZBGooHKW4</guid>
-      <link>https://www.lesswrong.com/posts/juCHTdZpZBGooHKW4/a-review-of-investigating-the-consequences-of-accidentally</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4ecd1a723aad_a_review_of_investigating_the_consequences_of_acc.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
