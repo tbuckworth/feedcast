@@ -20,28 +20,52 @@ DEEPINFRA_VOICE_UPLOAD_URL = "https://api.deepinfra.com/v1/voices/add"
 DEEPINFRA_API_URL = "https://api.deepinfra.com/v1/inference/ResembleAI/chatterbox-turbo"
 
 
-def upload_voice_to_deepinfra(voice_path: Path, api_key: str) -> str:
+def upload_voice_to_deepinfra(voice_path: Path, api_key: str, max_retries: int = 5) -> str:
     """Upload voice sample to DeepInfra and return voice_id.
 
     Uploads fresh each session to ensure the voice exists on the server
     handling requests (avoids cross-region replication issues).
+
+    DeepInfra's upload endpoint returns intermittent 5xx errors, so retry
+    with backoff on transient server/connection failures before giving up.
     """
     print(f"    Uploading voice sample: {voice_path.name}")
 
-    with open(voice_path, "rb") as f:
-        response = httpx.post(
-            DEEPINFRA_VOICE_UPLOAD_URL,
-            headers={"Authorization": f"Bearer {api_key}"},
-            files={"files": (voice_path.name, f, "audio/wav")},
-            data={"name": voice_path.stem, "description": f"Voice clone of {voice_path.stem}"},
-            timeout=60,
-        )
+    response = None
+    for attempt in range(max_retries):
+        try:
+            with open(voice_path, "rb") as f:
+                response = httpx.post(
+                    DEEPINFRA_VOICE_UPLOAD_URL,
+                    headers={"Authorization": f"Bearer {api_key}"},
+                    files={"files": (voice_path.name, f, "audio/wav")},
+                    data={"name": voice_path.stem, "description": f"Voice clone of {voice_path.stem}"},
+                    timeout=60,
+                )
+        except (httpx.TimeoutException, httpx.ConnectError, httpx.ReadError) as e:
+            if attempt < max_retries - 1:
+                wait_time = (attempt + 1) * 10
+                print(f"    Upload {type(e).__name__}, retry {attempt + 2}/{max_retries} in {wait_time}s")
+                import time
+                time.sleep(wait_time)
+                continue
+            raise
 
-    # Diagnostic logging for debugging voice cloning issues
-    print(f"    [DIAG] Upload response status: {response.status_code}")
-    print(f"    [DIAG] Upload response headers: {dict(response.headers)}")
+        # Diagnostic logging for debugging voice cloning issues
+        print(f"    [DIAG] Upload response status: {response.status_code}")
+        print(f"    [DIAG] Upload response headers: {dict(response.headers)}")
 
-    if response.status_code != 200:
+        if response.status_code == 200:
+            break
+
+        # Retry transient server errors (DeepInfra returns intermittent 500s)
+        if response.status_code >= 500 and attempt < max_retries - 1:
+            wait_time = (attempt + 1) * 10
+            print(f"    Upload failed {response.status_code}, retry {attempt + 2}/{max_retries} in {wait_time}s")
+            import time
+            time.sleep(wait_time)
+            continue
+
         raise RuntimeError(f"Failed to upload voice: {response.status_code} - {response.text}")
 
     result = response.json()
