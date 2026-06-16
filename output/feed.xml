@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-16</title>
+      <description>Daily News Briefing - 2026-06-16
+
+Topics covered:
+- The escalating confrontation between Anthropic and the White House has reached a critical flashpoint
+- In a landmark shift for the space economy, SpaceX has completed a historic initial public offering, raising eighty-five point seven billion dollars as underwriters maxed out their share purchases
+- On the corporate front, Fox has announced a twenty-two billion dollar acquisition of Roku, a move that would create the third-largest television company in the United States
+- In global technology policy, the United Kingdom has unveiled a sweeping ban on social media for children under sixteen, mirroring recent legislation in Australia
+- Finally, Vice President JD Vance has tempered expectations regarding the recently announced Iran deal, describing the framework as a "page and a half" of general principles rather than a detailed treaty
+- Markets will be closely monitoring Nvidia’s bond pricing today as a primary signal for the long-term valuation of the AI infrastructure sector</description>
+      <pubDate>Tue, 16 Jun 2026 09:31:04 +0000</pubDate>
+      <guid>news-briefing-2026-06-16</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9972d41cb0f5_daily_news_briefing_-_2026-06-16.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-16.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Rationality Quotes, June '26</title>
+      <description>Audio version of Rationality Quotes, June '26 from LessWrong Frontpage</description>
+      <pubDate>Tue, 16 Jun 2026 03:44:05 +0000</pubDate>
+      <guid>2SSWmcDtDKGrNDX8K</guid>
+      <link>https://www.lesswrong.com/posts/2SSWmcDtDKGrNDX8K/rationality-quotes-june-26</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9353d418087c_rationality_quotes_june_26.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“The Once And Future Fable #2” by Zvi</title>
+      <description>Audio version of “The Once And Future Fable #2” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 15 Jun 2026 16:01:57 +0000</pubDate>
+      <guid>ea901a18-a42f-4b5d-8631-d0de86ce5def</guid>
+      <link>https://www.lesswrong.com/posts/3fagcqrauaJs32mZZ/the-once-and-future-fable-2</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/384af6b25472_the_once_and_future_fable_2_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>How reality turns to slop</title>
       <description>Audio version of How reality turns to slop from LessWrong Frontpage</description>
       <pubDate>Mon, 15 Jun 2026 10:42:35 +0000</pubDate>
