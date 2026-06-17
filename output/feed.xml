@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-17</title>
+      <description>Daily News Briefing - 2026-06-17
+
+Topics covered:
+- In a massive consolidation of the AI and aerospace sectors, SpaceX has announced the acquisition of the AI coding platform Cursor for sixty billion dollars in stock
+- On the regulatory front, a major legal battle is brewing over the infrastructure powering the "Grok" large language model
+- In AI safety and research, OpenAI has published a new framework for predicting model safety prior to release by simulating real-world deployment
+- Turning to global technology and hardware, Qualcomm has unveiled the Snapdragon Reality Elite chip, targeting a wave of over forty new AI wearables including camera-equipped earbuds and smart glasses
+- Finally, in geopolitics, the truce between the United States and Iran remains fragile
+- Markets will be watching SpaceX’s stock performance today as investors digest the dilution of the sixty billion dollar Cursor acquisition</description>
+      <pubDate>Wed, 17 Jun 2026 09:06:31 +0000</pubDate>
+      <guid>news-briefing-2026-06-17</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/73b578a8d1b9_daily_news_briefing_-_2026-06-17.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-17.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Plastic Cake Fallacy</title>
+      <description>Audio version of Plastic Cake Fallacy from LessWrong Frontpage</description>
+      <pubDate>Wed, 17 Jun 2026 07:33:20 +0000</pubDate>
+      <guid>ayCm5AWQuHfeqtZim</guid>
+      <link>https://www.lesswrong.com/posts/ayCm5AWQuHfeqtZim/plastic-cake-fallacy</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/35abde73db13_plastic_cake_fallacy.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Never Cross a River Four Feet Deep on Average</title>
+      <description>Audio version of Never Cross a River Four Feet Deep on Average from Scott Alexander</description>
+      <pubDate>Tue, 16 Jun 2026 20:07:52 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/never-cross-a-river-four-feet-deep</guid>
+      <link>https://www.astralcodexten.com/p/never-cross-a-river-four-feet-deep</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5c246ffcc207_never_cross_a_river_four_feet_deep_on_average.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Fable and Mythos: Model Welfare” by Zvi</title>
+      <description>Audio version of “Fable and Mythos: Model Welfare” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 16 Jun 2026 16:04:25 +0000</pubDate>
+      <guid>7ac591ca-9502-46ae-b323-ee0a06348883</guid>
+      <link>https://www.lesswrong.com/posts/Ko9GngKMJ8AccBJA7/fable-and-mythos-model-welfare</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4bbc6188c1b2_fable_and_mythos_model_welfare_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-16</title>
       <description>Daily News Briefing - 2026-06-16
 
@@ -992,47 +1044,6 @@ Topics covered:
       <guid>7EBNE2gfxpySXiREs</guid>
       <link>https://www.lesswrong.com/posts/7EBNE2gfxpySXiREs/links-1-2026-05-part-1</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/1df4d618e67b_links_1_202605_part_1.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-05-17</title>
-      <description>Daily News Briefing - 2026-05-17
-
-Topics covered:
-- The geopolitical fallout from the Beijing summit has intensified as Taiwan officially rejected President Trump’s recent warning against declaring independence
-- In the AI sector, OpenAI has finalized its executive pivot toward "agentic" systems by placing co-founder Greg Brockman in charge of all product strategy
-- On the regulatory and academic front, the crackdown on AI-generated content is entering a punitive phase
-- In global security, the United States and Nigerian forces have confirmed the elimination of Abu-Bilal al-Minuki, identified as a senior Islamic State leader and, according to President Trump, "the most active terrorist in the world." However, this victory is tempered by a deepening crisis in West Africa
-- On the front lines of modern warfare, BBC Verify has released an analysis of new tactical footage showing Hezbollah’s use of fiber-optic-controlled drones against Israel
-- Looking toward tomorrow, markets will be watching for the first flight data from SpaceX’s Starship test, which aims to prove the viability of orbital compute clusters for the next generation of AI infrastructure</description>
-      <pubDate>Sun, 17 May 2026 06:50:09 +0000</pubDate>
-      <guid>news-briefing-2026-05-17</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/96550dbd949c_daily_news_briefing_-_2026-05-17.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-17.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>How to Reason about Your Health Issues</title>
-      <description>Audio version of How to Reason about Your Health Issues from LessWrong Frontpage</description>
-      <pubDate>Sun, 17 May 2026 05:10:37 +0000</pubDate>
-      <guid>WiRrHDd3EiaRd6gsu</guid>
-      <link>https://www.lesswrong.com/posts/WiRrHDd3EiaRd6gsu/how-to-reason-about-your-health-issues</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8b5ad0cba057_how_to_reason_about_your_health_issues.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The Sigmoids Won't Save You</title>
-      <description>Audio version of The Sigmoids Won't Save You from Scott Alexander</description>
-      <pubDate>Fri, 15 May 2026 08:55:10 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-sigmoids-wont-save-you</guid>
-      <link>https://www.astralcodexten.com/p/the-sigmoids-wont-save-you</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/73834b611b4d_the_sigmoids_wont_save_you.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
