@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-18</title>
+      <description>Daily News Briefing - 2026-06-18
+
+Topics covered:
+- The diplomatic landscape in Europe has shifted dramatically following the signing of a fourteen-point memorandum of understanding between the United States and Iran at the Palace of Versailles
+- In the AI sector, the fallout from the White House’s emergency export controls on Anthropic is intensifying
+- While labs face regulatory heat, AI capabilities continue to breach specialized domains
+- On the consumer hardware front, a divide is emerging between ambitious "spatial computing" and a skeptical public
+- In corporate and cybersecurity news, a massive breach has exposed credentials for thousands of sensitive networks, including those of NATO contractors, FedEx, and Oracle
+- Markets will be watching the energy sector closely today to see if crude prices react to the continued defiance of the Iranian tanker fleet despite the Versailles agreement</description>
+      <pubDate>Thu, 18 Jun 2026 09:08:36 +0000</pubDate>
+      <guid>news-briefing-2026-06-18</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/970ceff064d9_daily_news_briefing_-_2026-06-18.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-18.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>GLM 5.2 playing text adventures</title>
+      <description>Audio version of GLM 5.2 playing text adventures from LessWrong Frontpage</description>
+      <pubDate>Thu, 18 Jun 2026 07:23:51 +0000</pubDate>
+      <guid>xNNLqxLaR3sna89Ec</guid>
+      <link>https://www.lesswrong.com/posts/xNNLqxLaR3sna89Ec/glm-5-2-playing-text-adventures</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b2263e740e2a_glm_52_playing_text_adventures.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Waiting For The Miracle</title>
+      <description>Audio version of Waiting For The Miracle from Scott Alexander</description>
+      <pubDate>Thu, 18 Jun 2026 04:42:50 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/waiting-for-the-miracle</guid>
+      <link>https://www.astralcodexten.com/p/waiting-for-the-miracle</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/76db45f77c1e_waiting_for_the_miracle.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“The Once And Future Fable #3: Fix This Code” by Zvi</title>
+      <description>Audio version of “The Once And Future Fable #3: Fix This Code” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 17 Jun 2026 14:13:10 +0000</pubDate>
+      <guid>077cac78-ffe7-469c-aebd-9cf5ed76ba22</guid>
+      <link>https://www.lesswrong.com/posts/HaHzwvhbWam4n8hJB/the-once-and-future-fable-3-fix-this-code</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7637c3a9540f_the_once_and_future_fable_3_fix_this_code_by_z.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-17</title>
       <description>Daily News Briefing - 2026-06-17
 
@@ -1014,36 +1066,6 @@ Topics covered:
       <guid>d6b2e36b-438b-4ebc-be8c-57c15c59ad4f</guid>
       <link>https://www.lesswrong.com/posts/znzZyvxAvSSkep4tL/dating-roundup-12-sex-and-violence</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0ab6260f4ede_dating_roundup_12_sex_and_violence_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-05-18</title>
-      <description>Daily News Briefing - 2026-05-18
-
-Topics covered:
-- Geopolitical tensions have escalated sharply in the Middle East following a suspected strike near the United Arab Emirates’ Barakah nuclear power plant
-- In East Asia, Taiwanese President Lai Ching-te issued his first direct response to last week’s Beijing summit, asserting that Taiwan will neither provoke conflict nor relinquish its sovereignty
-- In the AI sector, Apple is preparing a significant strategic pivot for its upcoming mobile operating system, iOS twenty-seven
-- The high-stakes legal battle between Elon Musk and OpenAI is now in the hands of the jury, following closing arguments that focused heavily on CEO Sam Altman’s credibility
-- On the global health front, the World Health Organization has officially declared the Ebola outbreak in the Democratic Republic of Congo an international emergency
-- Looking toward tomorrow, all eyes will be on the jury in the OpenAI trial, as their decision could trigger a series of immediate executive shifts at the world’s most prominent AI laboratory</description>
-      <pubDate>Mon, 18 May 2026 08:10:59 +0000</pubDate>
-      <guid>news-briefing-2026-05-18</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/68b639d5c492_daily_news_briefing_-_2026-05-18.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-18.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Links #1: 2026/05 Part 1</title>
-      <description>Audio version of Links #1: 2026/05 Part 1 from LessWrong Frontpage</description>
-      <pubDate>Mon, 18 May 2026 05:04:17 +0000</pubDate>
-      <guid>7EBNE2gfxpySXiREs</guid>
-      <link>https://www.lesswrong.com/posts/7EBNE2gfxpySXiREs/links-1-2026-05-part-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1df4d618e67b_links_1_202605_part_1.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
