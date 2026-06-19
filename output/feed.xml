@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-19</title>
+      <description>Daily News Briefing - 2026-06-19
+
+Topics covered:
+- The fragile peace between the United States and Iran is already showing signs of strain as diplomatic talks in Switzerland were abruptly postponed
+- In the AI sector, the "brain drain" and executive reshuffling at major labs continues to accelerate
+- The nexus between AI infrastructure and government policy is becoming a major source of corporate friction
+- In hardware and economics, the cost of the AI revolution is beginning to hit the consumer's wallet
+- Finally, a massive cybersecurity breach in Texas has compromised the personal data of over three million residents
+- Markets will be watching the energy sector today as the first Russian "shadow fleet" tanker since the recent boarding incidents has entered the English Channel, testing Western maritime resolve</description>
+      <pubDate>Fri, 19 Jun 2026 09:09:06 +0000</pubDate>
+      <guid>news-briefing-2026-06-19</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e84291e1c5e3_daily_news_briefing_-_2026-06-19.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-19.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Preliminary Thoughts On The Midjourney Scanner</title>
+      <description>Audio version of Preliminary Thoughts On The Midjourney Scanner from Scott Alexander</description>
+      <pubDate>Fri, 19 Jun 2026 05:32:51 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/preliminary-thoughts-on-the-midjourney</guid>
+      <link>https://www.astralcodexten.com/p/preliminary-thoughts-on-the-midjourney</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d0382b70691a_preliminary_thoughts_on_the_midjourney_scanner.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Research agenda: Interpretive debate</title>
+      <description>Audio version of Research agenda: Interpretive debate from LessWrong Frontpage</description>
+      <pubDate>Thu, 18 Jun 2026 23:46:47 +0000</pubDate>
+      <guid>onaSmiocXtBYG5BZZ</guid>
+      <link>https://www.lesswrong.com/posts/onaSmiocXtBYG5BZZ/research-agenda-interpretive-debate</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ab519d8949cc_research_agenda_interpretive_debate.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #173: AI Pauses” by Zvi</title>
+      <description>Audio version of “AI #173: AI Pauses” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 18 Jun 2026 13:41:58 +0000</pubDate>
+      <guid>0b46f99f-fef7-43df-a9c2-10ddcb501cc2</guid>
+      <link>https://www.lesswrong.com/posts/P7jBmCeBDq2ebojWY/ai-173-ai-pauses</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/42314a8080e6_ai_173_ai_pauses_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-18</title>
       <description>Daily News Briefing - 2026-06-18
 
@@ -1014,58 +1066,6 @@ Topics covered:
       <guid>db957820-bfa0-45b6-b01e-d8b5c2e0bcc4</guid>
       <link>https://www.lesswrong.com/posts/7FH3EzsLdb7NxL785/housing-roundup-15-the-war-against-renters-1</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e992e79bf84f_housing_roundup_15_the_war_against_renters_by.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The Types Of Candidate You Find In The California Gubernatorial Race</title>
-      <description>Audio version of The Types Of Candidate You Find In The California Gubernatorial Race from Scott Alexander</description>
-      <pubDate>Tue, 19 May 2026 10:19:35 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-types-of-candidate-you-find-in</guid>
-      <link>https://www.astralcodexten.com/p/the-types-of-candidate-you-find-in</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aff8017317e8_the_types_of_candidate_you_find_in_the_california.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-05-19</title>
-      <description>Daily News Briefing - 2026-05-19
-
-Topics covered:
-- The most anticipated legal battle in the technology sector has reached a swift conclusion
-- In a move to capture the enterprise market, OpenAI has partnered with Dell to bring its Codex programming model to on-premise and hybrid cloud environments
-- The consumer AI landscape is also shifting as Amazon announced that its upgraded Alexa Plus assistant can now generate entire AI-hosted podcasts on demand
-- On the geopolitical front, President Trump announced he has delayed a planned military strike on Iran at the request of Gulf state allies
-- The global health crisis in Central Africa is worsening
-- The domestic fallout from the AI boom continues to manifest in public hostility</description>
-      <pubDate>Tue, 19 May 2026 07:53:29 +0000</pubDate>
-      <guid>news-briefing-2026-05-19</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d522e36d723f_daily_news_briefing_-_2026-05-19.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-19.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Let's have more partial insiders.</title>
-      <description>Audio version of Let's have more partial insiders. from LessWrong Frontpage</description>
-      <pubDate>Tue, 19 May 2026 07:24:59 +0000</pubDate>
-      <guid>ezE6iaifkMSwPdrG8</guid>
-      <link>https://www.lesswrong.com/posts/ezE6iaifkMSwPdrG8/let-s-have-more-partial-insiders</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1904f58302bc_lets_have_more_partial_insiders.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Dating Roundup #12: Sex and Violence” by Zvi</title>
-      <description>Audio version of “Dating Roundup #12: Sex and Violence” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 18 May 2026 19:21:20 +0000</pubDate>
-      <guid>d6b2e36b-438b-4ebc-be8c-57c15c59ad4f</guid>
-      <link>https://www.lesswrong.com/posts/znzZyvxAvSSkep4tL/dating-roundup-12-sex-and-violence</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0ab6260f4ede_dating_roundup_12_sex_and_violence_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
