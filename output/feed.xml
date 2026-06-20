@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-20</title>
+      <description>Daily News Briefing - 2026-06-20
+
+Topics covered:
+- In a critical update to the regional security situation, Israel and Hezbollah have agreed to a ceasefire
+- The geopolitical ripple effects of the United States' recent military actions are also complicating European alliances
+- In the AI sector, Google DeepMind has released its "AI Control Roadmap," a first-of-its-kind technical framework for securing autonomous agents
+- The controversy surrounding the White House’s emergency export controls on Anthropic continues to grow
+- In Asian technology and markets, Japan has recorded its largest initial public offering of the year
+- Finally, in a sign of shifting priorities for the technology sector, Amazon M-G-M has reportedly dropped "Artificial," the planned feature film about OpenAI C-E-O Sam Altman</description>
+      <pubDate>Sat, 20 Jun 2026 07:54:31 +0000</pubDate>
+      <guid>news-briefing-2026-06-20</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e590a6f815c6_daily_news_briefing_-_2026-06-20.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-20.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The LLM shoggoth meme is weirder than you think</title>
+      <description>Audio version of The LLM shoggoth meme is weirder than you think from LessWrong Frontpage</description>
+      <pubDate>Fri, 19 Jun 2026 23:35:24 +0000</pubDate>
+      <guid>nhb8AyEcQGjQetgi5</guid>
+      <link>https://www.lesswrong.com/posts/nhb8AyEcQGjQetgi5/the-llm-shoggoth-meme-is-weirder-than-you-think</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/80678f33edb2_the_llm_shoggoth_meme_is_weirder_than_you_think.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>A forecast of Chinese DUV and EUV photolithography progress</title>
+      <description>Audio version of A forecast of Chinese DUV and EUV photolithography progress from AI Futures Project</description>
+      <pubDate>Fri, 19 Jun 2026 15:32:43 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</guid>
+      <link>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/39c993a52a4f_a_forecast_of_chinese_duv_and_euv_photolithography.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Fable 5 and Mythos 5: Capabilities” by Zvi</title>
+      <description>Audio version of “Claude Fable 5 and Mythos 5: Capabilities” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 19 Jun 2026 14:42:40 +0000</pubDate>
+      <guid>e1923531-778e-4f77-b384-3579c29a745b</guid>
+      <link>https://www.lesswrong.com/posts/kMnobCQp9z2pSbzDB/claude-fable-5-and-mythos-5-capabilities</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/600ed39f99eb_claude_fable_5_and_mythos_5_capabilities_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-19</title>
       <description>Daily News Briefing - 2026-06-19
 
@@ -1019,53 +1071,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-05-20</title>
-      <description>Daily News Briefing - 2026-05-20
-
-Topics covered:
-- The primary focus of the technology sector today is Google I/O twenty-six, where the company signaled a fundamental shift from search engine to "agentic" platform
-- In a move to standardize AI safety and authenticity, OpenAI and Nvidia have joined Google in adopting SynthID, a watermarking technology for AI-generated content
-- The race for AI-driven software development has also intensified
-- Geopolitically, the Strait of Hormuz has emerged as a new theater for digital conflict
-- In Central Africa, the health crisis continues to weigh on the global supply chain for critical minerals
-- Looking toward tomorrow, the financial markets will be assessing the impact of a blockbuster utility merger between NextEra and Dominion, a multi-billion dollar deal driven almost entirely by the unprecedented electricity demands of the AI data center boom</description>
-      <pubDate>Wed, 20 May 2026 07:52:24 +0000</pubDate>
-      <guid>news-briefing-2026-05-20</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/98af5ba7f17b_daily_news_briefing_-_2026-05-20.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-20.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>If AI is normal technology, history is not reassuring.</title>
-      <description>Audio version of If AI is normal technology, history is not reassuring. from LessWrong Frontpage</description>
-      <pubDate>Wed, 20 May 2026 07:21:52 +0000</pubDate>
-      <guid>4MCuvdsZFEBAaGCsb</guid>
-      <link>https://www.lesswrong.com/posts/4MCuvdsZFEBAaGCsb/if-ai-is-normal-technology-history-is-not-reassuring</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a67927799ed0_if_ai_is_normal_technology_history_is_not_reassur.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Childhood And Education #19: Letting Kids Be Kids #2” by Zvi</title>
-      <description>Audio version of “Childhood And Education #19: Letting Kids Be Kids #2” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 19 May 2026 22:23:51 +0000</pubDate>
-      <guid>c33c218f-9608-4624-8f2e-253cf6f896e5</guid>
-      <link>https://www.lesswrong.com/posts/ytoLzgKHutaKxkRZr/childhood-and-education-19-letting-kids-be-kids-2</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/dc37c88013f8_childhood_and_education_19_letting_kids_be_kids.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Housing Roundup #15: The War Against Renters” by Zvi</title>
-      <description>Audio version of “Housing Roundup #15: The War Against Renters” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 19 May 2026 21:41:37 +0000</pubDate>
-      <guid>db957820-bfa0-45b6-b01e-d8b5c2e0bcc4</guid>
-      <link>https://www.lesswrong.com/posts/7FH3EzsLdb7NxL785/housing-roundup-15-the-war-against-renters-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e992e79bf84f_housing_roundup_15_the_war_against_renters_by.mp3" type="audio/mpeg" length="0" />
+      <title>The Types Of Candidate You Find In The California Gubernatorial Race</title>
+      <description>Audio version of The Types Of Candidate You Find In The California Gubernatorial Race from Scott Alexander</description>
+      <pubDate>Tue, 19 May 2026 10:19:35 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/the-types-of-candidate-you-find-in</guid>
+      <link>https://www.astralcodexten.com/p/the-types-of-candidate-you-find-in</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aff8017317e8_the_types_of_candidate_you_find_in_the_california.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1099,17 +1110,6 @@ Topics covered:
       <guid>XLLjqMxETva3ABtsK</guid>
       <link>https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e146da8ae513_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Q1 2026 Timelines Update</title>
-      <description>Audio version of Q1 2026 Timelines Update from AI Futures Project</description>
-      <pubDate>Thu, 02 Apr 2026 18:10:18 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
-      <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
