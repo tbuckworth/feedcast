@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-21</title>
+      <description>Daily News Briefing - 2026-06-21
+
+Topics covered:
+- The fragile stability established by yesterday’s ceasefire is already under threat as a major communications rift opens between Washington and Tehran
+- The "brain drain" from Google DeepMind has reached a historic turning point with the departure of Nobel laureate John Jumper
+- In a landmark development for the future of creative intellectual property, The Atlantic has published a massive, searchable database detailing the specific musical tracks used to train prominent AI models
+- The diplomatic spat between the United States and its European allies has escalated into a direct personal confrontation
+- Finally, the United Kingdom has announced that it will implement facial-recognition age checks for asylum-seekers, despite internal government reports acknowledging that the technology remains prone to significant demographic bias and error
+- Markets will be watching the price of Brent Crude today as satellite imagery confirms whether tankers are actually being blocked at the Strait of Hormuz</description>
+      <pubDate>Sun, 21 Jun 2026 08:38:00 +0000</pubDate>
+      <guid>news-briefing-2026-06-21</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f965fad69430_daily_news_briefing_-_2026-06-21.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-21.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The Cookie Monster Explains AI Safety</title>
+      <description>Audio version of The Cookie Monster Explains AI Safety from LessWrong Frontpage</description>
+      <pubDate>Sun, 21 Jun 2026 00:52:40 +0000</pubDate>
+      <guid>AgKnBSxsFvuRCsEye</guid>
+      <link>https://www.lesswrong.com/posts/AgKnBSxsFvuRCsEye/the-cookie-monster-explains-ai-safety</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e62e9e2c8fc1_the_cookie_monster_explains_ai_safety.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-20</title>
       <description>Daily News Briefing - 2026-06-20
 
@@ -339,6 +369,17 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/my-ai-opinions</guid>
       <link>https://www.astralcodexten.com/p/my-ai-opinions</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/9058e518f287_my_ai_opinions.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #172: The First Fable” by Zvi</title>
+      <description>Audio version of “AI #172: The First Fable” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 11 Jun 2026 19:02:21 +0000</pubDate>
+      <guid>46876936-25a4-4ca1-9cc7-316a2e3e6362</guid>
+      <link>https://www.lesswrong.com/posts/BHwbunvkgNojAa3HC/ai-172-the-first-fable</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e8fced35a879_ai_172_the_first_fable_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1041,36 +1082,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-05-21</title>
-      <description>Daily News Briefing - 2026-05-21
-
-Topics covered:
-- The long-awaited initial public offering of SpaceX has officially moved into the public eye, revealing the first comprehensive look at Elon Musk’s integrated business empire
-- In the AI capability race, OpenAI appears to have achieved a milestone in machine reasoning
-- Google is moving to monetize its new "agentic" search interface by integrating Al-generated advertising directly into Gemini conversational flows
-- Geopolitically, the "no-limits" partnership between Russia and China is showing its first signs of visible friction
-- The global health crisis continues to worsen in the Democratic Republic of Congo
-- Looking toward tomorrow, tech regulators will be monitoring the first day of a landmark trial regarding the "right to tweak" smart TV software, a case that could determine whether consumers have the legal right to strip advertising and tracking code from their own devices</description>
-      <pubDate>Thu, 21 May 2026 07:59:31 +0000</pubDate>
-      <guid>news-briefing-2026-05-21</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b7854ebf5cc5_daily_news_briefing_-_2026-05-21.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-21.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Numb mental state shifts</title>
-      <description>Audio version of Numb mental state shifts from LessWrong Frontpage</description>
-      <pubDate>Thu, 21 May 2026 03:50:15 +0000</pubDate>
-      <guid>3uDvQivMiGAtn5qen</guid>
-      <link>https://www.lesswrong.com/posts/3uDvQivMiGAtn5qen/numb-mental-state-shifts</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6f847fd28ea9_numb_mental_state_shifts.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>The Types Of Candidate You Find In The California Gubernatorial Race</title>
       <description>Audio version of The Types Of Candidate You Find In The California Gubernatorial Race from Scott Alexander</description>
       <pubDate>Tue, 19 May 2026 10:19:35 +0000</pubDate>
@@ -1110,6 +1121,17 @@ Topics covered:
       <guid>XLLjqMxETva3ABtsK</guid>
       <link>https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e146da8ae513_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Q1 2026 Timelines Update</title>
+      <description>Audio version of Q1 2026 Timelines Update from AI Futures Project</description>
+      <pubDate>Thu, 02 Apr 2026 18:10:18 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
+      <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
