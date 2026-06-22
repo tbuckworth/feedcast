@@ -209,7 +209,14 @@ class FeedMonitor:
         self, days: int = 30, audio_dir: Optional[Path] = None,
         transcript_dir: Optional[Path] = None,
     ) -> int:
-        """Remove entries older than specified days and their audio/transcript files. Returns count removed."""
+        """Remove entries added more than `days` ago and their audio/transcript files. Returns count removed.
+
+        Retention is keyed on `processed_at` (when the episode was added to the
+        podcast), NOT `published` (the original post date). Keying on `published`
+        would delete a freshly-added episode whose source post is older than the
+        cutoff — its audio gets generated, listed in the feed, then immediately
+        deleted in the same run, leaving a 404 enclosure.
+        """
         cutoff = datetime.now().timestamp() - (days * 24 * 60 * 60)
         cutoff_date = datetime.fromtimestamp(cutoff).isoformat()
 
@@ -217,7 +224,7 @@ class FeedMonitor:
             # Delete associated files before removing DB rows
             if audio_dir or transcript_dir:
                 cursor = conn.execute(
-                    "SELECT id, audio_file FROM processed_posts WHERE published < ?",
+                    "SELECT id, audio_file FROM processed_posts WHERE processed_at < ?",
                     (cutoff_date,),
                 )
                 for entry_id, audio_file in cursor.fetchall():
@@ -231,7 +238,7 @@ class FeedMonitor:
                             txt_path.unlink()
 
             cursor = conn.execute(
-                "DELETE FROM processed_posts WHERE published < ?", (cutoff_date,)
+                "DELETE FROM processed_posts WHERE processed_at < ?", (cutoff_date,)
             )
             conn.commit()
             return cursor.rowcount
