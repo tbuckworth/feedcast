@@ -267,22 +267,24 @@ async def async_main(config_path: Path | None = None) -> None:
 
         print(f"  {new_episodes} new episodes created")
 
-    # Generate podcast feed
-    print(f"\nGenerating podcast feed...")
+    # Cleanup old entries BEFORE generating the feed, so the feed never
+    # references audio/transcripts that cleanup deletes in this same run
+    # (otherwise the deployed feed.xml advertises 404 enclosures).
     transcript_dir = output_dir / "transcripts"
-    db_entries = monitor.get_processed_entries()
-    episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir, transcript_dir)
-    feed_path = output_dir / "feed.xml"
-    feed_gen.generate(episodes, feed_path)
-    print(f"  Generated feed with {len(episodes)} episodes: {feed_path}")
-
-    # Cleanup old entries (optional)
     removed = monitor.cleanup_old_entries(days=30, audio_dir=audio_dir, transcript_dir=transcript_dir)
     if removed:
         print(f"  Cleaned up {removed} old entries")
     removed_briefings = monitor.cleanup_old_briefings(days=7)
     if removed_briefings:
         print(f"  Cleaned up {removed_briefings} old news briefings")
+
+    # Generate podcast feed
+    print(f"\nGenerating podcast feed...")
+    db_entries = monitor.get_processed_entries()
+    episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir, transcript_dir)
+    feed_path = output_dir / "feed.xml"
+    feed_gen.generate(episodes, feed_path)
+    print(f"  Generated feed with {len(episodes)} episodes: {feed_path}")
 
     # Send ntfy notification for injected URLs
     if inject_url:
