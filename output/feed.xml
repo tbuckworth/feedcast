@@ -1060,25 +1060,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-05-23</title>
-      <description>Daily News Briefing - 2026-05-23
-
-Topics covered:
-- SpaceX has officially filed for its highly anticipated initial public offering, providing the first detailed look at the financial interconnectivity of Elon Musk’s companies
-- In Washington, President Trump has abruptly canceled a scheduled signing event for an executive order on artificial intelligence safety
-- Google’s transition to an "agentic" search interface is facing significant technical hurdles following its recent redesign
-- Geopolitically, Russia has escalated tensions with Ukraine after President Vladimir Putin accused Kyiv of striking a student dormitory
-- The global health crisis in the Democratic Republic of Congo has entered a more dangerous phase
-- Looking toward tomorrow, market analysts will be parsing the three dozen pages of risk factors in the SpaceX filing to determine if Musk’s complex cross-company financial "shuffling" will dampen investor appetite for the world's most valuable private company</description>
-      <pubDate>Sat, 23 May 2026 06:39:02 +0000</pubDate>
-      <guid>news-briefing-2026-05-23</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5035bfaba922_daily_news_briefing_-_2026-05-23.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-23.txt" type="text/plain" />
-    </item>
-    <item>
       <title>Out-of-Context Reasoning (OOCR) in LLMs: A Short Primer and Reading List</title>
       <description>Audio version of Out-of-Context Reasoning (OOCR) in LLMs: A Short Primer and Reading List from Owain Evans</description>
       <pubDate>Sat, 23 May 2026 02:46:14 +0000</pubDate>
@@ -1151,17 +1132,6 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
       <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>New, improved multiple-choice TruthfulQA</title>
-      <description>Audio version of New, improved multiple-choice TruthfulQA from Owain Evans</description>
-      <pubDate>Wed, 15 Jan 2025 23:32:09 +0000</pubDate>
-      <guid>Bunfwz6JsNd44kgLT</guid>
-      <link>https://www.lesswrong.com/posts/Bunfwz6JsNd44kgLT/new-improved-multiple-choice-truthfulqa</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/be18640f6d79_new_improved_multiple-choice_truthfulqa.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
