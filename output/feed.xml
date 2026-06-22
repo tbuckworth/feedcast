@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-22</title>
+      <description>Daily News Briefing - 2026-06-22
+
+Topics covered:
+- In a pivotal step for global security, the first round of formal diplomatic negotiations between the United States and Iran has concluded in Switzerland with what mediators describe as "encouraging progress." Following last week’s Versailles agreement, both nations have now committed to a rigorous sixty-day timeline to finalize a comprehensive treaty
+- In the technology sector, OpenAI has secured one of its largest enterprise victories to date
+- The fallout from the United States government’s emergency export controls on Anthropic continues to reshape the industry's competitive landscape
+- In regional politics, a wave of populism is sweeping South America as Abelardo de la Espriella, a political outsider backed by President Trump, appears to have won the Colombian presidency
+- Finally, a record-breaking heatwave has gripped Western Europe, with more than half of France now under "red alert" status
+- Markets will be watching European energy futures today to see if Germany’s potential pivot back to coal provides relief to an industrial sector struggling with the dual pressures of a heatwave and post-war energy volatility</description>
+      <pubDate>Mon, 22 Jun 2026 09:51:40 +0000</pubDate>
+      <guid>news-briefing-2026-06-22</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/20e3126928bb_daily_news_briefing_-_2026-06-22.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-22.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Naturally learned behaviors in deep MLPs resist detection by both human and learned algorithms</title>
+      <description>Audio version of Naturally learned behaviors in deep MLPs resist detection by both human and learned algorithms from LessWrong Frontpage</description>
+      <pubDate>Mon, 22 Jun 2026 09:10:41 +0000</pubDate>
+      <guid>EsiLnZGDHpYoZXGAh</guid>
+      <link>https://www.lesswrong.com/posts/EsiLnZGDHpYoZXGAh/naturally-learned-behaviors-in-deep-mlps-resist-detection-by</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/963aaf84f0c6_naturally_learned_behaviors_in_deep_mlps_resist_de.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-21</title>
       <description>Daily News Briefing - 2026-06-21
 
@@ -380,6 +410,17 @@ Topics covered:
       <guid>46876936-25a4-4ca1-9cc7-316a2e3e6362</guid>
       <link>https://www.lesswrong.com/posts/BHwbunvkgNojAa3HC/ai-172-the-first-fable</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e8fced35a879_ai_172_the_first_fable_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Three Labs With a Plan and A Memorandum” by Zvi</title>
+      <description>Audio version of “Three Labs With a Plan and A Memorandum” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 09 Jun 2026 22:41:16 +0000</pubDate>
+      <guid>68eb91cb-6e8b-4f46-b651-5e8b26205a86</guid>
+      <link>https://www.lesswrong.com/posts/uWxW5KWnyHrGj6tpu/three-labs-with-a-plan-and-a-memorandum</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3efb15e21da5_three_labs_with_a_plan_and_a_memorandum_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1066,28 +1107,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/new-paradigms-wont-save-you</guid>
       <link>https://www.astralcodexten.com/p/new-paradigms-wont-save-you</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3435fa25d4c9_new_paradigms_wont_save_you.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #169: New Knowledge” by Zvi</title>
-      <description>Audio version of “AI #169: New Knowledge” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 21 May 2026 13:21:53 +0000</pubDate>
-      <guid>f233ece3-15b0-42f4-900a-977cfc2e17fa</guid>
-      <link>https://www.lesswrong.com/posts/xWsBwrboYDEMdj8TC/ai-169-new-knowledge</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7eb24f5860b3_ai_169_new_knowledge_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The Types Of Candidate You Find In The California Gubernatorial Race</title>
-      <description>Audio version of The Types Of Candidate You Find In The California Gubernatorial Race from Scott Alexander</description>
-      <pubDate>Tue, 19 May 2026 10:19:35 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-types-of-candidate-you-find-in</guid>
-      <link>https://www.astralcodexten.com/p/the-types-of-candidate-you-find-in</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aff8017317e8_the_types_of_candidate_you_find_in_the_california.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
