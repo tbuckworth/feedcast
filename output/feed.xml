@@ -21,6 +21,49 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-27</title>
+      <description>Daily News Briefing - 2026-06-27
+
+Topics covered:
+- In a landmark moment for artificial intelligence, OpenAI has officially unveiled the GPT-five point six model suite, headlined by its flagship model, "Sol." This release occurred less than twenty-four hours after the Trump administration requested the company stagger the rollout due to national security concerns
+- Simultaneously, the two-week regulatory lockdown on Anthropic appears to be easing
+- Geopolitical tensions have escalated into direct military action as United States Central Command launched strikes against Iranian targets today
+- In South America, the humanitarian crisis in Venezuela has deepened significantly
+- In Europe, a record-shattering heatwave has turned deadly
+- Finally, in legal news, former National Security Adviser John Bolton has pleaded guilty to mishandling classified documents</description>
+      <pubDate>Sat, 27 Jun 2026 06:57:56 +0000</pubDate>
+      <guid>news-briefing-2026-06-27</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4acb93902358_daily_news_briefing_-_2026-06-27.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-27.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Intelligence (Artificial)
+in a Fallen World</title>
+      <description>Audio version of Intelligence (Artificial)
+in a Fallen World from LessWrong Frontpage</description>
+      <pubDate>Sat, 27 Jun 2026 01:05:16 +0000</pubDate>
+      <guid>2sGmy2pJakSbo9vih</guid>
+      <link>https://www.lesswrong.com/posts/2sGmy2pJakSbo9vih/intelligence-artificial-in-a-fallen-world</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0e22aa7cbea3_intelligence_artificial_in_a_fallen_world.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“White House Will Ad Hoc Decide Who Can Individually Access GPT-5.6” by Zvi</title>
+      <description>Audio version of “White House Will Ad Hoc Decide Who Can Individually Access GPT-5.6” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 26 Jun 2026 14:55:04 +0000</pubDate>
+      <guid>80564eb2-4f99-4e5c-8e41-d57967cb85b7</guid>
+      <link>https://www.lesswrong.com/posts/MkwL4AcbE44yePEQx/white-house-will-ad-hoc-decide-who-can-individually-access</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1494351727c9_white_house_will_ad_hoc_decide_who_can_individual.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-26</title>
       <description>Daily News Briefing - 2026-06-26
 
@@ -1104,6 +1147,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Use AI This Election</title>
+      <description>Audio version of Use AI This Election from Scott Alexander</description>
+      <pubDate>Tue, 26 May 2026 20:22:30 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/use-ai-this-election</guid>
+      <link>https://www.astralcodexten.com/p/use-ai-this-election</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d018a4de7d8a_use_ai_this_election.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Out-of-Context Reasoning (OOCR) in LLMs: A Short Primer and Reading List</title>
       <description>Audio version of Out-of-Context Reasoning (OOCR) in LLMs: A Short Primer and Reading List from Owain Evans</description>
       <pubDate>Sat, 23 May 2026 02:46:14 +0000</pubDate>
@@ -1291,6 +1345,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>How do we (more) safely defer to AIs?</title>
+      <description>Audio version of How do we (more) safely defer to AIs? from Ryan Greenblatt</description>
+      <pubDate>Thu, 12 Feb 2026 16:55:52 +0000</pubDate>
+      <guid>vjAM7F8vMZS7oRrrh</guid>
+      <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Clarifying how our AI timelines forecasts have changed since AI 2027</title>
       <description>Audio version of Clarifying how our AI timelines forecasts have changed since AI 2027 from AI Futures Project</description>
       <pubDate>Tue, 27 Jan 2026 22:50:15 +0000</pubDate>
@@ -1335,12 +1400,34 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>AI Futures Model: Dec 2025 Update</title>
+      <description>Audio version of AI Futures Model: Dec 2025 Update from AI Futures Project</description>
+      <pubDate>Wed, 31 Dec 2025 02:08:48 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/ai-futures-model-dec-2025-update</guid>
+      <link>https://blog.aifutures.org/p/ai-futures-model-dec-2025-update</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/271107ce0b83_ai_futures_model_dec_2025_update.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>The Thinking Machines Tinker API is good news for AI control and security</title>
       <description>Audio version of The Thinking Machines Tinker API is good news for AI control and security from Buck Shlegeris</description>
       <pubDate>Thu, 09 Oct 2025 15:22:15 +0000</pubDate>
       <guid>r68nCQK3veQtCdqGt</guid>
       <link>https://www.lesswrong.com/posts/r68nCQK3veQtCdqGt/the-thinking-machines-tinker-api-is-good-news-for-ai-control</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/484b3eb83a9c_the_thinking_machines_tinker_api_is_good_news_for.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Christian homeschoolers in the year 3000</title>
+      <description>Audio version of Christian homeschoolers in the year 3000 from Buck Shlegeris</description>
+      <pubDate>Wed, 17 Sep 2025 14:44:04 +0000</pubDate>
+      <guid>8aRFB2qGyjQGJkEdZ</guid>
+      <link>https://www.lesswrong.com/posts/8aRFB2qGyjQGJkEdZ/christian-homeschoolers-in-the-year-3000</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c374d7dda1f9_christian_homeschoolers_in_the_year_3000.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1363,6 +1450,17 @@ Topics covered:
       <guid>APfuz9hFz9d8SRETA</guid>
       <link>https://www.lesswrong.com/posts/APfuz9hFz9d8SRETA/my-pitch-for-the-ai-village</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e1b5ebb4f741_my_pitch_for_the_ai_village.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>METR's Observations of Reward Hacking in Recent Frontier Models</title>
+      <description>Audio version of METR's Observations of Reward Hacking in Recent Frontier Models from Daniel Kokotajlo</description>
+      <pubDate>Mon, 09 Jun 2025 18:03:31 +0000</pubDate>
+      <guid>Zu4ai9GFpwezyfB2K</guid>
+      <link>https://www.lesswrong.com/posts/Zu4ai9GFpwezyfB2K/metr-s-observations-of-reward-hacking-in-recent-frontier</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23eb66ae716_metrs_observations_of_reward_hacking_in_recent_fr.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1407,6 +1505,17 @@ Topics covered:
       <guid>mLfPHv4QjmeQrsSva</guid>
       <link>https://www.lesswrong.com/posts/mLfPHv4QjmeQrsSva/paper-on-measuring-situational-awareness-in-llms</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/fef7a5852995_paper_on_measuring_situational_awareness_in_llms.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Paper: Forecasting world events with neural nets</title>
+      <description>Audio version of Paper: Forecasting world events with neural nets from Owain Evans</description>
+      <pubDate>Fri, 01 Jul 2022 19:40:12 +0000</pubDate>
+      <guid>ixiCECkFFguFcHWFa</guid>
+      <link>https://www.lesswrong.com/posts/ixiCECkFFguFcHWFa/paper-forecasting-world-events-with-neural-nets</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/12b351aa4801_paper_forecasting_world_events_with_neural_nets.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
