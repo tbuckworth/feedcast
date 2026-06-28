@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-28</title>
+      <description>Daily News Briefing - 2026-06-28
+
+Topics covered:
+- The geopolitical situation in the Middle East has sharply deteriorated as the United States and Iran exchanged direct retaliatory strikes, effectively shattering the fragile ceasefire established by the Versailles agreement
+- In the artificial intelligence sector, a significant shift in talent and strategy is underway as OpenAI continues its push into physical infrastructure
+- The American "AI blackout" of international markets is creating a permanent shift in global competition
+- In South America, the humanitarian situation in Venezuela has reached a critical tipping point
+- Finally, a record-shattering heatwave across Europe continues to expand, with an estimated one hundred and fifty million people now experiencing temperatures over thirty-five degrees Celsius
+- Markets will be watching the opening of energy futures on Monday to see how the strikes in Kuwait and Bahrain impact global oil and gas supply chains</description>
+      <pubDate>Sun, 28 Jun 2026 07:55:16 +0000</pubDate>
+      <guid>news-briefing-2026-06-28</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/eacb4b5386f8_daily_news_briefing_-_2026-06-28.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-28.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Can we use steering vectors to suppress reward-hacking? Somewhat</title>
+      <description>Audio version of Can we use steering vectors to suppress reward-hacking? Somewhat from LessWrong Frontpage</description>
+      <pubDate>Sun, 28 Jun 2026 05:29:09 +0000</pubDate>
+      <guid>kzri5W2uBfF2mdboK</guid>
+      <link>https://www.lesswrong.com/posts/kzri5W2uBfF2mdboK/can-we-use-steering-vectors-to-suppress-reward-hacking-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f79dcec4cf72_can_we_use_steering_vectors_to_suppress_reward-hac.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-27</title>
       <description>Daily News Briefing - 2026-06-27
 
@@ -1106,53 +1136,23 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-05-28</title>
-      <description>Daily News Briefing - 2026-05-28
-
-Topics covered:
-- The fragile diplomatic framework in the Middle East has been shaken by a direct military exchange between the United States and Iran
-- In a landmark move for autonomous finance, Robinhood has announced it will allow users to deploy AI agents to trade stocks
-- The technology landscape is shifting away from United States-centric manufacturing as Nvidia announced a massive one hundred fifty billion dollar annual investment in Taiwan
-- AI safety and policy have reached a new level of public visibility through a series of interventions and regulatory shifts
-- Domestically, the Trump administration is preparing a controversial public health response to the Ebola outbreak in the Democratic Republic of Congo
-- Looking toward tomorrow, the Federal Aviation Administration will begin its formal investigation into SpaceX’s Starship booster failure, a process that will keep the heavy-lift vehicle grounded during a critical period for its upcoming initial public offering</description>
-      <pubDate>Thu, 28 May 2026 08:07:01 +0000</pubDate>
-      <guid>news-briefing-2026-05-28</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/14f2253d0f59_daily_news_briefing_-_2026-05-28.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-28.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Using Bayesian Reasoning to Resolve Probability Paradoxes</title>
-      <description>Audio version of Using Bayesian Reasoning to Resolve Probability Paradoxes from LessWrong Frontpage</description>
-      <pubDate>Thu, 28 May 2026 01:37:34 +0000</pubDate>
-      <guid>eaXHaRvXmpJvFdv4c</guid>
-      <link>https://www.lesswrong.com/posts/eaXHaRvXmpJvFdv4c/using-bayesian-reasoning-to-resolve-probability-paradoxes</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/20dea2acb051_using_bayesian_reasoning_to_resolve_probability_pa.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Full automation of AI R&amp;D probably yields a large speed up even without a software-only singularity</title>
-      <description>Audio version of Full automation of AI R&amp;D probably yields a large speed up even without a software-only singularity from Ryan Greenblatt</description>
-      <pubDate>Wed, 27 May 2026 18:16:34 +0000</pubDate>
-      <guid>jfwhvd43sbpkGTLyn</guid>
-      <link>https://www.lesswrong.com/posts/jfwhvd43sbpkGTLyn/full-automation-of-ai-r-and-d-probably-yields-a-large-speed</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8826178be6ba_full_automation_of_ai_rd_probably_yields_a_large.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Use AI This Election</title>
       <description>Audio version of Use AI This Election from Scott Alexander</description>
       <pubDate>Tue, 26 May 2026 20:22:30 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/use-ai-this-election</guid>
       <link>https://www.astralcodexten.com/p/use-ai-this-election</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d018a4de7d8a_use_ai_this_election.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“RTMH: Pope Leo’s Magnifica Humanitas on AI” by Zvi</title>
+      <description>Audio version of “RTMH: Pope Leo’s Magnifica Humanitas on AI” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 26 May 2026 13:24:10 +0000</pubDate>
+      <guid>efe9ec0c-af23-425d-b354-ffb1c4258f66</guid>
+      <link>https://www.lesswrong.com/posts/RZeg98Tdrq47vbjva/rtmh-pope-leo-s-magnifica-humanitas-on-ai</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aa6eb1101ff4_rtmh_pope_leos_magnifica_humanitas_on_ai_by_zv.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1356,6 +1356,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Distinguish between inference scaling and "larger tasks use more compute"</title>
+      <description>Audio version of Distinguish between inference scaling and "larger tasks use more compute" from Ryan Greenblatt</description>
+      <pubDate>Wed, 11 Feb 2026 18:37:13 +0000</pubDate>
+      <guid>rRbDNQLfihiHbXytf</guid>
+      <link>https://www.lesswrong.com/posts/rRbDNQLfihiHbXytf/distinguish-between-inference-scaling-and-larger-tasks-use</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f14ce93e351f_distinguish_between_inference_scaling_and_larger.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Clarifying how our AI timelines forecasts have changed since AI 2027</title>
       <description>Audio version of Clarifying how our AI timelines forecasts have changed since AI 2027 from AI Futures Project</description>
       <pubDate>Tue, 27 Jan 2026 22:50:15 +0000</pubDate>
@@ -1411,6 +1422,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Early US policy priorities for AGI</title>
+      <description>Audio version of Early US policy priorities for AGI from AI Futures Project</description>
+      <pubDate>Tue, 09 Dec 2025 01:11:06 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/early-us-policy-priorities-for-agi</guid>
+      <link>https://blog.aifutures.org/p/early-us-policy-priorities-for-agi</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/869e490690c7_early_us_policy_priorities_for_agi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>The Thinking Machines Tinker API is good news for AI control and security</title>
       <description>Audio version of The Thinking Machines Tinker API is good news for AI control and security from Buck Shlegeris</description>
       <pubDate>Thu, 09 Oct 2025 15:22:15 +0000</pubDate>
@@ -1428,6 +1450,17 @@ Topics covered:
       <guid>8aRFB2qGyjQGJkEdZ</guid>
       <link>https://www.lesswrong.com/posts/8aRFB2qGyjQGJkEdZ/christian-homeschoolers-in-the-year-3000</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c374d7dda1f9_christian_homeschoolers_in_the_year_3000.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>I enjoyed most of IABIED</title>
+      <description>Audio version of I enjoyed most of IABIED from Buck Shlegeris</description>
+      <pubDate>Wed, 17 Sep 2025 04:34:52 +0000</pubDate>
+      <guid>P4xeb3jnFAYDdEEXs</guid>
+      <link>https://www.lesswrong.com/posts/P4xeb3jnFAYDdEEXs/i-enjoyed-most-of-iabied</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d4688cc14ec2_i_enjoyed_most_of_iabied.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1461,6 +1494,17 @@ Topics covered:
       <guid>Zu4ai9GFpwezyfB2K</guid>
       <link>https://www.lesswrong.com/posts/Zu4ai9GFpwezyfB2K/metr-s-observations-of-reward-hacking-in-recent-frontier</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23eb66ae716_metrs_observations_of_reward_hacking_in_recent_fr.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Training AGI in Secret would be Unsafe and Unethical</title>
+      <description>Audio version of Training AGI in Secret would be Unsafe and Unethical from Daniel Kokotajlo</description>
+      <pubDate>Fri, 18 Apr 2025 12:27:35 +0000</pubDate>
+      <guid>FGqfdJmB8MSH5LKGc</guid>
+      <link>https://www.lesswrong.com/posts/FGqfdJmB8MSH5LKGc/training-agi-in-secret-would-be-unsafe-and-unethical-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6a1d9fadda4c_training_agi_in_secret_would_be_unsafe_and_unethic.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1516,6 +1560,17 @@ Topics covered:
       <guid>ixiCECkFFguFcHWFa</guid>
       <link>https://www.lesswrong.com/posts/ixiCECkFFguFcHWFa/paper-forecasting-world-events-with-neural-nets</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/12b351aa4801_paper_forecasting_world_events_with_neural_nets.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Paper: Teaching GPT3 to express uncertainty in words</title>
+      <description>Audio version of Paper: Teaching GPT3 to express uncertainty in words from Owain Evans</description>
+      <pubDate>Tue, 31 May 2022 13:27:17 +0000</pubDate>
+      <guid>vbfAwZqKs84agyGWC</guid>
+      <link>https://www.lesswrong.com/posts/vbfAwZqKs84agyGWC/paper-teaching-gpt3-to-express-uncertainty-in-words</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d1900582d82e_paper_teaching_gpt3_to_express_uncertainty_in_wor.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
