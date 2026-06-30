@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-06-30</title>
+      <description>Daily News Briefing - 2026-06-30
+
+Topics covered:
+- In a landmark victory for digital privacy, the United States Supreme Court has ruled that "geofence warrants" are protected by Fourth Amendment privacy rights
+- The humanitarian crisis in Venezuela is intensifying as the death toll from last week’s dual earthquakes has officially reached one thousand seven hundred people
+- In the technology sector, South Korea has announced a staggering one-trillion-dollar investment initiative to secure a dominant position in the "physical A-I" market
+- Artificial intelligence policy is shifting toward the protection of personal data as Senator Elizabeth Warren and Representative Mary Gay Scanlon introduced a proposal to ban A-I companies from selling users' health and location information
+- Finally, OpenAI is signaling an expansion into specialized hardware
+- Markets will be watching for the outcome of eleventh-hour trade negotiations today, as the United States, Canada, and Mexico are expected to blow past the formal deadline to extend their regional free trade agreement</description>
+      <pubDate>Tue, 30 Jun 2026 07:58:13 +0000</pubDate>
+      <guid>news-briefing-2026-06-30</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2b0d64b83899_daily_news_briefing_-_2026-06-30.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-30.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>How should you slow down AI progress if it becomes necessary?</title>
+      <description>Audio version of How should you slow down AI progress if it becomes necessary? from LessWrong Frontpage</description>
+      <pubDate>Tue, 30 Jun 2026 06:46:09 +0000</pubDate>
+      <guid>qns9i7RZwxAAGGsjD</guid>
+      <link>https://www.lesswrong.com/posts/qns9i7RZwxAAGGsjD/how-should-you-slow-down-ai-progress-if-it-becomes-necessary</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/21a52a569357_how_should_you_slow_down_ai_progress_if_it_becomes.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“WSJ Article Claiming China Has Matched Anthropic Is Obvious Nonsense” by Zvi</title>
+      <description>Audio version of “WSJ Article Claiming China Has Matched Anthropic Is Obvious Nonsense” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 29 Jun 2026 15:16:38 +0000</pubDate>
+      <guid>96fdd0cc-2d1d-4495-a580-ffeefa6f2e8b</guid>
+      <link>https://www.lesswrong.com/posts/bpBYm5jiS4tpyzuDS/wsj-article-claiming-china-has-matched-anthropic-is-obvious</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3c03584de916_wsj_article_claiming_china_has_matched_anthropic.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-29</title>
       <description>Daily News Briefing - 2026-06-29
 
@@ -1054,31 +1095,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-05-31</title>
-      <description>Daily News Briefing - 2026-05-31
-
-Topics covered:
-- The primary focus today is on the strategic fortification of artificial intelligence infrastructure and the technical challenges of long-term autonomy
-- In the realm of AI research, new technical analyses from the AI Alignment Forum suggest that the full automation of AI research and development could lead to a massive acceleration in progress, even without achieving a "software-only singularity." Researchers argue that AI-driven algorithmic improvements can overcome diminishing returns, potentially delivering four years of traditional progress within a single calendar year
-- Domestically, a significant shift in the developer ecosystem is causing friction
-- On the geopolitical front, the AUKUS security pact—comprising the United States, United Kingdom, and Australia—is expanding into subsea warfare
-- In the Middle East, the "final determination" on an Iran ceasefire remains elusive despite high-level meetings
-- Finally, in space and finance, the formal filings for the SpaceX initial public offering have drawn sharp criticism</description>
-      <pubDate>Sun, 31 May 2026 07:50:33 +0000</pubDate>
-      <guid>news-briefing-2026-05-31</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/473d0a0bdafb_daily_news_briefing_-_2026-05-31.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-05-31.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Fundamental Uncertainty: Alternate Framework and Pointwise Reduction</title>
-      <description>Audio version of Fundamental Uncertainty: Alternate Framework and Pointwise Reduction from LessWrong Frontpage</description>
-      <pubDate>Sun, 31 May 2026 03:47:07 +0000</pubDate>
-      <guid>jECkQzProayWhGmNi</guid>
-      <link>https://www.lesswrong.com/posts/jECkQzProayWhGmNi/fundamental-uncertainty-alternate-framework-and-pointwise</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d9bedbd5ea5e_fundamental_uncertainty_alternate_framework_and_p.mp3" type="audio/mpeg" length="0" />
+      <title>Book Review: The Dialectical Imagination</title>
+      <description>Audio version of Book Review: The Dialectical Imagination from Scott Alexander</description>
+      <pubDate>Fri, 29 May 2026 08:14:27 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/book-review-the-dialectical-imagination</guid>
+      <link>https://www.astralcodexten.com/p/book-review-the-dialectical-imagination</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b1bb0283f327_book_review_the_dialectical_imagination.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1370,6 +1392,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts</title>
+      <description>Audio version of Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts from Ryan Greenblatt</description>
+      <pubDate>Thu, 01 Jan 2026 13:36:25 +0000</pubDate>
+      <guid>aYtrLhoZtCKZnfBvA</guid>
+      <link>https://www.lesswrong.com/posts/aYtrLhoZtCKZnfBvA/recent-llms-can-do-2-hop-and-3-hop-latent-no-cot-reasoning</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>AI Futures Model: Dec 2025 Update</title>
       <description>Audio version of AI Futures Model: Dec 2025 Update from AI Futures Project</description>
       <pubDate>Wed, 31 Dec 2025 02:08:48 +0000</pubDate>
@@ -1398,6 +1431,17 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/scenario-scrutiny-for-ai-policy</guid>
       <link>https://blog.aifutures.org/p/scenario-scrutiny-for-ai-policy</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/6da72523af3d_scenario_scrutiny_for_ai_policy.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>How an AI company CEO could quietly take over the world</title>
+      <description>Audio version of How an AI company CEO could quietly take over the world from AI Futures Project</description>
+      <pubDate>Tue, 21 Oct 2025 16:21:38 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/how-an-ai-company-ceo-could-quietly</guid>
+      <link>https://blog.aifutures.org/p/how-an-ai-company-ceo-could-quietly</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/48759244faa2_how_an_ai_company_ceo_could_quietly_take_over_the.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1502,6 +1546,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>OpenAI: Detecting misbehavior in frontier reasoning models</title>
+      <description>Audio version of OpenAI: Detecting misbehavior in frontier reasoning models from Daniel Kokotajlo</description>
+      <pubDate>Tue, 11 Mar 2025 02:17:21 +0000</pubDate>
+      <guid>7wFdXj9oR8M9AiFht</guid>
+      <link>https://www.lesswrong.com/posts/7wFdXj9oR8M9AiFht/openai-detecting-misbehavior-in-frontier-reasoning-models</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/71af94af83a9_openai_detecting_misbehavior_in_frontier_reasonin.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>New, improved multiple-choice TruthfulQA</title>
       <description>Audio version of New, improved multiple-choice TruthfulQA from Owain Evans</description>
       <pubDate>Wed, 15 Jan 2025 23:32:09 +0000</pubDate>
@@ -1574,6 +1629,17 @@ Topics covered:
       <guid>yYkrbS5iAwdEQyynW</guid>
       <link>https://www.lesswrong.com/posts/yYkrbS5iAwdEQyynW/how-do-new-models-from-openai-deepmind-and-anthropic-perform</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0f8210208a56_how_do_new_models_from_openai_deepmind_and_anthro.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Lives of the Cambridge polymath geniuses</title>
+      <description>Audio version of Lives of the Cambridge polymath geniuses from Owain Evans</description>
+      <pubDate>Tue, 25 Jan 2022 04:45:17 +0000</pubDate>
+      <guid>qbHLGo5vu8HD3JqEM</guid>
+      <link>https://www.lesswrong.com/posts/qbHLGo5vu8HD3JqEM/lives-of-the-cambridge-polymath-geniuses</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7204b47ff0d6_lives_of_the_cambridge_polymath_geniuses.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
