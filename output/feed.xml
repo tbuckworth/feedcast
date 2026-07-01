@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-01</title>
+      <description>Daily News Briefing - 2026-07-01
+
+Topics covered:
+- In a major shift for artificial intelligence policy, the Trump administration has officially lifted the regulatory lockdown on Anthropic
+- The United States Supreme Court has delivered a significant blow to the administration’s immigration agenda, ruling that birthright citizenship is protected under the Fourteenth Amendment
+- In the hardware and infrastructure sector, the race to challenge Nvidia’s dominance is accelerating
+- In technology and markets, Vint Cerf, widely recognized as one of the "fathers of the internet" for co-developing the T-C-P-I-P protocols, has announced his retirement from Google after serving as its chief internet evangelist for over two decades
+- Finally, in a rare moment of hope for the humanitarian crisis in Venezuela, a three-year-old child was rescued from the rubble in La Guaira six days after the dual earthquakes
+- Markets will be watching for the official expiration of the North American free trade agreement tonight, as officials from the United States, Canada, and Mexico remain in eleventh-hour negotiations</description>
+      <pubDate>Wed, 01 Jul 2026 08:18:40 +0000</pubDate>
+      <guid>news-briefing-2026-07-01</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/438ebd77b2b1_daily_news_briefing_-_2026-07-01.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-01.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>A Black Box Made Less Opaque (part 4)</title>
+      <description>Audio version of A Black Box Made Less Opaque (part 4) from LessWrong Frontpage</description>
+      <pubDate>Wed, 01 Jul 2026 07:30:19 +0000</pubDate>
+      <guid>Wx2qkD6GgfzfGkjEA</guid>
+      <link>https://www.lesswrong.com/posts/Wx2qkD6GgfzfGkjEA/a-black-box-made-less-opaque-part-4</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fc5267264159_a_black_box_made_less_opaque_part_4.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Chip Off The Old Block</title>
+      <description>Audio version of Chip Off The Old Block from Scott Alexander</description>
+      <pubDate>Wed, 01 Jul 2026 03:11:23 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/chip-off-the-old-block</guid>
+      <link>https://www.astralcodexten.com/p/chip-off-the-old-block</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c622ad1de9a7_chip_off_the_old_block.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“The Once And Future Fable #5” by Zvi</title>
+      <description>Audio version of “The Once And Future Fable #5” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 30 Jun 2026 21:52:27 +0000</pubDate>
+      <guid>f66bca9b-abb6-457d-b401-062e7a6347a7</guid>
+      <link>https://www.lesswrong.com/posts/phxgfwGNGbanumMMv/the-once-and-future-fable-5</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e573f475bd53_the_once_and_future_fable_5_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-06-30</title>
       <description>Daily News Briefing - 2026-06-30
 
@@ -1414,6 +1466,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Measuring no CoT math time horizon (single forward pass)</title>
+      <description>Audio version of Measuring no CoT math time horizon (single forward pass) from Ryan Greenblatt</description>
+      <pubDate>Fri, 26 Dec 2025 16:37:52 +0000</pubDate>
+      <guid>Ty5Bmg7P6Tciy2uj2</guid>
+      <link>https://www.lesswrong.com/posts/Ty5Bmg7P6Tciy2uj2/measuring-no-cot-math-time-horizon-single-forward-pass</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/68b09fa7e2a6_measuring_no_cot_math_time_horizon_single_forward.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Early US policy priorities for AGI</title>
       <description>Audio version of Early US policy priorities for AGI from AI Futures Project</description>
       <pubDate>Tue, 09 Dec 2025 01:11:06 +0000</pubDate>
@@ -1453,6 +1516,17 @@ Topics covered:
       <guid>r68nCQK3veQtCdqGt</guid>
       <link>https://www.lesswrong.com/posts/r68nCQK3veQtCdqGt/the-thinking-machines-tinker-api-is-good-news-for-ai-control</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/484b3eb83a9c_the_thinking_machines_tinker_api_is_good_news_for.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The world's first frontier AI regulation is surprisingly thoughtful: the EU's Code of Practice</title>
+      <description>Audio version of The world's first frontier AI regulation is surprisingly thoughtful: the EU's Code of Practice from AI Futures Project</description>
+      <pubDate>Mon, 22 Sep 2025 15:21:03 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/what-the-eus-code-of-practice-means</guid>
+      <link>https://blog.aifutures.org/p/what-the-eus-code-of-practice-means</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6da6a4e8df41_the_worlds_first_frontier_ai_regulation_is_surpri.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1557,6 +1631,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>What goals will AIs have? A list of hypotheses</title>
+      <description>Audio version of What goals will AIs have? A list of hypotheses from Daniel Kokotajlo</description>
+      <pubDate>Mon, 03 Mar 2025 20:08:31 +0000</pubDate>
+      <guid>r86BBAqLHXrZ4mWWA</guid>
+      <link>https://www.lesswrong.com/posts/r86BBAqLHXrZ4mWWA/what-goals-will-ais-have-a-list-of-hypotheses</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/02ce92bdb834_what_goals_will_ais_have_a_list_of_hypotheses.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>New, improved multiple-choice TruthfulQA</title>
       <description>Audio version of New, improved multiple-choice TruthfulQA from Owain Evans</description>
       <pubDate>Wed, 15 Jan 2025 23:32:09 +0000</pubDate>
@@ -1640,6 +1725,17 @@ Topics covered:
       <guid>qbHLGo5vu8HD3JqEM</guid>
       <link>https://www.lesswrong.com/posts/qbHLGo5vu8HD3JqEM/lives-of-the-cambridge-polymath-geniuses</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7204b47ff0d6_lives_of_the_cambridge_polymath_geniuses.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Rationalists of the 1950s (and before) also called themselves “Rationalists”</title>
+      <description>Audio version of The Rationalists of the 1950s (and before) also called themselves “Rationalists” from Owain Evans</description>
+      <pubDate>Sun, 28 Nov 2021 20:17:22 +0000</pubDate>
+      <guid>DtcbfwSrcewFubjxp</guid>
+      <link>https://www.lesswrong.com/posts/DtcbfwSrcewFubjxp/the-rationalists-of-the-1950s-and-before-also-called</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a1b6a9154fb2_the_rationalists_of_the_1950s_and_before_also_ca.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
