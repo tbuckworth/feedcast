@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-02</title>
+      <description>Daily News Briefing - 2026-07-02
+
+Topics covered:
+- In a move that signals the intensifying competition for artificial intelligence hardware, SpaceX has reportedly developed an AI device prototype
+- The landscape of professional and creative digital tools is also shifting rapidly
+- In international trade, the North American free trade framework has entered a period of extreme uncertainty
+- In a major blow to physical media, Sony has announced it will cease production of PlayStation game discs for all new titles beginning in twenty-twenty-eight
+- Finally, the White House’s financial disclosures continue to break historical precedents
+- Expect markets to react tomorrow as investors digest the implications of the annual trade reviews on North American manufacturing and logistics</description>
+      <pubDate>Thu, 02 Jul 2026 07:38:05 +0000</pubDate>
+      <guid>news-briefing-2026-07-02</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a06506882144_daily_news_briefing_-_2026-07-02.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-02.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Practical connection with past lives</title>
+      <description>Audio version of Practical connection with past lives from LessWrong Frontpage</description>
+      <pubDate>Thu, 02 Jul 2026 04:01:15 +0000</pubDate>
+      <guid>z5zXAu7ZS9MYYZvvb</guid>
+      <link>https://www.lesswrong.com/posts/z5zXAu7ZS9MYYZvvb/practical-connection-with-past-lives</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/86721aeaaf63_practical_connection_with_past_lives.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Sonnet 5 Is Not Frontier But Has Its Uses” by Zvi</title>
+      <description>Audio version of “Claude Sonnet 5 Is Not Frontier But Has Its Uses” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 01 Jul 2026 22:42:58 +0000</pubDate>
+      <guid>c0f47831-5927-4a41-8307-565dec70b80a</guid>
+      <link>https://www.lesswrong.com/posts/d9pmwQsFC2AXceryg/claude-sonnet-5-is-not-frontier-but-has-its-uses</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/63eeb653d703_claude_sonnet_5_is_not_frontier_but_has_its_uses.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-01</title>
       <description>Daily News Briefing - 2026-07-01
 
@@ -1106,47 +1147,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-06-01</title>
-      <description>Daily News Briefing - 2026-06-01
-
-Topics covered:
-- The situation in the Middle East has entered a phase of high-intensity kinetic exchange that is severely complicating ongoing diplomatic efforts
-- The health crisis in the Democratic Republic of Congo has crossed a critical threshold into the Americas
-- On the AI safety and technical front, the industry is shifting focus from raw performance metrics to "behavioral evaluations." A new framework published on the AI Alignment Forum argues that standard capability tests—like coding or math benchmarks—fail to capture the most dangerous risks
-- In the global energy and environmental landscape, activist Erin Brockovich has launched a new campaign targeting the "secrecy" surrounding data center operations
-- Finally, the trend of "human enhancement" is making a formal transition from Silicon Valley ideology to the sporting arena
-- Looking toward tomorrow, maritime insurers will be recalibrating risk premiums as the requested changes to the Iran nuclear framework leave the security of the Strait of Hormuz in a state of high uncertainty</description>
-      <pubDate>Mon, 01 Jun 2026 09:31:25 +0000</pubDate>
-      <guid>news-briefing-2026-06-01</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/617e9ccee1df_daily_news_briefing_-_2026-06-01.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-01.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Lean, not backpressure</title>
-      <description>Audio version of Lean, not backpressure from LessWrong Frontpage</description>
-      <pubDate>Mon, 01 Jun 2026 07:57:26 +0000</pubDate>
-      <guid>uRvyWtrJfaLQt32dv</guid>
-      <link>https://www.lesswrong.com/posts/uRvyWtrJfaLQt32dv/lean-not-backpressure</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f1c7403342cc_lean_not_backpressure.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Notes on axes of variation in third-party risk assessment</title>
-      <description>Audio version of Notes on axes of variation in third-party risk assessment from Buck Shlegeris</description>
-      <pubDate>Sun, 31 May 2026 20:48:06 +0000</pubDate>
-      <guid>oGTajcGwxxFG4Z7eN</guid>
-      <link>https://www.lesswrong.com/posts/oGTajcGwxxFG4Z7eN/notes-on-axes-of-variation-in-third-party-risk-assessment</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fc9f1752bdd7_notes_on_axes_of_variation_in_third-party_risk_ass.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Book Review: The Dialectical Imagination</title>
       <description>Audio version of Book Review: The Dialectical Imagination from Scott Alexander</description>
       <pubDate>Fri, 29 May 2026 08:14:27 +0000</pubDate>
@@ -1560,6 +1560,17 @@ Topics covered:
       <guid>9MaTnw5sWeQrggYBG</guid>
       <link>https://www.lesswrong.com/posts/9MaTnw5sWeQrggYBG/an-epistemic-advantage-of-working-as-a-moderate</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/04cba548aa9e_an_epistemic_advantage_of_working_as_a_moderate.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>AI As Profoundly Abnormal Technology</title>
+      <description>Audio version of AI As Profoundly Abnormal Technology from AI Futures Project</description>
+      <pubDate>Thu, 24 Jul 2025 05:41:38 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</guid>
+      <link>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e48d899f22a8_ai_as_profoundly_abnormal_technology.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
