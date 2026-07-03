@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-03</title>
+      <description>Daily News Briefing - 2026-07-03
+
+Topics covered:
+- In a move to align with the Trump administration and blunt growing public backlash, OpenAI has proposed giving the United States government a five percent ownership stake in the company
+- The race for custom silicon is also accelerating as Anthropic enters negotiations with Samsung to develop its own specialized AI chips
+- In geopolitics and security, a "most massive" Russian aerial assault on Kyiv has killed at least thirty people, striking a nine-story apartment block and multiple locations across the Ukrainian capital
+- The technology industry also faces a major legal and financial reckoning today
+- In the transportation sector, Tesla reported a twenty-five percent surge in sales for the second quarter, delivering over four hundred eighty thousand vehicles
+- In Venezuela, a miracle has emerged from the disaster as rescue workers pulled a man alive from the rubble of a collapsed parking garage eight days after the twin earthquakes</description>
+      <pubDate>Fri, 03 Jul 2026 07:28:05 +0000</pubDate>
+      <guid>news-briefing-2026-07-03</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/59027ba4c535_daily_news_briefing_-_2026-07-03.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-03.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>One axis and two features, how I solved the first puzzle from BlueDot and how a classifier hid country on the food direction</title>
+      <description>Audio version of One axis and two features, how I solved the first puzzle from BlueDot and how a classifier hid country on the food direction from LessWrong Frontpage</description>
+      <pubDate>Fri, 03 Jul 2026 05:22:27 +0000</pubDate>
+      <guid>ZPNf3QbQ5rLgkKtY7</guid>
+      <link>https://www.lesswrong.com/posts/ZPNf3QbQ5rLgkKtY7/one-axis-and-two-features-how-i-solved-the-first-puzzle-from</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5262ceb1f5a1_one_axis_and_two_features_how_i_solved_the_first.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The AI Superforecasters Are Here</title>
+      <description>Audio version of The AI Superforecasters Are Here from Scott Alexander</description>
+      <pubDate>Thu, 02 Jul 2026 23:14:12 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/the-ai-superforecasters-are-here</guid>
+      <link>https://www.astralcodexten.com/p/the-ai-superforecasters-are-here</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3e45bfd23848_the_ai_superforecasters_are_here.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #175: The Fable Continues” by Zvi</title>
+      <description>Audio version of “AI #175: The Fable Continues” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 02 Jul 2026 13:23:22 +0000</pubDate>
+      <guid>bd9d3b5a-f377-4af3-8900-73fdce991008</guid>
+      <link>https://www.lesswrong.com/posts/WNvBxtbHuLreFe7af/ai-175-the-fable-continues</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9cf1cc99ecc2_ai_175_the_fable_continues_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-02</title>
       <description>Daily News Briefing - 2026-07-02
 
@@ -1125,23 +1177,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Wood Screws and the Methods of Rationality</title>
-      <description>Audio version of Wood Screws and the Methods of Rationality from LessWrong Frontpage</description>
-      <pubDate>Tue, 02 Jun 2026 07:49:54 +0000</pubDate>
-      <guid>2mwFLvJBkfitmR2tu</guid>
-      <link>https://www.lesswrong.com/posts/2mwFLvJBkfitmR2tu/wood-screws-and-the-methods-of-rationality</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9afef6d23047_wood_screws_and_the_methods_of_rationality.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Opus 4.8 Part 2: Model Welfare” by Zvi</title>
-      <description>Audio version of “Opus 4.8 Part 2: Model Welfare” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 01 Jun 2026 15:12:47 +0000</pubDate>
-      <guid>4c81feaa-6eed-402d-898f-e1960c5cf372</guid>
-      <link>https://www.lesswrong.com/posts/2Ln5G6Jso3fMrgPEv/opus-4-8-part-2-model-welfare</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f5822b54c068_opus_48_part_2_model_welfare_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <title>Notes on axes of variation in third-party risk assessment</title>
+      <description>Audio version of Notes on axes of variation in third-party risk assessment from Buck Shlegeris</description>
+      <pubDate>Sun, 31 May 2026 20:48:06 +0000</pubDate>
+      <guid>oGTajcGwxxFG4Z7eN</guid>
+      <link>https://www.lesswrong.com/posts/oGTajcGwxxFG4Z7eN/notes-on-axes-of-variation-in-third-party-risk-assessment</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fc9f1752bdd7_notes_on_axes_of_variation_in_third-party_risk_ass.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1571,6 +1612,17 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</guid>
       <link>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e48d899f22a8_ai_as_profoundly_abnormal_technology.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>We aren't worried about misalignment as self-fulfilling prophecy</title>
+      <description>Audio version of We aren't worried about misalignment as self-fulfilling prophecy from AI Futures Project</description>
+      <pubDate>Fri, 18 Jul 2025 07:50:57 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/against-misalignment-as-self-fulfilling</guid>
+      <link>https://blog.aifutures.org/p/against-misalignment-as-self-fulfilling</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/35d1a2718ee0_we_arent_worried_about_misalignment_as_self-fulfi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
