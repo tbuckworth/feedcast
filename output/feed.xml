@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-04</title>
+      <description>Daily News Briefing - 2026-07-04
+
+Topics covered:
+- In a move to expand its footprint in the life sciences, Anthropic has launched "Claude Science," an integrated artificial intelligence workbench designed specifically for researchers
+- On the hardware front, Midjourney has provided the first detailed look at its experimental medical scanner, a "dunk-tank" ultrasound device intended for use in spas and wellness centers
+- In geopolitics and security, the European heatwave has reached a lethal peak, with France recording over two thousand excess deaths in recent days
+- The humanitarian situation in Venezuela continues to deteriorate as families are being forced to identify earthquake victims at makeshift morgues and tent cities
+- In space infrastructure, the startup Rocket Lab has secured three dedicated launch contracts from NASA, further consolidating its position as the primary American challenger to SpaceX’s launch dominance
+- Expect markets to remain thin today due to the extreme weather conditions impacting North American commerce and the ongoing volatility in the energy sector</description>
+      <pubDate>Sat, 04 Jul 2026 06:52:19 +0000</pubDate>
+      <guid>news-briefing-2026-07-04</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c8ca9051f63c_daily_news_briefing_-_2026-07-04.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-04.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The Lace (short story)</title>
+      <description>Audio version of The Lace (short story) from LessWrong Frontpage</description>
+      <pubDate>Sat, 04 Jul 2026 04:43:59 +0000</pubDate>
+      <guid>enjZrq6g72oH6Gx3F</guid>
+      <link>https://www.lesswrong.com/posts/enjZrq6g72oH6Gx3F/the-lace-short-story</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6ebb58c24cf0_the_lace_short_story.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Fable #6: The Return of the King” by Zvi</title>
+      <description>Audio version of “Fable #6: The Return of the King” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 03 Jul 2026 13:22:57 +0000</pubDate>
+      <guid>926c0652-b301-4b31-ab76-bf562e447bbd</guid>
+      <link>https://www.lesswrong.com/posts/r9HsHHSsfABhhxnYr/fable-6-the-return-of-the-king</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/55d788522c98_fable_6_the_return_of_the_king_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-03</title>
       <description>Daily News Briefing - 2026-07-03
 
@@ -1136,47 +1177,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-06-03</title>
-      <description>Daily News Briefing - 2026-06-03
-
-Topics covered:
-- The primary focus today is a major strategic pivot by Microsoft at its annual Build conference, signaling an aggressive push for sovereignty in the AI stack
-- On the policy front, President Trump has signed a new executive order creating a voluntary framework for AI safety
-- In the global landscape, the Middle East conflict has expanded into new territory
-- In the realm of technical safety and standards, the Alignment Research Center has launched the White-Box Estimation Challenge
-- Finally, in the energy and hardware sectors, the race for next-generation power and compute continues to attract massive capital
-- Looking toward tomorrow, the focus will stay on the "Build" ecosystem as developers begin stress-testing Microsoft’s new "Scout" assistant, an always-on agent built on the OpenClaw framework</description>
-      <pubDate>Wed, 03 Jun 2026 08:59:46 +0000</pubDate>
-      <guid>news-briefing-2026-06-03</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f88ef04d4a20_daily_news_briefing_-_2026-06-03.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-03.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Don’t Edit Your Ideas Before Having Them</title>
-      <description>Audio version of Don’t Edit Your Ideas Before Having Them from LessWrong Frontpage</description>
-      <pubDate>Wed, 03 Jun 2026 08:09:43 +0000</pubDate>
-      <guid>p79pNyuPHzW3QtHpy</guid>
-      <link>https://www.lesswrong.com/posts/p79pNyuPHzW3QtHpy/don-t-edit-your-ideas-before-having-them</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c3d57e5d71f2_dont_edit_your_ideas_before_having_them.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Opus 4.8: Capabilities and Reactions” by Zvi</title>
-      <description>Audio version of “Claude Opus 4.8: Capabilities and Reactions” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 02 Jun 2026 14:11:58 +0000</pubDate>
-      <guid>7e037da5-5ddc-47ae-8787-fd37df5e23be</guid>
-      <link>https://www.lesswrong.com/posts/AfLGv6u9eZNuFHb4c/claude-opus-4-8-capabilities-and-reactions</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a283b0843236_claude_opus_48_capabilities_and_reactions_by_z.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Notes on axes of variation in third-party risk assessment</title>
       <description>Audio version of Notes on axes of variation in third-party risk assessment from Buck Shlegeris</description>
       <pubDate>Sun, 31 May 2026 20:48:06 +0000</pubDate>
@@ -1634,6 +1634,17 @@ Topics covered:
       <guid>zuuQwueBpv9ZCpNuX</guid>
       <link>https://www.lesswrong.com/posts/zuuQwueBpv9ZCpNuX/vitalik-s-response-to-ai-2027</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a2b17c92c517_vitaliks_response_to_ai_2027.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>What you can do about AI 2027</title>
+      <description>Audio version of What you can do about AI 2027 from AI Futures Project</description>
+      <pubDate>Sat, 28 Jun 2025 17:46:28 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/what-you-can-do-about-ai-2027</guid>
+      <link>https://blog.aifutures.org/p/what-you-can-do-about-ai-2027</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/feab7f530ca2_what_you_can_do_about_ai_2027.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
