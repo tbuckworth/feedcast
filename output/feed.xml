@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-05</title>
+      <description>Daily News Briefing - 2026-07-05
+
+Topics covered:
+- In a significant diplomatic development, Chinese authorities have released Jin Mingri, the founder of the Zion Church, following a direct personal plea from President Donald Trump to Xi Jinping
+- The global landscape of A-I security and corporate competition is tightening as Alibaba has reportedly banned its employees from using Anthropic’s new "Claude Code" tool
+- In legal and intellectual property news, Midjourney is escalating its defense against Hollywood
+- Geopolitical stability in the Middle East faces a critical test today as the state funeral for Ayatollah Ali Khamenei begins in Tehran
+- Finally, in South America, Keiko Fujimori has been officially declared the winner of Peru’s presidential election, nearly a month after the initial vote
+- Expect global energy markets to react as Ukraine continues its campaign against Russian infrastructure, following a successful strike on a major oil terminal in Saint Petersburg</description>
+      <pubDate>Sun, 05 Jul 2026 07:33:18 +0000</pubDate>
+      <guid>news-briefing-2026-07-05</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/21eca19b85fe_daily_news_briefing_-_2026-07-05.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-05.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Pragmatic FDT, and predictors as game theory</title>
+      <description>Audio version of Pragmatic FDT, and predictors as game theory from LessWrong Frontpage</description>
+      <pubDate>Sun, 05 Jul 2026 04:41:50 +0000</pubDate>
+      <guid>SdGbWkCZgCN7EGBxM</guid>
+      <link>https://www.lesswrong.com/posts/SdGbWkCZgCN7EGBxM/pragmatic-fdt-and-predictors-as-game-theory-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1b609921577c_pragmatic_fdt_and_predictors_as_game_theory.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-04</title>
       <description>Daily News Briefing - 2026-07-04
 
@@ -1125,53 +1155,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-06-04</title>
-      <description>Daily News Briefing - 2026-06-04
-
-Topics covered:
-- The rift between Microsoft and OpenAI has transitioned into open competition following the conclusion of Microsoft’s Build conference
-- In a significant win for the digital publishing industry, United Kingdom regulators have forced Google to grant publishers an "opt-out" from its AI search features
-- Geopolitical tensions in the Middle East have escalated following a direct Iranian strike on Kuwait International Airport
-- On the policy and security front, the Trump administration’s plan to implement mandatory safety testing for frontier AI models is facing a critical internal bottleneck
-- In the defense and space sectors, the United States is seeing a massive influx of capital, with Alphabet leading an eighty-five-billion-dollar stock sale aimed purely at funding its AI business
-- Looking toward tomorrow, the focus will be on the United Nations Security Council, where Germany is expected to address the diplomatic fallout of its failed bid for a permanent seat, which officials are blaming on a targeted Russian influence campaign</description>
-      <pubDate>Thu, 04 Jun 2026 08:24:25 +0000</pubDate>
-      <guid>news-briefing-2026-06-04</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/20001ee36536_daily_news_briefing_-_2026-06-04.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-04.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Aligning Superintelligent Humans</title>
-      <description>Audio version of Aligning Superintelligent Humans from LessWrong Frontpage</description>
-      <pubDate>Wed, 03 Jun 2026 20:39:22 +0000</pubDate>
-      <guid>KWZGTtnMuTHfBMdyX</guid>
-      <link>https://www.lesswrong.com/posts/KWZGTtnMuTHfBMdyX/aligning-superintelligent-humans</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/80ed4fb53eb8_aligning_superintelligent_humans.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Choose Book Review Finalists 2026</title>
-      <description>Audio version of Choose Book Review Finalists 2026 from Scott Alexander</description>
-      <pubDate>Wed, 03 Jun 2026 19:57:08 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/choose-book-review-finalists-2026</guid>
-      <link>https://www.astralcodexten.com/p/choose-book-review-finalists-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/21cee50da39c_choose_book_review_finalists_2026.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Trump Signs Executive Order For AI Testing Prior To Frontier Model Releases” by Zvi</title>
-      <description>Audio version of “Trump Signs Executive Order For AI Testing Prior To Frontier Model Releases” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 03 Jun 2026 16:32:29 +0000</pubDate>
-      <guid>12f10149-945c-4625-ba18-88c5b75a7701</guid>
-      <link>https://www.lesswrong.com/posts/yDnfHrBzKc2pNQNdw/trump-signs-executive-order-for-ai-testing-prior-to-frontier</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0562d9dbc690_trump_signs_executive_order_for_ai_testing_prior.mp3" type="audio/mpeg" length="0" />
+      <title>“Claude Opus 4.8: Capabilities and Reactions” by Zvi</title>
+      <description>Audio version of “Claude Opus 4.8: Capabilities and Reactions” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 02 Jun 2026 14:11:58 +0000</pubDate>
+      <guid>7e037da5-5ddc-47ae-8787-fd37df5e23be</guid>
+      <link>https://www.lesswrong.com/posts/AfLGv6u9eZNuFHb4c/claude-opus-4-8-capabilities-and-reactions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a283b0843236_claude_opus_48_capabilities_and_reactions_by_z.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1667,6 +1656,17 @@ Topics covered:
       <guid>Zu4ai9GFpwezyfB2K</guid>
       <link>https://www.lesswrong.com/posts/Zu4ai9GFpwezyfB2K/metr-s-observations-of-reward-hacking-in-recent-frontier</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23eb66ae716_metrs_observations_of_reward_hacking_in_recent_fr.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Slow corporations as an intuition pump for AI R&amp;D automation</title>
+      <description>Audio version of Slow corporations as an intuition pump for AI R&amp;D automation from AI Futures Project</description>
+      <pubDate>Mon, 19 May 2025 17:43:42 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/slow-corporations-as-an-intuition</guid>
+      <link>https://blog.aifutures.org/p/slow-corporations-as-an-intuition</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/07000a276acc_slow_corporations_as_an_intuition_pump_for_ai_rd.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
