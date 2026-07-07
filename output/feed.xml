@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-07</title>
+      <description>Daily News Briefing - 2026-07-07
+
+Topics covered:
+- In corporate technology and labor, Microsoft has laid off four thousand eight hundred employees as it begins its new fiscal year
+- In the realm of A-I safety and cybersecurity, new details have emerged regarding the world’s first "A-I run" ransomware attack
+- On the policy and privacy front, Anthropic is facing a backlash following the discovery of a "secret tracker" within its Claude interface
+- In geopolitics, Ukrainian President Volodymyr Zelensky is arriving at a North Atlantic Treaty Organization meeting in Turkey today to make an urgent plea for air defense interceptors
+- In financial markets and hardware, South Korean memory giant S-K Hynix is preparing for a multi-billion dollar United States initial public offering this Friday
+- Expect a major political shift in Europe tomorrow as a French court delivers its verdict on Marine Le Pen, which could disqualify her from the twenty-twenty-seven presidential race</description>
+      <pubDate>Tue, 07 Jul 2026 07:45:50 +0000</pubDate>
+      <guid>news-briefing-2026-07-07</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9c8cb45c54cd_daily_news_briefing_-_2026-07-07.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-07.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>When does a chess transformer “see” a knight fork? An initial result from logit lens and attention patterns</title>
+      <description>Audio version of When does a chess transformer “see” a knight fork? An initial result from logit lens and attention patterns from LessWrong Frontpage</description>
+      <pubDate>Tue, 07 Jul 2026 06:51:08 +0000</pubDate>
+      <guid>z7XuJWYxwiZw9Wk2W</guid>
+      <link>https://www.lesswrong.com/posts/z7XuJWYxwiZw9Wk2W/when-does-a-chess-transformer-see-a-knight-fork-an-initial</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bc089dff1a39_when_does_a_chess_transformer_see_a_knight_fork.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-06</title>
       <description>Daily News Briefing - 2026-07-06
 
@@ -1125,31 +1155,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-06-06</title>
-      <description>Daily News Briefing - 2026-06-06
-
-Topics covered:
-- The most critical escalation in the Middle East occurred overnight as the United States and Iran traded direct kinetic strikes across the Persian Gulf
-- The infrastructure required to sustain the AI boom is facing its first major domestic legal blockade
-- In the corporate sector, the high costs of AI are causing a strategic recalibration in the relationship between major players
-- Regarding technical safety and the future of compute, a new research agenda published on the AI Alignment Forum argues that the industry must shift toward "mechanistic detail" to predict failure modes in what researchers call the "first transformative AI." This push for transparency is gaining urgency as a vulnerability was discovered in Sound Blaster hardware that shows how AI-enabled USB peripherals can infect PCs without any user interaction
-- On the geopolitical front, Vladimir Putin has officially rejected President Zelensky’s request for face-to-face talks, stating there is "no point" in a meeting to end the war in Ukraine
-- Looking toward tomorrow, maritime insurers and logistics firms will be bracing for further disruptions in the Gulf following the strikes on Bahrain and Kuwait, even as the first Iranian World Cup athletes arrive in Los Angeles under heightened security</description>
-      <pubDate>Sat, 06 Jun 2026 06:57:39 +0000</pubDate>
-      <guid>news-briefing-2026-06-06</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3bb2556f730c_daily_news_briefing_-_2026-06-06.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-06.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“OpenAI Offers A New Policy Blueprint” by Zvi</title>
-      <description>Audio version of “OpenAI Offers A New Policy Blueprint” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 05 Jun 2026 11:44:34 +0000</pubDate>
-      <guid>60e02fdd-e833-4b91-a489-5411e7173151</guid>
-      <link>https://www.lesswrong.com/posts/uvbpTpn6uoMuTbojX/openai-offers-a-new-policy-blueprint</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f1d95b795371_openai_offers_a_new_policy_blueprint_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <title>“AI #171: False Flag” by Zvi</title>
+      <description>Audio version of “AI #171: False Flag” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 04 Jun 2026 15:55:29 +0000</pubDate>
+      <guid>3a647a23-1338-4096-ba75-6302ea8e67a7</guid>
+      <link>https://www.lesswrong.com/posts/LzxoR5GakceQFtbta/ai-171-false-flag</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1d5c41b117d5_ai_171_false_flag_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1700,6 +1711,17 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/make-the-prompt-public</guid>
       <link>https://blog.aifutures.org/p/make-the-prompt-public</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/17592b945f0a_make_the_prompt_public.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Making sense of OpenAI's models</title>
+      <description>Audio version of Making sense of OpenAI's models from AI Futures Project</description>
+      <pubDate>Thu, 01 May 2025 16:13:05 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/making-sense-of-openais-models</guid>
+      <link>https://blog.aifutures.org/p/making-sense-of-openais-models</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2d2013158167_making_sense_of_openais_models.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
