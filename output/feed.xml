@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-09</title>
+      <description>Daily News Briefing - 2026-07-09
+
+Topics covered:
+- In geopolitics and global security, the conflict between the United States and Iran has escalated into a sustained air campaign
+- In the realm of A-I capabilities, the competition between frontier labs is accelerating with two major releases
+- Regarding A-I safety and policy, OpenAI has formally outlined its principles for national security partnerships
+- In space and hardware, Jeff Bezos’s Blue Origin is reportedly seeking to raise ten billion dollars in private capital
+- On the domestic and social front, the "A-I boom" is fundamentally reshaping the American economy and education system
+- Finally, in legal news, a federal judge has approved Elon Musk’s one-point-five million dollar settlement with the Securities and Exchange Commission, ending the years-long dispute over his acquisition of the platform formerly known as Twitter</description>
+      <pubDate>Thu, 09 Jul 2026 07:47:49 +0000</pubDate>
+      <guid>news-briefing-2026-07-09</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/13360531c8f7_daily_news_briefing_-_2026-07-09.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-09.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Interpretability is becoming increasingly uninterpretable</title>
+      <description>Audio version of Interpretability is becoming increasingly uninterpretable from LessWrong Frontpage</description>
+      <pubDate>Thu, 09 Jul 2026 07:04:49 +0000</pubDate>
+      <guid>JiWTjLo2zxsqf2YXF</guid>
+      <link>https://www.lesswrong.com/posts/JiWTjLo2zxsqf2YXF/interpretability-is-becoming-increasingly-uninterpretable</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b67da12d4596_interpretability_is_becoming_increasingly_uninterp.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Childhood and Education #20: Phones and Screens” by Zvi</title>
+      <description>Audio version of “Childhood and Education #20: Phones and Screens” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 08 Jul 2026 19:42:41 +0000</pubDate>
+      <guid>f16b71b1-c3c9-49f1-80ea-5bdd33406422</guid>
+      <link>https://www.lesswrong.com/posts/XA8fMCnwuc45uZYHX/childhood-and-education-20-phones-and-screens</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5140662148b0_childhood_and_education_20_phones_and_screens.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Your Book Review: The Book Of Abraham</title>
+      <description>Audio version of Your Book Review: The Book Of Abraham from Scott Alexander</description>
+      <pubDate>Wed, 08 Jul 2026 12:48:42 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/your-book-review-the-book-of-abraham</guid>
+      <link>https://www.astralcodexten.com/p/your-book-review-the-book-of-abraham</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ebc748ef2be8_your_book_review_the_book_of_abraham.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-08</title>
       <description>Daily News Briefing - 2026-07-08
 
@@ -1136,36 +1188,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-06-08</title>
-      <description>Daily News Briefing - 2026-06-08
-
-Topics covered:
-- The escalating military conflict between the United States and Iran has triggered a significant global market correction
-- As the United States prepares to host the World Cup later this month, geopolitical tensions are bleeding into the sporting world
-- In Europe, a coalition of President Zelensky’s closest allies has released a five-point framework for peace talks with Russia
-- On the technical and corporate front, the AI industry is facing a period of financial and operational turbulence
-- Finally, in cybersecurity news, a retrospective of the first half of twenty-twenty-six reveals a staggering volume of high-level breaches
-- Looking toward tomorrow, the focus will shift to California for the opening of Apple’s Worldwide Developers Conference, which is expected to provide the first look at the company’s long-awaited integration of agentic AI into the iOS ecosystem</description>
-      <pubDate>Mon, 08 Jun 2026 08:59:06 +0000</pubDate>
-      <guid>news-briefing-2026-06-08</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c744f39099ae_daily_news_briefing_-_2026-06-08.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-08.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Bun's Migration from Zig to Rust as a Potential Case Study for Gradual Disempowerment</title>
-      <description>Audio version of Bun's Migration from Zig to Rust as a Potential Case Study for Gradual Disempowerment from LessWrong Frontpage</description>
-      <pubDate>Mon, 08 Jun 2026 07:06:07 +0000</pubDate>
-      <guid>qEbqPitYhWHthwFNu</guid>
-      <link>https://www.lesswrong.com/posts/qEbqPitYhWHthwFNu/bun-s-migration-from-zig-to-rust-as-a-potential-case-study</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/abccbc9d62c7_buns_migration_from_zig_to_rust_as_a_potential_ca.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“AI #171: False Flag” by Zvi</title>
       <description>Audio version of “AI #171: False Flag” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Thu, 04 Jun 2026 15:55:29 +0000</pubDate>
@@ -1744,6 +1766,17 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/why-america-wins</guid>
       <link>https://blog.aifutures.org/p/why-america-wins</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3f1f3b89837b_why_america_wins.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>AI 2027: Media, Reactions, Criticism</title>
+      <description>Audio version of AI 2027: Media, Reactions, Criticism from AI Futures Project</description>
+      <pubDate>Wed, 23 Apr 2025 04:48:16 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/ai-2027-media-reactions-criticism</guid>
+      <link>https://blog.aifutures.org/p/ai-2027-media-reactions-criticism</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3b5641f57ff3_ai_2027_media_reactions_criticism.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
