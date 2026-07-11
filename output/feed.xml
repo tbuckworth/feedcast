@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-11</title>
+      <description>Daily News Briefing - 2026-07-11
+
+Topics covered:
+- In artificial intelligence litigation and hardware strategy, Apple has filed a major lawsuit against OpenAI, alleging a systematic theft of trade secrets
+- Regarding AI product safety and privacy, Meta has abruptly disabled a new Instagram feature that allowed users to generate deepfakes of public accounts
+- In geopolitics and regional security, the United States is intensifying diplomatic efforts to stabilize global trade routes
+- In the physical layer of the AI boom, the South Korean chipmaker S-K Hynix successfully completed its twenty-six-and-a-half billion dollar initial public offering on the Nasdaq, the largest ever foreign debut in United States history
+- On the frontiers of compute and energy, a new pilot program from the solar company Sunrun is attempting to decentralize the data center
+- Expect continued market volatility as investors digest the implications of the Apple-OpenAI legal battle on future hardware collaborations</description>
+      <pubDate>Sat, 11 Jul 2026 06:20:15 +0000</pubDate>
+      <guid>news-briefing-2026-07-11</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/679053c067e6_daily_news_briefing_-_2026-07-11.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-11.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Measuring Is Not Enough Anymore</title>
+      <description>Audio version of Measuring Is Not Enough Anymore from LessWrong Frontpage</description>
+      <pubDate>Sat, 11 Jul 2026 03:21:57 +0000</pubDate>
+      <guid>4TMKvGmoAWjXBGwWk</guid>
+      <link>https://www.lesswrong.com/posts/4TMKvGmoAWjXBGwWk/measuring-is-not-enough-anymore</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/53bab626ef5c_measuring_is_not_enough_anymore.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Plan A: Suggestions For Further Work</title>
+      <description>Audio version of Plan A: Suggestions For Further Work from AI Futures Project</description>
+      <pubDate>Fri, 10 Jul 2026 23:15:06 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/plan-a-suggestions-for-further-work</guid>
+      <link>https://blog.aifutures.org/p/plan-a-suggestions-for-further-work</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f2b51774f117_plan_a_suggestions_for_further_work.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #176 Part 2: Plan B” by Zvi</title>
+      <description>Audio version of “AI #176 Part 2: Plan B” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 10 Jul 2026 12:45:11 +0000</pubDate>
+      <guid>38d46a5c-bdbb-4573-8aad-804c378ed505</guid>
+      <link>https://www.lesswrong.com/posts/7Av7wwErwNXdM3J68/ai-176-part-2-plan-b</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2820b08aa986_ai_176_part_2_plan_b_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-10</title>
       <description>Daily News Briefing - 2026-07-10
 
@@ -1205,6 +1257,28 @@ Topics covered:
       <guid>68eb91cb-6e8b-4f46-b651-5e8b26205a86</guid>
       <link>https://www.lesswrong.com/posts/uWxW5KWnyHrGj6tpu/three-labs-with-a-plan-and-a-memorandum</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3efb15e21da5_three_labs_with_a_plan_and_a_memorandum_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Berkeley Meetup This Wednesday</title>
+      <description>Audio version of Berkeley Meetup This Wednesday from Scott Alexander</description>
+      <pubDate>Mon, 08 Jun 2026 23:12:38 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/berkeley-meetup-this-wednesday-77b</guid>
+      <link>https://www.astralcodexten.com/p/berkeley-meetup-this-wednesday-77b</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4282236d7cdf_berkeley_meetup_this_wednesday.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Efficient tradeoffs and the safety-usefulness tradeoff model</title>
+      <description>Audio version of Efficient tradeoffs and the safety-usefulness tradeoff model from Buck Shlegeris</description>
+      <pubDate>Mon, 08 Jun 2026 20:28:17 +0000</pubDate>
+      <guid>mBsZTZxtjgCdN4CDA</guid>
+      <link>https://www.lesswrong.com/posts/mBsZTZxtjgCdN4CDA/efficient-tradeoffs-and-the-safety-usefulness-tradeoff-model</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ae1ba4cf0d4f_efficient_tradeoffs_and_the_safety-usefulness_trad.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
