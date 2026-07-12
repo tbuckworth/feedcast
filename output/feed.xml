@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-12</title>
+      <description>Daily News Briefing - 2026-07-12
+
+Topics covered:
+- In geopolitics and global energy security, the maritime crisis in the Middle East has reached a critical flashpoint
+- In artificial intelligence policy and alignment, a new consensus is emerging among researchers that political will, rather than technical capability, is now the primary bottleneck for AI safety
+- Regarding AI capabilities and consumer hardware, OpenAI is pivoting its product strategy toward domestic integration and ambient productivity
+- In the United States, the Trump administration has escalated its confrontation with the press, subpoenaing two New York Times journalists
+- Finally, in regional stability and climate risk, eastern China is facing its second major hurricane in a single week
+- Expect an immediate spike in crude oil futures as markets react to the confirmed closure of the Strait of Hormuz</description>
+      <pubDate>Sun, 12 Jul 2026 06:40:02 +0000</pubDate>
+      <guid>news-briefing-2026-07-12</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/368570401a55_daily_news_briefing_-_2026-07-12.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-12.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The current bottleneck is political will, not research</title>
+      <description>Audio version of The current bottleneck is political will, not research from LessWrong Frontpage</description>
+      <pubDate>Sat, 11 Jul 2026 21:56:32 +0000</pubDate>
+      <guid>EexsebbYhbe2gXkPP</guid>
+      <link>https://www.lesswrong.com/posts/EexsebbYhbe2gXkPP/the-current-bottleneck-is-political-will-not-research</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/74cd01b02d97_the_current_bottleneck_is_political_will_not_rese.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Introduction for and Reactions to Plan A” by Zvi</title>
+      <description>Audio version of “Introduction for and Reactions to Plan A” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sat, 11 Jul 2026 20:43:22 +0000</pubDate>
+      <guid>bf4801e1-122f-4d2c-bcdb-c944d0689229</guid>
+      <link>https://www.lesswrong.com/posts/z9tXCGogEgkgHSh8G/introduction-for-and-reactions-to-plan-a</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5675b5db302a_introduction_for_and_reactions_to_plan_a_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-11</title>
       <description>Daily News Briefing - 2026-07-11
 
