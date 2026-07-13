@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-13</title>
+      <description>Daily News Briefing - 2026-07-13
+
+Topics covered:
+- In United States politics and legislative leadership, Senator Lindsey Graham of South Carolina has died at the age of seventy-one following what his office described as a brief and sudden cardiac illness
+- In the physical layer of artificial intelligence, the long-term legacy of Apple’s cancelled self-driving car program is coming into focus as the primary engine for its current hardware dominance
+- In artificial intelligence safety and governance, a new position paper on the Alignment Forum argues that technical research is no longer the primary bottleneck to preventing catastrophic risk
+- In geopolitics and energy, Qatar has entered a period of national mourning following the death of former Emir Sheikh Hamad bin Khalifa Al Thani at age seventy-four
+- Finally, in regional diplomacy, a century-old era of border friction has ended as Gibraltar officially removed border controls with Spain
+- Expect a week of legislative maneuvering as the Senate prepares for the sudden process of filling Senator Graham’s seat</description>
+      <pubDate>Mon, 13 Jul 2026 07:27:15 +0000</pubDate>
+      <guid>news-briefing-2026-07-13</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e2c2d023e8dc_daily_news_briefing_-_2026-07-13.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-13.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>5 "Plan A" scenarios</title>
+      <description>Audio version of 5 "Plan A" scenarios from LessWrong Frontpage</description>
+      <pubDate>Mon, 13 Jul 2026 00:36:52 +0000</pubDate>
+      <guid>7HHKaD3BdsfHX7doz</guid>
+      <link>https://www.lesswrong.com/posts/7HHKaD3BdsfHX7doz/5-plan-a-scenarios</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2c643d0a139e_5_plan_a_scenarios.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“WSJ Article Claiming China Has Matched Anthropic Is Obvious Nonsense” by Zvi</title>
+      <description>Audio version of “WSJ Article Claiming China Has Matched Anthropic Is Obvious Nonsense” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sun, 12 Jul 2026 10:44:00 +0000</pubDate>
+      <guid>86bfa8b1-7b15-4ca9-933a-a23283229edf</guid>
+      <link>https://www.lesswrong.com/posts/2zSpuGJRk6EyjHAL6/wsj-article-claiming-china-has-matched-anthropic-is-obvious-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a68d4af7b153_wsj_article_claiming_china_has_matched_anthropic.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-12</title>
       <description>Daily News Briefing - 2026-07-12
 
