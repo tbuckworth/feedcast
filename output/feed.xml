@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-15</title>
+      <description>Daily News Briefing - 2026-07-15
+
+Topics covered:
+- In artificial intelligence policy and infrastructure, New York has become the first state to enact a statewide moratorium on new hyperscale data centers
+- Regarding AI capabilities and hardware, reports from Bloomberg indicate that OpenAI is preparing to announce its first consumer device—a screenless smart speaker—later this year
+- In a major development for AI research and safety, Google DeepMind CEO Demis Hassabis has formally called for the creation of a global AI watchdog led by the United States
+- In geopolitics and energy, the conflict in the Middle East has entered an even more volatile stage as President Trump threatened to bomb Iranian bridges and power plants unless Tehran resumes negotiations
+- In domestic tech and labor, Meta is facing a significant lawsuit from twenty-six former employees who allege the company used biased AI tools to select workers for mass layoffs
+- Finally, in the private sector, OpenAI researcher Miles Wang is reportedly in talks to launch a two billion dollar AI drug discovery startup, signaling continued investor appetite for applying large-scale models to the life sciences</description>
+      <pubDate>Wed, 15 Jul 2026 06:20:52 +0000</pubDate>
+      <guid>news-briefing-2026-07-15</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c18411a90876_daily_news_briefing_-_2026-07-15.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-15.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Singular Learning Theory Comprehensive - 2</title>
+      <description>Audio version of Singular Learning Theory Comprehensive - 2 from LessWrong Frontpage</description>
+      <pubDate>Wed, 15 Jul 2026 05:42:53 +0000</pubDate>
+      <guid>ZmHsfaG8YtvMaa4Mm</guid>
+      <link>https://www.lesswrong.com/posts/ZmHsfaG8YtvMaa4Mm/singular-learning-theory-comprehensive-2-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/53288d425992_singular_learning_theory_comprehensive_-_2.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Twitter Thoughts For You” by Zvi</title>
+      <description>Audio version of “Twitter Thoughts For You” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 14 Jul 2026 17:58:25 +0000</pubDate>
+      <guid>0b2782e6-cbc6-4bd5-be02-be284727e316</guid>
+      <link>https://www.lesswrong.com/posts/2GFyHmCLJYCag7gKh/twitter-thoughts-for-you</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d581d0973101_twitter_thoughts_for_you_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-14</title>
       <description>Daily News Briefing - 2026-07-14
 
