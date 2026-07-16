@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-16</title>
+      <description>Daily News Briefing - 2026-07-16
+
+Topics covered:
+- In geopolitics and global security, the conflict in the Middle East has reached a precarious new stage
+- In artificial intelligence capabilities and hardware, OpenAI has made its first formal foray into physical products, though it is not the ambient device the industry expected
+- In AI litigation and safety, xAI has filed a landmark lawsuit against a South Carolina man, alleging he bypassed Grok’s safety filters to generate and distribute child sexual abuse material
+- In corporate technology and infrastructure, Microsoft has begun a tactical shift to protect its market share against its own partners
+- In regulatory news and labor, a federal judge has ruled that the Trump administration cannot deport foreign researchers based solely on their work in content moderation or disinformation studies
+- In markets, SpaceX stock has fallen to its initial offering price of one hundred and thirty-five dollars as investors recalibrate their expectations ahead of this week’s Starship launch</description>
+      <pubDate>Thu, 16 Jul 2026 06:24:23 +0000</pubDate>
+      <guid>news-briefing-2026-07-16</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3dd2e03c3da5_daily_news_briefing_-_2026-07-16.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-16.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Can we build an early warning system for loss of control to AI?</title>
+      <description>Audio version of Can we build an early warning system for loss of control to AI? from LessWrong Frontpage</description>
+      <pubDate>Thu, 16 Jul 2026 06:15:34 +0000</pubDate>
+      <guid>46CjwoPXwZPR3Lrz5</guid>
+      <link>https://www.lesswrong.com/posts/46CjwoPXwZPR3Lrz5/can-we-build-an-early-warning-system-for-loss-of-control-to</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6e12ed68991b_can_we_build_an_early_warning_system_for_loss_of_c.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Six Slightly Skew Boogeymen</title>
+      <description>Audio version of Six Slightly Skew Boogeymen from Scott Alexander</description>
+      <pubDate>Thu, 16 Jul 2026 00:55:28 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/six-slightly-skew-boogeymen</guid>
+      <link>https://www.astralcodexten.com/p/six-slightly-skew-boogeymen</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/532f804fbf4d_six_slightly_skew_boogeymen.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Monthly Roundup #44: July 2026” by Zvi</title>
+      <description>Audio version of “Monthly Roundup #44: July 2026” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 15 Jul 2026 16:23:06 +0000</pubDate>
+      <guid>648da05e-3994-43ec-a3d3-e9de9b37d4a4</guid>
+      <link>https://www.lesswrong.com/posts/KiCwcAGHx4rdwJgzD/monthly-roundup-44-july-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0dae45bfbfa4_monthly_roundup_44_july_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-15</title>
       <description>Daily News Briefing - 2026-07-15
 
@@ -1325,80 +1377,6 @@ Topics covered:
       <guid>ea901a18-a42f-4b5d-8631-d0de86ce5def</guid>
       <link>https://www.lesswrong.com/posts/3fagcqrauaJs32mZZ/the-once-and-future-fable-2</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/384af6b25472_the_once_and_future_fable_2_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>How reality turns to slop</title>
-      <description>Audio version of How reality turns to slop from LessWrong Frontpage</description>
-      <pubDate>Mon, 15 Jun 2026 10:42:35 +0000</pubDate>
-      <guid>j5o4pkCdDsPLxdePP</guid>
-      <link>https://www.lesswrong.com/posts/j5o4pkCdDsPLxdePP/how-reality-turns-to-slop</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5db2d1b32ecb_how_reality_turns_to_slop.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-06-15</title>
-      <description>Daily News Briefing - 2026-06-15
-
-Topics covered:
-- The lead story today concerns a potential high-level breach of American frontier artificial intelligence
-- In the realm of AI safety, new research from Google DeepMind’s Interpretability team explores why standard safety filtering often fails during fine-tuning
-- Turning to geopolitics and global energy markets, crude oil prices have fallen and global stock indices have jumped following President Trump’s announcement of a deal with Iran
-- On the corporate front, OpenAI has launched the "OpenAI Partner Network" and committed one hundred fifty million dollars to accelerate the adoption of enterprise AI
-- Finally, the technology sector is bracing for social friction as the "AI layoff wave" continues
-- Investors will be watching the opening of the Asian markets tonight to see if the downward trend in oil prices holds as the specifics of the Iran deal are analyzed</description>
-      <pubDate>Mon, 15 Jun 2026 10:28:49 +0000</pubDate>
-      <guid>news-briefing-2026-06-15</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/41519bcb187a_daily_news_briefing_-_2026-06-15.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-15.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>On Responsibility and Death: Can We See Reality for What It Is or Will It Break Us</title>
-      <description>Audio version of On Responsibility and Death: Can We See Reality for What It Is or Will It Break Us from LessWrong Frontpage</description>
-      <pubDate>Mon, 15 Jun 2026 10:14:26 +0000</pubDate>
-      <guid>LGKLDJobggH2GebAX</guid>
-      <link>https://www.lesswrong.com/posts/LGKLDJobggH2GebAX/on-responsibility-and-death-can-we-see-reality-for-what-it</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/27f845ed7050_on_responsibility_and_death_can_we_see_reality_fo.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“American Government Takes Down Claude Fable” by Zvi</title>
-      <description>Audio version of “American Government Takes Down Claude Fable” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sat, 13 Jun 2026 19:41:43 +0000</pubDate>
-      <guid>a164c5b8-5b8f-4f1b-8d3f-3cd024dce6b1</guid>
-      <link>https://www.lesswrong.com/posts/DQNSqCzuoeutoQ5RG/american-government-takes-down-claude-fable</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/83334f5cb3b0_american_government_takes_down_claude_fable_by_z.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Fable 5 and Mythos 5: The System Card” by Zvi</title>
-      <description>Audio version of “Claude Fable 5 and Mythos 5: The System Card” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 12 Jun 2026 18:52:04 +0000</pubDate>
-      <guid>406231c7-3d11-464d-b94b-db2fc3f05f23</guid>
-      <link>https://www.lesswrong.com/posts/ixJDkQBncJBshcvwj/claude-fable-5-and-mythos-5-the-system-card</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3064dad748ce_claude_fable_5_and_mythos_5_the_system_card_by.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>My AI Opinions</title>
-      <description>Audio version of My AI Opinions from Scott Alexander</description>
-      <pubDate>Thu, 11 Jun 2026 20:50:39 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/my-ai-opinions</guid>
-      <link>https://www.astralcodexten.com/p/my-ai-opinions</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9058e518f287_my_ai_opinions.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
