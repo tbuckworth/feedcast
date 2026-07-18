@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-18</title>
+      <description>Daily News Briefing - 2026-07-18
+
+Topics covered:
+- In geopolitics and global security, the maritime conflict in the Middle East has entered its second week of kinetic engagement as the United States conducted air strikes against Iran for the seventh consecutive night
+- In artificial intelligence policy and platform safety, San Francisco City Attorney David Chiu has formally ordered Apple and Google to purge "nudify" applications from their respective app stores
+- In AI hardware and corporate litigation, the legal battle between Apple and OpenAI has intensified, with new analysis of the trade secret complaint suggesting it may be a strategic attempt to derail OpenAI’s reported plans for an initial public offering
+- In infrastructure and energy, a massive magnitude seven-point-three earthquake has struck off the coast of Mexico, triggering small tsunami waves and adding fresh pressure to North American supply chains already strained by wildfires
+- In the corporate sector, Databricks has reached a staggering one-hundred-and-eighty-eight billion dollar valuation, cementing its status as the leading provider of data infrastructure for the generative AI era
+- Expect increased diplomatic tension through the weekend as Canada responds to the United States tariff threats amidst ongoing environmental and seismic disruptions</description>
+      <pubDate>Sat, 18 Jul 2026 06:10:01 +0000</pubDate>
+      <guid>news-briefing-2026-07-18</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9f6b869a0c16_daily_news_briefing_-_2026-07-18.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-18.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The Most Forbidden Technique is not always forbidden</title>
+      <description>Audio version of The Most Forbidden Technique is not always forbidden from LessWrong Frontpage</description>
+      <pubDate>Sat, 18 Jul 2026 00:59:59 +0000</pubDate>
+      <guid>tEFD2bgNWZ6XcurKA</guid>
+      <link>https://www.lesswrong.com/posts/tEFD2bgNWZ6XcurKA/the-most-forbidden-technique-is-not-always-forbidden-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5b80fac15e32_the_most_forbidden_technique_is_not_always_forbidd.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Your Book Review: Great And Desperate Cures</title>
+      <description>Audio version of Your Book Review: Great And Desperate Cures from Scott Alexander</description>
+      <pubDate>Fri, 17 Jul 2026 15:22:53 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/your-book-review-great-and-desperate</guid>
+      <link>https://www.astralcodexten.com/p/your-book-review-great-and-desperate</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5b1d9468d1ba_your_book_review_great_and_desperate_cures.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #177 Part 2: Wish You Were Here” by Zvi</title>
+      <description>Audio version of “AI #177 Part 2: Wish You Were Here” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 17 Jul 2026 12:52:03 +0000</pubDate>
+      <guid>7b85376f-21fb-42ed-8bd9-854aa6a0f28c</guid>
+      <link>https://www.lesswrong.com/posts/Zjj3PTEng8GDqfK6j/ai-177-part-2-wish-you-were-here</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aada8a4f15c6_ai_177_part_2_wish_you_were_here_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-17</title>
       <description>Daily News Briefing - 2026-07-17
 
@@ -1336,58 +1388,6 @@ Topics covered:
       <guid>077cac78-ffe7-469c-aebd-9cf5ed76ba22</guid>
       <link>https://www.lesswrong.com/posts/HaHzwvhbWam4n8hJB/the-once-and-future-fable-3-fix-this-code</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7637c3a9540f_the_once_and_future_fable_3_fix_this_code_by_z.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-06-17</title>
-      <description>Daily News Briefing - 2026-06-17
-
-Topics covered:
-- In a massive consolidation of the AI and aerospace sectors, SpaceX has announced the acquisition of the AI coding platform Cursor for sixty billion dollars in stock
-- On the regulatory front, a major legal battle is brewing over the infrastructure powering the "Grok" large language model
-- In AI safety and research, OpenAI has published a new framework for predicting model safety prior to release by simulating real-world deployment
-- Turning to global technology and hardware, Qualcomm has unveiled the Snapdragon Reality Elite chip, targeting a wave of over forty new AI wearables including camera-equipped earbuds and smart glasses
-- Finally, in geopolitics, the truce between the United States and Iran remains fragile
-- Markets will be watching SpaceX’s stock performance today as investors digest the dilution of the sixty billion dollar Cursor acquisition</description>
-      <pubDate>Wed, 17 Jun 2026 09:06:31 +0000</pubDate>
-      <guid>news-briefing-2026-06-17</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/73b578a8d1b9_daily_news_briefing_-_2026-06-17.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-17.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Plastic Cake Fallacy</title>
-      <description>Audio version of Plastic Cake Fallacy from LessWrong Frontpage</description>
-      <pubDate>Wed, 17 Jun 2026 07:33:20 +0000</pubDate>
-      <guid>ayCm5AWQuHfeqtZim</guid>
-      <link>https://www.lesswrong.com/posts/ayCm5AWQuHfeqtZim/plastic-cake-fallacy</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/35abde73db13_plastic_cake_fallacy.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Never Cross a River Four Feet Deep on Average</title>
-      <description>Audio version of Never Cross a River Four Feet Deep on Average from Scott Alexander</description>
-      <pubDate>Tue, 16 Jun 2026 20:07:52 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/never-cross-a-river-four-feet-deep</guid>
-      <link>https://www.astralcodexten.com/p/never-cross-a-river-four-feet-deep</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5c246ffcc207_never_cross_a_river_four_feet_deep_on_average.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Fable and Mythos: Model Welfare” by Zvi</title>
-      <description>Audio version of “Fable and Mythos: Model Welfare” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 16 Jun 2026 16:04:25 +0000</pubDate>
-      <guid>7ac591ca-9502-46ae-b323-ee0a06348883</guid>
-      <link>https://www.lesswrong.com/posts/Ko9GngKMJ8AccBJA7/fable-and-mythos-model-welfare</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4bbc6188c1b2_fable_and_mythos_model_welfare_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
