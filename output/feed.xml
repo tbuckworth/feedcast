@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-19</title>
+      <description>Daily News Briefing - 2026-07-19
+
+Topics covered:
+- In geopolitics and global security, the conflict in the Middle East has escalated into a direct multi-front exchange as the United States conducted air strikes against Iranian targets for the eighth consecutive night
+- Regarding North American relations and environmental policy, President Trump has intensified his trade threats against Canada, vowing to impose new tariffs to compensate for "filthy air" crossing the border from Canadian wildfires
+- In artificial intelligence safety and healthcare policy, the United States government has launched a pilot program to use AI for insurance "prior authorization" and coverage decisions
+- In the aerospace and logistics sectors, India has hit a major milestone with the successful orbital launch of Vikram-one, the nation’s first commercial rocket
+- In technology and infrastructure, Waymo was forced to pause all robotaxi services in San Francisco for one hour today following a localized power outage
+- Expect continued diplomatic friction and market uncertainty through Monday as the United States military evaluates its response to the Iranian strikes in Kuwait</description>
+      <pubDate>Sun, 19 Jul 2026 06:35:11 +0000</pubDate>
+      <guid>news-briefing-2026-07-19</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c2fd78fc285c_daily_news_briefing_-_2026-07-19.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-19.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>A Solution to Cryptographic Boxes for Unfriendly AI</title>
+      <description>Audio version of A Solution to Cryptographic Boxes for Unfriendly AI from LessWrong Frontpage</description>
+      <pubDate>Sun, 19 Jul 2026 00:33:54 +0000</pubDate>
+      <guid>PG2RupAvCNqZ5PAvu</guid>
+      <link>https://www.lesswrong.com/posts/PG2RupAvCNqZ5PAvu/a-solution-to-cryptographic-boxes-for-unfriendly-ai</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1db6e97816ad_a_solution_to_cryptographic_boxes_for_unfriendly_a.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #177 Part 1: Tip of the Iceberg” by Zvi</title>
+      <description>Audio version of “AI #177 Part 1: Tip of the Iceberg” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sat, 18 Jul 2026 09:07:10 +0000</pubDate>
+      <guid>156ea254-0a52-467f-a661-08e21229278f</guid>
+      <link>https://www.lesswrong.com/posts/who9xZ7DxuprsJoTr/ai-177-part-1-tip-of-the-iceberg</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cf44fb2a4695_ai_177_part_1_tip_of_the_iceberg_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-18</title>
       <description>Daily News Briefing - 2026-07-18
 
@@ -172,6 +213,17 @@ Topics covered:
       <guid>648da05e-3994-43ec-a3d3-e9de9b37d4a4</guid>
       <link>https://www.lesswrong.com/posts/KiCwcAGHx4rdwJgzD/monthly-roundup-44-july-2026</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0dae45bfbfa4_monthly_roundup_44_july_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>AI Chip Regulation Is Not A Dystopian Surveillance State</title>
+      <description>Audio version of AI Chip Regulation Is Not A Dystopian Surveillance State from Scott Alexander</description>
+      <pubDate>Wed, 15 Jul 2026 10:19:35 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/ai-chip-regulation-is-not-a-dystopian</guid>
+      <link>https://www.astralcodexten.com/p/ai-chip-regulation-is-not-a-dystopian</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d5cbe09e2649_ai_chip_regulation_is_not_a_dystopian_surveillance.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1336,58 +1388,6 @@ Topics covered:
       <guid>0b46f99f-fef7-43df-a9c2-10ddcb501cc2</guid>
       <link>https://www.lesswrong.com/posts/P7jBmCeBDq2ebojWY/ai-173-ai-pauses</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/42314a8080e6_ai_173_ai_pauses_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-06-18</title>
-      <description>Daily News Briefing - 2026-06-18
-
-Topics covered:
-- The diplomatic landscape in Europe has shifted dramatically following the signing of a fourteen-point memorandum of understanding between the United States and Iran at the Palace of Versailles
-- In the AI sector, the fallout from the White House’s emergency export controls on Anthropic is intensifying
-- While labs face regulatory heat, AI capabilities continue to breach specialized domains
-- On the consumer hardware front, a divide is emerging between ambitious "spatial computing" and a skeptical public
-- In corporate and cybersecurity news, a massive breach has exposed credentials for thousands of sensitive networks, including those of NATO contractors, FedEx, and Oracle
-- Markets will be watching the energy sector closely today to see if crude prices react to the continued defiance of the Iranian tanker fleet despite the Versailles agreement</description>
-      <pubDate>Thu, 18 Jun 2026 09:08:36 +0000</pubDate>
-      <guid>news-briefing-2026-06-18</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/970ceff064d9_daily_news_briefing_-_2026-06-18.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-18.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>GLM 5.2 playing text adventures</title>
-      <description>Audio version of GLM 5.2 playing text adventures from LessWrong Frontpage</description>
-      <pubDate>Thu, 18 Jun 2026 07:23:51 +0000</pubDate>
-      <guid>xNNLqxLaR3sna89Ec</guid>
-      <link>https://www.lesswrong.com/posts/xNNLqxLaR3sna89Ec/glm-5-2-playing-text-adventures</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b2263e740e2a_glm_52_playing_text_adventures.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Waiting For The Miracle</title>
-      <description>Audio version of Waiting For The Miracle from Scott Alexander</description>
-      <pubDate>Thu, 18 Jun 2026 04:42:50 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/waiting-for-the-miracle</guid>
-      <link>https://www.astralcodexten.com/p/waiting-for-the-miracle</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/76db45f77c1e_waiting_for_the_miracle.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“The Once And Future Fable #3: Fix This Code” by Zvi</title>
-      <description>Audio version of “The Once And Future Fable #3: Fix This Code” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 17 Jun 2026 14:13:10 +0000</pubDate>
-      <guid>077cac78-ffe7-469c-aebd-9cf5ed76ba22</guid>
-      <link>https://www.lesswrong.com/posts/HaHzwvhbWam4n8hJB/the-once-and-future-fable-3-fix-this-code</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7637c3a9540f_the_once_and_future_fable_3_fix_this_code_by_z.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
