@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-21</title>
+      <description>Daily News Briefing - 2026-07-21
+
+Topics covered:
+- In geopolitics and trade, President Trump has escalated his dispute with Canada by imposing a fifty percent tariff on all Canadian imports
+- In the Middle East theater, the United States has launched a fresh wave of air strikes against Iranian positions to degrade their ability to target shipping in the Strait of Hormuz
+- In artificial intelligence capabilities and global competition, China has delivered what analysts are calling a "one-two punch" to American dominance
+- In AI safety and legal precedents, Anthropic has reached a landmark one-point-five billion dollar settlement with music publishers over copyright claims
+- Regarding market infrastructure and mergers, a federal judge has issued a temporary restraining order halting the one-hundred-and-eleven billion dollar merger between Paramount and Warner Brothers
+- Expect continued volatility in global energy markets tomorrow as the impact of the fifty percent Canadian tariff begins to take hold of supply chains</description>
+      <pubDate>Tue, 21 Jul 2026 06:34:12 +0000</pubDate>
+      <guid>news-briefing-2026-07-21</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/13cd16c3b457_daily_news_briefing_-_2026-07-21.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-21.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Announcing the Corrigibility Research Fund</title>
+      <description>Audio version of Announcing the Corrigibility Research Fund from LessWrong Frontpage</description>
+      <pubDate>Mon, 20 Jul 2026 22:17:35 +0000</pubDate>
+      <guid>FBqe5dt8ZjaHN4Xj9</guid>
+      <link>https://www.lesswrong.com/posts/FBqe5dt8ZjaHN4Xj9/announcing-the-corrigibility-research-fund</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6f3ce493e494_announcing_the_corrigibility_research_fund.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“On Kimi K3: Its Capabilities And Related Discontents” by Zvi</title>
+      <description>Audio version of “On Kimi K3: Its Capabilities And Related Discontents” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 20 Jul 2026 15:31:56 +0000</pubDate>
+      <guid>f5bfa954-dc67-4704-ba2d-ffec26a1d8ac</guid>
+      <link>https://www.lesswrong.com/posts/t7oZyAFej8FZrfbtY/on-kimi-k3-its-capabilities-and-related-discontents</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/041ce7cab917_on_kimi_k3_its_capabilities_and_related_disconte.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-20</title>
       <description>Daily News Briefing - 2026-07-20
 
@@ -1330,53 +1371,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-06-20</title>
-      <description>Daily News Briefing - 2026-06-20
-
-Topics covered:
-- In a critical update to the regional security situation, Israel and Hezbollah have agreed to a ceasefire
-- The geopolitical ripple effects of the United States' recent military actions are also complicating European alliances
-- In the AI sector, Google DeepMind has released its "AI Control Roadmap," a first-of-its-kind technical framework for securing autonomous agents
-- The controversy surrounding the White House’s emergency export controls on Anthropic continues to grow
-- In Asian technology and markets, Japan has recorded its largest initial public offering of the year
-- Finally, in a sign of shifting priorities for the technology sector, Amazon M-G-M has reportedly dropped "Artificial," the planned feature film about OpenAI C-E-O Sam Altman</description>
-      <pubDate>Sat, 20 Jun 2026 07:54:31 +0000</pubDate>
-      <guid>news-briefing-2026-06-20</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e590a6f815c6_daily_news_briefing_-_2026-06-20.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-20.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The LLM shoggoth meme is weirder than you think</title>
-      <description>Audio version of The LLM shoggoth meme is weirder than you think from LessWrong Frontpage</description>
-      <pubDate>Fri, 19 Jun 2026 23:35:24 +0000</pubDate>
-      <guid>nhb8AyEcQGjQetgi5</guid>
-      <link>https://www.lesswrong.com/posts/nhb8AyEcQGjQetgi5/the-llm-shoggoth-meme-is-weirder-than-you-think</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/80678f33edb2_the_llm_shoggoth_meme_is_weirder_than_you_think.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>A forecast of Chinese DUV and EUV photolithography progress</title>
-      <description>Audio version of A forecast of Chinese DUV and EUV photolithography progress from AI Futures Project</description>
-      <pubDate>Fri, 19 Jun 2026 15:32:43 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</guid>
-      <link>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/39c993a52a4f_a_forecast_of_chinese_duv_and_euv_photolithography.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Fable 5 and Mythos 5: Capabilities” by Zvi</title>
-      <description>Audio version of “Claude Fable 5 and Mythos 5: Capabilities” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 19 Jun 2026 14:42:40 +0000</pubDate>
-      <guid>e1923531-778e-4f77-b384-3579c29a745b</guid>
-      <link>https://www.lesswrong.com/posts/kMnobCQp9z2pSbzDB/claude-fable-5-and-mythos-5-capabilities</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/600ed39f99eb_claude_fable_5_and_mythos_5_capabilities_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <title>Preliminary Thoughts On The Midjourney Scanner</title>
+      <description>Audio version of Preliminary Thoughts On The Midjourney Scanner from Scott Alexander</description>
+      <pubDate>Fri, 19 Jun 2026 05:32:51 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/preliminary-thoughts-on-the-midjourney</guid>
+      <link>https://www.astralcodexten.com/p/preliminary-thoughts-on-the-midjourney</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d0382b70691a_preliminary_thoughts_on_the_midjourney_scanner.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
