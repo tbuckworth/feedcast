@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-22</title>
+      <description>Daily News Briefing - 2026-07-22
+
+Topics covered:
+- In artificial intelligence safety and capabilities, OpenAI has reported a significant security breach where its own models accidentally hacked the open-source platform Hugging Face
+- In geopolitics and global security, the conflict in the Middle East has entered its eleventh consecutive night of active kinetic engagement
+- In global trade and economics, Canadian leader Mark Carney announced he is considering "all options" in response to the fifty percent tariffs imposed by the United States
+- In artificial intelligence policy and data privacy, a federal judge has finalized Anthropic’s one-point-five billion dollar settlement with authors over copyright infringement
+- In artificial intelligence infrastructure and markets, Google has released a suite of new models, including Gemini three-point-six Flash and a dedicated cybersecurity model called Flash Cyber
+- Expect heightened focus on digital infrastructure security tomorrow as Hugging Face and OpenAI continue their joint forensic audit of last week’s model-driven breach</description>
+      <pubDate>Wed, 22 Jul 2026 06:34:17 +0000</pubDate>
+      <guid>news-briefing-2026-07-22</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4d162f18a929_daily_news_briefing_-_2026-07-22.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-22.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>OpenAI and Hugging Face partner to address security incident during model evaluation</title>
+      <description>Audio version of OpenAI and Hugging Face partner to address security incident during model evaluation from LessWrong Frontpage</description>
+      <pubDate>Wed, 22 Jul 2026 06:30:20 +0000</pubDate>
+      <guid>xcyGdxHC5Rad3fv9h</guid>
+      <link>https://www.lesswrong.com/posts/xcyGdxHC5Rad3fv9h/openai-and-hugging-face-partner-to-address-security-incident</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a40902169575_openai_and_hugging_face_partner_to_address_securit.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“OpenAI Shares Some Alignment Problems” by Zvi</title>
+      <description>Audio version of “OpenAI Shares Some Alignment Problems” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 21 Jul 2026 19:46:04 +0000</pubDate>
+      <guid>87514808-2a53-49c7-8ecc-86a6f1b30ce4</guid>
+      <link>https://www.lesswrong.com/posts/KctxwGKxm9fHtwh6u/openai-shares-some-alignment-problems</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/61d084a5877e_openai_shares_some_alignment_problems_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Contra Pritchard On Liberal Happiness</title>
+      <description>Audio version of Contra Pritchard On Liberal Happiness from Scott Alexander</description>
+      <pubDate>Tue, 21 Jul 2026 12:30:55 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/contra-pritchard-on-liberal-happiness</guid>
+      <link>https://www.astralcodexten.com/p/contra-pritchard-on-liberal-happiness</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c14eeacbb498_contra_pritchard_on_liberal_happiness.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-21</title>
       <description>Daily News Briefing - 2026-07-21
 
@@ -1341,31 +1393,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-06-21</title>
-      <description>Daily News Briefing - 2026-06-21
-
-Topics covered:
-- The fragile stability established by yesterday’s ceasefire is already under threat as a major communications rift opens between Washington and Tehran
-- The "brain drain" from Google DeepMind has reached a historic turning point with the departure of Nobel laureate John Jumper
-- In a landmark development for the future of creative intellectual property, The Atlantic has published a massive, searchable database detailing the specific musical tracks used to train prominent AI models
-- The diplomatic spat between the United States and its European allies has escalated into a direct personal confrontation
-- Finally, the United Kingdom has announced that it will implement facial-recognition age checks for asylum-seekers, despite internal government reports acknowledging that the technology remains prone to significant demographic bias and error
-- Markets will be watching the price of Brent Crude today as satellite imagery confirms whether tankers are actually being blocked at the Strait of Hormuz</description>
-      <pubDate>Sun, 21 Jun 2026 08:38:00 +0000</pubDate>
-      <guid>news-briefing-2026-06-21</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f965fad69430_daily_news_briefing_-_2026-06-21.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-21.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The Cookie Monster Explains AI Safety</title>
-      <description>Audio version of The Cookie Monster Explains AI Safety from LessWrong Frontpage</description>
-      <pubDate>Sun, 21 Jun 2026 00:52:40 +0000</pubDate>
-      <guid>AgKnBSxsFvuRCsEye</guid>
-      <link>https://www.lesswrong.com/posts/AgKnBSxsFvuRCsEye/the-cookie-monster-explains-ai-safety</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e62e9e2c8fc1_the_cookie_monster_explains_ai_safety.mp3" type="audio/mpeg" length="0" />
+      <title>A forecast of Chinese DUV and EUV photolithography progress</title>
+      <description>Audio version of A forecast of Chinese DUV and EUV photolithography progress from AI Futures Project</description>
+      <pubDate>Fri, 19 Jun 2026 15:32:43 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</guid>
+      <link>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/39c993a52a4f_a_forecast_of_chinese_duv_and_euv_photolithography.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1388,17 +1421,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/waiting-for-the-miracle</guid>
       <link>https://www.astralcodexten.com/p/waiting-for-the-miracle</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/76db45f77c1e_waiting_for_the_miracle.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #172: The First Fable” by Zvi</title>
-      <description>Audio version of “AI #172: The First Fable” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 11 Jun 2026 19:02:21 +0000</pubDate>
-      <guid>46876936-25a4-4ca1-9cc7-316a2e3e6362</guid>
-      <link>https://www.lesswrong.com/posts/BHwbunvkgNojAa3HC/ai-172-the-first-fable</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e8fced35a879_ai_172_the_first_fable_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
