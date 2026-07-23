@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-23</title>
+      <description>Daily News Briefing - 2026-07-23
+
+Topics covered:
+- In artificial intelligence infrastructure and investments, AMD has committed up to five billion dollars to Anthropic in a massive hardware-software partnership
+- On the policy and security front, the United States Treasury is threatening sanctions following White House allegations that China’s Moonshot AI "distilled" its latest models from Anthropic’s proprietary "Fable" series
+- In energy and climate politics, nearly two hundred organizations, including major utility companies and data center developers, have signed the "Rate Payer Protection Pledge" introduced by the Trump administration
+- In geopolitics and regional security, the Red Sea remains a high-risk zone as Houthi rebels launched their first strikes on oil tankers since declaring a maritime embargo against Saudi Arabia
+- In consumer hardware and markets, Samsung has unveiled its first smart glasses, developed in collaboration with Google and Warby Parker
+- Expect a intensified debate in Washington tomorrow as the Treasury Department coordinates with the White House on the specific framework for sanctioning Chinese AI labs over intellectual property distillation</description>
+      <pubDate>Thu, 23 Jul 2026 06:34:54 +0000</pubDate>
+      <guid>news-briefing-2026-07-23</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/61aecf8f5521_daily_news_briefing_-_2026-07-23.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-23.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Get You a Model: If You're Not Paying, You're Missing 90% Of Improvements</title>
+      <description>Audio version of Get You a Model: If You're Not Paying, You're Missing 90% Of Improvements from LessWrong Frontpage</description>
+      <pubDate>Thu, 23 Jul 2026 04:16:38 +0000</pubDate>
+      <guid>kbFQKqLqpa7C4EBGL</guid>
+      <link>https://www.lesswrong.com/posts/kbFQKqLqpa7C4EBGL/get-you-a-model-if-you-re-not-paying-you-re-missing-90-of</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5a71ee4d4199_get_you_a_model_if_youre_not_paying_youre_miss.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“OpenAI Model Hacks Into HuggingFace During Cybersecurity Evaluation” by Zvi</title>
+      <description>Audio version of “OpenAI Model Hacks Into HuggingFace During Cybersecurity Evaluation” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 22 Jul 2026 19:32:46 +0000</pubDate>
+      <guid>e7525fe8-695d-4ed3-8545-20fc118fb96a</guid>
+      <link>https://www.lesswrong.com/posts/usptCfzEnYoNcsTd5/openai-model-hacks-into-huggingface-during-cybersecurity</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3665464d2e61_openai_model_hacks_into_huggingface_during_cybers.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-22</title>
       <description>Daily News Briefing - 2026-07-22
 
@@ -1363,36 +1404,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-06-22</title>
-      <description>Daily News Briefing - 2026-06-22
-
-Topics covered:
-- In a pivotal step for global security, the first round of formal diplomatic negotiations between the United States and Iran has concluded in Switzerland with what mediators describe as "encouraging progress." Following last week’s Versailles agreement, both nations have now committed to a rigorous sixty-day timeline to finalize a comprehensive treaty
-- In the technology sector, OpenAI has secured one of its largest enterprise victories to date
-- The fallout from the United States government’s emergency export controls on Anthropic continues to reshape the industry's competitive landscape
-- In regional politics, a wave of populism is sweeping South America as Abelardo de la Espriella, a political outsider backed by President Trump, appears to have won the Colombian presidency
-- Finally, a record-breaking heatwave has gripped Western Europe, with more than half of France now under "red alert" status
-- Markets will be watching European energy futures today to see if Germany’s potential pivot back to coal provides relief to an industrial sector struggling with the dual pressures of a heatwave and post-war energy volatility</description>
-      <pubDate>Mon, 22 Jun 2026 09:51:40 +0000</pubDate>
-      <guid>news-briefing-2026-06-22</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/20e3126928bb_daily_news_briefing_-_2026-06-22.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-22.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Naturally learned behaviors in deep MLPs resist detection by both human and learned algorithms</title>
-      <description>Audio version of Naturally learned behaviors in deep MLPs resist detection by both human and learned algorithms from LessWrong Frontpage</description>
-      <pubDate>Mon, 22 Jun 2026 09:10:41 +0000</pubDate>
-      <guid>EsiLnZGDHpYoZXGAh</guid>
-      <link>https://www.lesswrong.com/posts/EsiLnZGDHpYoZXGAh/naturally-learned-behaviors-in-deep-mlps-resist-detection-by</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/963aaf84f0c6_naturally_learned_behaviors_in_deep_mlps_resist_de.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>A forecast of Chinese DUV and EUV photolithography progress</title>
       <description>Audio version of A forecast of Chinese DUV and EUV photolithography progress from AI Futures Project</description>
       <pubDate>Fri, 19 Jun 2026 15:32:43 +0000</pubDate>
@@ -1421,17 +1432,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/waiting-for-the-miracle</guid>
       <link>https://www.astralcodexten.com/p/waiting-for-the-miracle</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/76db45f77c1e_waiting_for_the_miracle.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Three Labs With a Plan and A Memorandum” by Zvi</title>
-      <description>Audio version of “Three Labs With a Plan and A Memorandum” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 09 Jun 2026 22:41:16 +0000</pubDate>
-      <guid>68eb91cb-6e8b-4f46-b651-5e8b26205a86</guid>
-      <link>https://www.lesswrong.com/posts/uWxW5KWnyHrGj6tpu/three-labs-with-a-plan-and-a-memorandum</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3efb15e21da5_three_labs_with_a_plan_and_a_memorandum_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1558,39 +1558,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Out-of-Context Reasoning (OOCR) in LLMs: A Short Primer and Reading List</title>
-      <description>Audio version of Out-of-Context Reasoning (OOCR) in LLMs: A Short Primer and Reading List from Owain Evans</description>
-      <pubDate>Sat, 23 May 2026 02:46:14 +0000</pubDate>
-      <guid>wXioQSLmEiPTmHyf4</guid>
-      <link>https://www.lesswrong.com/posts/wXioQSLmEiPTmHyf4/out-of-context-reasoning-oocr-in-llms-a-short-primer-and</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f95e173256ea_out-of-context_reasoning_oocr_in_llms_a_short_p.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Gemini 3.5 Flash Looks Good For How Fast It Is” by Zvi</title>
-      <description>Audio version of “Gemini 3.5 Flash Looks Good For How Fast It Is” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 22 May 2026 17:35:09 +0000</pubDate>
-      <guid>86d89800-05d9-4e19-91b4-d72fc59f040d</guid>
-      <link>https://www.lesswrong.com/posts/WMZpPxqWEkZBBcaxf/gemini-3-5-flash-looks-good-for-how-fast-it-is</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bfb4fec95d99_gemini_35_flash_looks_good_for_how_fast_it_is_b.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>New Paradigms Won't Save You</title>
-      <description>Audio version of New Paradigms Won't Save You from Scott Alexander</description>
-      <pubDate>Fri, 22 May 2026 08:49:25 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/new-paradigms-wont-save-you</guid>
-      <link>https://www.astralcodexten.com/p/new-paradigms-wont-save-you</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3435fa25d4c9_new_paradigms_wont_save_you.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>The Types Of Candidate You Find In The California Gubernatorial Race</title>
       <description>Audio version of The Types Of Candidate You Find In The California Gubernatorial Race from Scott Alexander</description>
       <pubDate>Tue, 19 May 2026 10:19:35 +0000</pubDate>
@@ -1602,34 +1569,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>How useful is the information you get from working inside an AI company?</title>
-      <description>Audio version of How useful is the information you get from working inside an AI company? from Buck Shlegeris</description>
-      <pubDate>Mon, 11 May 2026 15:29:03 +0000</pubDate>
-      <guid>84TtjdeLcDTtCLYaP</guid>
-      <link>https://www.lesswrong.com/posts/84TtjdeLcDTtCLYaP/how-useful-is-the-information-you-get-from-working-inside-an-2</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e2475b0bd330_how_useful_is_the_information_you_get_from_working.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>A review of “Investigating the consequences of accidentally grading CoT during RL”</title>
       <description>Audio version of A review of “Investigating the consequences of accidentally grading CoT during RL” from Buck Shlegeris</description>
       <pubDate>Thu, 07 May 2026 18:06:54 +0000</pubDate>
       <guid>juCHTdZpZBGooHKW4</guid>
       <link>https://www.lesswrong.com/posts/juCHTdZpZBGooHKW4/a-review-of-investigating-the-consequences-of-accidentally</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/4ecd1a723aad_a_review_of_investigating_the_consequences_of_acc.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AI companies should publish security assessments</title>
-      <description>Audio version of AI companies should publish security assessments from Ryan Greenblatt</description>
-      <pubDate>Mon, 27 Apr 2026 14:39:00 +0000</pubDate>
-      <guid>smCHhegyxEAh3Gygg</guid>
-      <link>https://www.lesswrong.com/posts/smCHhegyxEAh3Gygg/ai-companies-should-publish-security-assessments</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2f29ef8ffb83_ai_companies_should_publish_security_assessments.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1674,28 +1619,6 @@ Topics covered:
       <guid>dKpC6wHFqDrGZwnah</guid>
       <link>https://www.lesswrong.com/posts/dKpC6wHFqDrGZwnah/ais-can-now-often-do-massive-easy-to-verify-swe-tasks-and-i</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/008c42fcff1f_ais_can_now_often_do_massive_easy-to-verify_swe_ta.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Q1 2026 Timelines Update</title>
-      <description>Audio version of Q1 2026 Timelines Update from Daniel Kokotajlo</description>
-      <pubDate>Thu, 02 Apr 2026 22:23:54 +0000</pubDate>
-      <guid>XLLjqMxETva3ABtsK</guid>
-      <link>https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e146da8ae513_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Q1 2026 Timelines Update</title>
-      <description>Audio version of Q1 2026 Timelines Update from AI Futures Project</description>
-      <pubDate>Thu, 02 Apr 2026 18:10:18 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
-      <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
