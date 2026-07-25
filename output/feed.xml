@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-25</title>
+      <description>Daily News Briefing - 2026-07-25
+
+Topics covered:
+- In artificial intelligence capabilities and markets, Anthropic has released Claude Opus Five, its latest high-end model
+- In government policy and science, the Trump administration has officially launched the "Genesis Mission," a five-billion-dollar grant program aimed at accelerating AI-driven scientific breakthroughs
+- In geopolitics and global conflict, the regional war in the Middle East has entered a dangerous new phase of naval engagement
+- In global trade and economics, President Trump has introduced a massive new wave of tariffs on dozens of countries, citing concerns over forced labor
+- In space and infrastructure, SpaceX successfully launched its new Version Three Starlink satellites, though the mission was marred by another booster failure during the landing phase
+- Expect a volatile day on Wall Street as tech firms and automakers, including Rivian, move forward with lawsuits against the federal government demanding full refunds for the previous year’s commerce duties</description>
+      <pubDate>Sat, 25 Jul 2026 06:22:44 +0000</pubDate>
+      <guid>news-briefing-2026-07-25</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e04fab840abf_daily_news_briefing_-_2026-07-25.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-25.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Wait, feelings are supposed to be IN THE BODY?”</title>
+      <description>Audio version of “Wait, feelings are supposed to be IN THE BODY?” from LessWrong Frontpage</description>
+      <pubDate>Sat, 25 Jul 2026 00:15:17 +0000</pubDate>
+      <guid>APR9vfogzzohtDi8A</guid>
+      <link>https://www.lesswrong.com/posts/APR9vfogzzohtDi8A/wait-feelings-are-supposed-to-be-in-the-body-1</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/99c9a646d9b3_wait_feelings_are_supposed_to_be_in_the_body.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Introducing Lightcone Commons” by Zvi</title>
+      <description>Audio version of “Introducing Lightcone Commons” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 24 Jul 2026 17:22:51 +0000</pubDate>
+      <guid>98a5c0a6-947f-4406-911a-1b3bbb06cbf2</guid>
+      <link>https://www.lesswrong.com/posts/fYostss6JqkSfxc5C/introducing-lightcone-commons</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/68e18a6c777f_introducing_lightcone_commons_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Your Book Review: Breakdown In Pakistan</title>
+      <description>Audio version of Your Book Review: Breakdown In Pakistan from Scott Alexander</description>
+      <pubDate>Fri, 24 Jul 2026 15:04:42 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/breakdown-in-pakistan</guid>
+      <link>https://www.astralcodexten.com/p/breakdown-in-pakistan</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f1412b4532cd_your_book_review_breakdown_in_pakistan.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-24</title>
       <description>Daily News Briefing - 2026-07-24
 
@@ -1374,47 +1426,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-06-24</title>
-      <description>Daily News Briefing - 2026-06-24
-
-Topics covered:
-- In a landmark shift for executive power, the United States Congress has passed a war powers resolution for the first time in this administration, formally breaking with President Trump over the conflict with Iran
-- In artificial intelligence capabilities, OpenAI has announced that its GPT-five Pro model successfully solved a three-year-old mystery in immunology
-- The defensive AI market is also heating up as Superhuman has acquired the AI detection startup GPT-Zero
-- In the corporate sector, Oracle has announced twenty-one thousand layoffs, the largest scale-back in its recent history
-- Finally, the geographical focus of the tech world continues to shift toward India
-- Markets will be watching the opening of the European energy exchanges as France reports a surge in heatwave-related deaths, further straining the continent's power grid</description>
-      <pubDate>Wed, 24 Jun 2026 07:49:37 +0000</pubDate>
-      <guid>news-briefing-2026-06-24</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/25288292d113_daily_news_briefing_-_2026-06-24.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-24.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Guardian Angels: LLM Personalization for Productivity and Security</title>
-      <description>Audio version of Guardian Angels: LLM Personalization for Productivity and Security from LessWrong Frontpage</description>
-      <pubDate>Wed, 24 Jun 2026 05:30:56 +0000</pubDate>
-      <guid>siWqHqCSybdhtWGud</guid>
-      <link>https://www.lesswrong.com/posts/siWqHqCSybdhtWGud/guardian-angels-llm-personalization-for-productivity-and</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/582238a3f7a1_guardian_angels_llm_personalization_for_productiv.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Monthly Roundup #43: June 2026” by Zvi</title>
-      <description>Audio version of “Monthly Roundup #43: June 2026” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 23 Jun 2026 12:33:23 +0000</pubDate>
-      <guid>2522247e-1edb-4473-93b5-fecb0c89b78a</guid>
-      <link>https://www.lesswrong.com/posts/Taa4zmSNtD5S99tJT/monthly-roundup-43-june-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/91e418438646_monthly_roundup_43_june_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>A forecast of Chinese DUV and EUV photolithography progress</title>
       <description>Audio version of A forecast of Chinese DUV and EUV photolithography progress from AI Futures Project</description>
       <pubDate>Fri, 19 Jun 2026 15:32:43 +0000</pubDate>
@@ -1580,17 +1591,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>The Types Of Candidate You Find In The California Gubernatorial Race</title>
-      <description>Audio version of The Types Of Candidate You Find In The California Gubernatorial Race from Scott Alexander</description>
-      <pubDate>Tue, 19 May 2026 10:19:35 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-types-of-candidate-you-find-in</guid>
-      <link>https://www.astralcodexten.com/p/the-types-of-candidate-you-find-in</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aff8017317e8_the_types_of_candidate_you_find_in_the_california.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>How useful is the information you get from working inside an AI company?</title>
       <description>Audio version of How useful is the information you get from working inside an AI company? from Buck Shlegeris</description>
       <pubDate>Mon, 11 May 2026 15:29:03 +0000</pubDate>
@@ -1602,12 +1602,23 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines</title>
-      <description>Audio version of If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines from Ryan Greenblatt</description>
-      <pubDate>Sat, 11 Apr 2026 00:38:52 +0000</pubDate>
-      <guid>Jga7PHMzfZf4fbdyo</guid>
-      <link>https://www.lesswrong.com/posts/Jga7PHMzfZf4fbdyo/if-mythos-actually-made-anthropic-employees-4x-more</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0aaf520ae940_if_mythos_actually_made_anthropic_employees_4x_mor.mp3" type="audio/mpeg" length="0" />
+      <title>A review of “Investigating the consequences of accidentally grading CoT during RL”</title>
+      <description>Audio version of A review of “Investigating the consequences of accidentally grading CoT during RL” from Buck Shlegeris</description>
+      <pubDate>Thu, 07 May 2026 18:06:54 +0000</pubDate>
+      <guid>juCHTdZpZBGooHKW4</guid>
+      <link>https://www.lesswrong.com/posts/juCHTdZpZBGooHKW4/a-review-of-investigating-the-consequences-of-accidentally</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4ecd1a723aad_a_review_of_investigating_the_consequences_of_acc.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>AI companies should publish security assessments</title>
+      <description>Audio version of AI companies should publish security assessments from Ryan Greenblatt</description>
+      <pubDate>Mon, 27 Apr 2026 14:39:00 +0000</pubDate>
+      <guid>smCHhegyxEAh3Gygg</guid>
+      <link>https://www.lesswrong.com/posts/smCHhegyxEAh3Gygg/ai-companies-should-publish-security-assessments</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2f29ef8ffb83_ai_companies_should_publish_security_assessments.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1657,23 +1668,23 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Announcing ControlConf 2026</title>
-      <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
-      <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
-      <guid>tN5mgBAinwFe5c67c</guid>
-      <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
+      <title>Types of Handoff to AIs</title>
+      <description>Audio version of Types of Handoff to AIs from Daniel Kokotajlo</description>
+      <pubDate>Mon, 16 Mar 2026 22:24:25 +0000</pubDate>
+      <guid>YuMr6kbstuieQHkGj</guid>
+      <link>https://www.lesswrong.com/posts/YuMr6kbstuieQHkGj/types-of-handoff-to-ais</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/186d63bf34b6_types_of_handoff_to_ais.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Grading AI 2027's 2025 Predictions</title>
-      <description>Audio version of Grading AI 2027's 2025 Predictions from Daniel Kokotajlo</description>
-      <pubDate>Fri, 13 Feb 2026 00:18:41 +0000</pubDate>
-      <guid>JYGeAAh92hAwvseFk</guid>
-      <link>https://www.lesswrong.com/posts/JYGeAAh92hAwvseFk/grading-ai-2027-s-2025-predictions</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8aad9aed9429_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
+      <title>Grading AI 2027’s 2025 Predictions</title>
+      <description>Audio version of Grading AI 2027’s 2025 Predictions from AI Futures Project</description>
+      <pubDate>Thu, 12 Feb 2026 23:56:07 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</guid>
+      <link>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1696,17 +1707,6 @@ Topics covered:
       <guid>rRbDNQLfihiHbXytf</guid>
       <link>https://www.lesswrong.com/posts/rRbDNQLfihiHbXytf/distinguish-between-inference-scaling-and-larger-tasks-use</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f14ce93e351f_distinguish_between_inference_scaling_and_larger.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Clarifying how our AI timelines forecasts have changed since AI 2027</title>
-      <description>Audio version of Clarifying how our AI timelines forecasts have changed since AI 2027 from AI Futures Project</description>
-      <pubDate>Tue, 27 Jan 2026 22:50:15 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts</guid>
-      <link>https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/310dcf521ccf_clarifying_how_our_ai_timelines_forecasts_have_cha.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -2031,12 +2031,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>How do LLMs give truthful answers? A discussion of LLM vs. human reasoning, ensembles &amp; parrots</title>
-      <description>Audio version of How do LLMs give truthful answers? A discussion of LLM vs. human reasoning, ensembles &amp; parrots from Owain Evans</description>
-      <pubDate>Thu, 28 Mar 2024 02:34:21 +0000</pubDate>
-      <guid>ZKksgfTxuxKhDfk4m</guid>
-      <link>https://www.lesswrong.com/posts/ZKksgfTxuxKhDfk4m/how-do-llms-give-truthful-answers-a-discussion-of-llm-vs</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/040c943c4686_how_do_llms_give_truthful_answers_a_discussion_of.mp3" type="audio/mpeg" length="0" />
+      <title>New, improved multiple-choice TruthfulQA</title>
+      <description>Audio version of New, improved multiple-choice TruthfulQA from Owain Evans</description>
+      <pubDate>Wed, 15 Jan 2025 23:32:09 +0000</pubDate>
+      <guid>Bunfwz6JsNd44kgLT</guid>
+      <link>https://www.lesswrong.com/posts/Bunfwz6JsNd44kgLT/new-improved-multiple-choice-truthfulqa</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/be18640f6d79_new_improved_multiple-choice_truthfulqa.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
