@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-26</title>
+      <description>Daily News Briefing - 2026-07-26
+
+Topics covered:
+- In space and heavy infrastructure, SpaceX has concluded the thirteenth flight of Starship with an "auspicious" finish that has cleared the way for a tower catch attempt on the next mission
+- In artificial intelligence and the labor market, Monday-dot-com has become the latest in a string of twenty major tech firms to officially cite artificial intelligence as a primary driver for layoffs
+- In geopolitics and environmental crisis, the European climate emergency is worsening as more than three hundred thousand people have been forced to flee their homes across Spain and France
+- In global policy and regulation, the European Union is intensifying its conflict with Silicon Valley as researchers formally accuse TikTok, X, and Meta of stonewalling
+- In regional politics, India is seeing a rare win for organized youth protest as the Education Minister has resigned following weeks of pressure from the "Cockroach Janta Party." The protest, which became the most visible expression of public anger against Prime Minister Narendra Modi’s administration, has officially been called off after successfully forcing leadership changes in the wake of national education and testing scandals
+- Expect continued tension in the media sector as Kalshi demands that Netflix remove its "Prediction Games" documentary trailer, alleging defamation and the use of fabricated documents to misrepresent the prediction market industry</description>
+      <pubDate>Sun, 26 Jul 2026 06:41:24 +0000</pubDate>
+      <guid>news-briefing-2026-07-26</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/57a6302e8bf4_daily_news_briefing_-_2026-07-26.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-26.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Simple Dutch books versus Sleeping Beauty halfers</title>
+      <description>Audio version of Simple Dutch books versus Sleeping Beauty halfers from LessWrong Frontpage</description>
+      <pubDate>Sun, 26 Jul 2026 05:41:08 +0000</pubDate>
+      <guid>q3qHctffoPmZkArBB</guid>
+      <link>https://www.lesswrong.com/posts/q3qHctffoPmZkArBB/simple-dutch-books-versus-sleeping-beauty-halfers</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bb3342b38e17_simple_dutch_books_versus_sleeping_beauty_halfers.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Opus 5: The System Card” by Zvi</title>
+      <description>Audio version of “Claude Opus 5: The System Card” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sat, 25 Jul 2026 13:43:12 +0000</pubDate>
+      <guid>18ee7606-bf2f-4075-b397-b1d21659be07</guid>
+      <link>https://www.lesswrong.com/posts/ywGX6FhgbZEkHRfQR/claude-opus-5-the-system-card</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/983c1a78291c_claude_opus_5_the_system_card_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-25</title>
       <description>Daily News Briefing - 2026-07-25
 
@@ -1385,42 +1426,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-06-25</title>
-      <description>Daily News Briefing - 2026-06-25
-
-Topics covered:
-- In a milestone for the semiconductor industry, OpenAI has officially unveiled its first custom silicon, an artificial intelligence processor named "Jalapeño." Developed in partnership with Broadcom, Jalapeño is an application-specific integrated circuit designed exclusively for large language model inference at scale
-- The geopolitical and corporate friction surrounding AI safety has escalated as Anthropic publicly accused Chinese conglomerate Alibaba of illicitly extracting capabilities from its Claude models
-- On the domestic front, President Trump has submitted an eighty-seven-billion-dollar emergency budget request to Congress to cover the surging costs of the recent military engagement with Iran
-- In the first major domestic political test for the AI industry, a high-stakes proxy war in New York’s Democratic primary has ended in a draw
-- Two major health and environmental crises are converging on Western Europe
-- In the private sector, Agility Robotics has announced plans to go public via a two-and-a-half-billion-dollar merger with a special purpose acquisition company</description>
-      <pubDate>Thu, 25 Jun 2026 07:51:13 +0000</pubDate>
-      <guid>news-briefing-2026-06-25</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fcefadb46c0b_daily_news_briefing_-_2026-06-25.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-06-25.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>What do people interpret from fatness?</title>
-      <description>Audio version of What do people interpret from fatness? from LessWrong Frontpage</description>
-      <pubDate>Thu, 25 Jun 2026 07:11:05 +0000</pubDate>
-      <guid>REbmuGtYqFxDSy7Qt</guid>
-      <link>https://www.lesswrong.com/posts/REbmuGtYqFxDSy7Qt/what-do-people-interpret-from-fatness</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5dabbc5d3e60_what_do_people_interpret_from_fatness.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“The Once And Future Fable #4” by Zvi</title>
-      <description>Audio version of “The Once And Future Fable #4” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 24 Jun 2026 20:13:13 +0000</pubDate>
-      <guid>1d596866-edc9-4a6a-9852-562b1cd17d95</guid>
-      <link>https://www.lesswrong.com/posts/xJMngE34AfwGWvKLx/the-once-and-future-fable-4</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9e4f59da60a3_the_once_and_future_fable_4_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <title>Should People Avoid Whole-Body Screening Info?</title>
+      <description>Audio version of Should People Avoid Whole-Body Screening Info? from Scott Alexander</description>
+      <pubDate>Tue, 23 Jun 2026 00:41:37 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/should-people-avoid-whole-body-screening</guid>
+      <link>https://www.astralcodexten.com/p/should-people-avoid-whole-body-screening</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/afac220bb4e4_should_people_avoid_whole-body_screening_info.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1624,12 +1635,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>My picture of the present in AI</title>
-      <description>Audio version of My picture of the present in AI from Ryan Greenblatt</description>
-      <pubDate>Tue, 07 Apr 2026 16:44:58 +0000</pubDate>
-      <guid>WjaGAA4xCAXeFpyWm</guid>
-      <link>https://www.lesswrong.com/posts/WjaGAA4xCAXeFpyWm/my-picture-of-the-present-in-ai</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/edfbb161e75d_my_picture_of_the_present_in_ai.mp3" type="audio/mpeg" length="0" />
+      <title>Current AIs seem pretty misaligned to me</title>
+      <description>Audio version of Current AIs seem pretty misaligned to me from Ryan Greenblatt</description>
+      <pubDate>Wed, 15 Apr 2026 15:14:11 +0000</pubDate>
+      <guid>WewsByywWNhX9rtwi</guid>
+      <link>https://www.lesswrong.com/posts/WewsByywWNhX9rtwi/current-ais-seem-pretty-misaligned-to-me</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e3c3d13e4326_current_ais_seem_pretty_misaligned_to_me.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1679,6 +1690,28 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Announcing ControlConf 2026</title>
+      <description>Audio version of Announcing ControlConf 2026 from Buck Shlegeris</description>
+      <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
+      <guid>tN5mgBAinwFe5c67c</guid>
+      <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Grading AI 2027's 2025 Predictions</title>
+      <description>Audio version of Grading AI 2027's 2025 Predictions from Daniel Kokotajlo</description>
+      <pubDate>Fri, 13 Feb 2026 00:18:41 +0000</pubDate>
+      <guid>JYGeAAh92hAwvseFk</guid>
+      <link>https://www.lesswrong.com/posts/JYGeAAh92hAwvseFk/grading-ai-2027-s-2025-predictions</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8aad9aed9429_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Grading AI 2027’s 2025 Predictions</title>
       <description>Audio version of Grading AI 2027’s 2025 Predictions from AI Futures Project</description>
       <pubDate>Thu, 12 Feb 2026 23:56:07 +0000</pubDate>
@@ -1712,12 +1745,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Forecast how AI will progress in 2026</title>
-      <description>Audio version of Forecast how AI will progress in 2026 from AI Futures Project</description>
-      <pubDate>Sat, 17 Jan 2026 18:52:05 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/forecast-how-ai-will-progress-in</guid>
-      <link>https://blog.aifutures.org/p/forecast-how-ai-will-progress-in</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b9c56661c15c_forecast_how_ai_will_progress_in_2026.mp3" type="audio/mpeg" length="0" />
+      <title>Clarifying how our AI timelines forecasts have changed since AI 2027</title>
+      <description>Audio version of Clarifying how our AI timelines forecasts have changed since AI 2027 from AI Futures Project</description>
+      <pubDate>Tue, 27 Jan 2026 22:50:15 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts</guid>
+      <link>https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/310dcf521ccf_clarifying_how_our_ai_timelines_forecasts_have_cha.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1729,17 +1762,6 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/what-happens-when-superhuman-ais</guid>
       <link>https://blog.aifutures.org/p/what-happens-when-superhuman-ais</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/04eb9263329e_what_happens_when_superhuman_ais_compete_for_contr.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The inaugural Redwood Research podcast</title>
-      <description>Audio version of The inaugural Redwood Research podcast from Buck Shlegeris</description>
-      <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
-      <guid>p4iJpumHt6Ay9KnXT</guid>
-      <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1888,17 +1910,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Vitalik's Response to AI 2027</title>
-      <description>Audio version of Vitalik's Response to AI 2027 from Daniel Kokotajlo</description>
-      <pubDate>Fri, 11 Jul 2025 21:43:36 +0000</pubDate>
-      <guid>zuuQwueBpv9ZCpNuX</guid>
-      <link>https://www.lesswrong.com/posts/zuuQwueBpv9ZCpNuX/vitalik-s-response-to-ai-2027</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a2b17c92c517_vitaliks_response_to_ai_2027.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>What you can do about AI 2027</title>
       <description>Audio version of What you can do about AI 2027 from AI Futures Project</description>
       <pubDate>Sat, 28 Jun 2025 17:46:28 +0000</pubDate>
@@ -2042,12 +2053,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Paper: Tell, Don't Show- Declarative facts influence how LLMs generalize</title>
-      <description>Audio version of Paper: Tell, Don't Show- Declarative facts influence how LLMs generalize from Owain Evans</description>
-      <pubDate>Tue, 19 Dec 2023 19:14:26 +0000</pubDate>
-      <guid>DR67cnvgCXw7CkXbd</guid>
-      <link>https://www.lesswrong.com/posts/DR67cnvgCXw7CkXbd/paper-tell-don-t-show-declarative-facts-influence-how-llms</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e98db3d4899a_paper_tell_dont_show-_declarative_facts_influen.mp3" type="audio/mpeg" length="0" />
+      <title>How do LLMs give truthful answers? A discussion of LLM vs. human reasoning, ensembles &amp; parrots</title>
+      <description>Audio version of How do LLMs give truthful answers? A discussion of LLM vs. human reasoning, ensembles &amp; parrots from Owain Evans</description>
+      <pubDate>Thu, 28 Mar 2024 02:34:21 +0000</pubDate>
+      <guid>ZKksgfTxuxKhDfk4m</guid>
+      <link>https://www.lesswrong.com/posts/ZKksgfTxuxKhDfk4m/how-do-llms-give-truthful-answers-a-discussion-of-llm-vs</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/040c943c4686_how_do_llms_give_truthful_answers_a_discussion_of.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
