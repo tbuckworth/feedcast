@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-07-28</title>
+      <description>Daily News Briefing - 2026-07-28
+
+Topics covered:
+- In artificial intelligence security and safety, Microsoft and Nvidia have launched the "Open Secure AI Alliance" alongside SpaceX and International Business Machines
+- In AI capabilities and geopolitics, Silicon Valley is on high alert following the release of Moonshot AI’s Kimi K-three
+- In global conflict and energy, oil prices have dived following a surprise announcement from President Trump that the United States and Iran have entered a "pause" in kinetic strikes to allow space for diplomatic talks
+- In domestic infrastructure and legal developments, the Trump administration has granted SpaceX a critical exemption from the Federal Communications Commission’s ban on foreign-made routers
+- In regional news and high-profile legal cases, world leaders including President Volodymyr Zelensky and Prime Minister Benjamin Netanyahu are arriving in Washington to attend the funeral of Senator Lindsey Graham
+- Expect a major confrontation in the tech sector tomorrow as the first committee hearings for the "AI Kill Switch Act" begin in the House of Representatives</description>
+      <pubDate>Tue, 28 Jul 2026 06:31:54 +0000</pubDate>
+      <guid>news-briefing-2026-07-28</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3a43768b1e05_daily_news_briefing_-_2026-07-28.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-28.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Somebody out there wants you to fetch coffee</title>
+      <description>Audio version of Somebody out there wants you to fetch coffee from LessWrong Frontpage</description>
+      <pubDate>Tue, 28 Jul 2026 04:35:54 +0000</pubDate>
+      <guid>ukxtp629mmDs8Mtca</guid>
+      <link>https://www.lesswrong.com/posts/ukxtp629mmDs8Mtca/somebody-out-there-wants-you-to-fetch-coffee</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f438e9eca01c_somebody_out_there_wants_you_to_fetch_coffee.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Opus 5: Model Welfare” by Zvi</title>
+      <description>Audio version of “Claude Opus 5: Model Welfare” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 27 Jul 2026 20:03:44 +0000</pubDate>
+      <guid>08d2a7d0-e222-4ff0-8ca8-53b05e06a3d1</guid>
+      <link>https://www.lesswrong.com/posts/bBXBpsyKAvJ5CqPzA/claude-opus-5-model-welfare</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/10ff467b9895_claude_opus_5_model_welfare_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-07-27</title>
       <description>Daily News Briefing - 2026-07-27
 
@@ -1372,6 +1413,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>The Metaculus Democracy Threat Index</title>
+      <description>Audio version of The Metaculus Democracy Threat Index from Scott Alexander</description>
+      <pubDate>Thu, 25 Jun 2026 23:59:00 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/the-metaculus-threat-to-democracy</guid>
+      <link>https://www.astralcodexten.com/p/the-metaculus-threat-to-democracy</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3f3ea57d798f_the_metaculus_democracy_threat_index.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Should People Avoid Whole-Body Screening Info?</title>
       <description>Audio version of Should People Avoid Whole-Body Screening Info? from Scott Alexander</description>
       <pubDate>Tue, 23 Jun 2026 00:41:37 +0000</pubDate>
@@ -1592,6 +1644,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>My picture of the present in AI</title>
+      <description>Audio version of My picture of the present in AI from Ryan Greenblatt</description>
+      <pubDate>Tue, 07 Apr 2026 16:44:58 +0000</pubDate>
+      <guid>WjaGAA4xCAXeFpyWm</guid>
+      <link>https://www.lesswrong.com/posts/WjaGAA4xCAXeFpyWm/my-picture-of-the-present-in-ai</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/edfbb161e75d_my_picture_of_the_present_in_ai.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Q1 2026 Timelines Update</title>
       <description>Audio version of Q1 2026 Timelines Update from Daniel Kokotajlo</description>
       <pubDate>Thu, 02 Apr 2026 22:23:54 +0000</pubDate>
@@ -1691,6 +1754,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>What Happens When Superhuman AIs Compete for Control?</title>
+      <description>Audio version of What Happens When Superhuman AIs Compete for Control? from AI Futures Project</description>
+      <pubDate>Sun, 11 Jan 2026 14:02:41 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/what-happens-when-superhuman-ais</guid>
+      <link>https://blog.aifutures.org/p/what-happens-when-superhuman-ais</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/04eb9263329e_what_happens_when_superhuman_ais_compete_for_contr.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>The inaugural Redwood Research podcast</title>
       <description>Audio version of The inaugural Redwood Research podcast from Buck Shlegeris</description>
       <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
@@ -1752,6 +1826,17 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/how-an-ai-company-ceo-could-quietly</guid>
       <link>https://blog.aifutures.org/p/how-an-ai-company-ceo-could-quietly</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/48759244faa2_how_an_ai_company_ceo_could_quietly_take_over_the.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Thinking Machines Tinker API is good news for AI control and security</title>
+      <description>Audio version of The Thinking Machines Tinker API is good news for AI control and security from Buck Shlegeris</description>
+      <pubDate>Thu, 09 Oct 2025 15:22:15 +0000</pubDate>
+      <guid>r68nCQK3veQtCdqGt</guid>
+      <link>https://www.lesswrong.com/posts/r68nCQK3veQtCdqGt/the-thinking-machines-tinker-api-is-good-news-for-ai-control</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/484b3eb83a9c_the_thinking_machines_tinker_api_is_good_news_for.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1829,6 +1914,17 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/what-you-can-do-about-ai-2027</guid>
       <link>https://blog.aifutures.org/p/what-you-can-do-about-ai-2027</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/feab7f530ca2_what_you_can_do_about_ai_2027.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>My pitch for the AI Village</title>
+      <description>Audio version of My pitch for the AI Village from Daniel Kokotajlo</description>
+      <pubDate>Tue, 24 Jun 2025 15:00:52 +0000</pubDate>
+      <guid>APfuz9hFz9d8SRETA</guid>
+      <link>https://www.lesswrong.com/posts/APfuz9hFz9d8SRETA/my-pitch-for-the-ai-village</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e1b5ebb4f741_my_pitch_for_the_ai_village.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1961,6 +2057,17 @@ Topics covered:
       <guid>DR67cnvgCXw7CkXbd</guid>
       <link>https://www.lesswrong.com/posts/DR67cnvgCXw7CkXbd/paper-tell-don-t-show-declarative-facts-influence-how-llms</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e98db3d4899a_paper_tell_dont_show-_declarative_facts_influen.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Paper: On measuring situational awareness in LLMs</title>
+      <description>Audio version of Paper: On measuring situational awareness in LLMs from Owain Evans</description>
+      <pubDate>Mon, 04 Sep 2023 12:54:20 +0000</pubDate>
+      <guid>mLfPHv4QjmeQrsSva</guid>
+      <link>https://www.lesswrong.com/posts/mLfPHv4QjmeQrsSva/paper-on-measuring-situational-awareness-in-llms</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fef7a5852995_paper_on_measuring_situational_awareness_in_llms.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
