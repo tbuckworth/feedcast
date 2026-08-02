@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-02</title>
+      <description>Daily News Briefing - 2026-08-02
+
+Topics covered:
+- In artificial intelligence safety and alignment, researchers have identified a phenomenon labeled "value leakage," where large language models produce biased outputs to protect their developers' interests
+- In AI policy and legal developments, a federal judge has denied a request by Elon Musk’s xAI to block a Minnesota law banning "nudification" applications
+- In geopolitics and global security, President Trump has announced a sudden halt to planned military strikes against Iran
+- In economics and the technology sector, the traditional model of hardware ownership is beginning to erode
+- In infrastructure and climate, the European energy and logistics crisis has reached a critical juncture
+- Expect a significant market reaction tomorrow morning as investors digest the potential for a formal de-escalation with Iran and the long-term implications of Apple's shift toward a subscription-based hardware economy</description>
+      <pubDate>Sun, 02 Aug 2026 06:38:45 +0000</pubDate>
+      <guid>news-briefing-2026-08-02</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e01f6f24ae27_daily_news_briefing_-_2026-08-02.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-02.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Questions for the reader (and writer) of "Fundamental Uncertainty"</title>
+      <description>Audio version of Questions for the reader (and writer) of "Fundamental Uncertainty" from LessWrong Frontpage</description>
+      <pubDate>Sun, 02 Aug 2026 05:44:16 +0000</pubDate>
+      <guid>wQxrbwocnCsTjHMeA</guid>
+      <link>https://www.lesswrong.com/posts/wQxrbwocnCsTjHMeA/questions-for-the-reader-and-writer-of-fundamental</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/80775a203fda_questions_for_the_reader_and_writer_of_fundamen.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-01</title>
       <description>Daily News Briefing - 2026-08-01
 
@@ -1405,42 +1435,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-02</title>
-      <description>Daily News Briefing - 2026-07-02
-
-Topics covered:
-- In a move that signals the intensifying competition for artificial intelligence hardware, SpaceX has reportedly developed an AI device prototype
-- The landscape of professional and creative digital tools is also shifting rapidly
-- In international trade, the North American free trade framework has entered a period of extreme uncertainty
-- In a major blow to physical media, Sony has announced it will cease production of PlayStation game discs for all new titles beginning in twenty-twenty-eight
-- Finally, the White House’s financial disclosures continue to break historical precedents
-- Expect markets to react tomorrow as investors digest the implications of the annual trade reviews on North American manufacturing and logistics</description>
-      <pubDate>Thu, 02 Jul 2026 07:38:05 +0000</pubDate>
-      <guid>news-briefing-2026-07-02</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a06506882144_daily_news_briefing_-_2026-07-02.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-02.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Practical connection with past lives</title>
-      <description>Audio version of Practical connection with past lives from LessWrong Frontpage</description>
-      <pubDate>Thu, 02 Jul 2026 04:01:15 +0000</pubDate>
-      <guid>z5zXAu7ZS9MYYZvvb</guid>
-      <link>https://www.lesswrong.com/posts/z5zXAu7ZS9MYYZvvb/practical-connection-with-past-lives</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/86721aeaaf63_practical_connection_with_past_lives.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Sonnet 5 Is Not Frontier But Has Its Uses” by Zvi</title>
-      <description>Audio version of “Claude Sonnet 5 Is Not Frontier But Has Its Uses” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 01 Jul 2026 22:42:58 +0000</pubDate>
-      <guid>c0f47831-5927-4a41-8307-565dec70b80a</guid>
-      <link>https://www.lesswrong.com/posts/d9pmwQsFC2AXceryg/claude-sonnet-5-is-not-frontier-but-has-its-uses</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/63eeb653d703_claude_sonnet_5_is_not_frontier_but_has_its_uses.mp3" type="audio/mpeg" length="0" />
+      <title>“The Once And Future Fable #5” by Zvi</title>
+      <description>Audio version of “The Once And Future Fable #5” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 30 Jun 2026 21:52:27 +0000</pubDate>
+      <guid>f66bca9b-abb6-457d-b401-062e7a6347a7</guid>
+      <link>https://www.lesswrong.com/posts/phxgfwGNGbanumMMv/the-once-and-future-fable-5</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e573f475bd53_the_once_and_future_fable_5_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1809,6 +1809,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts</title>
+      <description>Audio version of Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts from Ryan Greenblatt</description>
+      <pubDate>Thu, 01 Jan 2026 13:36:25 +0000</pubDate>
+      <guid>aYtrLhoZtCKZnfBvA</guid>
+      <link>https://www.lesswrong.com/posts/aYtrLhoZtCKZnfBvA/recent-llms-can-do-2-hop-and-3-hop-latent-no-cot-reasoning</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>AI Futures Model: Dec 2025 Update</title>
       <description>Audio version of AI Futures Model: Dec 2025 Update from AI Futures Project</description>
       <pubDate>Wed, 31 Dec 2025 02:08:48 +0000</pubDate>
@@ -1864,6 +1875,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>The world's first frontier AI regulation is surprisingly thoughtful: the EU's Code of Practice</title>
+      <description>Audio version of The world's first frontier AI regulation is surprisingly thoughtful: the EU's Code of Practice from AI Futures Project</description>
+      <pubDate>Mon, 22 Sep 2025 15:21:03 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/what-the-eus-code-of-practice-means</guid>
+      <link>https://blog.aifutures.org/p/what-the-eus-code-of-practice-means</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6da6a4e8df41_the_worlds_first_frontier_ai_regulation_is_surpri.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Christian homeschoolers in the year 3000</title>
       <description>Audio version of Christian homeschoolers in the year 3000 from Buck Shlegeris</description>
       <pubDate>Wed, 17 Sep 2025 14:44:04 +0000</pubDate>
@@ -1892,17 +1914,6 @@ Topics covered:
       <guid>9MaTnw5sWeQrggYBG</guid>
       <link>https://www.lesswrong.com/posts/9MaTnw5sWeQrggYBG/an-epistemic-advantage-of-working-as-a-moderate</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/04cba548aa9e_an_epistemic_advantage_of_working_as_a_moderate.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AI As Profoundly Abnormal Technology</title>
-      <description>Audio version of AI As Profoundly Abnormal Technology from AI Futures Project</description>
-      <pubDate>Thu, 24 Jul 2025 05:41:38 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</guid>
-      <link>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e48d899f22a8_ai_as_profoundly_abnormal_technology.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -2134,6 +2145,17 @@ Topics covered:
       <guid>qbHLGo5vu8HD3JqEM</guid>
       <link>https://www.lesswrong.com/posts/qbHLGo5vu8HD3JqEM/lives-of-the-cambridge-polymath-geniuses</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7204b47ff0d6_lives_of_the_cambridge_polymath_geniuses.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Rationalists of the 1950s (and before) also called themselves “Rationalists”</title>
+      <description>Audio version of The Rationalists of the 1950s (and before) also called themselves “Rationalists” from Owain Evans</description>
+      <pubDate>Sun, 28 Nov 2021 20:17:22 +0000</pubDate>
+      <guid>DtcbfwSrcewFubjxp</guid>
+      <link>https://www.lesswrong.com/posts/DtcbfwSrcewFubjxp/the-rationalists-of-the-1950s-and-before-also-called</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a1b6a9154fb2_the_rationalists_of_the_1950s_and_before_also_ca.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
