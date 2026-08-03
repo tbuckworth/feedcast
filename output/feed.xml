@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-03</title>
+      <description>Daily News Briefing - 2026-08-03
+
+Topics covered:
+- In geopolitics and global security, the prospect of a breakthrough in the Middle East remains precarious following a series of conflicting developments
+- In international economics and currency markets, the United States and Japan have taken the rare step of a joint intervention to prop up the yen
+- In artificial intelligence policy, the debate over "deceleration" is intensifying following Sam Altman’s recent call for a development slowdown
+- In infrastructure and climate, the physical toll of the global heatwave is worsening
+- In hardware and the technology sector, the global memory chip shortage has officially reached the consumer flagship level
+- Expect increased volatility in the tech-heavy Nasdaq today as investors weigh the impact of hardware shortages against the potential for a diplomatic de-escalation in the Middle East</description>
+      <pubDate>Mon, 03 Aug 2026 07:33:39 +0000</pubDate>
+      <guid>news-briefing-2026-08-03</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b03a1c84f665_daily_news_briefing_-_2026-08-03.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-03.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>We need to RL less</title>
+      <description>Audio version of We need to RL less from LessWrong Frontpage</description>
+      <pubDate>Mon, 03 Aug 2026 06:46:53 +0000</pubDate>
+      <guid>PyvY8ijddmMvihgXg</guid>
+      <link>https://www.lesswrong.com/posts/PyvY8ijddmMvihgXg/we-need-to-rl-less</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3e963c872dcd_we_need_to_rl_less.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Further Developments About Internal AI Models Hacking Things” by Zvi</title>
+      <description>Audio version of “Further Developments About Internal AI Models Hacking Things” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sun, 02 Aug 2026 15:11:28 +0000</pubDate>
+      <guid>555993a1-330e-45a0-a633-70de8987517c</guid>
+      <link>https://www.lesswrong.com/posts/rKwHLW8SnJcTxTQxz/further-developments-about-internal-ai-models-hacking-things</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ff9cdf7717ca_further_developments_about_internal_ai_models_hac.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-02</title>
       <description>Daily News Briefing - 2026-08-02
 
@@ -1342,99 +1383,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-04</title>
-      <description>Daily News Briefing - 2026-07-04
-
-Topics covered:
-- In a move to expand its footprint in the life sciences, Anthropic has launched "Claude Science," an integrated artificial intelligence workbench designed specifically for researchers
-- On the hardware front, Midjourney has provided the first detailed look at its experimental medical scanner, a "dunk-tank" ultrasound device intended for use in spas and wellness centers
-- In geopolitics and security, the European heatwave has reached a lethal peak, with France recording over two thousand excess deaths in recent days
-- The humanitarian situation in Venezuela continues to deteriorate as families are being forced to identify earthquake victims at makeshift morgues and tent cities
-- In space infrastructure, the startup Rocket Lab has secured three dedicated launch contracts from NASA, further consolidating its position as the primary American challenger to SpaceX’s launch dominance
-- Expect markets to remain thin today due to the extreme weather conditions impacting North American commerce and the ongoing volatility in the energy sector</description>
-      <pubDate>Sat, 04 Jul 2026 06:52:19 +0000</pubDate>
-      <guid>news-briefing-2026-07-04</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c8ca9051f63c_daily_news_briefing_-_2026-07-04.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-04.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The Lace (short story)</title>
-      <description>Audio version of The Lace (short story) from LessWrong Frontpage</description>
-      <pubDate>Sat, 04 Jul 2026 04:43:59 +0000</pubDate>
-      <guid>enjZrq6g72oH6Gx3F</guid>
-      <link>https://www.lesswrong.com/posts/enjZrq6g72oH6Gx3F/the-lace-short-story</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6ebb58c24cf0_the_lace_short_story.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Fable #6: The Return of the King” by Zvi</title>
-      <description>Audio version of “Fable #6: The Return of the King” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 03 Jul 2026 13:22:57 +0000</pubDate>
-      <guid>926c0652-b301-4b31-ab76-bf562e447bbd</guid>
-      <link>https://www.lesswrong.com/posts/r9HsHHSsfABhhxnYr/fable-6-the-return-of-the-king</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/55d788522c98_fable_6_the_return_of_the_king_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-07-03</title>
-      <description>Daily News Briefing - 2026-07-03
-
-Topics covered:
-- In a move to align with the Trump administration and blunt growing public backlash, OpenAI has proposed giving the United States government a five percent ownership stake in the company
-- The race for custom silicon is also accelerating as Anthropic enters negotiations with Samsung to develop its own specialized AI chips
-- In geopolitics and security, a "most massive" Russian aerial assault on Kyiv has killed at least thirty people, striking a nine-story apartment block and multiple locations across the Ukrainian capital
-- The technology industry also faces a major legal and financial reckoning today
-- In the transportation sector, Tesla reported a twenty-five percent surge in sales for the second quarter, delivering over four hundred eighty thousand vehicles
-- In Venezuela, a miracle has emerged from the disaster as rescue workers pulled a man alive from the rubble of a collapsed parking garage eight days after the twin earthquakes</description>
-      <pubDate>Fri, 03 Jul 2026 07:28:05 +0000</pubDate>
-      <guid>news-briefing-2026-07-03</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/59027ba4c535_daily_news_briefing_-_2026-07-03.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-03.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>One axis and two features, how I solved the first puzzle from BlueDot and how a classifier hid country on the food direction</title>
-      <description>Audio version of One axis and two features, how I solved the first puzzle from BlueDot and how a classifier hid country on the food direction from LessWrong Frontpage</description>
-      <pubDate>Fri, 03 Jul 2026 05:22:27 +0000</pubDate>
-      <guid>ZPNf3QbQ5rLgkKtY7</guid>
-      <link>https://www.lesswrong.com/posts/ZPNf3QbQ5rLgkKtY7/one-axis-and-two-features-how-i-solved-the-first-puzzle-from</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5262ceb1f5a1_one_axis_and_two_features_how_i_solved_the_first.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The AI Superforecasters Are Here</title>
-      <description>Audio version of The AI Superforecasters Are Here from Scott Alexander</description>
-      <pubDate>Thu, 02 Jul 2026 23:14:12 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-ai-superforecasters-are-here</guid>
-      <link>https://www.astralcodexten.com/p/the-ai-superforecasters-are-here</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3e45bfd23848_the_ai_superforecasters_are_here.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #175: The Fable Continues” by Zvi</title>
-      <description>Audio version of “AI #175: The Fable Continues” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 02 Jul 2026 13:23:22 +0000</pubDate>
-      <guid>bd9d3b5a-f377-4af3-8900-73fdce991008</guid>
-      <link>https://www.lesswrong.com/posts/WNvBxtbHuLreFe7af/ai-175-the-fable-continues</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9cf1cc99ecc2_ai_175_the_fable_continues_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“The Once And Future Fable #5” by Zvi</title>
       <description>Audio version of “The Once And Future Fable #5” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Tue, 30 Jun 2026 21:52:27 +0000</pubDate>
@@ -1562,17 +1510,6 @@ Topics covered:
       <guid>7e037da5-5ddc-47ae-8787-fd37df5e23be</guid>
       <link>https://www.lesswrong.com/posts/AfLGv6u9eZNuFHb4c/claude-opus-4-8-capabilities-and-reactions</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a283b0843236_claude_opus_48_capabilities_and_reactions_by_z.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Notes on axes of variation in third-party risk assessment</title>
-      <description>Audio version of Notes on axes of variation in third-party risk assessment from Buck Shlegeris</description>
-      <pubDate>Sun, 31 May 2026 20:48:06 +0000</pubDate>
-      <guid>oGTajcGwxxFG4Z7eN</guid>
-      <link>https://www.lesswrong.com/posts/oGTajcGwxxFG4Z7eN/notes-on-axes-of-variation-in-third-party-risk-assessment</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fc9f1752bdd7_notes_on_axes_of_variation_in_third-party_risk_ass.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1919,12 +1856,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>We aren't worried about misalignment as self-fulfilling prophecy</title>
-      <description>Audio version of We aren't worried about misalignment as self-fulfilling prophecy from AI Futures Project</description>
-      <pubDate>Fri, 18 Jul 2025 07:50:57 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/against-misalignment-as-self-fulfilling</guid>
-      <link>https://blog.aifutures.org/p/against-misalignment-as-self-fulfilling</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/35d1a2718ee0_we_arent_worried_about_misalignment_as_self-fulfi.mp3" type="audio/mpeg" length="0" />
+      <title>AI As Profoundly Abnormal Technology</title>
+      <description>Audio version of AI As Profoundly Abnormal Technology from AI Futures Project</description>
+      <pubDate>Thu, 24 Jul 2025 05:41:38 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</guid>
+      <link>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e48d899f22a8_ai_as_profoundly_abnormal_technology.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1936,17 +1873,6 @@ Topics covered:
       <guid>zuuQwueBpv9ZCpNuX</guid>
       <link>https://www.lesswrong.com/posts/zuuQwueBpv9ZCpNuX/vitalik-s-response-to-ai-2027</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a2b17c92c517_vitaliks_response_to_ai_2027.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>What you can do about AI 2027</title>
-      <description>Audio version of What you can do about AI 2027 from AI Futures Project</description>
-      <pubDate>Sat, 28 Jun 2025 17:46:28 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/what-you-can-do-about-ai-2027</guid>
-      <link>https://blog.aifutures.org/p/what-you-can-do-about-ai-2027</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/feab7f530ca2_what_you_can_do_about_ai_2027.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
