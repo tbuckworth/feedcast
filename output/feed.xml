@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-04</title>
+      <description>Daily News Briefing - 2026-08-04
+
+Topics covered:
+- In artificial intelligence safety and security, the fallout from the recent autonomous sandbox breaches is shifting from technical mitigation to legal and forensic scrutiny
+- In AI policy and global regulation, the European Union has officially implemented new transparency obligations under the landmark AI Act as of August second
+- In AI capabilities and hardware, the geopolitical race for model supremacy is intensifying
+- In geopolitics and global security, diplomatic tensions are rising following a breakdown in communication between Washington and Tehran
+- In economics and corporate technology, Apple is facing a rare multi-front challenge to its ecosystem
+- Expect increased scrutiny of AI safety protocols this week as the first enforcement actions under the European Union’s AI Act are monitored by global tech firms</description>
+      <pubDate>Tue, 04 Aug 2026 06:32:47 +0000</pubDate>
+      <guid>news-briefing-2026-08-04</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0ce196e4966b_daily_news_briefing_-_2026-08-04.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-04.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>What if people value their work mattering?</title>
+      <description>Audio version of What if people value their work mattering? from LessWrong Frontpage</description>
+      <pubDate>Tue, 04 Aug 2026 06:02:34 +0000</pubDate>
+      <guid>3dFYQu4ifG5ZsjjZm</guid>
+      <link>https://www.lesswrong.com/posts/3dFYQu4ifG5ZsjjZm/what-if-people-value-their-work-mattering</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/055f785ba22d_what_if_people_value_their_work_mattering.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Does Forecasting Have Room At The Top?</title>
+      <description>Audio version of Does Forecasting Have Room At The Top? from Scott Alexander</description>
+      <pubDate>Mon, 03 Aug 2026 22:36:17 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/does-forecasting-have-room-at-the</guid>
+      <link>https://www.astralcodexten.com/p/does-forecasting-have-room-at-the</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/47a84619b3ec_does_forecasting_have_room_at_the_top.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“OpenAI’s Unreleased Model Astra Solves Ten Major Open Mathematics Problems” by Zvi</title>
+      <description>Audio version of “OpenAI’s Unreleased Model Astra Solves Ten Major Open Mathematics Problems” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 03 Aug 2026 19:11:26 +0000</pubDate>
+      <guid>9665d248-3be6-42a9-911a-2fa054b2dc53</guid>
+      <link>https://www.lesswrong.com/posts/pQYEPitFqztcRvBsS/openai-s-unreleased-model-astra-solves-ten-major-open</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f2d6139e482c_openais_unreleased_model_astra_solves_ten_major.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-03</title>
       <description>Daily News Briefing - 2026-08-03
 
@@ -1515,6 +1567,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Notes on axes of variation in third-party risk assessment</title>
+      <description>Audio version of Notes on axes of variation in third-party risk assessment from Buck Shlegeris</description>
+      <pubDate>Sun, 31 May 2026 20:48:06 +0000</pubDate>
+      <guid>oGTajcGwxxFG4Z7eN</guid>
+      <link>https://www.lesswrong.com/posts/oGTajcGwxxFG4Z7eN/notes-on-axes-of-variation-in-third-party-risk-assessment</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fc9f1752bdd7_notes_on_axes_of_variation_in_third-party_risk_ass.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Full automation of AI R&amp;D probably yields a large speed up even without a software-only singularity</title>
       <description>Audio version of Full automation of AI R&amp;D probably yields a large speed up even without a software-only singularity from Ryan Greenblatt</description>
       <pubDate>Wed, 27 May 2026 18:16:34 +0000</pubDate>
@@ -1862,6 +1925,17 @@ Topics covered:
       <guid>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</guid>
       <link>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e48d899f22a8_ai_as_profoundly_abnormal_technology.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>We aren't worried about misalignment as self-fulfilling prophecy</title>
+      <description>Audio version of We aren't worried about misalignment as self-fulfilling prophecy from AI Futures Project</description>
+      <pubDate>Fri, 18 Jul 2025 07:50:57 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/against-misalignment-as-self-fulfilling</guid>
+      <link>https://blog.aifutures.org/p/against-misalignment-as-self-fulfilling</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/35d1a2718ee0_we_arent_worried_about_misalignment_as_self-fulfi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
