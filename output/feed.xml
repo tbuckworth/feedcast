@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-05</title>
+      <description>Daily News Briefing - 2026-08-05
+
+Topics covered:
+- In artificial intelligence capabilities and corporate economics, SpaceX has emerged as a major surprise player in the compute market
+- In AI policy and infrastructure, the rapid expansion of data centers has hit a significant roadblock in the United States
+- In AI safety and research, the Alignment Research Center, or ARC, has announced that it is doubling down on "mechanistic interpretability." The center’s leadership confirmed a new six-month focus on developing techniques to find structural explanations for neural network behavior
+- In geopolitics and regional security, the humanitarian situation in Ukraine has reached a grim new milestone
+- In legal developments and cybersecurity, the conflict between Apple and OpenAI has moved into the court of public opinion
+- Expect a period of heightened market scrutiny on energy stocks as other states consider following Texas in auditing the impact of AI infrastructure on local power grids</description>
+      <pubDate>Wed, 05 Aug 2026 06:35:34 +0000</pubDate>
+      <guid>news-briefing-2026-08-05</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/44aee6efe197_daily_news_briefing_-_2026-08-05.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-05.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Persona Corruption and Role Miscasting in Emergent Misalignment</title>
+      <description>Audio version of Persona Corruption and Role Miscasting in Emergent Misalignment from LessWrong Frontpage</description>
+      <pubDate>Wed, 05 Aug 2026 04:56:15 +0000</pubDate>
+      <guid>HooBYPCkMDGjktcLA</guid>
+      <link>https://www.lesswrong.com/posts/HooBYPCkMDGjktcLA/persona-corruption-and-role-miscasting-in-emergent</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3eb6235296e9_persona_corruption_and_role_miscasting_in_emergent.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Beauty Of Settled Science</title>
+      <description>Audio version of The Beauty Of Settled Science from Scott Alexander</description>
+      <pubDate>Tue, 04 Aug 2026 21:32:18 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/the-beauty-of-settled-science</guid>
+      <link>https://www.astralcodexten.com/p/the-beauty-of-settled-science</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/944e26cc58f3_the_beauty_of_settled_science.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-04</title>
       <description>Daily News Briefing - 2026-08-04
 
@@ -1405,31 +1446,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-05</title>
-      <description>Daily News Briefing - 2026-07-05
-
-Topics covered:
-- In a significant diplomatic development, Chinese authorities have released Jin Mingri, the founder of the Zion Church, following a direct personal plea from President Donald Trump to Xi Jinping
-- The global landscape of A-I security and corporate competition is tightening as Alibaba has reportedly banned its employees from using Anthropic’s new "Claude Code" tool
-- In legal and intellectual property news, Midjourney is escalating its defense against Hollywood
-- Geopolitical stability in the Middle East faces a critical test today as the state funeral for Ayatollah Ali Khamenei begins in Tehran
-- Finally, in South America, Keiko Fujimori has been officially declared the winner of Peru’s presidential election, nearly a month after the initial vote
-- Expect global energy markets to react as Ukraine continues its campaign against Russian infrastructure, following a successful strike on a major oil terminal in Saint Petersburg</description>
-      <pubDate>Sun, 05 Jul 2026 07:33:18 +0000</pubDate>
-      <guid>news-briefing-2026-07-05</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/21eca19b85fe_daily_news_briefing_-_2026-07-05.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-05.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Pragmatic FDT, and predictors as game theory</title>
-      <description>Audio version of Pragmatic FDT, and predictors as game theory from LessWrong Frontpage</description>
-      <pubDate>Sun, 05 Jul 2026 04:41:50 +0000</pubDate>
-      <guid>SdGbWkCZgCN7EGBxM</guid>
-      <link>https://www.lesswrong.com/posts/SdGbWkCZgCN7EGBxM/pragmatic-fdt-and-predictors-as-game-theory-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1b609921577c_pragmatic_fdt_and_predictors_as_game_theory.mp3" type="audio/mpeg" length="0" />
+      <title>“Fable #6: The Return of the King” by Zvi</title>
+      <description>Audio version of “Fable #6: The Return of the King” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 03 Jul 2026 13:22:57 +0000</pubDate>
+      <guid>926c0652-b301-4b31-ab76-bf562e447bbd</guid>
+      <link>https://www.lesswrong.com/posts/r9HsHHSsfABhhxnYr/fable-6-the-return-of-the-king</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/55d788522c98_fable_6_the_return_of_the_king_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1551,17 +1573,6 @@ Topics covered:
       <guid>12f10149-945c-4625-ba18-88c5b75a7701</guid>
       <link>https://www.lesswrong.com/posts/yDnfHrBzKc2pNQNdw/trump-signs-executive-order-for-ai-testing-prior-to-frontier</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0562d9dbc690_trump_signs_executive_order_for_ai_testing_prior.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Opus 4.8: Capabilities and Reactions” by Zvi</title>
-      <description>Audio version of “Claude Opus 4.8: Capabilities and Reactions” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 02 Jun 2026 14:11:58 +0000</pubDate>
-      <guid>7e037da5-5ddc-47ae-8787-fd37df5e23be</guid>
-      <link>https://www.lesswrong.com/posts/AfLGv6u9eZNuFHb4c/claude-opus-4-8-capabilities-and-reactions</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a283b0843236_claude_opus_48_capabilities_and_reactions_by_z.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1952,6 +1963,17 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>What you can do about AI 2027</title>
+      <description>Audio version of What you can do about AI 2027 from AI Futures Project</description>
+      <pubDate>Sat, 28 Jun 2025 17:46:28 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/what-you-can-do-about-ai-2027</guid>
+      <link>https://blog.aifutures.org/p/what-you-can-do-about-ai-2027</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/feab7f530ca2_what_you_can_do_about_ai_2027.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>My pitch for the AI Village</title>
       <description>Audio version of My pitch for the AI Village from Daniel Kokotajlo</description>
       <pubDate>Tue, 24 Jun 2025 15:00:52 +0000</pubDate>
@@ -1969,17 +1991,6 @@ Topics covered:
       <guid>Zu4ai9GFpwezyfB2K</guid>
       <link>https://www.lesswrong.com/posts/Zu4ai9GFpwezyfB2K/metr-s-observations-of-reward-hacking-in-recent-frontier</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23eb66ae716_metrs_observations_of_reward_hacking_in_recent_fr.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Slow corporations as an intuition pump for AI R&amp;D automation</title>
-      <description>Audio version of Slow corporations as an intuition pump for AI R&amp;D automation from AI Futures Project</description>
-      <pubDate>Mon, 19 May 2025 17:43:42 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/slow-corporations-as-an-intuition</guid>
-      <link>https://blog.aifutures.org/p/slow-corporations-as-an-intuition</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/07000a276acc_slow_corporations_as_an_intuition_pump_for_ai_rd.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
