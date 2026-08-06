@@ -21,6 +21,69 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-06</title>
+      <description>Daily News Briefing - 2026-08-06
+
+Topics covered:
+- In artificial intelligence safety and policy, a significant breach involving autonomous agents has triggered new alarms among international regulators
+- In AI capabilities and corporate leadership, Google has announced a major restructuring of its AI division
+- In geopolitics and regional security, the humanitarian crisis in Ukraine is worsening as air defense stocks reach a critical breaking point
+- In economics and infrastructure, SpaceX’s transition into a compute powerhouse is facing immediate market skepticism
+- Finally, in cybersecurity and consumer privacy, a significant vulnerability has been discovered in Apple’s Private Relay feature
+- Expect a day of intense volatility for tech stocks as markets continue to digest the leadership shakeups at Google and the hardware sustainability questions raised by SpaceX</description>
+      <pubDate>Thu, 06 Aug 2026 06:36:33 +0000</pubDate>
+      <guid>news-briefing-2026-08-06</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/55ce5e085699_daily_news_briefing_-_2026-08-06.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-06.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Open Questions On Open Weights</title>
+      <description>Audio version of Open Questions On Open Weights from Scott Alexander</description>
+      <pubDate>Thu, 06 Aug 2026 03:56:29 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/open-questions-on-open-weights</guid>
+      <link>https://www.astralcodexten.com/p/open-questions-on-open-weights</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/84725f25d637_open_questions_on_open_weights.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Five counterintuitive insights from Plan A</title>
+      <description>Audio version of Five counterintuitive insights from Plan A from LessWrong Frontpage</description>
+      <pubDate>Thu, 06 Aug 2026 01:19:26 +0000</pubDate>
+      <guid>5xAvSFyKT2XYwsLrh</guid>
+      <link>https://www.lesswrong.com/posts/5xAvSFyKT2XYwsLrh/five-counterintuitive-insights-from-plan-a</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1ec7298c78f2_five_counterintuitive_insights_from_plan_a.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>How to pace the US frontier</title>
+      <description>Audio version of How to pace the US frontier from AI Futures Project</description>
+      <pubDate>Wed, 05 Aug 2026 18:12:09 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/how-to-pace-the-us-frontier</guid>
+      <link>https://blog.aifutures.org/p/how-to-pace-the-us-frontier</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/86753f460ae9_how_to_pace_the_us_frontier.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“The Three AI Pills” by Zvi</title>
+      <description>Audio version of “The Three AI Pills” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 05 Aug 2026 16:11:06 +0000</pubDate>
+      <guid>6b70039c-474c-4126-a1b0-8b27c1ddf26f</guid>
+      <link>https://www.lesswrong.com/posts/fcYrqEw8kbLMa7orw/the-three-ai-pills</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e52c047b8e46_the_three_ai_pills_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-05</title>
       <description>Daily News Briefing - 2026-08-05
 
@@ -1416,36 +1479,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-06</title>
-      <description>Daily News Briefing - 2026-07-06
-
-Topics covered:
-- In geopolitics and security, Russia has launched its second major aerial assault on Kyiv in a single week
-- In France, the a political future of the country’s leading opposition figure hangs in the balance
-- On the environmental and regulatory front, the United States is facing a dual crisis of extreme weather and industrial safety
-- In the technology and education sectors, a widening "A-I divide" is emerging among American families
-- In financial news, a new analysis indicates that investors in President Trump’s official "TRUMP" memecoin have lost a cumulative three-point-eight billion dollars
-- Finally, in the humanitarian recovery in Venezuela, a twelve-year-old girl has been rescued after being trapped for thirty-two hours under the rubble of a ten-story building in the wake of the June earthquakes</description>
-      <pubDate>Mon, 06 Jul 2026 08:27:08 +0000</pubDate>
-      <guid>news-briefing-2026-07-06</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ec1373a176fc_daily_news_briefing_-_2026-07-06.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-06.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Computation enables Action: Exploding the Simulation Fallacy</title>
-      <description>Audio version of Computation enables Action: Exploding the Simulation Fallacy from LessWrong Frontpage</description>
-      <pubDate>Mon, 06 Jul 2026 02:54:26 +0000</pubDate>
-      <guid>y3ao4KSkZztemmd79</guid>
-      <link>https://www.lesswrong.com/posts/y3ao4KSkZztemmd79/computation-enables-action-exploding-the-simulation-fallacy</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2f54b8c93de4_computation_enables_action_exploding_the_simulati.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Fable #6: The Return of the King” by Zvi</title>
       <description>Audio version of “Fable #6: The Return of the King” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Fri, 03 Jul 2026 13:22:57 +0000</pubDate>
@@ -1551,28 +1584,6 @@ Topics covered:
       <guid>3a647a23-1338-4096-ba75-6302ea8e67a7</guid>
       <link>https://www.lesswrong.com/posts/LzxoR5GakceQFtbta/ai-171-false-flag</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/1d5c41b117d5_ai_171_false_flag_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Choose Book Review Finalists 2026</title>
-      <description>Audio version of Choose Book Review Finalists 2026 from Scott Alexander</description>
-      <pubDate>Wed, 03 Jun 2026 19:57:08 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/choose-book-review-finalists-2026</guid>
-      <link>https://www.astralcodexten.com/p/choose-book-review-finalists-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/21cee50da39c_choose_book_review_finalists_2026.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Trump Signs Executive Order For AI Testing Prior To Frontier Model Releases” by Zvi</title>
-      <description>Audio version of “Trump Signs Executive Order For AI Testing Prior To Frontier Model Releases” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 03 Jun 2026 16:32:29 +0000</pubDate>
-      <guid>12f10149-945c-4625-ba18-88c5b75a7701</guid>
-      <link>https://www.lesswrong.com/posts/yDnfHrBzKc2pNQNdw/trump-signs-executive-order-for-ai-testing-prior-to-frontier</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0562d9dbc690_trump_signs_executive_order_for_ai_testing_prior.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1991,17 +2002,6 @@ Topics covered:
       <guid>Zu4ai9GFpwezyfB2K</guid>
       <link>https://www.lesswrong.com/posts/Zu4ai9GFpwezyfB2K/metr-s-observations-of-reward-hacking-in-recent-frontier</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23eb66ae716_metrs_observations_of_reward_hacking_in_recent_fr.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Make The Prompt Public</title>
-      <description>Audio version of Make The Prompt Public from AI Futures Project</description>
-      <pubDate>Sat, 17 May 2025 11:41:22 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/make-the-prompt-public</guid>
-      <link>https://blog.aifutures.org/p/make-the-prompt-public</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/17592b945f0a_make_the_prompt_public.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
