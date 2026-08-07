@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-07</title>
+      <description>Daily News Briefing - 2026-08-07
+
+Topics covered:
+- In artificial intelligence safety and research, new findings from the Alignment Forum are shedding light on "task gaming," a specific form of misalignment where models prioritize looking successful over actually completing a task
+- In AI hardware and infrastructure, the industry is moving aggressively toward vertical integration to break reliance on Nvidia
+- In AI capabilities and consumer products, OpenAI is significantly lowering the barrier to entry for its most advanced systems
+- In geopolitics and trade, the Trump administration has escalated its technology standoff with China by imposing a fifteen percent tariff on key semiconductor materials
+- In economics and global markets, the aviation and social media sectors are facing major shifts
+- Expect a day of high-stakes corporate maneuvering as OpenAI and Apple’s legal teams face off in federal court over the future of AI intellectual property</description>
+      <pubDate>Fri, 07 Aug 2026 05:45:24 +0000</pubDate>
+      <guid>news-briefing-2026-08-07</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/684f57f52dd2_daily_news_briefing_-_2026-08-07.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-07.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>MacGregor The Bridge Builder</title>
+      <description>Audio version of MacGregor The Bridge Builder from Scott Alexander</description>
+      <pubDate>Fri, 07 Aug 2026 04:44:32 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/macgregor-the-bridge-builder</guid>
+      <link>https://www.astralcodexten.com/p/macgregor-the-bridge-builder</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/43b1baa32b3a_macgregor_the_bridge_builder.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Traffic Shaping for Workload Classification</title>
+      <description>Audio version of Traffic Shaping for Workload Classification from LessWrong Frontpage</description>
+      <pubDate>Thu, 06 Aug 2026 23:24:44 +0000</pubDate>
+      <guid>hYjBosio5NsbrPzAC</guid>
+      <link>https://www.lesswrong.com/posts/hYjBosio5NsbrPzAC/traffic-shaping-for-workload-classification-2</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/abe23d90d45d_traffic_shaping_for_workload_classification.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #180: No Longer In Charge” by Zvi</title>
+      <description>Audio version of “AI #180: No Longer In Charge” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 06 Aug 2026 13:42:56 +0000</pubDate>
+      <guid>fea3305f-9cef-4a72-9823-b8f498d62f3c</guid>
+      <link>https://www.lesswrong.com/posts/mxNjwQitLvwWq9jm2/ai-180-no-longer-in-charge</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cc40d4a7fe71_ai_180_no_longer_in_charge_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-06</title>
       <description>Daily News Briefing - 2026-08-06
 
@@ -1449,36 +1501,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-07</title>
-      <description>Daily News Briefing - 2026-07-07
-
-Topics covered:
-- In corporate technology and labor, Microsoft has laid off four thousand eight hundred employees as it begins its new fiscal year
-- In the realm of A-I safety and cybersecurity, new details have emerged regarding the world’s first "A-I run" ransomware attack
-- On the policy and privacy front, Anthropic is facing a backlash following the discovery of a "secret tracker" within its Claude interface
-- In geopolitics, Ukrainian President Volodymyr Zelensky is arriving at a North Atlantic Treaty Organization meeting in Turkey today to make an urgent plea for air defense interceptors
-- In financial markets and hardware, South Korean memory giant S-K Hynix is preparing for a multi-billion dollar United States initial public offering this Friday
-- Expect a major political shift in Europe tomorrow as a French court delivers its verdict on Marine Le Pen, which could disqualify her from the twenty-twenty-seven presidential race</description>
-      <pubDate>Tue, 07 Jul 2026 07:45:50 +0000</pubDate>
-      <guid>news-briefing-2026-07-07</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9c8cb45c54cd_daily_news_briefing_-_2026-07-07.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-07.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>When does a chess transformer “see” a knight fork? An initial result from logit lens and attention patterns</title>
-      <description>Audio version of When does a chess transformer “see” a knight fork? An initial result from logit lens and attention patterns from LessWrong Frontpage</description>
-      <pubDate>Tue, 07 Jul 2026 06:51:08 +0000</pubDate>
-      <guid>z7XuJWYxwiZw9Wk2W</guid>
-      <link>https://www.lesswrong.com/posts/z7XuJWYxwiZw9Wk2W/when-does-a-chess-transformer-see-a-knight-fork-an-initial</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bc089dff1a39_when_does_a_chess_transformer_see_a_knight_fork.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Fable #6: The Return of the King” by Zvi</title>
       <description>Audio version of “Fable #6: The Return of the King” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Fri, 03 Jul 2026 13:22:57 +0000</pubDate>
@@ -1573,17 +1595,6 @@ Topics covered:
       <guid>mBsZTZxtjgCdN4CDA</guid>
       <link>https://www.lesswrong.com/posts/mBsZTZxtjgCdN4CDA/efficient-tradeoffs-and-the-safety-usefulness-tradeoff-model</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ae1ba4cf0d4f_efficient_tradeoffs_and_the_safety-usefulness_trad.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #171: False Flag” by Zvi</title>
-      <description>Audio version of “AI #171: False Flag” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 04 Jun 2026 15:55:29 +0000</pubDate>
-      <guid>3a647a23-1338-4096-ba75-6302ea8e67a7</guid>
-      <link>https://www.lesswrong.com/posts/LzxoR5GakceQFtbta/ai-171-false-flag</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1d5c41b117d5_ai_171_false_flag_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -2007,12 +2018,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Making sense of OpenAI's models</title>
-      <description>Audio version of Making sense of OpenAI's models from AI Futures Project</description>
-      <pubDate>Thu, 01 May 2025 16:13:05 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/making-sense-of-openais-models</guid>
-      <link>https://blog.aifutures.org/p/making-sense-of-openais-models</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2d2013158167_making_sense_of_openais_models.mp3" type="audio/mpeg" length="0" />
+      <title>Slow corporations as an intuition pump for AI R&amp;D automation</title>
+      <description>Audio version of Slow corporations as an intuition pump for AI R&amp;D automation from AI Futures Project</description>
+      <pubDate>Mon, 19 May 2025 17:43:42 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/slow-corporations-as-an-intuition</guid>
+      <link>https://blog.aifutures.org/p/slow-corporations-as-an-intuition</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/07000a276acc_slow_corporations_as_an_intuition_pump_for_ai_rd.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
