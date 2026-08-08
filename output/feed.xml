@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-08</title>
+      <description>Daily News Briefing - 2026-08-08
+
+Topics covered:
+- In artificial intelligence safety and policy, OpenAI has officially paused the development of its upcoming model, codenamed "Astra," citing significant security risks
+- In AI capabilities and infrastructure, the physical footprint of the industry is expanding despite mounting regulatory and environmental pushback
+- In geopolitics and regional security, a major new defense alliance has formed in the Middle East
+- In economics and corporate technology, Meta has been hit with a second massive penalty in its landmark child safety case
+- Finally, in the evolving AI workforce, Google’s leadership shakeup has taken a definitive turn
+- Expect continued volatility in the energy sector as investors react to the administration's aggressive rollback of offshore wind infrastructure</description>
+      <pubDate>Sat, 08 Aug 2026 05:03:01 +0000</pubDate>
+      <guid>news-briefing-2026-08-08</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e6e6f95ac3b6_daily_news_briefing_-_2026-08-08.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-08.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Don’t Inoculate Everything: Stratified Inoculation Prompting Narrows Backdoors and Preserves Desired Traits</title>
+      <description>Audio version of Don’t Inoculate Everything: Stratified Inoculation Prompting Narrows Backdoors and Preserves Desired Traits from LessWrong Frontpage</description>
+      <pubDate>Sat, 08 Aug 2026 01:20:24 +0000</pubDate>
+      <guid>FS7GFsGsH7CSQLahy</guid>
+      <link>https://www.lesswrong.com/posts/FS7GFsGsH7CSQLahy/don-t-inoculate-everything-stratified-inoculation-prompting</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/85de333fe0f4_dont_inoculate_everything_stratified_inoculation.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“OpenAI Trained Its Models For Months While Those Models Were Coordinating Exploits Via Message Boards” by Zvi</title>
+      <description>Audio version of “OpenAI Trained Its Models For Months While Those Models Were Coordinating Exploits Via Message Boards” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 07 Aug 2026 17:02:54 +0000</pubDate>
+      <guid>72626b7a-ec1d-4d5b-b1e1-9e84c074915e</guid>
+      <link>https://www.lesswrong.com/posts/noXXv7PwwFqauTBFQ/openai-trained-its-models-for-months-while-those-models-were</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/682894a48478_openai_trained_its_models_for_months_while_those.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-07</title>
       <description>Daily News Briefing - 2026-08-07
 
@@ -1460,47 +1501,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-08</title>
-      <description>Daily News Briefing - 2026-07-08
-
-Topics covered:
-- In geopolitics and global security, the United States and Iran have traded direct military strikes following a series of attacks on tankers in the Strait of Hormuz
-- In the realm of A-I capabilities and corporate strategy, Meta has launched its new "Muse Image" model, developed by its specialized Superintelligence Labs
-- On the policy and legal front, French nationalist leader Marine Le Pen has remained defiant after a court of appeal confirmed her guilty verdict for embezzling European Union funds
-- In the physical layer of the A-I boom, data centers are now creating a direct conflict with President Trump’s "Made in America" manufacturing agenda
-- Finally, in labor and automation, Australian dock workers have entered negotiations for a twenty-eight-hour work week, citing the existential threat of A-I and port automation
-- Expect a major hardware reveal next month as Google has officially scheduled its Pixel eleven launch event for August twelfth</description>
-      <pubDate>Wed, 08 Jul 2026 06:33:48 +0000</pubDate>
-      <guid>news-briefing-2026-07-08</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/025d127fe4f3_daily_news_briefing_-_2026-07-08.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-08.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>[Linkpost]Six Story Prompts I Want to Read</title>
-      <description>Audio version of [Linkpost]Six Story Prompts I Want to Read from LessWrong Frontpage</description>
-      <pubDate>Wed, 08 Jul 2026 06:12:08 +0000</pubDate>
-      <guid>4T2WdXXLuxKJyPcoQ</guid>
-      <link>https://www.lesswrong.com/posts/4T2WdXXLuxKJyPcoQ/linkpost-six-story-prompts-i-want-to-read</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bb8e56d1a52b_linkpostsix_story_prompts_i_want_to_read.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“No Space Like J-Space” by Zvi</title>
-      <description>Audio version of “No Space Like J-Space” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 07 Jul 2026 21:51:51 +0000</pubDate>
-      <guid>40576fd5-c8ae-45a0-a13a-a5a13c26168f</guid>
-      <link>https://www.lesswrong.com/posts/EnxHPxJT4Xin5cTsX/no-space-like-j-space</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c4596769a371_no_space_like_j-space_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Fable #6: The Return of the King” by Zvi</title>
       <description>Audio version of “Fable #6: The Return of the King” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Fri, 03 Jul 2026 13:22:57 +0000</pubDate>
@@ -2029,12 +2029,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Why America Wins</title>
-      <description>Audio version of Why America Wins from AI Futures Project</description>
-      <pubDate>Thu, 24 Apr 2025 05:51:15 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/why-america-wins</guid>
-      <link>https://blog.aifutures.org/p/why-america-wins</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3f1f3b89837b_why_america_wins.mp3" type="audio/mpeg" length="0" />
+      <title>Make The Prompt Public</title>
+      <description>Audio version of Make The Prompt Public from AI Futures Project</description>
+      <pubDate>Sat, 17 May 2025 11:41:22 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/make-the-prompt-public</guid>
+      <link>https://blog.aifutures.org/p/make-the-prompt-public</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/17592b945f0a_make_the_prompt_public.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
