@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-09</title>
+      <description>Daily News Briefing - 2026-08-09
+
+Topics covered:
+- In artificial intelligence infrastructure and environmental policy, Amazon's push for massive compute power has collided with climate goals
+- In artificial intelligence capabilities and research, Google DeepMind has achieved a significant milestone in predictive modeling with its new WeatherNext system
+- In geopolitics and regional security, the humanitarian crisis in Ukraine has intensified as air defenses reach a critical failure point
+- In United States politics and law enforcement, the executive branch has secured a key victory with the narrow confirmation of Todd Blanche as Attorney General
+- Finally, in autonomous systems, NASA has confirmed that the Perseverance rover has set a new record for off-world autonomy
+- Expect continued international tension in the coming days as Spain and Italy escalate border controls following a surge of migration into the Spanish exclave of Ceuta</description>
+      <pubDate>Sun, 09 Aug 2026 05:11:33 +0000</pubDate>
+      <guid>news-briefing-2026-08-09</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/edbd2b37a9e9_daily_news_briefing_-_2026-08-09.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-09.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Dutch-book resistant probability over centered worlds</title>
+      <description>Audio version of Dutch-book resistant probability over centered worlds from LessWrong Frontpage</description>
+      <pubDate>Sat, 08 Aug 2026 23:05:10 +0000</pubDate>
+      <guid>cTSfisyzwxCvEpqEc</guid>
+      <link>https://www.lesswrong.com/posts/cTSfisyzwxCvEpqEc/dutch-book-resistant-probability-over-centered-worlds</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3156ec755e8a_dutch-book_resistant_probability_over_centered_wor.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“What Happened: OpenAI and HuggingFace” by Zvi</title>
+      <description>Audio version of “What Happened: OpenAI and HuggingFace” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sat, 08 Aug 2026 16:11:52 +0000</pubDate>
+      <guid>b03f9b4b-c25f-4294-8aac-b80c424ae763</guid>
+      <link>https://www.lesswrong.com/posts/xPAxz4g96uKz9FrHs/what-happened-openai-and-huggingface</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/17cbba5b34b6_what_happened_openai_and_huggingface_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-08</title>
       <description>Daily News Briefing - 2026-08-08
 
@@ -1449,58 +1490,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-09</title>
-      <description>Daily News Briefing - 2026-07-09
-
-Topics covered:
-- In geopolitics and global security, the conflict between the United States and Iran has escalated into a sustained air campaign
-- In the realm of A-I capabilities, the competition between frontier labs is accelerating with two major releases
-- Regarding A-I safety and policy, OpenAI has formally outlined its principles for national security partnerships
-- In space and hardware, Jeff Bezos’s Blue Origin is reportedly seeking to raise ten billion dollars in private capital
-- On the domestic and social front, the "A-I boom" is fundamentally reshaping the American economy and education system
-- Finally, in legal news, a federal judge has approved Elon Musk’s one-point-five million dollar settlement with the Securities and Exchange Commission, ending the years-long dispute over his acquisition of the platform formerly known as Twitter</description>
-      <pubDate>Thu, 09 Jul 2026 07:47:49 +0000</pubDate>
-      <guid>news-briefing-2026-07-09</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/13360531c8f7_daily_news_briefing_-_2026-07-09.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-09.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Interpretability is becoming increasingly uninterpretable</title>
-      <description>Audio version of Interpretability is becoming increasingly uninterpretable from LessWrong Frontpage</description>
-      <pubDate>Thu, 09 Jul 2026 07:04:49 +0000</pubDate>
-      <guid>JiWTjLo2zxsqf2YXF</guid>
-      <link>https://www.lesswrong.com/posts/JiWTjLo2zxsqf2YXF/interpretability-is-becoming-increasingly-uninterpretable</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b67da12d4596_interpretability_is_becoming_increasingly_uninterp.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Childhood and Education #20: Phones and Screens” by Zvi</title>
-      <description>Audio version of “Childhood and Education #20: Phones and Screens” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 08 Jul 2026 19:42:41 +0000</pubDate>
-      <guid>f16b71b1-c3c9-49f1-80ea-5bdd33406422</guid>
-      <link>https://www.lesswrong.com/posts/XA8fMCnwuc45uZYHX/childhood-and-education-20-phones-and-screens</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5140662148b0_childhood_and_education_20_phones_and_screens.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Your Book Review: The Book Of Abraham</title>
-      <description>Audio version of Your Book Review: The Book Of Abraham from Scott Alexander</description>
-      <pubDate>Wed, 08 Jul 2026 12:48:42 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-book-review-the-book-of-abraham</guid>
-      <link>https://www.astralcodexten.com/p/your-book-review-the-book-of-abraham</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ebc748ef2be8_your_book_review_the_book_of_abraham.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Fable #6: The Return of the King” by Zvi</title>
       <description>Audio version of “Fable #6: The Return of the King” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Fri, 03 Jul 2026 13:22:57 +0000</pubDate>
@@ -2040,12 +2029,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>AI 2027: Media, Reactions, Criticism</title>
-      <description>Audio version of AI 2027: Media, Reactions, Criticism from AI Futures Project</description>
-      <pubDate>Wed, 23 Apr 2025 04:48:16 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/ai-2027-media-reactions-criticism</guid>
-      <link>https://blog.aifutures.org/p/ai-2027-media-reactions-criticism</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3b5641f57ff3_ai_2027_media_reactions_criticism.mp3" type="audio/mpeg" length="0" />
+      <title>Making sense of OpenAI's models</title>
+      <description>Audio version of Making sense of OpenAI's models from AI Futures Project</description>
+      <pubDate>Thu, 01 May 2025 16:13:05 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/making-sense-of-openais-models</guid>
+      <link>https://blog.aifutures.org/p/making-sense-of-openais-models</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2d2013158167_making_sense_of_openais_models.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
