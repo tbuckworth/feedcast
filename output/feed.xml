@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-10</title>
+      <description>Daily News Briefing - 2026-08-10
+
+Topics covered:
+- In artificial intelligence capabilities and developer workflows, Anthropic has announced that it is enabling "auto mode" by default for its Claude Code tool
+- In AI infrastructure and finance, the specialized hedge fund Situational Awareness has signaled continued confidence in the hardware layer by investing four-hundred million dollars in the chip startup Source Foundry
+- In geopolitics and regional security, Israeli Prime Minister Benjamin Netanyahu has formally rejected a fifteen-point peace plan for Gaza proposed by the Trump administration
+- In legal developments and international law enforcement, a major operation against global organized crime reached a milestone today as suspected crime boss Daniel Kinahan appeared in a Dublin court
+- Finally, in cybersecurity and privacy research, a new adversarial pattern has been developed that can effectively "blind" surveillance cameras
+- Expect increased diplomatic friction between Washington and Jerusalem as the White House reacts to the rejection of its regional peace initiative</description>
+      <pubDate>Mon, 10 Aug 2026 05:38:19 +0000</pubDate>
+      <guid>news-briefing-2026-08-10</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7e9ef351263a_daily_news_briefing_-_2026-08-10.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-10.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>How to be an AI safety research engineer</title>
+      <description>Audio version of How to be an AI safety research engineer from LessWrong Frontpage</description>
+      <pubDate>Mon, 10 Aug 2026 05:32:02 +0000</pubDate>
+      <guid>Wty5mcDBEmypap8o2</guid>
+      <link>https://www.lesswrong.com/posts/Wty5mcDBEmypap8o2/how-to-be-an-ai-safety-research-engineer</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a100d12843d3_how_to_be_an_ai_safety_research_engineer.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-09</title>
       <description>Daily News Briefing - 2026-08-09
 
@@ -98,6 +128,17 @@ Topics covered:
       <guid>72626b7a-ec1d-4d5b-b1e1-9e84c074915e</guid>
       <link>https://www.lesswrong.com/posts/noXXv7PwwFqauTBFQ/openai-trained-its-models-for-months-while-those-models-were</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/682894a48478_openai_trained_its_models_for_months_while_those.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“OpenAI Trained Its Models For Months While Those Models Were Coordinating Exploits Via Message Boards” by Zvi</title>
+      <description>Audio version of “OpenAI Trained Its Models For Months While Those Models Were Coordinating Exploits Via Message Boards” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 07 Aug 2026 17:02:54 +0000</pubDate>
+      <guid>77d90a39-c6bd-4934-8e81-64af41af82c3</guid>
+      <link>https://www.lesswrong.com/posts/noXXv7PwwFqauTBFQ/openai-trained-its-models-for-months-while-those-models-were</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/318a83a0ccd5_openai_trained_its_models_for_months_while_those.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1411,80 +1452,6 @@ Topics covered:
       <guid>38d46a5c-bdbb-4573-8aad-804c378ed505</guid>
       <link>https://www.lesswrong.com/posts/7Av7wwErwNXdM3J68/ai-176-part-2-plan-b</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/2820b08aa986_ai_176_part_2_plan_b_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-07-10</title>
-      <description>Daily News Briefing - 2026-07-10
-
-Topics covered:
-- In artificial intelligence capabilities and corporate strategy, OpenAI has officially launched its next-generation frontier model, GPT-five-point-six
-- Regarding AI leadership and safety, OpenAI is facing a significant executive transition
-- In the physical layer of tech and infrastructure, Microsoft’s latest sustainability report reveals a twenty-five percent surge in carbon emissions over the last year, totaling thirty-four million metric tons
-- In geopolitics and energy, global shipping through the Strait of Hormuz has slowed significantly following the recent exchange of strikes between the United States and Iran
-- Finally, in AI-driven automation, a world-first preclinical trial has successfully demonstrated humanoid robots, controlled remotely by surgeons, performing operations on live pigs
-- Expect continued scrutiny of the AI sector's environmental impact as European ports, including Rotterdam, face new lawsuits demanding a faster transition away from the fossil fuels currently powering the digital boom</description>
-      <pubDate>Fri, 10 Jul 2026 07:42:34 +0000</pubDate>
-      <guid>news-briefing-2026-07-10</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/694ef5e6c972_daily_news_briefing_-_2026-07-10.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-10.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Don't normalize a permanent underclass (even a rich one)</title>
-      <description>Audio version of Don't normalize a permanent underclass (even a rich one) from LessWrong Frontpage</description>
-      <pubDate>Fri, 10 Jul 2026 06:40:56 +0000</pubDate>
-      <guid>EANs7YerYXmaXF9FE</guid>
-      <link>https://www.lesswrong.com/posts/EANs7YerYXmaXF9FE/don-t-normalize-a-permanent-underclass-even-a-rich-one-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e4eaafe37684_dont_normalize_a_permanent_underclass_even_a_ric.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AI 2040: Plan A</title>
-      <description>Audio version of AI 2040: Plan A from Daniel Kokotajlo</description>
-      <pubDate>Thu, 09 Jul 2026 16:25:14 +0000</pubDate>
-      <guid>pFzctpJBat95SrCyC</guid>
-      <link>https://www.lesswrong.com/posts/pFzctpJBat95SrCyC/ai-2040-plan-a</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8f70bf8d72b5_ai_2040_plan_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Introducing Plan A</title>
-      <description>Audio version of Introducing Plan A from Scott Alexander</description>
-      <pubDate>Thu, 09 Jul 2026 16:19:53 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/introducing-plan-a</guid>
-      <link>https://www.astralcodexten.com/p/introducing-plan-a</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/112ef6929270_introducing_plan_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AI 2040: Plan A</title>
-      <description>Audio version of AI 2040: Plan A from AI Futures Project</description>
-      <pubDate>Thu, 09 Jul 2026 16:14:53 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/ai-2040-plan-a</guid>
-      <link>https://blog.aifutures.org/p/ai-2040-plan-a</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/84228fcb8aee_ai_2040_plan_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #176 Part 1: Doing It Live” by Zvi</title>
-      <description>Audio version of “AI #176 Part 1: Doing It Live” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 09 Jul 2026 14:32:15 +0000</pubDate>
-      <guid>2be77069-72ea-4bee-904f-bc10c6044d3b</guid>
-      <link>https://www.lesswrong.com/posts/M9eLyMsH5DLjMYL86/ai-176-part-1-doing-it-live</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/91b846be0ef6_ai_176_part_1_doing_it_live_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
