@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-11</title>
+      <description>Daily News Briefing - 2026-08-11
+
+Topics covered:
+- In artificial intelligence capabilities and cybersecurity, OpenAI has launched a specialized frontier model, GPT-five-point-six-Cyber, alongside an expansion of its "Daybreak" defense program
+- In artificial intelligence policy and infrastructure, Meta CEO Mark Zuckerberg has published a six-thousand-five-hundred-word manifesto titled "The Future is for Everyone." The essay advocates for an open-source "personal superintelligence" and serves as a strategic reboot for Meta, positioning the company as the open alternative to closed ecosystems like OpenAI
+- In geopolitics and regional security, the conflict in Ukraine has reached a new level of escalation as a Ukrainian drone strike hit deep into Russian territory, killing at least thirteen people
+- In United States domestic policy and public health, President Trump has signed a controversial executive order aimed at limiting childhood vaccines
+- In markets and corporate technology, Google has begun hosting rival app stores within its Play Store for the first time, following a significant court-ordered loss to Epic Games
+- Expect a period of heightened legal and medical debate as health organizations mobilize to challenge the administration's new vaccine mandates in federal court</description>
+      <pubDate>Tue, 11 Aug 2026 05:14:48 +0000</pubDate>
+      <guid>news-briefing-2026-08-11</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5339f630b82f_daily_news_briefing_-_2026-08-11.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-11.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>On using crises to shift political will for AI</title>
+      <description>Audio version of On using crises to shift political will for AI from LessWrong Frontpage</description>
+      <pubDate>Tue, 11 Aug 2026 04:54:51 +0000</pubDate>
+      <guid>wbEcn5HTtvH4TsDN4</guid>
+      <link>https://www.lesswrong.com/posts/wbEcn5HTtvH4TsDN4/on-using-crises-to-shift-political-will-for-ai</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6ad3e367c050_on_using_crises_to_shift_political_will_for_ai.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“The Pacing of the Frontier” by Zvi</title>
+      <description>Audio version of “The Pacing of the Frontier” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 10 Aug 2026 21:53:21 +0000</pubDate>
+      <guid>0bc11530-74ba-41c4-9153-7ba75d8510a6</guid>
+      <link>https://www.lesswrong.com/posts/WgWoJPKw5b2XTDD24/the-pacing-of-the-frontier</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a17a90a57730_the_pacing_of_the_frontier_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-10</title>
       <description>Daily News Briefing - 2026-08-10
 
@@ -1405,53 +1446,23 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-11</title>
-      <description>Daily News Briefing - 2026-07-11
-
-Topics covered:
-- In artificial intelligence litigation and hardware strategy, Apple has filed a major lawsuit against OpenAI, alleging a systematic theft of trade secrets
-- Regarding AI product safety and privacy, Meta has abruptly disabled a new Instagram feature that allowed users to generate deepfakes of public accounts
-- In geopolitics and regional security, the United States is intensifying diplomatic efforts to stabilize global trade routes
-- In the physical layer of the AI boom, the South Korean chipmaker S-K Hynix successfully completed its twenty-six-and-a-half billion dollar initial public offering on the Nasdaq, the largest ever foreign debut in United States history
-- On the frontiers of compute and energy, a new pilot program from the solar company Sunrun is attempting to decentralize the data center
-- Expect continued market volatility as investors digest the implications of the Apple-OpenAI legal battle on future hardware collaborations</description>
-      <pubDate>Sat, 11 Jul 2026 06:20:15 +0000</pubDate>
-      <guid>news-briefing-2026-07-11</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/679053c067e6_daily_news_briefing_-_2026-07-11.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-11.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Measuring Is Not Enough Anymore</title>
-      <description>Audio version of Measuring Is Not Enough Anymore from LessWrong Frontpage</description>
-      <pubDate>Sat, 11 Jul 2026 03:21:57 +0000</pubDate>
-      <guid>4TMKvGmoAWjXBGwWk</guid>
-      <link>https://www.lesswrong.com/posts/4TMKvGmoAWjXBGwWk/measuring-is-not-enough-anymore</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/53bab626ef5c_measuring_is_not_enough_anymore.mp3" type="audio/mpeg" length="0" />
+      <title>AI 2040: Plan A</title>
+      <description>Audio version of AI 2040: Plan A from Daniel Kokotajlo</description>
+      <pubDate>Thu, 09 Jul 2026 16:25:14 +0000</pubDate>
+      <guid>pFzctpJBat95SrCyC</guid>
+      <link>https://www.lesswrong.com/posts/pFzctpJBat95SrCyC/ai-2040-plan-a</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8f70bf8d72b5_ai_2040_plan_a.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Plan A: Suggestions For Further Work</title>
-      <description>Audio version of Plan A: Suggestions For Further Work from AI Futures Project</description>
-      <pubDate>Fri, 10 Jul 2026 23:15:06 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/plan-a-suggestions-for-further-work</guid>
-      <link>https://blog.aifutures.org/p/plan-a-suggestions-for-further-work</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f2b51774f117_plan_a_suggestions_for_further_work.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #176 Part 2: Plan B” by Zvi</title>
-      <description>Audio version of “AI #176 Part 2: Plan B” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 10 Jul 2026 12:45:11 +0000</pubDate>
-      <guid>38d46a5c-bdbb-4573-8aad-804c378ed505</guid>
-      <link>https://www.lesswrong.com/posts/7Av7wwErwNXdM3J68/ai-176-part-2-plan-b</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2820b08aa986_ai_176_part_2_plan_b_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <title>AI 2040: Plan A</title>
+      <description>Audio version of AI 2040: Plan A from AI Futures Project</description>
+      <pubDate>Thu, 09 Jul 2026 16:14:53 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/ai-2040-plan-a</guid>
+      <link>https://blog.aifutures.org/p/ai-2040-plan-a</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/84228fcb8aee_ai_2040_plan_a.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1529,28 +1540,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/waiting-for-the-miracle</guid>
       <link>https://www.astralcodexten.com/p/waiting-for-the-miracle</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/76db45f77c1e_waiting_for_the_miracle.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Berkeley Meetup This Wednesday</title>
-      <description>Audio version of Berkeley Meetup This Wednesday from Scott Alexander</description>
-      <pubDate>Mon, 08 Jun 2026 23:12:38 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/berkeley-meetup-this-wednesday-77b</guid>
-      <link>https://www.astralcodexten.com/p/berkeley-meetup-this-wednesday-77b</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4282236d7cdf_berkeley_meetup_this_wednesday.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Efficient tradeoffs and the safety-usefulness tradeoff model</title>
-      <description>Audio version of Efficient tradeoffs and the safety-usefulness tradeoff model from Buck Shlegeris</description>
-      <pubDate>Mon, 08 Jun 2026 20:28:17 +0000</pubDate>
-      <guid>mBsZTZxtjgCdN4CDA</guid>
-      <link>https://www.lesswrong.com/posts/mBsZTZxtjgCdN4CDA/efficient-tradeoffs-and-the-safety-usefulness-tradeoff-model</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ae1ba4cf0d4f_efficient_tradeoffs_and_the_safety-usefulness_trad.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
