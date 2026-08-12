@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-12</title>
+      <description>Daily News Briefing - 2026-08-12
+
+Topics covered:
+- In artificial intelligence safety and emergent behavior, researchers at the Alignment Forum have identified a significant new risk: "swarm coordination" among autonomous agents
+- In artificial intelligence capabilities and research, both Google Gemini and OpenAI’s ChatGPT have officially surpassed one billion monthly users
+- In cybersecurity and infrastructure, a "Zoomsday" vulnerability has been patched after researchers used fewer than twenty prompts on publicly available AI models to hijack devices via Zoom’s annotation feature
+- In geopolitics and regional security, the humanitarian crisis in Colombia has worsened following Tuesday’s earthquake, with the death toll rising to one hundred eighty as rescuers struggle through significant aftershocks
+- In economics and corporate technology, OpenAI is undergoing another leadership shift as Special Projects lead and former COO Brad Lightcap departs after eight years to start a new venture
+- Expect heightened scrutiny of enterprise software security as the FBI investigates a "fake-hotspot" attack targeting Delta Airlines passengers, suspected to have originated from attendees of the DEF CON security conference</description>
+      <pubDate>Wed, 12 Aug 2026 05:41:26 +0000</pubDate>
+      <guid>news-briefing-2026-08-12</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a441459443fb_daily_news_briefing_-_2026-08-12.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-12.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>AI swarms are starting to pose indirect takeover risk</title>
+      <description>Audio version of AI swarms are starting to pose indirect takeover risk from LessWrong Frontpage</description>
+      <pubDate>Wed, 12 Aug 2026 05:05:34 +0000</pubDate>
+      <guid>8oFYZdXkTaNGRtcn8</guid>
+      <link>https://www.lesswrong.com/posts/8oFYZdXkTaNGRtcn8/ai-swarms-are-starting-to-pose-indirect-takeover-risk</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6febc81a339a_ai_swarms_are_starting_to_pose_indirect_takeover_r.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Various Reflections About What Happened With OpenAI’s Internal Models” by Zvi</title>
+      <description>Audio version of “Various Reflections About What Happened With OpenAI’s Internal Models” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 11 Aug 2026 22:20:56 +0000</pubDate>
+      <guid>2f48002f-93f0-411f-b105-5878f7405602</guid>
+      <link>https://www.lesswrong.com/posts/jLQ4mbqriJwJ2eqRc/various-reflections-about-what-happened-with-openai-s</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cc110ade10bf_various_reflections_about_what_happened_with_open.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-11</title>
       <description>Daily News Briefing - 2026-08-11
 
@@ -1405,42 +1446,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-12</title>
-      <description>Daily News Briefing - 2026-07-12
-
-Topics covered:
-- In geopolitics and global energy security, the maritime crisis in the Middle East has reached a critical flashpoint
-- In artificial intelligence policy and alignment, a new consensus is emerging among researchers that political will, rather than technical capability, is now the primary bottleneck for AI safety
-- Regarding AI capabilities and consumer hardware, OpenAI is pivoting its product strategy toward domestic integration and ambient productivity
-- In the United States, the Trump administration has escalated its confrontation with the press, subpoenaing two New York Times journalists
-- Finally, in regional stability and climate risk, eastern China is facing its second major hurricane in a single week
-- Expect an immediate spike in crude oil futures as markets react to the confirmed closure of the Strait of Hormuz</description>
-      <pubDate>Sun, 12 Jul 2026 06:40:02 +0000</pubDate>
-      <guid>news-briefing-2026-07-12</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/368570401a55_daily_news_briefing_-_2026-07-12.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-12.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The current bottleneck is political will, not research</title>
-      <description>Audio version of The current bottleneck is political will, not research from LessWrong Frontpage</description>
-      <pubDate>Sat, 11 Jul 2026 21:56:32 +0000</pubDate>
-      <guid>EexsebbYhbe2gXkPP</guid>
-      <link>https://www.lesswrong.com/posts/EexsebbYhbe2gXkPP/the-current-bottleneck-is-political-will-not-research</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/74cd01b02d97_the_current_bottleneck_is_political_will_not_rese.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Introduction for and Reactions to Plan A” by Zvi</title>
-      <description>Audio version of “Introduction for and Reactions to Plan A” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sat, 11 Jul 2026 20:43:22 +0000</pubDate>
-      <guid>bf4801e1-122f-4d2c-bcdb-c944d0689229</guid>
-      <link>https://www.lesswrong.com/posts/z9tXCGogEgkgHSh8G/introduction-for-and-reactions-to-plan-a</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5675b5db302a_introduction_for_and_reactions_to_plan_a_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <title>Plan A: Suggestions For Further Work</title>
+      <description>Audio version of Plan A: Suggestions For Further Work from AI Futures Project</description>
+      <pubDate>Fri, 10 Jul 2026 23:15:06 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/plan-a-suggestions-for-further-work</guid>
+      <link>https://blog.aifutures.org/p/plan-a-suggestions-for-further-work</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f2b51774f117_plan_a_suggestions_for_further_work.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1540,6 +1551,17 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/waiting-for-the-miracle</guid>
       <link>https://www.astralcodexten.com/p/waiting-for-the-miracle</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/76db45f77c1e_waiting_for_the_miracle.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Efficient tradeoffs and the safety-usefulness tradeoff model</title>
+      <description>Audio version of Efficient tradeoffs and the safety-usefulness tradeoff model from Buck Shlegeris</description>
+      <pubDate>Mon, 08 Jun 2026 20:28:17 +0000</pubDate>
+      <guid>mBsZTZxtjgCdN4CDA</guid>
+      <link>https://www.lesswrong.com/posts/mBsZTZxtjgCdN4CDA/efficient-tradeoffs-and-the-safety-usefulness-tradeoff-model</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ae1ba4cf0d4f_efficient_tradeoffs_and_the_safety-usefulness_trad.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
