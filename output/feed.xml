@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-14</title>
+      <description>Daily News Briefing - 2026-08-14
+
+Topics covered:
+- In artificial intelligence capabilities and enterprise infrastructure, OpenAI has significantly increased the velocity of its model releases and leadership changes
+- In AI safety and emergent behavior, researchers at Anthropic have published findings detailing "turf wars" between autonomous agents
+- In cybersecurity and national policy, the Trump administration has issued a landmark memorandum fundamentally altering the United States’ offensive cyber posture
+- In global geopolitics and infrastructure, extreme weather and regional tensions are straining energy grids and logistics
+- In corporate technology and markets, the valuation of the primary AI labs is reaching historic heights despite mounting legal challenges
+- Expect a period of intense diplomatic maneuvering as Japan and Russia recalibrate their presence in the Pacific following Putin’s territorial visit</description>
+      <pubDate>Fri, 14 Aug 2026 05:41:19 +0000</pubDate>
+      <guid>news-briefing-2026-08-14</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/30f528c8bca9_daily_news_briefing_-_2026-08-14.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-14.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The Foothills Of Bay Area House Party</title>
+      <description>Audio version of The Foothills Of Bay Area House Party from Scott Alexander</description>
+      <pubDate>Thu, 13 Aug 2026 23:54:32 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/the-foothills-of-bay-area-house-party</guid>
+      <link>https://www.astralcodexten.com/p/the-foothills-of-bay-area-house-party</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a5ab83577f9e_the_foothills_of_bay_area_house_party.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Features that current AIs don't have that future AIs will have</title>
+      <description>Audio version of Features that current AIs don't have that future AIs will have from LessWrong Frontpage</description>
+      <pubDate>Thu, 13 Aug 2026 21:49:54 +0000</pubDate>
+      <guid>NyEM3FtgL7XkbfCXy</guid>
+      <link>https://www.lesswrong.com/posts/NyEM3FtgL7XkbfCXy/features-that-current-ais-don-t-have-that-future-ais-will</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/763a3bdc6cd9_features_that_current_ais_dont_have_that_future_a.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #181: Astra Goes Cyber Critical” by Zvi</title>
+      <description>Audio version of “AI #181: Astra Goes Cyber Critical” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 13 Aug 2026 15:22:24 +0000</pubDate>
+      <guid>788b9775-83d3-44cf-9db9-30e33d63af7a</guid>
+      <link>https://www.lesswrong.com/posts/hLn3SakowZLFWobHf/ai-181-astra-goes-cyber-critical</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6619abc66536_ai_181_astra_goes_cyber_critical_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-13</title>
       <description>Daily News Briefing - 2026-08-13
 
@@ -1411,47 +1463,6 @@ Topics covered:
       <guid>0b2782e6-cbc6-4bd5-be02-be284727e316</guid>
       <link>https://www.lesswrong.com/posts/2GFyHmCLJYCag7gKh/twitter-thoughts-for-you</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d581d0973101_twitter_thoughts_for_you_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-07-14</title>
-      <description>Daily News Briefing - 2026-07-14
-
-Topics covered:
-- In artificial intelligence litigation and corporate warfare, Apple’s lawsuit against OpenAI has moved into an aggressive discovery phase, revealing extraordinary allegations of corporate espionage
-- In United States politics, the vacancy left by the late Senator Lindsey Graham has been filled with a surprising degree of traditionalist continuity
-- In the physical layer of tech and infrastructure, the automotive and aerospace sectors are facing a period of intense structural realignment
-- In geopolitics and regional crises, the death toll from the devastating wildfires in Europe and civil unrest in Southeast Asia continues to climb
-- Finally, in artificial intelligence safety and research, developers have released "Prism," an automated scaffold designed to turn AI models into their own researchers
-- Expect heightened market sensitivity this week as SpaceX’s Starship launch provides the first major performance metric for the newly public aerospace giant</description>
-      <pubDate>Tue, 14 Jul 2026 06:17:22 +0000</pubDate>
-      <guid>news-briefing-2026-07-14</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/599452359fcb_daily_news_briefing_-_2026-07-14.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-14.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Our response to Séb Krier on Plan A</title>
-      <description>Audio version of Our response to Séb Krier on Plan A from LessWrong Frontpage</description>
-      <pubDate>Tue, 14 Jul 2026 02:21:36 +0000</pubDate>
-      <guid>RPgHythvMKh6eG9pS</guid>
-      <link>https://www.lesswrong.com/posts/RPgHythvMKh6eG9pS/our-response-to-seb-krier-on-plan-a</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b51ff8f4832b_our_response_to_sb_krier_on_plan_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Better Call Sol The Workhorse” by Zvi</title>
-      <description>Audio version of “Better Call Sol The Workhorse” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 13 Jul 2026 20:54:55 +0000</pubDate>
-      <guid>9f07cf6f-34f3-468d-96be-4727e4f02149</guid>
-      <link>https://www.lesswrong.com/posts/zPdDmJTovsKTvAiH2/better-call-sol-the-workhorse</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/66d6437add29_better_call_sol_the_workhorse_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
