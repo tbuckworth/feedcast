@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-16</title>
+      <description>Daily News Briefing - 2026-08-16
+
+Topics covered:
+- In artificial intelligence safety and technical research, a new analysis of Google DeepMind’s DiffusionGemma model has raised concerns regarding "opaque serial depth." Unlike traditional models that generate tokens sequentially, this model generates text via diffusion, carrying both tokens and vectors through multiple hidden steps before producing a final output
+- In artificial intelligence policy and ethics, Anthropic has released technical details on its new provenance system designed to combat the weaponization of synthetic media
+- In geopolitics and regional stability, a significant diplomatic opening has occurred on the Korean Peninsula
+- In cybersecurity and infrastructure, Ukraine has successfully struck a major Russian rocket factory using "Flamingo" cruise missiles, marking a significant tactical victory in its campaign against Russian long-range strike capabilities
+- In corporate technology and aerospace, SpaceX has officially closed its acquisition of the AI coding startup Cursor
+- Expect a period of heightened climate monitoring as Hawaii braces for a potential direct hit from Category One Hurricane Lala, which could drop up to twenty-five inches of rain and mark the first major strike on the islands in over three decades</description>
+      <pubDate>Sun, 16 Aug 2026 04:40:48 +0000</pubDate>
+      <guid>news-briefing-2026-08-16</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/82cb62b54826_daily_news_briefing_-_2026-08-16.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-16.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Does DiffusionGemma do latent reasoning?</title>
+      <description>Audio version of Does DiffusionGemma do latent reasoning? from LessWrong Frontpage</description>
+      <pubDate>Sun, 16 Aug 2026 04:22:20 +0000</pubDate>
+      <guid>QBuJ3suRZxrrxSTtv</guid>
+      <link>https://www.lesswrong.com/posts/QBuJ3suRZxrrxSTtv/does-diffusiongemma-do-latent-reasoning</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/659ee933f54f_does_diffusiongemma_do_latent_reasoning.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“On Dwarkesh Patel’s Podcast With Ryan Greenblatt” by Zvi</title>
+      <description>Audio version of “On Dwarkesh Patel’s Podcast With Ryan Greenblatt” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sat, 15 Aug 2026 13:02:13 +0000</pubDate>
+      <guid>8bbc1dd2-1cda-42fa-a3f7-3e507fae2541</guid>
+      <link>https://www.lesswrong.com/posts/BZW8CeAHHJ52EvwYt/on-dwarkesh-patel-s-podcast-with-ryan-greenblatt</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3390119a86ea_on_dwarkesh_patels_podcast_with_ryan_greenblatt.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-15</title>
       <description>Daily News Briefing - 2026-08-15
 
@@ -1400,58 +1441,6 @@ Topics covered:
       <guid>737c26eb-4d97-4df5-a263-67c18ae4448f</guid>
       <link>https://www.lesswrong.com/posts/who9xZ7DxuprsJoTr/ai-177-part-1-tip-of-the-iceberg</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f7f81915baa8_ai_177_part_1_tip_of_the_iceberg_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-07-16</title>
-      <description>Daily News Briefing - 2026-07-16
-
-Topics covered:
-- In geopolitics and global security, the conflict in the Middle East has reached a precarious new stage
-- In artificial intelligence capabilities and hardware, OpenAI has made its first formal foray into physical products, though it is not the ambient device the industry expected
-- In AI litigation and safety, xAI has filed a landmark lawsuit against a South Carolina man, alleging he bypassed Grok’s safety filters to generate and distribute child sexual abuse material
-- In corporate technology and infrastructure, Microsoft has begun a tactical shift to protect its market share against its own partners
-- In regulatory news and labor, a federal judge has ruled that the Trump administration cannot deport foreign researchers based solely on their work in content moderation or disinformation studies
-- In markets, SpaceX stock has fallen to its initial offering price of one hundred and thirty-five dollars as investors recalibrate their expectations ahead of this week’s Starship launch</description>
-      <pubDate>Thu, 16 Jul 2026 06:24:23 +0000</pubDate>
-      <guid>news-briefing-2026-07-16</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3dd2e03c3da5_daily_news_briefing_-_2026-07-16.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-16.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Can we build an early warning system for loss of control to AI?</title>
-      <description>Audio version of Can we build an early warning system for loss of control to AI? from LessWrong Frontpage</description>
-      <pubDate>Thu, 16 Jul 2026 06:15:34 +0000</pubDate>
-      <guid>46CjwoPXwZPR3Lrz5</guid>
-      <link>https://www.lesswrong.com/posts/46CjwoPXwZPR3Lrz5/can-we-build-an-early-warning-system-for-loss-of-control-to</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6e12ed68991b_can_we_build_an_early_warning_system_for_loss_of_c.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Six Slightly Skew Boogeymen</title>
-      <description>Audio version of Six Slightly Skew Boogeymen from Scott Alexander</description>
-      <pubDate>Thu, 16 Jul 2026 00:55:28 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/six-slightly-skew-boogeymen</guid>
-      <link>https://www.astralcodexten.com/p/six-slightly-skew-boogeymen</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/532f804fbf4d_six_slightly_skew_boogeymen.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Monthly Roundup #44: July 2026” by Zvi</title>
-      <description>Audio version of “Monthly Roundup #44: July 2026” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 15 Jul 2026 16:23:06 +0000</pubDate>
-      <guid>648da05e-3994-43ec-a3d3-e9de9b37d4a4</guid>
-      <link>https://www.lesswrong.com/posts/KiCwcAGHx4rdwJgzD/monthly-roundup-44-july-2026</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0dae45bfbfa4_monthly_roundup_44_july_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
