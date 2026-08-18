@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-18</title>
+      <description>Daily News Briefing - 2026-08-18
+
+Topics covered:
+- In artificial intelligence safety and technical policy, Anthropic has provided a technical breakdown of the invisible watermarking system now integrated into Claude
+- In artificial intelligence economics and markets, the sector is seeing an extraordinary surge in capital and revenue
+- In AI ethics and data acquisition, new reports from TechCrunch and Ars Technica suggest that Amazon is systematically destroying rare, physical books after digitizing them for training data
+- In geopolitics and regional security, the Trump administration has issued a severe diplomatic warning to Oman
+- In global health and cybersecurity, the Ebola outbreak in the Democratic Republic of Congo has officially become the deadliest in the nation’s history
+- Expect a week of heightened tension in the Pacific as Russia warns the United Kingdom that continued drone shipments to Ukraine will lead to direct "consequences," even as Britain reaffirms its commitment to Kyiv</description>
+      <pubDate>Tue, 18 Aug 2026 04:40:59 +0000</pubDate>
+      <guid>news-briefing-2026-08-18</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2dff448b9c41_daily_news_briefing_-_2026-08-18.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-18.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Price recursion is the rational theory of reward</title>
+      <description>Audio version of Price recursion is the rational theory of reward from LessWrong Frontpage</description>
+      <pubDate>Tue, 18 Aug 2026 03:22:58 +0000</pubDate>
+      <guid>MAqgva9hLGTMX2wL7</guid>
+      <link>https://www.lesswrong.com/posts/MAqgva9hLGTMX2wL7/price-recursion-is-the-rational-theory-of-reward</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9df06447bd9f_price_recursion_is_the_rational_theory_of_reward.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-17</title>
       <description>Daily News Briefing - 2026-08-17
 
@@ -1383,58 +1413,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-18</title>
-      <description>Daily News Briefing - 2026-07-18
-
-Topics covered:
-- In geopolitics and global security, the maritime conflict in the Middle East has entered its second week of kinetic engagement as the United States conducted air strikes against Iran for the seventh consecutive night
-- In artificial intelligence policy and platform safety, San Francisco City Attorney David Chiu has formally ordered Apple and Google to purge "nudify" applications from their respective app stores
-- In AI hardware and corporate litigation, the legal battle between Apple and OpenAI has intensified, with new analysis of the trade secret complaint suggesting it may be a strategic attempt to derail OpenAI’s reported plans for an initial public offering
-- In infrastructure and energy, a massive magnitude seven-point-three earthquake has struck off the coast of Mexico, triggering small tsunami waves and adding fresh pressure to North American supply chains already strained by wildfires
-- In the corporate sector, Databricks has reached a staggering one-hundred-and-eighty-eight billion dollar valuation, cementing its status as the leading provider of data infrastructure for the generative AI era
-- Expect increased diplomatic tension through the weekend as Canada responds to the United States tariff threats amidst ongoing environmental and seismic disruptions</description>
-      <pubDate>Sat, 18 Jul 2026 06:10:01 +0000</pubDate>
-      <guid>news-briefing-2026-07-18</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9f6b869a0c16_daily_news_briefing_-_2026-07-18.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-18.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The Most Forbidden Technique is not always forbidden</title>
-      <description>Audio version of The Most Forbidden Technique is not always forbidden from LessWrong Frontpage</description>
-      <pubDate>Sat, 18 Jul 2026 00:59:59 +0000</pubDate>
-      <guid>tEFD2bgNWZ6XcurKA</guid>
-      <link>https://www.lesswrong.com/posts/tEFD2bgNWZ6XcurKA/the-most-forbidden-technique-is-not-always-forbidden-1</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5b80fac15e32_the_most_forbidden_technique_is_not_always_forbidd.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Your Book Review: Great And Desperate Cures</title>
-      <description>Audio version of Your Book Review: Great And Desperate Cures from Scott Alexander</description>
-      <pubDate>Fri, 17 Jul 2026 15:22:53 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-book-review-great-and-desperate</guid>
-      <link>https://www.astralcodexten.com/p/your-book-review-great-and-desperate</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5b1d9468d1ba_your_book_review_great_and_desperate_cures.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #177 Part 2: Wish You Were Here” by Zvi</title>
-      <description>Audio version of “AI #177 Part 2: Wish You Were Here” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 17 Jul 2026 12:52:03 +0000</pubDate>
-      <guid>7b85376f-21fb-42ed-8bd9-854aa6a0f28c</guid>
-      <link>https://www.lesswrong.com/posts/Zjj3PTEng8GDqfK6j/ai-177-part-2-wish-you-were-here</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aada8a4f15c6_ai_177_part_2_wish_you_were_here_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Monthly Roundup #44: July 2026” by Zvi</title>
       <description>Audio version of “Monthly Roundup #44: July 2026” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Wed, 15 Jul 2026 16:23:06 +0000</pubDate>
@@ -1452,6 +1430,17 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/ai-chip-regulation-is-not-a-dystopian</guid>
       <link>https://www.astralcodexten.com/p/ai-chip-regulation-is-not-a-dystopian</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d5cbe09e2649_ai_chip_regulation_is_not_a_dystopian_surveillance.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Twitter Thoughts For You” by Zvi</title>
+      <description>Audio version of “Twitter Thoughts For You” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 14 Jul 2026 17:58:25 +0000</pubDate>
+      <guid>0b2782e6-cbc6-4bd5-be02-be284727e316</guid>
+      <link>https://www.lesswrong.com/posts/2GFyHmCLJYCag7gKh/twitter-thoughts-for-you</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d581d0973101_twitter_thoughts_for_you_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
