@@ -1,6 +1,7 @@
 """Podcast RSS feed generation."""
 
 import os
+import subprocess
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from datetime import datetime
@@ -38,6 +39,7 @@ class Episode:
     duration_seconds: int
     link: Optional[str] = None
     transcript_url: Optional[str] = None
+    author: str = ""
 
 
 class FeedGenerator:
@@ -71,12 +73,23 @@ class FeedGenerator:
         return f"{title}\n\nTopics covered:\n" + "\n".join(bullets)
 
     def _get_audio_duration(self, audio_path: Path) -> int:
-        """Get duration of audio file in seconds."""
-        try:
-            import soundfile as sf
+        """Get duration of audio file in seconds, or 0 if it cannot be read.
 
-            info = sf.info(audio_path)
-            return int(info.duration)
+        Uses ffprobe, which ships with the ffmpeg the pipeline already requires.
+        The previous soundfile import was never satisfied (soundfile is not a
+        dependency), so every episode silently published a 00:00:00 duration.
+        """
+        try:
+            out = subprocess.run(
+                [
+                    "ffprobe", "-v", "error",
+                    "-show_entries", "format=duration",
+                    "-of", "default=noprint_wrappers=1:nokey=1",
+                    str(audio_path),
+                ],
+                capture_output=True, text=True, timeout=30, check=True,
+            )
+            return int(float(out.stdout.strip()))
         except Exception:
             return 0
 
@@ -155,6 +168,11 @@ class FeedGenerator:
             if episode.link:
                 ET.SubElement(item, "link").text = episode.link
 
+            if episode.author:
+                ET.SubElement(
+                    item, f"{{{self.ITUNES_NS}}}author"
+                ).text = episode.author
+
             # Enclosure (audio file)
             audio_url = f"{self.config.base_url}/audio/{episode.audio_file}"
             enclosure = ET.SubElement(item, "enclosure")
@@ -207,10 +225,18 @@ class FeedGenerator:
             published = datetime.fromisoformat(entry["published"])
             content = entry.get("content", "")
             is_briefing = entry["id"].startswith("news-briefing-")
+            # Rows predating the author column store '' — fall back to the feed
+            # name, which for the per-author feeds is already the person's name.
+            author = (entry.get("author") or "").strip() or entry["feed_name"]
 
             # Build description
             if is_briefing and content:
                 description = self._build_briefing_description(entry["title"], content)
+            elif author != entry["feed_name"]:
+                description = (
+                    f"Audio version of {entry['title']} by {author}"
+                    f" from {entry['feed_name']}"
+                )
             else:
                 description = f"Audio version of {entry['title']} from {entry['feed_name']}"
 
@@ -232,6 +258,7 @@ class FeedGenerator:
                     duration_seconds=duration,
                     link=entry.get("link"),
                     transcript_url=transcript_url,
+                    author="" if is_briefing else author,
                 )
             )
 

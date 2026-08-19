@@ -101,6 +101,13 @@ jobs:
           INJECT_URL: ${{ inputs.inject_url }}
           INJECT_MODE: ${{ inputs.inject_mode }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          # Completion email. Absent secrets simply skip the report.
+          SMTP_HOST: ${{ vars.SMTP_HOST }}
+          SMTP_PORT: ${{ vars.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          FEEDCAST_EMAIL_TO: ${{ secrets.FEEDCAST_EMAIL_TO }}
+          FEEDCAST_EMAIL_ALWAYS: ${{ vars.FEEDCAST_EMAIL_ALWAYS }}
           VOICE_UPLOAD_DELAY_SECONDS: "5"
           SAVE_DEBUG_WAVS: "false"
         run: uv run python -m src.main

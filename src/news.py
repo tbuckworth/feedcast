@@ -140,4 +140,5 @@ class NewsAggregator:
             published=datetime.now(),
             author="Feedcast Bot",
             feed_name="Daily News Briefing",
+            authors=["Feedcast Bot"],
         )

@@ -47,7 +47,8 @@ The pipeline runs in three async phases orchestrated by `src/main.py`:
 - **`src/processor.py`** — `ContentProcessor`: HTML cleaning with BeautifulSoup, LLM summarization via Gemini 3 Flash. Auto mode uses 24,000 char threshold to decide summarize vs verbatim. Converts HTML tables to prose (small tables inline, large tables via Gemini 2.5 Flash) before text extraction.
 - **`src/normalizer.py`** — `TextNormalizer`: Gemini 2.5 Flash-powered text normalization for TTS. Converts numbers, dates, percentages, currency, abbreviations, and special characters to spoken form. Handles long texts by splitting into paragraph batches.
 - **`src/audio.py`** — `AudioGenerator`: Voice sample upload to DeepInfra (fresh each session), async TTS with retry/backoff for 429s, ffmpeg concatenation to MP3. Voice sample: `voice_samples/derek_perkins.wav`.
-- **`src/feed.py`** — `FeedGenerator`: RSS 2.0 XML generation with iTunes namespace tags.
+- **`src/feed.py`** — `FeedGenerator`: RSS 2.0 XML generation with iTunes namespace tags. Episode durations come from `ffprobe`. Item descriptions and `<itunes:author>` carry the post's author(s).
+- **`src/email_report.py`** — `send_report()`: HTML + plain-text run report emailed over SMTP when the pipeline finishes. Covers the day's news briefing in full, each new episode with author, source link and audio link, any failures, and the past week's other episodes. Silently skipped when the SMTP env vars are unset, and never raises.
 - **`src/news.py`** — `NewsAggregator`: Parallel RSS fetching of news sources, article filtering by recency (configurable lookback), Gemini 3 Flash-powered synthesis into a daily briefing. Produces a date-keyed `FeedEntry` for idempotent daily processing. Accepts recent briefing context for cross-day dedup.
 
 ### Configuration
@@ -69,6 +70,13 @@ The pipeline runs in three async phases orchestrated by `src/main.py`:
 | `VOICE_UPLOAD_DELAY_SECONDS` | No | Delay after voice upload for cross-region replication (CI uses 5) |
 | `SAVE_DEBUG_WAVS` | No | Save intermediate WAV chunks for debugging |
 | `LLM_TIMEOUT_SECONDS` | No | Per-request timeout for OpenRouter calls (default 180, 3 retries) |
+| `FEEDCAST_EMAIL_TO` | No | Recipient of the HTML run report. Unset disables the email entirely |
+| `SMTP_USER` | No | SMTP username (the sending Gmail address) |
+| `GMAIL_APP_PASSWORD` | No | Google App Password. `SMTP_PASSWORD` is accepted as an alias |
+| `SMTP_HOST` | No | SMTP server (default `smtp.gmail.com`) |
+| `SMTP_PORT` | No | SMTP port (default 587 STARTTLS; 465 switches to implicit TLS) |
+| `FEEDCAST_EMAIL_FROM` | No | From address (defaults to `SMTP_USER`) |
+| `FEEDCAST_EMAIL_ALWAYS` | No | Send the report even when a run produced nothing new |
 
 ### URL Injection (Send Any URL)
 
