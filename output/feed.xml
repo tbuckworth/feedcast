@@ -21,6 +21,58 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-19</title>
+      <description>Daily News Briefing - 2026-08-19
+
+Topics covered:
+- In artificial intelligence safety and technical policy, OpenAI has announced a sweeping overhaul of its internal security protocols following a previously undisclosed breach
+- In AI infrastructure and markets, a massive financial realignment is underway as Nvidia partners with a coalition of major Wall Street firms—including BlackRock, Goldman Sachs, and Brookfield—to assemble five hundred billion dollars in financing
+- In artificial intelligence capabilities and global expansion, OpenAI is launching two significant initiatives
+- In geopolitics and regional security, the Trump administration has temporarily paused the implementation of new tariffs on Canada for seventy-two hours, signaling that a deal to avert a trade war is imminent
+- In technology and corporate policy, Apple has overhauled its App Store fee structure in the European Union
+- Expect a period of intense scrutiny for the United States healthcare sector as lawmakers and researchers react to a new three-point-seven million patient data breach at CareCloud and ongoing leadership shifts in federal health research</description>
+      <pubDate>Wed, 19 Aug 2026 14:01:19 +0000</pubDate>
+      <guid>news-briefing-2026-08-19</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/950b10692448_daily_news_briefing_-_2026-08-19.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-19.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The Control Paradox</title>
+      <description>Audio version of The Control Paradox from LessWrong Frontpage</description>
+      <pubDate>Wed, 19 Aug 2026 12:39:26 +0000</pubDate>
+      <guid>SCFabKnTgC36RzC6r</guid>
+      <link>https://www.lesswrong.com/posts/SCFabKnTgC36RzC6r/the-control-paradox</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a8fb73eba076_the_control_paradox.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Why I'm Staying Out Of The Substack Religion Debate</title>
+      <description>Audio version of Why I'm Staying Out Of The Substack Religion Debate from Scott Alexander</description>
+      <pubDate>Wed, 19 Aug 2026 05:24:22 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/why-im-staying-out-of-the-substack</guid>
+      <link>https://www.astralcodexten.com/p/why-im-staying-out-of-the-substack</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9db0a944bf98_why_im_staying_out_of_the_substack_religion_debat.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Anthropic Risk Report: August 2026” by Zvi</title>
+      <description>Audio version of “Anthropic Risk Report: August 2026” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 18 Aug 2026 20:42:27 +0000</pubDate>
+      <guid>e9c4a79d-60ec-4e4f-80b7-b546756ddb9d</guid>
+      <link>https://www.lesswrong.com/posts/dA8gohzABk6vT7yzP/anthropic-risk-report-august-2026</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/999248cffaa2_anthropic_risk_report_august_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-18</title>
       <description>Daily News Briefing - 2026-08-18
 
@@ -1331,105 +1383,12 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-20</title>
-      <description>Daily News Briefing - 2026-07-20
-
-Topics covered:
-- In geopolitics and global security, the conflict in the Middle East has claimed another American life
-- In Eastern Europe, Russia has launched a massive ballistic missile and drone offensive against multiple Ukrainian cities
-- In artificial intelligence capabilities and the entertainment industry, Netflix has announced the five hundred and eighty-seven million dollar cash acquisition of InterPositive, an AI filmmaking startup co-founded by actor Ben Affleck
-- On the technical side of AI safety, new research published on the Alignment Forum by researchers Josh and Neel has provided critical insights into "Hereditary Traits" in model distillation
-- In the aerospace sector, India has successfully reached orbit with the Vikram-one, the nation’s first privately developed commercial rocket
-- Expect continued diplomatic and military volatility through the next twenty-four hours as the United States weighs further retaliatory measures for the recent casualties in Iraq and Jordan</description>
-      <pubDate>Mon, 20 Jul 2026 06:52:32 +0000</pubDate>
-      <guid>news-briefing-2026-07-20</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c51d9ed8ed05_daily_news_briefing_-_2026-07-20.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-20.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>A Very Simple Game Theory of Pronoun Degendering</title>
-      <description>Audio version of A Very Simple Game Theory of Pronoun Degendering from LessWrong Frontpage</description>
-      <pubDate>Mon, 20 Jul 2026 05:06:03 +0000</pubDate>
-      <guid>iuKe4mtz3MeMfEyXT</guid>
-      <link>https://www.lesswrong.com/posts/iuKe4mtz3MeMfEyXT/a-very-simple-game-theory-of-pronoun-degendering</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/79545d48a471_a_very_simple_game_theory_of_pronoun_degendering.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Demis Hassabis on the New Coming Age” by Zvi</title>
-      <description>Audio version of “Demis Hassabis on the New Coming Age” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sun, 19 Jul 2026 14:21:21 +0000</pubDate>
-      <guid>fd52a352-7fea-4b19-803f-9f724edaaa92</guid>
-      <link>https://www.lesswrong.com/posts/3RfJLcmkztSTq9afc/demis-hassabis-on-the-new-coming-age</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/58355e775780_demis_hassabis_on_the_new_coming_age_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-07-19</title>
-      <description>Daily News Briefing - 2026-07-19
-
-Topics covered:
-- In geopolitics and global security, the conflict in the Middle East has escalated into a direct multi-front exchange as the United States conducted air strikes against Iranian targets for the eighth consecutive night
-- Regarding North American relations and environmental policy, President Trump has intensified his trade threats against Canada, vowing to impose new tariffs to compensate for "filthy air" crossing the border from Canadian wildfires
-- In artificial intelligence safety and healthcare policy, the United States government has launched a pilot program to use AI for insurance "prior authorization" and coverage decisions
-- In the aerospace and logistics sectors, India has hit a major milestone with the successful orbital launch of Vikram-one, the nation’s first commercial rocket
-- In technology and infrastructure, Waymo was forced to pause all robotaxi services in San Francisco for one hour today following a localized power outage
-- Expect continued diplomatic friction and market uncertainty through Monday as the United States military evaluates its response to the Iranian strikes in Kuwait</description>
-      <pubDate>Sun, 19 Jul 2026 06:35:11 +0000</pubDate>
-      <guid>news-briefing-2026-07-19</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c2fd78fc285c_daily_news_briefing_-_2026-07-19.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-19.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>A Solution to Cryptographic Boxes for Unfriendly AI</title>
-      <description>Audio version of A Solution to Cryptographic Boxes for Unfriendly AI from LessWrong Frontpage</description>
-      <pubDate>Sun, 19 Jul 2026 00:33:54 +0000</pubDate>
-      <guid>PG2RupAvCNqZ5PAvu</guid>
-      <link>https://www.lesswrong.com/posts/PG2RupAvCNqZ5PAvu/a-solution-to-cryptographic-boxes-for-unfriendly-ai</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1db6e97816ad_a_solution_to_cryptographic_boxes_for_unfriendly_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #177 Part 1: Tip of the Iceberg” by Zvi</title>
-      <description>Audio version of “AI #177 Part 1: Tip of the Iceberg” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sat, 18 Jul 2026 09:07:10 +0000</pubDate>
-      <guid>156ea254-0a52-467f-a661-08e21229278f</guid>
-      <link>https://www.lesswrong.com/posts/who9xZ7DxuprsJoTr/ai-177-part-1-tip-of-the-iceberg</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cf44fb2a4695_ai_177_part_1_tip_of_the_iceberg_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Monthly Roundup #44: July 2026” by Zvi</title>
       <description>Audio version of “Monthly Roundup #44: July 2026” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Wed, 15 Jul 2026 16:23:06 +0000</pubDate>
       <guid>648da05e-3994-43ec-a3d3-e9de9b37d4a4</guid>
       <link>https://www.lesswrong.com/posts/KiCwcAGHx4rdwJgzD/monthly-roundup-44-july-2026</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0dae45bfbfa4_monthly_roundup_44_july_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AI Chip Regulation Is Not A Dystopian Surveillance State</title>
-      <description>Audio version of AI Chip Regulation Is Not A Dystopian Surveillance State from Scott Alexander</description>
-      <pubDate>Wed, 15 Jul 2026 10:19:35 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/ai-chip-regulation-is-not-a-dystopian</guid>
-      <link>https://www.astralcodexten.com/p/ai-chip-regulation-is-not-a-dystopian</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d5cbe09e2649_ai_chip_regulation_is_not_a_dystopian_surveillance.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -1551,17 +1510,6 @@ Topics covered:
       <guid>https://www.astralcodexten.com/p/preliminary-thoughts-on-the-midjourney</guid>
       <link>https://www.astralcodexten.com/p/preliminary-thoughts-on-the-midjourney</link>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d0382b70691a_preliminary_thoughts_on_the_midjourney_scanner.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Waiting For The Miracle</title>
-      <description>Audio version of Waiting For The Miracle from Scott Alexander</description>
-      <pubDate>Thu, 18 Jun 2026 04:42:50 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/waiting-for-the-miracle</guid>
-      <link>https://www.astralcodexten.com/p/waiting-for-the-miracle</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/76db45f77c1e_waiting_for_the_miracle.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:00:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
