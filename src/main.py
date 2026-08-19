@@ -3,6 +3,7 @@
 import asyncio
 import hashlib
 import os
+import socket
 from datetime import datetime
 from pathlib import Path
 from typing import Literal
@@ -18,6 +19,12 @@ from .monitor import FeedEntry, FeedMonitor
 from .news import NewsAggregator
 from .normalizer import TextNormalizer
 from .processor import ContentProcessor
+
+# feedparser.parse(url) fetches through urllib, which blocks forever on a
+# stalled server — a single unresponsive feed would hang the whole run until
+# CI killed it. feedparser 6.x exposes no timeout argument, so bound it at the
+# socket layer. Only affects blocking sockets; asyncio/httpx are unaffected.
+socket.setdefaulttimeout(30)
 
 
 class FeedConfig(BaseModel):
@@ -197,7 +204,18 @@ async def async_main(config_path: Path | None = None) -> None:
             print(f"  {fc.name}: {len(entries)} new entries")
             return (fc, entries)
 
-        feed_results = await asyncio.gather(*[fetch_one(fc) for fc in config.feeds])
+        # return_exceptions: one unreachable or slow feed must not abort the run.
+        # feedparser raises (rather than setting bozo) on a socket timeout.
+        raw_results = await asyncio.gather(
+            *[fetch_one(fc) for fc in config.feeds],
+            return_exceptions=True,
+        )
+        feed_results = []
+        for fc, result in zip(config.feeds, raw_results):
+            if isinstance(result, BaseException):
+                print(f"  Warning: failed to fetch {fc.name}: {result!r}")
+                continue
+            feed_results.append(result)
 
         # Deduplicate — gather preserves config order, so author feeds win
         seen_ids: set[str] = set()
