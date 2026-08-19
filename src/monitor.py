@@ -26,12 +26,16 @@ def format_authors(authors: list[str]) -> str:
 
 
 def extract_authors(entry, feed_name: str) -> list[str]:
-    """Pull up to MAX_AUTHORS names off a feedparser entry.
+    """Pull every author name off a feedparser entry, in order.
 
     feedparser exposes `authors` as a list of dicts for feeds that publish
     several (LessWrong currently emits exactly one per post, but co-authored
     posts and other feeds do not). Fall back to the single `author` string,
     then to the feed name so an episode is never attributed to nobody.
+
+    Deliberately does NOT truncate: capping is a rendering decision that
+    belongs to format_authors, which needs the true count to know whether to
+    say "and others". Truncating here would silently drop co-authors instead.
     """
     names: list[str] = []
     for a in entry.get("authors") or []:
@@ -42,7 +46,7 @@ def extract_authors(entry, feed_name: str) -> list[str]:
         single = (entry.get("author") or "").strip()
         if single:
             names = [single]
-    return (names or [feed_name])[:MAX_AUTHORS]
+    return names or [feed_name]
 
 
 @dataclass

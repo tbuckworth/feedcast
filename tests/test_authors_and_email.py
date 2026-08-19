@@ -37,9 +37,10 @@ class TestExtractAuthors:
         entry = {"authors": [{"name": "Ada"}, {"name": "Grace"}]}
         assert extract_authors(entry, "Feed") == ["Ada", "Grace"]
 
-    def test_caps_at_max(self):
+    def test_keeps_every_author_capping_is_the_formatters_job(self):
         entry = {"authors": [{"name": f"P{i}"} for i in range(9)]}
-        assert len(extract_authors(entry, "Feed")) == MAX_AUTHORS
+        assert len(extract_authors(entry, "Feed")) == 9
+        assert format_authors(extract_authors(entry, "Feed")).count(",") == MAX_AUTHORS - 1
 
     def test_dedupes(self):
         entry = {"authors": [{"name": "Ada"}, {"name": "Ada"}, {"name": "Grace"}]}
@@ -203,3 +204,50 @@ class TestSendPath:
 
         monkeypatch.setattr("smtplib.SMTP", boom)
         assert send_report(self._report(), datetime(2026, 8, 19)) is False
+
+
+class TestRegressions:
+    """Both of these were live bugs, caught in review."""
+
+    def test_six_authors_survive_extraction_to_display(self):
+        """extract_authors must not pre-truncate, or 'and others' is unreachable
+        and the sixth co-author vanishes without trace."""
+        entry = {"authors": [{"name": n} for n in ["A", "B", "C", "D", "E", "F"]]}
+        names = extract_authors(entry, "Feed")
+        assert len(names) == 6, "extraction must keep every author"
+        assert format_authors(names) == "A, B, C, D, E and others"
+
+    def test_malformed_smtp_port_does_not_raise(self, monkeypatch):
+        """send_report promises never to raise; a bad SMTP_PORT repo var used to
+        throw ValueError straight through and fail the whole pipeline run."""
+        from src.email_report import send_report
+
+        captured = {}
+
+        class FakeSMTP:
+            def __init__(self, host, port, timeout=None):
+                captured["port"] = port
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *a):
+                return False
+
+            def starttls(self, context=None):
+                pass
+
+            def login(self, *a):
+                pass
+
+            def send_message(self, msg):
+                pass
+
+        monkeypatch.setattr("smtplib.SMTP", FakeSMTP)
+        monkeypatch.setenv("FEEDCAST_EMAIL_TO", "reader@example.com")
+        monkeypatch.setenv("SMTP_USER", "sender@example.com")
+        monkeypatch.setenv("GMAIL_APP_PASSWORD", "pw")
+        monkeypatch.setenv("SMTP_PORT", "not-a-number")
+
+        assert send_report(RunReport(), datetime(2026, 8, 19)) is True
+        assert captured["port"] == 587

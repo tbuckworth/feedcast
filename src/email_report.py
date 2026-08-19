@@ -23,6 +23,8 @@ MUTED = "#6b6b6b"
 RULE = "#e3e3e3"
 ACCENT = "#1f5f8b"
 
+DEFAULT_PORT = 587
+
 
 @dataclass
 class ReportEpisode:
@@ -225,33 +227,39 @@ def send_report(report: RunReport, when: datetime | None = None) -> bool:
     # An unset GitHub Actions `vars.X` interpolates to an empty string rather
     # than being absent, so fall back on emptiness, not just on the key missing.
     host = os.environ.get("SMTP_HOST", "").strip() or "smtp.gmail.com"
-    port = int(os.environ.get("SMTP_PORT", "").strip() or "587")
-    from_addr = os.environ.get("FEEDCAST_EMAIL_FROM", "").strip() or user
-
-    n = len(report.episodes)
-    subject = f"Feedcast — {when.strftime('%d %b')} — {n} new episode{'s' if n != 1 else ''}"
-    if report.failures and not n:
-        subject = f"Feedcast — {when.strftime('%d %b')} — {len(report.failures)} failed"
-
-    msg = EmailMessage()
-    msg["Subject"] = subject
-    msg["From"] = from_addr
-    msg["To"] = to_addr
-    msg.set_content(build_text(report, when))
-    msg.add_alternative(build_html(report, when), subtype="html")
+    raw_port = os.environ.get("SMTP_PORT", "").strip()
+    try:
+        port = int(raw_port) if raw_port else DEFAULT_PORT
+    except ValueError:
+        print(f"  Email report: SMTP_PORT={raw_port!r} is not a number, using {DEFAULT_PORT}")
+        port = DEFAULT_PORT
 
     try:
+        from_addr = os.environ.get("FEEDCAST_EMAIL_FROM", "").strip() or user
+
+        n = len(report.episodes)
+        subject = f"Feedcast — {when.strftime('%d %b')} — {n} new episode{'s' if n != 1 else ''}"
+        if report.failures and not n:
+            subject = f"Feedcast — {when.strftime('%d %b')} — {len(report.failures)} failed"
+
+        msg = EmailMessage()
+        msg["Subject"] = subject
+        msg["From"] = from_addr
+        msg["To"] = to_addr
+        msg.set_content(build_text(report, when))
+        msg.add_alternative(build_html(report, when), subtype="html")
+
         # Port 465 is implicit TLS; 587 is STARTTLS. Gmail accepts both.
         if port == 465:
             with smtplib.SMTP_SSL(host, port, timeout=60,
-                                  context=ssl.create_default_context()) as s:
-                s.login(user, password)
-                s.send_message(msg)
+                                  context=ssl.create_default_context()) as srv:
+                srv.login(user, password)
+                srv.send_message(msg)
         else:
-            with smtplib.SMTP(host, port, timeout=60) as s:
-                s.starttls(context=ssl.create_default_context())
-                s.login(user, password)
-                s.send_message(msg)
+            with smtplib.SMTP(host, port, timeout=60) as srv:
+                srv.starttls(context=ssl.create_default_context())
+                srv.login(user, password)
+                srv.send_message(msg)
         print(f"  Email report sent to {to_addr}")
         return True
     except Exception as e:
