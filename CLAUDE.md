@@ -68,6 +68,7 @@ The pipeline runs in three async phases orchestrated by `src/main.py`:
 | `NTFY_TOPIC` | No | ntfy.sh topic for push notifications on inject success/failure (e.g. `feedcast-titus`) |
 | `VOICE_UPLOAD_DELAY_SECONDS` | No | Delay after voice upload for cross-region replication (CI uses 5) |
 | `SAVE_DEBUG_WAVS` | No | Save intermediate WAV chunks for debugging |
+| `LLM_TIMEOUT_SECONDS` | No | Per-request timeout for OpenRouter calls (default 180, 3 retries) |
 
 ### URL Injection (Send Any URL)
 
