@@ -117,5 +117,6 @@ def url_to_feed_entry(url: str) -> FeedEntry:
         content=article["text"],
         published=datetime.now(),  # Always use now — article dates can be old, causing cleanup to delete fresh episodes
         author=article["author"],
+        authors=[article["author"]],
         feed_name=domain,
     )

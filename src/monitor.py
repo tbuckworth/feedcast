@@ -2,12 +2,51 @@
 
 import re
 import sqlite3
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
 
 import feedparser
+
+
+MAX_AUTHORS = 5
+
+
+def format_authors(authors: list[str]) -> str:
+    """Render an author list for speech and display: 'A', 'A and B', 'A, B and C'."""
+    shown = authors[:MAX_AUTHORS]
+    if not shown:
+        return ""
+    if len(authors) > MAX_AUTHORS:
+        return ", ".join(shown) + " and others"
+    if len(shown) == 1:
+        return shown[0]
+    return ", ".join(shown[:-1]) + " and " + shown[-1]
+
+
+def extract_authors(entry, feed_name: str) -> list[str]:
+    """Pull every author name off a feedparser entry, in order.
+
+    feedparser exposes `authors` as a list of dicts for feeds that publish
+    several (LessWrong currently emits exactly one per post, but co-authored
+    posts and other feeds do not). Fall back to the single `author` string,
+    then to the feed name so an episode is never attributed to nobody.
+
+    Deliberately does NOT truncate: capping is a rendering decision that
+    belongs to format_authors, which needs the true count to know whether to
+    say "and others". Truncating here would silently drop co-authors instead.
+    """
+    names: list[str] = []
+    for a in entry.get("authors") or []:
+        name = (a.get("name") or "").strip() if isinstance(a, dict) else str(a).strip()
+        if name and name not in names:
+            names.append(name)
+    if not names:
+        single = (entry.get("author") or "").strip()
+        if single:
+            names = [single]
+    return names or [feed_name]
 
 
 @dataclass
@@ -21,6 +60,7 @@ class FeedEntry:
     published: datetime
     author: str
     feed_name: str
+    authors: list[str] = field(default_factory=list)
 
 
 class FeedMonitor:
@@ -55,6 +95,12 @@ class FeedMonitor:
             # Migration: add content column if missing
             try:
                 conn.execute("ALTER TABLE processed_posts ADD COLUMN content TEXT DEFAULT ''")
+            except sqlite3.OperationalError:
+                pass  # Column already exists
+            # Migration: add author column if missing. Rows written before this
+            # column existed keep '', and readers fall back to the feed name.
+            try:
+                conn.execute("ALTER TABLE processed_posts ADD COLUMN author TEXT DEFAULT ''")
             except sqlite3.OperationalError:
                 pass  # Column already exists
             conn.commit()
@@ -94,8 +140,8 @@ class FeedMonitor:
             conn.execute(
                 """
                 INSERT OR REPLACE INTO processed_posts
-                (id, feed_name, title, link, published, processed_at, audio_file, content)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                (id, feed_name, title, link, published, processed_at, audio_file, content, author)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     entry.id,
@@ -106,6 +152,7 @@ class FeedMonitor:
                     datetime.now().isoformat(),
                     audio_file,
                     content or "",
+                    entry.author or "",
                 ),
             )
             conn.commit()
@@ -154,7 +201,8 @@ class FeedMonitor:
             elif hasattr(entry, "updated_parsed") and entry.updated_parsed:
                 published = datetime(*entry.updated_parsed[:6])
 
-            author = entry.get("author", feed_name)
+            authors = extract_authors(entry, feed_name)
+            author = format_authors(authors)
 
             entries.append(
                 FeedEntry(
@@ -165,6 +213,7 @@ class FeedMonitor:
                     published=published,
                     author=author,
                     feed_name=feed_name,
+                    authors=authors,
                 )
             )
 

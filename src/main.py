@@ -4,7 +4,7 @@ import asyncio
 import hashlib
 import os
 import socket
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Literal
 
@@ -13,8 +13,9 @@ import yaml
 from pydantic import BaseModel
 
 from .audio import AudioGenerator
+from .email_report import ReportEpisode, RunReport, send_report
 from .extractor import ExtractionError, url_to_feed_entry
-from .feed import FeedGenerator, PodcastConfig
+from .feed import Episode, FeedGenerator, PodcastConfig
 from .monitor import FeedEntry, FeedMonitor
 from .news import NewsAggregator
 from .normalizer import TextNormalizer
@@ -253,6 +254,9 @@ async def async_main(config_path: Path | None = None) -> None:
 
     print(f"\n{len(entries_to_process)} entries to process")
 
+    new_entry_ids: set[str] = set()
+    failures: list[tuple[str, str]] = []
+
     if not entries_to_process:
         print("No new entries to process.")
     else:
@@ -271,12 +275,16 @@ async def async_main(config_path: Path | None = None) -> None:
         # PHASE 3: Sequential finalization
         print(f"\nPhase 3: Finalizing...")
         new_episodes = 0
-        for result in results:
-            if isinstance(result, Exception):
-                print(f"  Error processing entry: {type(result).__name__}: {result!r}")
+        # gather() preserves input order, so zipping recovers which entry each
+        # exception came from — the report needs to name what failed.
+        for (submitted, _mode, _prompt), result in zip(entries_to_process, results):
+            if isinstance(result, BaseException):
+                print(f"  Error processing {submitted.title}: {type(result).__name__}: {result!r}")
+                failures.append((submitted.title, f"{type(result).__name__}: {result}"))
                 continue
             entry, audio_path = result
             monitor.mark_processed(entry, audio_path.name, content=entry.content)
+            new_entry_ids.add(entry.id)
             # Store news briefing text for future dedup context
             if entry.id.startswith("news-briefing-") and briefing_entry:
                 today = datetime.now().strftime("%Y-%m-%d")
@@ -304,6 +312,15 @@ async def async_main(config_path: Path | None = None) -> None:
     feed_gen.generate(episodes, feed_path)
     print(f"  Generated feed with {len(episodes)} episodes: {feed_path}")
 
+    # Email the run report. Skipped silently when the SMTP vars are unset.
+    if new_entry_ids or failures or _email_always():
+        report = _build_run_report(
+            episodes, db_entries, new_entry_ids, failures, config.podcast.base_url,
+        )
+        send_report(report)
+    else:
+        print("  Nothing new — email report skipped (set FEEDCAST_EMAIL_ALWAYS=true to send anyway)")
+
     # Send ntfy notification for injected URLs
     if inject_url:
         ntfy_topic = os.environ.get("NTFY_TOPIC", "").strip()
@@ -311,6 +328,49 @@ async def async_main(config_path: Path | None = None) -> None:
             await _send_ntfy(ntfy_topic, inject_url, entries_to_process)
 
     print(f"\nPipeline complete.")
+
+
+def _email_always() -> bool:
+    """Whether to email even on a run that produced nothing."""
+    return os.environ.get("FEEDCAST_EMAIL_ALWAYS", "").strip().lower() in ("true", "1", "yes")
+
+
+def _build_run_report(
+    episodes: list[Episode], db_entries: list[dict], new_entry_ids: set[str],
+    failures: list[tuple[str, str]], base_url: str,
+) -> RunReport:
+    """Assemble the emailed report from this run's episodes and the feed."""
+    db_by_id = {d["id"]: d for d in db_entries}
+    cutoff = datetime.now() - timedelta(days=7)
+
+    def to_report(ep: Episode) -> ReportEpisode:
+        row = db_by_id.get(ep.id, {})
+        is_briefing = ep.id.startswith("news-briefing-")
+        feed_name = row.get("feed_name", "")
+        author = (row.get("author") or "").strip() or feed_name
+        return ReportEpisode(
+            title=ep.title,
+            author="" if is_briefing else author,
+            feed_name=feed_name,
+            link=ep.link or "",
+            audio_url=f"{base_url}/audio/{ep.audio_file}",
+            duration_seconds=ep.duration_seconds,
+            is_briefing=is_briefing,
+            briefing_text=(row.get("content") or "") if is_briefing else "",
+        )
+
+    ordered = sorted(episodes, key=lambda e: e.published, reverse=True)
+    return RunReport(
+        episodes=[to_report(e) for e in ordered if e.id in new_entry_ids],
+        recent=[
+            to_report(e) for e in ordered
+            if e.id not in new_entry_ids and e.published >= cutoff
+        ][:12],
+        failures=failures,
+        feed_url=f"{base_url}/feed.xml",
+        site_url=base_url,
+        total_in_feed=len(episodes),
+    )
 
 
 async def _send_ntfy(
