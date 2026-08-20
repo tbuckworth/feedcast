@@ -1,12 +1,8 @@
 """Unit tests for pure functions — no API calls, no mocking."""
 
 import hashlib
-import os
 import re
 from datetime import datetime
-
-# ContentProcessor.__init__ reads ANTHROPIC_API_KEY, set a dummy before import
-os.environ.setdefault("ANTHROPIC_API_KEY", "test-key")
 
 from src.audio import split_into_chunks
 from src.feed import FeedGenerator, PodcastConfig
