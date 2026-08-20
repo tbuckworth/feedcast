@@ -70,7 +70,7 @@ class MathsFilterConfig(BaseModel):
     """Skip audio for posts that are too mathematical to follow by ear."""
 
     enabled: bool = True
-    threshold_per_1k: float = 10.0
+    threshold_per_1k: float = 8.0
 
 
 class NewsBriefingConfig(BaseModel):
@@ -262,9 +262,13 @@ async def async_main(config_path: Path | None = None) -> None:
                 print(f"  News briefing already processed today")
 
     # Maths filter: posts built on real mathematics are linked, not narrated.
-    # Skipped in inject mode — sending a URL is an explicit "I want this one".
+    # Bypassed for inject and reprocess — both are explicit "I want this one"
+    # requests. Reprocess especially: it deletes the row first, so filtering a
+    # reprocessed post would re-insert it with a NULL audio_file and silently
+    # drop an already-published episode out of feed.xml, unrecoverably.
     maths_skipped: list[tuple[FeedEntry, MathsVerdict]] = []
-    if config.maths_filter.enabled and not inject_url and entries_to_process:
+    if (config.maths_filter.enabled and not inject_url and not reprocess_entry
+            and entries_to_process):
         print(f"\nChecking {len(entries_to_process)} entries for maths density...")
         candidates = [
             (i, e) for i, (e, _m, _p) in enumerate(entries_to_process)

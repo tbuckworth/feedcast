@@ -19,17 +19,31 @@ from typing import Optional
 
 import httpx
 
-# Per 1000 words. Measured across 20 recent LessWrong and Alignment Forum posts:
-# the three genuinely mathematical ones scored 129.7, 30.5 and 13.5, and every
-# prose post scored 6.6 or below. 10 sits in the empty gap between them.
-DEFAULT_THRESHOLD = 10.0
+# Per 1000 words, re-measured after the inline-LaTeX pattern was tightened to
+# exclude currency (which lowered every score). Across 20 recent LessWrong and
+# Alignment Forum posts the mathematical ones now score 99.0, 23.1 and 9.8, and
+# every prose post scores 6.6 or below. 8 sits in that gap.
+#
+# Recalibrate this whenever _PATTERNS changes — the two numbers are coupled, and
+# a pattern change silently moves every score.
+DEFAULT_THRESHOLD = 8.0
+
+# A density alone is not enough. On a short post two matches can clear 10/1000
+# words, and being wrong here is expensive and silent: the post gets no audio
+# and is marked processed, so it never comes back. Require real volume too.
+MIN_HITS = 8
 
 _LW_HOSTS = ("lesswrong.com", "alignmentforum.org")
 _POST_ID = re.compile(r"/posts/([A-Za-z0-9]{17})")
 _UA = {"User-Agent": "Mozilla/5.0 (feedcast)"}
 
 _PATTERNS = [
-    r"\$[^$\n]{1,120}\$",                       # inline LaTeX
+    # Inline LaTeX. The lookahead demands a genuinely mathematical character
+    # inside the delimiters, so prose about money — "raised $10M at a $1B
+    # valuation" — is not read as an equation. Costs us bare "$D$"-style
+    # single letters, which is the right trade: a false negative merely
+    # narrates a post, a false positive deletes it.
+    r"\$(?=[^$\n]*[\\=^_{}])[^$\n]{1,120}\$",
     r"\\\(", r"\\\[",                           # alternative delimiters
     r"\\begin\{(align|equation|cases|matrix)",  # display environments
     r"\\frac", r"\\sum", r"\\prod", r"\\int", r"\\lim",
@@ -94,5 +108,5 @@ def assess(link: str, fallback_text: str,
     md = fetch_lesswrong_markdown(link)
     text, source = (md, "markdown") if md else (fallback_text, "rss")
     hits, score = maths_score(text)
-    return MathsVerdict(is_heavy=score >= threshold, score=round(score, 1),
-                        hits=hits, source=source)
+    return MathsVerdict(is_heavy=score >= threshold and hits >= MIN_HITS,
+                        score=round(score, 1), hits=hits, source=source)
