@@ -81,7 +81,7 @@ class ContentProcessor:
                 table_html = str(table)
                 response = await self.client.chat.completions.create(
                     model=MODEL_CHEAP,
-                    max_tokens=500,
+                    max_tokens=4000,
                     messages=[
                         {"role": "system", "content": "Convert this HTML table into natural spoken prose. Be concise but preserve all key data points. Do not use bullet points or formatting."},
                         {"role": "user", "content": table_html},
@@ -121,7 +121,7 @@ Content:
 
         response = await self.client.chat.completions.create(
             model=MODEL_STRONG,
-            max_tokens=2000,
+            max_tokens=16000,
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_message},
