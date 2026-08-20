@@ -154,19 +154,23 @@ def build_html(report: RunReport, when: datetime) -> str:
         parts.append(section("Failed", rows))
 
     if report.linked:
-        rows = "".join(
-            f'<tr><td style="padding:13px 0;border-bottom:1px solid {RULE};">'
-            f'<div style="font-size:15px;font-weight:600;line-height:1.35;">'
-            + (f'<a href="{escape(p.link, quote=True)}" style="color:{INK};'
-               f'text-decoration:none;">{escape(p.title)}</a>' if p.link else escape(p.title))
-            + "</div>"
-            f'<div style="font-size:12px;color:{MUTED};margin-top:4px;">'
-            f'{escape(" &middot; ".join(b for b in (p.author, p.feed_name) if b))}'
-            f' &middot; {p.maths_score:g} maths matches per 1000 words</div>'
-            f'<div style="margin-top:9px;">{_btn(p.link, "Read it")}</div>'
-            "</td></tr>"
-            for p in report.linked
-        )
+        def _linked_row(post: LinkedPost) -> str:
+            title = (f'<a href="{escape(post.link, quote=True)}" '
+                     f'style="color:{INK};text-decoration:none;">{escape(post.title)}</a>'
+                     if post.link else escape(post.title))
+            # The separator stays outside escape(); escaping it yields "&amp;middot;",
+            # which renders as literal text in the mail client.
+            who = " &middot; ".join(escape(b) for b in (post.author, post.feed_name) if b)
+            return (
+                f'<tr><td style="padding:13px 0;border-bottom:1px solid {RULE};">'
+                f'<div style="font-size:15px;font-weight:600;line-height:1.35;">{title}</div>'
+                f'<div style="font-size:12px;color:{MUTED};margin-top:4px;">{who}'
+                f' &middot; {post.maths_score:g} maths matches per 1000 words</div>'
+                f'<div style="margin-top:9px;">{_btn(post.link, "Read it")}</div>'
+                "</td></tr>"
+            )
+
+        rows = "".join(_linked_row(p) for p in report.linked)
         parts.append(section("Linked, not narrated", rows))
         parts.append(
             f'<tr><td style="padding:2px 0 0 0;font-size:12px;color:{MUTED};'
