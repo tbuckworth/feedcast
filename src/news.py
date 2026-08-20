@@ -108,7 +108,7 @@ class NewsAggregator:
 
         response = await self.client.chat.completions.create(
             model=MODEL_STRONG,
-            max_tokens=1500,
+            max_tokens=16000,
             messages=[
                 {"role": "system", "content": self.prompt},
                 {"role": "user", "content": user_message},

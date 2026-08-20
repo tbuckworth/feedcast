@@ -43,17 +43,18 @@ The pipeline runs in three async phases orchestrated by `src/main.py`:
 
 - **`src/monitor.py`** — `FeedMonitor`: RSS fetching with `feedparser`, SQLite-backed dedup tracking (`data/posts.db`, tables `processed_posts` and `news_briefings`). Supports `skip_patterns` per feed for title-based filtering. Stores recent news briefings for cross-day dedup. `is_processed_by_link()` provides link-based dedup for injected URLs.
 - **`src/extractor.py`** — `url_to_feed_entry()`: Fetches any URL via trafilatura, extracts article text + metadata (title, author, date). Entry IDs use `injected-{sha256(url)[:16]}` format. Rejects content under 200 chars (quality gate for JS-rendered/paywalled pages).
-- **`src/llm.py`** — OpenRouter client factory (`get_client()`) and model constants (`MODEL_STRONG` = Gemini 3 Flash, `MODEL_CHEAP` = Gemini 2.5 Flash). All LLM calls use the OpenAI SDK against OpenRouter.
-- **`src/processor.py`** — `ContentProcessor`: HTML cleaning with BeautifulSoup, LLM summarization via Gemini 3 Flash. Auto mode uses 24,000 char threshold to decide summarize vs verbatim. Converts HTML tables to prose (small tables inline, large tables via Gemini 2.5 Flash) before text extraction.
-- **`src/normalizer.py`** — `TextNormalizer`: Gemini 2.5 Flash-powered text normalization for TTS. Converts numbers, dates, percentages, currency, abbreviations, and special characters to spoken form. Handles long texts by splitting into paragraph batches.
+- **`src/llm.py`** — OpenRouter client factory (`get_client()`) and model constants. Both `MODEL_STRONG` and `MODEL_CHEAP` are **Claude Opus 4.6** — it writes everything that is actually heard. All LLM calls use the OpenAI SDK against OpenRouter.
+- **`src/mathiness.py`** — `assess()`: decides whether a post is too mathematical to follow by ear. Scores LaTeX density per 1000 words against `maths_filter.threshold_per_1k`. Fetches the LessWrong/Alignment Forum **markdown** via GraphQL, because RSS and the rendered page both strip MathJax — formulas otherwise arrive as holes. Flagged posts get no audio and are linked in the email instead.
+- **`src/processor.py`** — `ContentProcessor`: HTML cleaning with BeautifulSoup, LLM summarization via Opus 4.6. Auto mode uses 24,000 char threshold to decide summarize vs verbatim. Converts HTML tables to prose (small tables inline, large tables via the LLM) before text extraction.
+- **`src/normalizer.py`** — `TextNormalizer`: Opus 4.6-powered text normalization for TTS. Converts numbers, dates, percentages, currency, abbreviations, and special characters to spoken form. Handles long texts by splitting into paragraph batches.
 - **`src/audio.py`** — `AudioGenerator`: Voice sample upload to DeepInfra (fresh each session), async TTS with retry/backoff for 429s, ffmpeg concatenation to MP3. Voice sample: `voice_samples/derek_perkins.wav`.
 - **`src/feed.py`** — `FeedGenerator`: RSS 2.0 XML generation with iTunes namespace tags. Episode durations come from `ffprobe`. Item descriptions and `<itunes:author>` carry the post's author(s).
 - **`src/email_report.py`** — `send_report()`: HTML + plain-text run report emailed over SMTP when the pipeline finishes. Covers the day's news briefing in full, each new episode with author, source link and audio link, any failures, and the past week's other episodes. Silently skipped when the SMTP env vars are unset, and never raises.
-- **`src/news.py`** — `NewsAggregator`: Parallel RSS fetching of news sources, article filtering by recency (configurable lookback), Gemini 3 Flash-powered synthesis into a daily briefing. Produces a date-keyed `FeedEntry` for idempotent daily processing. Accepts recent briefing context for cross-day dedup.
+- **`src/news.py`** — `NewsAggregator`: Parallel RSS fetching of news sources, article filtering by recency (configurable lookback), Opus 4.6-powered synthesis into a daily briefing. Produces a date-keyed `FeedEntry` for idempotent daily processing. Accepts recent briefing context for cross-day dedup.
 
 ### Configuration
 
-`config.yaml` defines podcast metadata, the default summarization prompt, the feed list, and the optional `news_briefing` section. Each feed has a `mode` (`summarize`, `verbatim`, or `auto`), optional custom prompt, and optional `skip_patterns` (list of regexes matched against entry titles to filter out non-article posts). The `news_briefing` section configures the daily briefing with `enabled`, `lookback_hours`, a synthesis `prompt`, and a list of `sources` (each with `name`, `url`, `category`).
+`config.yaml` defines podcast metadata, the default summarization prompt, the feed list, the `maths_filter` section (`enabled`, `threshold_per_1k` — LaTeX matches per 1000 words above which a post is linked rather than narrated), and the optional `news_briefing` section. Each feed has a `mode` (`summarize`, `verbatim`, or `auto`), optional custom prompt, and optional `skip_patterns` (list of regexes matched against entry titles to filter out non-article posts). The `news_briefing` section configures the daily briefing with `enabled`, `lookback_hours`, a synthesis `prompt`, and a list of `sources` (each with `name`, `url`, `category`).
 
 ### Environment variables
 
@@ -100,6 +101,8 @@ GitHub Actions workflow (`.github/workflows/update-feed.yml`) runs daily at 6am 
 
 ```
 RSS feeds → feedparser → skip_patterns filter → new entries (SQLite dedup)
+    → maths filter (LessWrong markdown via GraphQL; too mathematical → link in
+      email, no audio, recorded with a NULL audio_file so it never recurs)
     → table-to-prose conversion (small inline, large via Gemini 2.5 Flash)
     → Gemini 3 Flash summarization OR HTML cleaning
     → TTS normalization (numbers/dates/symbols → spoken form via Gemini 2.5 Flash)

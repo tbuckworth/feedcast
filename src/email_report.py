@@ -41,12 +41,25 @@ class ReportEpisode:
 
 
 @dataclass
+class LinkedPost:
+    """A post deliberately not narrated — too mathematical to follow by ear."""
+
+    title: str
+    author: str
+    feed_name: str
+    link: str
+    maths_score: float = 0.0
+    source: str = ""
+
+
+@dataclass
 class RunReport:
     """Everything the email needs about a single pipeline run."""
 
     episodes: list[ReportEpisode] = field(default_factory=list)
     recent: list[ReportEpisode] = field(default_factory=list)
     failures: list[tuple[str, str]] = field(default_factory=list)
+    linked: list[LinkedPost] = field(default_factory=list)
     feed_url: str = ""
     site_url: str = ""
     total_in_feed: int = 0
@@ -140,6 +153,28 @@ def build_html(report: RunReport, when: datetime) -> str:
         )
         parts.append(section("Failed", rows))
 
+    if report.linked:
+        rows = "".join(
+            f'<tr><td style="padding:13px 0;border-bottom:1px solid {RULE};">'
+            f'<div style="font-size:15px;font-weight:600;line-height:1.35;">'
+            + (f'<a href="{escape(p.link, quote=True)}" style="color:{INK};'
+               f'text-decoration:none;">{escape(p.title)}</a>' if p.link else escape(p.title))
+            + "</div>"
+            f'<div style="font-size:12px;color:{MUTED};margin-top:4px;">'
+            f'{escape(" &middot; ".join(b for b in (p.author, p.feed_name) if b))}'
+            f' &middot; {p.maths_score:g} maths matches per 1000 words</div>'
+            f'<div style="margin-top:9px;">{_btn(p.link, "Read it")}</div>'
+            "</td></tr>"
+            for p in report.linked
+        )
+        parts.append(section("Linked, not narrated", rows))
+        parts.append(
+            f'<tr><td style="padding:2px 0 0 0;font-size:12px;color:{MUTED};'
+            f'line-height:1.55;">These are built on real mathematics. Even a good '
+            f'spoken explanation is hard to follow without seeing the notation, so '
+            f'they are linked rather than read aloud.</td></tr>'
+        )
+
     if report.recent:
         items = "".join(
             f'<li style="margin:0 0 6px 0;font-size:13px;line-height:1.45;">'
@@ -200,6 +235,15 @@ def build_text(report: RunReport, when: datetime) -> str:
     if report.failures:
         lines.append("Failed:")
         lines += [f"  - {t}: {err}" for t, err in report.failures] + [""]
+    if report.linked:
+        lines.append("Linked, not narrated (too mathematical for audio):")
+        for p in report.linked:
+            lines.append(f"  - {p.title} ({p.author or p.feed_name}) "
+                         f"[{p.maths_score:g}/1k]")
+            if p.link:
+                lines.append(f"    {p.link}")
+        lines.append("")
+
     if report.recent:
         lines.append("Also published this week:")
         lines += [f"  - {e.title} ({e.author or e.feed_name})" for e in report.recent] + [""]
@@ -239,6 +283,9 @@ def send_report(report: RunReport, when: datetime | None = None) -> bool:
 
         n = len(report.episodes)
         subject = f"Feedcast — {when.strftime('%d %b')} — {n} new episode{'s' if n != 1 else ''}"
+        if report.linked and not n:
+            subject = (f"Feedcast — {when.strftime('%d %b')} — "
+                       f"{len(report.linked)} linked, no audio")
         if report.failures and not n:
             subject = f"Feedcast — {when.strftime('%d %b')} — {len(report.failures)} failed"
 

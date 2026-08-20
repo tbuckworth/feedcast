@@ -13,9 +13,10 @@ import yaml
 from pydantic import BaseModel
 
 from .audio import AudioGenerator
-from .email_report import ReportEpisode, RunReport, send_report
+from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
 from .extractor import ExtractionError, url_to_feed_entry
 from .feed import Episode, FeedGenerator, PodcastConfig
+from .mathiness import MathsVerdict, assess
 from .monitor import FeedEntry, FeedMonitor
 from .news import NewsAggregator
 from .normalizer import TextNormalizer
@@ -65,6 +66,13 @@ class NewsSource(BaseModel):
     category: str
 
 
+class MathsFilterConfig(BaseModel):
+    """Skip audio for posts that are too mathematical to follow by ear."""
+
+    enabled: bool = True
+    threshold_per_1k: float = 10.0
+
+
 class NewsBriefingConfig(BaseModel):
     """Configuration for the daily news briefing."""
 
@@ -82,6 +90,7 @@ class Config(BaseModel):
     default_prompt: str
     feeds: list[FeedConfig]
     news_briefing: NewsBriefingConfig | None = None
+    maths_filter: MathsFilterConfig = MathsFilterConfig()
 
 
 def load_config(config_path: Path) -> Config:
@@ -252,6 +261,36 @@ async def async_main(config_path: Path | None = None) -> None:
             elif briefing_entry:
                 print(f"  News briefing already processed today")
 
+    # Maths filter: posts built on real mathematics are linked, not narrated.
+    # Skipped in inject mode — sending a URL is an explicit "I want this one".
+    maths_skipped: list[tuple[FeedEntry, MathsVerdict]] = []
+    if config.maths_filter.enabled and not inject_url and entries_to_process:
+        print(f"\nChecking {len(entries_to_process)} entries for maths density...")
+        candidates = [
+            (i, e) for i, (e, _m, _p) in enumerate(entries_to_process)
+            if not e.id.startswith("news-briefing-")
+        ]
+        verdicts = await asyncio.gather(
+            *[asyncio.to_thread(assess, e.link, e.content,
+                                config.maths_filter.threshold_per_1k)
+              for _i, e in candidates],
+            return_exceptions=True,
+        )
+        drop: set[int] = set()
+        for (idx, entry), verdict in zip(candidates, verdicts):
+            if isinstance(verdict, BaseException):
+                print(f"  Maths check failed for {entry.title}: {verdict!r} — keeping")
+                continue
+            if verdict.is_heavy:
+                print(f"  Too mathematical for audio ({verdict.score}/1k via "
+                      f"{verdict.source}): {entry.title}")
+                drop.add(idx)
+                maths_skipped.append((entry, verdict))
+        if drop:
+            entries_to_process = [
+                t for i, t in enumerate(entries_to_process) if i not in drop
+            ]
+
     print(f"\n{len(entries_to_process)} entries to process")
 
     new_entry_ids: set[str] = set()
@@ -293,6 +332,12 @@ async def async_main(config_path: Path | None = None) -> None:
 
         print(f"  {new_episodes} new episodes created")
 
+    # Record the maths-skipped posts with no audio file. This dedups them so they
+    # are not re-detected daily, and the feed generator already skips any entry
+    # without audio, so they never appear as a broken episode.
+    for entry, _verdict in maths_skipped:
+        monitor.mark_processed(entry, None, content=entry.content)
+
     # Cleanup old entries BEFORE generating the feed, so the feed never
     # references audio/transcripts that cleanup deletes in this same run
     # (otherwise the deployed feed.xml advertises 404 enclosures).
@@ -313,9 +358,10 @@ async def async_main(config_path: Path | None = None) -> None:
     print(f"  Generated feed with {len(episodes)} episodes: {feed_path}")
 
     # Email the run report. Skipped silently when the SMTP vars are unset.
-    if new_entry_ids or failures or _email_always():
+    if new_entry_ids or failures or maths_skipped or _email_always():
         report = _build_run_report(
             episodes, db_entries, new_entry_ids, failures, config.podcast.base_url,
+            maths_skipped,
         )
         send_report(report)
     else:
@@ -338,6 +384,7 @@ def _email_always() -> bool:
 def _build_run_report(
     episodes: list[Episode], db_entries: list[dict], new_entry_ids: set[str],
     failures: list[tuple[str, str]], base_url: str,
+    maths_skipped: list[tuple[FeedEntry, MathsVerdict]] | None = None,
 ) -> RunReport:
     """Assemble the emailed report from this run's episodes and the feed."""
     db_by_id = {d["id"]: d for d in db_entries}
@@ -367,6 +414,11 @@ def _build_run_report(
             if e.id not in new_entry_ids and e.published >= cutoff
         ][:12],
         failures=failures,
+        linked=[
+            LinkedPost(title=e.title, author=e.author, feed_name=e.feed_name,
+                       link=e.link, maths_score=v.score, source=v.source)
+            for e, v in (maths_skipped or [])
+        ],
         feed_url=f"{base_url}/feed.xml",
         site_url=base_url,
         total_in_feed=len(episodes),
