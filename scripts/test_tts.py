@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""TTS provider comparison script for OpenAI male voices.
+"""TTS voice comparison script, routed through OpenRouter.
+
+Dev utility only — the pipeline itself uses DeepInfra Chatterbox, because
+OpenRouter's speech models offer preset voices but no voice cloning, and
+Feedcast needs the cloned Derek Perkins voice.
 
 Usage:
     uv run python scripts/test_tts.py
 
 Requires environment variables:
-    OPENAI_API_KEY - OpenAI API key
+    OPENROUTER_API_KEY - OpenRouter API key
 
 Output will be saved to voice_samples/tts_comparison/
 """
@@ -29,19 +33,26 @@ conclusion is something we'd never want an AI to do without checking with humans
 """.strip()
 
 
-async def generate_openai(
+# OpenRouter mirrors OpenAI's /v1/audio/speech contract, so the request shape
+# is unchanged from the original OpenAI version of this script — only the host,
+# the key and the namespaced model id differ.
+SPEECH_URL = "https://openrouter.ai/api/v1/audio/speech"
+SPEECH_MODEL = "openai/gpt-audio"
+
+
+async def generate_speech(
     text: str,
     voice: str,
     api_key: str,
     output_path: Path,
-    model: str = "tts-1-hd",
+    model: str = SPEECH_MODEL,
 ) -> Path | None:
-    """Generate audio using OpenAI TTS API."""
-    print(f"  Generating OpenAI {model} sample with voice: {voice}...")
+    """Generate audio via OpenRouter's speech endpoint."""
+    print(f"  Generating {model} sample with voice: {voice}...")
 
     async with httpx.AsyncClient(timeout=120.0) as client:
         response = await client.post(
-            "https://api.openai.com/v1/audio/speech",
+            SPEECH_URL,
             headers={
                 "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json",
@@ -55,7 +66,7 @@ async def generate_openai(
         )
 
         if response.status_code != 200:
-            print(f"    ERROR: OpenAI returned {response.status_code}: {response.text[:200]}")
+            print(f"    ERROR: OpenRouter returned {response.status_code}: {response.text[:200]}")
             return None
 
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -71,10 +82,10 @@ async def main():
     project_root = Path(__file__).parent.parent
     output_dir = project_root / "voice_samples" / "tts_comparison"
 
-    openai_key = os.environ.get("OPENAI_API_KEY")
+    api_key = os.environ.get("OPENROUTER_API_KEY")
 
-    if not openai_key:
-        print("ERROR: OPENAI_API_KEY must be set")
+    if not api_key:
+        print("ERROR: OPENROUTER_API_KEY must be set")
         return 1
 
     print(f"Output directory: {output_dir}")
@@ -84,21 +95,18 @@ async def main():
 
     results = []
 
-    # OpenAI male voices (using tts-1-hd for best quality)
-    # fable is often noted as having a British quality
-    openai_voices = [
+    # Preset male voices exposed by the speech model
+    voices = [
         ("echo", "Echo - deep male"),
         ("fable", "Fable - expressive male (often sounds British)"),
         ("onyx", "Onyx - deep authoritative male"),
     ]
 
-    print("=== OpenAI Male Voices (tts-1-hd) ===")
-    for voice, description in openai_voices:
+    print(f"=== Male Voices ({SPEECH_MODEL}) ===")
+    for voice, description in voices:
         print(f"  {description}")
-        output_path = output_dir / f"openai_{voice}.mp3"
-        result = await generate_openai(
-            TEST_TEXT, voice, openai_key, output_path, model="tts-1-hd"
-        )
+        output_path = output_dir / f"{voice}.mp3"
+        result = await generate_speech(TEST_TEXT, voice, api_key, output_path)
         results.append((voice, result))
 
     # Summary
@@ -121,8 +129,8 @@ async def main():
 
     print(f"\nOutput directory: {output_dir}")
     print("\nListen to each output and select your preferred voice!")
-    print("\nNote: OpenAI doesn't have explicit British accents.")
-    print("'fable' is often noted as having a somewhat British quality.")
+    print("\nNote: these are preset voices — no cloning. For the cloned")
+    print("Derek Perkins voice the pipeline uses, see scripts/test_voice_cloning.sh.")
 
     return 0
 
