@@ -88,6 +88,13 @@ feeds:
     mode: "auto"
     prompt: null
 
+# Posts built on real mathematics are linked in the email rather than narrated —
+# even a good spoken explanation is hard to follow without seeing the notation.
+# Threshold is LaTeX matches per 1000 words, measured on the markdown source.
+maths_filter:
+  enabled: true
+  threshold_per_1k: 10.0
+
 news_briefing:
   enabled: true
   lookback_hours: 24
