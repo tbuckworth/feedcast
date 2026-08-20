@@ -62,7 +62,6 @@ DEEPINFRA_API_KEY=your_key     # Required — DeepInfra Chatterbox TTS
 |----------|----------|---------|
 | `OPENROUTER_API_KEY` | Yes | OpenRouter API for LLM calls (Gemini Flash) |
 | `DEEPINFRA_API_KEY` | Yes | DeepInfra Chatterbox TTS API |
-| `ANTHROPIC_API_KEY` | No | Legacy Claude API key (kept as fallback) |
 | `REPROCESS_ENTRY` | No | Entry ID/URL to reprocess from RSS feeds |
 | `FORCE_VERBATIM` | No | Force verbatim mode when reprocessing |
 | `INJECT_URL` | No | Any URL to extract and process as a podcast episode |
@@ -70,6 +69,14 @@ DEEPINFRA_API_KEY=your_key     # Required — DeepInfra Chatterbox TTS
 | `NTFY_TOPIC` | No | ntfy.sh topic for push notifications on inject success/failure |
 | `VOICE_UPLOAD_DELAY_SECONDS` | No | Delay after voice upload for cross-region replication (CI uses 5) |
 | `SAVE_DEBUG_WAVS` | No | Save intermediate WAV chunks for debugging |
+| `LLM_TIMEOUT_SECONDS` | No | Per-request timeout for OpenRouter calls (default 180, 3 retries) |
+| `FEEDCAST_EMAIL_TO` | No | Recipient of the HTML run report. Unset disables the email entirely |
+| `SMTP_USER` | No | SMTP username (the sending Gmail address) |
+| `GMAIL_APP_PASSWORD` | No | Google App Password. `SMTP_PASSWORD` is accepted as an alias |
+| `SMTP_HOST` | No | SMTP server (default `smtp.gmail.com`) |
+| `SMTP_PORT` | No | SMTP port (default 587 STARTTLS; 465 switches to implicit TLS) |
+| `FEEDCAST_EMAIL_FROM` | No | From address (defaults to `SMTP_USER`) |
+| `FEEDCAST_EMAIL_ALWAYS` | No | Send the report even when a run produced nothing new |
 
 ### Configuration
 

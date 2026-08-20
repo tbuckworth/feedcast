@@ -22,7 +22,7 @@ IMPORTANT: Preserve ALL other text exactly as-is. Do not summarize, rephrase, or
 
 
 class TextNormalizer:
-    """Normalizes text for TTS using Claude Haiku."""
+    """Normalizes text for TTS using MODEL_CHEAP via OpenRouter."""
 
     def __init__(self):
         self.client = get_client()

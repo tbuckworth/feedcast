@@ -13,7 +13,7 @@ AUTO_VERBATIM_LIMIT = 24000  # ~25 min of audio at ~0.063 sec/char
 
 
 class ContentProcessor:
-    """Processes feed content - either summarizing with Claude or cleaning for verbatim."""
+    """Processes feed content - either summarizing via the LLM or cleaning for verbatim."""
 
     def __init__(self, default_prompt: str):
         self.client = get_client()
@@ -77,7 +77,7 @@ class ContentProcessor:
             if data_rows <= 3:
                 prose = self._table_to_prose_simple(table)
             else:
-                # Larger tables: use Claude Haiku to summarize
+                # Larger tables: summarize with the cheap model
                 table_html = str(table)
                 response = await self.client.chat.completions.create(
                     model=MODEL_CHEAP,
@@ -97,7 +97,7 @@ class ContentProcessor:
     async def summarize(
         self, entry: FeedEntry, prompt: Optional[str] = None
     ) -> str:
-        """Summarize content using Claude API."""
+        """Summarize content using MODEL_STRONG via OpenRouter."""
         content_with_tables = await self.process_tables(entry.content)
         clean_content = self.clean_html(content_with_tables)
 
@@ -114,7 +114,7 @@ Published: {entry.published.strftime("%Y-%m-%d")}
 Content:
 {clean_content}"""
 
-        # Truncate if too long (Claude can handle ~100k tokens, but we'll be conservative)
+        # Truncate if too long — the models handle far more, but stay conservative
         max_chars = 100000
         if len(user_message) > max_chars:
             user_message = user_message[:max_chars] + "\n\n[Content truncated due to length]"
@@ -156,7 +156,7 @@ Content:
         is_news_briefing = entry.id.startswith("news-briefing-")
 
         if is_news_briefing and mode == "verbatim":
-            # News briefings: Claude's output already opens with the date, skip redundant intro
+            # News briefings: the synthesis already opens with the date, skip redundant intro
             content_with_tables = await self.process_tables(entry.content)
             text = self.clean_html(content_with_tables)
         elif mode == "summarize":

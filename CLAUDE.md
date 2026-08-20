@@ -61,7 +61,6 @@ The pipeline runs in three async phases orchestrated by `src/main.py`:
 |----------|----------|---------|
 | `OPENROUTER_API_KEY` | Yes | OpenRouter API for LLM calls (Gemini Flash) |
 | `DEEPINFRA_API_KEY` | Yes | DeepInfra Chatterbox TTS API |
-| `ANTHROPIC_API_KEY` | No | Legacy Claude API key (kept as fallback) |
 | `REPROCESS_ENTRY` | No | Entry ID/URL to reprocess |
 | `FORCE_VERBATIM` | No | Force verbatim for reprocessed entry |
 | `INJECT_URL` | No | Arbitrary URL to extract and process as a new episode (skips RSS fetching) |
