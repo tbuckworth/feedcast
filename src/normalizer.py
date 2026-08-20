@@ -1,6 +1,6 @@
 """TTS text normalization using LLM."""
 
-from .llm import get_client, MODEL_CHEAP
+from .llm import get_client, MODEL_NORMALIZER
 
 NORMALIZE_PROMPT = """\
 You are a text normalizer preparing written text for text-to-speech (TTS) synthesis.
@@ -22,7 +22,7 @@ IMPORTANT: Preserve ALL other text exactly as-is. Do not summarize, rephrase, or
 
 
 class TextNormalizer:
-    """Normalizes text for TTS using MODEL_CHEAP via OpenRouter."""
+    """Normalizes text for TTS using MODEL_NORMALIZER via OpenRouter."""
 
     def __init__(self):
         self.client = get_client()
@@ -41,8 +41,8 @@ class TextNormalizer:
     async def _normalize_chunk(self, text: str) -> str:
         """Normalize a single chunk of text."""
         response = await self.client.chat.completions.create(
-            model=MODEL_CHEAP,
-            max_tokens=16000,
+            model=MODEL_NORMALIZER,
+            max_tokens=8000,
             messages=[
                 {"role": "system", "content": NORMALIZE_PROMPT},
                 {"role": "user", "content": text},

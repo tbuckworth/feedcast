@@ -115,3 +115,54 @@ class TestLinkedInEmail:
         from src.email_report import send_report
         send_report(self._report(), datetime(2026, 8, 20))
         assert "1 linked, no audio" in sent["subject"]
+
+
+class TestFalsePositiveGuards:
+    """A false positive here silently deletes a post, so these matter more
+    than the false negatives they trade against."""
+
+    @pytest.fixture(autouse=True)
+    def _no_network(self, monkeypatch):
+        monkeypatch.setattr("src.mathiness.fetch_lesswrong_markdown", lambda *a, **k: None)
+
+    def test_currency_is_not_mathematics(self):
+        """'raised $10M at a $1B valuation' must not read as an equation."""
+        money = ("The startup raised $10M at a $1B valuation. "
+                 "It later raised $25M at a $3B valuation. ") * 3
+        hits, _ = maths_score(money)
+        assert hits == 0
+        assert assess("https://example.com/p", money).is_heavy is False
+
+    def test_real_latex_still_counted_alongside_currency(self):
+        mixed = (r"They raised $10M. We define $f(x) = \lim_{t\to\infty}\phi(x,t)$ "
+                 r"where $\phi$ is bounded and $\sum_i p_i = 1$. ") * 8
+        assert assess("https://example.com/p", mixed).is_heavy is True
+
+    def test_short_post_needs_real_volume_not_just_density(self):
+        """Two matches in a short post clears the density bar but must not fire."""
+        from src.mathiness import MIN_HITS
+        short = r"We set $a = b$ and $c = d$. " + "filler words here " * 20
+        hits, score = maths_score(short)
+        assert hits < MIN_HITS
+        assert score >= DEFAULT_THRESHOLD, "density alone would have flagged it"
+        assert assess("https://example.com/p", short).is_heavy is False
+
+    def test_threshold_and_min_hits_both_required(self):
+        from src.mathiness import MIN_HITS
+        dense_enough = r"$a = b$ " * (MIN_HITS + 2) + "word " * 50
+        assert assess("https://example.com/p", dense_enough).is_heavy is True
+
+
+class TestLinkedRowEscaping:
+    def test_separator_is_not_double_escaped(self):
+        """escape() around the whole joined string yields a literal &middot;."""
+        r = RunReport(linked=[LinkedPost("T", "Ada", "LessWrong", "https://x/p", 13.5, "markdown")])
+        html = build_html(r, datetime(2026, 8, 20))
+        assert "&amp;middot;" not in html
+        assert "&middot;" in html
+
+    def test_hostile_author_still_escaped(self):
+        r = RunReport(linked=[LinkedPost("T", "A & <b>B</b>", "Feed", "https://x/p", 13.5, "md")])
+        html = build_html(r, datetime(2026, 8, 20))
+        assert "<b>" not in html
+        assert "A &amp; &lt;b&gt;B&lt;/b&gt;" in html

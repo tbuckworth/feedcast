@@ -4,12 +4,29 @@ import os
 
 from openai import AsyncOpenAI
 
-# Opus 4.6 writes everything Titus actually hears. Measured against Gemini 3
-# Flash on a real maths post, Flash emitted 14 raw LaTeX expressions into the
-# spoken script ("denoted as $D$"), which the TTS reads out as "dollar sign D
-# dollar sign"; Opus 4.6 emitted none. See data/model_comparison.json.
-MODEL_STRONG = "anthropic/claude-opus-4.6"
-MODEL_CHEAP = "anthropic/claude-opus-4.6"
+# Two roles, deliberately not one model.
+#
+# MODEL_WRITER produces prose a person listens to — summaries, the daily
+# briefing, table descriptions. Measured against Gemini 3 Flash on a real maths
+# post, Flash emitted 14 raw LaTeX expressions into the spoken script ("denoted
+# as $D$"), which the TTS reads aloud as "dollar sign D dollar sign"; Opus 4.6
+# emitted none. See data/model_comparison.json.
+MODEL_WRITER = "anthropic/claude-opus-4.6"
+
+# MODEL_NORMALIZER only transforms: "45%" -> "forty-five percent". It writes
+# nothing. It is also the single largest consumer of tokens in the pipeline —
+# ~47%, because it is the only call that takes the whole episode in AND emits
+# the whole episode back out.
+#
+# A stronger model is not better here, and is arguably worse: the instruction
+# is "preserve ALL other text exactly as-is", and a reasoning model handed a
+# whole episode has more capacity to decide something could be phrased better.
+# Gemini 3 Flash did this job for 168 episodes without incident.
+MODEL_NORMALIZER = "google/gemini-3-flash-preview"
+
+# Back-compat aliases; prefer the role names above.
+MODEL_STRONG = MODEL_WRITER
+MODEL_CHEAP = MODEL_WRITER
 
 
 # The SDK default is 600s x 2 retries, so one wedged request can stall a run
