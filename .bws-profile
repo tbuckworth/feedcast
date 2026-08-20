@@ -1,0 +1,7 @@
+# Which stored secret this repo gets, by name. NO VALUES — safe to commit.
+# See ~/pyg/admin/wiki/topics/secrets-and-credentials.md
+#
+# Titus asked for the Arrow key specifically; the vault also holds a plain
+# OPENROUTER_API_KEY and an OPENROUTER_API_KEY__FEEDCAST, so without this the
+# repo would silently pick up the wrong one.
+OPENROUTER_API_KEY = ARROW_OPENROUTER_API_KEY
