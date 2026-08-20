@@ -94,7 +94,6 @@ jobs:
         timeout-minutes: 50
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           DEEPINFRA_API_KEY: ${{ secrets.DEEPINFRA_API_KEY }}
           REPROCESS_ENTRY: ${{ inputs.entry_url }}
           FORCE_VERBATIM: ${{ inputs.force_verbatim }}

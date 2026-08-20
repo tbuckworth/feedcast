@@ -3,7 +3,7 @@
 Generates before/after audio samples to compare raw vs. normalized text.
 Outputs pairs of WAV files to data/normalization_test/.
 
-Requires DEEPINFRA_API_KEY and ANTHROPIC_API_KEY env vars.
+Requires DEEPINFRA_API_KEY and OPENROUTER_API_KEY env vars.
 """
 
 import asyncio

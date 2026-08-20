@@ -89,7 +89,7 @@ class NewsAggregator:
         return "\n\n".join(sections)
 
     async def synthesize_briefing(self, formatted_articles: str) -> str:
-        """Call Claude to synthesize the briefing from formatted articles."""
+        """Synthesize the briefing from formatted articles via MODEL_STRONG."""
         # Build user message with dedup context from recent briefings
         user_message_parts = []
         if self.recent_briefings:
