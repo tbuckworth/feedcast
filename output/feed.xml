@@ -21,6 +21,47 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-20</title>
+      <description>Daily News Briefing - 2026-08-20
+
+Topics covered:
+- In artificial intelligence safety and enterprise policy, OpenAI has launched a series of "Zero Data Retention" features for its frontier models
+- In artificial intelligence capabilities and education, the competitive landscape for "AI agents" is intensifying
+- In AI economics and infrastructure, the commodification of "compute" is accelerating
+- In technology and infrastructure, Amazon has announced a massive expansion of its "Prime Air" drone delivery service, aiming to reach five hundred United States neighborhoods by the end of twenty-twenty-six
+- In geopolitics and regional security, the Trump administration has escalated its rhetoric in the Middle East following the expiration of a sixty-day ceasefire window
+- Expect a significant shift in United States health policy as the administration prepares to nominate Heidi Overton to lead the Food and Drug Administration, a move likely to trigger intense debate over the future of vaccine mandates and reproductive healthcare</description>
+      <pubDate>Thu, 20 Aug 2026 04:42:31 +0000</pubDate>
+      <guid>news-briefing-2026-08-20</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d15e5c9f9576_daily_news_briefing_-_2026-08-20.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-20.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Making sense of the misalignment risk model in the Anthropic Risk Report (August 2026)</title>
+      <description>Audio version of Making sense of the misalignment risk model in the Anthropic Risk Report (August 2026) from LessWrong Frontpage</description>
+      <pubDate>Thu, 20 Aug 2026 02:33:34 +0000</pubDate>
+      <guid>P6gLGnjjzZMPyvJGa</guid>
+      <link>https://www.lesswrong.com/posts/P6gLGnjjzZMPyvJGa/making-sense-of-the-misalignment-risk-model-in-the-anthropic</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b1ca59096731_making_sense_of_the_misalignment_risk_model_in_the.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“OpenAI Takes Initial Steps To Address Its Alignment Problems” by Zvi</title>
+      <description>Audio version of “OpenAI Takes Initial Steps To Address Its Alignment Problems” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 19 Aug 2026 20:03:01 +0000</pubDate>
+      <guid>02e9a2c4-6929-4041-8bc1-72f544556dba</guid>
+      <link>https://www.lesswrong.com/posts/X3p8cFAzCgRErEcJr/openai-takes-initial-steps-to-address-its-alignment-problems</link>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ec67460c1ec4_openai_takes_initial_steps_to_address_its_alignme.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-19</title>
       <description>Daily News Briefing - 2026-08-19
 
