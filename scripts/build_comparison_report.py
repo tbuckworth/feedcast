@@ -20,6 +20,19 @@ OUT = ROOT / "output" / "model_comparison.html"
 FABLE_PRICE = (10.00, 50.00)
 
 
+def notation_leaks(text: str) -> int:
+    """Count things a TTS voice would read aloud as gibberish.
+
+    This is the whole complaint in one number: raw LaTeX, stray backslashes and
+    sub/superscript braces all get spoken symbol by symbol ("dollar sign D
+    dollar sign"). A clean script scores zero.
+    """
+    import re as _re
+    return (len(_re.findall(r"\$[^$\n]{1,60}\$", text))
+            + text.count("\\")
+            + len(_re.findall(r"[_^{}]", text)))
+
+
 def money(x: float) -> str:
     return f"${x:.4f}" if x < 1 else f"${x:.2f}"
 
@@ -52,6 +65,9 @@ def card(run: dict, artefact_key: str) -> str:
     body = "".join(f"<p>{escape(p.strip())}</p>"
                    for p in run.get("output", "").split("\n") if p.strip())
     chain = " → ".join(escape(m.split("/")[-1]) for m in run["models"])
+    leaks = notation_leaks(run.get("output", ""))
+    leak_pill = (f'<span class="leak bad">{leaks} notation leaks — would be spoken aloud</span><br>'
+                 if leaks else '<span class="leak ok">no notation leaked</span><br>')
 
     return f"""
         <article class="out" data-setup="{escape(run['key'])}">
@@ -60,6 +76,7 @@ def card(run: dict, artefact_key: str) -> str:
             <span class="pill">{money(run['cost'])}</span>
           </header>
           <div class="meta mono small">{chain}<br>
+            {leak_pill}
             {run['words']} words &middot; {run['usage']['in']:,} in / {run['usage']['out']:,} out
             &middot; {run['seconds']:.0f}s</div>
           {brief}
@@ -85,7 +102,8 @@ def cost_table(results: dict) -> str:
         if not nb or not mp or nb.get("error") or mp.get("error"):
             continue
         monthly = per_month(nb["cost"], BRIEFINGS) + per_month(mp["cost"], POSTS)
-        cls = ' class="pick"' if k == "opus5_opus46" else ""
+        # No setup is pre-selected — Titus reads the scripts and decides.
+        cls = ""
         rows.append(f"""
         <tr{cls}><td>{escape(nb['label'])}</td>
           <td class="num">{money(nb['cost'])}</td>
@@ -219,6 +237,9 @@ def build(results: dict) -> str:
     border-radius:20px;padding:2px 9px;white-space:nowrap}}
   .pill.bad{{background:var(--bad);color:#fff}}
   .meta{{color:var(--muted);line-height:1.5}}
+  .leak{{display:inline-block;margin:3px 0;padding:1px 7px;border-radius:3px;font-size:.7rem}}
+  .leak.ok{{color:var(--good);border:1px solid var(--good)}}
+  .leak.bad{{color:#fff;background:var(--bad);font-weight:600}}
   .script p{{margin:0 0 10px 0;font-size:.94rem;line-height:1.62;color:var(--ink)}}
   .script p:last-child{{margin-bottom:0}}
 
