@@ -41,7 +41,9 @@ Rules:
 - Say what the piece actually claims, not that it discusses a topic. "Anthropic's \
 revenue growth slowed ahead of its IPO" — not "the author covers Anthropic's IPO".
 - This is read, not spoken. Keep numerals, percent signs, currency and symbols as \
-they are.
+they are, and convert anything already spelled out for speech back into figures: \
+"forty-five percent" becomes 45%, "two-thousand twenty-six" becomes 2026, \
+"thirteen billion dollars" becomes $13 billion.
 - No preamble, no closing line, no headings, no markdown, no bold.
 - One bullet per line. Do not number them or prefix them with any character.
 - If the text is a news briefing, give one bullet per story it covers."""

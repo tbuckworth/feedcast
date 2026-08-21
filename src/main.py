@@ -128,16 +128,19 @@ async def process_entry(
                      label=entry.title)
     )
 
-    processed_text = await normalizer.normalize_for_tts(processed_text)
-    print(f"    Normalized text: {len(processed_text)} chars")
-
-    episode_id = generate_episode_id(entry.id)
+    # Everything from here to the finished MP3 sits inside the guard.
+    # Normalisation raises loudly on a truncated completion, and an escape
+    # there would leave the digest in flight into Phase 3 and the loop closing
+    # on a pending task.
     try:
+        processed_text = await normalizer.normalize_for_tts(processed_text)
+        print(f"    Normalized text: {len(processed_text)} chars")
+
+        episode_id = generate_episode_id(entry.id)
         audio_path = await audio_gen.generate_episode(
             processed_text, audio_dir, episode_id, entry.title, http_client,
         )
     except BaseException:
-        # Do not leave the digest running into the next phase on a failed entry.
         digest_task.cancel()
         raise
     print(f"    Generated audio: {audio_path.name}")
@@ -145,6 +148,93 @@ async def process_entry(
     entry.bullets = await digest_task
     print(f"    Digest: {len(entry.bullets)} bullets")
     return (entry, audio_path)
+
+
+async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> None:
+    """Digest rows that predate the bullets column, in parallel.
+
+    Digests the post's own text rather than the spoken script, because scripts
+    are not kept for anything but the briefing. For a summarised post that
+    means bullets drawn from the whole article instead of from its 450-word
+    summary, which is if anything the better source — but it does mean running
+    the full-text recovery first, or a Zvi post would be digested from the
+    three-percent podcast blurb.
+    """
+    from .processor import ContentProcessor as _CP
+
+    # Skip rows with no audio: those are the maths-linked posts, and the email
+    # renders them as a link and a score, with nowhere to put bullets.
+    todo = [r for r in rows if r["audio_file"] and not (r.get("bullets") or "")]
+    if not todo:
+        return
+    print(f"  Backfilling digests for {len(todo)} entries...")
+    cleaner = _CP("")
+
+    async def one(row: dict) -> None:
+        is_briefing = row["id"].startswith("news-briefing-")
+        if is_briefing:
+            text = row["content"] or ""
+        else:
+            entry = FeedEntry(
+                id=row["id"], feed_name=row["feed_name"], title=row["title"],
+                link=row["link"], content=row["content"] or "",
+                published=datetime.fromisoformat(row["published"]),
+                author=row["author"] or row["feed_name"],
+            )
+            gain = await asyncio.to_thread(enrich_entry, entry)
+            if gain.replaced:
+                print(f"    Recovered full text for {entry.title} "
+                      f"({gain.before:,} -> {gain.after:,})")
+            text = cleaner.clean_html(entry.content)
+        bullets = await safe_bullets(text, is_briefing=is_briefing, label=row["title"])
+        monitor.set_bullets(row["id"], bullets)
+        print(f"    {len(bullets)} bullets: {row['title'][:56]}")
+
+    await asyncio.gather(*[one(r) for r in todo], return_exceptions=True)
+
+
+async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
+                         audio_dir: Path, output_dir: Path) -> None:
+    """Rebuild and re-send the most recent run's email. Publishes nothing.
+
+    Exists because the mail credentials only live in CI, so re-sending after a
+    template change means asking the pipeline to do it. Deliberately does not
+    fetch, process, generate audio, rewrite feed.xml or run cleanup.
+    """
+    db_entries = monitor.get_processed_entries()
+    if not db_entries:
+        print("Nothing in the database to report on.")
+        return
+
+    latest = max(d["processed_at"][:10] for d in db_entries)
+    todays = [d for d in db_entries if d["processed_at"][:10] == latest]
+    print(f"Re-sending the report for {latest} ({len(todays)} entries)")
+
+    await _backfill_bullets(monitor, todays)
+    db_entries = monitor.get_processed_entries()   # reread, now with bullets
+
+    # A row with no audio is a post the maths filter linked instead of
+    # narrating. Rescore it so the email can say why, the same as a live run.
+    linked: list[tuple[FeedEntry, MathsVerdict]] = []
+    for row in todays:
+        if row["audio_file"]:
+            continue
+        entry = FeedEntry(
+            id=row["id"], feed_name=row["feed_name"], title=row["title"],
+            link=row["link"], content=row["content"] or "",
+            published=datetime.fromisoformat(row["published"]),
+            author=row["author"] or row["feed_name"],
+        )
+        verdict = await asyncio.to_thread(
+            assess, entry.link, entry.content, config.maths_filter.threshold_per_1k)
+        linked.append((entry, verdict))
+
+    transcript_dir = output_dir / "transcripts"
+    episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir, transcript_dir)
+    new_ids = {d["id"] for d in todays if d["audio_file"]}
+    report = _build_run_report(episodes, db_entries, new_ids, [],
+                               config.podcast.base_url, linked)
+    send_report(report)
 
 
 async def async_main(config_path: Path | None = None) -> None:
@@ -189,9 +279,6 @@ async def async_main(config_path: Path | None = None) -> None:
         else:
             print(f"  Entry not found in database (may be new)")
 
-    processor = ContentProcessor(config.default_prompt)
-    normalizer = TextNormalizer()
-    audio_gen = AudioGenerator(voice=config.tts.voice, speed=config.tts.speed)
     podcast_config = PodcastConfig(
         title=config.podcast.title,
         description=config.podcast.description,
@@ -202,6 +289,16 @@ async def async_main(config_path: Path | None = None) -> None:
         image_url=config.podcast.image_url,
     )
     feed_gen = FeedGenerator(podcast_config)
+
+    # Before the TTS setup: constructing AudioGenerator demands a DeepInfra key
+    # and uploads the voice sample, and a resend makes no audio at all.
+    if os.environ.get("RESEND_REPORT", "").strip().lower() in ("true", "1", "yes"):
+        await _resend_report(monitor, config, feed_gen, audio_dir, output_dir)
+        return
+
+    processor = ContentProcessor(config.default_prompt)
+    normalizer = TextNormalizer()
+    audio_gen = AudioGenerator(voice=config.tts.voice, speed=config.tts.speed)
 
     entries_to_process: list[tuple[FeedEntry, str, str]] = []
     # Bound here, before Phase 1: the news-briefing block appends to it, and
