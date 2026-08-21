@@ -1,5 +1,6 @@
 """Tests for the maths filter that keeps equation-heavy posts out of the audio."""
 
+import httpx
 import pytest
 
 from src.email_report import LinkedPost, RunReport, build_html, build_text
@@ -166,3 +167,52 @@ class TestLinkedRowEscaping:
         html = build_html(r, datetime(2026, 8, 20))
         assert "<b>" not in html
         assert "A &amp; &lt;b&gt;B&lt;/b&gt;" in html
+
+
+def test_transient_fetch_failure_is_not_cached(monkeypatch):
+    """A flaky GraphQL call must not poison the post for the next caller.
+
+    The maths filter fetches first and fulltext.py fetches second. If a timeout
+    were cached, the second call would get None, the episode would be built
+    from the feed's excerpt, and marking it processed means no retry ever.
+    """
+    from src import mathiness
+
+    mathiness._graphql_markdown.cache_clear()
+    link = "https://www.lesswrong.com/posts/AAAAAAAAAAAAAAAAA/x"
+    calls = []
+
+    def flaky(post_id, host, timeout):
+        calls.append(post_id)
+        if len(calls) == 1:
+            raise httpx.ReadTimeout("boom")
+        return "$x = 1$"
+
+    monkeypatch.setattr(mathiness, "_graphql_markdown", flaky)
+
+    assert mathiness.fetch_lesswrong_markdown(link) is None
+    assert mathiness.fetch_lesswrong_markdown(link) == "$x = 1$"
+    assert len(calls) == 2
+
+
+def test_successful_fetch_is_cached(monkeypatch):
+    from src import mathiness
+
+    mathiness._graphql_markdown.cache_clear()
+    link = "https://www.lesswrong.com/posts/BBBBBBBBBBBBBBBBB/y"
+    calls = []
+
+    def counting(url, json, timeout, headers):
+        calls.append(url)
+
+        class R:
+            def raise_for_status(self): pass
+            def json(self): return {"data": {"post": {"result": {"contents": {"markdown": "hi"}}}}}
+
+        return R()
+
+    monkeypatch.setattr(mathiness.httpx, "post", counting)
+
+    assert mathiness.fetch_lesswrong_markdown(link) == "hi"
+    assert mathiness.fetch_lesswrong_markdown(link) == "hi"
+    assert len(calls) == 1

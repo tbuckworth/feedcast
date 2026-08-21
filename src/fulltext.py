@@ -20,11 +20,11 @@ left alone.
 """
 
 import re
-from typing import Optional
+from dataclasses import dataclass
 
 import markdown as _markdown
 
-from .mathiness import fetch_lesswrong_markdown
+from .mathiness import fetch_lesswrong_markdown, lesswrong_post_id
 from .monitor import FeedEntry
 
 # Replace the feed's body only when the real post is materially longer. Markdown
@@ -48,22 +48,45 @@ def _visible_length(html: str) -> int:
     return len(" ".join(text.split()))
 
 
-def enrich_entry(entry: FeedEntry) -> Optional[tuple[int, int]]:
+@dataclass
+class Enrichment:
+    """What happened when we tried to recover a post's full text.
+
+    The outcomes have to be distinguishable. "The feed already had the whole
+    post" and "we could not reach the post" both leave the body alone, but only
+    one of them is a problem — and the silent one ships a blurb as an episode.
+    """
+
+    replaced: bool
+    reason: str      # replaced | feed-complete | unreachable | not-lesswrong
+    before: int
+    after: int
+
+    @property
+    def is_failure(self) -> bool:
+        return self.reason == "unreachable"
+
+
+def enrich_entry(entry: FeedEntry) -> Enrichment:
     """Swap in the full post text when the feed shipped an excerpt.
 
-    Mutates ``entry.content`` in place and returns ``(before, after)`` visible
-    character counts, or None when nothing was changed. Any failure is a None:
-    a partial episode is better than a failed run, and the caller has no
-    better option than the body it already had.
+    Mutates ``entry.content`` in place. Never raises: a partial episode beats a
+    failed run, and the caller has no better body than the one it already has.
+    It does report the difference, so a failure is visible in the log instead of
+    looking like a feed that was fine all along.
     """
+    before = _visible_length(entry.content)
+    if not lesswrong_post_id(entry.link):
+        return Enrichment(False, "not-lesswrong", before, before)
+
     md = fetch_lesswrong_markdown(entry.link)
     if not md:
-        return None
+        return Enrichment(False, "unreachable", before, before)
 
     html = markdown_to_html(md)
-    before, after = _visible_length(entry.content), _visible_length(html)
+    after = _visible_length(html)
     if after < before * MIN_GAIN:
-        return None
+        return Enrichment(False, "feed-complete", before, after)
 
     entry.content = html
-    return before, after
+    return Enrichment(True, "replaced", before, after)

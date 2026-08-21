@@ -41,7 +41,7 @@ The pipeline runs in three async phases orchestrated by `src/main.py`:
 
 ### Key modules
 
-- **`src/monitor.py`** — `FeedMonitor`: RSS fetching with `feedparser`, SQLite-backed dedup tracking (`data/posts.db`, tables `processed_posts` and `news_briefings`). Supports `skip_patterns` per feed for title-based filtering. Stores recent news briefings for cross-day dedup. `is_processed_by_link()` provides link-based dedup for injected URLs.
+- **`src/monitor.py`** — `FeedMonitor`: RSS fetching with `feedparser`, plus `warn_if_dead()`, which every feed fetch runs through — `feedparser.parse()` never raises, so a 404 or a DNS failure arrives as an empty feed and reads as "nobody posted".  SQLite-backed dedup tracking (`data/posts.db`, tables `processed_posts` and `news_briefings`). Supports `skip_patterns` per feed for title-based filtering. Stores recent news briefings for cross-day dedup. `is_processed_by_link()` provides link-based dedup for injected URLs.
 - **`src/extractor.py`** — `url_to_feed_entry()`: Fetches any URL via trafilatura, extracts article text + metadata (title, author, date). Entry IDs use `injected-{sha256(url)[:16]}` format. Rejects content under 200 chars (quality gate for JS-rendered/paywalled pages).
 - **`src/llm.py`** — OpenRouter client factory (`get_client()`) and two role-named model constants. `MODEL_WRITER` (**Claude Opus 4.6**) produces prose a person listens to: summaries, the daily briefing, table descriptions. `MODEL_NORMALIZER` (**Gemini 3 Flash**) only transforms text for TTS and writes nothing — it is ~47% of all tokens, and a reasoning model is not better at "preserve all other text exactly as-is". `MODEL_STRONG`/`MODEL_CHEAP` remain as aliases of `MODEL_WRITER`. All LLM calls use the OpenAI SDK against OpenRouter.
 - **`src/mathiness.py`** — `assess()`: decides whether a post is too mathematical to follow by ear. Scores LaTeX density per 1000 words against `maths_filter.threshold_per_1k`. Fetches the LessWrong/Alignment Forum **markdown** via GraphQL, because RSS and the rendered page both strip MathJax — formulas otherwise arrive as holes. Flagged posts get no audio and are linked in the email instead.
@@ -114,8 +114,8 @@ RSS feeds → feedparser → skip_patterns filter → new entries (SQLite dedup)
     → SQLite mark processed
     → RSS XML feed generation → GitHub Pages
 
-News sources (RSS) → parallel fetch → filter last 48h
-    → group by category → Gemini 3 Flash synthesis (with recent briefing dedup context)
+News sources (RSS) → parallel fetch → filter to lookback_hours (24)
+    → group by category → Opus 4.6 synthesis (with recent briefing dedup context)
     → single briefing FeedEntry → same audio pipeline above
 
 Injected URL (via Chrome extension / Android PWA / CLI)
