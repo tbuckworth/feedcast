@@ -86,6 +86,9 @@ class FeedMonitor:
 
     def __init__(self, db_path: Path):
         self.db_path = db_path
+        # Feeds that returned nothing this run, for the email. A source can
+        # die quietly for months otherwise — the run just looks uneventful.
+        self.dead_feeds: list[str] = []
         self._init_db()
 
     def _init_db(self) -> None:
@@ -190,7 +193,8 @@ class FeedMonitor:
     def fetch_feed(self, url: str, feed_name: str, skip_patterns: list[str] | None = None) -> list[FeedEntry]:
         """Fetch and parse an RSS feed, returning new entries."""
         feed = feedparser.parse(url)
-        warn_if_dead(feed, feed_name, url)
+        if warn_if_dead(feed, feed_name, url):
+            self.dead_feeds.append(feed_name)
         entries = []
 
         for entry in feed.entries:

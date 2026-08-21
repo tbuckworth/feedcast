@@ -98,8 +98,14 @@ def _graphql_markdown(post_id: str, host: str, timeout: float) -> Optional[str]:
                    timeout=timeout, headers=_UA)
     r.raise_for_status()
     data = r.json()
-    return (((data.get("data") or {}).get("post") or {})
-            .get("result", {}).get("contents", {}).get("markdown"))
+    # `or {}` at every level, not `.get(k, {})`. GraphQL answers a deleted,
+    # draft or unknown post with an explicit null rather than a missing key, and
+    # .get("result", {}) hands back that null. The AttributeError that follows
+    # is swallowed as None by the caller, which inverts this function's whole
+    # contract: a permanent "no markdown here" gets refetched every run and is
+    # reported to the user as a transient failure.
+    return ((((data.get("data") or {}).get("post") or {})
+             .get("result") or {}).get("contents") or {}).get("markdown")
 
 
 def fetch_lesswrong_markdown(link: str, timeout: float = 30.0) -> Optional[str]:
