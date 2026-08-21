@@ -312,10 +312,14 @@ async def async_main(config_path: Path | None = None) -> None:
         for entry, gain in zip(enrichable, gains):
             if isinstance(gain, BaseException):
                 print(f"  Full-text fetch failed for {entry.title}: {gain!r} — using feed body")
-            elif gain:
-                before, after = gain
+            elif gain.replaced:
                 print(f"  Recovered full text: {entry.title} "
-                      f"({before:,} -> {after:,} chars)")
+                      f"({gain.before:,} -> {gain.after:,} chars)")
+            elif gain.is_failure:
+                # Silence here is how a three-percent blurb ships as an episode.
+                print(f"  WARNING: could not reach the full text of {entry.title} — "
+                      f"narrating the feed body ({gain.before:,} chars), which may "
+                      f"be an excerpt")
 
     print(f"\n{len(entries_to_process)} entries to process")
 
