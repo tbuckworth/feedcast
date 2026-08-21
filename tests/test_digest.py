@@ -95,3 +95,35 @@ def test_text_alternative_lists_bullets():
     text = build_text(report, datetime(2026, 8, 21))
 
     assert "  - First claim" in text and "  - Second claim" in text
+
+
+def test_linked_post_without_a_recorded_score_omits_the_number():
+    # A zero would read as "no maths at all", which is the opposite of why the
+    # post was linked.
+    from src.email_report import LinkedPost
+
+    report = RunReport(
+        linked=[LinkedPost(title="Creativity Beyond the Manifold", author="A",
+                           feed_name="LessWrong Frontpage", link="https://x/y",
+                           maths_score=0.0, source="unrecorded")],
+        feed_url="f", site_url="s",
+    )
+    html = build_html(report, datetime(2026, 8, 21))
+    text = build_text(report, datetime(2026, 8, 21))
+
+    assert "maths matches per 1000 words" not in html
+    assert "0/1k" not in text
+    assert "Creativity Beyond the Manifold" in html
+
+
+def test_linked_post_with_a_score_still_shows_it():
+    from src.email_report import LinkedPost
+
+    report = RunReport(
+        linked=[LinkedPost(title="An Anytime Algorithm", author="A",
+                           feed_name="Alignment Forum", link="https://x/y",
+                           maths_score=23.1, source="markdown")],
+        feed_url="f", site_url="s",
+    )
+
+    assert "23.1 maths matches per 1000 words" in build_html(report, datetime(2026, 8, 21))
