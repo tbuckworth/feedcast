@@ -27,6 +27,11 @@ on:
           - summarize
           - verbatim
         default: auto
+      resend_report:
+        description: 'Re-send the last run''s email only — no fetching, no audio, no publishing'
+        required: false
+        type: boolean
+        default: false
 
 concurrency:
   group: feedcast-pipeline
@@ -99,6 +104,7 @@ jobs:
           FORCE_VERBATIM: ${{ inputs.force_verbatim }}
           INJECT_URL: ${{ inputs.inject_url }}
           INJECT_MODE: ${{ inputs.inject_mode }}
+          RESEND_REPORT: ${{ inputs.resend_report }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           # Completion email. Absent secrets simply skip the report.
           SMTP_HOST: ${{ vars.SMTP_HOST }}

@@ -71,6 +71,7 @@ The pipeline runs in three async phases orchestrated by `src/main.py`:
 | `NTFY_TOPIC` | No | ntfy.sh topic for push notifications on inject success/failure (e.g. `feedcast-titus`) |
 | `VOICE_UPLOAD_DELAY_SECONDS` | No | Delay after voice upload for cross-region replication (CI uses 5) |
 | `SAVE_DEBUG_WAVS` | No | Save intermediate WAV chunks for debugging |
+| `RESEND_REPORT` | No | Re-send the last run's email and nothing else. Backfills missing bullet digests, publishes nothing, generates no audio. Mail credentials only exist in CI, so this is how you re-send after a template change |
 | `LLM_TIMEOUT_SECONDS` | No | Per-request timeout for OpenRouter calls (default 180, 3 retries) |
 | `FEEDCAST_EMAIL_TO` | No | Recipient of the HTML run report. Unset disables the email entirely |
 | `SMTP_USER` | No | SMTP username (the sending Gmail address) |
@@ -97,7 +98,7 @@ The inject system allows sending any URL to feedcast from a browser or phone:
 
 ### CI/CD
 
-GitHub Actions workflow (`.github/workflows/update-feed.yml`) runs daily at 6am UTC. It runs the pipeline, commits results, then deploys `output/` to GitHub Pages. Manual dispatch supports `entry_url`, `force_verbatim`, `inject_url`, and `inject_mode` inputs. A `concurrency` group (`feedcast-pipeline`) prevents race conditions between scheduled and injected runs. The commit step uses `git pull --rebase` to handle sequential runs cleanly.
+GitHub Actions workflow (`.github/workflows/update-feed.yml`) runs daily at 6am UTC. It runs the pipeline, commits results, then deploys `output/` to GitHub Pages. Manual dispatch supports `entry_url`, `force_verbatim`, `inject_url`, `inject_mode`, and `resend_report` inputs. A `concurrency` group (`feedcast-pipeline`) prevents race conditions between scheduled and injected runs. The commit step uses `git pull --rebase` to handle sequential runs cleanly.
 
 ## Data Flow
 
