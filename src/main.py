@@ -16,6 +16,7 @@ from .audio import AudioGenerator
 from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
 from .extractor import ExtractionError, url_to_feed_entry
 from .feed import Episode, FeedGenerator, PodcastConfig
+from .fulltext import enrich_entry
 from .mathiness import MathsVerdict, assess
 from .monitor import FeedEntry, FeedMonitor
 from .news import NewsAggregator
@@ -294,6 +295,27 @@ async def async_main(config_path: Path | None = None) -> None:
             entries_to_process = [
                 t for i, t in enumerate(entries_to_process) if i not in drop
             ]
+
+    # Some feeds ship an excerpt rather than the post. Zvi's is a podcast feed
+    # whose body is a blurb plus a chapter list — three percent of the article —
+    # so the summariser was working from a table of contents. Pull the real text
+    # before anything reads it. Runs after the maths filter so posts about to be
+    # dropped are not fetched twice, and in reprocess mode too, which is usually
+    # someone asking for a bad episode to be done again.
+    if entries_to_process and not inject_url:
+        enrichable = [e for e, _m, _p in entries_to_process
+                      if not e.id.startswith("news-briefing-")]
+        gains = await asyncio.gather(
+            *[asyncio.to_thread(enrich_entry, e) for e in enrichable],
+            return_exceptions=True,
+        )
+        for entry, gain in zip(enrichable, gains):
+            if isinstance(gain, BaseException):
+                print(f"  Full-text fetch failed for {entry.title}: {gain!r} — using feed body")
+            elif gain:
+                before, after = gain
+                print(f"  Recovered full text: {entry.title} "
+                      f"({before:,} -> {after:,} chars)")
 
     print(f"\n{len(entries_to_process)} entries to process")
 

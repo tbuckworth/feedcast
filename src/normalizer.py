@@ -119,12 +119,17 @@ class TextNormalizer:
         current_len = 0
 
         for para in paragraphs:
-            if current_len + len(para) > MAX_BATCH_CHARS and current_batch:
+            # Count the "\n\n" the join will add, or a post made of many short
+            # list items overshoots the cap by two characters per paragraph —
+            # enough to blow past it entirely and defeat the bound.
+            extra = len(para) + (2 if current_batch else 0)
+            if current_batch and current_len + extra > MAX_BATCH_CHARS:
                 batches.append(current_batch)
                 current_batch = []
                 current_len = 0
+                extra = len(para)
             current_batch.append(para)
-            current_len += len(para)
+            current_len += extra
 
         if current_batch:
             batches.append(current_batch)
