@@ -184,6 +184,9 @@ async def async_main(config_path: Path | None = None) -> None:
     feed_gen = FeedGenerator(podcast_config)
 
     entries_to_process: list[tuple[FeedEntry, str, str]] = []
+    # Bound here, before Phase 1: the news-briefing block appends to it, and
+    # assigning it later in this function would make it a local everywhere.
+    dead_sources: list[str] = []
     briefing_entry = None
 
     if inject_url:
@@ -269,7 +272,7 @@ async def async_main(config_path: Path | None = None) -> None:
     # reprocessed post would re-insert it with a NULL audio_file and silently
     # drop an already-published episode out of feed.xml, unrecoverably.
     maths_skipped: list[tuple[FeedEntry, MathsVerdict]] = []
-    dead_sources: list[str] = list(monitor.dead_feeds)
+    dead_sources += monitor.dead_feeds
     if (config.maths_filter.enabled and not inject_url and not reprocess_entry
             and entries_to_process):
         print(f"\nChecking {len(entries_to_process)} entries for maths density...")

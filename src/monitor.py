@@ -193,7 +193,7 @@ class FeedMonitor:
     def fetch_feed(self, url: str, feed_name: str, skip_patterns: list[str] | None = None) -> list[FeedEntry]:
         """Fetch and parse an RSS feed, returning new entries."""
         feed = feedparser.parse(url)
-        if warn_if_dead(feed, feed_name, url):
+        if warn_if_dead(feed, feed_name, url) and feed_name not in self.dead_feeds:
             self.dead_feeds.append(feed_name)
         entries = []
 
