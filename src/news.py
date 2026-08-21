@@ -35,7 +35,8 @@ class NewsAggregator:
         async def fetch_one(source: dict) -> list[dict]:
             feed = await asyncio.to_thread(feedparser.parse, source["url"])
             if warn_if_dead(feed, source["name"], source["url"]):
-                self.dead_sources.append(source["name"])
+                if source["name"] not in self.dead_sources:
+                    self.dead_sources.append(source["name"])
                 return []
             articles = []
             for entry in feed.entries:
