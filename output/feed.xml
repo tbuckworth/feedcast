@@ -21,6 +21,49 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-21</title>
+      <description>Daily News Briefing - 2026-08-21
+
+Topics covered:
+- In artificial intelligence leadership and corporate strategy, The Verge reports that OpenAI is now firmly under the operational command of co-founder Greg Brockman as the company prepares for its initial public offering
+- In artificial intelligence and its impact on fundamental research, OpenAI has published solutions to longstanding problems in mathematics that The Verge describes as landing "like a bombshell" in the field
+- In AI security vulnerabilities, Ars Technica reports that xAI's Grok model is susceptible to a new attack called "Cryptographic Context Injection," where malicious instructions embedded in encrypted text can bypass the model's safety guardrails and exfiltrate user data
+- In geopolitics and security, Russia launched what Kyiv Mayor Vitali Klitschko called a "massive attack" on Ukraine's capital overnight, killing at least seventeen people and deliberately targeting critical infrastructure including hot water supply systems
+- In climate and environmental risk, the United Kingdom's Met Office has warned that the developing El Niño pattern is set to become the "strongest in living memory," an unprecedented event that makes twenty-twenty-seven likely to be the hottest year on record
+- In autonomous vehicle deployment, Nevada has granted permits to Tesla, Uber, and Waymo that would collectively allow up to eight thousand robotaxis to operate in the state over the next twelve months, representing one of the largest concentrated approvals of autonomous vehicle deployment in United States history</description>
+      <pubDate>Fri, 21 Aug 2026 04:43:12 +0000</pubDate>
+      <guid>news-briefing-2026-08-21</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/35434c6ddce7_daily_news_briefing_-_2026-08-21.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:42</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-21.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>College EA Meetups Everywhere: Call For Organizers</title>
+      <description>Audio version of College EA Meetups Everywhere: Call For Organizers from Scott Alexander</description>
+      <pubDate>Thu, 20 Aug 2026 19:55:39 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/college-ea-meetups-everywhere-call</guid>
+      <link>https://www.astralcodexten.com/p/college-ea-meetups-everywhere-call</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9023631f0d09_college_ea_meetups_everywhere_call_for_organizers.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:11:56</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #182: Pause For Reflection” by Zvi</title>
+      <description>Audio version of “AI #182: Pause For Reflection” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 20 Aug 2026 14:51:49 +0000</pubDate>
+      <guid>54ec9819-c542-4dcf-82f8-54df82bf47df</guid>
+      <link>https://www.lesswrong.com/posts/JSZkzsi8cD4pW6ffA/ai-182-pause-for-reflection</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/83e8b5340383_ai_182_pause_for_reflection_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:02:53</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-20</title>
       <description>Daily News Briefing - 2026-08-20
 
@@ -34,7 +77,7 @@ Topics covered:
       <pubDate>Thu, 20 Aug 2026 04:42:31 +0000</pubDate>
       <guid>news-briefing-2026-08-20</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d15e5c9f9576_daily_news_briefing_-_2026-08-20.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:40</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-20.txt" type="text/plain" />
@@ -45,8 +88,9 @@ Topics covered:
       <pubDate>Thu, 20 Aug 2026 02:33:34 +0000</pubDate>
       <guid>P6gLGnjjzZMPyvJGa</guid>
       <link>https://www.lesswrong.com/posts/P6gLGnjjzZMPyvJGa/making-sense-of-the-misalignment-risk-model-in-the-anthropic</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/b1ca59096731_making_sense_of_the_misalignment_risk_model_in_the.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:17:43</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -56,8 +100,9 @@ Topics covered:
       <pubDate>Wed, 19 Aug 2026 20:03:01 +0000</pubDate>
       <guid>02e9a2c4-6929-4041-8bc1-72f544556dba</guid>
       <link>https://www.lesswrong.com/posts/X3p8cFAzCgRErEcJr/openai-takes-initial-steps-to-address-its-alignment-problems</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ec67460c1ec4_openai_takes_initial_steps_to_address_its_alignme.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:03</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -75,7 +120,7 @@ Topics covered:
       <pubDate>Wed, 19 Aug 2026 14:01:19 +0000</pubDate>
       <guid>news-briefing-2026-08-19</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/950b10692448_daily_news_briefing_-_2026-08-19.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:01</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-19.txt" type="text/plain" />
@@ -86,8 +131,9 @@ Topics covered:
       <pubDate>Wed, 19 Aug 2026 12:39:26 +0000</pubDate>
       <guid>SCFabKnTgC36RzC6r</guid>
       <link>https://www.lesswrong.com/posts/SCFabKnTgC36RzC6r/the-control-paradox</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a8fb73eba076_the_control_paradox.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:21</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -97,8 +143,9 @@ Topics covered:
       <pubDate>Wed, 19 Aug 2026 05:24:22 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/why-im-staying-out-of-the-substack</guid>
       <link>https://www.astralcodexten.com/p/why-im-staying-out-of-the-substack</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/9db0a944bf98_why_im_staying_out_of_the_substack_religion_debat.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:23:20</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -108,8 +155,9 @@ Topics covered:
       <pubDate>Tue, 18 Aug 2026 20:42:27 +0000</pubDate>
       <guid>e9c4a79d-60ec-4e4f-80b7-b546756ddb9d</guid>
       <link>https://www.lesswrong.com/posts/dA8gohzABk6vT7yzP/anthropic-risk-report-august-2026</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/999248cffaa2_anthropic_risk_report_august_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:58</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -127,7 +175,7 @@ Topics covered:
       <pubDate>Tue, 18 Aug 2026 04:40:59 +0000</pubDate>
       <guid>news-briefing-2026-08-18</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/2dff448b9c41_daily_news_briefing_-_2026-08-18.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:45</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-18.txt" type="text/plain" />
@@ -138,8 +186,9 @@ Topics covered:
       <pubDate>Tue, 18 Aug 2026 03:22:58 +0000</pubDate>
       <guid>MAqgva9hLGTMX2wL7</guid>
       <link>https://www.lesswrong.com/posts/MAqgva9hLGTMX2wL7/price-recursion-is-the-rational-theory-of-reward</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/9df06447bd9f_price_recursion_is_the_rational_theory_of_reward.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:22:58</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -157,7 +206,7 @@ Topics covered:
       <pubDate>Mon, 17 Aug 2026 04:49:18 +0000</pubDate>
       <guid>news-briefing-2026-08-17</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/35051496e09c_daily_news_briefing_-_2026-08-17.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:30</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-17.txt" type="text/plain" />
@@ -168,8 +217,9 @@ Topics covered:
       <pubDate>Sun, 16 Aug 2026 21:11:57 +0000</pubDate>
       <guid>vvGKtaGCd7ryXH5b7</guid>
       <link>https://www.lesswrong.com/posts/vvGKtaGCd7ryXH5b7/study-update-does-post-training-quantization-change-welfare</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ff6427d88efd_study_update_does_post-training_quantization_chan.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:31:44</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -179,8 +229,9 @@ Topics covered:
       <pubDate>Sun, 16 Aug 2026 18:38:42 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/q25-2026-timelines-update-uplift</guid>
       <link>https://blog.aifutures.org/p/q25-2026-timelines-update-uplift</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/579c4e9f8f9a_q25_2026_timelines_update_uplift_and_revenue.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:11</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -198,7 +249,7 @@ Topics covered:
       <pubDate>Sun, 16 Aug 2026 04:40:48 +0000</pubDate>
       <guid>news-briefing-2026-08-16</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/82cb62b54826_daily_news_briefing_-_2026-08-16.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:24</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-16.txt" type="text/plain" />
@@ -209,8 +260,9 @@ Topics covered:
       <pubDate>Sun, 16 Aug 2026 04:22:20 +0000</pubDate>
       <guid>QBuJ3suRZxrrxSTtv</guid>
       <link>https://www.lesswrong.com/posts/QBuJ3suRZxrrxSTtv/does-diffusiongemma-do-latent-reasoning</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/659ee933f54f_does_diffusiongemma_do_latent_reasoning.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:26:55</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -220,8 +272,9 @@ Topics covered:
       <pubDate>Sat, 15 Aug 2026 13:02:13 +0000</pubDate>
       <guid>8bbc1dd2-1cda-42fa-a3f7-3e507fae2541</guid>
       <link>https://www.lesswrong.com/posts/BZW8CeAHHJ52EvwYt/on-dwarkesh-patel-s-podcast-with-ryan-greenblatt</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3390119a86ea_on_dwarkesh_patels_podcast_with_ryan_greenblatt.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:50</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -239,7 +292,7 @@ Topics covered:
       <pubDate>Sat, 15 Aug 2026 04:36:55 +0000</pubDate>
       <guid>news-briefing-2026-08-15</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/cd68eed36e0f_daily_news_briefing_-_2026-08-15.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:41</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-15.txt" type="text/plain" />
@@ -250,8 +303,9 @@ Topics covered:
       <pubDate>Sat, 15 Aug 2026 02:09:00 +0000</pubDate>
       <guid>XN2B3rapcjzHL3bJr</guid>
       <link>https://www.lesswrong.com/posts/XN2B3rapcjzHL3bJr/metaphilosophy-ii-empirical-flywheels-1</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/43b84d33fa7c_metaphilosophy_ii_empirical_flywheels.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:11:02</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -261,8 +315,9 @@ Topics covered:
       <pubDate>Fri, 14 Aug 2026 22:21:13 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/your-book-review-the-escape-artist</guid>
       <link>https://www.astralcodexten.com/p/your-book-review-the-escape-artist</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/063d0c299ca5_your_book_review_the_escape_artist.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:41:30</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -280,7 +335,7 @@ Topics covered:
       <pubDate>Fri, 14 Aug 2026 05:41:19 +0000</pubDate>
       <guid>news-briefing-2026-08-14</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/30f528c8bca9_daily_news_briefing_-_2026-08-14.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:11</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-14.txt" type="text/plain" />
@@ -291,8 +346,9 @@ Topics covered:
       <pubDate>Thu, 13 Aug 2026 23:54:32 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/the-foothills-of-bay-area-house-party</guid>
       <link>https://www.astralcodexten.com/p/the-foothills-of-bay-area-house-party</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a5ab83577f9e_the_foothills_of_bay_area_house_party.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:23:34</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -302,8 +358,9 @@ Topics covered:
       <pubDate>Thu, 13 Aug 2026 21:49:54 +0000</pubDate>
       <guid>NyEM3FtgL7XkbfCXy</guid>
       <link>https://www.lesswrong.com/posts/NyEM3FtgL7XkbfCXy/features-that-current-ais-don-t-have-that-future-ais-will</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/763a3bdc6cd9_features_that_current_ais_dont_have_that_future_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:52</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -313,8 +370,9 @@ Topics covered:
       <pubDate>Thu, 13 Aug 2026 15:22:24 +0000</pubDate>
       <guid>788b9775-83d3-44cf-9db9-30e33d63af7a</guid>
       <link>https://www.lesswrong.com/posts/hLn3SakowZLFWobHf/ai-181-astra-goes-cyber-critical</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/6619abc66536_ai_181_astra_goes_cyber_critical_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:02</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -332,7 +390,7 @@ Topics covered:
       <pubDate>Thu, 13 Aug 2026 05:44:44 +0000</pubDate>
       <guid>news-briefing-2026-08-13</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/4542a381ac16_daily_news_briefing_-_2026-08-13.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:56</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-13.txt" type="text/plain" />
@@ -343,8 +401,9 @@ Topics covered:
       <pubDate>Thu, 13 Aug 2026 04:10:45 +0000</pubDate>
       <guid>iQiDPmAgKo4KcG5uy</guid>
       <link>https://www.lesswrong.com/posts/iQiDPmAgKo4KcG5uy/patterns-and-problems-in-emerging-multiagent-systems</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/2180fd6d87b3_patterns_and_problems_in_emerging_multiagent_syste.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:01:22</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -354,8 +413,9 @@ Topics covered:
       <pubDate>Thu, 13 Aug 2026 04:09:15 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/the-quest-for-caffeine-you-can-have</guid>
       <link>https://www.astralcodexten.com/p/the-quest-for-caffeine-you-can-have</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/968c1b5c2d77_the_quest_for_caffeine_you_can_have_at_night.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:26:03</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -365,8 +425,9 @@ Topics covered:
       <pubDate>Wed, 12 Aug 2026 17:51:11 +0000</pubDate>
       <guid>5b2d0d5b-00ca-4e9d-ab3b-c0bd067c1505</guid>
       <link>https://www.lesswrong.com/posts/iQCNuQXQQakKnidmA/monthly-roundup-45-august-2026</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/43070f1fe418_monthly_roundup_45_august_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:49</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -384,7 +445,7 @@ Topics covered:
       <pubDate>Wed, 12 Aug 2026 05:41:26 +0000</pubDate>
       <guid>news-briefing-2026-08-12</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a441459443fb_daily_news_briefing_-_2026-08-12.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:29</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-12.txt" type="text/plain" />
@@ -395,8 +456,9 @@ Topics covered:
       <pubDate>Wed, 12 Aug 2026 05:05:34 +0000</pubDate>
       <guid>8oFYZdXkTaNGRtcn8</guid>
       <link>https://www.lesswrong.com/posts/8oFYZdXkTaNGRtcn8/ai-swarms-are-starting-to-pose-indirect-takeover-risk</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/6febc81a339a_ai_swarms_are_starting_to_pose_indirect_takeover_r.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:25:03</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -406,8 +468,9 @@ Topics covered:
       <pubDate>Tue, 11 Aug 2026 22:20:56 +0000</pubDate>
       <guid>2f48002f-93f0-411f-b105-5878f7405602</guid>
       <link>https://www.lesswrong.com/posts/jLQ4mbqriJwJ2eqRc/various-reflections-about-what-happened-with-openai-s</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/cc110ade10bf_various_reflections_about_what_happened_with_open.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:04</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -425,7 +488,7 @@ Topics covered:
       <pubDate>Tue, 11 Aug 2026 05:14:48 +0000</pubDate>
       <guid>news-briefing-2026-08-11</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5339f630b82f_daily_news_briefing_-_2026-08-11.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:07</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-11.txt" type="text/plain" />
@@ -436,8 +499,9 @@ Topics covered:
       <pubDate>Tue, 11 Aug 2026 04:54:51 +0000</pubDate>
       <guid>wbEcn5HTtvH4TsDN4</guid>
       <link>https://www.lesswrong.com/posts/wbEcn5HTtvH4TsDN4/on-using-crises-to-shift-political-will-for-ai</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/6ad3e367c050_on_using_crises_to_shift_political_will_for_ai.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:09:37</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -447,8 +511,9 @@ Topics covered:
       <pubDate>Mon, 10 Aug 2026 21:53:21 +0000</pubDate>
       <guid>0bc11530-74ba-41c4-9153-7ba75d8510a6</guid>
       <link>https://www.lesswrong.com/posts/WgWoJPKw5b2XTDD24/the-pacing-of-the-frontier</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a17a90a57730_the_pacing_of_the_frontier_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:54</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -466,7 +531,7 @@ Topics covered:
       <pubDate>Mon, 10 Aug 2026 05:38:19 +0000</pubDate>
       <guid>news-briefing-2026-08-10</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7e9ef351263a_daily_news_briefing_-_2026-08-10.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:42</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-10.txt" type="text/plain" />
@@ -477,8 +542,9 @@ Topics covered:
       <pubDate>Mon, 10 Aug 2026 05:32:02 +0000</pubDate>
       <guid>Wty5mcDBEmypap8o2</guid>
       <link>https://www.lesswrong.com/posts/Wty5mcDBEmypap8o2/how-to-be-an-ai-safety-research-engineer</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a100d12843d3_how_to_be_an_ai_safety_research_engineer.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:11:37</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -496,7 +562,7 @@ Topics covered:
       <pubDate>Sun, 09 Aug 2026 05:11:33 +0000</pubDate>
       <guid>news-briefing-2026-08-09</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/edbd2b37a9e9_daily_news_briefing_-_2026-08-09.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:38</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-09.txt" type="text/plain" />
@@ -507,8 +573,9 @@ Topics covered:
       <pubDate>Sat, 08 Aug 2026 23:05:10 +0000</pubDate>
       <guid>cTSfisyzwxCvEpqEc</guid>
       <link>https://www.lesswrong.com/posts/cTSfisyzwxCvEpqEc/dutch-book-resistant-probability-over-centered-worlds</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3156ec755e8a_dutch-book_resistant_probability_over_centered_wor.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:19:44</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -518,8 +585,9 @@ Topics covered:
       <pubDate>Sat, 08 Aug 2026 16:11:52 +0000</pubDate>
       <guid>b03f9b4b-c25f-4294-8aac-b80c424ae763</guid>
       <link>https://www.lesswrong.com/posts/xPAxz4g96uKz9FrHs/what-happened-openai-and-huggingface</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/17cbba5b34b6_what_happened_openai_and_huggingface_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:44</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -537,7 +605,7 @@ Topics covered:
       <pubDate>Sat, 08 Aug 2026 05:03:01 +0000</pubDate>
       <guid>news-briefing-2026-08-08</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e6e6f95ac3b6_daily_news_briefing_-_2026-08-08.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:21</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-08.txt" type="text/plain" />
@@ -548,8 +616,9 @@ Topics covered:
       <pubDate>Sat, 08 Aug 2026 01:20:24 +0000</pubDate>
       <guid>FS7GFsGsH7CSQLahy</guid>
       <link>https://www.lesswrong.com/posts/FS7GFsGsH7CSQLahy/don-t-inoculate-everything-stratified-inoculation-prompting</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/85de333fe0f4_dont_inoculate_everything_stratified_inoculation.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:24</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -559,8 +628,9 @@ Topics covered:
       <pubDate>Fri, 07 Aug 2026 17:02:54 +0000</pubDate>
       <guid>72626b7a-ec1d-4d5b-b1e1-9e84c074915e</guid>
       <link>https://www.lesswrong.com/posts/noXXv7PwwFqauTBFQ/openai-trained-its-models-for-months-while-those-models-were</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/682894a48478_openai_trained_its_models_for_months_while_those.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:51</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -570,8 +640,9 @@ Topics covered:
       <pubDate>Fri, 07 Aug 2026 17:02:54 +0000</pubDate>
       <guid>77d90a39-c6bd-4934-8e81-64af41af82c3</guid>
       <link>https://www.lesswrong.com/posts/noXXv7PwwFqauTBFQ/openai-trained-its-models-for-months-while-those-models-were</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/318a83a0ccd5_openai_trained_its_models_for_months_while_those.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:18</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -589,7 +660,7 @@ Topics covered:
       <pubDate>Fri, 07 Aug 2026 05:45:24 +0000</pubDate>
       <guid>news-briefing-2026-08-07</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/684f57f52dd2_daily_news_briefing_-_2026-08-07.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:37</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-07.txt" type="text/plain" />
@@ -600,8 +671,9 @@ Topics covered:
       <pubDate>Fri, 07 Aug 2026 04:44:32 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/macgregor-the-bridge-builder</guid>
       <link>https://www.astralcodexten.com/p/macgregor-the-bridge-builder</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/43b1baa32b3a_macgregor_the_bridge_builder.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:06:38</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -611,8 +683,9 @@ Topics covered:
       <pubDate>Thu, 06 Aug 2026 23:24:44 +0000</pubDate>
       <guid>hYjBosio5NsbrPzAC</guid>
       <link>https://www.lesswrong.com/posts/hYjBosio5NsbrPzAC/traffic-shaping-for-workload-classification-2</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/abe23d90d45d_traffic_shaping_for_workload_classification.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:18</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -622,8 +695,9 @@ Topics covered:
       <pubDate>Thu, 06 Aug 2026 13:42:56 +0000</pubDate>
       <guid>fea3305f-9cef-4a72-9823-b8f498d62f3c</guid>
       <link>https://www.lesswrong.com/posts/mxNjwQitLvwWq9jm2/ai-180-no-longer-in-charge</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/cc40d4a7fe71_ai_180_no_longer_in_charge_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:41</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -641,7 +715,7 @@ Topics covered:
       <pubDate>Thu, 06 Aug 2026 06:36:33 +0000</pubDate>
       <guid>news-briefing-2026-08-06</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/55ce5e085699_daily_news_briefing_-_2026-08-06.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:53</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-06.txt" type="text/plain" />
@@ -652,8 +726,9 @@ Topics covered:
       <pubDate>Thu, 06 Aug 2026 03:56:29 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/open-questions-on-open-weights</guid>
       <link>https://www.astralcodexten.com/p/open-questions-on-open-weights</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/84725f25d637_open_questions_on_open_weights.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:11:04</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -663,8 +738,9 @@ Topics covered:
       <pubDate>Thu, 06 Aug 2026 01:19:26 +0000</pubDate>
       <guid>5xAvSFyKT2XYwsLrh</guid>
       <link>https://www.lesswrong.com/posts/5xAvSFyKT2XYwsLrh/five-counterintuitive-insights-from-plan-a</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/1ec7298c78f2_five_counterintuitive_insights_from_plan_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:23:38</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -674,8 +750,9 @@ Topics covered:
       <pubDate>Wed, 05 Aug 2026 18:12:09 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/how-to-pace-the-us-frontier</guid>
       <link>https://blog.aifutures.org/p/how-to-pace-the-us-frontier</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/86753f460ae9_how_to_pace_the_us_frontier.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -685,8 +762,9 @@ Topics covered:
       <pubDate>Wed, 05 Aug 2026 16:11:06 +0000</pubDate>
       <guid>6b70039c-474c-4126-a1b0-8b27c1ddf26f</guid>
       <link>https://www.lesswrong.com/posts/fcYrqEw8kbLMa7orw/the-three-ai-pills</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e52c047b8e46_the_three_ai_pills_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:14</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -704,7 +782,7 @@ Topics covered:
       <pubDate>Wed, 05 Aug 2026 06:35:34 +0000</pubDate>
       <guid>news-briefing-2026-08-05</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/44aee6efe197_daily_news_briefing_-_2026-08-05.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:14</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-05.txt" type="text/plain" />
@@ -715,8 +793,9 @@ Topics covered:
       <pubDate>Wed, 05 Aug 2026 04:56:15 +0000</pubDate>
       <guid>HooBYPCkMDGjktcLA</guid>
       <link>https://www.lesswrong.com/posts/HooBYPCkMDGjktcLA/persona-corruption-and-role-miscasting-in-emergent</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3eb6235296e9_persona_corruption_and_role_miscasting_in_emergent.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -726,8 +805,9 @@ Topics covered:
       <pubDate>Tue, 04 Aug 2026 21:32:18 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/the-beauty-of-settled-science</guid>
       <link>https://www.astralcodexten.com/p/the-beauty-of-settled-science</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/944e26cc58f3_the_beauty_of_settled_science.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:13:26</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -745,7 +825,7 @@ Topics covered:
       <pubDate>Tue, 04 Aug 2026 06:32:47 +0000</pubDate>
       <guid>news-briefing-2026-08-04</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0ce196e4966b_daily_news_briefing_-_2026-08-04.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:11</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-04.txt" type="text/plain" />
@@ -756,8 +836,9 @@ Topics covered:
       <pubDate>Tue, 04 Aug 2026 06:02:34 +0000</pubDate>
       <guid>3dFYQu4ifG5ZsjjZm</guid>
       <link>https://www.lesswrong.com/posts/3dFYQu4ifG5ZsjjZm/what-if-people-value-their-work-mattering</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/055f785ba22d_what_if_people_value_their_work_mattering.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:09:37</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -767,8 +848,9 @@ Topics covered:
       <pubDate>Mon, 03 Aug 2026 22:36:17 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/does-forecasting-have-room-at-the</guid>
       <link>https://www.astralcodexten.com/p/does-forecasting-have-room-at-the</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/47a84619b3ec_does_forecasting_have_room_at_the_top.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:23:01</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -778,8 +860,9 @@ Topics covered:
       <pubDate>Mon, 03 Aug 2026 19:11:26 +0000</pubDate>
       <guid>9665d248-3be6-42a9-911a-2fa054b2dc53</guid>
       <link>https://www.lesswrong.com/posts/pQYEPitFqztcRvBsS/openai-s-unreleased-model-astra-solves-ten-major-open</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f2d6139e482c_openais_unreleased_model_astra_solves_ten_major.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:02</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -797,7 +880,7 @@ Topics covered:
       <pubDate>Mon, 03 Aug 2026 07:33:39 +0000</pubDate>
       <guid>news-briefing-2026-08-03</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/b03a1c84f665_daily_news_briefing_-_2026-08-03.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:55</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-03.txt" type="text/plain" />
@@ -808,8 +891,9 @@ Topics covered:
       <pubDate>Mon, 03 Aug 2026 06:46:53 +0000</pubDate>
       <guid>PyvY8ijddmMvihgXg</guid>
       <link>https://www.lesswrong.com/posts/PyvY8ijddmMvihgXg/we-need-to-rl-less</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3e963c872dcd_we_need_to_rl_less.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:10:45</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -819,8 +903,9 @@ Topics covered:
       <pubDate>Sun, 02 Aug 2026 15:11:28 +0000</pubDate>
       <guid>555993a1-330e-45a0-a633-70de8987517c</guid>
       <link>https://www.lesswrong.com/posts/rKwHLW8SnJcTxTQxz/further-developments-about-internal-ai-models-hacking-things</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ff9cdf7717ca_further_developments_about_internal_ai_models_hac.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:53</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -838,7 +923,7 @@ Topics covered:
       <pubDate>Sun, 02 Aug 2026 06:38:45 +0000</pubDate>
       <guid>news-briefing-2026-08-02</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e01f6f24ae27_daily_news_briefing_-_2026-08-02.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:22</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-02.txt" type="text/plain" />
@@ -849,8 +934,9 @@ Topics covered:
       <pubDate>Sun, 02 Aug 2026 05:44:16 +0000</pubDate>
       <guid>wQxrbwocnCsTjHMeA</guid>
       <link>https://www.lesswrong.com/posts/wQxrbwocnCsTjHMeA/questions-for-the-reader-and-writer-of-fundamental</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/80775a203fda_questions_for_the_reader_and_writer_of_fundamen.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:10:18</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -868,7 +954,7 @@ Topics covered:
       <pubDate>Sat, 01 Aug 2026 06:35:06 +0000</pubDate>
       <guid>news-briefing-2026-08-01</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/58ffde0bc7a1_daily_news_briefing_-_2026-08-01.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:11</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-01.txt" type="text/plain" />
@@ -879,8 +965,9 @@ Topics covered:
       <pubDate>Fri, 31 Jul 2026 23:58:42 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/your-book-review-the-epic-of-gilgamesh</guid>
       <link>https://www.astralcodexten.com/p/your-book-review-the-epic-of-gilgamesh</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7a6d01d7129c_your_book_review_the_epic_of_gilgamesh.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:40:40</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -890,8 +977,9 @@ Topics covered:
       <pubDate>Fri, 31 Jul 2026 22:56:13 +0000</pubDate>
       <guid>oirrSj3itFLSyscW8</guid>
       <link>https://www.lesswrong.com/posts/oirrSj3itFLSyscW8/sota-alignment-assessments-don-t-strongly-update-us-against</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/808c391f27b9_sota_alignment_assessments_dont_strongly_update_u.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:57</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -901,8 +989,9 @@ Topics covered:
       <pubDate>Fri, 31 Jul 2026 13:01:29 +0000</pubDate>
       <guid>1576c595-5433-4f62-85ac-d50e1d4ddf98</guid>
       <link>https://www.lesswrong.com/posts/CXeoAhNrAeWpvoyiF/ai-179-part-2-hearing-the-fire-alarm</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ecd9f9a185e9_ai_179_part_2_hearing_the_fire_alarm_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:50</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -920,7 +1009,7 @@ Topics covered:
       <pubDate>Fri, 31 Jul 2026 06:50:01 +0000</pubDate>
       <guid>news-briefing-2026-07-31</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/9498f3e39c99_daily_news_briefing_-_2026-07-31.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:18</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-31.txt" type="text/plain" />
@@ -931,8 +1020,9 @@ Topics covered:
       <pubDate>Fri, 31 Jul 2026 00:05:25 +0000</pubDate>
       <guid>KK5pqtrfb8XnmqLka</guid>
       <link>https://www.lesswrong.com/posts/KK5pqtrfb8XnmqLka/who-do-llms-self-identify-as</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/42447ff4eb53_who_do_llms_self-identify_as.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:00:15</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -942,8 +1032,9 @@ Topics covered:
       <pubDate>Thu, 30 Jul 2026 13:41:39 +0000</pubDate>
       <guid>9a4643b3-e049-40fe-a65d-a4ee206ef44f</guid>
       <link>https://www.lesswrong.com/posts/gfWCuTEGNgd2CQbrM/ai-179-part-1-a-louder-fire-alarm-for-general-intelligence</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ed7caf71838b_ai_179_part_1_a_louder_fire_alarm_for_general_i.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:49</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -961,7 +1052,7 @@ Topics covered:
       <pubDate>Thu, 30 Jul 2026 06:34:15 +0000</pubDate>
       <guid>news-briefing-2026-07-30</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/2ecf9deccf3a_daily_news_briefing_-_2026-07-30.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:22</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-30.txt" type="text/plain" />
@@ -972,8 +1063,9 @@ Topics covered:
       <pubDate>Thu, 30 Jul 2026 05:03:03 +0000</pubDate>
       <guid>DtpjeBf9bzzqNJDmr</guid>
       <link>https://www.lesswrong.com/posts/DtpjeBf9bzzqNJDmr/rethinking-the-second-brain-from-storing-information-to-1</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/437ebd9f5bc4_rethinking_the_second_brain_from_storing_inform.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:07:24</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -983,8 +1075,9 @@ Topics covered:
       <pubDate>Thu, 30 Jul 2026 01:07:16 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/highlights-from-the-discourse-on</guid>
       <link>https://www.astralcodexten.com/p/highlights-from-the-discourse-on</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/9bbbdcd6ed79_highlights_from_the_discourse_on_the_hugging_face.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:36:58</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -994,8 +1087,9 @@ Topics covered:
       <pubDate>Wed, 29 Jul 2026 15:36:12 +0000</pubDate>
       <guid>f441d561-a0c5-4fb7-aa82-8415fa2334e9</guid>
       <link>https://www.lesswrong.com/posts/eWmeMLqTEauCmHLeR/frontier-lab-employee-open-letter-calls-for-being-able-to</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/8f4f97e63f6a_frontier_lab_employee_open_letter_calls_for_being.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:08</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1013,7 +1107,7 @@ Topics covered:
       <pubDate>Wed, 29 Jul 2026 06:37:19 +0000</pubDate>
       <guid>news-briefing-2026-07-29</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/58c4b9379f28_daily_news_briefing_-_2026-07-29.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:18</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-29.txt" type="text/plain" />
@@ -1024,8 +1118,9 @@ Topics covered:
       <pubDate>Wed, 29 Jul 2026 02:39:56 +0000</pubDate>
       <guid>bAKMEv5umocCXJkpM</guid>
       <link>https://www.lesswrong.com/posts/bAKMEv5umocCXJkpM/isn-t-it-a-threat-to-reject-unfair-offers-in-the-ultimatum</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/13139a3b27a1_isnt_it_a_threat_to_reject_unfair_offers_in_the_u.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:15</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1035,8 +1130,9 @@ Topics covered:
       <pubDate>Tue, 28 Jul 2026 18:13:05 +0000</pubDate>
       <guid>abfafc35-0084-4e6d-9905-6196ad4e2228</guid>
       <link>https://www.lesswrong.com/posts/Pj4Eewb4KXvXFCcGv/claude-opus-5-is-highly-capable-but-is-no-mythos</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f0d231bc1c2f_claude_opus_5_is_highly_capable_but_is_no_mythos.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:56</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1046,8 +1142,9 @@ Topics covered:
       <pubDate>Tue, 28 Jul 2026 11:05:46 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/psychology-research-is-mostly-fine</guid>
       <link>https://www.astralcodexten.com/p/psychology-research-is-mostly-fine</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/aaf443012ae5_psychology_research_is_mostly_fine.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:07:53</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1065,7 +1162,7 @@ Topics covered:
       <pubDate>Tue, 28 Jul 2026 06:31:54 +0000</pubDate>
       <guid>news-briefing-2026-07-28</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3a43768b1e05_daily_news_briefing_-_2026-07-28.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:43</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-28.txt" type="text/plain" />
@@ -1076,8 +1173,9 @@ Topics covered:
       <pubDate>Tue, 28 Jul 2026 04:35:54 +0000</pubDate>
       <guid>ukxtp629mmDs8Mtca</guid>
       <link>https://www.lesswrong.com/posts/ukxtp629mmDs8Mtca/somebody-out-there-wants-you-to-fetch-coffee</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f438e9eca01c_somebody_out_there_wants_you_to_fetch_coffee.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:09:29</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1087,8 +1185,9 @@ Topics covered:
       <pubDate>Mon, 27 Jul 2026 20:03:44 +0000</pubDate>
       <guid>08d2a7d0-e222-4ff0-8ca8-53b05e06a3d1</guid>
       <link>https://www.lesswrong.com/posts/bBXBpsyKAvJ5CqPzA/claude-opus-5-model-welfare</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/10ff467b9895_claude_opus_5_model_welfare_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:57</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1106,7 +1205,7 @@ Topics covered:
       <pubDate>Mon, 27 Jul 2026 07:38:36 +0000</pubDate>
       <guid>news-briefing-2026-07-27</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23dc05c35ed_daily_news_briefing_-_2026-07-27.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:54</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-27.txt" type="text/plain" />
@@ -1117,8 +1216,9 @@ Topics covered:
       <pubDate>Mon, 27 Jul 2026 04:02:35 +0000</pubDate>
       <guid>XHixQXscpLNxndGgY</guid>
       <link>https://www.lesswrong.com/posts/XHixQXscpLNxndGgY/a-clarification-on-celebrating-victory</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f4354d42dcd2_a_clarification_on_celebrating_victory.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:01:52</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1128,8 +1228,9 @@ Topics covered:
       <pubDate>Sun, 26 Jul 2026 19:23:03 +0000</pubDate>
       <guid>e76272e0-9367-418e-9aa0-9fc52dc8fdfd</guid>
       <link>https://www.lesswrong.com/posts/uAkcxDidvGWZjHrbp/more-on-an-internal-openai-model-hacking-into-huggingface</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5e72fd3e00b0_more_on_an_internal_openai_model_hacking_into_hug.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1147,7 +1248,7 @@ Topics covered:
       <pubDate>Sun, 26 Jul 2026 06:41:24 +0000</pubDate>
       <guid>news-briefing-2026-07-26</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/57a6302e8bf4_daily_news_briefing_-_2026-07-26.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:58</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-26.txt" type="text/plain" />
@@ -1158,8 +1259,9 @@ Topics covered:
       <pubDate>Sun, 26 Jul 2026 05:41:08 +0000</pubDate>
       <guid>q3qHctffoPmZkArBB</guid>
       <link>https://www.lesswrong.com/posts/q3qHctffoPmZkArBB/simple-dutch-books-versus-sleeping-beauty-halfers</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/bb3342b38e17_simple_dutch_books_versus_sleeping_beauty_halfers.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:18:25</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1169,8 +1271,9 @@ Topics covered:
       <pubDate>Sat, 25 Jul 2026 13:43:12 +0000</pubDate>
       <guid>18ee7606-bf2f-4075-b397-b1d21659be07</guid>
       <link>https://www.lesswrong.com/posts/ywGX6FhgbZEkHRfQR/claude-opus-5-the-system-card</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/983c1a78291c_claude_opus_5_the_system_card_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:10</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1188,7 +1291,7 @@ Topics covered:
       <pubDate>Sat, 25 Jul 2026 06:22:44 +0000</pubDate>
       <guid>news-briefing-2026-07-25</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e04fab840abf_daily_news_briefing_-_2026-07-25.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:06</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-25.txt" type="text/plain" />
@@ -1199,8 +1302,9 @@ Topics covered:
       <pubDate>Sat, 25 Jul 2026 00:15:17 +0000</pubDate>
       <guid>APR9vfogzzohtDi8A</guid>
       <link>https://www.lesswrong.com/posts/APR9vfogzzohtDi8A/wait-feelings-are-supposed-to-be-in-the-body-1</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/99c9a646d9b3_wait_feelings_are_supposed_to_be_in_the_body.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:11</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1210,8 +1314,9 @@ Topics covered:
       <pubDate>Fri, 24 Jul 2026 17:22:51 +0000</pubDate>
       <guid>98a5c0a6-947f-4406-911a-1b3bbb06cbf2</guid>
       <link>https://www.lesswrong.com/posts/fYostss6JqkSfxc5C/introducing-lightcone-commons</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/68e18a6c777f_introducing_lightcone_commons_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:49</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1221,8 +1326,9 @@ Topics covered:
       <pubDate>Fri, 24 Jul 2026 15:04:42 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/breakdown-in-pakistan</guid>
       <link>https://www.astralcodexten.com/p/breakdown-in-pakistan</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f1412b4532cd_your_book_review_breakdown_in_pakistan.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:45:30</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1240,7 +1346,7 @@ Topics covered:
       <pubDate>Fri, 24 Jul 2026 06:30:26 +0000</pubDate>
       <guid>news-briefing-2026-07-24</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/1aafad79cebf_daily_news_briefing_-_2026-07-24.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:46</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-24.txt" type="text/plain" />
@@ -1251,8 +1357,9 @@ Topics covered:
       <pubDate>Fri, 24 Jul 2026 05:43:14 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/the-hugging-face-incident</guid>
       <link>https://www.astralcodexten.com/p/the-hugging-face-incident</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/bcdbf23a278c_the_hugging_face_incident.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:10:48</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1262,8 +1369,9 @@ Topics covered:
       <pubDate>Fri, 24 Jul 2026 01:51:53 +0000</pubDate>
       <guid>9vAFajDD3iLgs9vi4</guid>
       <link>https://www.lesswrong.com/posts/9vAFajDD3iLgs9vi4/linkpost-thoughts-on-the-recent-openai-hack</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/1df2b9eeb7d7_linkpost_thoughts_on_the_recent_openai_hack.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:09:03</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1273,8 +1381,9 @@ Topics covered:
       <pubDate>Thu, 23 Jul 2026 17:56:49 +0000</pubDate>
       <guid>9auCLJg3Z77dFdYhR</guid>
       <link>https://www.lesswrong.com/posts/9auCLJg3Z77dFdYhR/the-openai-huggingface-incident-or-redwood-research-podcast</link>
+      <itunes:author>Ryan Greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a0fbd2d607ee_the_openaihuggingface_incident_redwood_research.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:06:57</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1284,8 +1393,9 @@ Topics covered:
       <pubDate>Thu, 23 Jul 2026 14:20:54 +0000</pubDate>
       <guid>7690d3ac-dbaf-472c-84c2-c53e36b46c38</guid>
       <link>https://www.lesswrong.com/posts/BK7E4jHNMykpnt796/ai-178-a-fire-alarm-for-general-intelligence</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/512b0d2579b4_ai_178_a_fire_alarm_for_general_intelligence_b.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:04</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1303,7 +1413,7 @@ Topics covered:
       <pubDate>Thu, 23 Jul 2026 06:34:54 +0000</pubDate>
       <guid>news-briefing-2026-07-23</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/61aecf8f5521_daily_news_briefing_-_2026-07-23.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:52</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-23.txt" type="text/plain" />
@@ -1314,8 +1424,9 @@ Topics covered:
       <pubDate>Thu, 23 Jul 2026 04:16:38 +0000</pubDate>
       <guid>kbFQKqLqpa7C4EBGL</guid>
       <link>https://www.lesswrong.com/posts/kbFQKqLqpa7C4EBGL/get-you-a-model-if-you-re-not-paying-you-re-missing-90-of</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5a71ee4d4199_get_you_a_model_if_youre_not_paying_youre_miss.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:00:51</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1325,8 +1436,9 @@ Topics covered:
       <pubDate>Wed, 22 Jul 2026 19:32:46 +0000</pubDate>
       <guid>e7525fe8-695d-4ed3-8545-20fc118fb96a</guid>
       <link>https://www.lesswrong.com/posts/usptCfzEnYoNcsTd5/openai-model-hacks-into-huggingface-during-cybersecurity</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3665464d2e61_openai_model_hacks_into_huggingface_during_cybers.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:53</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1344,7 +1456,7 @@ Topics covered:
       <pubDate>Wed, 22 Jul 2026 06:34:17 +0000</pubDate>
       <guid>news-briefing-2026-07-22</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/4d162f18a929_daily_news_briefing_-_2026-07-22.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:58</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-22.txt" type="text/plain" />
@@ -1355,8 +1467,9 @@ Topics covered:
       <pubDate>Wed, 22 Jul 2026 06:30:20 +0000</pubDate>
       <guid>xcyGdxHC5Rad3fv9h</guid>
       <link>https://www.lesswrong.com/posts/xcyGdxHC5Rad3fv9h/openai-and-hugging-face-partner-to-address-security-incident</link>
+      <itunes:author>LessWrong Frontpage</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a40902169575_openai_and_hugging_face_partner_to_address_securit.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:01:30</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1366,8 +1479,9 @@ Topics covered:
       <pubDate>Tue, 21 Jul 2026 19:46:04 +0000</pubDate>
       <guid>87514808-2a53-49c7-8ecc-86a6f1b30ce4</guid>
       <link>https://www.lesswrong.com/posts/KctxwGKxm9fHtwh6u/openai-shares-some-alignment-problems</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/61d084a5877e_openai_shares_some_alignment_problems_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:36</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1377,49 +1491,9 @@ Topics covered:
       <pubDate>Tue, 21 Jul 2026 12:30:55 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/contra-pritchard-on-liberal-happiness</guid>
       <link>https://www.astralcodexten.com/p/contra-pritchard-on-liberal-happiness</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c14eeacbb498_contra_pritchard_on_liberal_happiness.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-07-21</title>
-      <description>Daily News Briefing - 2026-07-21
-
-Topics covered:
-- In geopolitics and trade, President Trump has escalated his dispute with Canada by imposing a fifty percent tariff on all Canadian imports
-- In the Middle East theater, the United States has launched a fresh wave of air strikes against Iranian positions to degrade their ability to target shipping in the Strait of Hormuz
-- In artificial intelligence capabilities and global competition, China has delivered what analysts are calling a "one-two punch" to American dominance
-- In AI safety and legal precedents, Anthropic has reached a landmark one-point-five billion dollar settlement with music publishers over copyright claims
-- Regarding market infrastructure and mergers, a federal judge has issued a temporary restraining order halting the one-hundred-and-eleven billion dollar merger between Paramount and Warner Brothers
-- Expect continued volatility in global energy markets tomorrow as the impact of the fifty percent Canadian tariff begins to take hold of supply chains</description>
-      <pubDate>Tue, 21 Jul 2026 06:34:12 +0000</pubDate>
-      <guid>news-briefing-2026-07-21</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/13cd16c3b457_daily_news_briefing_-_2026-07-21.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-21.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Announcing the Corrigibility Research Fund</title>
-      <description>Audio version of Announcing the Corrigibility Research Fund from LessWrong Frontpage</description>
-      <pubDate>Mon, 20 Jul 2026 22:17:35 +0000</pubDate>
-      <guid>FBqe5dt8ZjaHN4Xj9</guid>
-      <link>https://www.lesswrong.com/posts/FBqe5dt8ZjaHN4Xj9/announcing-the-corrigibility-research-fund</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6f3ce493e494_announcing_the_corrigibility_research_fund.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“On Kimi K3: Its Capabilities And Related Discontents” by Zvi</title>
-      <description>Audio version of “On Kimi K3: Its Capabilities And Related Discontents” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 20 Jul 2026 15:31:56 +0000</pubDate>
-      <guid>f5bfa954-dc67-4704-ba2d-ffec26a1d8ac</guid>
-      <link>https://www.lesswrong.com/posts/t7oZyAFej8FZrfbtY/on-kimi-k3-its-capabilities-and-related-discontents</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/041ce7cab917_on_kimi_k3_its_capabilities_and_related_disconte.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:11:30</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1429,8 +1503,9 @@ Topics covered:
       <pubDate>Wed, 15 Jul 2026 16:23:06 +0000</pubDate>
       <guid>648da05e-3994-43ec-a3d3-e9de9b37d4a4</guid>
       <link>https://www.lesswrong.com/posts/KiCwcAGHx4rdwJgzD/monthly-roundup-44-july-2026</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0dae45bfbfa4_monthly_roundup_44_july_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:53</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1440,8 +1515,9 @@ Topics covered:
       <pubDate>Tue, 14 Jul 2026 17:58:25 +0000</pubDate>
       <guid>0b2782e6-cbc6-4bd5-be02-be284727e316</guid>
       <link>https://www.lesswrong.com/posts/2GFyHmCLJYCag7gKh/twitter-thoughts-for-you</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d581d0973101_twitter_thoughts_for_you_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:57</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1451,8 +1527,9 @@ Topics covered:
       <pubDate>Mon, 13 Jul 2026 20:54:55 +0000</pubDate>
       <guid>9f07cf6f-34f3-468d-96be-4727e4f02149</guid>
       <link>https://www.lesswrong.com/posts/zPdDmJTovsKTvAiH2/better-call-sol-the-workhorse</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/66d6437add29_better_call_sol_the_workhorse_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:55</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1462,8 +1539,9 @@ Topics covered:
       <pubDate>Fri, 10 Jul 2026 23:15:06 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/plan-a-suggestions-for-further-work</guid>
       <link>https://blog.aifutures.org/p/plan-a-suggestions-for-further-work</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f2b51774f117_plan_a_suggestions_for_further_work.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:50</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1473,8 +1551,9 @@ Topics covered:
       <pubDate>Thu, 09 Jul 2026 16:25:14 +0000</pubDate>
       <guid>pFzctpJBat95SrCyC</guid>
       <link>https://www.lesswrong.com/posts/pFzctpJBat95SrCyC/ai-2040-plan-a</link>
+      <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/8f70bf8d72b5_ai_2040_plan_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:01:50</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1484,8 +1563,9 @@ Topics covered:
       <pubDate>Thu, 09 Jul 2026 16:14:53 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/ai-2040-plan-a</guid>
       <link>https://blog.aifutures.org/p/ai-2040-plan-a</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/84228fcb8aee_ai_2040_plan_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:25</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1495,8 +1575,9 @@ Topics covered:
       <pubDate>Fri, 03 Jul 2026 13:22:57 +0000</pubDate>
       <guid>926c0652-b301-4b31-ab76-bf562e447bbd</guid>
       <link>https://www.lesswrong.com/posts/r9HsHHSsfABhhxnYr/fable-6-the-return-of-the-king</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/55d788522c98_fable_6_the_return_of_the_king_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:42</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1506,8 +1587,9 @@ Topics covered:
       <pubDate>Tue, 30 Jun 2026 21:52:27 +0000</pubDate>
       <guid>f66bca9b-abb6-457d-b401-062e7a6347a7</guid>
       <link>https://www.lesswrong.com/posts/phxgfwGNGbanumMMv/the-once-and-future-fable-5</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e573f475bd53_the_once_and_future_fable_5_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:37</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1517,8 +1599,9 @@ Topics covered:
       <pubDate>Thu, 25 Jun 2026 23:59:00 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/the-metaculus-threat-to-democracy</guid>
       <link>https://www.astralcodexten.com/p/the-metaculus-threat-to-democracy</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3f3ea57d798f_the_metaculus_democracy_threat_index.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:10:01</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1528,8 +1611,9 @@ Topics covered:
       <pubDate>Tue, 23 Jun 2026 00:41:37 +0000</pubDate>
       <guid>https://www.astralcodexten.com/p/should-people-avoid-whole-body-screening</guid>
       <link>https://www.astralcodexten.com/p/should-people-avoid-whole-body-screening</link>
+      <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/afac220bb4e4_should_people_avoid_whole-body_screening_info.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:27:01</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1539,19 +1623,9 @@ Topics covered:
       <pubDate>Fri, 19 Jun 2026 15:32:43 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</guid>
       <link>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/39c993a52a4f_a_forecast_of_chinese_duv_and_euv_photolithography.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Preliminary Thoughts On The Midjourney Scanner</title>
-      <description>Audio version of Preliminary Thoughts On The Midjourney Scanner from Scott Alexander</description>
-      <pubDate>Fri, 19 Jun 2026 05:32:51 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/preliminary-thoughts-on-the-midjourney</guid>
-      <link>https://www.astralcodexten.com/p/preliminary-thoughts-on-the-midjourney</link>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d0382b70691a_preliminary_thoughts_on_the_midjourney_scanner.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:29</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1561,8 +1635,9 @@ Topics covered:
       <pubDate>Mon, 08 Jun 2026 20:28:17 +0000</pubDate>
       <guid>mBsZTZxtjgCdN4CDA</guid>
       <link>https://www.lesswrong.com/posts/mBsZTZxtjgCdN4CDA/efficient-tradeoffs-and-the-safety-usefulness-tradeoff-model</link>
+      <itunes:author>Buck Shlegeris</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ae1ba4cf0d4f_efficient_tradeoffs_and_the_safety-usefulness_trad.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:17:39</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1572,8 +1647,9 @@ Topics covered:
       <pubDate>Sun, 31 May 2026 20:48:06 +0000</pubDate>
       <guid>oGTajcGwxxFG4Z7eN</guid>
       <link>https://www.lesswrong.com/posts/oGTajcGwxxFG4Z7eN/notes-on-axes-of-variation-in-third-party-risk-assessment</link>
+      <itunes:author>Buck Shlegeris</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/fc9f1752bdd7_notes_on_axes_of_variation_in_third-party_risk_ass.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:20:42</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1583,8 +1659,9 @@ Topics covered:
       <pubDate>Wed, 27 May 2026 18:16:34 +0000</pubDate>
       <guid>jfwhvd43sbpkGTLyn</guid>
       <link>https://www.lesswrong.com/posts/jfwhvd43sbpkGTLyn/full-automation-of-ai-r-and-d-probably-yields-a-large-speed</link>
+      <itunes:author>Ryan Greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/8826178be6ba_full_automation_of_ai_rd_probably_yields_a_large.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:11:31</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1594,8 +1671,9 @@ Topics covered:
       <pubDate>Sat, 23 May 2026 02:46:14 +0000</pubDate>
       <guid>wXioQSLmEiPTmHyf4</guid>
       <link>https://www.lesswrong.com/posts/wXioQSLmEiPTmHyf4/out-of-context-reasoning-oocr-in-llms-a-short-primer-and</link>
+      <itunes:author>Owain Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f95e173256ea_out-of-context_reasoning_oocr_in_llms_a_short_p.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:13:03</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1605,8 +1683,9 @@ Topics covered:
       <pubDate>Mon, 11 May 2026 15:29:03 +0000</pubDate>
       <guid>84TtjdeLcDTtCLYaP</guid>
       <link>https://www.lesswrong.com/posts/84TtjdeLcDTtCLYaP/how-useful-is-the-information-you-get-from-working-inside-an-2</link>
+      <itunes:author>Buck Shlegeris</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e2475b0bd330_how_useful_is_the_information_you_get_from_working.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:15:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1616,8 +1695,9 @@ Topics covered:
       <pubDate>Thu, 07 May 2026 18:06:54 +0000</pubDate>
       <guid>juCHTdZpZBGooHKW4</guid>
       <link>https://www.lesswrong.com/posts/juCHTdZpZBGooHKW4/a-review-of-investigating-the-consequences-of-accidentally</link>
+      <itunes:author>Buck Shlegeris</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/4ecd1a723aad_a_review_of_investigating_the_consequences_of_acc.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:20:35</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1627,8 +1707,9 @@ Topics covered:
       <pubDate>Mon, 27 Apr 2026 14:39:00 +0000</pubDate>
       <guid>smCHhegyxEAh3Gygg</guid>
       <link>https://www.lesswrong.com/posts/smCHhegyxEAh3Gygg/ai-companies-should-publish-security-assessments</link>
+      <itunes:author>Ryan Greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/2f29ef8ffb83_ai_companies_should_publish_security_assessments.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:07:46</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1638,8 +1719,9 @@ Topics covered:
       <pubDate>Wed, 15 Apr 2026 15:14:11 +0000</pubDate>
       <guid>WewsByywWNhX9rtwi</guid>
       <link>https://www.lesswrong.com/posts/WewsByywWNhX9rtwi/current-ais-seem-pretty-misaligned-to-me</link>
+      <itunes:author>Ryan Greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e3c3d13e4326_current_ais_seem_pretty_misaligned_to_me.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:59</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1649,8 +1731,9 @@ Topics covered:
       <pubDate>Sat, 11 Apr 2026 00:38:52 +0000</pubDate>
       <guid>Jga7PHMzfZf4fbdyo</guid>
       <link>https://www.lesswrong.com/posts/Jga7PHMzfZf4fbdyo/if-mythos-actually-made-anthropic-employees-4x-more</link>
+      <itunes:author>Ryan Greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0aaf520ae940_if_mythos_actually_made_anthropic_employees_4x_mor.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:16:19</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1660,8 +1743,9 @@ Topics covered:
       <pubDate>Tue, 07 Apr 2026 16:44:58 +0000</pubDate>
       <guid>WjaGAA4xCAXeFpyWm</guid>
       <link>https://www.lesswrong.com/posts/WjaGAA4xCAXeFpyWm/my-picture-of-the-present-in-ai</link>
+      <itunes:author>Ryan Greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/edfbb161e75d_my_picture_of_the_present_in_ai.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:26:51</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1671,8 +1755,9 @@ Topics covered:
       <pubDate>Mon, 06 Apr 2026 16:01:56 +0000</pubDate>
       <guid>dKpC6wHFqDrGZwnah</guid>
       <link>https://www.lesswrong.com/posts/dKpC6wHFqDrGZwnah/ais-can-now-often-do-massive-easy-to-verify-swe-tasks-and-i</link>
+      <itunes:author>Ryan Greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/008c42fcff1f_ais_can_now_often_do_massive_easy-to-verify_swe_ta.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:29</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1682,8 +1767,9 @@ Topics covered:
       <pubDate>Thu, 02 Apr 2026 22:23:54 +0000</pubDate>
       <guid>XLLjqMxETva3ABtsK</guid>
       <link>https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update</link>
+      <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e146da8ae513_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:05:34</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1693,8 +1779,9 @@ Topics covered:
       <pubDate>Thu, 02 Apr 2026 18:10:18 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
       <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:55</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1704,8 +1791,9 @@ Topics covered:
       <pubDate>Mon, 16 Mar 2026 22:24:25 +0000</pubDate>
       <guid>YuMr6kbstuieQHkGj</guid>
       <link>https://www.lesswrong.com/posts/YuMr6kbstuieQHkGj/types-of-handoff-to-ais</link>
+      <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/186d63bf34b6_types_of_handoff_to_ais.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:15:50</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1715,8 +1803,9 @@ Topics covered:
       <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
       <guid>tN5mgBAinwFe5c67c</guid>
       <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
+      <itunes:author>Buck Shlegeris</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:36</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1726,8 +1815,9 @@ Topics covered:
       <pubDate>Fri, 13 Feb 2026 00:18:41 +0000</pubDate>
       <guid>JYGeAAh92hAwvseFk</guid>
       <link>https://www.lesswrong.com/posts/JYGeAAh92hAwvseFk/grading-ai-2027-s-2025-predictions</link>
+      <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/8aad9aed9429_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:20:54</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1737,8 +1827,9 @@ Topics covered:
       <pubDate>Thu, 12 Feb 2026 23:56:07 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</guid>
       <link>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:19</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1748,8 +1839,9 @@ Topics covered:
       <pubDate>Thu, 12 Feb 2026 16:55:52 +0000</pubDate>
       <guid>vjAM7F8vMZS7oRrrh</guid>
       <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
+      <itunes:author>Ryan Greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:09</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1759,8 +1851,9 @@ Topics covered:
       <pubDate>Wed, 11 Feb 2026 18:37:13 +0000</pubDate>
       <guid>rRbDNQLfihiHbXytf</guid>
       <link>https://www.lesswrong.com/posts/rRbDNQLfihiHbXytf/distinguish-between-inference-scaling-and-larger-tasks-use</link>
+      <itunes:author>Ryan Greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f14ce93e351f_distinguish_between_inference_scaling_and_larger.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:07:01</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1770,8 +1863,9 @@ Topics covered:
       <pubDate>Tue, 27 Jan 2026 22:50:15 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts</guid>
       <link>https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/310dcf521ccf_clarifying_how_our_ai_timelines_forecasts_have_cha.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:44</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1781,8 +1875,9 @@ Topics covered:
       <pubDate>Sat, 17 Jan 2026 18:52:05 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/forecast-how-ai-will-progress-in</guid>
       <link>https://blog.aifutures.org/p/forecast-how-ai-will-progress-in</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/b9c56661c15c_forecast_how_ai_will_progress_in_2026.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:45</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1792,8 +1887,9 @@ Topics covered:
       <pubDate>Sun, 11 Jan 2026 14:02:41 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/what-happens-when-superhuman-ais</guid>
       <link>https://blog.aifutures.org/p/what-happens-when-superhuman-ais</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/04eb9263329e_what_happens_when_superhuman_ais_compete_for_contr.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:17</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1803,8 +1899,9 @@ Topics covered:
       <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
       <guid>p4iJpumHt6Ay9KnXT</guid>
       <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
+      <itunes:author>Buck Shlegeris</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:04:55</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1814,8 +1911,9 @@ Topics covered:
       <pubDate>Thu, 01 Jan 2026 13:36:25 +0000</pubDate>
       <guid>aYtrLhoZtCKZnfBvA</guid>
       <link>https://www.lesswrong.com/posts/aYtrLhoZtCKZnfBvA/recent-llms-can-do-2-hop-and-3-hop-latent-no-cot-reasoning</link>
+      <itunes:author>Ryan Greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:22</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1825,8 +1923,9 @@ Topics covered:
       <pubDate>Wed, 31 Dec 2025 02:08:48 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/ai-futures-model-dec-2025-update</guid>
       <link>https://blog.aifutures.org/p/ai-futures-model-dec-2025-update</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/271107ce0b83_ai_futures_model_dec_2025_update.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:26</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1836,8 +1935,9 @@ Topics covered:
       <pubDate>Tue, 09 Dec 2025 01:11:06 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/early-us-policy-priorities-for-agi</guid>
       <link>https://blog.aifutures.org/p/early-us-policy-priorities-for-agi</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/869e490690c7_early_us_policy_priorities_for_agi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:22</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1847,8 +1947,9 @@ Topics covered:
       <pubDate>Tue, 28 Oct 2025 20:20:21 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/scenario-scrutiny-for-ai-policy</guid>
       <link>https://blog.aifutures.org/p/scenario-scrutiny-for-ai-policy</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/6da72523af3d_scenario_scrutiny_for_ai_policy.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:03</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1858,8 +1959,9 @@ Topics covered:
       <pubDate>Tue, 21 Oct 2025 16:21:38 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/how-an-ai-company-ceo-could-quietly</guid>
       <link>https://blog.aifutures.org/p/how-an-ai-company-ceo-could-quietly</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/48759244faa2_how_an_ai_company_ceo_could_quietly_take_over_the.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1869,8 +1971,9 @@ Topics covered:
       <pubDate>Thu, 09 Oct 2025 15:22:15 +0000</pubDate>
       <guid>r68nCQK3veQtCdqGt</guid>
       <link>https://www.lesswrong.com/posts/r68nCQK3veQtCdqGt/the-thinking-machines-tinker-api-is-good-news-for-ai-control</link>
+      <itunes:author>Buck Shlegeris</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/484b3eb83a9c_the_thinking_machines_tinker_api_is_good_news_for.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:13:08</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1880,8 +1983,9 @@ Topics covered:
       <pubDate>Mon, 22 Sep 2025 15:21:03 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/what-the-eus-code-of-practice-means</guid>
       <link>https://blog.aifutures.org/p/what-the-eus-code-of-practice-means</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/6da6a4e8df41_the_worlds_first_frontier_ai_regulation_is_surpri.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:33</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1891,8 +1995,9 @@ Topics covered:
       <pubDate>Wed, 17 Sep 2025 14:44:04 +0000</pubDate>
       <guid>8aRFB2qGyjQGJkEdZ</guid>
       <link>https://www.lesswrong.com/posts/8aRFB2qGyjQGJkEdZ/christian-homeschoolers-in-the-year-3000</link>
+      <itunes:author>Buck Shlegeris</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c374d7dda1f9_christian_homeschoolers_in_the_year_3000.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:15:12</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1902,8 +2007,9 @@ Topics covered:
       <pubDate>Wed, 17 Sep 2025 04:34:52 +0000</pubDate>
       <guid>P4xeb3jnFAYDdEEXs</guid>
       <link>https://www.lesswrong.com/posts/P4xeb3jnFAYDdEEXs/i-enjoyed-most-of-iabied</link>
+      <itunes:author>Buck Shlegeris</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d4688cc14ec2_i_enjoyed_most_of_iabied.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:16:33</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1913,8 +2019,9 @@ Topics covered:
       <pubDate>Wed, 20 Aug 2025 17:47:01 +0000</pubDate>
       <guid>9MaTnw5sWeQrggYBG</guid>
       <link>https://www.lesswrong.com/posts/9MaTnw5sWeQrggYBG/an-epistemic-advantage-of-working-as-a-moderate</link>
+      <itunes:author>Buck Shlegeris</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/04cba548aa9e_an_epistemic_advantage_of_working_as_a_moderate.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:08:51</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1924,8 +2031,9 @@ Topics covered:
       <pubDate>Thu, 24 Jul 2025 05:41:38 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</guid>
       <link>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e48d899f22a8_ai_as_profoundly_abnormal_technology.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:39</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1935,8 +2043,9 @@ Topics covered:
       <pubDate>Fri, 18 Jul 2025 07:50:57 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/against-misalignment-as-self-fulfilling</guid>
       <link>https://blog.aifutures.org/p/against-misalignment-as-self-fulfilling</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/35d1a2718ee0_we_arent_worried_about_misalignment_as_self-fulfi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:02</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1946,8 +2055,9 @@ Topics covered:
       <pubDate>Fri, 11 Jul 2025 21:43:36 +0000</pubDate>
       <guid>zuuQwueBpv9ZCpNuX</guid>
       <link>https://www.lesswrong.com/posts/zuuQwueBpv9ZCpNuX/vitalik-s-response-to-ai-2027</link>
+      <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a2b17c92c517_vitaliks_response_to_ai_2027.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:25:53</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1957,8 +2067,9 @@ Topics covered:
       <pubDate>Sat, 28 Jun 2025 17:46:28 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/what-you-can-do-about-ai-2027</guid>
       <link>https://blog.aifutures.org/p/what-you-can-do-about-ai-2027</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/feab7f530ca2_what_you_can_do_about_ai_2027.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:41</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1968,8 +2079,9 @@ Topics covered:
       <pubDate>Tue, 24 Jun 2025 15:00:52 +0000</pubDate>
       <guid>APfuz9hFz9d8SRETA</guid>
       <link>https://www.lesswrong.com/posts/APfuz9hFz9d8SRETA/my-pitch-for-the-ai-village</link>
+      <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e1b5ebb4f741_my_pitch_for_the_ai_village.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:16:46</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1979,8 +2091,9 @@ Topics covered:
       <pubDate>Mon, 09 Jun 2025 18:03:31 +0000</pubDate>
       <guid>Zu4ai9GFpwezyfB2K</guid>
       <link>https://www.lesswrong.com/posts/Zu4ai9GFpwezyfB2K/metr-s-observations-of-reward-hacking-in-recent-frontier</link>
+      <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23eb66ae716_metrs_observations_of_reward_hacking_in_recent_fr.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:28:47</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1990,8 +2103,9 @@ Topics covered:
       <pubDate>Mon, 19 May 2025 17:43:42 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/slow-corporations-as-an-intuition</guid>
       <link>https://blog.aifutures.org/p/slow-corporations-as-an-intuition</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/07000a276acc_slow_corporations_as_an_intuition_pump_for_ai_rd.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:28</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2001,8 +2115,9 @@ Topics covered:
       <pubDate>Sat, 17 May 2025 11:41:22 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/make-the-prompt-public</guid>
       <link>https://blog.aifutures.org/p/make-the-prompt-public</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/17592b945f0a_make_the_prompt_public.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:16</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2012,8 +2127,9 @@ Topics covered:
       <pubDate>Thu, 01 May 2025 16:13:05 +0000</pubDate>
       <guid>https://blog.aifutures.org/p/making-sense-of-openais-models</guid>
       <link>https://blog.aifutures.org/p/making-sense-of-openais-models</link>
+      <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/2d2013158167_making_sense_of_openais_models.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:02:52</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2023,8 +2139,9 @@ Topics covered:
       <pubDate>Fri, 18 Apr 2025 12:27:35 +0000</pubDate>
       <guid>FGqfdJmB8MSH5LKGc</guid>
       <link>https://www.lesswrong.com/posts/FGqfdJmB8MSH5LKGc/training-agi-in-secret-would-be-unsafe-and-unethical-1</link>
+      <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/6a1d9fadda4c_training_agi_in_secret_would_be_unsafe_and_unethic.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:23:17</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2034,8 +2151,9 @@ Topics covered:
       <pubDate>Thu, 03 Apr 2025 16:23:44 +0000</pubDate>
       <guid>TpSFoqoG2M5MAAesg</guid>
       <link>https://www.lesswrong.com/posts/TpSFoqoG2M5MAAesg/ai-2027-what-superintelligence-looks-like-1</link>
+      <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/956f710ee004_ai_2027_what_superintelligence_looks_like.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:03:14</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2045,8 +2163,9 @@ Topics covered:
       <pubDate>Tue, 11 Mar 2025 02:17:21 +0000</pubDate>
       <guid>7wFdXj9oR8M9AiFht</guid>
       <link>https://www.lesswrong.com/posts/7wFdXj9oR8M9AiFht/openai-detecting-misbehavior-in-frontier-reasoning-models</link>
+      <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/71af94af83a9_openai_detecting_misbehavior_in_frontier_reasonin.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:08:11</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2056,8 +2175,9 @@ Topics covered:
       <pubDate>Wed, 15 Jan 2025 23:32:09 +0000</pubDate>
       <guid>Bunfwz6JsNd44kgLT</guid>
       <link>https://www.lesswrong.com/posts/Bunfwz6JsNd44kgLT/new-improved-multiple-choice-truthfulqa</link>
+      <itunes:author>Owain Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/be18640f6d79_new_improved_multiple-choice_truthfulqa.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:07:40</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2067,8 +2187,9 @@ Topics covered:
       <pubDate>Thu, 28 Mar 2024 02:34:21 +0000</pubDate>
       <guid>ZKksgfTxuxKhDfk4m</guid>
       <link>https://www.lesswrong.com/posts/ZKksgfTxuxKhDfk4m/how-do-llms-give-truthful-answers-a-discussion-of-llm-vs</link>
+      <itunes:author>Owain Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/040c943c4686_how_do_llms_give_truthful_answers_a_discussion_of.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:18:51</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2078,8 +2199,9 @@ Topics covered:
       <pubDate>Tue, 19 Dec 2023 19:14:26 +0000</pubDate>
       <guid>DR67cnvgCXw7CkXbd</guid>
       <link>https://www.lesswrong.com/posts/DR67cnvgCXw7CkXbd/paper-tell-don-t-show-declarative-facts-influence-how-llms</link>
+      <itunes:author>Owain Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e98db3d4899a_paper_tell_dont_show-_declarative_facts_influen.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:14:44</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2089,8 +2211,9 @@ Topics covered:
       <pubDate>Mon, 04 Sep 2023 12:54:20 +0000</pubDate>
       <guid>mLfPHv4QjmeQrsSva</guid>
       <link>https://www.lesswrong.com/posts/mLfPHv4QjmeQrsSva/paper-on-measuring-situational-awareness-in-llms</link>
+      <itunes:author>Owain Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/fef7a5852995_paper_on_measuring_situational_awareness_in_llms.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:12:03</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2100,8 +2223,9 @@ Topics covered:
       <pubDate>Fri, 01 Jul 2022 19:40:12 +0000</pubDate>
       <guid>ixiCECkFFguFcHWFa</guid>
       <link>https://www.lesswrong.com/posts/ixiCECkFFguFcHWFa/paper-forecasting-world-events-with-neural-nets</link>
+      <itunes:author>Owain Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/12b351aa4801_paper_forecasting_world_events_with_neural_nets.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:09:02</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2111,8 +2235,9 @@ Topics covered:
       <pubDate>Tue, 31 May 2022 13:27:17 +0000</pubDate>
       <guid>vbfAwZqKs84agyGWC</guid>
       <link>https://www.lesswrong.com/posts/vbfAwZqKs84agyGWC/paper-teaching-gpt3-to-express-uncertainty-in-words</link>
+      <itunes:author>Owain Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d1900582d82e_paper_teaching_gpt3_to_express_uncertainty_in_wor.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:08:41</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2122,8 +2247,9 @@ Topics covered:
       <pubDate>Sat, 26 Feb 2022 12:46:04 +0000</pubDate>
       <guid>yYkrbS5iAwdEQyynW</guid>
       <link>https://www.lesswrong.com/posts/yYkrbS5iAwdEQyynW/how-do-new-models-from-openai-deepmind-and-anthropic-perform</link>
+      <itunes:author>Owain Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0f8210208a56_how_do_new_models_from_openai_deepmind_and_anthro.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:26:29</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2133,8 +2259,9 @@ Topics covered:
       <pubDate>Tue, 25 Jan 2022 04:45:17 +0000</pubDate>
       <guid>qbHLGo5vu8HD3JqEM</guid>
       <link>https://www.lesswrong.com/posts/qbHLGo5vu8HD3JqEM/lives-of-the-cambridge-polymath-geniuses</link>
+      <itunes:author>Owain Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7204b47ff0d6_lives_of_the_cambridge_polymath_geniuses.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:06:03</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2144,8 +2271,9 @@ Topics covered:
       <pubDate>Sun, 28 Nov 2021 20:17:22 +0000</pubDate>
       <guid>DtcbfwSrcewFubjxp</guid>
       <link>https://www.lesswrong.com/posts/DtcbfwSrcewFubjxp/the-rationalists-of-the-1950s-and-before-also-called</link>
+      <itunes:author>Owain Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a1b6a9154fb2_the_rationalists_of_the_1950s_and_before_also_ca.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:00</itunes:duration>
+      <itunes:duration>00:07:31</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
