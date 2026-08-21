@@ -40,9 +40,8 @@ def test_replaces_a_podcast_blurb_with_the_post(fake_markdown):
 
     gain = enrich_entry(entry)
 
-    assert gain is not None
-    before, after = gain
-    assert after > before * 10
+    assert gain.replaced and gain.reason == "replaced"
+    assert gain.after > gain.before * 10
     assert "The full post." in entry.content
 
 
@@ -53,16 +52,35 @@ def test_leaves_a_complete_body_alone(fake_markdown):
     fake_markdown(body)
     entry = make_entry(f"<p>{body}</p>")
 
-    assert enrich_entry(entry) is None
+    gain = enrich_entry(entry)
+
+    assert not gain.replaced and gain.reason == "feed-complete"
     assert entry.content == f"<p>{body}</p>"
 
 
 def test_non_lesswrong_entry_is_untouched(fake_markdown):
     fake_markdown(None)
     entry = make_entry("<p>short</p>")
+    entry.link = "https://www.astralcodexten.com/p/something"
 
-    assert enrich_entry(entry) is None
+    gain = enrich_entry(entry)
+
+    # Not a failure: Scott Alexander's feed carries the post and there is no
+    # markdown to fetch. Reporting this as unreachable would cry wolf daily.
+    assert gain.reason == "not-lesswrong"
     assert entry.content == "<p>short</p>"
+
+
+def test_unreachable_markdown_is_distinguishable_from_a_complete_feed(fake_markdown):
+    # The case that ships a blurb as an episode. It must not look like the
+    # feed-complete case, which is the normal, fine outcome.
+    fake_markdown(None)
+    entry = make_entry("<p>Chapters: (01:16:32) The Incentives</p>")
+
+    gain = enrich_entry(entry)
+
+    assert gain.reason == "unreachable" and gain.is_failure
+    assert entry.content == "<p>Chapters: (01:16:32) The Incentives</p>"
 
 
 def test_markdown_tables_survive_as_html():

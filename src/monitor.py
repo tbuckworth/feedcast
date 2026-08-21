@@ -63,6 +63,24 @@ class FeedEntry:
     authors: list[str] = field(default_factory=list)
 
 
+def warn_if_dead(feed, name: str, url: str) -> bool:
+    """Say so when a feed returns nothing, and report True if it did.
+
+    feedparser never raises: a 404, a DNS failure or an HTML error page all
+    come back as a parsed feed with zero entries, so `except` blocks around it
+    are dead code. Without this check a source that dies is indistinguishable
+    from an author who simply did not post — which is how three of the news
+    sources went months contributing nothing.
+    """
+    if feed.entries:
+        return False
+    status = getattr(feed, "status", None)
+    reason = getattr(feed, "bozo_exception", None) or "no items"
+    print(f"  WARNING: {name} returned no entries "
+          f"(HTTP {status}) — {reason} <{url}>")
+    return True
+
+
 class FeedMonitor:
     """Monitors RSS feeds and tracks processed posts in SQLite."""
 
@@ -172,6 +190,7 @@ class FeedMonitor:
     def fetch_feed(self, url: str, feed_name: str, skip_patterns: list[str] | None = None) -> list[FeedEntry]:
         """Fetch and parse an RSS feed, returning new entries."""
         feed = feedparser.parse(url)
+        warn_if_dead(feed, feed_name, url)
         entries = []
 
         for entry in feed.entries:

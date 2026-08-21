@@ -81,29 +81,41 @@ def lesswrong_post_id(link: str) -> Optional[str]:
 
 
 @lru_cache(maxsize=128)
+def _graphql_markdown(post_id: str, host: str, timeout: float) -> Optional[str]:
+    """Fetch one post's markdown, raising on transport failure.
+
+    Raising rather than returning None is what makes the cache safe. lru_cache
+    stores return values and not exceptions, so a timeout or a 502 is retried
+    by the next caller, while a real "this post has no markdown" answer is
+    remembered. Caching the failure instead would be quietly destructive: the
+    maths filter runs first, so one flaky GraphQL call would poison the entry
+    for fulltext.py, the episode would be built from the 3% podcast blurb, and
+    marking it processed means it never gets another chance.
+    """
+    query = ('{post(input:{selector:{_id:"%s"}}){result{contents{markdown}}}}'
+             % post_id)
+    r = httpx.post(f"https://www.{host}/graphql", json={"query": query},
+                   timeout=timeout, headers=_UA)
+    r.raise_for_status()
+    data = r.json()
+    return (((data.get("data") or {}).get("post") or {})
+            .get("result", {}).get("contents", {}).get("markdown"))
+
+
 def fetch_lesswrong_markdown(link: str, timeout: float = 30.0) -> Optional[str]:
     """Fetch a post's markdown source, where the LaTeX survives.
 
     Returns None on any failure — a maths check is never worth failing a run
     over, and the caller falls back to scoring whatever text it already had.
-
-    Cached because two callers want the same document in one run: this module
-    scores it, and fulltext.py renders it when the feed only shipped an
-    excerpt. One post is one fetch.
+    Callers that need to tell "no markdown" from "fetch broke" should check
+    lesswrong_post_id() first and treat a None on a real post id as a failure.
     """
     post_id = lesswrong_post_id(link)
     if not post_id:
         return None
     host = "alignmentforum.org" if "alignmentforum" in link else "lesswrong.com"
-    query = ('{post(input:{selector:{_id:"%s"}}){result{contents{markdown}}}}'
-             % post_id)
     try:
-        r = httpx.post(f"https://www.{host}/graphql", json={"query": query},
-                       timeout=timeout, headers=_UA)
-        r.raise_for_status()
-        data = r.json()
-        return (((data.get("data") or {}).get("post") or {})
-                .get("result", {}).get("contents", {}).get("markdown"))
+        return _graphql_markdown(post_id, host, timeout)
     except Exception:
         return None
 

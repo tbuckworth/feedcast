@@ -6,7 +6,7 @@ from datetime import datetime, timedelta, timezone
 import feedparser
 
 from .llm import get_client, MODEL_STRONG
-from .monitor import FeedEntry
+from .monitor import FeedEntry, warn_if_dead
 
 
 class NewsAggregator:
@@ -24,6 +24,9 @@ class NewsAggregator:
         self.lookback_hours = lookback_hours
         self.recent_briefings = recent_briefings or []
         self.client = get_client()
+        # Sources that returned nothing this run. A dead feed reads as a slow
+        # news day, so the briefing silently narrows without anyone noticing.
+        self.dead_sources: list[str] = []
 
     async def fetch_all_sources(self) -> list[dict]:
         """Fetch all RSS sources in parallel, filtering to recent articles."""
@@ -31,6 +34,9 @@ class NewsAggregator:
 
         async def fetch_one(source: dict) -> list[dict]:
             feed = await asyncio.to_thread(feedparser.parse, source["url"])
+            if warn_if_dead(feed, source["name"], source["url"]):
+                self.dead_sources.append(source["name"])
+                return []
             articles = []
             for entry in feed.entries:
                 published = None
