@@ -109,6 +109,15 @@ class NewsAggregator:
             user_message_parts.append("---")
             user_message_parts.append("")
 
+        # The prompt tells the model to open with "[today's date]" and never
+        # says what today is, so it inferred one from the articles and got it
+        # wrong: the briefing filed on 2026-08-21 announced itself as
+        # "August twenty-second". State the date.
+        user_message_parts.insert(
+            0, f"Today is {datetime.now().strftime('%A, %d %B %Y')}. "
+               f"Use this date when you open the briefing, not a date taken "
+               f"from any article.")
+        user_message_parts.insert(1, "")
         user_message_parts.append("## Today's articles:")
         user_message_parts.append(formatted_articles)
         user_message = "\n".join(user_message_parts)

@@ -188,6 +188,17 @@ class FeedMonitor:
             )
             conn.commit()
 
+    def set_bullets(self, entry_id: str, bullets: list[str]) -> None:
+        """Attach a digest to an existing row without touching anything else.
+
+        mark_processed would work but rewrites processed_at, which would make a
+        backfilled old episode look like it was published today.
+        """
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("UPDATE processed_posts SET bullets = ? WHERE id = ?",
+                         (json.dumps(bullets) if bullets else "", entry_id))
+            conn.commit()
+
     def get_processed_entries(self) -> list[dict]:
         """Get all processed entries."""
         with sqlite3.connect(self.db_path) as conn:
