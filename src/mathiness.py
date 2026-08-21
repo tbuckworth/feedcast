@@ -15,6 +15,7 @@ The GraphQL `contents{markdown}` field preserves the LaTeX.
 
 import re
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Optional
 
 import httpx
@@ -79,11 +80,16 @@ def lesswrong_post_id(link: str) -> Optional[str]:
     return m.group(1) if m else None
 
 
+@lru_cache(maxsize=128)
 def fetch_lesswrong_markdown(link: str, timeout: float = 30.0) -> Optional[str]:
     """Fetch a post's markdown source, where the LaTeX survives.
 
     Returns None on any failure — a maths check is never worth failing a run
     over, and the caller falls back to scoring whatever text it already had.
+
+    Cached because two callers want the same document in one run: this module
+    scores it, and fulltext.py renders it when the feed only shipped an
+    excerpt. One post is one fetch.
     """
     post_id = lesswrong_post_id(link)
     if not post_id:

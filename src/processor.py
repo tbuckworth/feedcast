@@ -10,6 +10,7 @@ from .llm import get_client, MODEL_STRONG, MODEL_CHEAP
 from .monitor import FeedEntry
 
 AUTO_VERBATIM_LIMIT = 24000  # ~25 min of audio at ~0.063 sec/char
+MAX_PROMPT_CHARS = 400000    # ~100k tokens; a cost ceiling, not a context limit
 
 
 class ContentProcessor:
@@ -114,10 +115,17 @@ Published: {entry.published.strftime("%Y-%m-%d")}
 Content:
 {clean_content}"""
 
-        # Truncate if too long — the models handle far more, but stay conservative
-        max_chars = 100000
-        if len(user_message) > max_chars:
-            user_message = user_message[:max_chars] + "\n\n[Content truncated due to length]"
+        # A ceiling, not a working limit. The writer model holds a million tokens
+        # and the longest post we see is a Zvi weekly at ~100,000 characters
+        # (~25,000 tokens), so this should never bind — but an unbounded prompt
+        # is an unbounded bill. Say so when it does bind: a truncated summary is
+        # exactly the failure this module was just fixed for, and it must not be
+        # able to happen again in silence.
+        if len(user_message) > MAX_PROMPT_CHARS:
+            print(f"    WARNING: content truncated for the summariser "
+                  f"({len(user_message):,} > {MAX_PROMPT_CHARS:,} chars) — "
+                  f"the summary will not cover the whole post")
+            user_message = user_message[:MAX_PROMPT_CHARS] + "\n\n[Content truncated due to length]"
 
         response = await self.client.chat.completions.create(
             model=MODEL_STRONG,
