@@ -178,17 +178,25 @@ def test_transient_fetch_failure_is_not_cached(monkeypatch):
     """
     from src import mathiness
 
+    # Patch the transport, not _graphql_markdown itself — replacing the cached
+    # function is exactly the mistake that would let this test pass with the
+    # cache back on the failure path.
     mathiness._graphql_markdown.cache_clear()
     link = "https://www.lesswrong.com/posts/AAAAAAAAAAAAAAAAA/x"
     calls = []
 
-    def flaky(post_id, host, timeout):
-        calls.append(post_id)
+    def flaky(url, json, timeout, headers):
+        calls.append(url)
         if len(calls) == 1:
             raise httpx.ReadTimeout("boom")
-        return "$x = 1$"
 
-    monkeypatch.setattr(mathiness, "_graphql_markdown", flaky)
+        class R:
+            def raise_for_status(self): pass
+            def json(self): return {"data": {"post": {"result": {"contents": {"markdown": "$x = 1$"}}}}}
+
+        return R()
+
+    monkeypatch.setattr(mathiness.httpx, "post", flaky)
 
     assert mathiness.fetch_lesswrong_markdown(link) is None
     assert mathiness.fetch_lesswrong_markdown(link) == "$x = 1$"
@@ -216,3 +224,37 @@ def test_successful_fetch_is_cached(monkeypatch):
     assert mathiness.fetch_lesswrong_markdown(link) == "hi"
     assert mathiness.fetch_lesswrong_markdown(link) == "hi"
     assert len(calls) == 1
+
+
+@pytest.mark.parametrize("payload", [
+    {"data": {"post": {"result": None}}},
+    {"data": {"post": {"result": {"contents": None}}}},
+    {"data": {"post": None}},
+])
+def test_graphql_nulls_are_a_permanent_answer_not_a_crash(monkeypatch, payload):
+    """A deleted or draft post answers with null, not a missing key.
+
+    .get("result", {}) returns that null and the chained .get() raises, which
+    the caller swallows as None. The post then looks unreachable — refetched
+    every run, and reported to the user as a transient failure.
+    """
+    from src import mathiness
+
+    mathiness._graphql_markdown.cache_clear()
+    calls = []
+
+    def fake_post(url, json, timeout, headers):
+        calls.append(url)
+
+        class R:
+            def raise_for_status(self): pass
+            def json(self): return payload
+
+        return R()
+
+    monkeypatch.setattr(mathiness.httpx, "post", fake_post)
+    link = "https://www.lesswrong.com/posts/CCCCCCCCCCCCCCCCC/gone"
+
+    assert mathiness.fetch_lesswrong_markdown(link) is None
+    assert mathiness.fetch_lesswrong_markdown(link) is None
+    assert len(calls) == 1, "a permanent null must be cached, not retried"

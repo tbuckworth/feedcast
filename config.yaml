@@ -123,12 +123,12 @@ news_briefing:
 
   sources:
     - { name: "BBC World", url: "https://feeds.bbci.co.uk/news/world/rss.xml", category: "geopolitics" }
-    - { name: "Reuters World", url: "https://feeds.reuters.com/Reuters/worldNews", category: "geopolitics" }
-    - { name: "Reuters Business", url: "https://feeds.reuters.com/reuters/businessNews", category: "economics" }
+    - { name: "Guardian World", url: "https://www.theguardian.com/world/rss", category: "geopolitics" }
+    - { name: "Guardian Business", url: "https://www.theguardian.com/business/rss", category: "economics" }
     - { name: "Ars Technica", url: "https://feeds.arstechnica.com/arstechnica/index", category: "technology" }
     - { name: "TechCrunch", url: "https://techcrunch.com/feed/", category: "technology" }
     - { name: "The Verge AI", url: "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml", category: "ai_news" }
     - { name: "VentureBeat AI", url: "https://venturebeat.com/category/ai/feed/", category: "ai_news" }
     - { name: "Alignment Forum", url: "https://www.alignmentforum.org/feed.xml?view=frontpage-rss", category: "ai_safety" }
     - { name: "OpenAI Blog", url: "https://openai.com/blog/rss.xml", category: "ai_labs" }
-    - { name: "Anthropic News", url: "https://www.anthropic.com/rss.xml", category: "ai_labs" }
+    - { name: "Import AI", url: "https://jack-clark.net/feed/", category: "ai_labs" }

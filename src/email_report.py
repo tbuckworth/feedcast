@@ -60,6 +60,7 @@ class RunReport:
     recent: list[ReportEpisode] = field(default_factory=list)
     failures: list[tuple[str, str]] = field(default_factory=list)
     linked: list[LinkedPost] = field(default_factory=list)
+    dead_sources: list[str] = field(default_factory=list)
     feed_url: str = ""
     site_url: str = ""
     total_in_feed: int = 0
@@ -153,6 +154,17 @@ def build_html(report: RunReport, when: datetime) -> str:
         )
         parts.append(section("Failed", rows))
 
+    if report.dead_sources:
+        # Worth the space even though nothing broke visibly: a source that 404s
+        # produces an empty feed, not an error, so the only symptom is a
+        # briefing that quietly gets narrower.
+        rows = "".join(
+            f'<tr><td style="padding:8px 0;border-bottom:1px solid {RULE};'
+            f'font-size:13px;color:#a33;">{escape(name)}</td></tr>'
+            for name in report.dead_sources
+        )
+        parts.append(section("Sources that returned nothing", rows))
+
     if report.linked:
         def _linked_row(post: LinkedPost) -> str:
             title = (f'<a href="{escape(post.link, quote=True)}" '
@@ -239,6 +251,9 @@ def build_text(report: RunReport, when: datetime) -> str:
     if report.failures:
         lines.append("Failed:")
         lines += [f"  - {t}: {err}" for t, err in report.failures] + [""]
+    if report.dead_sources:
+        lines.append("Sources that returned nothing:")
+        lines += [f"  - {n}" for n in report.dead_sources] + [""]
     if report.linked:
         lines.append("Linked, not narrated (too mathematical for audio):")
         for p in report.linked:

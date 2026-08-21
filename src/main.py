@@ -257,6 +257,7 @@ async def async_main(config_path: Path | None = None) -> None:
                 recent_briefings=recent_briefings,
             )
             briefing_entry = await aggregator.generate_briefing()
+            dead_sources += aggregator.dead_sources
             if briefing_entry and not monitor.is_processed(briefing_entry.id):
                 entries_to_process.insert(0, (briefing_entry, "verbatim", config.default_prompt))
             elif briefing_entry:
@@ -268,6 +269,7 @@ async def async_main(config_path: Path | None = None) -> None:
     # reprocessed post would re-insert it with a NULL audio_file and silently
     # drop an already-published episode out of feed.xml, unrecoverably.
     maths_skipped: list[tuple[FeedEntry, MathsVerdict]] = []
+    dead_sources: list[str] = list(monitor.dead_feeds)
     if (config.maths_filter.enabled and not inject_url and not reprocess_entry
             and entries_to_process):
         print(f"\nChecking {len(entries_to_process)} entries for maths density...")
@@ -388,10 +390,10 @@ async def async_main(config_path: Path | None = None) -> None:
     print(f"  Generated feed with {len(episodes)} episodes: {feed_path}")
 
     # Email the run report. Skipped silently when the SMTP vars are unset.
-    if new_entry_ids or failures or maths_skipped or _email_always():
+    if new_entry_ids or failures or maths_skipped or dead_sources or _email_always():
         report = _build_run_report(
             episodes, db_entries, new_entry_ids, failures, config.podcast.base_url,
-            maths_skipped,
+            maths_skipped, dead_sources,
         )
         send_report(report)
     else:
@@ -415,6 +417,7 @@ def _build_run_report(
     episodes: list[Episode], db_entries: list[dict], new_entry_ids: set[str],
     failures: list[tuple[str, str]], base_url: str,
     maths_skipped: list[tuple[FeedEntry, MathsVerdict]] | None = None,
+    dead_sources: list[str] | None = None,
 ) -> RunReport:
     """Assemble the emailed report from this run's episodes and the feed."""
     db_by_id = {d["id"]: d for d in db_entries}
@@ -449,6 +452,7 @@ def _build_run_report(
                        link=e.link, maths_score=v.score, source=v.source)
             for e, v in (maths_skipped or [])
         ],
+        dead_sources=sorted(set(dead_sources or [])),
         feed_url=f"{base_url}/feed.xml",
         site_url=base_url,
         total_in_feed=len(episodes),
