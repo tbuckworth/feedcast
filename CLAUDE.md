@@ -50,7 +50,8 @@ The pipeline runs in three async phases orchestrated by `src/main.py`:
 - **`src/normalizer.py`** — `TextNormalizer`: Gemini 3 Flash-powered text normalization for TTS. Converts numbers, dates, percentages, currency, abbreviations, and special characters to spoken form. Handles long texts by splitting into paragraph batches.
 - **`src/audio.py`** — `AudioGenerator`: Voice sample upload to DeepInfra (fresh each session), async TTS with retry/backoff for 429s, ffmpeg concatenation to MP3. Voice sample: `voice_samples/derek_perkins.wav`.
 - **`src/feed.py`** — `FeedGenerator`: RSS 2.0 XML generation with iTunes namespace tags. Episode durations come from `ffprobe`. Item descriptions and `<itunes:author>` carry the post's author(s).
-- **`src/email_report.py`** — `send_report()`: HTML + plain-text run report emailed over SMTP when the pipeline finishes. Covers the day's news briefing in full, each new episode with author, source link and audio link, any failures, any source that returned nothing (`dead_sources` — a 404 feed produces an empty parse, not an error, so this is the only symptom), and the past week's other episodes. Silently skipped when the SMTP env vars are unset, and never raises.
+- **`src/digest.py`** — `safe_bullets()`: a 3-6 bullet digest of each episode for the email. Opus 4.6, one call per episode, fired concurrently with TTS in `process_entry` so it costs no wall-clock. Takes the spoken script *before* normalisation, because bullets are read: they want "45%", not "forty-five percent". Never raises — a failed digest logs and the episode ships without one. Stored as JSON in `processed_posts.bullets`.
+- **`src/email_report.py`** — `send_report()`: HTML + plain-text run report emailed over SMTP when the pipeline finishes. Covers the day's news briefing as bullets (falling back to the full text if the digest failed), each new episode with its bullet digest, author, source link and audio link, any failures, any source that returned nothing (`dead_sources` — a 404 feed produces an empty parse, not an error, so this is the only symptom), and the past week's other episodes. Silently skipped when the SMTP env vars are unset, and never raises.
 - **`src/news.py`** — `NewsAggregator`: Parallel RSS fetching of news sources, article filtering by recency (configurable lookback), Opus 4.6-powered synthesis into a daily briefing. Produces a date-keyed `FeedEntry` for idempotent daily processing. Accepts recent briefing context for cross-day dedup.
 
 ### Configuration
@@ -110,7 +111,7 @@ RSS feeds → feedparser → skip_patterns filter → new entries (SQLite dedup)
     → TTS normalization (numbers/dates/symbols → spoken form via Gemini 2.5 Flash)
     → text chunks (≤500 chars, sentence boundaries)
     → DeepInfra TTS per chunk (voice-cloned WAVs)
-    → ffmpeg concat → MP3
+    → ffmpeg concat → MP3   (bullet digest runs in parallel, for the email)
     → SQLite mark processed
     → RSS XML feed generation → GitHub Pages
 
