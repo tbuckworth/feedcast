@@ -185,11 +185,15 @@ def build_html(report: RunReport, when: datetime) -> str:
             # The separator stays outside escape(); escaping it yields "&amp;middot;",
             # which renders as literal text in the mail client.
             who = " &middot; ".join(escape(b) for b in (post.author, post.feed_name) if b)
+            # No score means the verdict predates it being recorded. Say
+            # nothing rather than print a zero that reads as "no maths at all".
+            score = (f' &middot; {post.maths_score:g} maths matches per 1000 words'
+                     if post.maths_score > 0 else "")
             return (
                 f'<tr><td style="padding:13px 0;border-bottom:1px solid {RULE};">'
                 f'<div style="font-size:15px;font-weight:600;line-height:1.35;">{title}</div>'
                 f'<div style="font-size:12px;color:{MUTED};margin-top:4px;">{who}'
-                f' &middot; {post.maths_score:g} maths matches per 1000 words</div>'
+                f'{score}</div>'
                 f'<div style="margin-top:9px;">{_btn(post.link, "Read it")}</div>'
                 "</td></tr>"
             )
@@ -271,8 +275,8 @@ def build_text(report: RunReport, when: datetime) -> str:
     if report.linked:
         lines.append("Linked, not narrated (too mathematical for audio):")
         for p in report.linked:
-            lines.append(f"  - {p.title} ({p.author or p.feed_name}) "
-                         f"[{p.maths_score:g}/1k]")
+            score = f" [{p.maths_score:g}/1k]" if p.maths_score > 0 else ""
+            lines.append(f"  - {p.title} ({p.author or p.feed_name}){score}")
             if p.link:
                 lines.append(f"    {p.link}")
         lines.append("")

@@ -133,6 +133,14 @@ class FeedMonitor:
                 conn.execute("ALTER TABLE processed_posts ADD COLUMN bullets TEXT DEFAULT ''")
             except sqlite3.OperationalError:
                 pass  # Column already exists
+            # Migration: the maths verdict that caused a post to be linked
+            # rather than narrated, as JSON. Recorded at the moment of the
+            # decision so a later report states what was decided, rather than
+            # re-deriving a score that can disagree with it.
+            try:
+                conn.execute("ALTER TABLE processed_posts ADD COLUMN maths TEXT DEFAULT ''")
+            except sqlite3.OperationalError:
+                pass  # Column already exists
             conn.commit()
 
     def is_processed(self, entry_id: str) -> bool:
@@ -163,15 +171,15 @@ class FeedMonitor:
 
     def mark_processed(
         self, entry: FeedEntry, audio_file: Optional[str] = None,
-        content: Optional[str] = None,
+        content: Optional[str] = None, maths: Optional[dict] = None,
     ) -> None:
         """Mark a post as processed."""
         with sqlite3.connect(self.db_path) as conn:
             conn.execute(
                 """
                 INSERT OR REPLACE INTO processed_posts
-                (id, feed_name, title, link, published, processed_at, audio_file, content, author, bullets)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (id, feed_name, title, link, published, processed_at, audio_file, content, author, bullets, maths)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     entry.id,
@@ -184,6 +192,7 @@ class FeedMonitor:
                     content or "",
                     entry.author or "",
                     json.dumps(entry.bullets) if entry.bullets else "",
+                    json.dumps(maths) if maths else "",
                 ),
             )
             conn.commit()
