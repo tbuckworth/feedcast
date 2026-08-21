@@ -2,6 +2,7 @@
 
 import asyncio
 import hashlib
+import json
 import os
 import socket
 from datetime import datetime, timedelta
@@ -13,6 +14,7 @@ import yaml
 from pydantic import BaseModel
 
 from .audio import AudioGenerator
+from .digest import safe_bullets
 from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
 from .extractor import ExtractionError, url_to_feed_entry
 from .feed import Episode, FeedGenerator, PodcastConfig
@@ -116,14 +118,32 @@ async def process_entry(
     print(f"\n  Processing: {entry.title}")
     processed_text = await processor.process(entry, mode, prompt, title=entry.title)
     print(f"    Processed text: {len(processed_text)} chars")
+
+    # Digest the script BEFORE normalisation — bullets are read, so they want
+    # "45%", not the "forty-five percent" a voice needs — and run it alongside
+    # the audio, which takes minutes to the digest's seconds. Free wall-clock.
+    digest_task = asyncio.create_task(
+        safe_bullets(processed_text,
+                     is_briefing=entry.id.startswith("news-briefing-"),
+                     label=entry.title)
+    )
+
     processed_text = await normalizer.normalize_for_tts(processed_text)
     print(f"    Normalized text: {len(processed_text)} chars")
 
     episode_id = generate_episode_id(entry.id)
-    audio_path = await audio_gen.generate_episode(
-        processed_text, audio_dir, episode_id, entry.title, http_client,
-    )
+    try:
+        audio_path = await audio_gen.generate_episode(
+            processed_text, audio_dir, episode_id, entry.title, http_client,
+        )
+    except BaseException:
+        # Do not leave the digest running into the next phase on a failed entry.
+        digest_task.cancel()
+        raise
     print(f"    Generated audio: {audio_path.name}")
+
+    entry.bullets = await digest_task
+    print(f"    Digest: {len(entry.bullets)} bullets")
     return (entry, audio_path)
 
 
@@ -416,6 +436,15 @@ def _email_always() -> bool:
     return os.environ.get("FEEDCAST_EMAIL_ALWAYS", "").strip().lower() in ("true", "1", "yes")
 
 
+def _bullets_of(row: dict) -> list[str]:
+    """Read a stored digest. Rows written before the column existed have ''."""
+    try:
+        parsed = json.loads(row.get("bullets") or "[]")
+    except (ValueError, TypeError):
+        return []
+    return [b for b in parsed if isinstance(b, str)] if isinstance(parsed, list) else []
+
+
 def _build_run_report(
     episodes: list[Episode], db_entries: list[dict], new_entry_ids: set[str],
     failures: list[tuple[str, str]], base_url: str,
@@ -440,6 +469,7 @@ def _build_run_report(
             duration_seconds=ep.duration_seconds,
             is_briefing=is_briefing,
             briefing_text=(row.get("content") or "") if is_briefing else "",
+            bullets=_bullets_of(row),
         )
 
     ordered = sorted(episodes, key=lambda e: e.published, reverse=True)

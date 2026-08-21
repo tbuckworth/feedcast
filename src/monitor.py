@@ -1,5 +1,6 @@
 """RSS feed monitoring with SQLite tracking."""
 
+import json
 import re
 import sqlite3
 from dataclasses import dataclass, field
@@ -61,6 +62,8 @@ class FeedEntry:
     author: str
     feed_name: str
     authors: list[str] = field(default_factory=list)
+    # Read-not-heard digest for the email. Filled in during Phase 2.
+    bullets: list[str] = field(default_factory=list)
 
 
 def warn_if_dead(feed, name: str, url: str) -> bool:
@@ -124,6 +127,12 @@ class FeedMonitor:
                 conn.execute("ALTER TABLE processed_posts ADD COLUMN author TEXT DEFAULT ''")
             except sqlite3.OperationalError:
                 pass  # Column already exists
+            # Migration: bullet digest for the email, stored as a JSON array.
+            # Older rows keep '' and simply render without bullets.
+            try:
+                conn.execute("ALTER TABLE processed_posts ADD COLUMN bullets TEXT DEFAULT ''")
+            except sqlite3.OperationalError:
+                pass  # Column already exists
             conn.commit()
 
     def is_processed(self, entry_id: str) -> bool:
@@ -161,8 +170,8 @@ class FeedMonitor:
             conn.execute(
                 """
                 INSERT OR REPLACE INTO processed_posts
-                (id, feed_name, title, link, published, processed_at, audio_file, content, author)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (id, feed_name, title, link, published, processed_at, audio_file, content, author, bullets)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     entry.id,
@@ -174,6 +183,7 @@ class FeedMonitor:
                     audio_file,
                     content or "",
                     entry.author or "",
+                    json.dumps(entry.bullets) if entry.bullets else "",
                 ),
             )
             conn.commit()

@@ -38,6 +38,7 @@ class ReportEpisode:
     duration_seconds: int
     is_briefing: bool = False
     briefing_text: str = ""
+    bullets: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -108,7 +109,18 @@ def _episode_html(ep: ReportEpisode) -> str:
     )
     meta = " &middot; ".join(escape(bit) for bit in _meta_bits(ep))
     body = ""
-    if ep.is_briefing and ep.briefing_text:
+    if ep.bullets:
+        items = "".join(
+            f'<li style="margin:0 0 7px 0;font-size:14px;line-height:1.5;color:{INK};">'
+            f"{escape(b)}</li>"
+            for b in ep.bullets
+        )
+        # Outlook ignores list-style padding on <ul>, hence the margin as well.
+        body = (f'<ul style="margin:12px 0 4px 0;padding-left:20px;'
+                f'margin-left:0;">{items}</ul>')
+    elif ep.is_briefing and ep.briefing_text:
+        # The digest failed. The whole briefing is worse than bullets but far
+        # better than an empty section where the day's news should be.
         paras = "".join(
             f'<p style="margin:0 0 11px 0;font-size:14px;line-height:1.55;color:{INK};">{escape(p.strip())}</p>'
             for p in ep.briefing_text.split("\n\n") if p.strip()
@@ -245,7 +257,9 @@ def build_text(report: RunReport, when: datetime) -> str:
             lines.append(f"  Source: {ep.link}")
         if ep.audio_url:
             lines.append(f"  Audio:  {ep.audio_url}")
-        if ep.is_briefing and ep.briefing_text:
+        if ep.bullets:
+            lines += ["", *(f"  - {b}" for b in ep.bullets)]
+        elif ep.is_briefing and ep.briefing_text:
             lines += ["", *(f"  {p.strip()}" for p in ep.briefing_text.split("\n\n") if p.strip())]
         lines.append("")
     if report.failures:
