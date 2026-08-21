@@ -190,7 +190,32 @@ async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> None:
         monitor.set_bullets(row["id"], bullets)
         print(f"    {len(bullets)} bullets: {row['title'][:56]}")
 
-    await asyncio.gather(*[one(r) for r in todo], return_exceptions=True)
+    results = await asyncio.gather(*[one(r) for r in todo], return_exceptions=True)
+    for row, result in zip(todo, results):
+        # safe_bullets catches its own API failures; anything arriving here is
+        # something else — a malformed published date, say — and would
+        # otherwise ship a bulletless episode on a run reporting success.
+        if isinstance(result, BaseException):
+            print(f"    Backfill failed for {row['title'][:56]}: "
+                  f"{type(result).__name__}: {result}")
+
+
+def _stored_verdict(row: dict) -> MathsVerdict:
+    """The maths verdict recorded when the post was linked.
+
+    Rows written before the column existed have nothing stored. Those report a
+    zero score, which the email renders as "linked, not narrated" with no
+    number — honest about not knowing, rather than inventing a figure.
+    """
+    try:
+        data = json.loads(row.get("maths") or "null")
+    except (ValueError, TypeError):
+        data = None
+    if not isinstance(data, dict):
+        return MathsVerdict(is_heavy=True, score=0.0, hits=0, source="unrecorded")
+    return MathsVerdict(is_heavy=True, score=float(data.get("score") or 0.0),
+                        hits=int(data.get("hits") or 0),
+                        source=str(data.get("source") or "unrecorded"))
 
 
 async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
@@ -214,7 +239,12 @@ async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
     db_entries = monitor.get_processed_entries()   # reread, now with bullets
 
     # A row with no audio is a post the maths filter linked instead of
-    # narrating. Rescore it so the email can say why, the same as a live run.
+    # narrating. Report the verdict that was recorded at the time, not a fresh
+    # one: re-deriving it can disagree with the decision it is explaining. If
+    # the GraphQL fetch fails during a resend, assess() silently falls back to
+    # scoring the RSS body, whose maths LessWrong strips — so the email would
+    # print a low score as the reason a post was dropped for being too
+    # mathematical.
     linked: list[tuple[FeedEntry, MathsVerdict]] = []
     for row in todays:
         if row["audio_file"]:
@@ -225,9 +255,7 @@ async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
             published=datetime.fromisoformat(row["published"]),
             author=row["author"] or row["feed_name"],
         )
-        verdict = await asyncio.to_thread(
-            assess, entry.link, entry.content, config.maths_filter.threshold_per_1k)
-        linked.append((entry, verdict))
+        linked.append((entry, _stored_verdict(row)))
 
     transcript_dir = output_dir / "transcripts"
     episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir, transcript_dir)
@@ -487,8 +515,11 @@ async def async_main(config_path: Path | None = None) -> None:
     # Record the maths-skipped posts with no audio file. This dedups them so they
     # are not re-detected daily, and the feed generator already skips any entry
     # without audio, so they never appear as a broken episode.
-    for entry, _verdict in maths_skipped:
-        monitor.mark_processed(entry, None, content=entry.content)
+    for entry, verdict in maths_skipped:
+        monitor.mark_processed(
+            entry, None, content=entry.content,
+            maths={"score": verdict.score, "hits": verdict.hits,
+                   "source": verdict.source})
 
     # Cleanup old entries BEFORE generating the feed, so the feed never
     # references audio/transcripts that cleanup deletes in this same run
