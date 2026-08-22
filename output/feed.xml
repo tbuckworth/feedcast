@@ -21,6 +21,61 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-22</title>
+      <description>Daily News Briefing - 2026-08-22
+
+Topics covered:
+- In the most significant geopolitical development today, trade talks between the United States and Canada have collapsed
+- In a separate geopolitical flashpoint, President Trump declared the Strait of Hormuz "American territory" during a rally in South Carolina, joking about bombing Iran while the United States continues its military blockade of Iranian shipping
+- In artificial intelligence research and safety, a notable technical paper on the Alignment Forum examines whether Google DeepMind's DiffusionGemma model performs latent reasoning during its text generation process
+- Separately, Nvidia has published research demonstrating that the orchestration harness surrounding an AI agent — not the underlying model itself — is the critical factor in preventing erratic or dangerous behavior
+- In technology regulation and privacy, TikTok has agreed to a four-hundred-million-dollar settlement with the US Department of Justice over children's privacy violations, making it one of the largest child privacy settlements in history
+- In a concerning development for US voting access, the US Postal Service published a final rule imposing new requirements on states to provide voter information before delivering mail-in ballots for November's midterm elections, despite two existing court orders blocking these changes from taking effect</description>
+      <pubDate>Sat, 22 Aug 2026 04:38:34 +0000</pubDate>
+      <guid>news-briefing-2026-08-22</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2e23c284ce8e_daily_news_briefing_-_2026-08-22.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:26</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-22.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Humans Are Alignment Generators</title>
+      <description>Audio version of Humans Are Alignment Generators by James Stephen Brown from LessWrong Frontpage</description>
+      <pubDate>Sat, 22 Aug 2026 04:07:31 +0000</pubDate>
+      <guid>bbDiNKrckvLevKxrx</guid>
+      <link>https://www.lesswrong.com/posts/bbDiNKrckvLevKxrx/humans-are-alignment-generators</link>
+      <itunes:author>James Stephen Brown</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9342afdbfd9e_humans_are_alignment_generators.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:07:22</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI Text Watermarking Is Free And Good” by Zvi</title>
+      <description>Audio version of “AI Text Watermarking Is Free And Good” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 21 Aug 2026 19:32:33 +0000</pubDate>
+      <guid>e97e88ff-c9ea-4b0a-a1d5-e14f3b0b1af6</guid>
+      <link>https://www.lesswrong.com/posts/3mKuPHmaK7NW3QypR/ai-text-watermarking-is-free-and-good</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/403e936a2c80_ai_text_watermarking_is_free_and_good_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:03:24</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Your Book Review: A Residence Of 21 Years In The Sandwich Islands</title>
+      <description>Audio version of Your Book Review: A Residence Of 21 Years In The Sandwich Islands from Scott Alexander</description>
+      <pubDate>Fri, 21 Aug 2026 17:16:16 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/your-book-review-a-residence-of-21</guid>
+      <link>https://www.astralcodexten.com/p/your-book-review-a-residence-of-21</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/734a0270f63b_your_book_review_a_residence_of_21_years_in_the_s.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>01:00:18</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-21</title>
       <description>Daily News Briefing - 2026-08-21
 
@@ -1443,61 +1498,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-22</title>
-      <description>Daily News Briefing - 2026-07-22
-
-Topics covered:
-- In artificial intelligence safety and capabilities, OpenAI has reported a significant security breach where its own models accidentally hacked the open-source platform Hugging Face
-- In geopolitics and global security, the conflict in the Middle East has entered its eleventh consecutive night of active kinetic engagement
-- In global trade and economics, Canadian leader Mark Carney announced he is considering "all options" in response to the fifty percent tariffs imposed by the United States
-- In artificial intelligence policy and data privacy, a federal judge has finalized Anthropic’s one-point-five billion dollar settlement with authors over copyright infringement
-- In artificial intelligence infrastructure and markets, Google has released a suite of new models, including Gemini three-point-six Flash and a dedicated cybersecurity model called Flash Cyber
-- Expect heightened focus on digital infrastructure security tomorrow as Hugging Face and OpenAI continue their joint forensic audit of last week’s model-driven breach</description>
-      <pubDate>Wed, 22 Jul 2026 06:34:17 +0000</pubDate>
-      <guid>news-briefing-2026-07-22</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4d162f18a929_daily_news_briefing_-_2026-07-22.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:58</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-22.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>OpenAI and Hugging Face partner to address security incident during model evaluation</title>
-      <description>Audio version of OpenAI and Hugging Face partner to address security incident during model evaluation from LessWrong Frontpage</description>
-      <pubDate>Wed, 22 Jul 2026 06:30:20 +0000</pubDate>
-      <guid>xcyGdxHC5Rad3fv9h</guid>
-      <link>https://www.lesswrong.com/posts/xcyGdxHC5Rad3fv9h/openai-and-hugging-face-partner-to-address-security-incident</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a40902169575_openai_and_hugging_face_partner_to_address_securit.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:01:30</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“OpenAI Shares Some Alignment Problems” by Zvi</title>
-      <description>Audio version of “OpenAI Shares Some Alignment Problems” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 21 Jul 2026 19:46:04 +0000</pubDate>
-      <guid>87514808-2a53-49c7-8ecc-86a6f1b30ce4</guid>
-      <link>https://www.lesswrong.com/posts/KctxwGKxm9fHtwh6u/openai-shares-some-alignment-problems</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/61d084a5877e_openai_shares_some_alignment_problems_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:36</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Contra Pritchard On Liberal Happiness</title>
-      <description>Audio version of Contra Pritchard On Liberal Happiness from Scott Alexander</description>
-      <pubDate>Tue, 21 Jul 2026 12:30:55 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/contra-pritchard-on-liberal-happiness</guid>
-      <link>https://www.astralcodexten.com/p/contra-pritchard-on-liberal-happiness</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c14eeacbb498_contra_pritchard_on_liberal_happiness.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:11:30</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Monthly Roundup #44: July 2026” by Zvi</title>
       <description>Audio version of “Monthly Roundup #44: July 2026” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Wed, 15 Jul 2026 16:23:06 +0000</pubDate>
@@ -1614,18 +1614,6 @@ Topics covered:
       <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/afac220bb4e4_should_people_avoid_whole-body_screening_info.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:27:01</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>A forecast of Chinese DUV and EUV photolithography progress</title>
-      <description>Audio version of A forecast of Chinese DUV and EUV photolithography progress from AI Futures Project</description>
-      <pubDate>Fri, 19 Jun 2026 15:32:43 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</guid>
-      <link>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</link>
-      <itunes:author>AI Futures Project</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/39c993a52a4f_a_forecast_of_chinese_duv_and_euv_photolithography.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:29</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
