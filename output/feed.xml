@@ -21,6 +21,37 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-23</title>
+      <description>Daily News Briefing - 2026-08-23
+
+Topics covered:
+- The most significant AI safety story today comes from TechCrunch, which reports that a new study finds leading frontier AI laboratories still have few publicly documented plans for containing a rogue model
+- On AI capabilities, British AI lab Inherent, founded by DeepMind alumni, has released an agent called Faraday that reportedly outperformed both Anthropic and OpenAI systems at replicating scientific research papers
+- The US-Canada trade war remains the dominant economic story
+- In Middle East security, Iran's newly appointed head of its supreme national security council, hardliner Mohsen Rezaei, has issued a direct warning that any neighboring country joining US economic pressure campaigns against Tehran will be considered an "enemy." He also threatened American commercial interests in the region
+- In two other developments worth noting: a fur seal found dead at Beachport in South Australia has been confirmed as the first Australian mainland mammal fatality from the spreading H-five bird flu strain, with officials warning of "significant losses" to come
+- Looking ahead, expect markets Monday to react sharply to the now-confirmed US-Canada tariff escalation, while the AI safety community will likely press frontier labs for concrete answers on containment protocols in the wake of this week's revelations</description>
+      <pubDate>Sun, 23 Aug 2026 04:42:37 +0000</pubDate>
+      <guid>news-briefing-2026-08-23</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6b43350072d6_daily_news_briefing_-_2026-08-23.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:03:51</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-23.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Prompt Sufficiency: A Missive for the Managerial Class</title>
+      <description>Audio version of Prompt Sufficiency: A Missive for the Managerial Class by KAP from LessWrong Frontpage</description>
+      <pubDate>Sun, 23 Aug 2026 03:08:55 +0000</pubDate>
+      <guid>jDHc4oK4oPwfh6TcK</guid>
+      <link>https://www.lesswrong.com/posts/jDHc4oK4oPwfh6TcK/prompt-sufficiency-a-missive-for-the-managerial-class</link>
+      <itunes:author>KAP</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5ff529708ca2_prompt_sufficiency_a_missive_for_the_managerial_c.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:10:10</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-22</title>
       <description>Daily News Briefing - 2026-08-22
 
@@ -1455,45 +1486,14 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-23</title>
-      <description>Daily News Briefing - 2026-07-23
-
-Topics covered:
-- In artificial intelligence infrastructure and investments, AMD has committed up to five billion dollars to Anthropic in a massive hardware-software partnership
-- On the policy and security front, the United States Treasury is threatening sanctions following White House allegations that China’s Moonshot AI "distilled" its latest models from Anthropic’s proprietary "Fable" series
-- In energy and climate politics, nearly two hundred organizations, including major utility companies and data center developers, have signed the "Rate Payer Protection Pledge" introduced by the Trump administration
-- In geopolitics and regional security, the Red Sea remains a high-risk zone as Houthi rebels launched their first strikes on oil tankers since declaring a maritime embargo against Saudi Arabia
-- In consumer hardware and markets, Samsung has unveiled its first smart glasses, developed in collaboration with Google and Warby Parker
-- Expect a intensified debate in Washington tomorrow as the Treasury Department coordinates with the White House on the specific framework for sanctioning Chinese AI labs over intellectual property distillation</description>
-      <pubDate>Thu, 23 Jul 2026 06:34:54 +0000</pubDate>
-      <guid>news-briefing-2026-07-23</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/61aecf8f5521_daily_news_briefing_-_2026-07-23.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:52</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-23.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Get You a Model: If You're Not Paying, You're Missing 90% Of Improvements</title>
-      <description>Audio version of Get You a Model: If You're Not Paying, You're Missing 90% Of Improvements from LessWrong Frontpage</description>
-      <pubDate>Thu, 23 Jul 2026 04:16:38 +0000</pubDate>
-      <guid>kbFQKqLqpa7C4EBGL</guid>
-      <link>https://www.lesswrong.com/posts/kbFQKqLqpa7C4EBGL/get-you-a-model-if-you-re-not-paying-you-re-missing-90-of</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5a71ee4d4199_get_you_a_model_if_youre_not_paying_youre_miss.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:00:51</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“OpenAI Model Hacks Into HuggingFace During Cybersecurity Evaluation” by Zvi</title>
-      <description>Audio version of “OpenAI Model Hacks Into HuggingFace During Cybersecurity Evaluation” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 22 Jul 2026 19:32:46 +0000</pubDate>
-      <guid>e7525fe8-695d-4ed3-8545-20fc118fb96a</guid>
-      <link>https://www.lesswrong.com/posts/usptCfzEnYoNcsTd5/openai-model-hacks-into-huggingface-during-cybersecurity</link>
+      <title>“OpenAI Shares Some Alignment Problems” by Zvi</title>
+      <description>Audio version of “OpenAI Shares Some Alignment Problems” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 21 Jul 2026 19:46:04 +0000</pubDate>
+      <guid>87514808-2a53-49c7-8ecc-86a6f1b30ce4</guid>
+      <link>https://www.lesswrong.com/posts/KctxwGKxm9fHtwh6u/openai-shares-some-alignment-problems</link>
       <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3665464d2e61_openai_model_hacks_into_huggingface_during_cybers.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:53</itunes:duration>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/61d084a5877e_openai_shares_some_alignment_problems_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:03:23</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1614,6 +1614,18 @@ Topics covered:
       <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/afac220bb4e4_should_people_avoid_whole-body_screening_info.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:27:01</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>A forecast of Chinese DUV and EUV photolithography progress</title>
+      <description>Audio version of A forecast of Chinese DUV and EUV photolithography progress by Hamish Low from AI Futures Project</description>
+      <pubDate>Fri, 19 Jun 2026 15:32:43 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</guid>
+      <link>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</link>
+      <itunes:author>Hamish Low</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/39c993a52a4f_a_forecast_of_chinese_duv_and_euv_photolithography.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:03:54</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
