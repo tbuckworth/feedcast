@@ -150,7 +150,8 @@ class TestSendPath:
                 sent["msg"] = msg
 
         monkeypatch.setattr("smtplib.SMTP", FakeSMTP)
-        for var in ("SMTP_HOST", "SMTP_PORT", "SMTP_PASSWORD", "FEEDCAST_EMAIL_FROM"):
+        for var in ("SMTP_HOST", "SMTP_PORT", "SMTP_PASSWORD",
+                    "FEEDCAST_EMAIL_FROM", "FEEDCAST_EMAIL_BCC"):
             monkeypatch.delenv(var, raising=False)
         monkeypatch.setenv("FEEDCAST_EMAIL_TO", "reader@example.com")
         monkeypatch.setenv("SMTP_USER", "sender@example.com")
@@ -178,6 +179,23 @@ class TestSendPath:
 
         html = msg.get_body(("html",)).get_content()
         assert "Ada Lovelace" in html and "https://example.com/a.mp3" in html
+
+    def test_bcc_recipients_are_added(self, fake_smtp, monkeypatch):
+        """Extra readers are blind-copied, one address or several."""
+        from src.email_report import send_report
+        monkeypatch.setenv("FEEDCAST_EMAIL_BCC", "one@example.com, two@example.com")
+        assert send_report(self._report(), datetime(2026, 8, 19)) is True
+
+        msg = fake_smtp["msg"]
+        assert msg["To"] == "reader@example.com"
+        assert msg["Bcc"] == "one@example.com, two@example.com"
+
+    def test_blank_bcc_var_adds_no_header(self, fake_smtp, monkeypatch):
+        """An unset GitHub Actions secret arrives as '' — no empty Bcc header."""
+        from src.email_report import send_report
+        monkeypatch.setenv("FEEDCAST_EMAIL_BCC", "")
+        send_report(self._report(), datetime(2026, 8, 19))
+        assert fake_smtp["msg"]["Bcc"] is None
 
     def test_defaults_to_gmail_starttls(self, fake_smtp):
         from src.email_report import send_report
