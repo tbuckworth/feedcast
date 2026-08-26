@@ -288,20 +288,26 @@ def build_text(report: RunReport, when: datetime) -> str:
     return "\n".join(lines)
 
 
+def _addresses(raw: str) -> list[str]:
+    """Split a comma- or semicolon-separated address list, dropping blanks."""
+    return [a.strip() for a in raw.replace(";", ",").split(",") if a.strip()]
+
+
 def send_report(report: RunReport, when: datetime | None = None) -> bool:
     """Email the run report. Returns True if sent, False if skipped or failed.
 
     Never raises: a broken mailbox must not fail an otherwise-good run.
     """
     when = when or datetime.now()
-    to_addr = os.environ.get("FEEDCAST_EMAIL_TO", "").strip()
+    to_addrs = _addresses(os.environ.get("FEEDCAST_EMAIL_TO", ""))
+    bcc_addrs = _addresses(os.environ.get("FEEDCAST_EMAIL_BCC", ""))
     user = os.environ.get("SMTP_USER", "").strip()
     password = (
         os.environ.get("SMTP_PASSWORD", "")
         or os.environ.get("GMAIL_APP_PASSWORD", "")
     ).strip()
 
-    if not (to_addr and user and password):
+    if not (to_addrs and user and password):
         print("  Email report skipped (FEEDCAST_EMAIL_TO / SMTP_USER / SMTP_PASSWORD not set)")
         return False
 
@@ -329,7 +335,11 @@ def send_report(report: RunReport, when: datetime | None = None) -> bool:
         msg = EmailMessage()
         msg["Subject"] = subject
         msg["From"] = from_addr
-        msg["To"] = to_addr
+        msg["To"] = ", ".join(to_addrs)
+        # send_message delivers to the Bcc addresses but strips the header from
+        # the transmitted copy, so those recipients stay hidden from each other.
+        if bcc_addrs:
+            msg["Bcc"] = ", ".join(bcc_addrs)
         msg.set_content(build_text(report, when))
         msg.add_alternative(build_html(report, when), subtype="html")
 
@@ -344,7 +354,7 @@ def send_report(report: RunReport, when: datetime | None = None) -> bool:
                 srv.starttls(context=ssl.create_default_context())
                 srv.login(user, password)
                 srv.send_message(msg)
-        print(f"  Email report sent to {to_addr}")
+        print(f"  Email report sent to {', '.join(to_addrs + bcc_addrs)}")
         return True
     except Exception as e:
         print(f"  Email report failed: {type(e).__name__}: {e}")
