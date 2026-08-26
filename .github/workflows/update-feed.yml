@@ -112,6 +112,7 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           FEEDCAST_EMAIL_TO: ${{ secrets.FEEDCAST_EMAIL_TO }}
+          FEEDCAST_EMAIL_BCC: ${{ secrets.FEEDCAST_EMAIL_BCC }}
           FEEDCAST_EMAIL_ALWAYS: ${{ vars.FEEDCAST_EMAIL_ALWAYS }}
           VOICE_UPLOAD_DELAY_SECONDS: "5"
           SAVE_DEBUG_WAVS: "false"
