@@ -179,7 +179,7 @@ The pipeline sends notifications via [ntfy.sh](https://ntfy.sh) when injected UR
 
 ## CI/CD
 
-GitHub Actions workflow (`.github/workflows/update-feed.yml`) runs daily at 6am UTC:
+GitHub Actions workflow (`.github/workflows/update-feed.yml`) runs daily at 03:43 UTC:
 
 1. Fetches feeds, processes new entries, generates audio
 2. Commits results to the repo
@@ -192,6 +192,14 @@ GitHub Actions workflow (`.github/workflows/update-feed.yml`) runs daily at 6am 
 - `inject_mode` — auto/summarize/verbatim
 
 A concurrency group prevents race conditions between scheduled and on-demand runs.
+
+**Scheduled runs are best-effort.** GitHub delivers `schedule:` late under load —
+hours late on 27 and 28 Aug 2026 — and sometimes not at all. Two mitigations:
+the cron sits off the congested top of the hour, and `scripts/cron-backstop.sh`
+runs from the desktop crontab a couple of hours later, dispatching the workflow
+only when no run exists for that UTC day. A redundant dispatch is harmless: the
+concurrency group queues it, and a run with nothing new publishes nothing and
+sends no email.
 
 **GitHub Secrets required:**
 - `OPENROUTER_API_KEY`
