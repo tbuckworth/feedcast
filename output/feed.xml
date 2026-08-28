@@ -64,6 +64,30 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Do AI Models Want to Be Monitored? Measuring Monitorability Disposition in Large Reasoning Models</title>
+      <description>Audio version of Do AI Models Want to Be Monitored? Measuring Monitorability Disposition in Large Reasoning Models by Shahriar Golchin from LessWrong Frontpage</description>
+      <pubDate>Fri, 28 Aug 2026 10:01:09 +0000</pubDate>
+      <guid>pX8y8Lfrt8p5aRBC4</guid>
+      <link>https://www.lesswrong.com/posts/pX8y8Lfrt8p5aRBC4/do-ai-models-want-to-be-monitored-measuring-monitorability</link>
+      <itunes:author>Shahriar Golchin</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c64b7909aaaf_do_ai_models_want_to_be_monitored_measuring_monit.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:17:40</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #183: Pre Post Mortem” by Zvi</title>
+      <description>Audio version of “AI #183: Pre Post Mortem” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 27 Aug 2026 14:21:08 +0000</pubDate>
+      <guid>c135f3ae-a854-478b-8a39-9a2a69ce9e95</guid>
+      <link>https://www.lesswrong.com/posts/JaGWyjnqJzvSAuojc/ai-183-pre-post-mortem</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8f35b46fab2d_ai_183_pre_post_mortem_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:03:57</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-27</title>
       <description>Daily News Briefing - 2026-08-27
 
@@ -1659,6 +1683,18 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines</title>
+      <description>Audio version of If Mythos actually made Anthropic employees 4x more productive, I would radically shorten my timelines by ryan_greenblatt from Ryan Greenblatt</description>
+      <pubDate>Sat, 11 Apr 2026 00:38:52 +0000</pubDate>
+      <guid>Jga7PHMzfZf4fbdyo</guid>
+      <link>https://www.lesswrong.com/posts/Jga7PHMzfZf4fbdyo/if-mythos-actually-made-anthropic-employees-4x-more</link>
+      <itunes:author>ryan_greenblatt</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0aaf520ae940_if_mythos_actually_made_anthropic_employees_4x_mor.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:16:11</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Q1 2026 Timelines Update</title>
       <description>Audio version of Q1 2026 Timelines Update from Daniel Kokotajlo</description>
       <pubDate>Thu, 02 Apr 2026 22:23:54 +0000</pubDate>
@@ -1779,6 +1815,18 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>What Happens When Superhuman AIs Compete for Control?</title>
+      <description>Audio version of What Happens When Superhuman AIs Compete for Control? by Steven Veld from AI Futures Project</description>
+      <pubDate>Sun, 11 Jan 2026 14:02:41 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/what-happens-when-superhuman-ais</guid>
+      <link>https://blog.aifutures.org/p/what-happens-when-superhuman-ais</link>
+      <itunes:author>Steven Veld</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/04eb9263329e_what_happens_when_superhuman_ais_compete_for_contr.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:09</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>The inaugural Redwood Research podcast</title>
       <description>Audio version of The inaugural Redwood Research podcast by Buck from Buck Shlegeris</description>
       <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
@@ -1835,6 +1883,18 @@ Topics covered:
       <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/48759244faa2_how_an_ai_company_ceo_could_quietly_take_over_the.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:03:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Thinking Machines Tinker API is good news for AI control and security</title>
+      <description>Audio version of The Thinking Machines Tinker API is good news for AI control and security by Buck from Buck Shlegeris</description>
+      <pubDate>Thu, 09 Oct 2025 15:22:15 +0000</pubDate>
+      <guid>r68nCQK3veQtCdqGt</guid>
+      <link>https://www.lesswrong.com/posts/r68nCQK3veQtCdqGt/the-thinking-machines-tinker-api-is-good-news-for-ai-control</link>
+      <itunes:author>Buck</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/484b3eb83a9c_the_thinking_machines_tinker_api_is_good_news_for.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:13:11</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1919,6 +1979,18 @@ Topics covered:
       <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/feab7f530ca2_what_you_can_do_about_ai_2027.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:02:41</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>My pitch for the AI Village</title>
+      <description>Audio version of My pitch for the AI Village from Daniel Kokotajlo</description>
+      <pubDate>Tue, 24 Jun 2025 15:00:52 +0000</pubDate>
+      <guid>APfuz9hFz9d8SRETA</guid>
+      <link>https://www.lesswrong.com/posts/APfuz9hFz9d8SRETA/my-pitch-for-the-ai-village</link>
+      <itunes:author>Daniel Kokotajlo</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e1b5ebb4f741_my_pitch_for_the_ai_village.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:20:24</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2027,6 +2099,18 @@ Topics covered:
       <itunes:author>Owain_Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e98db3d4899a_paper_tell_dont_show-_declarative_facts_influen.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:14:39</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Paper: On measuring situational awareness in LLMs</title>
+      <description>Audio version of Paper: On measuring situational awareness in LLMs by Owain_Evans from Owain Evans</description>
+      <pubDate>Mon, 04 Sep 2023 12:54:20 +0000</pubDate>
+      <guid>mLfPHv4QjmeQrsSva</guid>
+      <link>https://www.lesswrong.com/posts/mLfPHv4QjmeQrsSva/paper-on-measuring-situational-awareness-in-llms</link>
+      <itunes:author>Owain_Evans</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fef7a5852995_paper_on_measuring_situational_awareness_in_llms.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:12:10</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
