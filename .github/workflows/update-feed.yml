@@ -2,7 +2,9 @@ name: Update Podcast Feed
 
 on:
   schedule:
-    - cron: '0 4 * * *'  # Daily at 4am UTC (5am BST)
+    # Off the top of the hour: GitHub's scheduler is most congested at :00 and
+    # silently drops fires there (missed entirely 2026-08-27 and 2026-08-28).
+    - cron: '43 3 * * *'  # Daily at 03:43 UTC (04:43 BST)
   workflow_dispatch:
     inputs:
       entry_url:
@@ -47,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     # Backstop: normal runs take 12-30 min. Without this the job inherits the
     # 6h GitHub default, so any network stall burns 6h of minutes (2026-08-19).
-    timeout-minutes: 75
+    timeout-minutes: 115
     steps:
       - uses: actions/checkout@v4
 
@@ -96,7 +98,9 @@ jobs:
         run: uv sync
 
       - name: Run pipeline
-        timeout-minutes: 50
+        # A backlog day (a late or skipped fire, so two days of posts at once)
+        # overran 50 min mid-TTS and threw the whole run away (2026-08-27).
+        timeout-minutes: 90
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           DEEPINFRA_API_KEY: ${{ secrets.DEEPINFRA_API_KEY }}
