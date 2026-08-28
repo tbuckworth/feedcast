@@ -21,6 +21,49 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-28</title>
+      <description>Daily News Briefing - 2026-08-28
+
+Topics covered:
+- The most significant AI story today is a federal judge's ruling that the Trump administration illegally retaliated against Anthropic by blacklisting the company from Pentagon contracts
+- In a related development, more than one hundred companies including OpenAI, Anthropic, and Google have jointly called for action to defend against rogue AI, advertising a new collaborative cybersecurity solution they say can address threats from autonomous AI systems
+- Separately, Ars Technica reports that a lawsuit alleges Elon Musk's xAI used both real and AI-generated child sexual abuse material to train its Grok models
+- On the US-Canada trade war, the situation continues to deteriorate
+- The Nepal-Tibet flood disaster has worsened significantly
+- On the AI infrastructure policy front, the Trump administration is facing industry backlash on two fronts</description>
+      <pubDate>Fri, 28 Aug 2026 16:29:26 +0000</pubDate>
+      <guid>news-briefing-2026-08-28</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/794690d7b4b8_daily_news_briefing_-_2026-08-28.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:57</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-28.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Value generalisation theory of change: the theory behind the approach</title>
+      <description>Audio version of Value generalisation theory of change: the theory behind the approach by Stuart_Armstrong from LessWrong Frontpage</description>
+      <pubDate>Fri, 28 Aug 2026 13:30:20 +0000</pubDate>
+      <guid>f79SNtqFD7SqJY2vf</guid>
+      <link>https://www.lesswrong.com/posts/f79SNtqFD7SqJY2vf/value-generalisation-theory-of-change-the-theory-behind-the</link>
+      <itunes:author>Stuart_Armstrong</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7f63960d8869_value_generalisation_theory_of_change_the_theory.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:22:44</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“OpenAI Offers Straight-Laced Postmortem Of The HuggingFace Hack” by Zvi</title>
+      <description>Audio version of “OpenAI Offers Straight-Laced Postmortem Of The HuggingFace Hack” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 28 Aug 2026 11:41:25 +0000</pubDate>
+      <guid>c011d8d7-8e9c-4b2f-8987-e5d74cb35a39</guid>
+      <link>https://www.lesswrong.com/posts/Khmh3ghqaGEpmpC9r/openai-offers-straight-laced-postmortem-of-the-huggingface</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3dad6d2ce92b_openai_offers_straight-laced_postmortem_of_the_hu.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:03:14</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-27</title>
       <description>Daily News Briefing - 2026-08-27
 
@@ -1376,61 +1419,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-29</title>
-      <description>Daily News Briefing - 2026-07-29
-
-Topics covered:
-- In artificial intelligence policy and safety, a significant coalition of industry leaders from OpenAI, Anthropic, Google, and Meta have signed a joint statement urging the United States government to implement global coordinated governance for frontier AI
-- In AI capabilities and hardware, the "RAM-ageddon" memory chip shortage is fundamentally restructuring the consumer market
-- In economics and infrastructure, Wall Street is showing signs of "AI fatigue" as capital expenditure projections reach staggering heights
-- In geopolitics and global security, the brief diplomatic "pause" has shattered
-- In regional news and legal developments, Japan is in a "race against time" to rescue survivors after a powerful earthquake struck the island of Kyushu, killing at least thirteen people
-- Expect a localized market reaction tomorrow as Philadelphia suburbs begin enforcing a forty-three-point demand list for new data center construction, potentially setting a new national precedent for how local governments tax AI infrastructure</description>
-      <pubDate>Wed, 29 Jul 2026 06:37:19 +0000</pubDate>
-      <guid>news-briefing-2026-07-29</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/58c4b9379f28_daily_news_briefing_-_2026-07-29.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:04:18</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-29.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Isn't it a threat to reject unfair offers in the Ultimatum Game?</title>
-      <description>Audio version of Isn't it a threat to reject unfair offers in the Ultimatum Game? from LessWrong Frontpage</description>
-      <pubDate>Wed, 29 Jul 2026 02:39:56 +0000</pubDate>
-      <guid>bAKMEv5umocCXJkpM</guid>
-      <link>https://www.lesswrong.com/posts/bAKMEv5umocCXJkpM/isn-t-it-a-threat-to-reject-unfair-offers-in-the-ultimatum</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/13139a3b27a1_isnt_it_a_threat_to_reject_unfair_offers_in_the_u.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:15</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi</title>
-      <description>Audio version of “Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 28 Jul 2026 18:13:05 +0000</pubDate>
-      <guid>abfafc35-0084-4e6d-9905-6196ad4e2228</guid>
-      <link>https://www.lesswrong.com/posts/Pj4Eewb4KXvXFCcGv/claude-opus-5-is-highly-capable-but-is-no-mythos</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f0d231bc1c2f_claude_opus_5_is_highly_capable_but_is_no_mythos.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:56</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Psychology Research Is Mostly Fine</title>
-      <description>Audio version of Psychology Research Is Mostly Fine from Scott Alexander</description>
-      <pubDate>Tue, 28 Jul 2026 11:05:46 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/psychology-research-is-mostly-fine</guid>
-      <link>https://www.astralcodexten.com/p/psychology-research-is-mostly-fine</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/aaf443012ae5_psychology_research_is_mostly_fine.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:07:53</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>The OpenAI/Huggingface incident | Redwood Research podcast episode 2</title>
       <description>Audio version of The OpenAI/Huggingface incident | Redwood Research podcast episode 2 by ryan_greenblatt from Ryan Greenblatt</description>
       <pubDate>Thu, 23 Jul 2026 17:56:49 +0000</pubDate>
@@ -1659,14 +1647,14 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>AIs can now often do massive easy-to-verify SWE tasks and I've updated towards shorter timelines</title>
-      <description>Audio version of AIs can now often do massive easy-to-verify SWE tasks and I've updated towards shorter timelines from Ryan Greenblatt</description>
-      <pubDate>Mon, 06 Apr 2026 16:01:56 +0000</pubDate>
-      <guid>dKpC6wHFqDrGZwnah</guid>
-      <link>https://www.lesswrong.com/posts/dKpC6wHFqDrGZwnah/ais-can-now-often-do-massive-easy-to-verify-swe-tasks-and-i</link>
-      <itunes:author>Ryan Greenblatt</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/008c42fcff1f_ais_can_now_often_do_massive_easy-to-verify_swe_ta.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:29</itunes:duration>
+      <title>Current AIs seem pretty misaligned to me</title>
+      <description>Audio version of Current AIs seem pretty misaligned to me by ryan_greenblatt from Ryan Greenblatt</description>
+      <pubDate>Wed, 15 Apr 2026 15:14:11 +0000</pubDate>
+      <guid>WewsByywWNhX9rtwi</guid>
+      <link>https://www.lesswrong.com/posts/WewsByywWNhX9rtwi/current-ais-seem-pretty-misaligned-to-me</link>
+      <itunes:author>ryan_greenblatt</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e3c3d13e4326_current_ais_seem_pretty_misaligned_to_me.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:15</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1779,6 +1767,30 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Forecast how AI will progress in 2026</title>
+      <description>Audio version of Forecast how AI will progress in 2026 by Eli Lifland from AI Futures Project</description>
+      <pubDate>Sat, 17 Jan 2026 18:52:05 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/forecast-how-ai-will-progress-in</guid>
+      <link>https://blog.aifutures.org/p/forecast-how-ai-will-progress-in</link>
+      <itunes:author>Eli Lifland</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b9c56661c15c_forecast_how_ai_will_progress_in_2026.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:02:45</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The inaugural Redwood Research podcast</title>
+      <description>Audio version of The inaugural Redwood Research podcast by Buck from Buck Shlegeris</description>
+      <pubDate>Sun, 04 Jan 2026 22:11:54 +0000</pubDate>
+      <guid>p4iJpumHt6Ay9KnXT</guid>
+      <link>https://www.lesswrong.com/posts/p4iJpumHt6Ay9KnXT/the-inaugural-redwood-research-podcast</link>
+      <itunes:author>Buck</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/774cfe017b4b_the_inaugural_redwood_research_podcast.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:19</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts</title>
       <description>Audio version of Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts from Ryan Greenblatt</description>
       <pubDate>Thu, 01 Jan 2026 13:36:25 +0000</pubDate>
@@ -1787,18 +1799,6 @@ Topics covered:
       <itunes:author>Ryan Greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:03:22</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AI Futures Model: Dec 2025 Update</title>
-      <description>Audio version of AI Futures Model: Dec 2025 Update from AI Futures Project</description>
-      <pubDate>Wed, 31 Dec 2025 02:08:48 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/ai-futures-model-dec-2025-update</guid>
-      <link>https://blog.aifutures.org/p/ai-futures-model-dec-2025-update</link>
-      <itunes:author>AI Futures Project</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/271107ce0b83_ai_futures_model_dec_2025_update.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:26</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1851,18 +1851,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Christian homeschoolers in the year 3000</title>
-      <description>Audio version of Christian homeschoolers in the year 3000 from Buck Shlegeris</description>
-      <pubDate>Wed, 17 Sep 2025 14:44:04 +0000</pubDate>
-      <guid>8aRFB2qGyjQGJkEdZ</guid>
-      <link>https://www.lesswrong.com/posts/8aRFB2qGyjQGJkEdZ/christian-homeschoolers-in-the-year-3000</link>
-      <itunes:author>Buck Shlegeris</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c374d7dda1f9_christian_homeschoolers_in_the_year_3000.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:15:12</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>I enjoyed most of IABIED</title>
       <description>Audio version of I enjoyed most of IABIED from Buck Shlegeris</description>
       <pubDate>Wed, 17 Sep 2025 04:34:52 +0000</pubDate>
@@ -1911,6 +1899,18 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>Vitalik's Response to AI 2027</title>
+      <description>Audio version of Vitalik's Response to AI 2027 from Daniel Kokotajlo</description>
+      <pubDate>Fri, 11 Jul 2025 21:43:36 +0000</pubDate>
+      <guid>zuuQwueBpv9ZCpNuX</guid>
+      <link>https://www.lesswrong.com/posts/zuuQwueBpv9ZCpNuX/vitalik-s-response-to-ai-2027</link>
+      <itunes:author>Daniel Kokotajlo</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a2b17c92c517_vitaliks_response_to_ai_2027.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:26:11</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>What you can do about AI 2027</title>
       <description>Audio version of What you can do about AI 2027 from AI Futures Project</description>
       <pubDate>Sat, 28 Jun 2025 17:46:28 +0000</pubDate>
@@ -1919,18 +1919,6 @@ Topics covered:
       <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/feab7f530ca2_what_you_can_do_about_ai_2027.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:02:41</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>METR's Observations of Reward Hacking in Recent Frontier Models</title>
-      <description>Audio version of METR's Observations of Reward Hacking in Recent Frontier Models from Daniel Kokotajlo</description>
-      <pubDate>Mon, 09 Jun 2025 18:03:31 +0000</pubDate>
-      <guid>Zu4ai9GFpwezyfB2K</guid>
-      <link>https://www.lesswrong.com/posts/Zu4ai9GFpwezyfB2K/metr-s-observations-of-reward-hacking-in-recent-frontier</link>
-      <itunes:author>Daniel Kokotajlo</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23eb66ae716_metrs_observations_of_reward_hacking_in_recent_fr.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:28:47</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2031,14 +2019,14 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Paper: Forecasting world events with neural nets</title>
-      <description>Audio version of Paper: Forecasting world events with neural nets from Owain Evans</description>
-      <pubDate>Fri, 01 Jul 2022 19:40:12 +0000</pubDate>
-      <guid>ixiCECkFFguFcHWFa</guid>
-      <link>https://www.lesswrong.com/posts/ixiCECkFFguFcHWFa/paper-forecasting-world-events-with-neural-nets</link>
-      <itunes:author>Owain Evans</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/12b351aa4801_paper_forecasting_world_events_with_neural_nets.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:09:02</itunes:duration>
+      <title>Paper: Tell, Don't Show- Declarative facts influence how LLMs generalize</title>
+      <description>Audio version of Paper: Tell, Don't Show- Declarative facts influence how LLMs generalize by Owain_Evans from Owain Evans</description>
+      <pubDate>Tue, 19 Dec 2023 19:14:26 +0000</pubDate>
+      <guid>DR67cnvgCXw7CkXbd</guid>
+      <link>https://www.lesswrong.com/posts/DR67cnvgCXw7CkXbd/paper-tell-don-t-show-declarative-facts-influence-how-llms</link>
+      <itunes:author>Owain_Evans</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e98db3d4899a_paper_tell_dont_show-_declarative_facts_influen.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:14:39</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
