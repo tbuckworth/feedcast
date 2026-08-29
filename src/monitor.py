@@ -4,7 +4,7 @@ import json
 import re
 import sqlite3
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -12,6 +12,13 @@ import feedparser
 
 
 MAX_AUTHORS = 5
+
+# Only narrate what was published recently. Dedup by id alone is not enough:
+# a feed that changes its guids, moves host, or is added to config.yaml
+# presents its whole archive as unseen, and the pipeline happily worked
+# through it one post per run (250 Zvi items back to Sep 2025, 2026-08-29).
+# A date cutoff makes that structurally impossible rather than merely unlikely.
+DEFAULT_MAX_AGE_HOURS = 48.0
 
 
 def format_authors(authors: list[str]) -> str:
@@ -62,8 +69,13 @@ class FeedEntry:
     author: str
     feed_name: str
     authors: list[str] = field(default_factory=list)
-    # Read-not-heard digest for the email. Filled in during Phase 2.
-    bullets: list[str] = field(default_factory=list)
+    # Read-not-heard digest for the email. Filled in during Phase 2. Each item
+    # is either a plain string or {"text": ..., "url": ...} when the bullet can
+    # be traced to one source article (the news briefing).
+    bullets: list = field(default_factory=list)
+    # The articles a synthesised entry was built from: {"title", "url",
+    # "source"}. Empty for ordinary posts, which are their own source.
+    sources: list[dict] = field(default_factory=list)
 
 
 def warn_if_dead(feed, name: str, url: str) -> bool:
@@ -220,12 +232,24 @@ class FeedMonitor:
             )
             return [dict(row) for row in cursor.fetchall()]
 
-    def fetch_feed(self, url: str, feed_name: str, skip_patterns: list[str] | None = None) -> list[FeedEntry]:
-        """Fetch and parse an RSS feed, returning new entries."""
+    def fetch_feed(self, url: str, feed_name: str, skip_patterns: list[str] | None = None,
+                   max_age_hours: float | None = DEFAULT_MAX_AGE_HOURS) -> list[FeedEntry]:
+        """Fetch and parse an RSS feed, returning new entries newer than the cutoff.
+
+        `max_age_hours=None` disables the cutoff, which only reprocessing an
+        old post on purpose should ever want.
+        """
         feed = feedparser.parse(url)
         if warn_if_dead(feed, feed_name, url) and feed_name not in self.dead_feeds:
             self.dead_feeds.append(feed_name)
         entries = []
+        # feedparser hands back naive UTC, so the cutoff must be naive UTC too.
+        # datetime.now() here silently skewed the window by the machine's UTC
+        # offset — an hour narrower on the BST desktop than in CI.
+        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
+        cutoff = (now_utc - timedelta(hours=max_age_hours)
+                  if max_age_hours is not None else None)
+        stale = undated = 0
 
         for entry in feed.entries:
             entry_id = entry.get("id") or entry.get("link", "")
@@ -248,11 +272,25 @@ class FeedMonitor:
                 content = entry.description
 
             # Parse published date
-            published = datetime.now()
+            published = None
             if hasattr(entry, "published_parsed") and entry.published_parsed:
                 published = datetime(*entry.published_parsed[:6])
             elif hasattr(entry, "updated_parsed") and entry.updated_parsed:
                 published = datetime(*entry.updated_parsed[:6])
+
+            if cutoff is not None:
+                # An undated entry cannot be shown to be recent, and the whole
+                # point of the cutoff is that nothing old slips through. Count
+                # it so a feed that stops publishing dates is visible rather
+                # than silently empty.
+                if published is None:
+                    undated += 1
+                    continue
+                if published < cutoff:
+                    stale += 1
+                    continue
+            elif published is None:
+                published = now_utc
 
             authors = extract_authors(entry, feed_name)
             author = format_authors(authors)
@@ -269,6 +307,12 @@ class FeedMonitor:
                     authors=authors,
                 )
             )
+
+        if stale or undated:
+            detail = f"{stale} older than {max_age_hours:g}h" if stale else ""
+            if undated:
+                detail = ", ".join(filter(None, [detail, f"{undated} with no date"]))
+            print(f"  {feed_name}: skipped {detail}")
 
         # Sort by published date (oldest first for processing)
         entries.sort(key=lambda e: e.published)
