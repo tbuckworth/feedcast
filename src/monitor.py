@@ -76,6 +76,11 @@ class FeedEntry:
     # The articles a synthesised entry was built from: {"title", "url",
     # "source"}. Empty for ordinary posts, which are their own source.
     sources: list[dict] = field(default_factory=list)
+    # The date the item carried in the feed, which decides whether it is new
+    # to us. Equal to `published` everywhere except LessWrong Curated, where
+    # the feed dates an item by its curation and `published` is corrected to
+    # the real posting date.
+    feed_date: Optional[datetime] = None
 
 
 def warn_if_dead(feed, name: str, url: str) -> bool:
@@ -153,6 +158,13 @@ class FeedMonitor:
                 conn.execute("ALTER TABLE processed_posts ADD COLUMN maths TEXT DEFAULT ''")
             except sqlite3.OperationalError:
                 pass  # Column already exists
+            # Migration: the date the feed gave the item, kept apart from the
+            # publication date so a curated post can be new to us in August
+            # and still say it was written in July.
+            try:
+                conn.execute("ALTER TABLE processed_posts ADD COLUMN feed_date TEXT DEFAULT ''")
+            except sqlite3.OperationalError:
+                pass  # Column already exists
             conn.commit()
 
     def is_processed(self, entry_id: str) -> bool:
@@ -190,8 +202,8 @@ class FeedMonitor:
             conn.execute(
                 """
                 INSERT OR REPLACE INTO processed_posts
-                (id, feed_name, title, link, published, processed_at, audio_file, content, author, bullets, maths)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (id, feed_name, title, link, published, processed_at, audio_file, content, author, bullets, maths, feed_date)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     entry.id,
@@ -205,6 +217,7 @@ class FeedMonitor:
                     entry.author or "",
                     json.dumps(entry.bullets) if entry.bullets else "",
                     json.dumps(maths) if maths else "",
+                    entry.feed_date.isoformat() if entry.feed_date else "",
                 ),
             )
             conn.commit()
@@ -249,7 +262,7 @@ class FeedMonitor:
         now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
         cutoff = (now_utc - timedelta(hours=max_age_hours)
                   if max_age_hours is not None else None)
-        stale = undated = 0
+        stale = undated = already = 0
 
         for entry in feed.entries:
             entry_id = entry.get("id") or entry.get("link", "")
@@ -292,6 +305,15 @@ class FeedMonitor:
             elif published is None:
                 published = now_utc
 
+            # The same post reaches us under different guids: an author feed
+            # and LessWrong Curated carry identical links weeks apart (Zvi's
+            # "On Writing #3" — guid f1c130ea… there, rA6pqn6kz8NvHyznT here).
+            # Without this the curated copy is narrated a second time.
+            link = entry.get("link", "")
+            if link and self.is_processed_by_link(link):
+                already += 1
+                continue
+
             authors = extract_authors(entry, feed_name)
             author = format_authors(authors)
 
@@ -299,19 +321,22 @@ class FeedMonitor:
                 FeedEntry(
                     id=entry_id,
                     title=entry.get("title", "Untitled"),
-                    link=entry.get("link", ""),
+                    link=link,
                     content=content,
                     published=published,
                     author=author,
                     feed_name=feed_name,
                     authors=authors,
+                    feed_date=published,
                 )
             )
 
-        if stale or undated:
-            detail = f"{stale} older than {max_age_hours:g}h" if stale else ""
-            if undated:
-                detail = ", ".join(filter(None, [detail, f"{undated} with no date"]))
+        if stale or undated or already:
+            detail = ", ".join(filter(None, [
+                f"{stale} older than {max_age_hours:g}h" if stale else "",
+                f"{undated} with no date" if undated else "",
+                f"{already} already narrated under another feed" if already else "",
+            ]))
             print(f"  {feed_name}: skipped {detail}")
 
         # Sort by published date (oldest first for processing)

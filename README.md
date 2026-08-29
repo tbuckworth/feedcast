@@ -247,6 +247,22 @@ feedcast/
 └── .github/workflows/    # GitHub Actions (daily + on-demand)
 ```
 
+## LessWrong Curated
+
+The aggregate LessWrong feed is `view=curated-rss` — the moderators' picks, a
+few a week — not `view=frontpage-rss`, which is every post promoted off
+Personal Blog (10-14 a day, no quality bar) and which the pipeline sampled
+essentially at random.
+
+That feed dates an item by its **curation**, and curation trails publication by
+up to several weeks. Both dates are kept: the curation date decides whether an
+item is new to us, and `src/lesswrong.py` asks LessWrong's GraphQL API when the
+post was actually written, which is what the email shows ("30 Jul 2026 ·
+curated 21 Aug 2026"). A failed lookup falls back to the feed's date.
+
+Because an author feed and the curated feed carry the same post under different
+guids, entries are also deduped by link.
+
 ## Freshness Window
 
 Only posts published within `FEEDCAST_MAX_AGE_HOURS` (default 48) are narrated.
@@ -260,6 +276,10 @@ The trade-off is deliberate: a post that is never picked up inside its window
 is never narrated at all, rather than surfacing weeks later. Feeds contribute
 their newest eligible entry per run, so a very busy feed still yields one
 episode a day.
+
+The window keys on the date the item entered its feed, not on when it was
+written — so a LessWrong post curated today is narrated today even if it was
+posted in July.
 
 ## Known Limitations
 
