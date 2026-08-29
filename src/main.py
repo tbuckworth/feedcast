@@ -19,6 +19,7 @@ from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
 from .extractor import ExtractionError, url_to_feed_entry
 from .feed import Episode, FeedGenerator, PodcastConfig
 from .fulltext import enrich_entry
+from .lesswrong import posted_at
 from .mathiness import MathsVerdict, assess
 from .monitor import DEFAULT_MAX_AGE_HOURS, FeedEntry, FeedMonitor
 from .news import NewsAggregator
@@ -384,14 +385,17 @@ async def async_main(config_path: Path | None = None) -> None:
 
         # Deduplicate — gather preserves config order, so author feeds win
         seen_ids: set[str] = set()
+        seen_links: set[str] = set()
         for feed_config, entries in feed_results:
             if not entries:
                 continue
             entry = entries[-1]  # most recent only
-            if entry.id in seen_ids:
+            if entry.id in seen_ids or (entry.link and entry.link in seen_links):
                 print(f"  Skipping duplicate: {entry.title}")
                 continue
             seen_ids.add(entry.id)
+            if entry.link:
+                seen_links.add(entry.link)
             mode = feed_config.mode
             if force_verbatim and reprocess_entry and (
                 entry.id == reprocess_entry or entry.link == reprocess_entry
@@ -400,6 +404,12 @@ async def async_main(config_path: Path | None = None) -> None:
                 mode = "verbatim"
             prompt = feed_config.prompt or config.default_prompt
             entries_to_process.append((entry, mode, prompt))
+
+        # LessWrong Curated dates an item by when it was curated. Keep that as
+        # the "is this new to us" date and ask LessWrong when the post was
+        # actually written, so the email states a release date rather than a
+        # promotion date. Silent no-op for every other feed.
+        await _correct_publication_dates([e for e, _m, _p in entries_to_process])
 
         # Generate daily news briefing if configured
         if config.news_briefing and config.news_briefing.enabled:
@@ -565,6 +575,23 @@ async def async_main(config_path: Path | None = None) -> None:
     print(f"\nPipeline complete.")
 
 
+async def _correct_publication_dates(entries: list[FeedEntry]) -> None:
+    """Replace a curation date with the real posting date, where they differ.
+
+    Only LessWrong links can be resolved, and only a difference worth showing
+    is applied — an hour's lag between posting and curation is noise.
+    """
+    for entry in entries:
+        real = await posted_at(entry.link)
+        if real is None or entry.feed_date is None:
+            continue
+        if abs((entry.feed_date - real).total_seconds()) < 86400:
+            continue
+        print(f"    {entry.title[:48]}: posted {real:%Y-%m-%d}, "
+              f"curated {entry.feed_date:%Y-%m-%d}")
+        entry.published = real
+
+
 def _max_age_hours() -> float | None:
     """How recent a post must be to be narrated at all.
 
@@ -606,6 +633,20 @@ def _bullets_of(row: dict) -> list:
             if isinstance(b, str) or (isinstance(b, dict) and b.get("text"))]
 
 
+def _curated_date(row: dict, published: datetime | None) -> datetime | None:
+    """When the feed surfaced a post, if that is not when it was written."""
+    raw = (row.get("feed_date") or "").strip()
+    if not raw:
+        return None
+    try:
+        surfaced = datetime.fromisoformat(raw)
+    except ValueError:
+        return None
+    if published and abs((surfaced - published).total_seconds()) < 86400:
+        return None
+    return surfaced
+
+
 def _build_run_report(
     episodes: list[Episode], db_entries: list[dict], new_entry_ids: set[str],
     failures: list[tuple[str, str]], base_url: str,
@@ -632,6 +673,7 @@ def _build_run_report(
             briefing_text=(row.get("content") or "") if is_briefing else "",
             bullets=_bullets_of(row),
             published=ep.published,
+            curated=_curated_date(row, ep.published),
         )
 
     ordered = sorted(episodes, key=lambda e: e.published, reverse=True)

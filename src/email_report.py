@@ -43,6 +43,10 @@ class ReportEpisode:
     # When the source material was published — not when we narrated it. The
     # two diverge whenever a run is late or a post is picked up a day on.
     published: datetime | None = None
+    # When the feed surfaced it, if that is materially later than publication:
+    # a LessWrong curation can trail the post by weeks, and without this the
+    # email looks like it dug up something from July for no reason.
+    curated: datetime | None = None
 
 
 @dataclass
@@ -106,6 +110,8 @@ def _meta_bits(ep: "ReportEpisode") -> list[str]:
     # Before the duration: this answers "is this actually new?", which is the
     # first thing you want to know about an item in a daily email.
     bits.append(format_published(ep.published))
+    if ep.curated:
+        bits.append(f"curated {format_published(ep.curated)}")
     bits.append(format_duration(ep.duration_seconds))
     return [b for b in bits if b]
 
