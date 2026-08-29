@@ -21,6 +21,18 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Tales of rebellion against externally-opaque meritocracies</title>
+      <description>Audio version of Tales of rebellion against externally-opaque meritocracies by Steven Byrnes from LessWrong Frontpage</description>
+      <pubDate>Sat, 29 Aug 2026 11:37:39 +0000</pubDate>
+      <guid>m8cP9KfkYMMCCQGrb</guid>
+      <link>https://www.lesswrong.com/posts/m8cP9KfkYMMCCQGrb/tales-of-rebellion-against-externally-opaque-meritocracies</link>
+      <itunes:author>Steven Byrnes</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9e199e6ac132_tales_of_rebellion_against_externally-opaque_merit.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:21:04</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Book Notes: Chokepoints</title>
       <description>Audio version of Book Notes: Chokepoints by Jakub Halmeš from LessWrong Frontpage</description>
       <pubDate>Sat, 29 Aug 2026 09:02:21 +0000</pubDate>
