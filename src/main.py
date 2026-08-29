@@ -20,7 +20,7 @@ from .extractor import ExtractionError, url_to_feed_entry
 from .feed import Episode, FeedGenerator, PodcastConfig
 from .fulltext import enrich_entry
 from .mathiness import MathsVerdict, assess
-from .monitor import FeedEntry, FeedMonitor
+from .monitor import DEFAULT_MAX_AGE_HOURS, FeedEntry, FeedMonitor
 from .news import NewsAggregator
 from .normalizer import TextNormalizer
 from .processor import ContentProcessor
@@ -125,7 +125,8 @@ async def process_entry(
     digest_task = asyncio.create_task(
         safe_bullets(processed_text,
                      is_briefing=entry.id.startswith("news-briefing-"),
-                     label=entry.title)
+                     label=entry.title,
+                     sources=entry.sources)
     )
 
     # Everything from here to the finished MP3 sits inside the guard.
@@ -357,9 +358,14 @@ async def async_main(config_path: Path | None = None) -> None:
         # NORMAL MODE: Phase 1 — Parallel feed fetching
         print(f"\nPhase 1: Fetching {len(config.feeds)} feeds in parallel...")
 
+        max_age = _max_age_hours()
+        print(f"  Only entries published in the last {max_age:g}h are eligible"
+              if max_age else "  Age cutoff disabled — every unseen entry is eligible")
+
         async def fetch_one(fc: FeedConfig) -> tuple[FeedConfig, list[FeedEntry]]:
             print(f"  Fetching: {fc.name} ({fc.url})")
-            entries = await asyncio.to_thread(monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns)
+            entries = await asyncio.to_thread(
+                monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns, max_age)
             print(f"  {fc.name}: {len(entries)} new entries")
             return (fc, entries)
 
@@ -559,18 +565,45 @@ async def async_main(config_path: Path | None = None) -> None:
     print(f"\nPipeline complete.")
 
 
+def _max_age_hours() -> float | None:
+    """How recent a post must be to be narrated at all.
+
+    Without this the pipeline treats "unseen" as "new", so a feed that rotates
+    its guids or joins config.yaml offers up its entire archive, one old post
+    per run. FEEDCAST_MAX_AGE_HOURS overrides it; 0 disables the cutoff, which
+    only a deliberate backfill should ever ask for.
+    """
+    raw = os.environ.get("FEEDCAST_MAX_AGE_HOURS", "").strip()
+    if not raw:
+        return DEFAULT_MAX_AGE_HOURS
+    try:
+        hours = float(raw)
+    except ValueError:
+        print(f"  FEEDCAST_MAX_AGE_HOURS={raw!r} is not a number, "
+              f"using {DEFAULT_MAX_AGE_HOURS:g}")
+        return DEFAULT_MAX_AGE_HOURS
+    return hours if hours > 0 else None
+
+
 def _email_always() -> bool:
     """Whether to email even on a run that produced nothing."""
     return os.environ.get("FEEDCAST_EMAIL_ALWAYS", "").strip().lower() in ("true", "1", "yes")
 
 
-def _bullets_of(row: dict) -> list[str]:
-    """Read a stored digest. Rows written before the column existed have ''."""
+def _bullets_of(row: dict) -> list:
+    """Read a stored digest. Rows written before the column existed have ''.
+
+    Bullets are strings, or {"text", "url"} once they cite a source; rows
+    written before that keep the old shape and render without a link.
+    """
     try:
         parsed = json.loads(row.get("bullets") or "[]")
     except (ValueError, TypeError):
         return []
-    return [b for b in parsed if isinstance(b, str)] if isinstance(parsed, list) else []
+    if not isinstance(parsed, list):
+        return []
+    return [b for b in parsed
+            if isinstance(b, str) or (isinstance(b, dict) and b.get("text"))]
 
 
 def _build_run_report(
@@ -598,6 +631,7 @@ def _build_run_report(
             is_briefing=is_briefing,
             briefing_text=(row.get("content") or "") if is_briefing else "",
             bullets=_bullets_of(row),
+            published=ep.published,
         )
 
     ordered = sorted(episodes, key=lambda e: e.published, reverse=True)

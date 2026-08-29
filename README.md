@@ -71,6 +71,7 @@ DEEPINFRA_API_KEY=your_key     # Required — DeepInfra Chatterbox TTS
 | `SAVE_DEBUG_WAVS` | No | Save intermediate WAV chunks for debugging |
 | `LLM_TIMEOUT_SECONDS` | No | Per-request timeout for OpenRouter calls (default 180, 3 retries) |
 | `FEEDCAST_EMAIL_TO` | No | Recipient of the HTML run report. Unset disables the email entirely |
+| `FEEDCAST_MAX_AGE_HOURS` | No | How recent a post must be to be narrated (default 48; `0` disables the cutoff) |
 | `FEEDCAST_EMAIL_BCC` | No | Extra recipients, comma-separated, blind-copied so they stay hidden from each other |
 | `SMTP_USER` | No | SMTP username (the sending Gmail address) |
 | `GMAIL_APP_PASSWORD` | No | Google App Password. `SMTP_PASSWORD` is accepted as an alias |
@@ -193,6 +194,12 @@ GitHub Actions workflow (`.github/workflows/update-feed.yml`) runs daily at 03:4
 
 A concurrency group prevents race conditions between scheduled and on-demand runs.
 
+**One publish per day.** A `guard` job asks whether today's daily run already
+published and stops the second one before it fetches anything, so the desktop
+trigger and GitHub's own schedule cannot both email you (they both did on
+2026-08-29). Anything asked for by hand — `entry_url`, `inject_url`,
+`resend_report`, or `force` — is never guarded.
+
 **Scheduled runs are best-effort.** GitHub delivers `schedule:` late under load —
 hours late on 27 and 28 Aug 2026 — and sometimes not at all. Two mitigations:
 the cron sits off the congested top of the hour, and `scripts/cron-backstop.sh`
@@ -239,6 +246,20 @@ feedcast/
 ├── voice_samples/        # TTS voice clone source audio
 └── .github/workflows/    # GitHub Actions (daily + on-demand)
 ```
+
+## Freshness Window
+
+Only posts published within `FEEDCAST_MAX_AGE_HOURS` (default 48) are narrated.
+Dedup by feed id alone is not enough: a feed that rotates its guids, changes
+host, or is newly added to `config.yaml` presents its entire archive as unseen.
+On 2026-08-29 the Zvi feed offered 250 items going back to September 2025 and
+the pipeline worked through them one per run, so the email filled with posts
+from months earlier.
+
+The trade-off is deliberate: a post that is never picked up inside its window
+is never narrated at all, rather than surfacing weeks later. Feeds contribute
+their newest eligible entry per run, so a very busy feed still yields one
+episode a day.
 
 ## Known Limitations
 

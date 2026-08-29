@@ -34,6 +34,11 @@ on:
         required: false
         type: boolean
         default: false
+      force:
+        description: 'Run even if today''s daily run already published'
+        required: false
+        type: boolean
+        default: false
 
 concurrency:
   group: feedcast-pipeline
@@ -45,7 +50,61 @@ permissions:
   id-token: write
 
 jobs:
+  # One publish per UTC day, whichever trigger gets there first.
+  #
+  # Two triggers race by design: the desktop crontab dispatches at a fixed
+  # hour, and GitHub's own schedule is the fallback for a desktop that is off.
+  # GitHub delivers `schedule:` hours late under load (11h on 2026-08-27,
+  # 12h on 2026-08-28, 7h on 2026-08-29), so "the late one arrives after the
+  # early one finished" is the normal case, not the exception — on 2026-08-29
+  # both ran and two emails went out. Anything the operator asked for by hand
+  # (a reprocess, an injection, a resend, force) is never guarded.
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - name: Has today's daily run already published?
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+          ON_DEMAND: ${{ inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true }}
+        run: |
+          set -euo pipefail
+          if [[ "$ON_DEMAND" == "true" ]]; then
+            echo "Operator-requested run — not guarded"
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          today="$(date -u +%Y-%m-%d)"
+          # A run counts as "already published" only if its update job actually
+          # ran: a guarded run succeeds with that job skipped, and must not
+          # itself block tomorrow's retry logic or today's genuine attempt.
+          published=0
+          for id in $(gh run list --repo "$REPO" --workflow update-feed.yml \
+                        --created "$today" --status success --limit 20 \
+                        --json databaseId --jq '.[].databaseId'); do
+            [[ "$id" == "$RUN_ID" ]] && continue
+            concl="$(gh api "/repos/$REPO/actions/runs/$id/jobs" \
+                       --jq '.jobs[] | select(.name=="update") | .conclusion')"
+            if [[ "$concl" == "success" ]]; then
+              echo "Run $id already published today"
+              published=1
+              break
+            fi
+          done
+          if [[ "$published" == "1" ]]; then
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          fi
+
   update:
+    needs: guard
+    if: needs.guard.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     # Backstop: normal runs take 12-30 min. Without this the job inherits the
     # 6h GitHub default, so any network stall burns 6h of minutes (2026-08-19).
@@ -118,6 +177,7 @@ jobs:
           FEEDCAST_EMAIL_TO: ${{ secrets.FEEDCAST_EMAIL_TO }}
           FEEDCAST_EMAIL_BCC: ${{ secrets.FEEDCAST_EMAIL_BCC }}
           FEEDCAST_EMAIL_ALWAYS: ${{ vars.FEEDCAST_EMAIL_ALWAYS }}
+          FEEDCAST_MAX_AGE_HOURS: ${{ vars.FEEDCAST_MAX_AGE_HOURS }}
           VOICE_UPLOAD_DELAY_SECONDS: "5"
           SAVE_DEBUG_WAVS: "false"
         run: uv run python -m src.main

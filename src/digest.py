@@ -48,6 +48,22 @@ they are, and convert anything already spelled out for speech back into figures:
 - One bullet per line. Do not number them or prefix them with any character.
 - If the text is a news briefing, give one bullet per story it covers."""
 
+# Appended when the caller knows which articles the text was synthesised from.
+# The briefing is written from many sources, so "read the source" is ambiguous
+# per bullet unless the model says which one it used.
+SOURCES_RULE = """
+
+The text was synthesised from the articles below. End every bullet with the URL \
+of the single article it draws on, in the form:
+
+  The bullet sentence. || https://example.com/article
+
+Use a URL from this list verbatim, never one you remember or invent. If a \
+bullet draws on no single article, end it with `|| none`.
+
+Articles:
+{articles}"""
+
 
 def _clean(line: str) -> str:
     """Strip whatever bullet furniture the model reached for anyway."""
@@ -56,11 +72,34 @@ def _clean(line: str) -> str:
     return line.strip()
 
 
-def parse_bullets(raw: str) -> list[str]:
-    """Turn a model response into clean bullets, dropping anything odd."""
-    out: list[str] = []
+def _split_source(text: str, allowed: set[str]) -> tuple[str, str]:
+    """Peel a trailing `|| url` off a bullet, keeping only a URL we supplied.
+
+    A model that invents a plausible-looking link is worse than one that gives
+    none: the reader clicks it and lands nowhere. Anything not in `allowed` is
+    dropped and the bullet stands on its own.
+    """
+    if "||" not in text:
+        return text.strip(), ""
+    body, _, tail = text.rpartition("||")
+    url = tail.strip().strip("<>").rstrip(".,)")
+    return body.strip(), url if url in allowed else ""
+
+
+def parse_bullets(raw: str, allowed_urls: set[str] | None = None) -> list:
+    """Turn a model response into clean bullets, dropping anything odd.
+
+    Returns plain strings, or {"text", "url"} dicts where a bullet named one
+    of `allowed_urls` as its source.
+    """
+    allowed = allowed_urls or set()
+    out: list = []
+    seen: set[str] = set()
     for line in (raw or "").splitlines():
         text = _clean(line)
+        url = ""
+        if allowed:
+            text, url = _split_source(text, allowed)
         # A trailing colon means a preamble or a heading ("Here are the
         # bullets:", "Key points:"), never a claim. Length alone does not catch
         # those — the preamble is longer than some genuine bullets.
@@ -68,37 +107,47 @@ def parse_bullets(raw: str) -> list[str]:
             continue
         if len(text) < MIN_BULLET_CHARS or len(text) > MAX_BULLET_CHARS:
             continue
-        if text not in out:
-            out.append(text)
+        if text not in seen:
+            seen.add(text)
+            out.append({"text": text, "url": url} if url else text)
     return out[:MAX_BULLETS]
 
 
-async def to_bullets(text: str, is_briefing: bool = False, client=None) -> list[str]:
-    """Digest one episode's script into bullets."""
+async def to_bullets(text: str, is_briefing: bool = False, client=None,
+                     sources: list[dict] | None = None) -> list:
+    """Digest one episode's script into bullets, each optionally linked."""
     if not text or not text.strip():
         return []
     client = client or get_client()
     n = "4 to 6" if is_briefing else "3 to 5"
+    system = PROMPT.format(n=n)
+    allowed = {s["url"] for s in (sources or []) if s.get("url")}
+    if allowed:
+        listing = "\n".join(
+            f"- {s['title']} ({s.get('source', '')}) {s['url']}"
+            for s in sources if s.get("url")
+        )
+        system += SOURCES_RULE.format(articles=listing)
     response = await client.chat.completions.create(
         model=MODEL_WRITER,
-        max_tokens=1200,
+        max_tokens=1600 if allowed else 1200,
         messages=[
-            {"role": "system", "content": PROMPT.format(n=n)},
+            {"role": "system", "content": system},
             {"role": "user", "content": text[:MAX_DIGEST_CHARS]},
         ],
     )
-    return parse_bullets(response.choices[0].message.content)
+    return parse_bullets(response.choices[0].message.content, allowed)
 
 
 async def safe_bullets(text: str, is_briefing: bool = False, client=None,
-                       label: str = "") -> list[str]:
+                       label: str = "", sources: list[dict] | None = None) -> list:
     """to_bullets with the failure swallowed and logged.
 
     A digest is a nicety on top of an episode that already exists. It must
     never be the reason a run fails or a finished MP3 is thrown away.
     """
     try:
-        return await to_bullets(text, is_briefing, client)
+        return await to_bullets(text, is_briefing, client, sources)
     except Exception as exc:
         print(f"    Digest failed for {label or 'episode'}: {exc!r}")
         return []
