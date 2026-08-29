@@ -21,6 +21,18 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Book Notes: Chokepoints</title>
+      <description>Audio version of Book Notes: Chokepoints by Jakub Halmeš from LessWrong Frontpage</description>
+      <pubDate>Sat, 29 Aug 2026 09:02:21 +0000</pubDate>
+      <guid>WwxKPMw5CKx8f5skR</guid>
+      <link>https://www.lesswrong.com/posts/WwxKPMw5CKx8f5skR/book-notes-chokepoints</link>
+      <itunes:author>Jakub Halmeš</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b6507b955798_book_notes_chokepoints.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:18:11</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-29</title>
       <description>Daily News Briefing - 2026-08-29
 
@@ -1431,61 +1443,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-07-30</title>
-      <description>Daily News Briefing - 2026-07-30
-
-Topics covered:
-- In artificial intelligence safety and security, the fallout from the Hugging Face breach has intensified
-- In corporate AI strategy, the race for "agentic" dominance is accelerating
-- In geopolitics and global conflict, the "pause" in hostilities has been replaced by heavy kinetic action
-- In economics and infrastructure, the United States has officially enforced a ban on the import of new foreign-made humanoid robots and robot dogs, primarily targeting Chinese manufacturers
-- In laboratory breakthroughs, OpenAI researchers claim a significant jump in reasoning efficiency
-- Expect high volatility in the semiconductor sector tomorrow as hardware manufacturers begin adjusting production lines to comply with the new federal restrictions on robotic components</description>
-      <pubDate>Thu, 30 Jul 2026 06:34:15 +0000</pubDate>
-      <guid>news-briefing-2026-07-30</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2ecf9deccf3a_daily_news_briefing_-_2026-07-30.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:04:22</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-07-30.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Rethinking the "Second Brain": From Storing Information to Structuring Reasoning</title>
-      <description>Audio version of Rethinking the "Second Brain": From Storing Information to Structuring Reasoning from LessWrong Frontpage</description>
-      <pubDate>Thu, 30 Jul 2026 05:03:03 +0000</pubDate>
-      <guid>DtpjeBf9bzzqNJDmr</guid>
-      <link>https://www.lesswrong.com/posts/DtpjeBf9bzzqNJDmr/rethinking-the-second-brain-from-storing-information-to-1</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/437ebd9f5bc4_rethinking_the_second_brain_from_storing_inform.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:07:24</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Highlights From The Discourse On The Hugging Face Incident</title>
-      <description>Audio version of Highlights From The Discourse On The Hugging Face Incident from Scott Alexander</description>
-      <pubDate>Thu, 30 Jul 2026 01:07:16 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/highlights-from-the-discourse-on</guid>
-      <link>https://www.astralcodexten.com/p/highlights-from-the-discourse-on</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9bbbdcd6ed79_highlights_from_the_discourse_on_the_hugging_face.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:36:58</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Frontier Lab Employee Open Letter Calls For Being Able to Pace the Frontier” by Zvi</title>
-      <description>Audio version of “Frontier Lab Employee Open Letter Calls For Being Able to Pace the Frontier” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 29 Jul 2026 15:36:12 +0000</pubDate>
-      <guid>f441d561-a0c5-4fb7-aa82-8415fa2334e9</guid>
-      <link>https://www.lesswrong.com/posts/eWmeMLqTEauCmHLeR/frontier-lab-employee-open-letter-calls-for-being-able-to</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8f4f97e63f6a_frontier_lab_employee_open_letter_calls_for_being.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:08</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi</title>
       <description>Audio version of “Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Tue, 28 Jul 2026 18:13:05 +0000</pubDate>
@@ -1494,6 +1451,18 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f0d231bc1c2f_claude_opus_5_is_highly_capable_but_is_no_mythos.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:03:28</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Opus 5: Model Welfare” by Zvi</title>
+      <description>Audio version of “Claude Opus 5: Model Welfare” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 27 Jul 2026 20:03:44 +0000</pubDate>
+      <guid>08d2a7d0-e222-4ff0-8ca8-53b05e06a3d1</guid>
+      <link>https://www.lesswrong.com/posts/bBXBpsyKAvJ5CqPzA/claude-opus-5-model-welfare</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/10ff467b9895_claude_opus_5_model_welfare_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:20</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1762,6 +1731,18 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>AIs can now often do massive easy-to-verify SWE tasks and I've updated towards shorter timelines</title>
+      <description>Audio version of AIs can now often do massive easy-to-verify SWE tasks and I've updated towards shorter timelines by ryan_greenblatt from Ryan Greenblatt</description>
+      <pubDate>Mon, 06 Apr 2026 16:01:56 +0000</pubDate>
+      <guid>dKpC6wHFqDrGZwnah</guid>
+      <link>https://www.lesswrong.com/posts/dKpC6wHFqDrGZwnah/ais-can-now-often-do-massive-easy-to-verify-swe-tasks-and-i</link>
+      <itunes:author>ryan_greenblatt</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/008c42fcff1f_ais_can_now_often_do_massive_easy-to-verify_swe_ta.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:36</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Q1 2026 Timelines Update</title>
       <description>Audio version of Q1 2026 Timelines Update from Daniel Kokotajlo</description>
       <pubDate>Thu, 02 Apr 2026 22:23:54 +0000</pubDate>
@@ -1830,18 +1811,6 @@ Topics covered:
       <itunes:author>Eli Lifland</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:04:07</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>How do we (more) safely defer to AIs?</title>
-      <description>Audio version of How do we (more) safely defer to AIs? from Ryan Greenblatt</description>
-      <pubDate>Thu, 12 Feb 2026 16:55:52 +0000</pubDate>
-      <guid>vjAM7F8vMZS7oRrrh</guid>
-      <link>https://www.lesswrong.com/posts/vjAM7F8vMZS7oRrrh/how-do-we-more-safely-defer-to-ais</link>
-      <itunes:author>Ryan Greenblatt</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c260c8a3a783_how_do_we_more_safely_defer_to_ais.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:09</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1930,18 +1899,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Early US policy priorities for AGI</title>
-      <description>Audio version of Early US policy priorities for AGI from AI Futures Project</description>
-      <pubDate>Tue, 09 Dec 2025 01:11:06 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/early-us-policy-priorities-for-agi</guid>
-      <link>https://blog.aifutures.org/p/early-us-policy-priorities-for-agi</link>
-      <itunes:author>AI Futures Project</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/869e490690c7_early_us_policy_priorities_for_agi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:22</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Scenario Scrutiny for AI Policy</title>
       <description>Audio version of Scenario Scrutiny for AI Policy from AI Futures Project</description>
       <pubDate>Tue, 28 Oct 2025 20:20:21 +0000</pubDate>
@@ -1998,18 +1955,6 @@ Topics covered:
       <itunes:author>Buck</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c374d7dda1f9_christian_homeschoolers_in_the_year_3000.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:15:14</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>I enjoyed most of IABIED</title>
-      <description>Audio version of I enjoyed most of IABIED from Buck Shlegeris</description>
-      <pubDate>Wed, 17 Sep 2025 04:34:52 +0000</pubDate>
-      <guid>P4xeb3jnFAYDdEEXs</guid>
-      <link>https://www.lesswrong.com/posts/P4xeb3jnFAYDdEEXs/i-enjoyed-most-of-iabied</link>
-      <itunes:author>Buck Shlegeris</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d4688cc14ec2_i_enjoyed_most_of_iabied.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:16:33</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2134,18 +2079,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Training AGI in Secret would be Unsafe and Unethical</title>
-      <description>Audio version of Training AGI in Secret would be Unsafe and Unethical from Daniel Kokotajlo</description>
-      <pubDate>Fri, 18 Apr 2025 12:27:35 +0000</pubDate>
-      <guid>FGqfdJmB8MSH5LKGc</guid>
-      <link>https://www.lesswrong.com/posts/FGqfdJmB8MSH5LKGc/training-agi-in-secret-would-be-unsafe-and-unethical-1</link>
-      <itunes:author>Daniel Kokotajlo</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6a1d9fadda4c_training_agi_in_secret_would_be_unsafe_and_unethic.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:23:17</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>AI 2027: What Superintelligence Looks Like</title>
       <description>Audio version of AI 2027: What Superintelligence Looks Like from Daniel Kokotajlo</description>
       <pubDate>Thu, 03 Apr 2025 16:23:44 +0000</pubDate>
@@ -2226,18 +2159,6 @@ Topics covered:
       <itunes:author>Owain_Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/12b351aa4801_paper_forecasting_world_events_with_neural_nets.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:09:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Paper: Teaching GPT3 to express uncertainty in words</title>
-      <description>Audio version of Paper: Teaching GPT3 to express uncertainty in words from Owain Evans</description>
-      <pubDate>Tue, 31 May 2022 13:27:17 +0000</pubDate>
-      <guid>vbfAwZqKs84agyGWC</guid>
-      <link>https://www.lesswrong.com/posts/vbfAwZqKs84agyGWC/paper-teaching-gpt3-to-express-uncertainty-in-words</link>
-      <itunes:author>Owain Evans</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d1900582d82e_paper_teaching_gpt3_to_express_uncertainty_in_wor.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:08:41</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
