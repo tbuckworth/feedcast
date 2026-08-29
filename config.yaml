@@ -81,10 +81,19 @@ feeds:
     mode: "summarize"
     prompt: null
 
-  # Aggregate feed — catches high-karma posts from any author.
+  # The community's own highlights, not the firehose. frontpage-rss carried
+  # every post promoted off Personal Blog — 10 to 14 a day, no quality bar —
+  # of which the pipeline narrated whichever happened to be newest. Curation
+  # is a few posts a week, chosen by the moderators.
+  #
+  # Note this feed's pubDate is the CURATION date, and curation trails
+  # publication by up to several weeks. That is deliberate here: an item is
+  # new to us when it is curated, and the email states the real posting date
+  # separately (see src/lesswrong.py).
+  #
   # Must be AFTER individual authors for correct deduplication.
-  - name: "LessWrong Frontpage"
-    url: "https://www.lesswrong.com/feed.xml?view=frontpage-rss"
+  - name: "LessWrong Curated"
+    url: "https://www.lesswrong.com/feed.xml?view=curated-rss"
     mode: "auto"
     prompt: null
 
