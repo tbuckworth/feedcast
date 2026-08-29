@@ -38,7 +38,11 @@ class ReportEpisode:
     duration_seconds: int
     is_briefing: bool = False
     briefing_text: str = ""
-    bullets: list[str] = field(default_factory=list)
+    # Plain strings, or {"text", "url"} where the bullet names its source.
+    bullets: list = field(default_factory=list)
+    # When the source material was published — not when we narrated it. The
+    # two diverge whenever a run is late or a post is picked up a day on.
+    published: datetime | None = None
 
 
 @dataclass
@@ -78,6 +82,18 @@ def format_duration(seconds: int) -> str:
     return f"{minutes} min {secs:02d} sec"
 
 
+def format_published(when: datetime | None) -> str:
+    """Render a source publication date, or '' when unknown."""
+    return when.strftime("%d %b %Y") if when else ""
+
+
+def bullet_parts(b) -> tuple[str, str]:
+    """Normalise a stored bullet to (text, url). Old rows are bare strings."""
+    if isinstance(b, dict):
+        return str(b.get("text", "")), str(b.get("url", ""))
+    return str(b), ""
+
+
 def _meta_bits(ep: "ReportEpisode") -> list[str]:
     """Author / feed / duration, minus the duplicate when they are the same.
 
@@ -87,6 +103,9 @@ def _meta_bits(ep: "ReportEpisode") -> list[str]:
     bits = [ep.author]
     if ep.feed_name and ep.feed_name != ep.author:
         bits.append(ep.feed_name)
+    # Before the duration: this answers "is this actually new?", which is the
+    # first thing you want to know about an item in a daily email.
+    bits.append(format_published(ep.published))
     bits.append(format_duration(ep.duration_seconds))
     return [b for b in bits if b]
 
@@ -101,6 +120,18 @@ def _btn(url: str, label: str) -> str:
     )
 
 
+def _bullet_html(b) -> str:
+    """One bullet, with a 'Source' link when it names the article it used."""
+    text, url = bullet_parts(b)
+    if not url:
+        return escape(text)
+    return (
+        f'{escape(text)} '
+        f'<a href="{escape(url, quote=True)}" style="color:{ACCENT};'
+        f'text-decoration:none;white-space:nowrap;">Source&nbsp;&rarr;</a>'
+    )
+
+
 def _episode_html(ep: ReportEpisode) -> str:
     title = escape(ep.title)
     title_html = (
@@ -112,7 +143,7 @@ def _episode_html(ep: ReportEpisode) -> str:
     if ep.bullets:
         items = "".join(
             f'<li style="margin:0 0 7px 0;font-size:14px;line-height:1.5;color:{INK};">'
-            f"{escape(b)}</li>"
+            f"{_bullet_html(b)}</li>"
             for b in ep.bullets
         )
         # Outlook ignores list-style padding on <ul>, hence the margin as well.
@@ -212,7 +243,10 @@ def build_html(report: RunReport, when: datetime) -> str:
             f'<li style="margin:0 0 6px 0;font-size:13px;line-height:1.45;">'
             + (f'<a href="{escape(e.link, quote=True)}" style="color:{ACCENT};text-decoration:none;">{escape(e.title)}</a>'
                if e.link else escape(e.title))
-            + f'<span style="color:{MUTED};"> &middot; {escape(e.author or e.feed_name)}</span></li>'
+            + f'<span style="color:{MUTED};"> &middot; '
+            + " &middot; ".join(escape(bit) for bit in
+                                (e.author or e.feed_name, format_published(e.published)) if bit)
+            + '</span></li>'
             for e in report.recent
         )
         parts.append(section(
@@ -262,7 +296,8 @@ def build_text(report: RunReport, when: datetime) -> str:
         if ep.audio_url:
             lines.append(f"  Audio:  {ep.audio_url}")
         if ep.bullets:
-            lines += ["", *(f"  - {b}" for b in ep.bullets)]
+            lines += ["", *(f"  - {t}" + (f" ({u})" if u else "")
+                            for t, u in map(bullet_parts, ep.bullets))]
         elif ep.is_briefing and ep.briefing_text:
             lines += ["", *(f"  {p.strip()}" for p in ep.briefing_text.split("\n\n") if p.strip())]
         lines.append("")
@@ -283,7 +318,9 @@ def build_text(report: RunReport, when: datetime) -> str:
 
     if report.recent:
         lines.append("Also published this week:")
-        lines += [f"  - {e.title} ({e.author or e.feed_name})" for e in report.recent] + [""]
+        lines += [f"  - {e.title} ({e.author or e.feed_name}"
+                  + (f", {format_published(e.published)}" if e.published else "") + ")"
+                  for e in report.recent] + [""]
     lines.append(report.feed_url)
     return "\n".join(lines)
 

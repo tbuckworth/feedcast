@@ -61,6 +61,7 @@ class NewsAggregator:
                     "category": source["category"],
                     "summary": summary[:500],
                     "published": published,
+                    "url": entry.get("link", ""),
                 })
             return articles
 
@@ -88,8 +89,11 @@ class NewsAggregator:
         for category, items in sorted(by_category.items()):
             section_lines = [f"## {category.upper().replace('_', ' ')}"]
             for item in items:
+                # The URL rides along so the digest can attribute each bullet
+                # back to the article it came from.
+                url = f"\n  URL: {item['url']}" if item.get("url") else ""
                 section_lines.append(
-                    f"- [{item['source']}] {item['title']}\n  {item['summary']}"
+                    f"- [{item['source']}] {item['title']}{url}\n  {item['summary']}"
                 )
             sections.append("\n".join(section_lines))
 
@@ -157,4 +161,6 @@ class NewsAggregator:
             author="Feedcast Bot",
             feed_name="Daily News Briefing",
             authors=["Feedcast Bot"],
+            sources=[{"title": a["title"], "url": a["url"], "source": a["source"]}
+                     for a in articles if a.get("url")],
         )
