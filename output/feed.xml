@@ -21,6 +21,37 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-08-30</title>
+      <description>Daily News Briefing - 2026-08-30
+
+Topics covered:
+- The most significant new development today is a deadly Russian drone strike on a warehouse near Kyiv that was storing military weapons and munitions, killing at least thirty-seven people and damaging more than fifty residential buildings including a care home for the elderly
+- The Nepal-Tibet flood disaster continues to worsen
+- In AI legal news, Sony Music and Warner Chappell have filed a major copyright lawsuit against Anthropic in US District Court for the Northern District of California
+- On the US-Canada front, the consumer boycott is now deeply embedded in Canadian daily life
+- Rounding out today's news, Iceland is holding a referendum on whether to resume European Union membership talks, and the vote is on a knife edge as counting continues
+- Looking ahead, the Anthropic copyright case could set important precedent for how music industry IP is treated in AI training, while the Nepal disaster's rising missing count suggests the final toll may be far worse than current figures indicate</description>
+      <pubDate>Sun, 30 Aug 2026 05:32:24 +0000</pubDate>
+      <guid>news-briefing-2026-08-30</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f9ae2f6e3a2f_daily_news_briefing_-_2026-08-30.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:31</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-30.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“METR and Redwood Offer Holy #%^@ Postmortem Of The HuggingFace Hack” by Zvi</title>
+      <description>Audio version of “METR and Redwood Offer Holy #%^@ Postmortem Of The HuggingFace Hack” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sat, 29 Aug 2026 12:42:12 +0000</pubDate>
+      <guid>b7c84480-20ac-416c-af18-360dce0fda43</guid>
+      <link>https://www.lesswrong.com/posts/bvBQmLrF5QKut8gRH/metr-and-redwood-offer-holy-postmortem-of-the-huggingface</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/11b92a2b34b6_metr_and_redwood_offer_holy_postmortem_of_th.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:05:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Tales of rebellion against externally-opaque meritocracies</title>
       <description>Audio version of Tales of rebellion against externally-opaque meritocracies by Steven Byrnes from LessWrong Frontpage</description>
       <pubDate>Sat, 29 Aug 2026 11:37:39 +0000</pubDate>
