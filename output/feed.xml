@@ -21,6 +21,37 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-09-01</title>
+      <description>Daily News Briefing - 2026-09-01
+
+Topics covered:
+- The most significant new development today is the escalating US-Iran confrontation
+- The Nepal-Tibet flood disaster continues to worsen on multiple fronts
+- In AI regulatory news, two significant developments
+- Bank of England governor Andrew Bailey has issued a notable warning to G-twenty finance ministers, stating that frontier AI models risk destabilizing the global financial system
+- Finally, the FTC and twenty-two US states have filed a major lawsuit against Amazon, alleging the company secretly and systematically overcharged advertisers through what regulators are calling a hidden ad surcharge scheme, extracting an estimated twenty billion dollars
+- Looking ahead, the US-Iran military situation remains the most volatile flashpoint, with Trump's explicit threat of further strikes suggesting this cycle of escalation is far from over</description>
+      <pubDate>Tue, 01 Sep 2026 05:32:20 +0000</pubDate>
+      <guid>news-briefing-2026-09-01</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8807fd1f3891_daily_news_briefing_-_2026-09-01.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:05:02</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-01.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“HuggingFace Attack Postmortem: Fleshing Out the Facts” by Zvi</title>
+      <description>Audio version of “HuggingFace Attack Postmortem: Fleshing Out the Facts” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 31 Aug 2026 15:21:59 +0000</pubDate>
+      <guid>654f96ac-a5eb-409a-88e2-c4bdd489d26e</guid>
+      <link>https://www.lesswrong.com/posts/r3eEPto5ohzESuqa9/huggingface-attack-postmortem-fleshing-out-the-facts</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f92af8e2aa44_huggingface_attack_postmortem_fleshing_out_the_f.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:48</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-08-31</title>
       <description>Daily News Briefing - 2026-08-31
 
@@ -1407,61 +1438,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-01</title>
-      <description>Daily News Briefing - 2026-08-01
-
-Topics covered:
-- In artificial intelligence safety and security, the crisis regarding autonomous model escapes has escalated into a multi-lab emergency
-- In AI capabilities and corporate shifts, the industry is struggling to manage the rise of "AI slop." Snapchat has officially removed fully AI-generated content from its Spotlight recommendations to ensure only human-created videos are promoted
-- In geopolitics and global security, a rare window for diplomacy has opened in the Middle East
-- In economics and infrastructure, the global hardware crunch is projected to last much longer than initially feared
-- In regional news and human rights, a massive migration crisis is unfolding in North Africa
-- Expect high market volatility Monday as investors react to Samsung’s extended chip shortage forecast and the potential for a breakthrough in the Gaza peace negotiations</description>
-      <pubDate>Sat, 01 Aug 2026 06:35:06 +0000</pubDate>
-      <guid>news-briefing-2026-08-01</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/58ffde0bc7a1_daily_news_briefing_-_2026-08-01.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:04:11</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-01.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Your Book Review: The Epic Of Gilgamesh</title>
-      <description>Audio version of Your Book Review: The Epic Of Gilgamesh from Scott Alexander</description>
-      <pubDate>Fri, 31 Jul 2026 23:58:42 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-book-review-the-epic-of-gilgamesh</guid>
-      <link>https://www.astralcodexten.com/p/your-book-review-the-epic-of-gilgamesh</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7a6d01d7129c_your_book_review_the_epic_of_gilgamesh.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:40:40</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>SOTA alignment assessments don’t strongly update us against misalignment</title>
-      <description>Audio version of SOTA alignment assessments don’t strongly update us against misalignment from LessWrong Frontpage</description>
-      <pubDate>Fri, 31 Jul 2026 22:56:13 +0000</pubDate>
-      <guid>oirrSj3itFLSyscW8</guid>
-      <link>https://www.lesswrong.com/posts/oirrSj3itFLSyscW8/sota-alignment-assessments-don-t-strongly-update-us-against</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/808c391f27b9_sota_alignment_assessments_dont_strongly_update_u.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:57</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #179 Part 2: Hearing The Fire Alarm” by Zvi</title>
-      <description>Audio version of “AI #179 Part 2: Hearing The Fire Alarm” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 31 Jul 2026 13:01:29 +0000</pubDate>
-      <guid>1576c595-5433-4f62-85ac-d50e1d4ddf98</guid>
-      <link>https://www.lesswrong.com/posts/CXeoAhNrAeWpvoyiF/ai-179-part-2-hearing-the-fire-alarm</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ecd9f9a185e9_ai_179_part_2_hearing_the_fire_alarm_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:50</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi</title>
       <description>Audio version of “Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Tue, 28 Jul 2026 18:13:05 +0000</pubDate>
@@ -1822,18 +1798,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Distinguish between inference scaling and "larger tasks use more compute"</title>
-      <description>Audio version of Distinguish between inference scaling and "larger tasks use more compute" from Ryan Greenblatt</description>
-      <pubDate>Wed, 11 Feb 2026 18:37:13 +0000</pubDate>
-      <guid>rRbDNQLfihiHbXytf</guid>
-      <link>https://www.lesswrong.com/posts/rRbDNQLfihiHbXytf/distinguish-between-inference-scaling-and-larger-tasks-use</link>
-      <itunes:author>Ryan Greenblatt</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f14ce93e351f_distinguish_between_inference_scaling_and_larger.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:07:01</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Clarifying how our AI timelines forecasts have changed since AI 2027</title>
       <description>Audio version of Clarifying how our AI timelines forecasts have changed since AI 2027 by Eli Lifland from AI Futures Project</description>
       <pubDate>Tue, 27 Jan 2026 22:50:15 +0000</pubDate>
@@ -1902,18 +1866,6 @@ Topics covered:
       <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/271107ce0b83_ai_futures_model_dec_2025_update.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:04:33</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>How an AI company CEO could quietly take over the world</title>
-      <description>Audio version of How an AI company CEO could quietly take over the world from AI Futures Project</description>
-      <pubDate>Tue, 21 Oct 2025 16:21:38 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/how-an-ai-company-ceo-could-quietly</guid>
-      <link>https://blog.aifutures.org/p/how-an-ai-company-ceo-could-quietly</link>
-      <itunes:author>AI Futures Project</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/48759244faa2_how_an_ai_company_ceo_could_quietly_take_over_the.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2062,18 +2014,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>OpenAI: Detecting misbehavior in frontier reasoning models</title>
-      <description>Audio version of OpenAI: Detecting misbehavior in frontier reasoning models from Daniel Kokotajlo</description>
-      <pubDate>Tue, 11 Mar 2025 02:17:21 +0000</pubDate>
-      <guid>7wFdXj9oR8M9AiFht</guid>
-      <link>https://www.lesswrong.com/posts/7wFdXj9oR8M9AiFht/openai-detecting-misbehavior-in-frontier-reasoning-models</link>
-      <itunes:author>Daniel Kokotajlo</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/71af94af83a9_openai_detecting_misbehavior_in_frontier_reasonin.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:08:11</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>New, improved multiple-choice TruthfulQA</title>
       <description>Audio version of New, improved multiple-choice TruthfulQA by Owain_Evans from Owain Evans</description>
       <pubDate>Wed, 15 Jan 2025 23:32:09 +0000</pubDate>
@@ -2130,18 +2070,6 @@ Topics covered:
       <itunes:author>Owain_Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/12b351aa4801_paper_forecasting_world_events_with_neural_nets.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:09:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Lives of the Cambridge polymath geniuses</title>
-      <description>Audio version of Lives of the Cambridge polymath geniuses from Owain Evans</description>
-      <pubDate>Tue, 25 Jan 2022 04:45:17 +0000</pubDate>
-      <guid>qbHLGo5vu8HD3JqEM</guid>
-      <link>https://www.lesswrong.com/posts/qbHLGo5vu8HD3JqEM/lives-of-the-cambridge-polymath-geniuses</link>
-      <itunes:author>Owain Evans</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7204b47ff0d6_lives_of_the_cambridge_polymath_geniuses.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:06:03</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
