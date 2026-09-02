@@ -464,7 +464,16 @@ async def async_main(config_path: Path | None = None) -> None:
                 max_article_chars=config.news_briefing.max_article_chars,
                 verify=config.fidelity_check,
             )
-            briefing_entry = await aggregator.generate_briefing()
+            # Idempotent per day: the briefing id is date-keyed, so once it is in
+            # the database a second run today (a reprocess, a test run, the late
+            # GitHub fire) must not pay for selection, fetches, writing and
+            # checking again only to throw the result away.
+            today_id = f"news-briefing-{datetime.now():%Y-%m-%d}"
+            if monitor.is_processed(today_id):
+                print(f"  {today_id} already exists; skipping briefing generation")
+                briefing_entry = None
+            else:
+                briefing_entry = await aggregator.generate_briefing()
             dead_sources += aggregator.dead_sources
             if briefing_entry and not monitor.is_processed(briefing_entry.id):
                 entries_to_process.insert(0, (briefing_entry, "verbatim", config.default_prompt))
