@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, timezone
 
 import feedparser
 
+from .bundle import writer_bundle
 from .llm import get_client, MODEL_STRONG
 from .monitor import FeedEntry, warn_if_dead
 
@@ -22,6 +23,7 @@ class NewsAggregator:
         self.sources = sources
         self.prompt = prompt
         self.lookback_hours = lookback_hours
+        self.last_bundle: str | None = None
         self.recent_briefings = recent_briefings or []
         self.client = get_client()
         # Sources that returned nothing this run. A dead feed reads as a slow
@@ -134,7 +136,12 @@ class NewsAggregator:
                 {"role": "user", "content": user_message},
             ],
         )
-        return response.choices[0].message.content
+        briefing = response.choices[0].message.content
+        self.last_bundle = writer_bundle(
+            title=f"Daily News Briefing - {datetime.now():%Y-%m-%d}",
+            model=MODEL_STRONG, system_prompt=self.prompt,
+            user_message=user_message, response=briefing)
+        return briefing
 
     async def generate_briefing(self) -> FeedEntry | None:
         """Orchestrate fetch → format → synthesize, return a FeedEntry or None."""
@@ -150,9 +157,11 @@ class NewsAggregator:
         formatted = self._format_articles_for_prompt(articles)
         print("  Synthesizing briefing via LLM...")
         briefing_text = await self.synthesize_briefing(formatted)
+        bundle = self.last_bundle
 
         today = datetime.now().strftime("%Y-%m-%d")
         return FeedEntry(
+            bundle=bundle,
             id=f"news-briefing-{today}",
             title=f"Daily News Briefing - {today}",
             link="",

@@ -14,6 +14,7 @@ import yaml
 from pydantic import BaseModel
 
 from .audio import AudioGenerator
+from .bundle import write_bundle
 from .digest import safe_bullets
 from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
 from .extractor import ExtractionError, url_to_feed_entry
@@ -21,7 +22,7 @@ from .feed import Episode, FeedGenerator, PodcastConfig
 from .fulltext import enrich_entry
 from .lesswrong import posted_at
 from .mathiness import MathsVerdict, assess
-from .monitor import DEFAULT_MAX_AGE_HOURS, FeedEntry, FeedMonitor
+from .monitor import DEFAULT_MAX_AGE_HOURS, FeedEntry, FeedMonitor, episode_id
 from .news import NewsAggregator
 from .normalizer import TextNormalizer
 from .processor import ContentProcessor
@@ -106,7 +107,7 @@ def load_config(config_path: Path) -> Config:
 
 def generate_episode_id(entry_id: str) -> str:
     """Generate a short, unique episode ID from entry ID."""
-    return hashlib.sha256(entry_id.encode()).hexdigest()[:12]
+    return episode_id(entry_id)
 
 
 async def process_entry(
@@ -274,6 +275,7 @@ async def async_main(config_path: Path | None = None) -> None:
     config_path = config_path or project_root / "config.yaml"
     db_path = project_root / "data" / "posts.db"
     audio_dir = project_root / "data" / "audio"
+    sources_dir = project_root / "data" / "sources"
     output_dir = project_root / "output"
 
     # Check for reprocess request
@@ -519,6 +521,8 @@ async def async_main(config_path: Path | None = None) -> None:
                 continue
             entry, audio_path = result
             monitor.mark_processed(entry, audio_path.name, content=entry.content)
+            if entry.bundle:
+                write_bundle(sources_dir, generate_episode_id(entry.id), entry.bundle)
             new_entry_ids.add(entry.id)
             # Store news briefing text for future dedup context
             if entry.id.startswith("news-briefing-") and briefing_entry:
@@ -541,7 +545,8 @@ async def async_main(config_path: Path | None = None) -> None:
     # references audio/transcripts that cleanup deletes in this same run
     # (otherwise the deployed feed.xml advertises 404 enclosures).
     transcript_dir = output_dir / "transcripts"
-    removed = monitor.cleanup_old_entries(days=30, audio_dir=audio_dir, transcript_dir=transcript_dir)
+    removed = monitor.cleanup_old_entries(days=30, audio_dir=audio_dir,
+                                          transcript_dir=transcript_dir, sources_dir=sources_dir)
     if removed:
         print(f"  Cleaned up {removed} old entries")
     removed_briefings = monitor.cleanup_old_briefings(days=7)
