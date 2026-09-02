@@ -10,7 +10,11 @@ from src.verify import (MODEL_CHECKER, MODEL_WRITER, Fidelity, fidelity_markdown
 
 
 class FakeClient:
-    """Replies in order; records every call's model and messages."""
+    """Replies in order; records every call's model and messages.
+
+    A reply may be a string, an exception, or ("length", "") to simulate a
+    budget exhausted by hidden reasoning.
+    """
 
     def __init__(self, replies):
         self.replies = list(replies)
@@ -22,7 +26,10 @@ class FakeClient:
         reply = self.replies.pop(0)
         if isinstance(reply, Exception):
             raise reply
-        return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=reply))])
+        finish, content = reply if isinstance(reply, tuple) else ("stop", reply)
+        return SimpleNamespace(
+            choices=[SimpleNamespace(message=SimpleNamespace(content=content), finish_reason=finish)],
+            usage=SimpleNamespace(completion_tokens=1))
 
 
 CLEAN = '{"claims_total": 12, "flags": []}'
@@ -103,3 +110,17 @@ def test_bundle_section_keeps_the_draft_when_revised():
     assert "Status: revised" in md and "[distorted, high]" in md
     assert "### Draft before revision\n\nthe first draft" in md
     assert fidelity_markdown(None) == ""
+
+
+def test_empty_reply_from_exhausted_reasoning_retries_without_reasoning():
+    client = FakeClient([("length", ""), CLEAN])
+    script, fid = asyncio.run(verify_script("s", "src", writer_system_prompt="p", client=client))
+    assert fid.status == "clean" and script == "s"
+    assert client.calls[0]["extra_body"] == {"reasoning": {"max_tokens": 4000}}
+    assert client.calls[1]["extra_body"] == {"reasoning": {"enabled": False}}
+
+
+def test_unparseable_but_nonempty_reply_is_not_retried():
+    client = FakeClient(["I refuse to answer in JSON."])
+    _, fid = asyncio.run(verify_script("s", "src", writer_system_prompt="p", client=client))
+    assert fid.status == "skipped" and "no JSON object" in fid.note and len(client.calls) == 1

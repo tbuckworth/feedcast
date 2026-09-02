@@ -99,22 +99,41 @@ def parse_flags(raw: str) -> tuple[int, list[dict]]:
     return total, flags
 
 
+# Sonnet reasons before it answers, and the reasoning counts against
+# max_tokens. Left to the provider's defaults it consumed the whole budget:
+# on 2026-09-02 a 6,000 cap truncated the JSON, and a 16,000 cap came back
+# with finish_reason=length and zero visible characters from the CI runner
+# (the desktop, on a different key and route, used ~5,000). So: a fixed
+# thinking budget first, and if the reply is still empty, once more with
+# reasoning off. Verification does not need a long think.
+CHECK_ATTEMPTS = (
+    {"reasoning": {"max_tokens": 4000}},
+    {"reasoning": {"enabled": False}},
+)
+
+
 async def check(script: str, source: str, client) -> tuple[int, list[dict]]:
     user = f"SOURCE:\n{source}\n\nSCRIPT:\n{script}"
-    # Sonnet reasons before it answers and the reasoning counts against
-    # max_tokens: a 1,900-character reply cost 5,300 output tokens on
-    # 2026-09-02, and a 6,000 cap truncated the JSON on both scripts that day.
-    response = await client.chat.completions.create(
-        model=MODEL_CHECKER, max_tokens=16000, temperature=0,
-        messages=[{"role": "system", "content": CHECK_PROMPT},
-                  {"role": "user", "content": user}])
-    choice = response.choices[0]
-    content = choice.message.content or ""
-    try:
-        return parse_flags(content)
-    except ValueError as e:
-        raise ValueError(f"{e} (finish_reason={choice.finish_reason}, "
-                         f"{len(content)} chars: {content[:160]!r})") from e
+    last = ""
+    for extra in CHECK_ATTEMPTS:
+        response = await client.chat.completions.create(
+            model=MODEL_CHECKER, max_tokens=16000, temperature=0,
+            messages=[{"role": "system", "content": CHECK_PROMPT},
+                      {"role": "user", "content": user}],
+            extra_body=extra)
+        choice = response.choices[0]
+        content = choice.message.content or ""
+        usage = getattr(response, "usage", None)
+        print(f"    checker: finish={choice.finish_reason} "
+              f"out={getattr(usage, 'completion_tokens', '?')} chars={len(content)} {extra}")
+        try:
+            return parse_flags(content)
+        except ValueError as e:
+            last = (f"{e} (finish_reason={choice.finish_reason}, "
+                    f"{len(content)} chars: {content[:160]!r})")
+            if content.strip():
+                break  # a real but unparseable reply; retrying will not help
+    raise ValueError(last)
 
 
 def _flags_text(flags: list[dict]) -> str:
