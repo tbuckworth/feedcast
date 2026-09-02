@@ -3,7 +3,8 @@
 #
 # `schedule:` is best-effort: GitHub drops fires under load, and dropped them
 # outright on 27 and 28 Aug 2026 (no run object at all, nothing to retry). This
-# runs from the desktop crontab a couple of hours after the cron slot, asks
+# runs from the desktop crontab at 05:30 Europe/London (about two hours after
+# the cron slot; the email should be out by 06:00 local), asks
 # whether any run exists for today, and dispatches one only if none does.
 #
 # Safe to run when the scheduled run is merely late rather than missing: the
