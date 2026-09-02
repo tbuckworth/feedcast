@@ -198,6 +198,30 @@ class FeedMonitor:
             )
             return cursor.fetchone() is not None
 
+    def get_entry(self, key: str) -> Optional[dict]:
+        """The stored row for an entry id or link, or None."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            row = conn.execute(
+                "SELECT * FROM processed_posts WHERE id = ? OR link = ?", (key, key)
+            ).fetchone()
+            return dict(row) if row else None
+
+    def restore_entry(self, row: dict) -> None:
+        """Put a row from get_entry back, unchanged.
+
+        Reprocessing deletes the row first so the entry looks new again; if the
+        feeds then do not offer it, the episode must not simply vanish.
+        """
+        cols = list(row.keys())
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute(
+                f"INSERT OR REPLACE INTO processed_posts ({', '.join(cols)}) "
+                f"VALUES ({', '.join('?' for _ in cols)})",
+                [row[c] for c in cols],
+            )
+            conn.commit()
+
     def delete_entry(self, entry_id: str) -> bool:
         """Delete an entry from the database. Returns True if deleted."""
         with sqlite3.connect(self.db_path) as conn:

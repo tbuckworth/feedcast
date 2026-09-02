@@ -310,6 +310,7 @@ async def async_main(config_path: Path | None = None) -> None:
     monitor = FeedMonitor(db_path)
 
     # Handle reprocess request - delete entry so it gets picked up again
+    reprocess_row = monitor.get_entry(reprocess_entry) if reprocess_entry else None
     if reprocess_entry:
         if monitor.delete_entry(reprocess_entry):
             print(f"  Deleted entry from database, will reprocess")
@@ -412,6 +413,39 @@ async def async_main(config_path: Path | None = None) -> None:
             prompt = feed_config.prompt or config.default_prompt
             entries_to_process.append((entry, mode, prompt))
 
+        # The requested entry is usually older than the freshness window — that
+        # is why someone is asking for it again — so the normal fetch above never
+        # sees it. Look for it once more with the cutoff off, and take only it.
+        # On 2026-09-02 the window silently turned a reprocess into a deletion.
+        reprocess_missing = None
+        if reprocess_entry:
+            async def fetch_all(fc: FeedConfig) -> list[FeedEntry]:
+                return await asyncio.to_thread(
+                    monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns, None)
+            found = None
+            for fc, result in zip(config.feeds, await asyncio.gather(
+                    *[fetch_all(fc) for fc in config.feeds], return_exceptions=True)):
+                if isinstance(result, BaseException):
+                    continue
+                for e in result:
+                    if e.id == reprocess_entry or e.link == reprocess_entry:
+                        found = (fc, e)
+                        break
+                if found:
+                    break
+            if found and found[1].id not in seen_ids:
+                fc, e = found
+                mode = "verbatim" if force_verbatim else fc.mode
+                entries_to_process.append((e, mode, fc.prompt or config.default_prompt))
+                print(f"  Reprocessing: {e.title} ({fc.name}, mode {mode})")
+            elif not found:
+                reprocess_missing = reprocess_entry
+                if reprocess_row:
+                    monitor.restore_entry(reprocess_row)
+                    print("  Requested entry is in no feed any more; previous episode kept")
+                else:
+                    print("  Requested entry is in no feed")
+
         # LessWrong Curated dates an item by when it was curated. Keep that as
         # the "is this new to us" date and ask LessWrong when the post was
         # actually written, so the email states a release date rather than a
@@ -501,6 +535,8 @@ async def async_main(config_path: Path | None = None) -> None:
 
     new_entry_ids: set[str] = set()
     failures: list[tuple[str, str]] = []
+    if not inject_url and reprocess_entry and reprocess_missing:
+        failures.append((reprocess_missing, "not found in any feed; the existing episode was kept"))
 
     if not entries_to_process:
         print("No new entries to process.")
@@ -568,6 +604,7 @@ async def async_main(config_path: Path | None = None) -> None:
     feed_path = output_dir / "feed.xml"
     feed_gen.generate(episodes, feed_path)
     print(f"  Generated feed with {len(episodes)} episodes: {feed_path}")
+    feed_gen.write_index(episodes, output_dir / "index.html")
 
     # Email the run report. Skipped silently when the SMTP vars are unset.
     if new_entry_ids or failures or maths_skipped or dead_sources or _email_always():
