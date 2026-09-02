@@ -27,6 +27,8 @@ INJECT_URL="https://example.com/article" INJECT_MODE="auto" uv run python -m src
 
 System dependency: `ffmpeg` is required for audio concatenation and MP3 encoding.
 
+The database (`data/posts.db`) and MP3s (`data/audio/`) are gitignored on main and live on the orphan `state` branch: run `scripts/state.sh pull` before the pipeline locally, and `scripts/state.sh push` only to publish. CI does both.
+
 ## Architecture
 
 The pipeline runs in three async phases orchestrated by `src/main.py`:
@@ -37,7 +39,7 @@ The pipeline runs in three async phases orchestrated by `src/main.py`:
 
 2. **Phase 2 — Parallel content + audio**: For each new entry, `ContentProcessor` either summarizes via Gemini 3 Flash (OpenRouter) or cleans HTML for verbatim reading, then `AudioGenerator` chunks the text (max 500 chars, split at sentence boundaries), calls DeepInfra Chatterbox TTS with voice cloning for each chunk, and concatenates with ffmpeg. A semaphore (limit 10) controls TTS concurrency.
 
-3. **Phase 3 — Sequential finalization**: Marks entries as processed in SQLite, generates `output/feed.xml`, and cleans up entries older than 30 days (including deleting associated audio files). In inject mode, sends a push notification via ntfy.sh on success or failure.
+3. **Phase 3 — Sequential finalization**: Marks entries as processed in SQLite, generates `output/feed.xml`, and cleans up entries older than 30 days (including deleting associated audio files). For every episode a writer model produced (summaries and the briefing), the exact prompt and reply are saved to `data/sources/<episode-id>.md` (`src/bundle.py`) and deleted by the same cleanup. In inject mode, sends a push notification via ntfy.sh on success or failure.
 
 ### Key modules
 

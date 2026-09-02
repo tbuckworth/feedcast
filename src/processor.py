@@ -6,6 +6,7 @@ from typing import Optional
 
 from bs4 import BeautifulSoup, Tag
 
+from .bundle import writer_bundle
 from .llm import get_client, MODEL_STRONG, MODEL_CHEAP
 from .monitor import FeedEntry
 
@@ -136,7 +137,11 @@ Content:
             ],
         )
 
-        return response.choices[0].message.content
+        summary = response.choices[0].message.content
+        entry.bundle = writer_bundle(
+            title=entry.title, model=MODEL_STRONG, system_prompt=system_prompt,
+            user_message=user_message, response=summary)
+        return summary
 
     async def process_verbatim(self, entry: FeedEntry) -> str:
         """Process content for verbatim reading - clean and format for TTS."""

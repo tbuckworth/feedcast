@@ -116,6 +116,10 @@ jobs:
         timeout-minutes: 5
         run: git pull origin main
 
+      - name: Restore database and audio from the state branch
+        timeout-minutes: 10
+        run: scripts/state.sh pull
+
       - name: Install uv
         uses: astral-sh/setup-uv@v4
 
@@ -195,16 +199,23 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/ data/
+          # The database and MP3s are gitignored here; they go to the
+          # `state` branch below. Main gets the feed, transcripts and the
+          # small per-episode source bundles.
+          git add output/ data/sources/
           git diff --staged --quiet || git commit -m "Update podcast feed"
           # Pull latest — if rebase fails (e.g. binary conflicts), fall back to merge
           if ! git pull --rebase origin main; then
             echo "Rebase failed, falling back to merge..."
             git rebase --abort
             git pull --no-rebase origin main -X ours
-            git add output/ data/
+            git add output/ data/sources/
             git diff --staged --quiet || git commit -m "Update podcast feed (merge)"
           fi
+          # State first: if this push lands and the main push fails, the
+          # next run regenerates feed.xml from the database anyway. The
+          # other order can advertise audio that was never published.
+          scripts/state.sh push
           git push
 
   deploy:
@@ -225,8 +236,9 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Copy audio to output
+      - name: Copy audio from the state branch to output
         run: |
+          scripts/state.sh pull
           mkdir -p output/audio
           cp data/audio/*.mp3 output/audio/ 2>/dev/null || true
 

@@ -22,8 +22,10 @@ dist/
 build/
 *.egg-info/
 
-# Keep data directory structure but ignore contents
-# (we'll use .gitkeep files)
+# The database and the MP3s live on the orphan `state` branch, not in main's
+# history (scripts/state.sh). data/sources/ (small text) stays on main.
+data/posts.db
+data/audio/
 
 # Voice samples - keep derek_perkins.wav input, ignore generated output
 voice_samples/output/

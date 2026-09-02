@@ -211,6 +211,21 @@ so the email arrives by about 06:00, and GitHub's own late fire is then stopped
 by the guard. A redundant dispatch is harmless: the concurrency group queues
 it, and a run with nothing new publishes nothing and sends no email.
 
+**Where the data lives.** The SQLite database and the MP3s are not in
+main's history. They sit on the orphan branch `state` as a single commit that
+`scripts/state.sh push` replaces on every run, so the repository stops growing
+by a day's audio every day (main's history had reached 4.2 GB of deleted MP3s
+by Sep 2026 and was rewritten). Main keeps the code, `output/` (feed and
+transcripts) and `data/sources/`, one small Markdown file per written episode
+holding exactly what the writer model was shown and what it wrote, so a summary
+can be audited against its source later. To run the pipeline locally:
+
+```bash
+scripts/state.sh pull      # fetch data/posts.db and data/audio/ from the state branch
+uv run python -m src.main
+scripts/state.sh push      # only if you mean to publish the result
+```
+
 **GitHub Secrets required:**
 - `OPENROUTER_API_KEY`
 - `DEEPINFRA_API_KEY`

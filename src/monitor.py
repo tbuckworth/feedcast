@@ -1,5 +1,6 @@
 """RSS feed monitoring with SQLite tracking."""
 
+import hashlib
 import json
 import re
 import sqlite3
@@ -57,6 +58,11 @@ def extract_authors(entry, feed_name: str) -> list[str]:
     return names or [feed_name]
 
 
+def episode_id(entry_id: str) -> str:
+    """Short stable id shared by an episode's audio, transcript and bundle files."""
+    return hashlib.sha256(entry_id.encode()).hexdigest()[:12]
+
+
 @dataclass
 class FeedEntry:
     """Represents a single RSS feed entry."""
@@ -81,6 +87,9 @@ class FeedEntry:
     # the feed dates an item by its curation and `published` is corrected to
     # the real posting date.
     feed_date: Optional[datetime] = None
+    # What the writer model was shown and what it wrote (see src/bundle.py).
+    # None for verbatim episodes, which involve no writer.
+    bundle: Optional[str] = None
 
 
 def warn_if_dead(feed, name: str, url: str) -> bool:
@@ -379,6 +388,7 @@ class FeedMonitor:
     def cleanup_old_entries(
         self, days: int = 30, audio_dir: Optional[Path] = None,
         transcript_dir: Optional[Path] = None,
+        sources_dir: Optional[Path] = None,
     ) -> int:
         """Remove entries added more than `days` ago and their audio/transcript files. Returns count removed.
 
@@ -393,7 +403,7 @@ class FeedMonitor:
 
         with sqlite3.connect(self.db_path) as conn:
             # Delete associated files before removing DB rows
-            if audio_dir or transcript_dir:
+            if audio_dir or transcript_dir or sources_dir:
                 cursor = conn.execute(
                     "SELECT id, audio_file FROM processed_posts WHERE processed_at < ?",
                     (cutoff_date,),
@@ -407,6 +417,10 @@ class FeedMonitor:
                         txt_path = transcript_dir / f"{entry_id}.txt"
                         if txt_path.exists():
                             txt_path.unlink()
+                    if sources_dir:
+                        md_path = sources_dir / f"{episode_id(entry_id)}.md"
+                        if md_path.exists():
+                            md_path.unlink()
 
             cursor = conn.execute(
                 "DELETE FROM processed_posts WHERE processed_at < ?", (cutoff_date,)
