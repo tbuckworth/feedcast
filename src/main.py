@@ -85,6 +85,9 @@ class NewsBriefingConfig(BaseModel):
     lookback_hours: int = 48
     prompt: str
     sources: list[NewsSource]
+    # Stories fetched in full for the writer; 0 = blurbs only, the old behaviour.
+    full_text_stories: int = 12
+    max_article_chars: int = 6000
 
 
 class Config(BaseModel):
@@ -96,6 +99,8 @@ class Config(BaseModel):
     feeds: list[FeedConfig]
     news_briefing: NewsBriefingConfig | None = None
     maths_filter: MathsFilterConfig = MathsFilterConfig()
+    # Second-model check of every written script against its source.
+    fidelity_check: bool = True
 
 
 def load_config(config_path: Path) -> Config:
@@ -328,7 +333,7 @@ async def async_main(config_path: Path | None = None) -> None:
         await _resend_report(monitor, config, feed_gen, audio_dir, output_dir)
         return
 
-    processor = ContentProcessor(config.default_prompt)
+    processor = ContentProcessor(config.default_prompt, verify=config.fidelity_check)
     normalizer = TextNormalizer()
     audio_gen = AudioGenerator(voice=config.tts.voice, speed=config.tts.speed)
 
@@ -421,6 +426,9 @@ async def async_main(config_path: Path | None = None) -> None:
                 prompt=config.news_briefing.prompt,
                 lookback_hours=config.news_briefing.lookback_hours,
                 recent_briefings=recent_briefings,
+                full_text_stories=config.news_briefing.full_text_stories,
+                max_article_chars=config.news_briefing.max_article_chars,
+                verify=config.fidelity_check,
             )
             briefing_entry = await aggregator.generate_briefing()
             dead_sources += aggregator.dead_sources
@@ -622,6 +630,15 @@ def _email_always() -> bool:
     return os.environ.get("FEEDCAST_EMAIL_ALWAYS", "").strip().lower() in ("true", "1", "yes")
 
 
+def _fidelity_of(row: dict) -> dict | None:
+    """Read a stored fidelity check; None for rows without one."""
+    try:
+        parsed = json.loads(row.get("fidelity") or "null")
+    except (ValueError, TypeError):
+        return None
+    return parsed if isinstance(parsed, dict) else None
+
+
 def _bullets_of(row: dict) -> list:
     """Read a stored digest. Rows written before the column existed have ''.
 
@@ -679,6 +696,7 @@ def _build_run_report(
             bullets=_bullets_of(row),
             published=ep.published,
             curated=_curated_date(row, ep.published),
+            fidelity=_fidelity_of(row),
         )
 
     ordered = sorted(episodes, key=lambda e: e.published, reverse=True)

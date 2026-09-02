@@ -211,6 +211,32 @@ so the email arrives by about 06:00, and GitHub's own late fire is then stopped
 by the guard. A redundant dispatch is harmless: the concurrency group queues
 it, and a run with nothing new publishes nothing and sends no email.
 
+**Test runs.** Dispatch the workflow with `test_run` ticked (or set
+`FEEDCAST_TEST_RUN=true` locally) to exercise the whole pipeline — fetch, write,
+narrate, publish — while the email goes only to `FEEDCAST_EMAIL_TO`, with a
+`[TEST]` subject and no BCC recipients. Combine it with `entry_url` to
+re-narrate one post as an end-to-end check without emailing anyone else.
+
+**Fidelity check.** Every script a writer model produces (summaries and the
+briefing) is read against its source by a second model, Claude Sonnet 5, which
+lists claims that are contradicted, distorted (misattributed, hedge dropped,
+number changed) or unsupported. Omissions and paraphrase are not flagged. If
+anything material comes back, the writer gets one pass to fix exactly those
+points and the checker reads the result again; the email then says "Checked
+against source: no issues", "2 issues corrected" or "1 still flagged", and the
+episode's bundle under `data/sources/` records the flags and the pre-revision
+draft. About $0.10 per episode. `fidelity_check: false` in `config.yaml`
+turns it off.
+
+**Briefing from full text.** The briefing writer used to see only each RSS
+item's title and the publisher's blurb (at most 500 characters), so detail
+beyond that came from the model's memory. It now makes two calls: first it
+picks `news_briefing.full_text_stories` stories from the blurbs, then the
+pipeline fetches those articles in full (capped at `max_article_chars` each,
+blurb kept where a page cannot be fetched) and the writer works from that text
+plus the remaining headlines. Roughly three times the tokens of the old single
+call.
+
 **Where the data lives.** The SQLite database and the MP3s are not in
 main's history. They sit on the orphan branch `state` as a single commit that
 `scripts/state.sh push` replaces on every run, so the repository stops growing

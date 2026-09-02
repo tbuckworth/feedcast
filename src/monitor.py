@@ -90,6 +90,8 @@ class FeedEntry:
     # What the writer model was shown and what it wrote (see src/bundle.py).
     # None for verbatim episodes, which involve no writer.
     bundle: Optional[str] = None
+    # Result of the source check (src/verify.py), as a plain dict.
+    fidelity: Optional[dict] = None
 
 
 def warn_if_dead(feed, name: str, url: str) -> bool:
@@ -174,6 +176,10 @@ class FeedMonitor:
                 conn.execute("ALTER TABLE processed_posts ADD COLUMN feed_date TEXT DEFAULT ''")
             except sqlite3.OperationalError:
                 pass  # Column already exists
+            try:
+                conn.execute("ALTER TABLE processed_posts ADD COLUMN fidelity TEXT DEFAULT ''")
+            except sqlite3.OperationalError:
+                pass  # Column already exists
             conn.commit()
 
     def is_processed(self, entry_id: str) -> bool:
@@ -211,8 +217,8 @@ class FeedMonitor:
             conn.execute(
                 """
                 INSERT OR REPLACE INTO processed_posts
-                (id, feed_name, title, link, published, processed_at, audio_file, content, author, bullets, maths, feed_date)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (id, feed_name, title, link, published, processed_at, audio_file, content, author, bullets, maths, feed_date, fidelity)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     entry.id,
@@ -227,6 +233,7 @@ class FeedMonitor:
                     json.dumps(entry.bullets) if entry.bullets else "",
                     json.dumps(maths) if maths else "",
                     entry.feed_date.isoformat() if entry.feed_date else "",
+                    json.dumps(entry.fidelity) if entry.fidelity else "",
                 ),
             )
             conn.commit()

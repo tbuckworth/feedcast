@@ -100,6 +100,10 @@ feeds:
 # Posts built on real mathematics are linked in the email rather than narrated —
 # even a good spoken explanation is hard to follow without seeing the notation.
 # Threshold is LaTeX matches per 1000 words, measured on the markdown source.
+# Every written script (summaries, the briefing) is read against its source by
+# a second model and corrected once if it misattributes, distorts or invents.
+fidelity_check: true
+
 maths_filter:
   enabled: true
   threshold_per_1k: 8.0
@@ -107,6 +111,10 @@ maths_filter:
 news_briefing:
   enabled: true
   lookback_hours: 24
+  # The writer picks this many stories from the blurbs, then writes from
+  # their full text (capped per article). 0 = old behaviour, blurbs only.
+  full_text_stories: 12
+  max_article_chars: 6000
   prompt: |
     You are a professional news anchor delivering a concise daily briefing
     for a technically sophisticated audience.
@@ -127,6 +135,8 @@ news_briefing:
 
     Prioritize: AI safety/policy > AI capabilities > geopolitics > economics > markets.
     Be factual. Attribute major claims to their source. Skip trivial or redundant articles.
+    Use only what the articles below say. Do not add names, numbers, quotes or
+    background from memory: if an article does not say it, the briefing does not either.
     Write out numbers, dates, and percentages in spoken form (e.g., "forty-five percent" not "45%").
     Spell out abbreviations (e.g., "for example" not "e.g.").
 

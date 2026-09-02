@@ -39,6 +39,11 @@ on:
         required: false
         type: boolean
         default: false
+      test_run:
+        description: 'Test run: publishes as normal, but the email goes only to FEEDCAST_EMAIL_TO with a [TEST] subject, never to the BCC list'
+        required: false
+        type: boolean
+        default: false
 
 concurrency:
   group: feedcast-pipeline
@@ -71,7 +76,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
           RUN_ID: ${{ github.run_id }}
-          ON_DEMAND: ${{ inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true }}
+          ON_DEMAND: ${{ inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true || inputs.test_run == true }}
         run: |
           set -euo pipefail
           if [[ "$ON_DEMAND" == "true" ]]; then
@@ -182,6 +187,7 @@ jobs:
           FEEDCAST_EMAIL_BCC: ${{ secrets.FEEDCAST_EMAIL_BCC }}
           FEEDCAST_EMAIL_ALWAYS: ${{ vars.FEEDCAST_EMAIL_ALWAYS }}
           FEEDCAST_MAX_AGE_HOURS: ${{ vars.FEEDCAST_MAX_AGE_HOURS }}
+          FEEDCAST_TEST_RUN: ${{ inputs.test_run }}
           VOICE_UPLOAD_DELAY_SECONDS: "5"
           SAVE_DEBUG_WAVS: "false"
         run: uv run python -m src.main

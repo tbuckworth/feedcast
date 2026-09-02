@@ -54,6 +54,7 @@ The pipeline runs in three async phases orchestrated by `src/main.py`:
 - **`src/feed.py`** — `FeedGenerator`: RSS 2.0 XML generation with iTunes namespace tags. Episode durations come from `ffprobe`. Item descriptions and `<itunes:author>` carry the post's author(s).
 - **`src/digest.py`** — `safe_bullets()`: a 3-6 bullet digest of each episode for the email. Opus 4.6, one call per episode, fired concurrently with TTS in `process_entry` so it costs no wall-clock. Takes the spoken script *before* normalisation, because bullets are read: they want "45%", not "forty-five percent". Never raises — a failed digest logs and the episode ships without one. Stored as JSON in `processed_posts.bullets`.
 - **`src/email_report.py`** — `send_report()`: HTML + plain-text run report emailed over SMTP when the pipeline finishes. Covers the day's news briefing as bullets (falling back to the full text if the digest failed), each new episode with its bullet digest, author, source link and audio link, any failures, any source that returned nothing (`dead_sources` — a 404 feed produces an empty parse, not an error, so this is the only symptom), and the past week's other episodes. Silently skipped when the SMTP env vars are unset, and never raises.
+- **`src/verify.py`** — Second-model fidelity check: Sonnet 5 reads each written script against its source, flags contradicted/distorted/unsupported claims, the writer revises once, the checker re-reads. Never raises. Result stored per episode (`fidelity` column) and shown in the email.
 - **`src/news.py`** — `NewsAggregator`: Parallel RSS fetching of news sources, article filtering by recency (configurable lookback), Opus 4.6-powered synthesis into a daily briefing. Produces a date-keyed `FeedEntry` for idempotent daily processing. Accepts recent briefing context for cross-day dedup.
 
 ### Configuration
@@ -72,6 +73,7 @@ The pipeline runs in three async phases orchestrated by `src/main.py`:
 | `INJECT_MODE` | No | Processing mode for injected URL: `auto` (default), `summarize`, or `verbatim` |
 | `NTFY_TOPIC` | No | ntfy.sh topic for push notifications on inject success/failure (e.g. `feedcast-titus`) |
 | `VOICE_UPLOAD_DELAY_SECONDS` | No | Delay after voice upload for cross-region replication (CI uses 5) |
+| `FEEDCAST_TEST_RUN` | No | `true` = publish as normal but email only `FEEDCAST_EMAIL_TO`, subject tagged `[TEST]`, no BCC |
 | `SAVE_DEBUG_WAVS` | No | Save intermediate WAV chunks for debugging |
 | `RESEND_REPORT` | No | Re-send the last run's email and nothing else. Backfills missing bullet digests, publishes nothing, generates no audio. Mail credentials only exist in CI, so this is how you re-send after a template change |
 | `LLM_TIMEOUT_SECONDS` | No | Per-request timeout for OpenRouter calls (default 180, 3 retries) |
