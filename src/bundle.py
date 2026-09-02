@@ -17,14 +17,16 @@ from pathlib import Path
 
 
 def writer_bundle(*, title: str, model: str, system_prompt: str,
-                  user_message: str, response: str) -> str:
-    """Render one writer exchange as Markdown."""
+                  user_message: str, response: str, notes: str = "") -> str:
+    """Render one writer exchange as Markdown, plus any check notes."""
+    tail = ["## Fidelity check", "", notes.rstrip(), ""] if notes.strip() else []
     return "\n".join([
         f"# {title}", "",
         f"Writer: {model}", "",
         "## System prompt", "", system_prompt.rstrip(), "",
         "## What the writer was given", "", user_message.rstrip(), "",
         "## What the writer wrote", "", response.rstrip(), "",
+        *tail,
     ])
 
 

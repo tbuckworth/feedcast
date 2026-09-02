@@ -24,6 +24,13 @@ MODEL_WRITER = "anthropic/claude-opus-4.6"
 # Gemini 3 Flash did this job for 168 episodes without incident.
 MODEL_NORMALIZER = "google/gemini-3-flash-preview"
 
+# MODEL_CHECKER reads a finished script against its source and lists what is
+# contradicted, distorted or unsupported (src/verify.py). Verification is a
+# narrower task than writing, so a mid-tier model does it well at a fraction
+# of the price; a different model from the writer also means its blind
+# spots are not the same ones.
+MODEL_CHECKER = "anthropic/claude-sonnet-5"
+
 # Back-compat aliases; prefer the role names above.
 MODEL_STRONG = MODEL_WRITER
 MODEL_CHEAP = MODEL_WRITER

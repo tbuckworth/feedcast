@@ -25,6 +25,8 @@ ACCENT = "#1f5f8b"
 
 DEFAULT_PORT = 587
 
+from .verify import fidelity_summary
+
 
 @dataclass
 class ReportEpisode:
@@ -47,6 +49,8 @@ class ReportEpisode:
     # a LessWrong curation can trail the post by weeks, and without this the
     # email looks like it dug up something from July for no reason.
     curated: datetime | None = None
+    # Result of the second-model source check, when one ran.
+    fidelity: dict | None = None
 
 
 @dataclass
@@ -163,6 +167,10 @@ def _episode_html(ep: ReportEpisode) -> str:
             for p in ep.briefing_text.split("\n\n") if p.strip()
         )
         body = f'<div style="margin:12px 0 4px 0;">{paras}</div>'
+    check = fidelity_summary(ep.fidelity)
+    if check:
+        body += (f'<div style="font-size:12px;color:{MUTED};margin-top:8px;">'
+                 f'{escape(check)}</div>')
 
     return f"""
       <tr><td style="padding:18px 0;border-bottom:1px solid {RULE};">
@@ -306,6 +314,8 @@ def build_text(report: RunReport, when: datetime) -> str:
                             for t, u in map(bullet_parts, ep.bullets))]
         elif ep.is_briefing and ep.briefing_text:
             lines += ["", *(f"  {p.strip()}" for p in ep.briefing_text.split("\n\n") if p.strip())]
+        if fidelity_summary(ep.fidelity):
+            lines.append(f"  ({fidelity_summary(ep.fidelity)})")
         lines.append("")
     if report.failures:
         lines.append("Failed:")
@@ -331,6 +341,11 @@ def build_text(report: RunReport, when: datetime) -> str:
     return "\n".join(lines)
 
 
+def is_test_run() -> bool:
+    """FEEDCAST_TEST_RUN: a run that publishes but must not reach the BCC list."""
+    return os.environ.get("FEEDCAST_TEST_RUN", "").strip().lower() in ("1", "true", "yes")
+
+
 def _addresses(raw: str) -> list[str]:
     """Split a comma- or semicolon-separated address list, dropping blanks."""
     return [a.strip() for a in raw.replace(";", ",").split(",") if a.strip()]
@@ -344,6 +359,9 @@ def send_report(report: RunReport, when: datetime | None = None) -> bool:
     when = when or datetime.now()
     to_addrs = _addresses(os.environ.get("FEEDCAST_EMAIL_TO", ""))
     bcc_addrs = _addresses(os.environ.get("FEEDCAST_EMAIL_BCC", ""))
+    test_run = is_test_run()
+    if test_run:
+        bcc_addrs = []
     user = os.environ.get("SMTP_USER", "").strip()
     password = (
         os.environ.get("SMTP_PASSWORD", "")
@@ -376,6 +394,8 @@ def send_report(report: RunReport, when: datetime | None = None) -> bool:
             subject = f"Feedcast — {when.strftime('%d %b')} — {len(report.failures)} failed"
 
         msg = EmailMessage()
+        if test_run:
+            subject = f"[TEST] {subject}"
         msg["Subject"] = subject
         msg["From"] = from_addr
         msg["To"] = ", ".join(to_addrs)

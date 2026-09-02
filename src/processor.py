@@ -7,6 +7,7 @@ from typing import Optional
 from bs4 import BeautifulSoup, Tag
 
 from .bundle import writer_bundle
+from .verify import fidelity_markdown, verify_script
 from .llm import get_client, MODEL_STRONG, MODEL_CHEAP
 from .monitor import FeedEntry
 
@@ -17,9 +18,12 @@ MAX_PROMPT_CHARS = 400000    # ~100k tokens; a cost ceiling, not a context limit
 class ContentProcessor:
     """Processes feed content - either summarizing via the LLM or cleaning for verbatim."""
 
-    def __init__(self, default_prompt: str):
+    def __init__(self, default_prompt: str, verify: bool = True):
         self.client = get_client()
         self.default_prompt = default_prompt
+        # Check summaries against their source with a second model and fix
+        # them once (src/verify.py). Off in tests and when config says so.
+        self.verify = verify
 
     def clean_html(self, html_content: str) -> str:
         """Extract clean text from HTML content."""
@@ -138,9 +142,16 @@ Content:
         )
 
         summary = response.choices[0].message.content
+        draft, fidelity = summary, None
+        if self.verify:
+            summary, fidelity = await verify_script(
+                summary, user_message, writer_system_prompt=system_prompt,
+                label=entry.title, client=self.client)
+            entry.fidelity = fidelity.to_dict()
         entry.bundle = writer_bundle(
             title=entry.title, model=MODEL_STRONG, system_prompt=system_prompt,
-            user_message=user_message, response=summary)
+            user_message=user_message, response=summary,
+            notes=fidelity_markdown(fidelity, draft if fidelity and fidelity.revised else None))
         return summary
 
     async def process_verbatim(self, entry: FeedEntry) -> str:
