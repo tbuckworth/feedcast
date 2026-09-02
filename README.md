@@ -201,12 +201,15 @@ trigger and GitHub's own schedule cannot both email you (they both did on
 `resend_report`, or `force` — is never guarded.
 
 **Scheduled runs are best-effort.** GitHub delivers `schedule:` late under load —
-hours late on 27 and 28 Aug 2026 — and sometimes not at all. Two mitigations:
-the cron sits off the congested top of the hour, and `scripts/cron-backstop.sh`
-runs from the desktop crontab a couple of hours later, dispatching the workflow
-only when no run exists for that UTC day. A redundant dispatch is harmless: the
-concurrency group queues it, and a run with nothing new publishes nothing and
-sends no email.
+4-6 hours late every day from 27 Aug to 2 Sep 2026 — and sometimes not at all.
+Two mitigations: the cron sits off the congested top of the hour, and
+`scripts/cron-backstop.sh` runs from the desktop crontab at 05:30 Europe/London
+(DST-aware, so the email lands at roughly the same local time all year),
+dispatching the workflow only when no run exists for that UTC day. In practice
+the backstop is what publishes each morning: the pipeline takes 10-25 minutes,
+so the email arrives by about 06:00, and GitHub's own late fire is then stopped
+by the guard. A redundant dispatch is harmless: the concurrency group queues
+it, and a run with nothing new publishes nothing and sends no email.
 
 **GitHub Secrets required:**
 - `OPENROUTER_API_KEY`
