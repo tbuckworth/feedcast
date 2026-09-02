@@ -39,6 +39,7 @@ Rules:
 - Background a listener would take as common knowledge is low severity. Anything a listener would repeat as "the author said" is high.
 - Numbers may be spelled out in the script ("forty-five percent" for 45%). That is never a discrepancy.
 - Keep every quote under 200 characters and verbatim from the text it comes from.
+- Report at most 12 flags, the most material first.
 
 Return ONLY JSON:
 {"claims_total": <int>,
@@ -100,11 +101,20 @@ def parse_flags(raw: str) -> tuple[int, list[dict]]:
 
 async def check(script: str, source: str, client) -> tuple[int, list[dict]]:
     user = f"SOURCE:\n{source}\n\nSCRIPT:\n{script}"
+    # Sonnet reasons before it answers and the reasoning counts against
+    # max_tokens: a 1,900-character reply cost 5,300 output tokens on
+    # 2026-09-02, and a 6,000 cap truncated the JSON on both scripts that day.
     response = await client.chat.completions.create(
-        model=MODEL_CHECKER, max_tokens=6000, temperature=0,
+        model=MODEL_CHECKER, max_tokens=16000, temperature=0,
         messages=[{"role": "system", "content": CHECK_PROMPT},
                   {"role": "user", "content": user}])
-    return parse_flags(response.choices[0].message.content or "")
+    choice = response.choices[0]
+    content = choice.message.content or ""
+    try:
+        return parse_flags(content)
+    except ValueError as e:
+        raise ValueError(f"{e} (finish_reason={choice.finish_reason}, "
+                         f"{len(content)} chars: {content[:160]!r})") from e
 
 
 def _flags_text(flags: list[dict]) -> str:
