@@ -3,6 +3,7 @@
 import os
 import subprocess
 import xml.etree.ElementTree as ET
+from html import escape
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -110,6 +111,46 @@ class FeedGenerator:
     def _format_rfc822(self, dt: datetime) -> str:
         """Format datetime as RFC 822."""
         return dt.strftime("%a, %d %b %Y %H:%M:%S +0000")
+
+    def write_index(self, episodes: list[Episode], output_path: Path) -> None:
+        """A plain landing page at the site root.
+
+        The email's "Open site" button and the feed's <link> both point at the
+        Pages root, which served a 404 for as long as the podcast existed: only
+        feed.xml and the share-target app were ever deployed there.
+        """
+        c = self.config
+        rows = []
+        for ep in sorted(episodes, key=lambda e: e.published, reverse=True):
+            mins = max(1, round(ep.duration_seconds / 60))
+            src = (f' &middot; <a href="{escape(ep.link, quote=True)}">source</a>'
+                   if ep.link else "")
+            rows.append(
+                f'<li><a href="audio/{escape(ep.audio_file, quote=True)}">{escape(ep.title)}</a>'
+                f'<span class="m">{ep.published:%d %b %Y} &middot; {mins} min'
+                f'{" &middot; " + escape(ep.author) if ep.author else ""}{src}</span></li>')
+        html = f"""<!doctype html>
+<html lang="{escape(c.language)}"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{escape(c.title)}</title>
+<link rel="alternate" type="application/rss+xml" title="{escape(c.title, quote=True)}" href="feed.xml">
+<style>
+body{{margin:0;padding:32px 20px 60px;background:#f5f7f6;color:#1b2024;font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}}
+main{{max-width:680px;margin:0 auto}} h1{{font-size:26px;margin:0 0 6px}} p{{color:#66717a;margin:0 0 18px}}
+.sub a{{display:inline-block;background:#1f6f78;color:#fff;text-decoration:none;padding:8px 14px;border-radius:4px;margin:0 8px 8px 0}}
+ul{{list-style:none;padding:0;margin:26px 0 0}} li{{padding:12px 0;border-top:1px solid #d9e0de}}
+li a{{color:#1b2024;text-decoration:none;font-weight:600}} li a:hover{{text-decoration:underline}}
+.m{{display:block;font-size:13px;color:#66717a;margin-top:3px}} .m a{{color:#1f6f78;font-weight:400}}
+</style></head><body><main>
+<h1>{escape(c.title)}</h1>
+<p>{escape(c.description)}</p>
+<div class="sub"><a href="feed.xml">Subscribe (RSS)</a><a href="app/">Send a URL</a></div>
+<ul>{"".join(rows)}</ul>
+<p style="margin-top:28px;font-size:13px">{len(episodes)} episodes in the feed. Episodes are kept for 30 days.</p>
+</main></body></html>
+"""
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(html, encoding="utf-8")
 
     def generate(self, episodes: list[Episode], output_path: Path) -> None:
         """Generate the podcast RSS feed XML."""
