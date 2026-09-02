@@ -1443,6 +1443,18 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>“Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi</title>
+      <description>Audio version of “Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 28 Jul 2026 18:13:05 +0000</pubDate>
+      <guid>abfafc35-0084-4e6d-9905-6196ad4e2228</guid>
+      <link>https://www.lesswrong.com/posts/Pj4Eewb4KXvXFCcGv/claude-opus-5-is-highly-capable-but-is-no-mythos</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f0d231bc1c2f_claude_opus_5_is_highly_capable_but_is_no_mythos.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:03:55</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>“Claude Opus 5: Model Welfare” by Zvi</title>
       <description>Audio version of “Claude Opus 5: Model Welfare” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Mon, 27 Jul 2026 20:03:44 +0000</pubDate>
