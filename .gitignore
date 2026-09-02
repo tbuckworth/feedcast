@@ -44,3 +44,7 @@ data/normalization_test/
 voice_samples/.voice_cache.json
 worker/node_modules/
 .feedcast-token
+
+# Ad-hoc TTS experiment outputs
+/test_*.mp3
+/derek_test.mp3
