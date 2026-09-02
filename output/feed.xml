@@ -21,6 +21,30 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>“Anthropic Has Some Alignment Problems” by Zvi</title>
+      <description>Audio version of “Anthropic Has Some Alignment Problems” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 02 Sep 2026 13:22:45 +0000</pubDate>
+      <guid>22cf3c81-8b7f-42cd-98e4-7cba99dab333</guid>
+      <link>https://www.lesswrong.com/posts/TcvcxH2Fk4n86wtoZ/anthropic-has-some-alignment-problems</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b3f6683be14f_anthropic_has_some_alignment_problems_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:19</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Absurd Adventure And Amygdalectomy Advocacy</title>
+      <description>Audio version of Absurd Adventure And Amygdalectomy Advocacy from Scott Alexander</description>
+      <pubDate>Wed, 02 Sep 2026 05:51:22 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/absurd-adventure-and-amygdalectomy</guid>
+      <link>https://www.astralcodexten.com/p/absurd-adventure-and-amygdalectomy</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b4e9cd346b41_absurd_adventure_and_amygdalectomy_advocacy.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:31:17</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-09-02</title>
       <description>Daily News Briefing - 2026-09-02
 
@@ -1407,49 +1431,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-03</title>
-      <description>Daily News Briefing - 2026-08-03
-
-Topics covered:
-- In geopolitics and global security, the prospect of a breakthrough in the Middle East remains precarious following a series of conflicting developments
-- In international economics and currency markets, the United States and Japan have taken the rare step of a joint intervention to prop up the yen
-- In artificial intelligence policy, the debate over "deceleration" is intensifying following Sam Altman’s recent call for a development slowdown
-- In infrastructure and climate, the physical toll of the global heatwave is worsening
-- In hardware and the technology sector, the global memory chip shortage has officially reached the consumer flagship level
-- Expect increased volatility in the tech-heavy Nasdaq today as investors weigh the impact of hardware shortages against the potential for a diplomatic de-escalation in the Middle East</description>
-      <pubDate>Mon, 03 Aug 2026 07:33:39 +0000</pubDate>
-      <guid>news-briefing-2026-08-03</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b03a1c84f665_daily_news_briefing_-_2026-08-03.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:55</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-03.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>We need to RL less</title>
-      <description>Audio version of We need to RL less from LessWrong Frontpage</description>
-      <pubDate>Mon, 03 Aug 2026 06:46:53 +0000</pubDate>
-      <guid>PyvY8ijddmMvihgXg</guid>
-      <link>https://www.lesswrong.com/posts/PyvY8ijddmMvihgXg/we-need-to-rl-less</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3e963c872dcd_we_need_to_rl_less.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:10:45</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Further Developments About Internal AI Models Hacking Things” by Zvi</title>
-      <description>Audio version of “Further Developments About Internal AI Models Hacking Things” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sun, 02 Aug 2026 15:11:28 +0000</pubDate>
-      <guid>555993a1-330e-45a0-a633-70de8987517c</guid>
-      <link>https://www.lesswrong.com/posts/rKwHLW8SnJcTxTQxz/further-developments-about-internal-ai-models-hacking-things</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ff9cdf7717ca_further_developments_about_internal_ai_models_hac.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:53</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi</title>
       <description>Audio version of “Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Tue, 28 Jul 2026 18:13:05 +0000</pubDate>
@@ -1878,18 +1859,6 @@ Topics covered:
       <itunes:author>Buck</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/c374d7dda1f9_christian_homeschoolers_in_the_year_3000.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:15:14</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AI As Profoundly Abnormal Technology</title>
-      <description>Audio version of AI As Profoundly Abnormal Technology from AI Futures Project</description>
-      <pubDate>Thu, 24 Jul 2025 05:41:38 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</guid>
-      <link>https://blog.aifutures.org/p/ai-as-profoundly-abnormal-technology</link>
-      <itunes:author>AI Futures Project</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e48d899f22a8_ai_as_profoundly_abnormal_technology.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:39</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
