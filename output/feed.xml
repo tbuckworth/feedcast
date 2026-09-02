@@ -929,6 +929,18 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
+      <title>How My Students Think About AI</title>
+      <description>Audio version of How My Students Think About AI by dvd from LessWrong Curated</description>
+      <pubDate>Thu, 13 Aug 2026 16:56:19 +0000</pubDate>
+      <guid>ySXuvJcqRindQwAk7</guid>
+      <link>https://www.lesswrong.com/posts/ySXuvJcqRindQwAk7/how-my-students-think-about-ai</link>
+      <itunes:author>dvd</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7848f9fac81e_how_my_students_think_about_ai.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:22:41</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>“AI #181: Astra Goes Cyber Critical” by Zvi</title>
       <description>Audio version of “AI #181: Astra Goes Cyber Critical” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Thu, 13 Aug 2026 15:22:24 +0000</pubDate>
@@ -1427,18 +1439,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f2d6139e482c_openais_unreleased_model_astra_solves_ten_major.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:03:02</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi</title>
-      <description>Audio version of “Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 28 Jul 2026 18:13:05 +0000</pubDate>
-      <guid>abfafc35-0084-4e6d-9905-6196ad4e2228</guid>
-      <link>https://www.lesswrong.com/posts/Pj4Eewb4KXvXFCcGv/claude-opus-5-is-highly-capable-but-is-no-mythos</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f0d231bc1c2f_claude_opus_5_is_highly_capable_but_is_no_mythos.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:28</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
