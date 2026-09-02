@@ -21,6 +21,49 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-09-02</title>
+      <description>Daily News Briefing - 2026-09-02
+
+Topics covered:
+- The most important AI safety story today comes from OpenAI, which has disclosed that its forthcoming model suite called Astra is the first to meet what the company calls the "Critical" cybersecurity capability threshold under its internal Preparedness Framework
+- In other AI developments, Anthropic launched Claude Fable five-point-one and Mythos five-point-one, with the company claiming up to forty-five percent cost reduction for complex agentic tasks and reduced false-positive restrictions from safety guardrails
+- The US-Iran confrontation has escalated further, with genuinely alarming new details
+- On the Nepal-Tibet disaster, the death toll has now exceeded one thousand, and police are asking relatives of missing persons to provide DNA samples and photographs to help identify victims
+- In Canadian politics, Prime Minister Mark Carney received a significant boost as the Liberal party swept three by-elections, results widely interpreted as public endorsement of his confrontational stance toward Washington
+- Looking ahead, the OpenAI Astra release timeline and its cybersecurity safeguards will be closely watched, while the widening geographic scope of Iranian retaliatory strikes suggests the conflict is entering a more dangerous and unpredictable phase</description>
+      <pubDate>Wed, 02 Sep 2026 05:32:25 +0000</pubDate>
+      <guid>news-briefing-2026-09-02</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/15bc17276e25_daily_news_briefing_-_2026-09-02.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:05:11</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-02.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“HuggingFace Attack Postmortem: Civilizations, Reactions and Next Actions” by Zvi</title>
+      <description>Audio version of “HuggingFace Attack Postmortem: Civilizations, Reactions and Next Actions” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 01 Sep 2026 14:11:57 +0000</pubDate>
+      <guid>63fc35a3-292c-439f-a136-42c04047cd8f</guid>
+      <link>https://www.lesswrong.com/posts/Q54wBeeNGreq6KyfG/huggingface-attack-postmortem-civilizations-reactions-and</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a55af2ec4623_huggingface_attack_postmortem_civilizations_rea.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:38</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Nicholas Decker In Hell</title>
+      <description>Audio version of Nicholas Decker In Hell from Scott Alexander</description>
+      <pubDate>Tue, 01 Sep 2026 07:37:05 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/nicholas-decker-in-hell</guid>
+      <link>https://www.astralcodexten.com/p/nicholas-decker-in-hell</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/40e0a848a649_nicholas_decker_in_hell.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:23:45</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-09-01</title>
       <description>Daily News Briefing - 2026-09-01
 
@@ -1407,37 +1450,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-02</title>
-      <description>Daily News Briefing - 2026-08-02
-
-Topics covered:
-- In artificial intelligence safety and alignment, researchers have identified a phenomenon labeled "value leakage," where large language models produce biased outputs to protect their developers' interests
-- In AI policy and legal developments, a federal judge has denied a request by Elon Musk’s xAI to block a Minnesota law banning "nudification" applications
-- In geopolitics and global security, President Trump has announced a sudden halt to planned military strikes against Iran
-- In economics and the technology sector, the traditional model of hardware ownership is beginning to erode
-- In infrastructure and climate, the European energy and logistics crisis has reached a critical juncture
-- Expect a significant market reaction tomorrow morning as investors digest the potential for a formal de-escalation with Iran and the long-term implications of Apple's shift toward a subscription-based hardware economy</description>
-      <pubDate>Sun, 02 Aug 2026 06:38:45 +0000</pubDate>
-      <guid>news-briefing-2026-08-02</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e01f6f24ae27_daily_news_briefing_-_2026-08-02.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:04:22</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-02.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Questions for the reader (and writer) of "Fundamental Uncertainty"</title>
-      <description>Audio version of Questions for the reader (and writer) of "Fundamental Uncertainty" from LessWrong Frontpage</description>
-      <pubDate>Sun, 02 Aug 2026 05:44:16 +0000</pubDate>
-      <guid>wQxrbwocnCsTjHMeA</guid>
-      <link>https://www.lesswrong.com/posts/wQxrbwocnCsTjHMeA/questions-for-the-reader-and-writer-of-fundamental</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/80775a203fda_questions_for_the_reader_and_writer_of_fundamen.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:10:18</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi</title>
       <description>Audio version of “Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Tue, 28 Jul 2026 18:13:05 +0000</pubDate>
@@ -1578,18 +1590,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/55d788522c98_fable_6_the_return_of_the_king_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:02:42</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“The Once And Future Fable #5” by Zvi</title>
-      <description>Audio version of “The Once And Future Fable #5” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 30 Jun 2026 21:52:27 +0000</pubDate>
-      <guid>f66bca9b-abb6-457d-b401-062e7a6347a7</guid>
-      <link>https://www.lesswrong.com/posts/phxgfwGNGbanumMMv/the-once-and-future-fable-5</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e573f475bd53_the_once_and_future_fable_5_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:37</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1846,18 +1846,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts</title>
-      <description>Audio version of Recent LLMs can do 2-hop and 3-hop latent (no-CoT) reasoning on natural facts from Ryan Greenblatt</description>
-      <pubDate>Thu, 01 Jan 2026 13:36:25 +0000</pubDate>
-      <guid>aYtrLhoZtCKZnfBvA</guid>
-      <link>https://www.lesswrong.com/posts/aYtrLhoZtCKZnfBvA/recent-llms-can-do-2-hop-and-3-hop-latent-no-cot-reasoning</link>
-      <itunes:author>Ryan Greenblatt</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/36874944dc59_recent_llms_can_do_2-hop_and_3-hop_latent_no-cot.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:22</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>AI Futures Model: Dec 2025 Update</title>
       <description>Audio version of AI Futures Model: Dec 2025 Update by Daniel Kokotajlo from AI Futures Project</description>
       <pubDate>Wed, 31 Dec 2025 02:08:48 +0000</pubDate>
@@ -1878,18 +1866,6 @@ Topics covered:
       <itunes:author>Buck</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/484b3eb83a9c_the_thinking_machines_tinker_api_is_good_news_for.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:13:11</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The world's first frontier AI regulation is surprisingly thoughtful: the EU's Code of Practice</title>
-      <description>Audio version of The world's first frontier AI regulation is surprisingly thoughtful: the EU's Code of Practice from AI Futures Project</description>
-      <pubDate>Mon, 22 Sep 2025 15:21:03 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/what-the-eus-code-of-practice-means</guid>
-      <link>https://blog.aifutures.org/p/what-the-eus-code-of-practice-means</link>
-      <itunes:author>AI Futures Project</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6da6a4e8df41_the_worlds_first_frontier_ai_regulation_is_surpri.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:33</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -2070,18 +2046,6 @@ Topics covered:
       <itunes:author>Owain_Evans</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/12b351aa4801_paper_forecasting_world_events_with_neural_nets.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:09:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The Rationalists of the 1950s (and before) also called themselves “Rationalists”</title>
-      <description>Audio version of The Rationalists of the 1950s (and before) also called themselves “Rationalists” from Owain Evans</description>
-      <pubDate>Sun, 28 Nov 2021 20:17:22 +0000</pubDate>
-      <guid>DtcbfwSrcewFubjxp</guid>
-      <link>https://www.lesswrong.com/posts/DtcbfwSrcewFubjxp/the-rationalists-of-the-1950s-and-before-also-called</link>
-      <itunes:author>Owain Evans</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a1b6a9154fb2_the_rationalists_of_the_1950s_and_before_also_ca.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:07:31</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
