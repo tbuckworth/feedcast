@@ -21,6 +21,25 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-09-03</title>
+      <description>Daily News Briefing - 2026-09-03
+
+Topics covered:
+- The top story today is a growing alarm among AI safety researchers over OpenAI's forthcoming Astra model, with significant new technical detail emerging about why this model is uniquely concerning
+- In a related AI policy development, the Trump administration has intervened in the New York Times copyright lawsuit against OpenAI, filing a statement of interest arguing that training AI models on copyrighted text constitutes fair use
+- Turning to the US-Iran conflict, the situation has grown more harrowing
+- On European security, the EU and NATO have vowed to escalate pressure on Russia after Germany formally attributed the Leipzig airport drone attack to Russian operatives
+- Finally, the Dutch central bank has moved eighty-six tonnes of gold reserves out of the United States and Canada to London, explicitly citing "increasing geopolitical unrest." The transfer, conducted between March and August, shifts the share of Dutch gold held in London from about eighteen percent to thirty-two percent
+- Looking ahead, the debate over opaque AI reasoning architectures may prove to be the defining safety controversy of this period, while the Iran conflict's civilian toll is raising pressure for diplomatic intervention that shows no sign of materializing</description>
+      <pubDate>Thu, 03 Sep 2026 04:34:30 +0000</pubDate>
+      <guid>news-briefing-2026-09-03</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cbae4efcecad_daily_news_briefing_-_2026-09-03.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:05:57</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-03.txt" type="text/plain" />
+    </item>
+    <item>
       <title>“Anthropic Has Some Alignment Problems” by Zvi</title>
       <description>Audio version of “Anthropic Has Some Alignment Problems” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Wed, 02 Sep 2026 13:22:45 +0000</pubDate>
