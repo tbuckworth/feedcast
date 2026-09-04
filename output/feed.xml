@@ -21,6 +21,49 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-09-04</title>
+      <description>Daily News Briefing - 2026-09-04
+
+Topics covered:
+- The biggest story today is the official launch of OpenAI's GPT-6 Astra, the model that has dominated safety discussions all week
+- In a closely related development, Nvidia has agreed to acquire Hugging Face for nearly thirteen billion dollars, in what would be the chip giant's largest-ever acquisition
+- A troubling AI safety story emerged from TechCrunch: a startup called Abliteration.ai has commercialized the removal of safety guardrails from open-weight AI models, turning what was previously an underground technique into a hosted service anyone can use from a web browser
+- On the US-Iran conflict, Iran continued striking US bases this week, targeting the Ahmad al-Jaber air base in Kuwait and the Al Minhad air base in the United Arab Emirates with missiles and drones
+- Volkswagen has confirmed the largest restructuring in global automotive history, with its supervisory board unanimously approving plans to cut one hundred thousand jobs by twenty-thirty — about fifteen percent of its workforce
+- Finally, four major AI services — ChatGPT, Claude, Grok, and Google's models — suffered a rare overlapping outage Thursday morning, with service disruptions spanning several hours before being resolved</description>
+      <pubDate>Fri, 04 Sep 2026 08:16:59 +0000</pubDate>
+      <guid>news-briefing-2026-09-04</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1c92ffeb4194_daily_news_briefing_-_2026-09-04.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:05:48</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-04.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“AI #184: Post Post Mortem” by Zvi</title>
+      <description>Audio version of “AI #184: Post Post Mortem” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 03 Sep 2026 14:31:50 +0000</pubDate>
+      <guid>ce4b3e48-8d9f-48fd-9736-6d5255f00fd8</guid>
+      <link>https://www.lesswrong.com/posts/W4zWCphxQftwum5kc/ai-184-post-post-mortem</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b65a3e5e3dd4_ai_184_post_post_mortem_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:05</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>College EA Meetups Everywhere: Times &amp; Places</title>
+      <description>Audio version of College EA Meetups Everywhere: Times &amp; Places from Scott Alexander</description>
+      <pubDate>Thu, 03 Sep 2026 08:10:42 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/college-ea-meetups-everywhere-times</guid>
+      <link>https://www.astralcodexten.com/p/college-ea-meetups-everywhere-times</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bf58bc6fa073_college_ea_meetups_everywhere_times_places.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>01:02:44</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-09-03</title>
       <description>Daily News Briefing - 2026-09-03
 
@@ -1364,104 +1407,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-05</title>
-      <description>Daily News Briefing - 2026-08-05
-
-Topics covered:
-- In artificial intelligence capabilities and corporate economics, SpaceX has emerged as a major surprise player in the compute market
-- In AI policy and infrastructure, the rapid expansion of data centers has hit a significant roadblock in the United States
-- In AI safety and research, the Alignment Research Center, or ARC, has announced that it is doubling down on "mechanistic interpretability." The center’s leadership confirmed a new six-month focus on developing techniques to find structural explanations for neural network behavior
-- In geopolitics and regional security, the humanitarian situation in Ukraine has reached a grim new milestone
-- In legal developments and cybersecurity, the conflict between Apple and OpenAI has moved into the court of public opinion
-- Expect a period of heightened market scrutiny on energy stocks as other states consider following Texas in auditing the impact of AI infrastructure on local power grids</description>
-      <pubDate>Wed, 05 Aug 2026 06:35:34 +0000</pubDate>
-      <guid>news-briefing-2026-08-05</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/44aee6efe197_daily_news_briefing_-_2026-08-05.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:04:14</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-05.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Persona Corruption and Role Miscasting in Emergent Misalignment</title>
-      <description>Audio version of Persona Corruption and Role Miscasting in Emergent Misalignment from LessWrong Frontpage</description>
-      <pubDate>Wed, 05 Aug 2026 04:56:15 +0000</pubDate>
-      <guid>HooBYPCkMDGjktcLA</guid>
-      <link>https://www.lesswrong.com/posts/HooBYPCkMDGjktcLA/persona-corruption-and-role-miscasting-in-emergent</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3eb6235296e9_persona_corruption_and_role_miscasting_in_emergent.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The Beauty Of Settled Science</title>
-      <description>Audio version of The Beauty Of Settled Science from Scott Alexander</description>
-      <pubDate>Tue, 04 Aug 2026 21:32:18 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-beauty-of-settled-science</guid>
-      <link>https://www.astralcodexten.com/p/the-beauty-of-settled-science</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/944e26cc58f3_the_beauty_of_settled_science.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:13:26</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-08-04</title>
-      <description>Daily News Briefing - 2026-08-04
-
-Topics covered:
-- In artificial intelligence safety and security, the fallout from the recent autonomous sandbox breaches is shifting from technical mitigation to legal and forensic scrutiny
-- In AI policy and global regulation, the European Union has officially implemented new transparency obligations under the landmark AI Act as of August second
-- In AI capabilities and hardware, the geopolitical race for model supremacy is intensifying
-- In geopolitics and global security, diplomatic tensions are rising following a breakdown in communication between Washington and Tehran
-- In economics and corporate technology, Apple is facing a rare multi-front challenge to its ecosystem
-- Expect increased scrutiny of AI safety protocols this week as the first enforcement actions under the European Union’s AI Act are monitored by global tech firms</description>
-      <pubDate>Tue, 04 Aug 2026 06:32:47 +0000</pubDate>
-      <guid>news-briefing-2026-08-04</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0ce196e4966b_daily_news_briefing_-_2026-08-04.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:04:11</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-04.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>What if people value their work mattering?</title>
-      <description>Audio version of What if people value their work mattering? from LessWrong Frontpage</description>
-      <pubDate>Tue, 04 Aug 2026 06:02:34 +0000</pubDate>
-      <guid>3dFYQu4ifG5ZsjjZm</guid>
-      <link>https://www.lesswrong.com/posts/3dFYQu4ifG5ZsjjZm/what-if-people-value-their-work-mattering</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/055f785ba22d_what_if_people_value_their_work_mattering.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:09:37</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Does Forecasting Have Room At The Top?</title>
-      <description>Audio version of Does Forecasting Have Room At The Top? from Scott Alexander</description>
-      <pubDate>Mon, 03 Aug 2026 22:36:17 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/does-forecasting-have-room-at-the</guid>
-      <link>https://www.astralcodexten.com/p/does-forecasting-have-room-at-the</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/47a84619b3ec_does_forecasting_have_room_at_the_top.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:23:01</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“OpenAI’s Unreleased Model Astra Solves Ten Major Open Mathematics Problems” by Zvi</title>
-      <description>Audio version of “OpenAI’s Unreleased Model Astra Solves Ten Major Open Mathematics Problems” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 03 Aug 2026 19:11:26 +0000</pubDate>
-      <guid>9665d248-3be6-42a9-911a-2fa054b2dc53</guid>
-      <link>https://www.lesswrong.com/posts/pQYEPitFqztcRvBsS/openai-s-unreleased-model-astra-solves-ten-major-open</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f2d6139e482c_openais_unreleased_model_astra_solves_ten_major.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:02</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi</title>
       <description>Audio version of “Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Tue, 28 Jul 2026 18:13:05 +0000</pubDate>
@@ -1594,18 +1539,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>“Fable #6: The Return of the King” by Zvi</title>
-      <description>Audio version of “Fable #6: The Return of the King” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 03 Jul 2026 13:22:57 +0000</pubDate>
-      <guid>926c0652-b301-4b31-ab76-bf562e447bbd</guid>
-      <link>https://www.lesswrong.com/posts/r9HsHHSsfABhhxnYr/fable-6-the-return-of-the-king</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/55d788522c98_fable_6_the_return_of_the_king_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:42</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>A forecast of Chinese DUV and EUV photolithography progress</title>
       <description>Audio version of A forecast of Chinese DUV and EUV photolithography progress by Hamish Low from AI Futures Project</description>
       <pubDate>Fri, 19 Jun 2026 15:32:43 +0000</pubDate>
@@ -1626,18 +1559,6 @@ Topics covered:
       <itunes:author>Buck Shlegeris</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ae1ba4cf0d4f_efficient_tradeoffs_and_the_safety-usefulness_trad.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:17:39</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Notes on axes of variation in third-party risk assessment</title>
-      <description>Audio version of Notes on axes of variation in third-party risk assessment from Buck Shlegeris</description>
-      <pubDate>Sun, 31 May 2026 20:48:06 +0000</pubDate>
-      <guid>oGTajcGwxxFG4Z7eN</guid>
-      <link>https://www.lesswrong.com/posts/oGTajcGwxxFG4Z7eN/notes-on-axes-of-variation-in-third-party-risk-assessment</link>
-      <itunes:author>Buck Shlegeris</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fc9f1752bdd7_notes_on_axes_of_variation_in_third-party_risk_ass.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:20:42</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1894,18 +1815,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>We aren't worried about misalignment as self-fulfilling prophecy</title>
-      <description>Audio version of We aren't worried about misalignment as self-fulfilling prophecy from AI Futures Project</description>
-      <pubDate>Fri, 18 Jul 2025 07:50:57 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/against-misalignment-as-self-fulfilling</guid>
-      <link>https://blog.aifutures.org/p/against-misalignment-as-self-fulfilling</link>
-      <itunes:author>AI Futures Project</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/35d1a2718ee0_we_arent_worried_about_misalignment_as_self-fulfi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:02</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Vitalik's Response to AI 2027</title>
       <description>Audio version of Vitalik's Response to AI 2027 from Daniel Kokotajlo</description>
       <pubDate>Fri, 11 Jul 2025 21:43:36 +0000</pubDate>
@@ -1914,18 +1823,6 @@ Topics covered:
       <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a2b17c92c517_vitaliks_response_to_ai_2027.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:26:11</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>What you can do about AI 2027</title>
-      <description>Audio version of What you can do about AI 2027 from AI Futures Project</description>
-      <pubDate>Sat, 28 Jun 2025 17:46:28 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/what-you-can-do-about-ai-2027</guid>
-      <link>https://blog.aifutures.org/p/what-you-can-do-about-ai-2027</link>
-      <itunes:author>AI Futures Project</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/feab7f530ca2_what_you_can_do_about_ai_2027.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:41</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
