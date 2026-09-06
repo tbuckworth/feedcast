@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-09-06</title>
+      <description>Daily News Briefing - 2026-09-06
+
+Topics covered:
+- The top story today is a significant shift from OpenAI on transparency
+- In the US-Iran conflict, the situation escalated sharply on Saturday with both sides attacking each other's ships
+- On Ukraine, Trump's envoys Jared Kushner and Steve Witkoff met with Vladimir Putin in Moscow on Saturday in what the White House called discussions of "substantive plans for next steps" to end the war, with announcements expected in coming weeks
+- Finally, the NHTSA investigation into Tesla's Cybercab continues to develop
+- Looking ahead, the Kushner-Witkoff meetings in Kyiv today will be the most closely watched diplomatic moment of the week, while OpenAI's promised disclosure framework could set important precedent for how the entire AI industry handles misalignment incidents going forward</description>
+      <pubDate>Sun, 06 Sep 2026 04:34:01 +0000</pubDate>
+      <guid>news-briefing-2026-09-06</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c67f1e83f295_daily_news_briefing_-_2026-09-06.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:55</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-06.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Claude Mythos 5.1 and Fable 5.1: Capabilities” by Zvi</title>
+      <description>Audio version of “Claude Mythos 5.1 and Fable 5.1: Capabilities” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sat, 05 Sep 2026 19:54:17 +0000</pubDate>
+      <guid>4340172b-3016-4a6b-b480-ae237fdd457c</guid>
+      <link>https://www.lesswrong.com/posts/QHoF3tJvryRtmAmMg/claude-mythos-5-1-and-fable-5-1-capabilities</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/88e4da4d856b_claude_mythos_51_and_fable_51_capabilities_by.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:03:55</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-09-05</title>
       <description>Daily News Briefing - 2026-09-05
 
@@ -1367,73 +1397,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/cc40d4a7fe71_ai_180_no_longer_in_charge_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:02:41</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-08-06</title>
-      <description>Daily News Briefing - 2026-08-06
-
-Topics covered:
-- In artificial intelligence safety and policy, a significant breach involving autonomous agents has triggered new alarms among international regulators
-- In AI capabilities and corporate leadership, Google has announced a major restructuring of its AI division
-- In geopolitics and regional security, the humanitarian crisis in Ukraine is worsening as air defense stocks reach a critical breaking point
-- In economics and infrastructure, SpaceX’s transition into a compute powerhouse is facing immediate market skepticism
-- Finally, in cybersecurity and consumer privacy, a significant vulnerability has been discovered in Apple’s Private Relay feature
-- Expect a day of intense volatility for tech stocks as markets continue to digest the leadership shakeups at Google and the hardware sustainability questions raised by SpaceX</description>
-      <pubDate>Thu, 06 Aug 2026 06:36:33 +0000</pubDate>
-      <guid>news-briefing-2026-08-06</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/55ce5e085699_daily_news_briefing_-_2026-08-06.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:53</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-06.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Open Questions On Open Weights</title>
-      <description>Audio version of Open Questions On Open Weights from Scott Alexander</description>
-      <pubDate>Thu, 06 Aug 2026 03:56:29 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/open-questions-on-open-weights</guid>
-      <link>https://www.astralcodexten.com/p/open-questions-on-open-weights</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/84725f25d637_open_questions_on_open_weights.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:11:04</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Five counterintuitive insights from Plan A</title>
-      <description>Audio version of Five counterintuitive insights from Plan A from LessWrong Frontpage</description>
-      <pubDate>Thu, 06 Aug 2026 01:19:26 +0000</pubDate>
-      <guid>5xAvSFyKT2XYwsLrh</guid>
-      <link>https://www.lesswrong.com/posts/5xAvSFyKT2XYwsLrh/five-counterintuitive-insights-from-plan-a</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1ec7298c78f2_five_counterintuitive_insights_from_plan_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:23:38</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>How to pace the US frontier</title>
-      <description>Audio version of How to pace the US frontier from AI Futures Project</description>
-      <pubDate>Wed, 05 Aug 2026 18:12:09 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/how-to-pace-the-us-frontier</guid>
-      <link>https://blog.aifutures.org/p/how-to-pace-the-us-frontier</link>
-      <itunes:author>AI Futures Project</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/86753f460ae9_how_to_pace_the_us_frontier.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“The Three AI Pills” by Zvi</title>
-      <description>Audio version of “The Three AI Pills” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 05 Aug 2026 16:11:06 +0000</pubDate>
-      <guid>6b70039c-474c-4126-a1b0-8b27c1ddf26f</guid>
-      <link>https://www.lesswrong.com/posts/fcYrqEw8kbLMa7orw/the-three-ai-pills</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e52c047b8e46_the_three_ai_pills_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:14</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
