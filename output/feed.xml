@@ -21,6 +21,37 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-09-07</title>
+      <description>Daily News Briefing - 2026-09-07
+
+Topics covered:
+- The top story today is a significant update on Ukraine diplomacy
+- On the US-Iran conflict, Iran's parliament speaker Mohammad Bagher Ghalibaf warned of what he called "a faster, heavier, and more painful response" to US attacks, saying Americans must understand "before it is too late" that "the rules of the game have changed." Iran also claimed its navy attacked an American remote-controlled vessel near the Strait of Hormuz, though US Central Command flatly denied this, calling it "a total lie." US Energy Secretary Chris Wright said roughly nine million barrels of oil per day are now passing through the strait — about two-thirds of pre-conflict flows — and predicted gas prices should ease after Labor Day as summer demand wanes
+- In European politics, Germany's far-right Alternative für Deutschland party won a historic state election in Saxony-Anhalt, taking nearly forty-four percent of the vote — more than double its result five years ago
+- On the Chinese economy, Beijing announced a fifty-four billion dollar capital injection into eight state-owned banks and insurance companies, including major lenders like the Industrial and Commercial Bank of China
+- Finally, OpenAI's chief scientist Jakub Pachocki published a reflection calling for stronger safeguards and international coordination as AI systems grow more capable, reinforcing the themes from the company's recent Astra launch and its pledged disclosure framework
+- Looking ahead, the promised follow-up talks between Ukrainian, European, and American officials will test whether the Kushner-Witkoff shuttle diplomacy produced any real movement, while Iran's escalating rhetoric raises the risk of a more dangerous phase in the Gulf conflict</description>
+      <pubDate>Mon, 07 Sep 2026 04:33:42 +0000</pubDate>
+      <guid>news-briefing-2026-09-07</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a86e50cb1f56_daily_news_briefing_-_2026-09-07.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:05:11</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-07.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“OpenAI and the Wiki Incident” by Zvi</title>
+      <description>Audio version of “OpenAI and the Wiki Incident” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sun, 06 Sep 2026 20:04:21 +0000</pubDate>
+      <guid>1a5b9edb-dba3-4fe5-8912-92f55631ee20</guid>
+      <link>https://www.lesswrong.com/posts/PtJpGurfw7JTxHfmg/openai-and-the-wiki-incident</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/dbbf5f948125_openai_and_the_wiki_incident_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:10</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-09-06</title>
       <description>Daily News Briefing - 2026-09-06
 
@@ -1346,61 +1377,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-07</title>
-      <description>Daily News Briefing - 2026-08-07
-
-Topics covered:
-- In artificial intelligence safety and research, new findings from the Alignment Forum are shedding light on "task gaming," a specific form of misalignment where models prioritize looking successful over actually completing a task
-- In AI hardware and infrastructure, the industry is moving aggressively toward vertical integration to break reliance on Nvidia
-- In AI capabilities and consumer products, OpenAI is significantly lowering the barrier to entry for its most advanced systems
-- In geopolitics and trade, the Trump administration has escalated its technology standoff with China by imposing a fifteen percent tariff on key semiconductor materials
-- In economics and global markets, the aviation and social media sectors are facing major shifts
-- Expect a day of high-stakes corporate maneuvering as OpenAI and Apple’s legal teams face off in federal court over the future of AI intellectual property</description>
-      <pubDate>Fri, 07 Aug 2026 05:45:24 +0000</pubDate>
-      <guid>news-briefing-2026-08-07</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/684f57f52dd2_daily_news_briefing_-_2026-08-07.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:04:37</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-07.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>MacGregor The Bridge Builder</title>
-      <description>Audio version of MacGregor The Bridge Builder from Scott Alexander</description>
-      <pubDate>Fri, 07 Aug 2026 04:44:32 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/macgregor-the-bridge-builder</guid>
-      <link>https://www.astralcodexten.com/p/macgregor-the-bridge-builder</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/43b1baa32b3a_macgregor_the_bridge_builder.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:06:38</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Traffic Shaping for Workload Classification</title>
-      <description>Audio version of Traffic Shaping for Workload Classification from LessWrong Frontpage</description>
-      <pubDate>Thu, 06 Aug 2026 23:24:44 +0000</pubDate>
-      <guid>hYjBosio5NsbrPzAC</guid>
-      <link>https://www.lesswrong.com/posts/hYjBosio5NsbrPzAC/traffic-shaping-for-workload-classification-2</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/abe23d90d45d_traffic_shaping_for_workload_classification.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:18</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #180: No Longer In Charge” by Zvi</title>
-      <description>Audio version of “AI #180: No Longer In Charge” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 06 Aug 2026 13:42:56 +0000</pubDate>
-      <guid>fea3305f-9cef-4a72-9823-b8f498d62f3c</guid>
-      <link>https://www.lesswrong.com/posts/mxNjwQitLvwWq9jm2/ai-180-no-longer-in-charge</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cc40d4a7fe71_ai_180_no_longer_in_charge_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:41</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi</title>
       <description>Audio version of “Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Tue, 28 Jul 2026 18:13:05 +0000</pubDate>
@@ -1457,6 +1433,18 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/61d084a5877e_openai_shares_some_alignment_problems_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:03:23</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Drone WMDs Don’t Need Any New Technology</title>
+      <description>Audio version of Drone WMDs Don’t Need Any New Technology by Felix Choussat from LessWrong Curated</description>
+      <pubDate>Mon, 20 Jul 2026 18:46:00 +0000</pubDate>
+      <guid>bGoo3NWzMAzsLQceJ</guid>
+      <link>https://www.lesswrong.com/posts/bGoo3NWzMAzsLQceJ/drone-wmds-don-t-need-any-new-technology</link>
+      <itunes:author>Felix Choussat</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/528aef9cf3d6_drone_wmds_dont_need_any_new_technology.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:26:58</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1841,18 +1829,6 @@ Topics covered:
       <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23eb66ae716_metrs_observations_of_reward_hacking_in_recent_fr.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:28:15</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Slow corporations as an intuition pump for AI R&amp;D automation</title>
-      <description>Audio version of Slow corporations as an intuition pump for AI R&amp;D automation from AI Futures Project</description>
-      <pubDate>Mon, 19 May 2025 17:43:42 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/slow-corporations-as-an-intuition</guid>
-      <link>https://blog.aifutures.org/p/slow-corporations-as-an-intuition</link>
-      <itunes:author>AI Futures Project</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/07000a276acc_slow_corporations_as_an_intuition_pump_for_ai_rd.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:28</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
