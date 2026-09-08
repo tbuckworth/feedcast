@@ -40,6 +40,18 @@ Topics covered:
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-08.txt" type="text/plain" />
     </item>
     <item>
+      <title>“An Alien Mind: Jakub Pachocki Warns Us” by Zvi</title>
+      <description>Audio version of “An Alien Mind: Jakub Pachocki Warns Us” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 07 Sep 2026 18:03:12 +0000</pubDate>
+      <guid>2215db3a-3649-4508-baf0-5a74d75d582e</guid>
+      <link>https://www.lesswrong.com/posts/8E6ng6CseuzafSxQR/an-alien-mind-jakub-pachocki-warns-us</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a52cabb0a564_an_alien_mind_jakub_pachocki_warns_us_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:03:52</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-09-07</title>
       <description>Daily News Briefing - 2026-09-07
 
@@ -1298,49 +1310,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-09</title>
-      <description>Daily News Briefing - 2026-08-09
-
-Topics covered:
-- In artificial intelligence infrastructure and environmental policy, Amazon's push for massive compute power has collided with climate goals
-- In artificial intelligence capabilities and research, Google DeepMind has achieved a significant milestone in predictive modeling with its new WeatherNext system
-- In geopolitics and regional security, the humanitarian crisis in Ukraine has intensified as air defenses reach a critical failure point
-- In United States politics and law enforcement, the executive branch has secured a key victory with the narrow confirmation of Todd Blanche as Attorney General
-- Finally, in autonomous systems, NASA has confirmed that the Perseverance rover has set a new record for off-world autonomy
-- Expect continued international tension in the coming days as Spain and Italy escalate border controls following a surge of migration into the Spanish exclave of Ceuta</description>
-      <pubDate>Sun, 09 Aug 2026 05:11:33 +0000</pubDate>
-      <guid>news-briefing-2026-08-09</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/edbd2b37a9e9_daily_news_briefing_-_2026-08-09.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:38</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-09.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Dutch-book resistant probability over centered worlds</title>
-      <description>Audio version of Dutch-book resistant probability over centered worlds from LessWrong Frontpage</description>
-      <pubDate>Sat, 08 Aug 2026 23:05:10 +0000</pubDate>
-      <guid>cTSfisyzwxCvEpqEc</guid>
-      <link>https://www.lesswrong.com/posts/cTSfisyzwxCvEpqEc/dutch-book-resistant-probability-over-centered-worlds</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3156ec755e8a_dutch-book_resistant_probability_over_centered_wor.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:19:44</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“What Happened: OpenAI and HuggingFace” by Zvi</title>
-      <description>Audio version of “What Happened: OpenAI and HuggingFace” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sat, 08 Aug 2026 16:11:52 +0000</pubDate>
-      <guid>b03f9b4b-c25f-4294-8aac-b80c424ae763</guid>
-      <link>https://www.lesswrong.com/posts/xPAxz4g96uKz9FrHs/what-happened-openai-and-huggingface</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/17cbba5b34b6_what_happened_openai_and_huggingface_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:44</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“OpenAI Trained Its Models For Months While Those Models Were Coordinating Exploits Via Message Boards” by Zvi</title>
       <description>Audio version of “OpenAI Trained Its Models For Months While Those Models Were Coordinating Exploits Via Message Boards” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Fri, 07 Aug 2026 17:02:54 +0000</pubDate>
@@ -1805,18 +1774,6 @@ Topics covered:
       <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23eb66ae716_metrs_observations_of_reward_hacking_in_recent_fr.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:28:15</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Making sense of OpenAI's models</title>
-      <description>Audio version of Making sense of OpenAI's models from AI Futures Project</description>
-      <pubDate>Thu, 01 May 2025 16:13:05 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/making-sense-of-openais-models</guid>
-      <link>https://blog.aifutures.org/p/making-sense-of-openais-models</link>
-      <itunes:author>AI Futures Project</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2d2013158167_making_sense_of_openais_models.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:52</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
