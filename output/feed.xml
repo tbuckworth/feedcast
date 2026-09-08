@@ -132,6 +132,18 @@ Topics covered:
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-05.txt" type="text/plain" />
     </item>
     <item>
+      <title>Your Book Review: The Tale Of Genji</title>
+      <description>Audio version of Your Book Review: The Tale Of Genji from Scott Alexander</description>
+      <pubDate>Fri, 04 Sep 2026 19:34:24 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/your-book-review-the-tale-of-genji</guid>
+      <link>https://www.astralcodexten.com/p/your-book-review-the-tale-of-genji</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d7ffd52332dd_your_book_review_the_tale_of_genji.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>01:04:57</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>“Claude Fable 5.1 and Mythos 5.1: The System Card” by Zvi</title>
       <description>Audio version of “Claude Fable 5.1 and Mythos 5.1: The System Card” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Fri, 04 Sep 2026 16:13:45 +0000</pubDate>
