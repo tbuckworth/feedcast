@@ -16,6 +16,16 @@ MAX_BATCH_CHARS = 18000
 MAX_OUTPUT_TOKENS = 12000
 
 
+# A passage the model refuses is halved at sentence boundaries until it is
+# shorter than this, then narrated as written. Gemini's filter blocked a
+# 17,909-char stretch of an ACX review on 2026-09-08 (PROHIBITED_CONTENT) —
+# single-newline prose that batching sees as one paragraph — and a third of the
+# post went out un-normalised when a few sentences were the problem.
+MIN_FALLBACK_CHARS = 1500
+
+_SENTENCE_BREAK = re.compile(r"(?<=[.!?])\s+")
+
+
 class NormalizationTruncated(RuntimeError):
     """The model hit its output ceiling, so the tail of the text is missing."""
 
@@ -63,9 +73,10 @@ class TextNormalizer:
 
         An empty completion is almost always about one passage — a provider
         filter, or content Gemini declines — not about the batch as a whole, so
-        halving the batch and trying each side isolates it. The offending
-        paragraph is then narrated as written, which reads "45%" as "forty-five
-        percent sign" at worst; the alternative was no episode (2026-09-06).
+        halving the batch and trying each side isolates it: by paragraph first,
+        then by sentence once a single paragraph is left. The offending passage
+        is then narrated as written, which reads "45%" as "forty-five percent
+        sign" at worst; the alternative was no episode (2026-09-06).
         """
         text = "\n\n".join(paragraphs)
         try:
@@ -78,8 +89,16 @@ class TextNormalizer:
                 left = await self._normalize_resilient(paragraphs[:mid])
                 right = await self._normalize_resilient(paragraphs[mid:])
                 return f"{left}\n\n{right}"
+            sentences = _SENTENCE_BREAK.split(text)
+            if len(sentences) > 1 and len(text) > MIN_FALLBACK_CHARS:
+                mid = len(sentences) // 2
+                print(f"    Normaliser returned nothing for a {len(text):,}-char passage "
+                      f"({e}); retrying as two halves at a sentence boundary")
+                left = await self._normalize_resilient([" ".join(sentences[:mid])])
+                right = await self._normalize_resilient([" ".join(sentences[mid:])])
+                return f"{left} {right}"
             print(f"    WARNING: normaliser returned nothing for a {len(text):,}-char "
-                  f"paragraph ({e}); narrating it un-normalised: {text[:80]!r}")
+                  f"passage ({e}); narrating it un-normalised: {text[:80]!r}")
             self.unnormalized_chars += len(text)
             return text
 
