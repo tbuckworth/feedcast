@@ -180,6 +180,25 @@ class FeedMonitor:
                 conn.execute("ALTER TABLE processed_posts ADD COLUMN fidelity TEXT DEFAULT ''")
             except sqlite3.OperationalError:
                 pass  # Column already exists
+            # Entries that failed mid-pipeline, so the next run tries them
+            # again whatever their age. Without this a transient blip was
+            # permanent: the run counted as published, the guard stopped the
+            # same-day retry, and the age window had closed by the next
+            # morning (Zvi 2026-09-08, an ACX review 2026-09-06). The
+            # normalised script is kept so a retry can go straight to TTS.
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS failed_entries (
+                    id TEXT PRIMARY KEY,
+                    link TEXT NOT NULL,
+                    feed_name TEXT NOT NULL,
+                    title TEXT NOT NULL,
+                    attempts INTEGER NOT NULL,
+                    last_error TEXT NOT NULL,
+                    first_failed_at TEXT NOT NULL,
+                    last_failed_at TEXT NOT NULL,
+                    normalized_text TEXT NOT NULL DEFAULT ''
+                )
+            """)
             conn.commit()
 
     def is_processed(self, entry_id: str) -> bool:
@@ -231,6 +250,64 @@ class FeedMonitor:
             )
             conn.commit()
             return cursor.rowcount > 0
+
+    # Retries of a failed entry, counting the first attempt. Three mornings is
+    # long enough for a provider blip and short enough that a post the
+    # pipeline genuinely cannot narrate stops appearing in the email.
+    MAX_ATTEMPTS = 3
+
+    def record_failure(self, entry: FeedEntry, error: str,
+                       normalized_text: Optional[str] = None) -> int:
+        """Queue a failed entry for the next run. Returns the attempt count so far."""
+        now = datetime.now().isoformat()
+        with sqlite3.connect(self.db_path) as conn:
+            row = conn.execute(
+                "SELECT attempts, first_failed_at, normalized_text FROM failed_entries WHERE id = ?",
+                (entry.id,),
+            ).fetchone()
+            attempts = (row[0] if row else 0) + 1
+            first = row[1] if row else now
+            # Keep the furthest-along script we have: an attempt that fails
+            # earlier than the last one (at summarisation, say) must not erase
+            # a normalised script that only needed narrating.
+            kept = normalized_text or (row[2] if row else "") or ""
+            conn.execute(
+                """
+                INSERT OR REPLACE INTO failed_entries
+                (id, link, feed_name, title, attempts, last_error,
+                 first_failed_at, last_failed_at, normalized_text)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (entry.id, entry.link, entry.feed_name, entry.title, attempts,
+                 error[:2000], first, now, kept),
+            )
+            conn.commit()
+        return attempts
+
+    def clear_failure(self, entry_id: str) -> None:
+        """Drop an entry from the retry queue, because it went through."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("DELETE FROM failed_entries WHERE id = ?", (entry_id,))
+            conn.commit()
+
+    def pending_failures(self) -> list[dict]:
+        """Failed entries still owed a retry, oldest failure first."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            rows = conn.execute(
+                "SELECT * FROM failed_entries WHERE attempts < ? ORDER BY first_failed_at",
+                (self.MAX_ATTEMPTS,),
+            ).fetchall()
+            return [dict(r) for r in rows]
+
+    def prune_failures(self, days: int = 30) -> int:
+        """Forget failures older than `days`, given up on or not."""
+        cutoff = (datetime.now() - timedelta(days=days)).isoformat()
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.execute(
+                "DELETE FROM failed_entries WHERE first_failed_at < ?", (cutoff,))
+            conn.commit()
+            return cursor.rowcount
 
     def mark_processed(
         self, entry: FeedEntry, audio_file: Optional[str] = None,

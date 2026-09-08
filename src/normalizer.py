@@ -2,7 +2,7 @@
 
 import re
 
-from .llm import get_client, MODEL_NORMALIZER
+from .llm import EmptyCompletion, MODEL_NORMALIZER, completion_text, get_client
 
 # One request's worth of input. Normalisation EXPANDS text — "1,234" becomes
 # nine words — so the output ceiling has to clear this comfortably.
@@ -43,6 +43,9 @@ class TextNormalizer:
 
     def __init__(self):
         self.client = get_client()
+        # Characters passed through as written because the model returned
+        # nothing for them; the run log reports it so it does not go unnoticed.
+        self.unnormalized_chars = 0
 
     async def normalize_for_tts(self, text: str) -> str:
         """Normalize text for TTS: convert numbers, dates, symbols to spoken form."""
@@ -53,7 +56,32 @@ class TextNormalizer:
         if len(text) > MAX_BATCH_CHARS:
             return await self._normalize_in_batches(text)
 
-        return await self._normalize_chunk(text)
+        return await self._normalize_resilient(text.split("\n\n"))
+
+    async def _normalize_resilient(self, paragraphs: list[str]) -> str:
+        """Normalise a batch, narrowing down to the paragraph the model won't take.
+
+        An empty completion is almost always about one passage — a provider
+        filter, or content Gemini declines — not about the batch as a whole, so
+        halving the batch and trying each side isolates it. The offending
+        paragraph is then narrated as written, which reads "45%" as "forty-five
+        percent sign" at worst; the alternative was no episode (2026-09-06).
+        """
+        text = "\n\n".join(paragraphs)
+        try:
+            return await self._normalize_chunk(text)
+        except EmptyCompletion as e:
+            if len(paragraphs) > 1:
+                mid = len(paragraphs) // 2
+                print(f"    Normaliser returned nothing for a {len(text):,}-char batch "
+                      f"({e}); retrying as two halves")
+                left = await self._normalize_resilient(paragraphs[:mid])
+                right = await self._normalize_resilient(paragraphs[mid:])
+                return f"{left}\n\n{right}"
+            print(f"    WARNING: normaliser returned nothing for a {len(text):,}-char "
+                  f"paragraph ({e}); narrating it un-normalised: {text[:80]!r}")
+            self.unnormalized_chars += len(text)
+            return text
 
     async def _normalize_chunk(self, text: str) -> str:
         """Normalize a single chunk of text."""
@@ -65,18 +93,18 @@ class TextNormalizer:
                 {"role": "user", "content": text},
             ],
         )
-        choice = response.choices[0]
+        content = completion_text(response, label=f"normaliser ({len(text):,} chars)")
 
         # A truncated completion is indistinguishable from a complete one in the
         # returned text: the episode simply ends mid-article and the MP3 stops.
         # Fail loudly instead — the run reports the entry and the rest continue.
-        if choice.finish_reason == "length":
+        if response.choices[0].finish_reason == "length":
             raise NormalizationTruncated(
                 f"{MODEL_NORMALIZER} hit its {MAX_OUTPUT_TOKENS}-token output "
                 f"ceiling on a {len(text)}-char chunk; text would be silently "
                 f"cut short"
             )
-        return choice.message.content
+        return content
 
     @staticmethod
     def _split_oversized(paragraph: str) -> list[str]:
@@ -136,8 +164,6 @@ class TextNormalizer:
 
         normalized_parts = []
         for batch in batches:
-            batch_text = "\n\n".join(batch)
-            normalized = await self._normalize_chunk(batch_text)
-            normalized_parts.append(normalized)
+            normalized_parts.append(await self._normalize_resilient(batch))
 
         return "\n\n".join(normalized_parts)

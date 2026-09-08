@@ -9,7 +9,7 @@ import feedparser
 
 from .bundle import writer_bundle
 from .extractor import extract_article
-from .llm import get_client, MODEL_STRONG
+from .llm import MODEL_STRONG, completion_text, get_client
 from .monitor import FeedEntry, warn_if_dead
 from .verify import fidelity_markdown, verify_script
 
@@ -217,7 +217,7 @@ class NewsAggregator:
                 {"role": "user", "content": user_message},
             ],
         )
-        briefing = response.choices[0].message.content
+        briefing = completion_text(response, label="news briefing")
         draft, fidelity = briefing, None
         if self.verify:
             briefing, fidelity = await verify_script(
