@@ -41,6 +41,41 @@ MODEL_CHEAP = MODEL_WRITER
 LLM_TIMEOUT_SECONDS = float(os.environ.get("LLM_TIMEOUT_SECONDS", "180"))
 
 
+class EmptyCompletion(RuntimeError):
+    """The model returned no text, though the HTTP call itself succeeded.
+
+    OpenRouter reports a provider-side failure (a filtered response, an upstream
+    error, a quota) as a 200 whose body has `error` set and `choices` absent;
+    the SDK parses that into a ChatCompletion with `choices=None`, and the SDK's
+    own retries never fire because nothing failed at the transport layer.
+    `response.choices[0]` on that object is the "'NoneType' object is not
+    subscriptable" that took out an ACX book review twice (2026-09-06, -08),
+    with nothing in the log to say which call or why.
+    """
+
+
+def completion_text(response, label: str = "") -> str:
+    """The text of a chat completion, or EmptyCompletion saying why there is none.
+
+    Every call site that reads `response.choices[0].message.content` should go
+    through here, so an empty reply names the call and carries the provider's
+    reason instead of surfacing as a type error three frames away.
+    """
+    where = f"{label}: " if label else ""
+    choices = getattr(response, "choices", None)
+    if not choices:
+        extra = getattr(response, "model_extra", None) or {}
+        error = getattr(response, "error", None) or extra.get("error")
+        raise EmptyCompletion(f"{where}response has no choices (provider error: {error!r})")
+    choice = choices[0]
+    content = getattr(choice.message, "content", None)
+    if content is None:
+        refusal = getattr(choice.message, "refusal", None)
+        raise EmptyCompletion(
+            f"{where}empty content (finish_reason={choice.finish_reason!r}, refusal={refusal!r})")
+    return content
+
+
 def get_client() -> AsyncOpenAI:
     return AsyncOpenAI(
         base_url="https://openrouter.ai/api/v1",

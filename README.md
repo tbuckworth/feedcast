@@ -211,11 +211,23 @@ so the email arrives by about 06:00, and GitHub's own late fire is then stopped
 by the guard. A redundant dispatch is harmless: the concurrency group queues
 it, and a run with nothing new publishes nothing and sends no email.
 
-**Test runs.** Dispatch the workflow with `test_run` ticked (or set
-`FEEDCAST_TEST_RUN=true` locally) to exercise the whole pipeline — fetch, write,
-narrate, publish — while the email goes only to `FEEDCAST_EMAIL_TO`, with a
-`[TEST]` subject and no BCC recipients. Combine it with `entry_url` to
-re-narrate one post as an end-to-end check without emailing anyone else.
+**Dev runs.** Every run dispatched by hand — an `entry_url` reprocess, an
+`inject_url`, a `resend_report`, a `force` — is a dev run: it publishes as
+normal, but the email goes only to `FEEDCAST_EMAIL_TO`, with a `[DEV]` subject
+and no BCC recipients. Only the daily run (GitHub's schedule, or the bare
+dispatch from the cron backstop) emails the list on its own; tick
+`notify_list` on a hand dispatch if that run should too. Locally,
+`FEEDCAST_TEST_RUN=true` does the same. On 2026-09-08 two debugging re-runs
+each emailed the whole list, one of them announcing nothing but a failure.
+
+**Failed entries retry themselves.** An entry that fails mid-pipeline gets a
+second pass in the same run — serially, on a fresh connection pool, resuming
+at the stage that failed and reusing the TTS chunks already on disk — and is
+then queued in `failed_entries` with its normalised script, so the next runs
+try it again regardless of the age window, straight from narration. Three
+attempts, then the email says it gave up. Before this a transient blip was
+permanent: the run counted as published, the guard stopped the same-day retry,
+and the window had closed by morning (Zvi 2026-09-08, an ACX review 2026-09-06).
 
 **Fidelity check.** Every script a writer model produces (summaries and the
 briefing) is read against its source by a second model, Claude Sonnet 5, which

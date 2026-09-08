@@ -36,7 +36,7 @@ def test_normal_run_bccs_and_shows_the_check_line(monkeypatch):
     assert not is_test_run()
     assert send_report(_report(), datetime(2026, 9, 3)) is True
     msg = FakeSMTP.sent["msg"]
-    assert msg["Bcc"] == "friend@example.com" and not msg["Subject"].startswith("[TEST]")
+    assert msg["Bcc"] == "friend@example.com" and not msg["Subject"].startswith("[DEV]")
     html = msg.get_body(preferencelist=("html",)).get_content()
     text = msg.get_body(preferencelist=("plain",)).get_content()
     assert "Checked against source: no issues" in html and "(Checked against source: no issues)" in text
@@ -48,7 +48,7 @@ def test_test_run_drops_bcc_and_tags_subject(monkeypatch):
     assert send_report(_report(), datetime(2026, 9, 3)) is True
     msg = FakeSMTP.sent["msg"]
     assert msg["Bcc"] is None and msg["To"] == "titus@example.com"
-    assert msg["Subject"].startswith("[TEST] Feedcast")
+    assert msg["Subject"].startswith("[DEV] Feedcast")
 
 
 def test_false_string_is_not_a_test_run(monkeypatch):

@@ -5,6 +5,8 @@ import hashlib
 import json
 import os
 import socket
+import traceback
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Literal
@@ -115,22 +117,49 @@ def generate_episode_id(entry_id: str) -> str:
     return episode_id(entry_id)
 
 
+@dataclass
+class Attempt:
+    """How far one entry got, so a retry resumes there instead of starting over.
+
+    The stages are the writer's work (`process`), TTS normalisation
+    (`normalize`), narration (`tts`) and the bullet digest (`digest`). A failure
+    names its stage in the log and the email. A later attempt skips any stage
+    that already produced text, and the normalised script is kept in the
+    database so a retry on another day goes straight to narration — the
+    summary, its fidelity check and the normalisation are the expensive part.
+    """
+    stage: str = "process"
+    processed_text: str | None = None
+    normalized_text: str | None = None
+    number: int = 1  # attempt count across runs, for the report
+
+
 async def process_entry(
     entry: FeedEntry, mode: str, prompt: str,
     processor: ContentProcessor, audio_gen: AudioGenerator,
     normalizer: TextNormalizer,
     audio_dir: Path, http_client: httpx.AsyncClient,
+    attempt: Attempt | None = None,
 ) -> tuple[FeedEntry, Path]:
     """Process one entry: content → audio. Runs concurrently with other entries."""
+    attempt = attempt if attempt is not None else Attempt()
     print(f"\n  Processing: {entry.title}")
-    processed_text = await processor.process(entry, mode, prompt, title=entry.title)
-    print(f"    Processed text: {len(processed_text)} chars")
+
+    if attempt.normalized_text is None and attempt.processed_text is None:
+        attempt.stage = "process"
+        attempt.processed_text = await processor.process(entry, mode, prompt, title=entry.title)
+        print(f"    Processed text: {len(attempt.processed_text)} chars")
+    elif attempt.processed_text is not None:
+        print(f"    Resuming with the script from an earlier attempt "
+              f"({len(attempt.processed_text)} chars)")
 
     # Digest the script BEFORE normalisation — bullets are read, so they want
     # "45%", not the "forty-five percent" a voice needs — and run it alongside
     # the audio, which takes minutes to the digest's seconds. Free wall-clock.
+    # A retry that only has the normalised script digests that instead: spoken
+    # numbers in the bullets beat no episode.
     digest_task = asyncio.create_task(
-        safe_bullets(processed_text,
+        safe_bullets(attempt.processed_text or attempt.normalized_text or "",
                      is_briefing=entry.id.startswith("news-briefing-"),
                      label=entry.title,
                      sources=entry.sources)
@@ -141,18 +170,25 @@ async def process_entry(
     # there would leave the digest in flight into Phase 3 and the loop closing
     # on a pending task.
     try:
-        processed_text = await normalizer.normalize_for_tts(processed_text)
-        print(f"    Normalized text: {len(processed_text)} chars")
+        if attempt.normalized_text is None:
+            attempt.stage = "normalize"
+            attempt.normalized_text = await normalizer.normalize_for_tts(attempt.processed_text)
+            print(f"    Normalized text: {len(attempt.normalized_text)} chars")
+        else:
+            print(f"    Resuming with the normalised script from an earlier attempt "
+                  f"({len(attempt.normalized_text)} chars)")
 
+        attempt.stage = "tts"
         episode_id = generate_episode_id(entry.id)
         audio_path = await audio_gen.generate_episode(
-            processed_text, audio_dir, episode_id, entry.title, http_client,
+            attempt.normalized_text, audio_dir, episode_id, entry.title, http_client,
         )
     except BaseException:
         digest_task.cancel()
         raise
     print(f"    Generated audio: {audio_path.name}")
 
+    attempt.stage = "digest"
     entry.bullets = await digest_task
     print(f"    Digest: {len(entry.bullets)} bullets")
     return (entry, audio_path)
@@ -342,6 +378,8 @@ async def async_main(config_path: Path | None = None) -> None:
     # Bound here, before Phase 1: the news-briefing block appends to it, and
     # assigning it later in this function would make it a local everywhere.
     dead_sources: list[str] = []
+    # Entries picked up from an earlier run's failure resume part-way through.
+    resumed: dict[str, Attempt] = {}
     briefing_entry = None
 
     if inject_url:
@@ -419,24 +457,12 @@ async def async_main(config_path: Path | None = None) -> None:
         # On 2026-09-02 the window silently turned a reprocess into a deletion.
         reprocess_missing = None
         if reprocess_entry:
-            async def fetch_all(fc: FeedConfig) -> list[FeedEntry]:
-                return await asyncio.to_thread(
-                    monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns, None)
-            found = None
-            for fc, result in zip(config.feeds, await asyncio.gather(
-                    *[fetch_all(fc) for fc in config.feeds], return_exceptions=True)):
-                if isinstance(result, BaseException):
-                    continue
-                for e in result:
-                    if e.id == reprocess_entry or e.link == reprocess_entry:
-                        found = (fc, e)
-                        break
-                if found:
-                    break
+            found = await _find_in_feeds(config, monitor, reprocess_entry)
             if found and found[1].id not in seen_ids:
                 fc, e = found
                 mode = "verbatim" if force_verbatim else fc.mode
                 entries_to_process.append((e, mode, fc.prompt or config.default_prompt))
+                seen_ids.add(e.id)
                 print(f"  Reprocessing: {e.title} ({fc.name}, mode {mode})")
             elif not found:
                 reprocess_missing = reprocess_entry
@@ -445,6 +471,29 @@ async def async_main(config_path: Path | None = None) -> None:
                     print("  Requested entry is in no feed any more; previous episode kept")
                 else:
                     print("  Requested entry is in no feed")
+
+        # Entries that failed on an earlier run. Their feed is fetched with the
+        # age cutoff off: a post that failed yesterday is outside the window by
+        # now, and that is exactly why it needs this path rather than the one
+        # above. Each gets MAX_ATTEMPTS mornings, then the email says so.
+        for row in monitor.pending_failures():
+            if row["id"] in seen_ids:
+                continue
+            found = await _find_in_feeds(config, monitor, row["id"], row["link"],
+                                         only_feed=row["feed_name"])
+            if not found:
+                print(f"  Earlier failure is no longer in its feed, dropping: {row['title']}")
+                monitor.clear_failure(row["id"])
+                continue
+            fc, e = found
+            seen_ids.add(e.id)
+            entries_to_process.append((e, fc.mode, fc.prompt or config.default_prompt))
+            script = row["normalized_text"] or None
+            resumed[e.id] = Attempt(stage="tts" if script else "process",
+                                    normalized_text=script, number=row["attempts"] + 1)
+            print(f"  Retrying from an earlier run: {e.title} "
+                  f"(attempt {row['attempts'] + 1} of {monitor.MAX_ATTEMPTS}"
+                  + (", script kept — straight to narration)" if script else ")"))
 
         # LessWrong Curated dates an item by when it was curated. Keep that as
         # the "is this new to us" date and ask LessWrong when the post was
@@ -552,28 +601,66 @@ async def async_main(config_path: Path | None = None) -> None:
     else:
         # PHASE 2: Parallel processing (content + audio)
         print(f"\nPhase 2: Processing {len(entries_to_process)} entries in parallel...")
+        attempts = {e.id: resumed.get(e.id, Attempt()) for e, _m, _p in entries_to_process}
 
         # Configure connection limits to avoid ReadError issues with concurrent TTS requests
         limits = httpx.Limits(max_keepalive_connections=5, max_connections=10)
-        async with httpx.AsyncClient(timeout=httpx.Timeout(300.0), limits=limits) as http_client:
-            tasks = [
-                process_entry(e, m, p, processor, audio_gen, normalizer, audio_dir, http_client)
-                for e, m, p in entries_to_process
-            ]
-            results = await asyncio.gather(*tasks, return_exceptions=True)
+
+        async def run_all(items, concurrently: bool) -> list:
+            async with httpx.AsyncClient(timeout=httpx.Timeout(300.0), limits=limits) as http_client:
+                coros = [
+                    process_entry(e, m, p, processor, audio_gen, normalizer, audio_dir,
+                                  http_client, attempts[e.id])
+                    for e, m, p in items
+                ]
+                if concurrently:
+                    return await asyncio.gather(*coros, return_exceptions=True)
+                out = []
+                for coro in coros:
+                    try:
+                        out.append(await coro)
+                    except Exception as exc:
+                        out.append(exc)
+                return out
+
+        results = await run_all(entries_to_process, concurrently=True)
+
+        # Second pass: whatever failed gets one more go, one at a time, on a
+        # fresh connection pool. It resumes at the stage that failed and
+        # reuses the TTS chunks already on disk, so a transient blip costs
+        # minutes here rather than a day (2026-09-08: three dropped DeepInfra
+        # connections cost the episode).
+        retry = [(item, r) for item, r in zip(entries_to_process, results)
+                 if isinstance(r, BaseException)]
+        if retry:
+            print(f"\n  Second pass: retrying {len(retry)} failed "
+                  f"{'entry' if len(retry) == 1 else 'entries'} serially...")
+            for (submitted, _m, _p), exc in retry:
+                print(f"    {submitted.title}: failed at {attempts[submitted.id].stage}: "
+                      f"{type(exc).__name__}: {exc}")
+            second = await run_all([item for item, _ in retry], concurrently=False)
+            second_by_id = {item[0].id: r for (item, _), r in zip(retry, second)}
+            results = [second_by_id.get(e.id, r)
+                       for (e, _m, _p), r in zip(entries_to_process, results)]
 
         # PHASE 3: Sequential finalization
         print(f"\nPhase 3: Finalizing...")
         new_episodes = 0
+        feed_names = {fc.name for fc in config.feeds}
         # gather() preserves input order, so zipping recovers which entry each
         # exception came from — the report needs to name what failed.
         for (submitted, _mode, _prompt), result in zip(entries_to_process, results):
             if isinstance(result, BaseException):
-                print(f"  Error processing {submitted.title}: {type(result).__name__}: {result!r}")
-                failures.append((submitted.title, f"{type(result).__name__}: {result}"))
+                # Only feed entries can be found again tomorrow. A briefing is
+                # regenerated daily anyway, and an injected URL has ntfy.
+                queue = (submitted.feed_name in feed_names
+                         and not submitted.id.startswith("news-briefing-"))
+                _report_entry_failure(submitted, attempts[submitted.id], result,
+                                      monitor, failures, queue=queue)
                 continue
             entry, audio_path = result
             monitor.mark_processed(entry, audio_path.name, content=entry.content)
+            monitor.clear_failure(entry.id)
             if entry.bundle:
                 write_bundle(sources_dir, generate_episode_id(entry.id), entry.bundle)
             new_entry_ids.add(entry.id)
@@ -584,6 +671,12 @@ async def async_main(config_path: Path | None = None) -> None:
             new_episodes += 1
 
         print(f"  {new_episodes} new episodes created")
+        if normalizer.unnormalized_chars:
+            msg = (f"{normalizer.unnormalized_chars:,} chars were narrated as written "
+                   f"because the normaliser returned nothing for them")
+            print(f"  WARNING: {msg}")
+            if os.environ.get("GITHUB_ACTIONS"):
+                print(f"::warning title=Feedcast normaliser::{msg}")
 
     # Record the maths-skipped posts with no audio file. This dedups them so they
     # are not re-detected daily, and the feed generator already skips any entry
@@ -605,6 +698,9 @@ async def async_main(config_path: Path | None = None) -> None:
     removed_briefings = monitor.cleanup_old_briefings(days=7)
     if removed_briefings:
         print(f"  Cleaned up {removed_briefings} old news briefings")
+    pruned = monitor.prune_failures(days=30)
+    if pruned:
+        print(f"  Forgot {pruned} old failure records")
 
     # Generate podcast feed
     print(f"\nGenerating podcast feed...")
@@ -669,6 +765,58 @@ def _max_age_hours() -> float | None:
               f"using {DEFAULT_MAX_AGE_HOURS:g}")
         return DEFAULT_MAX_AGE_HOURS
     return hours if hours > 0 else None
+
+
+async def _find_in_feeds(
+    config: Config, monitor: FeedMonitor, *keys: str, only_feed: str | None = None,
+) -> tuple[FeedConfig, FeedEntry] | None:
+    """Find an entry by id or link across the feeds, with the age cutoff off.
+
+    Shared by reprocessing and the failed-entry queue: both want a post the
+    normal windowed fetch has already stopped seeing.
+    """
+    feeds = [fc for fc in config.feeds if only_feed is None or fc.name == only_feed]
+    feeds = feeds or config.feeds
+
+    async def fetch_all(fc: FeedConfig) -> list[FeedEntry]:
+        return await asyncio.to_thread(
+            monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns, None)
+
+    fetched = await asyncio.gather(*[fetch_all(fc) for fc in feeds], return_exceptions=True)
+    for fc, result in zip(feeds, fetched):
+        if isinstance(result, BaseException):
+            continue
+        for e in result:
+            if e.id in keys or (e.link and e.link in keys):
+                return (fc, e)
+    return None
+
+
+def _report_entry_failure(
+    entry: FeedEntry, attempt: Attempt, exc: BaseException,
+    monitor: FeedMonitor, failures: list[tuple[str, str]], *, queue: bool,
+) -> None:
+    """Log a failed entry with its stage and traceback, queue it, tell the email.
+
+    The bare `TypeError: 'NoneType' object is not subscriptable` this replaces
+    took a log archaeology session to place (2026-09-08); the stage and the
+    traceback go in the log, and the stage and the attempt count in the email.
+    """
+    summary = f"{attempt.stage}: {type(exc).__name__}: {exc}"
+    print(f"  Error processing {entry.title} at {summary}")
+    print("".join(traceback.format_exception(type(exc), exc, exc.__traceback__)).rstrip())
+    note = ""
+    if queue:
+        n = monitor.record_failure(entry, summary, attempt.normalized_text)
+        if n < monitor.MAX_ATTEMPTS:
+            note = f" — attempt {n} of {monitor.MAX_ATTEMPTS}, will retry next run"
+        else:
+            note = f" — attempt {n} of {monitor.MAX_ATTEMPTS}, giving up"
+    failures.append((entry.title, summary + note))
+    if os.environ.get("GITHUB_ACTIONS"):
+        # Surfaces on the run's summary page, so a green run that lost an
+        # episode is not green at a glance.
+        print(f"::warning title=Feedcast entry failed::{entry.title} — {summary}{note}")
 
 
 def _email_always() -> bool:

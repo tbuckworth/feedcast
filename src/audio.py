@@ -3,7 +3,9 @@
 import asyncio
 import base64
 import os
+import random
 import re
+import shutil
 from pathlib import Path
 
 import httpx
@@ -117,33 +119,44 @@ def split_into_chunks(text: str, max_chars: int = MAX_CHUNK_CHARS) -> list[str]:
 
 async def generate_with_deepinfra_async(
     text: str, voice_id: str, api_key: str, http_client: httpx.AsyncClient,
-    save_debug_wav: Path | None = None,
+    save_debug_wav: Path | None = None, tag: str = "",
 ) -> bytes:
     """Generate audio using DeepInfra inference endpoint with voice cloning."""
     # Diagnostic logging
-    print(f"      [DIAG] Generating with voice_id: {voice_id}")
-    print(f"      [DIAG] Text length: {len(text)} chars, preview: {text[:80]!r}...")
+    print(f"      {tag}[DIAG] Generating with voice_id: {voice_id}")
+    print(f"      {tag}[DIAG] Text length: {len(text)} chars, preview: {text[:80]!r}...")
+
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+    }
+    payload = {
+        "text": text,
+        "voice_id": voice_id,
+        "cfg_weight": 0.5,
+        "exaggeration": 0.3,  # Lower exaggeration sounds more natural
+    }
 
     max_retries = 5
     for attempt in range(max_retries):
         try:
-            response = await http_client.post(
-                DEEPINFRA_API_URL,
-                headers={
-                    "Authorization": f"Bearer {api_key}",
-                    "Content-Type": "application/json",
-                },
-                json={
-                    "text": text,
-                    "voice_id": voice_id,
-                    "cfg_weight": 0.5,
-                    "exaggeration": 0.3,  # Lower exaggeration sounds more natural
-                },
-            )
+            if attempt == 0:
+                response = await http_client.post(DEEPINFRA_API_URL, headers=headers, json=payload)
+            else:
+                # A ReadError is the server closing the connection on us, and
+                # the shared pool can hand the same dead keepalive straight
+                # back: three chunks did exactly that for five rounds on
+                # 2026-09-08. Retries open their own connection instead.
+                fresh_limits = httpx.Limits(max_keepalive_connections=0, max_connections=1)
+                async with httpx.AsyncClient(timeout=http_client.timeout,
+                                             limits=fresh_limits) as fresh:
+                    response = await fresh.post(DEEPINFRA_API_URL, headers=headers, json=payload)
         except (httpx.TimeoutException, httpx.ConnectError, httpx.ReadError) as e:
             if attempt < max_retries - 1:
-                wait_time = (attempt + 1) * 10
-                print(f"      Retry {attempt + 2}/{max_retries} in {wait_time}s: {type(e).__name__}: {e}")
+                # Jittered, so chunks that failed together do not retry together.
+                wait_time = (attempt + 1) * 10 + random.uniform(0, 5)
+                print(f"      {tag}Retry {attempt + 2}/{max_retries} in {wait_time:.0f}s: "
+                      f"{type(e).__name__}: {e}")
                 await asyncio.sleep(wait_time)
                 continue
             raise
@@ -229,37 +242,61 @@ class AudioGenerator:
 
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
+        # Entries narrate concurrently and their chunk lines interleave in the
+        # log; the episode id in front is what tells them apart.
+        tag = f"[{output_path.stem[:12]}] "
+
         chunks = split_into_chunks(text)
-        print(f"    Generating audio in {len(chunks)} chunks via DeepInfra API...")
-        print(f"    [DIAG] Total text length: {len(text)} chars")
+        print(f"    {tag}Generating audio in {len(chunks)} chunks via DeepInfra API...")
+        print(f"    {tag}[DIAG] Total text length: {len(text)} chars")
         for i, chunk in enumerate(chunks):
-            print(f"    [DIAG] Chunk {i}: {len(chunk)} chars, preview: {chunk[:60]!r}...")
+            print(f"    {tag}[DIAG] Chunk {i}: {len(chunk)} chars, preview: {chunk[:60]!r}...")
 
         save_debug = os.environ.get("SAVE_DEBUG_WAVS", "").lower() in ("1", "true", "yes")
         debug_dir = output_path.parent / "debug_wavs" if save_debug else None
 
+        # Finished chunk WAVs stay beside the output until the MP3 exists, so a
+        # retry — the in-run second pass, or tomorrow's — synthesises only the
+        # chunks that failed. On 2026-09-08 seven good chunks were discarded
+        # with the three bad ones. data/audio/ is gitignored and state.sh
+        # pushes only top-level MP3s, so this directory never leaves the runner.
+        work_dir = output_path.parent / ".partial" / output_path.stem
+        work_dir.mkdir(parents=True, exist_ok=True)
+        cached = {p.name for p in work_dir.glob("chunk_*.wav") if p.stat().st_size > 0}
+        if cached:
+            print(f"    {tag}Reusing {len(cached)} chunk(s) synthesised by an earlier attempt")
+
         with tempfile.TemporaryDirectory() as tmpdir:
-            async def gen_chunk(i: int, chunk: str) -> tuple[int, bytes | None]:
+            async def gen_chunk(i: int, chunk: str) -> Path | None:
+                chunk_path = work_dir / f"chunk_{i:03d}.wav"
+                if chunk_path.name in cached:
+                    return chunk_path
                 async with self._semaphore:
-                    print(f"    Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
+                    print(f"    {tag}Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
                     debug_path = debug_dir / f"chunk_{i:03d}.wav" if debug_dir else None
                     audio_bytes = await generate_with_deepinfra_async(
                         chunk, self._voice_id, self._api_key, http_client,
-                        save_debug_wav=debug_path,
+                        save_debug_wav=debug_path, tag=tag,
                     )
-                    return (i, audio_bytes)
+                    if not audio_bytes:
+                        return None
+                    chunk_path.write_bytes(audio_bytes)
+                    return chunk_path
 
-            results = await asyncio.gather(*[gen_chunk(i, c) for i, c in enumerate(chunks)])
-            results.sort(key=lambda x: x[0])
+            # return_exceptions: let every chunk finish so the good ones are
+            # on disk for the retry, rather than abandoning them mid-flight
+            # the moment one chunk gives up.
+            results = await asyncio.gather(
+                *[gen_chunk(i, c) for i, c in enumerate(chunks)], return_exceptions=True)
+            errors = [r for r in results if isinstance(r, BaseException)]
+            if errors:
+                kept = sum(1 for r in results if isinstance(r, Path))
+                raise RuntimeError(
+                    f"{len(errors)} of {len(chunks)} TTS chunks failed "
+                    f"({kept} kept for retry): {type(errors[0]).__name__}: {errors[0]}"
+                ) from errors[0]
 
-            chunk_files = []
-            for i, audio_bytes in results:
-                if audio_bytes:
-                    chunk_path = Path(tmpdir) / f"chunk_{i:03d}.wav"
-                    with open(chunk_path, 'wb') as f:
-                        f.write(audio_bytes)
-                    chunk_files.append(chunk_path)
-
+            chunk_files = [r for r in results if isinstance(r, Path)]
             if not chunk_files:
                 raise ValueError("No audio generated")
 
@@ -288,7 +325,8 @@ class AudioGenerator:
                     capture_output=True, text=True, timeout=300,
                 )
                 if result.returncode == 0 and mp3_path.exists():
-                    print(f"      Saved: {mp3_path}")
+                    print(f"      {tag}Saved: {mp3_path}")
+                    shutil.rmtree(work_dir, ignore_errors=True)
                     return mp3_path
             else:
                 # Generate a short silence to insert between chunks
@@ -316,7 +354,8 @@ class AudioGenerator:
                     capture_output=True, text=True, timeout=300,
                 )
                 if result.returncode == 0 and mp3_path.exists():
-                    print(f"      Concatenated: {mp3_path}")
+                    print(f"      {tag}Concatenated: {mp3_path}")
+                    shutil.rmtree(work_dir, ignore_errors=True)
                     return mp3_path
 
             raise RuntimeError(f"FFmpeg failed: {result.stderr}")

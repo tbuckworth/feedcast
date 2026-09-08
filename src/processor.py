@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup, Tag
 
 from .bundle import writer_bundle
 from .verify import fidelity_markdown, verify_script
-from .llm import get_client, MODEL_STRONG, MODEL_CHEAP
+from .llm import MODEL_CHEAP, MODEL_STRONG, completion_text, get_client
 from .monitor import FeedEntry
 
 AUTO_VERBATIM_LIMIT = 24000  # ~25 min of audio at ~0.063 sec/char
@@ -93,7 +93,7 @@ class ContentProcessor:
                         {"role": "user", "content": table_html},
                     ],
                 )
-                prose = response.choices[0].message.content
+                prose = completion_text(response, label="table-to-prose")
 
             replacement = f"Here is a summary of the following table. {prose} Now continuing with the article."
             table.replace_with(BeautifulSoup(f"<p>{replacement}</p>", "html.parser"))
@@ -141,7 +141,7 @@ Content:
             ],
         )
 
-        summary = response.choices[0].message.content
+        summary = completion_text(response, label=f"summariser ({entry.title})")
         draft, fidelity = summary, None
         if self.verify:
             summary, fidelity = await verify_script(

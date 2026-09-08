@@ -342,7 +342,13 @@ def build_text(report: RunReport, when: datetime) -> str:
 
 
 def is_test_run() -> bool:
-    """FEEDCAST_TEST_RUN: a run that publishes but must not reach the BCC list."""
+    """FEEDCAST_TEST_RUN: a dev run — publishes as normal, emails only the operator.
+
+    The workflow sets this for every run someone asked for by hand (a
+    reprocess, an injection, a resend, a force) unless they tick `notify_list`.
+    On 2026-09-08 two debugging re-runs each emailed the whole BCC list, one of
+    them announcing nothing but a failure.
+    """
     return os.environ.get("FEEDCAST_TEST_RUN", "").strip().lower() in ("1", "true", "yes")
 
 
@@ -395,7 +401,7 @@ def send_report(report: RunReport, when: datetime | None = None) -> bool:
 
         msg = EmailMessage()
         if test_run:
-            subject = f"[TEST] {subject}"
+            subject = f"[DEV] {subject}"
         msg["Subject"] = subject
         msg["From"] = from_addr
         msg["To"] = ", ".join(to_addrs)
