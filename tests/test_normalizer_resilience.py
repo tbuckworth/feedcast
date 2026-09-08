@@ -11,7 +11,9 @@ from types import SimpleNamespace as NS
 
 import pytest
 
-from src.normalizer import MAX_BATCH_CHARS, NormalizationTruncated, TextNormalizer
+from src.normalizer import (
+    MAX_BATCH_CHARS, MIN_FALLBACK_CHARS, NormalizationTruncated, TextNormalizer,
+)
 
 
 def _normalizer(poison: str, finish="stop"):
@@ -59,6 +61,29 @@ def test_long_text_loses_nothing_around_a_bad_batch():
     assert len(out) == len(good)
     assert out[1000] == "This one has POISON in it."
     assert all(p == g.upper() for p, g in zip(out, good) if "POISON" not in g)
+
+
+def test_single_long_paragraph_is_narrowed_to_the_offending_sentences():
+    # Single-newline prose (ACX) reaches the normaliser as one paragraph; the
+    # 2026-09-08 fallback then passed 17,909 chars through as written.
+    sentences = [f"Sentence number {i} says something ordinary and fine." for i in range(120)]
+    sentences[60] = "This sentence carries the POISON the filter objects to."
+    text = " ".join(sentences)
+    assert len(text) > MIN_FALLBACK_CHARS
+    n, _ = _normalizer(poison="POISON")
+    out = asyncio.run(n.normalize_for_tts(text))
+    assert "POISON" in out and "SENTENCE NUMBER 0" in out and "SENTENCE NUMBER 119" in out
+    # The raw remainder is a handful of sentences, not the paragraph.
+    assert n.unnormalized_chars <= MIN_FALLBACK_CHARS
+    assert n.unnormalized_chars < len(text) / 4
+    assert len(out.split()) == len(text.split())          # nothing dropped or duplicated
+
+
+def test_short_passage_falls_back_whole_rather_than_splitting_forever():
+    n, calls = _normalizer(poison="POISON")
+    text = "Short one. Has POISON here. Done."
+    assert asyncio.run(n.normalize_for_tts(text)) == text
+    assert len(calls) == 1 and n.unnormalized_chars == len(text)
 
 
 def test_truncation_still_fails_loudly():
