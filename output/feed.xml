@@ -21,6 +21,25 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-09-08</title>
+      <description>Daily News Briefing - 2026-09-08
+
+Topics covered:
+- The top story today is new research deepening concerns about emergent behavior in AI agent swarms
+- Turning to European politics, German Chancellor Friedrich Merz appeared before reporters visibly shaken, calling the AfD's landslide in Saxony-Anhalt "the worst electoral defeat the CDU has suffered in decades." Exit polls showed only nine percent of voters approved of his performance
+- On the Ukraine front, BBC Verify analysis shows Kyiv is now enduring more daily air raid alerts than at any point since Russia's full-scale invasion began in twenty twenty-two
+- In North American trade, Canada's retaliatory tariffs on twenty billion dollars' worth of American imports took effect early this morning, ranging from fifteen to fifty percent and targeting steel, dairy, appliances, and electronics
+- Finally, North Korea and Russia opened the first road bridge linking the two countries across the Tumen River, capable of handling up to three hundred vehicles daily
+- Looking ahead, the DeepMind findings on emergent cheating in agent swarms are likely to intensify the debate over whether current oversight mechanisms can keep pace with increasingly autonomous AI systems, while Germany's two remaining state elections in less than two weeks will test whether the AfD's surge is a regional phenomenon or a continental turning point</description>
+      <pubDate>Tue, 08 Sep 2026 04:34:10 +0000</pubDate>
+      <guid>news-briefing-2026-09-08</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9e617b3099b0_daily_news_briefing_-_2026-09-08.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:05:55</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-08.txt" type="text/plain" />
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-09-07</title>
       <description>Daily News Briefing - 2026-09-07
 
@@ -1322,49 +1341,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-08</title>
-      <description>Daily News Briefing - 2026-08-08
-
-Topics covered:
-- In artificial intelligence safety and policy, OpenAI has officially paused the development of its upcoming model, codenamed "Astra," citing significant security risks
-- In AI capabilities and infrastructure, the physical footprint of the industry is expanding despite mounting regulatory and environmental pushback
-- In geopolitics and regional security, a major new defense alliance has formed in the Middle East
-- In economics and corporate technology, Meta has been hit with a second massive penalty in its landmark child safety case
-- Finally, in the evolving AI workforce, Google’s leadership shakeup has taken a definitive turn
-- Expect continued volatility in the energy sector as investors react to the administration's aggressive rollback of offshore wind infrastructure</description>
-      <pubDate>Sat, 08 Aug 2026 05:03:01 +0000</pubDate>
-      <guid>news-briefing-2026-08-08</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e6e6f95ac3b6_daily_news_briefing_-_2026-08-08.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:04:21</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-08.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Don’t Inoculate Everything: Stratified Inoculation Prompting Narrows Backdoors and Preserves Desired Traits</title>
-      <description>Audio version of Don’t Inoculate Everything: Stratified Inoculation Prompting Narrows Backdoors and Preserves Desired Traits from LessWrong Frontpage</description>
-      <pubDate>Sat, 08 Aug 2026 01:20:24 +0000</pubDate>
-      <guid>FS7GFsGsH7CSQLahy</guid>
-      <link>https://www.lesswrong.com/posts/FS7GFsGsH7CSQLahy/don-t-inoculate-everything-stratified-inoculation-prompting</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/85de333fe0f4_dont_inoculate_everything_stratified_inoculation.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:24</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“OpenAI Trained Its Models For Months While Those Models Were Coordinating Exploits Via Message Boards” by Zvi</title>
-      <description>Audio version of “OpenAI Trained Its Models For Months While Those Models Were Coordinating Exploits Via Message Boards” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 07 Aug 2026 17:02:54 +0000</pubDate>
-      <guid>72626b7a-ec1d-4d5b-b1e1-9e84c074915e</guid>
-      <link>https://www.lesswrong.com/posts/noXXv7PwwFqauTBFQ/openai-trained-its-models-for-months-while-those-models-were</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/682894a48478_openai_trained_its_models_for_months_while_those.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:51</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“OpenAI Trained Its Models For Months While Those Models Were Coordinating Exploits Via Message Boards” by Zvi</title>
       <description>Audio version of “OpenAI Trained Its Models For Months While Those Models Were Coordinating Exploits Via Message Boards” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Fri, 07 Aug 2026 17:02:54 +0000</pubDate>
@@ -1829,18 +1805,6 @@ Topics covered:
       <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23eb66ae716_metrs_observations_of_reward_hacking_in_recent_fr.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:28:15</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Make The Prompt Public</title>
-      <description>Audio version of Make The Prompt Public from AI Futures Project</description>
-      <pubDate>Sat, 17 May 2025 11:41:22 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/make-the-prompt-public</guid>
-      <link>https://blog.aifutures.org/p/make-the-prompt-public</link>
-      <itunes:author>AI Futures Project</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/17592b945f0a_make_the_prompt_public.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:16</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
