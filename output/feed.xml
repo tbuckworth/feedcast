@@ -21,6 +21,49 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-09-09</title>
+      <description>Daily News Briefing - 2026-09-09
+
+Topics covered:
+- The lead story today is a remarkable and contentious claim from OpenAI
+- Turning to the Middle East, the US-Iran conflict escalated sharply again on Tuesday
+- The US-Canada trade war intensified further on Tuesday
+- In AI industry news, French lab Mistral AI raised three billion euros — about three-and-a-half billion dollars — at a valuation exceeding twenty-one billion euros, in what it calls the largest equity fundraise ever by a European technology company
+- Finally, Microsoft patched a record nine hundred seventy-two vulnerabilities this month, one hundred twelve of them critical
+- Looking ahead, the OpenAI Navier-Stokes controversy is likely to force a broader reckoning over whether AI labs can fairly compete in scientific research while also controlling the tools researchers depend on</description>
+      <pubDate>Wed, 09 Sep 2026 04:35:00 +0000</pubDate>
+      <guid>news-briefing-2026-09-09</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5a87792b4f86_daily_news_briefing_-_2026-09-09.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:06:08</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-09.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>God Help Us, Let’s Try To Learn About Mechanistic Interpretability Techniques</title>
+      <description>Audio version of God Help Us, Let’s Try To Learn About Mechanistic Interpretability Techniques from Scott Alexander</description>
+      <pubDate>Tue, 08 Sep 2026 12:04:21 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/god-help-us-lets-try-to-learn-about</guid>
+      <link>https://www.astralcodexten.com/p/god-help-us-lets-try-to-learn-about</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/18e2979b5218_god_help_us_lets_try_to_learn_about_mechanistic.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:32:34</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Astra Is Hard to Monitor” by Zvi</title>
+      <description>Audio version of “Astra Is Hard to Monitor” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 08 Sep 2026 11:32:56 +0000</pubDate>
+      <guid>baa4f5dc-fdbf-4d19-b045-010fef7f6b81</guid>
+      <link>https://www.lesswrong.com/posts/HCRs8btkiamtWSNAL/astra-is-hard-to-monitor</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3124815d9881_astra_is_hard_to_monitor_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:03:50</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-09-08</title>
       <description>Daily News Briefing - 2026-09-08
 
