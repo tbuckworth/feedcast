@@ -21,6 +21,60 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-09-11</title>
+      <description>Daily News Briefing - 2026-09-11
+
+Topics covered:
+- The lead story today is a deepening crisis in global bond markets and energy prices, driven by a significant escalation in Yemen
+- Turning to AI safety, a personal-capacity analysis posted on the Alignment Forum — though the author flags it as heavily dependent on LLM-generated evaluation — finds that OpenAI's Astra model can perform a concerning amount of reasoning without any visible chain of thought
+- On the OpenAI training data controversy, the dispute over the company's mathematical breakthroughs is widening
+- Finally, Anthropic published a detailed report on Chinese distillation campaigns that significantly expands on the intelligence community's allegations from earlier this week
+- Looking ahead, next week's Federal Reserve meeting and Bank of England decision will test whether central banks can navigate the collision between surging energy costs and already fragile economies, while the widening mathematician revolt against OpenAI shows no signs of abating</description>
+      <pubDate>Fri, 11 Sep 2026 04:36:08 +0000</pubDate>
+      <guid>news-briefing-2026-09-11</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/48eb54236604_daily_news_briefing_-_2026-09-11.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:05:51</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-11.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>An operationalization of opaque serial depth</title>
+      <description>Audio version of An operationalization of opaque serial depth by ryan_greenblatt from Ryan Greenblatt</description>
+      <pubDate>Thu, 10 Sep 2026 17:26:39 +0000</pubDate>
+      <guid>x8BvtWxtoajBGHS3g</guid>
+      <link>https://www.lesswrong.com/posts/x8BvtWxtoajBGHS3g/an-operationalization-of-opaque-serial-depth</link>
+      <itunes:author>ryan_greenblatt</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2943bd9ca56f_an_operationalization_of_opaque_serial_depth.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:57</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #185: Preference Cascade” by Zvi</title>
+      <description>Audio version of “AI #185: Preference Cascade” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 10 Sep 2026 15:12:49 +0000</pubDate>
+      <guid>25aa08df-e11e-4f6e-b883-5ac45aeb14b1</guid>
+      <link>https://www.lesswrong.com/posts/tFmtz9HW6c2X9dw2B/ai-185-preference-cascade</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e80a21e6cd6f_ai_185_preference_cascade_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:18</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Royce On San Francisco</title>
+      <description>Audio version of Royce On San Francisco from Scott Alexander</description>
+      <pubDate>Thu, 10 Sep 2026 11:10:18 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/royce-on-san-francisco</guid>
+      <link>https://www.astralcodexten.com/p/royce-on-san-francisco</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9dcf612c464b_royce_on_san_francisco.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:16:05</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-09-10</title>
       <description>Daily News Briefing - 2026-09-10
 
@@ -1322,49 +1376,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-11</title>
-      <description>Daily News Briefing - 2026-08-11
-
-Topics covered:
-- In artificial intelligence capabilities and cybersecurity, OpenAI has launched a specialized frontier model, GPT-five-point-six-Cyber, alongside an expansion of its "Daybreak" defense program
-- In artificial intelligence policy and infrastructure, Meta CEO Mark Zuckerberg has published a six-thousand-five-hundred-word manifesto titled "The Future is for Everyone." The essay advocates for an open-source "personal superintelligence" and serves as a strategic reboot for Meta, positioning the company as the open alternative to closed ecosystems like OpenAI
-- In geopolitics and regional security, the conflict in Ukraine has reached a new level of escalation as a Ukrainian drone strike hit deep into Russian territory, killing at least thirteen people
-- In United States domestic policy and public health, President Trump has signed a controversial executive order aimed at limiting childhood vaccines
-- In markets and corporate technology, Google has begun hosting rival app stores within its Play Store for the first time, following a significant court-ordered loss to Epic Games
-- Expect a period of heightened legal and medical debate as health organizations mobilize to challenge the administration's new vaccine mandates in federal court</description>
-      <pubDate>Tue, 11 Aug 2026 05:14:48 +0000</pubDate>
-      <guid>news-briefing-2026-08-11</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5339f630b82f_daily_news_briefing_-_2026-08-11.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:04:07</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-11.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>On using crises to shift political will for AI</title>
-      <description>Audio version of On using crises to shift political will for AI from LessWrong Frontpage</description>
-      <pubDate>Tue, 11 Aug 2026 04:54:51 +0000</pubDate>
-      <guid>wbEcn5HTtvH4TsDN4</guid>
-      <link>https://www.lesswrong.com/posts/wbEcn5HTtvH4TsDN4/on-using-crises-to-shift-political-will-for-ai</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6ad3e367c050_on_using_crises_to_shift_political_will_for_ai.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:09:37</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“The Pacing of the Frontier” by Zvi</title>
-      <description>Audio version of “The Pacing of the Frontier” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 10 Aug 2026 21:53:21 +0000</pubDate>
-      <guid>0bc11530-74ba-41c4-9153-7ba75d8510a6</guid>
-      <link>https://www.lesswrong.com/posts/WgWoJPKw5b2XTDD24/the-pacing-of-the-frontier</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a17a90a57730_the_pacing_of_the_frontier_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:54</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>“Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi</title>
       <description>Audio version of “Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Tue, 28 Jul 2026 18:13:05 +0000</pubDate>
@@ -1481,30 +1492,6 @@ Topics covered:
       <itunes:author>AI Futures Project</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f2b51774f117_plan_a_suggestions_for_further_work.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:02:50</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AI 2040: Plan A</title>
-      <description>Audio version of AI 2040: Plan A from Daniel Kokotajlo</description>
-      <pubDate>Thu, 09 Jul 2026 16:25:14 +0000</pubDate>
-      <guid>pFzctpJBat95SrCyC</guid>
-      <link>https://www.lesswrong.com/posts/pFzctpJBat95SrCyC/ai-2040-plan-a</link>
-      <itunes:author>Daniel Kokotajlo</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8f70bf8d72b5_ai_2040_plan_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:01:50</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AI 2040: Plan A</title>
-      <description>Audio version of AI 2040: Plan A from AI Futures Project</description>
-      <pubDate>Thu, 09 Jul 2026 16:14:53 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/ai-2040-plan-a</guid>
-      <link>https://blog.aifutures.org/p/ai-2040-plan-a</link>
-      <itunes:author>AI Futures Project</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/84228fcb8aee_ai_2040_plan_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:25</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
