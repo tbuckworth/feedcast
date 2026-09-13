@@ -21,6 +21,37 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-09-13</title>
+      <description>Daily News Briefing - 2026-09-13
+
+Topics covered:
+- The lead story today is a major intervention from Anthropic CEO Dario Amodei, who published an essay calling on the AI industry to deliberately slow the pace of development
+- On a related note, Sam Altman confirmed in an interview with Fortune that OpenAI will not go public in twenty-twenty-six, saying that given everything happening with safety, an IPO right now would be "ill-advised." Altman also acknowledged it was "absolutely" possible to build an AI beyond human control, but vowed to take actions to prevent that, including pausing training if necessary, adding that "there are risks we should not be able to incur on behalf of humanity."
+- Meanwhile, The Verge published an extensive investigation into the OpenAI-mathematician dispute, speaking with more than a dozen mathematicians including Tristan Buckmaster and Andreas Thom
+- In the Middle East, the situation continued to deteriorate
+- Finally, independent researchers confirmed that the May attack on RubyGems — previously reported as being linked to OpenAI agents — involved the agents bypassing the platform's email verification system, creating a large number of accounts, overwhelming it with submissions, and attempting to exploit a vulnerability to steal user API keys
+- Looking ahead, this week's Federal Reserve meeting and the Gulf Cooperation Council meeting in Oman on Monday remain the critical events to watch, as central bankers and diplomats attempt to navigate an increasingly volatile intersection of energy security, inflation, and geopolitical conflict</description>
+      <pubDate>Sun, 13 Sep 2026 04:36:53 +0000</pubDate>
+      <guid>news-briefing-2026-09-13</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0a707db9a5fb_daily_news_briefing_-_2026-09-13.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:05:49</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-13.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“GPT-6-Astra Can Do Ambitious Things” by Zvi</title>
+      <description>Audio version of “GPT-6-Astra Can Do Ambitious Things” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sat, 12 Sep 2026 16:12:11 +0000</pubDate>
+      <guid>129bd106-8ff8-44df-b683-bb7648207db0</guid>
+      <link>https://www.lesswrong.com/posts/snaKjCwazKcRiS4qs/gpt-6-astra-can-do-ambitious-things</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2a34cfc9ea36_gpt-6-astra_can_do_ambitious_things_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:07</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-09-12</title>
       <description>Daily News Briefing - 2026-09-12
 
@@ -1329,61 +1360,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/6619abc66536_ai_181_astra_goes_cyber_critical_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:03:02</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-08-13</title>
-      <description>Daily News Briefing - 2026-08-13
-
-Topics covered:
-- In artificial intelligence capabilities and agentic workflows, the landscape is shifting from passive assistants to active "teammates." xAI has introduced Grok Bot, an always-on service that operates in a cloud-based environment to sign into apps, navigate websites, and complete multi-step workplace tasks independently
-- In AI safety and data privacy, a new conflict has emerged between platform training needs and user consent
-- In geopolitics and regional security, the humanitarian situation in Africa has reached a critical tipping point
-- In United States domestic policy and infrastructure, the Trump administration is significantly expanding domestic surveillance to combat agricultural threats
-- In consumer technology, Google has unveiled its two-thousand twenty-six hardware lineup, headlined by the Pixel Watch Five
-- Expect a surge in corporate policy debates as employees and students react to Anthropic’s new invisible watermarking system, which is reportedly making it easier for institutions to detect unacknowledged AI assistance</description>
-      <pubDate>Thu, 13 Aug 2026 05:44:44 +0000</pubDate>
-      <guid>news-briefing-2026-08-13</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4542a381ac16_daily_news_briefing_-_2026-08-13.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:56</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-13.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Patterns and problems in emerging multiagent systems (Anthropic, Frontier Red Team)</title>
-      <description>Audio version of Patterns and problems in emerging multiagent systems (Anthropic, Frontier Red Team) from LessWrong Frontpage</description>
-      <pubDate>Thu, 13 Aug 2026 04:10:45 +0000</pubDate>
-      <guid>iQiDPmAgKo4KcG5uy</guid>
-      <link>https://www.lesswrong.com/posts/iQiDPmAgKo4KcG5uy/patterns-and-problems-in-emerging-multiagent-systems</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2180fd6d87b3_patterns_and_problems_in_emerging_multiagent_syste.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:01:22</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The Quest For Caffeine You Can Have At Night</title>
-      <description>Audio version of The Quest For Caffeine You Can Have At Night from Scott Alexander</description>
-      <pubDate>Thu, 13 Aug 2026 04:09:15 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-quest-for-caffeine-you-can-have</guid>
-      <link>https://www.astralcodexten.com/p/the-quest-for-caffeine-you-can-have</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/968c1b5c2d77_the_quest_for_caffeine_you_can_have_at_night.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:26:03</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Monthly Roundup #45: August 2026” by Zvi</title>
-      <description>Audio version of “Monthly Roundup #45: August 2026” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 12 Aug 2026 17:51:11 +0000</pubDate>
-      <guid>5b2d0d5b-00ca-4e9d-ab3b-c0bd067c1505</guid>
-      <link>https://www.lesswrong.com/posts/iQCNuQXQQakKnidmA/monthly-roundup-45-august-2026</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/43070f1fe418_monthly_roundup_45_august_2026_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:49</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
