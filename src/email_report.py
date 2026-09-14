@@ -423,7 +423,10 @@ def send_report(report: RunReport, when: datetime | None = None) -> bool:
                 srv.starttls(context=ssl.create_default_context())
                 srv.login(user, password)
                 srv.send_message(msg)
-        print(f"  Email report sent to {', '.join(to_addrs + bcc_addrs)}")
+        # The Actions log is public: name only the To address (a secret,
+        # masked there) and count the blind-copied readers.
+        bcc_note = f" and {len(bcc_addrs)} bcc" if bcc_addrs else ""
+        print(f"  Email report sent to {', '.join(to_addrs)}{bcc_note}")
         return True
     except Exception as e:
         print(f"  Email report failed: {type(e).__name__}: {e}")
