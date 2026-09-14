@@ -21,6 +21,36 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-09-14</title>
+      <description>Daily News Briefing - 2026-09-14
+
+Topics covered:
+- The dominant story today is the political backlash against the AI industry's call for a slowdown
+- Meanwhile, the AI safety debate itself is drawing skepticism from parts of Silicon Valley
+- In geopolitics, the BRICS summit in Delhi concluded with a joint declaration that carefully avoids assigning blame on any major conflict
+- Separately, a Russian drone struck a train near the Poland-Ukraine border in what Ukrainian Railways said may have been an attempt to target a diplomatic train carrying former British Prime Minister Boris Johnson and former CIA chief David Petraeus, which had departed the station shortly before the strike
+- Looking ahead, the Guardian notes that Donald Trump's meeting with Xi Jinping in Washington on September twenty-fourth will test the prospects of any Sino-American coordination on AI safety — a key element of Amodei's third step for global regulation</description>
+      <pubDate>Mon, 14 Sep 2026 04:34:46 +0000</pubDate>
+      <guid>news-briefing-2026-09-14</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/edfc5c69b0fb_daily_news_briefing_-_2026-09-14.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:05:04</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-14.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Brand New AI Solves a Millennium Prize” by Zvi</title>
+      <description>Audio version of “Brand New AI Solves a Millennium Prize” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sun, 13 Sep 2026 15:51:36 +0000</pubDate>
+      <guid>2faec801-3413-4b2d-bbb1-1344b2693241</guid>
+      <link>https://www.lesswrong.com/posts/uoZW6BKaCcmNQrWis/brand-new-ai-solves-a-millennium-prize</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c352ad662c52_brand_new_ai_solves_a_millennium_prize_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:03:49</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-09-13</title>
       <description>Daily News Briefing - 2026-09-13
 
@@ -1297,49 +1327,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-14</title>
-      <description>Daily News Briefing - 2026-08-14
-
-Topics covered:
-- In artificial intelligence capabilities and enterprise infrastructure, OpenAI has significantly increased the velocity of its model releases and leadership changes
-- In AI safety and emergent behavior, researchers at Anthropic have published findings detailing "turf wars" between autonomous agents
-- In cybersecurity and national policy, the Trump administration has issued a landmark memorandum fundamentally altering the United States’ offensive cyber posture
-- In global geopolitics and infrastructure, extreme weather and regional tensions are straining energy grids and logistics
-- In corporate technology and markets, the valuation of the primary AI labs is reaching historic heights despite mounting legal challenges
-- Expect a period of intense diplomatic maneuvering as Japan and Russia recalibrate their presence in the Pacific following Putin’s territorial visit</description>
-      <pubDate>Fri, 14 Aug 2026 05:41:19 +0000</pubDate>
-      <guid>news-briefing-2026-08-14</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/30f528c8bca9_daily_news_briefing_-_2026-08-14.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:04:11</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-14.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The Foothills Of Bay Area House Party</title>
-      <description>Audio version of The Foothills Of Bay Area House Party from Scott Alexander</description>
-      <pubDate>Thu, 13 Aug 2026 23:54:32 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-foothills-of-bay-area-house-party</guid>
-      <link>https://www.astralcodexten.com/p/the-foothills-of-bay-area-house-party</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a5ab83577f9e_the_foothills_of_bay_area_house_party.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:23:34</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Features that current AIs don't have that future AIs will have</title>
-      <description>Audio version of Features that current AIs don't have that future AIs will have from LessWrong Frontpage</description>
-      <pubDate>Thu, 13 Aug 2026 21:49:54 +0000</pubDate>
-      <guid>NyEM3FtgL7XkbfCXy</guid>
-      <link>https://www.lesswrong.com/posts/NyEM3FtgL7XkbfCXy/features-that-current-ais-don-t-have-that-future-ais-will</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/763a3bdc6cd9_features_that_current_ais_dont_have_that_future_a.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:52</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>How My Students Think About AI</title>
       <description>Audio version of How My Students Think About AI by dvd from LessWrong Curated</description>
       <pubDate>Thu, 13 Aug 2026 16:56:19 +0000</pubDate>
@@ -1348,18 +1335,6 @@ Topics covered:
       <itunes:author>dvd</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/7848f9fac81e_how_my_students_think_about_ai.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:22:41</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #181: Astra Goes Cyber Critical” by Zvi</title>
-      <description>Audio version of “AI #181: Astra Goes Cyber Critical” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 13 Aug 2026 15:22:24 +0000</pubDate>
-      <guid>788b9775-83d3-44cf-9db9-30e33d63af7a</guid>
-      <link>https://www.lesswrong.com/posts/hLn3SakowZLFWobHf/ai-181-astra-goes-cyber-critical</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6619abc66536_ai_181_astra_goes_cyber_critical_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:02</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
