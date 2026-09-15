@@ -21,6 +21,48 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-09-15</title>
+      <description>Daily News Briefing - 2026-09-15
+
+Topics covered:
+- The biggest development today is the market reaction to the AI slowdown consensus and deepening questions about whether it will have real teeth
+- On the economic front, US ten-year Treasury yields hit five percent on Monday for the first time since twenty twenty-three, driven by oil surging past one hundred eight dollars a barrel
+- In European security, NATO fighter jets shot down a drone over Lithuania after it entered from neighboring Belarus
+- And the Panama Canal announced it will cut daily vessel transits to twenty-nine-point-five starting in October — down eighteen percent from August — as drought from what is forecast to be the strongest El Niño in four decades worsens
+- Looking ahead, all eyes turn to the Federal Reserve's rate decision on Wednesday, with markets bracing for a hike amid surging energy costs, while next week's Trump-Xi summit and the UN Security Council meeting on AI could determine whether the slowdown debate moves from rhetoric to reality</description>
+      <pubDate>Tue, 15 Sep 2026 04:34:54 +0000</pubDate>
+      <guid>news-briefing-2026-09-15</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b2f98c8659b0_daily_news_briefing_-_2026-09-15.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:05:08</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-15.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>King Ludd</title>
+      <description>Audio version of King Ludd from Scott Alexander</description>
+      <pubDate>Mon, 14 Sep 2026 23:56:40 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/king-ludd</guid>
+      <link>https://www.astralcodexten.com/p/king-ludd</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/07cd00154231_king_ludd.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:20:16</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“We Must Pace The Frontier” by Zvi</title>
+      <description>Audio version of “We Must Pace The Frontier” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 14 Sep 2026 15:32:04 +0000</pubDate>
+      <guid>036ddd46-c3aa-4cf1-a312-17a69871fe94</guid>
+      <link>https://www.lesswrong.com/posts/iWPDPWAPCGiSMiFA2/we-must-pace-the-frontier</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0ba350455d5c_we_must_pace_the_frontier_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:04</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-09-14</title>
       <description>Daily News Briefing - 2026-09-14
 
@@ -1241,92 +1283,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-16</title>
-      <description>Daily News Briefing - 2026-08-16
-
-Topics covered:
-- In artificial intelligence safety and technical research, a new analysis of Google DeepMind’s DiffusionGemma model has raised concerns regarding "opaque serial depth." Unlike traditional models that generate tokens sequentially, this model generates text via diffusion, carrying both tokens and vectors through multiple hidden steps before producing a final output
-- In artificial intelligence policy and ethics, Anthropic has released technical details on its new provenance system designed to combat the weaponization of synthetic media
-- In geopolitics and regional stability, a significant diplomatic opening has occurred on the Korean Peninsula
-- In cybersecurity and infrastructure, Ukraine has successfully struck a major Russian rocket factory using "Flamingo" cruise missiles, marking a significant tactical victory in its campaign against Russian long-range strike capabilities
-- In corporate technology and aerospace, SpaceX has officially closed its acquisition of the AI coding startup Cursor
-- Expect a period of heightened climate monitoring as Hawaii braces for a potential direct hit from Category One Hurricane Lala, which could drop up to twenty-five inches of rain and mark the first major strike on the islands in over three decades</description>
-      <pubDate>Sun, 16 Aug 2026 04:40:48 +0000</pubDate>
-      <guid>news-briefing-2026-08-16</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/82cb62b54826_daily_news_briefing_-_2026-08-16.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:04:24</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-16.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Does DiffusionGemma do latent reasoning?</title>
-      <description>Audio version of Does DiffusionGemma do latent reasoning? from LessWrong Frontpage</description>
-      <pubDate>Sun, 16 Aug 2026 04:22:20 +0000</pubDate>
-      <guid>QBuJ3suRZxrrxSTtv</guid>
-      <link>https://www.lesswrong.com/posts/QBuJ3suRZxrrxSTtv/does-diffusiongemma-do-latent-reasoning</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/659ee933f54f_does_diffusiongemma_do_latent_reasoning.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:26:55</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“On Dwarkesh Patel’s Podcast With Ryan Greenblatt” by Zvi</title>
-      <description>Audio version of “On Dwarkesh Patel’s Podcast With Ryan Greenblatt” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sat, 15 Aug 2026 13:02:13 +0000</pubDate>
-      <guid>8bbc1dd2-1cda-42fa-a3f7-3e507fae2541</guid>
-      <link>https://www.lesswrong.com/posts/BZW8CeAHHJ52EvwYt/on-dwarkesh-patel-s-podcast-with-ryan-greenblatt</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3390119a86ea_on_dwarkesh_patels_podcast_with_ryan_greenblatt.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:50</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-08-15</title>
-      <description>Daily News Briefing - 2026-08-15
-
-Topics covered:
-- In artificial intelligence capabilities and global partnerships, Apple has reportedly bypassed growing geopolitical tensions to train a custom large language model for the Chinese market in collaboration with Alibaba
-- In artificial intelligence safety and transparency, Google has announced a significant policy shift by allowing users to disable visible watermarks on AI-generated media
-- In cybersecurity and national infrastructure, a wave of sophisticated attacks has targeted United States water utilities, with officials pointing toward Iranian state-sponsored actors
-- In geopolitics and regional crises, the humanitarian situation in Japan has turned dire as "unprecedented" rainfall has claimed eight lives and left thousands of travelers stranded at Narita airport
-- In corporate technology and markets, a major realignment is underway in the fintech sector as Stripe and private equity firm Advent are reportedly in advanced talks to acquire PayPal
-- Expect continued volatility in global energy markets as new forecasts suggest natural gas prices could triple in parts of the United States, potentially ballooning the operational costs for AI data centers</description>
-      <pubDate>Sat, 15 Aug 2026 04:36:55 +0000</pubDate>
-      <guid>news-briefing-2026-08-15</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cd68eed36e0f_daily_news_briefing_-_2026-08-15.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:03:41</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-15.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Metaphilosophy II: Empirical Flywheels</title>
-      <description>Audio version of Metaphilosophy II: Empirical Flywheels from LessWrong Frontpage</description>
-      <pubDate>Sat, 15 Aug 2026 02:09:00 +0000</pubDate>
-      <guid>XN2B3rapcjzHL3bJr</guid>
-      <link>https://www.lesswrong.com/posts/XN2B3rapcjzHL3bJr/metaphilosophy-ii-empirical-flywheels-1</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/43b84d33fa7c_metaphilosophy_ii_empirical_flywheels.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:11:02</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Your Book Review: The Escape Artist</title>
-      <description>Audio version of Your Book Review: The Escape Artist from Scott Alexander</description>
-      <pubDate>Fri, 14 Aug 2026 22:21:13 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-book-review-the-escape-artist</guid>
-      <link>https://www.astralcodexten.com/p/your-book-review-the-escape-artist</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/063d0c299ca5_your_book_review_the_escape_artist.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:41:30</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>How My Students Think About AI</title>
       <description>Audio version of How My Students Think About AI by dvd from LessWrong Curated</description>
       <pubDate>Thu, 13 Aug 2026 16:56:19 +0000</pubDate>
@@ -1431,18 +1387,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d581d0973101_twitter_thoughts_for_you_by_zvi.mp3" type="audio/mpeg" length="0" />
       <itunes:duration>00:02:57</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Better Call Sol The Workhorse” by Zvi</title>
-      <description>Audio version of “Better Call Sol The Workhorse” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 13 Jul 2026 20:54:55 +0000</pubDate>
-      <guid>9f07cf6f-34f3-468d-96be-4727e4f02149</guid>
-      <link>https://www.lesswrong.com/posts/zPdDmJTovsKTvAiH2/better-call-sol-the-workhorse</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/66d6437add29_better_call_sol_the_workhorse_by_zvi.mp3" type="audio/mpeg" length="0" />
-      <itunes:duration>00:02:55</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
