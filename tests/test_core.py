@@ -346,3 +346,79 @@ class TestNewsBriefingDedup:
         econ_section_start = formatted.index("## ECONOMICS")
         assert formatted.index("AI Rule", ai_section_start) < econ_section_start
         assert formatted.index("Model Release", ai_section_start) < econ_section_start
+
+
+# --- generate (src/feed.py): what podcast crawlers need ---
+
+
+class TestGenerateFeedForCrawlers:
+    """Pocket Casts showed nothing for episodes the email linked (2026-09-15).
+
+    Its server polls a small private feed on its own schedule; a WebSub hub
+    declared in the feed and pinged by CI is what makes it fetch straight away.
+    The rest is hygiene the feed validator flagged: a non-URL guid must say it
+    is not a permalink, and enclosures should carry their real byte length.
+    """
+
+    def _feed(self, tmp_path, **cfg):
+        import xml.etree.ElementTree as ET
+        config = PodcastConfig(
+            title="T", description="D", author="A", email="e@e.com", language="en",
+            base_url="https://x.test/pod", **cfg,
+        )
+        from src.feed import Episode
+        eps = [
+            Episode(id="news-briefing-2026-09-15", title="Briefing", description="",
+                    audio_file="b.mp3", published=datetime(2026, 9, 15, 4, 34),
+                    duration_seconds=308, audio_bytes=2927229),
+            Episode(id="https://www.astralcodexten.com/p/king-ludd", title="King Ludd",
+                    description="", audio_file="k.mp3", published=datetime(2026, 9, 14),
+                    duration_seconds=1216, link="https://www.astralcodexten.com/p/king-ludd"),
+        ]
+        out = tmp_path / "feed.xml"
+        FeedGenerator(config).generate(eps, out)
+        return ET.parse(out).getroot().find("channel"), out.read_text()
+
+    ATOM = "{http://www.w3.org/2005/Atom}link"
+
+    def test_declares_the_websub_hub_next_to_the_self_link(self, tmp_path):
+        channel, text = self._feed(tmp_path)
+        links = {l.get("rel"): l.get("href") for l in channel.findall(self.ATOM)}
+        assert links["self"] == "https://x.test/pod/feed.xml"
+        assert links["hub"] == "https://pubsubhubbub.appspot.com/"
+        # The CI ping step extracts the hub from the serialised XML with grep.
+        assert '<atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />' in text
+
+    def test_hub_is_configurable_and_omittable(self, tmp_path):
+        channel, _ = self._feed(tmp_path, hub_url="https://hub.example/")
+        assert [l.get("href") for l in channel.findall(self.ATOM) if l.get("rel") == "hub"] \
+            == ["https://hub.example/"]
+        channel, _ = self._feed(tmp_path, hub_url="")
+        assert [l for l in channel.findall(self.ATOM) if l.get("rel") == "hub"] == []
+
+    def test_last_build_date_is_present_and_rfc822(self, tmp_path):
+        channel, _ = self._feed(tmp_path)
+        lbd = channel.findtext("lastBuildDate")
+        assert lbd and lbd.endswith("+0000")
+        from email.utils import parsedate_to_datetime
+        assert parsedate_to_datetime(lbd).year >= 2026
+
+    def test_non_url_guid_says_it_is_not_a_permalink(self, tmp_path):
+        channel, _ = self._feed(tmp_path)
+        guids = {i.findtext("guid"): i.find("guid").get("isPermaLink") for i in channel.findall("item")}
+        assert guids["news-briefing-2026-09-15"] == "false"
+        assert guids["https://www.astralcodexten.com/p/king-ludd"] is None   # a real permalink
+
+    def test_enclosure_length_is_the_audio_size(self, tmp_path):
+        channel, _ = self._feed(tmp_path)
+        lengths = {i.findtext("title"): i.find("enclosure").get("length") for i in channel.findall("item")}
+        assert lengths == {"Briefing": "2927229", "King Ludd": "0"}
+
+    def test_load_episodes_reads_the_audio_size(self, tmp_path):
+        config = PodcastConfig(title="T", description="D", author="A", email="e@e.com",
+                               language="en", base_url="https://x.test/pod")
+        (tmp_path / "a.mp3").write_bytes(b"\0" * 1234)
+        eps = FeedGenerator(config).load_episodes_from_db(
+            [{"id": "a", "title": "A", "audio_file": "a.mp3", "published": "2026-09-15T04:00:00",
+              "feed_name": "Zvi", "author": "Zvi", "link": None, "content": ""}], tmp_path)
+        assert eps[0].audio_bytes == 1234

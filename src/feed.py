@@ -5,7 +5,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 from html import escape
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -26,6 +26,11 @@ class PodcastConfig:
     language: str
     base_url: str
     image_url: Optional[str] = None
+    # WebSub hub (the W3C standard, formerly PubSubHubbub). Declared in the
+    # channel so apps can subscribe; CI pings it after each deploy. Pocket Casts
+    # polls a small private feed on its own schedule — hours, on a bad day — but
+    # acts on a hub notification within a minute or two. None or "" omits it.
+    hub_url: Optional[str] = "https://pubsubhubbub.appspot.com/"
 
 
 @dataclass
@@ -41,6 +46,7 @@ class Episode:
     link: Optional[str] = None
     transcript_url: Optional[str] = None
     author: str = ""
+    audio_bytes: int = 0
 
 
 class FeedGenerator:
@@ -112,6 +118,10 @@ class FeedGenerator:
         """Format datetime as RFC 822."""
         return dt.strftime("%a, %d %b %Y %H:%M:%S +0000")
 
+    @staticmethod
+    def _is_url(guid: str) -> bool:
+        return guid.startswith(("http://", "https://"))
+
     def write_index(self, episodes: list[Episode], output_path: Path) -> None:
         """A plain landing page at the site root.
 
@@ -174,6 +184,18 @@ li a{{color:#1b2024;text-decoration:none;font-weight:600}} li a:hover{{text-deco
         atom_link.set("rel", "self")
         atom_link.set("type", "application/rss+xml")
 
+        # WebSub hub. Subscribing apps are told the moment CI pings it.
+        if self.config.hub_url:
+            hub_link = ET.SubElement(channel, f"{{{ATOM_NS}}}link")
+            hub_link.set("href", self.config.hub_url)
+            hub_link.set("rel", "hub")
+
+        # Changes on every run, so a crawler comparing channel metadata (or a
+        # hub diffing two fetches) sees a new document even when only an
+        # item's enclosure changed.
+        ET.SubElement(channel, "lastBuildDate").text = self._format_rfc822(
+            datetime.now(timezone.utc))
+
         # iTunes specific tags
         ET.SubElement(channel, f"{{{self.ITUNES_NS}}}author").text = self.config.author
         ET.SubElement(channel, f"{{{self.ITUNES_NS}}}explicit").text = "false"
@@ -204,7 +226,12 @@ li a{{color:#1b2024;text-decoration:none;font-weight:600}} li a:hover{{text-deco
             ET.SubElement(item, "title").text = episode.title
             ET.SubElement(item, "description").text = episode.description
             ET.SubElement(item, "pubDate").text = self._format_rfc822(episode.published)
-            ET.SubElement(item, "guid").text = episode.id
+            # Briefing and LessWrong ids are not URLs; RSS says a guid is a
+            # permalink unless it says otherwise, and validators flag it.
+            guid = ET.SubElement(item, "guid")
+            guid.text = episode.id
+            if not self._is_url(episode.id):
+                guid.set("isPermaLink", "false")
 
             if episode.link:
                 ET.SubElement(item, "link").text = episode.link
@@ -223,7 +250,7 @@ li a{{color:#1b2024;text-decoration:none;font-weight:600}} li a:hover{{text-deco
                 enclosure.set("type", "audio/mpeg")
             else:
                 enclosure.set("type", "audio/wav")
-            enclosure.set("length", "0")  # Could compute actual size
+            enclosure.set("length", str(episode.audio_bytes))
 
             # iTunes episode tags
             ET.SubElement(
@@ -263,6 +290,7 @@ li a{{color:#1b2024;text-decoration:none;font-weight:600}} li a:hover{{text-deco
                 continue
 
             duration = self._get_audio_duration(audio_path)
+            audio_bytes = self._get_file_size(audio_path)
             published = datetime.fromisoformat(entry["published"])
             content = entry.get("content", "")
             is_briefing = entry["id"].startswith("news-briefing-")
@@ -300,6 +328,7 @@ li a{{color:#1b2024;text-decoration:none;font-weight:600}} li a:hover{{text-deco
                     link=entry.get("link"),
                     transcript_url=transcript_url,
                     author="" if is_briefing else author,
+                    audio_bytes=audio_bytes,
                 )
             )
 
