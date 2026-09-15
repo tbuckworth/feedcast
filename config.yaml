@@ -6,6 +6,10 @@ podcast:
   language: "en-us"
   image_url: "https://tbuckworth.github.io/feedcast/artwork.png"
   base_url: "https://tbuckworth.github.io/feedcast"
+  # WebSub hub declared in the feed and pinged by CI after every deploy, so
+  # subscribed apps (Pocket Casts among them) learn of new episodes at once
+  # instead of on their own polling schedule. Empty string disables both.
+  hub_url: "https://pubsubhubbub.appspot.com/"
 
 tts:
   # NOTE: Now using Chatterbox TTS with Derek Perkins voice cloning

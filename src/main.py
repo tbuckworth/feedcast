@@ -63,6 +63,8 @@ class PodcastMetaConfig(BaseModel):
     language: str = "en-us"
     base_url: str
     image_url: str | None = None
+    # WebSub hub declared in feed.xml and pinged by CI after deploy. "" disables.
+    hub_url: str | None = "https://pubsubhubbub.appspot.com/"
 
 
 class NewsSource(BaseModel):
@@ -361,6 +363,7 @@ async def async_main(config_path: Path | None = None) -> None:
         language=config.podcast.language,
         base_url=config.podcast.base_url,
         image_url=config.podcast.image_url,
+        hub_url=config.podcast.hub_url,
     )
     feed_gen = FeedGenerator(podcast_config)
 
