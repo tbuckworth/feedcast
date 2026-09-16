@@ -218,19 +218,27 @@ class Completion:
 
 async def complete(role: str, messages: list[dict], *, max_tokens: int, label: str = "",
                    client=None, temperature: float | None = None,
-                   reasoning: dict | None = None) -> Completion:
+                   reasoning: dict | None = None, fallback_on_empty: bool = True) -> Completion:
     """Run one chat completion for `role`, falling back along its target list.
 
-    `client` pins the call to that client and the role's primary model with no
-    fallback: tests use it, and so does anything that manages its own client.
-    `reasoning` overrides the target's default for this call only.
+    `client` pins the call to one client with no fallback: tests use it, and
+    so does anything that manages its own client. Such a client is assumed to
+    be OpenRouter's (`get_client()`), so the role's first OpenRouter target is
+    used — for the bullets role that is `openai/gpt-5.6-sol`, not the OpenAI
+    direct spelling. `reasoning` overrides the target's default for this call.
+
+    `fallback_on_empty=False` lets an empty reply (EmptyCompletion) propagate
+    instead of trying the next target: the checker's first attempt wants to
+    retry the *same* model with reasoning off, because a budget eaten by
+    hidden reasoning is not the model being down.
+
     Raises the last error when every target fails, and EmptyCompletion when
     the text is missing, so callers keep their existing handling.
     """
     targets = ROLES[role]
     where = label or role
     if client is not None:
-        target = targets[0]
+        target = next((t for t in targets if t.route == "openrouter"), targets[0])
         response = await client.chat.completions.create(
             **_kwargs(ROUTES["openrouter"], target, messages, max_tokens, temperature, reasoning))
         return _completion(response, target, where)
@@ -250,6 +258,17 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
             response = await api.chat.completions.create(
                 **_kwargs(route, target, messages, max_tokens, temperature, reasoning))
             done = _completion(response, target, where)
+        except EmptyCompletion as e:
+            if not fallback_on_empty:
+                # The caller will retry from the top; record any switch that
+                # happened on the way here so it still reaches the report.
+                if tried:
+                    fallback_log.append(f"{where}: reached {target.label} (empty) after " + "; ".join(tried))
+                raise
+            last = e
+            tried.append(f"{target.label}: {type(e).__name__}: {str(e)[:160]}")
+            print(f"    {where}: {tried[-1]}")
+            continue
         except Exception as e:  # noqa: BLE001 — any failure means try the next target
             last = e
             tried.append(f"{target.label}: {type(e).__name__}: {str(e)[:160]}")

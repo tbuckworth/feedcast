@@ -93,6 +93,33 @@ def test_checker_failure_never_raises():
     assert script == "orig" and fid.status == "skipped" and "openrouter down" in fid.note
 
 
+def test_an_empty_first_check_retries_with_reasoning_off_not_a_sibling_model(monkeypatch):
+    # Route-level: the first attempt's empty reply must not fall through to
+    # Sonnet 4.6 and be reported as a model fallback.
+    from src import llm
+    from types import SimpleNamespace as NS
+
+    class Api:
+        def __init__(self, replies):
+            self.replies, self.calls = list(replies), []
+            self.chat = NS(completions=NS(create=self._create))
+
+        async def _create(self, **kw):
+            self.calls.append(kw)
+            r = self.replies.pop(0)
+            return NS(choices=[NS(message=NS(content=r), finish_reason="length" if r is None else "stop")],
+                      usage=NS(completion_tokens=1))
+
+    api = Api([None, CLEAN])
+    monkeypatch.setattr(llm, "client_for", lambda route: api if route.name == "openrouter" else None)
+    monkeypatch.setattr(llm, "fallback_log", [])
+    script, fid = asyncio.run(verify_script("s", "src", writer_system_prompt="p"))
+    assert fid.status == "clean"
+    assert [c["model"] for c in api.calls] == [MODEL_CHECKER, MODEL_CHECKER]
+    assert api.calls[1]["extra_body"] == {"reasoning": {"enabled": False}}
+    assert llm.fallback_log == []
+
+
 def test_email_line():
     assert fidelity_summary(None) == ""
     assert fidelity_summary({"status": "skipped"}) == ""
