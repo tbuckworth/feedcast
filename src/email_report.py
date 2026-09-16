@@ -7,6 +7,7 @@ never fail a pipeline run that otherwise succeeded.
 """
 
 import os
+import re
 import smtplib
 import ssl
 from dataclasses import dataclass, field
@@ -74,6 +75,10 @@ class RunReport:
     failures: list[tuple[str, str]] = field(default_factory=list)
     linked: list[LinkedPost] = field(default_factory=list)
     dead_sources: list[str] = field(default_factory=list)
+    # Model fallbacks this run ("digest: served by ... after ..."): worth a
+    # line, because a backup that quietly serves for weeks is a primary that
+    # has quietly died.
+    notices: list[str] = field(default_factory=list)
     feed_url: str = ""
     site_url: str = ""
     total_in_feed: int = 0
@@ -130,19 +135,130 @@ def _btn(url: str, label: str) -> str:
     )
 
 
-def _bullet_html(b) -> str:
-    """One bullet, with a 'Source' link when it names the article it used."""
+_STOP = {"that", "this", "with", "from", "have", "were", "been", "their", "which",
+         "about", "into", "than", "then", "they", "them", "what", "when", "while",
+         "would", "could", "should", "also", "more", "most", "over", "under"}
+
+
+def _words(text: str) -> set[str]:
+    return {w for w in re.findall(r"[a-z0-9]+", text.lower()) if len(w) >= 4 and w not in _STOP}
+
+
+def _leaves(bullets: list):
+    """Every bullet and sub-bullet, as (text, is_sub)."""
+    for b in bullets:
+        text, _ = bullet_parts(b)
+        yield text, False
+        if isinstance(b, dict):
+            for sb in b.get("sub", []) or []:
+                yield bullet_parts(sb)[0], True
+
+
+def checker_notes(fid: dict | None) -> list[dict]:
+    """The checker's complaints worth showing: what is still wrong after revision,
+    or what was flagged when nothing was revised."""
+    if not fid:
+        return []
+    if fid.get("status") == "revised":
+        return list(fid.get("remaining") or [])
+    if fid.get("status") == "flagged":
+        return [f for f in fid.get("flags", []) if f.get("severity") in ("high", "medium")]
+    return []
+
+
+def flag_marks(bullets: list, notes: list[dict]) -> dict[str, int]:
+    """bullet text -> note number, for the bullet each complaint most resembles.
+
+    The bullets are a rewrite of the script, not a quotation of it, so the
+    match is by shared content words with the checker's `script_quote`. A
+    weak match marks nothing rather than the wrong bullet.
+    """
+    marks: dict[str, int] = {}
+    leaves = [t for t, _ in _leaves(bullets)]
+    for i, note in enumerate(notes, 1):
+        target = _words(note.get("script_quote", ""))
+        if not target:
+            continue
+        best, best_score = "", 0.0
+        for text in leaves:
+            shared = len(target & _words(text))
+            score = shared / len(target)
+            if shared >= 3 and score > best_score:
+                best, best_score = text, score
+        if best and best_score >= 0.3 and best not in marks:
+            marks[best] = i
+    return marks
+
+
+FLAG_BG = "#fff3c4"
+
+
+def _bullet_html(b, marks: dict[str, int] | None = None) -> str:
+    """One bullet, with a 'Source' link when it names the article it used.
+
+    A bullet may carry a short `label` (set in bold as a run-in heading) and
+    `sub`, a list of detail bullets rendered as a nested list. A bullet that
+    matches one of the checker's complaints is tinted and numbered to it.
+    """
+    marks = marks or {}
     text, url = bullet_parts(b)
-    if not url:
-        return escape(text)
-    return (
-        f'{escape(text)} '
-        f'<a href="{escape(url, quote=True)}" style="color:{ACCENT};'
-        f'text-decoration:none;white-space:nowrap;">Source&nbsp;&rarr;</a>'
-    )
+    label = str(b.get("label", "")) if isinstance(b, dict) else ""
+    html = f"<strong>{escape(label)}:</strong> {escape(text)}" if label else escape(text)
+    if url:
+        html += (f' <a href="{escape(url, quote=True)}" style="color:{ACCENT};'
+                 f'text-decoration:none;white-space:nowrap;">Source&nbsp;&rarr;</a>')
+    n = marks.get(text)
+    if n:
+        html = (f'<span style="background:{FLAG_BG};">{html}</span>'
+                f'<sup style="color:#a33;font-size:10px;"> [{n}]</sup>')
+    subs = b.get("sub") if isinstance(b, dict) else None
+    if subs:
+        items = "".join(
+            f'<li style="margin:4px 0 0 0;font-size:13px;line-height:1.45;color:{INK};">'
+            f"{_bullet_html(sb, marks)}</li>" for sb in subs)
+        html += f'<ul style="margin:2px 0 6px 0;padding-left:18px;">{items}</ul>'
+    return html
 
 
-def _episode_html(ep: ReportEpisode) -> str:
+def _notes_html(notes: list[dict], heading: str) -> str:
+    if not notes:
+        return ""
+    items = "".join(
+        f'<li style="margin:0 0 8px 0;">'
+        f'<span style="color:#a33;">[{escape(str(n.get("severity", "")))}, '
+        f'{escape(str(n.get("verdict", "")))}]</span> '
+        f'{escape(str(n.get("explanation", "")))}<br>'
+        f'<span style="color:{MUTED};">Script:</span> &ldquo;{escape(str(n.get("script_quote", "")))}&rdquo;<br>'
+        f'<span style="color:{MUTED};">Source:</span> &ldquo;{escape(str(n.get("source_quote", "")))}&rdquo;</li>'
+        for n in notes)
+    return (f'<div style="margin-top:12px;padding:10px 12px;background:#fbf7ec;'
+            f'border-left:3px solid #d9a441;font-size:12px;line-height:1.5;color:{INK};">'
+            f'<div style="font-weight:600;margin-bottom:6px;">{escape(heading)}</div>'
+            f'<ol style="margin:0;padding-left:18px;">{items}</ol></div>')
+
+
+def number_notes(episodes: list) -> tuple[dict[int, dict[str, int]], list[tuple[str, dict]]]:
+    """Number every checker complaint across the report, in episode order.
+
+    Returns (marks per episode index, [(episode title, note), ...]) so the
+    bullets can carry [n] markers that point at one list at the foot of the
+    email rather than a box under each episode.
+    """
+    marks: dict[int, dict[str, int]] = {}
+    ordered: list[tuple[str, dict]] = []
+    for i, ep in enumerate(episodes):
+        notes = checker_notes(ep.fidelity)
+        if not notes:
+            continue
+        offset = len(ordered)
+        local = flag_marks(ep.bullets, notes) if ep.bullets else {}
+        marks[i] = {text: n + offset for text, n in local.items()}
+        ordered += [(ep.title, n) for n in notes]
+    return marks, ordered
+
+
+def _episode_html(ep: ReportEpisode, marks: dict[str, int] | None = None,
+                  notes_inline: bool = True) -> str:
     title = escape(ep.title)
     title_html = (
         f'<a href="{escape(ep.link, quote=True)}" style="color:{INK};text-decoration:none;">{title}</a>'
@@ -150,10 +266,13 @@ def _episode_html(ep: ReportEpisode) -> str:
     )
     meta = " &middot; ".join(escape(bit) for bit in _meta_bits(ep))
     body = ""
+    notes = checker_notes(ep.fidelity)
+    if marks is None:
+        marks = flag_marks(ep.bullets, notes) if ep.bullets else {}
     if ep.bullets:
         items = "".join(
             f'<li style="margin:0 0 7px 0;font-size:14px;line-height:1.5;color:{INK};">'
-            f"{_bullet_html(b)}</li>"
+            f"{_bullet_html(b, marks)}</li>"
             for b in ep.bullets
         )
         # Outlook ignores list-style padding on <ul>, hence the margin as well.
@@ -168,7 +287,12 @@ def _episode_html(ep: ReportEpisode) -> str:
         )
         body = f'<div style="margin:12px 0 4px 0;">{paras}</div>'
     check = fidelity_summary(ep.fidelity)
-    if check:
+    if notes and notes_inline:
+        body += _notes_html(notes, check)
+    elif check:
+        # With the complaints deferred to the foot of the email the one-line
+        # verdict still belongs here, so an episode with issues is not the
+        # only one left without a "checked" line.
         body += (f'<div style="font-size:12px;color:{MUTED};margin-top:8px;">'
                  f'{escape(check)}</div>')
 
@@ -196,10 +320,16 @@ def build_html(report: RunReport, when: datetime) -> str:
             + rows
         )
 
-    parts = [section("Daily news briefing", "".join(_episode_html(e) for e in briefings))]
+    ordered_eps = briefings + others
+    marks_by_idx, all_notes = number_notes(ordered_eps)
+
+    def ep_html(e: ReportEpisode) -> str:
+        return _episode_html(e, marks_by_idx.get(ordered_eps.index(e), {}), notes_inline=False)
+
+    parts = [section("Daily news briefing", "".join(ep_html(e) for e in briefings))]
     parts.append(section(
         "New episodes" if len(others) != 1 else "New episode",
-        "".join(_episode_html(e) for e in others),
+        "".join(ep_html(e) for e in others),
     ))
 
     if report.failures:
@@ -252,6 +382,33 @@ def build_html(report: RunReport, when: datetime) -> str:
             f'they are linked rather than read aloud.</td></tr>'
         )
 
+    if all_notes:
+        rows = "".join(
+            f'<li style="margin:0 0 9px 0;">'
+            f'<span style="color:{MUTED};">{escape(title)}</span> &middot; '
+            f'<span style="color:#a33;">[{escape(str(n.get("severity", "")))}, '
+            f'{escape(str(n.get("verdict", "")))}]</span> '
+            f'{escape(str(n.get("explanation", "")))}<br>'
+            f'<span style="color:{MUTED};">Script:</span> &ldquo;{escape(str(n.get("script_quote", "")))}&rdquo;<br>'
+            f'<span style="color:{MUTED};">Source:</span> &ldquo;{escape(str(n.get("source_quote", "")))}&rdquo;</li>'
+            for title, n in all_notes)
+        parts.append(section(
+            "Checked against source",
+            f'<tr><td style="padding:12px 0 0 0;font-size:12px;line-height:1.5;color:{INK};">'
+            f'<div style="color:{MUTED};margin-bottom:8px;">Sonnet 5 read each script against its '
+            f'source; the writer fixed what it could once. These are the complaints that remain. '
+            f'Numbers match the highlighted bullets above.</div>'
+            f'<ol style="margin:0;padding-left:18px;">{rows}</ol></td></tr>',
+        ))
+
+    if report.notices:
+        rows = "".join(
+            f'<tr><td style="padding:6px 0;border-bottom:1px solid {RULE};'
+            f'font-size:12px;color:{MUTED};">{escape(n)}</td></tr>'
+            for n in report.notices
+        )
+        parts.append(section("Model fallbacks this run", rows))
+
     if report.recent:
         items = "".join(
             f'<li style="margin:0 0 6px 0;font-size:13px;line-height:1.45;">'
@@ -300,7 +457,10 @@ def build_text(report: RunReport, when: datetime) -> str:
     """Plain-text alternative for clients that refuse HTML."""
     lines = [f"Feedcast — {when.strftime('%A, %d %B %Y')}",
              f"{len(report.episodes)} new episode(s); {report.total_in_feed} in feed", ""]
-    for ep in report.episodes:
+    ordered_eps = [e for e in report.episodes if e.is_briefing] + \
+                  [e for e in report.episodes if not e.is_briefing]
+    marks_by_idx, all_notes = number_notes(ordered_eps)
+    for idx, ep in enumerate(ordered_eps):
         lines.append(f"* {ep.title}")
         meta = " / ".join(_meta_bits(ep))
         if meta:
@@ -310,12 +470,31 @@ def build_text(report: RunReport, when: datetime) -> str:
         if ep.audio_url:
             lines.append(f"  Audio:  {ep.audio_url}")
         if ep.bullets:
-            lines += ["", *(f"  - {t}" + (f" ({u})" if u else "")
-                            for t, u in map(bullet_parts, ep.bullets))]
+            marks = marks_by_idx.get(idx, {})
+
+            def line_for(b, indent: str) -> list[str]:
+                t, u = bullet_parts(b)
+                label = f"{b['label']}: " if isinstance(b, dict) and b.get("label") else ""
+                mark = f" [{marks[t]}]" if t in marks else ""
+                out = [f"{indent}- {label}{t}{mark}" + (f" ({u})" if u else "")]
+                for sb in (b.get("sub", []) if isinstance(b, dict) else []):
+                    out += line_for(sb, indent + "    ")
+                return out
+
+            lines.append("")
+            for b in ep.bullets:
+                lines += line_for(b, "  ")
         elif ep.is_briefing and ep.briefing_text:
             lines += ["", *(f"  {p.strip()}" for p in ep.briefing_text.split("\n\n") if p.strip())]
         if fidelity_summary(ep.fidelity):
             lines.append(f"  ({fidelity_summary(ep.fidelity)})")
+        lines.append("")
+    if all_notes:
+        lines.append("Checked against source (numbers match the marked bullets):")
+        for i, (title, n) in enumerate(all_notes, 1):
+            lines.append(f"  [{i}] {title} — {n.get('severity')}, {n.get('verdict')}: {n.get('explanation')}")
+            lines.append(f"      script: \"{n.get('script_quote')}\"")
+            lines.append(f"      source: \"{n.get('source_quote')}\"")
         lines.append("")
     if report.failures:
         lines.append("Failed:")
@@ -332,6 +511,9 @@ def build_text(report: RunReport, when: datetime) -> str:
                 lines.append(f"    {p.link}")
         lines.append("")
 
+    if report.notices:
+        lines.append("Model fallbacks this run:")
+        lines += [f"  - {n}" for n in report.notices] + [""]
     if report.recent:
         lines.append("Also published this week:")
         lines += [f"  - {e.title} ({e.author or e.feed_name}"

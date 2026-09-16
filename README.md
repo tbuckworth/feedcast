@@ -54,13 +54,17 @@ uv sync
 Create a `.env` file:
 
 ```bash
-OPENROUTER_API_KEY=your_key    # Required — LLM calls (Gemini Flash via OpenRouter)
+OPENROUTER_API_KEY=your_key    # Required — Claude Opus 4.6 (writer), Sonnet 5 (checker), Gemini 3 Flash (TTS normaliser)
+OPENAI_API_KEY=your_key        # GPT-5.6 Sol writes the email bullets; falls back to OpenRouter if unset
+ANTHROPIC_API_KEY=your_key     # Optional — backup route for the Claude roles
 DEEPINFRA_API_KEY=your_key     # Required — DeepInfra Chatterbox TTS
 ```
 
 | Variable | Required | Purpose |
 |----------|----------|---------|
-| `OPENROUTER_API_KEY` | Yes | OpenRouter API for LLM calls (Gemini Flash) |
+| `OPENROUTER_API_KEY` | Yes | OpenRouter: Claude Opus 4.6 (writer), Claude Sonnet 5 (checker), Gemini 3 Flash (TTS normaliser) |
+| `OPENAI_API_KEY` | No | OpenAI direct: GPT-5.6 Sol writes the email bullets. Unset falls back to Sol via OpenRouter, then Opus |
+| `ANTHROPIC_API_KEY` | No | Anthropic direct: backup route for the writer and checker roles |
 | `DEEPINFRA_API_KEY` | Yes | DeepInfra Chatterbox TTS API |
 | `REPROCESS_ENTRY` | No | Entry ID/URL to reprocess from RSS feeds |
 | `FORCE_VERBATIM` | No | Force verbatim mode when reprocessing |
@@ -266,6 +270,8 @@ scripts/state.sh push      # only if you mean to publish the result
 
 **GitHub Secrets required:**
 - `OPENROUTER_API_KEY`
+- `OPENAI_API_KEY`
+- `ANTHROPIC_API_KEY` (optional backup)
 - `DEEPINFRA_API_KEY`
 - `NTFY_TOPIC` (optional, for push notifications)
 

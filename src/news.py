@@ -9,7 +9,7 @@ import feedparser
 
 from .bundle import writer_bundle
 from .extractor import extract_article
-from .llm import MODEL_STRONG, completion_text, get_client
+from .llm import complete
 from .monitor import FeedEntry, warn_if_dead
 from .verify import fidelity_markdown, verify_script
 
@@ -48,7 +48,7 @@ class NewsAggregator:
         self.max_article_chars = max_article_chars
         self.verify = verify
         self.recent_briefings = recent_briefings or []
-        self.client = get_client()
+        self.client = None   # None: llm.complete() routes with fallbacks; tests pin a fake
         # Sources that returned nothing this run. A dead feed reads as a slow
         # news day, so the briefing silently narrows without anyone noticing.
         self.dead_sources: list[str] = []
@@ -133,11 +133,11 @@ class NewsAggregator:
         if len(articles) <= n:
             return list(articles)
         by_url = {a["url"]: a for a in articles if a.get("url")}
-        response = await self.client.chat.completions.create(
-            model=MODEL_STRONG, max_tokens=2000,
+        done = await complete(
+            "writer", max_tokens=2000, client=self.client, label="story selection",
             messages=[{"role": "system", "content": SELECT_PROMPT.format(n=n)},
                       {"role": "user", "content": self._format_articles_for_prompt(articles)}])
-        raw = response.choices[0].message.content or ""
+        raw = done.text or ""
         m = re.search(r"\[.*\]", raw, re.S)
         try:
             urls = json.loads(m.group(0)) if m else []
@@ -183,7 +183,7 @@ class NewsAggregator:
         return "\n".join(parts)
 
     async def synthesize_briefing(self, formatted_articles: str) -> str:
-        """Synthesize the briefing from formatted articles via MODEL_STRONG."""
+        """Synthesize the briefing from formatted articles with the writer role."""
         # Build user message with dedup context from recent briefings
         user_message_parts = []
         if self.recent_briefings:
@@ -209,15 +209,14 @@ class NewsAggregator:
         user_message_parts.append(formatted_articles)
         user_message = "\n".join(user_message_parts)
 
-        response = await self.client.chat.completions.create(
-            model=MODEL_STRONG,
-            max_tokens=16000,
+        done = await complete(
+            "writer", max_tokens=16000, client=self.client, label="news briefing",
             messages=[
                 {"role": "system", "content": self.prompt},
                 {"role": "user", "content": user_message},
             ],
         )
-        briefing = completion_text(response, label="news briefing")
+        briefing = done.text
         draft, fidelity = briefing, None
         if self.verify:
             briefing, fidelity = await verify_script(
@@ -226,7 +225,7 @@ class NewsAggregator:
             self.last_fidelity = fidelity.to_dict()
         self.last_bundle = writer_bundle(
             title=f"Daily News Briefing - {datetime.now():%Y-%m-%d}",
-            model=MODEL_STRONG, system_prompt=self.prompt,
+            model=done.target.label, system_prompt=self.prompt,
             user_message=user_message, response=briefing,
             notes=fidelity_markdown(fidelity, draft if fidelity and fidelity.revised else None))
         return briefing
@@ -263,6 +262,10 @@ class NewsAggregator:
             author="Feedcast Bot",
             feed_name="Daily News Briefing",
             authors=["Feedcast Bot"],
+            # For the email's per-bullet links: only the stories the writer
+            # was given in full. Passing every headline let the digest lift a
+            # story the briefing never told (a SpaceX launch, 2026-09-16) and
+            # cost ~4k tokens a call for the list alone.
             sources=[{"title": a["title"], "url": a["url"], "source": a["source"]}
-                     for a in articles if a.get("url")],
+                     for a in (selected or articles) if a.get("url")],
         )

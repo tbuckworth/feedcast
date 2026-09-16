@@ -22,7 +22,7 @@ import json
 import re
 from dataclasses import asdict, dataclass, field
 
-from .llm import MODEL_CHECKER, MODEL_WRITER, get_client
+from .llm import EmptyCompletion, MODEL_CHECKER, MODEL_WRITER, complete
 
 MATERIAL = ("high", "medium")
 VERDICTS = ("contradicted", "distorted", "unsupported")
@@ -107,29 +107,33 @@ def parse_flags(raw: str) -> tuple[int, list[dict]]:
 # thinking budget first, and if the reply is still empty, once more with
 # reasoning off. Verification does not need a long think.
 CHECK_ATTEMPTS = (
-    {"reasoning": {"max_tokens": 4000}},
-    {"reasoning": {"enabled": False}},
+    {"budget": 4000},
+    {"off": True},
 )
 
 
-async def check(script: str, source: str, client) -> tuple[int, list[dict]]:
+async def check(script: str, source: str, client=None) -> tuple[int, list[dict]]:
     user = f"SOURCE:\n{source}\n\nSCRIPT:\n{script}"
     last = ""
-    for extra in CHECK_ATTEMPTS:
-        response = await client.chat.completions.create(
-            model=MODEL_CHECKER, max_tokens=16000, temperature=0,
-            messages=[{"role": "system", "content": CHECK_PROMPT},
-                      {"role": "user", "content": user}],
-            extra_body=extra)
-        choice = response.choices[0]
-        content = choice.message.content or ""
-        usage = getattr(response, "usage", None)
-        print(f"    checker: finish={choice.finish_reason} "
-              f"out={getattr(usage, 'completion_tokens', '?')} chars={len(content)} {extra}")
+    for reasoning in CHECK_ATTEMPTS:
+        finish, content, usage = None, "", None
+        try:
+            done = await complete(
+                "checker", max_tokens=16000, temperature=0, client=client,
+                reasoning=reasoning, label="checker",
+                messages=[{"role": "system", "content": CHECK_PROMPT},
+                          {"role": "user", "content": user}])
+            finish, content, usage = done.finish_reason, done.text or "", done.usage
+        except EmptyCompletion as e:
+            # No text at all (every target); treat as the empty reply it is
+            # and let the second attempt run with reasoning off.
+            last = str(e)
+        print(f"    checker: finish={finish} "
+              f"out={getattr(usage, 'completion_tokens', '?')} chars={len(content)} {reasoning}")
         try:
             return parse_flags(content)
         except ValueError as e:
-            last = (f"{e} (finish_reason={choice.finish_reason}, "
+            last = (f"{e} (finish_reason={finish}, "
                     f"{len(content)} chars: {content[:160]!r})")
             if content.strip():
                 break  # a real but unparseable reply; retrying will not help
@@ -144,14 +148,14 @@ def _flags_text(flags: list[dict]) -> str:
 
 
 async def revise(script: str, source: str, flags: list[dict],
-                 writer_system_prompt: str, client) -> str:
+                 writer_system_prompt: str, client=None) -> str:
     user = (f"SOURCE:\n{source}\n\nYOUR SCRIPT:\n{script}\n\n"
             f"PROBLEMS FOUND:\n{_flags_text(flags)}\n\n{REVISE_PROMPT}")
-    response = await client.chat.completions.create(
-        model=MODEL_WRITER, max_tokens=16000,
+    done = await complete(
+        "writer", max_tokens=16000, client=client, label="revision",
         messages=[{"role": "system", "content": writer_system_prompt},
                   {"role": "user", "content": user}])
-    return (response.choices[0].message.content or "").strip()
+    return (done.text or "").strip()
 
 
 async def verify_script(script: str, source: str, *, writer_system_prompt: str,
@@ -159,7 +163,6 @@ async def verify_script(script: str, source: str, *, writer_system_prompt: str,
                         ) -> tuple[str, Fidelity]:
     """Check `script` against `source`; fix it once if needed. Returns (script, fidelity)."""
     try:
-        client = client or get_client()
         total, flags = await check(script, source, client)
         fid = Fidelity(status="clean", claims_total=total, flags=flags)
         material = fid.material
@@ -197,8 +200,13 @@ def fidelity_summary(fid: dict | None) -> str:
         return "Checked against source: no issues"
     if fid["status"] == "flagged":
         return f"Checked against source: {n} {plural(n)} flagged, not corrected"
+    # `remaining` is a fresh read of the revised script, so it can hold flags
+    # the first pass never raised; subtracting it from the draft count went
+    # negative ("-1 corrected", 2026-09-16). Say what each number is instead.
     if rem:
-        return f"Checked against source: {n - rem} corrected, {rem} still flagged"
+        total = len(fid.get("flags", []))
+        return (f"Checked against source: {total} {plural(total)} flagged in the draft "
+                f"({n} material), revised once; {rem} still flagged")
     return f"Checked against source: {n} {plural(n)} corrected"
 
 

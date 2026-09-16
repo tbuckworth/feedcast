@@ -127,3 +127,51 @@ def test_linked_post_with_a_score_still_shows_it():
     )
 
     assert "23.1 maths matches per 1000 words" in build_html(report, datetime(2026, 8, 21))
+
+
+def test_indented_lines_become_sub_bullets_of_the_headline_above():
+    raw = ("- Anthropic's report covers seven categories of misuse it disrupted.\n"
+           "  - Alibaba peaked at nearly 3 million exchanges a day from 3,500 fake accounts.\n"
+           "  - Moonshot and DeepSeek forwarded users' queries to Claude. || https://x/y\n"
+           "- Trump called AI existential risk a hoax, which Zvi calls a rhetorical Rubicon.")
+    out = parse_bullets(raw, {"https://x/y"})
+    assert len(out) == 2
+    assert out[0]["text"].startswith("Anthropic's report")
+    assert len(out[0]["sub"]) == 2
+    assert out[0]["sub"][1] == {"text": "Moonshot and DeepSeek forwarded users' queries to Claude.",
+                                "url": "https://x/y"}
+    # A headline with no link and no detail stays a plain string.
+    assert out[1] == "Trump called AI existential risk a hoax, which Zvi calls a rhetorical Rubicon."
+
+
+def test_level_is_relative_and_orphans_follow_their_rejected_headline():
+    # The whole reply indented by two spaces: still headlines, not sub-bullets.
+    # A heading line ("Key points:") is dropped together with its children,
+    # rather than those children attaching to the previous headline.
+    raw = ("  - First headline claim, long enough to be kept as one.\n"
+           "    - Detail under the first headline claim here.\n"
+           "  - Key points:\n"
+           "    - Orphaned detail that must not attach to the first headline.\n"
+           "  - Second headline claim, also long enough to be kept.")
+    out = parse_bullets(raw)
+    assert [b["text"] if isinstance(b, dict) else b for b in out] == [
+        "First headline claim, long enough to be kept as one.",
+        "Second headline claim, also long enough to be kept.",
+    ]
+    assert out[0]["sub"] == ["Detail under the first headline claim here."]
+
+
+def test_invented_urls_are_dropped_but_the_bullet_stays():
+    raw = "- A claim with a made-up link at the end of it. || https://invented.example/nope"
+    assert parse_bullets(raw, {"https://real.example/a"}) == [
+        "A claim with a made-up link at the end of it."]
+
+
+def test_sub_bullets_render_nested_in_html_and_indented_in_text():
+    report = _report(bullets=[{"text": "Headline claim about the report",
+                               "sub": ["Detail one of the claim", "Detail two of the claim"]}])
+    html = build_html(report, datetime(2026, 9, 16))
+    text = build_text(report, datetime(2026, 9, 16))
+    assert html.count("<ul") == 2 and "Detail two of the claim" in html
+    assert "  - Headline claim about the report" in text
+    assert "      - Detail one of the claim" in text

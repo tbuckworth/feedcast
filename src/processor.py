@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup, Tag
 
 from .bundle import writer_bundle
 from .verify import fidelity_markdown, verify_script
-from .llm import MODEL_CHEAP, MODEL_STRONG, completion_text, get_client
+from .llm import complete
 from .monitor import FeedEntry
 
 AUTO_VERBATIM_LIMIT = 24000  # ~25 min of audio at ~0.063 sec/char
@@ -19,7 +19,9 @@ class ContentProcessor:
     """Processes feed content - either summarizing via the LLM or cleaning for verbatim."""
 
     def __init__(self, default_prompt: str, verify: bool = True):
-        self.client = get_client()
+        # None routes each call through llm.complete() with fallbacks; tests
+        # pin a fake client here instead.
+        self.client = None
         self.default_prompt = default_prompt
         # Check summaries against their source with a second model and fix
         # them once (src/verify.py). Off in tests and when config says so.
@@ -85,15 +87,14 @@ class ContentProcessor:
             else:
                 # Larger tables: summarize with the cheap model
                 table_html = str(table)
-                response = await self.client.chat.completions.create(
-                    model=MODEL_CHEAP,
-                    max_tokens=4000,
+                done = await complete(
+                    "writer", max_tokens=4000, client=self.client, label="table-to-prose",
                     messages=[
                         {"role": "system", "content": "Convert this HTML table into natural spoken prose. Be concise but preserve all key data points. Do not use bullet points or formatting."},
                         {"role": "user", "content": table_html},
                     ],
                 )
-                prose = completion_text(response, label="table-to-prose")
+                prose = done.text
 
             replacement = f"Here is a summary of the following table. {prose} Now continuing with the article."
             table.replace_with(BeautifulSoup(f"<p>{replacement}</p>", "html.parser"))
@@ -103,7 +104,7 @@ class ContentProcessor:
     async def summarize(
         self, entry: FeedEntry, prompt: Optional[str] = None
     ) -> str:
-        """Summarize content using MODEL_STRONG via OpenRouter."""
+        """Summarize content with the writer role."""
         content_with_tables = await self.process_tables(entry.content)
         clean_content = self.clean_html(content_with_tables)
 
@@ -132,16 +133,16 @@ Content:
                   f"the summary will not cover the whole post")
             user_message = user_message[:MAX_PROMPT_CHARS] + "\n\n[Content truncated due to length]"
 
-        response = await self.client.chat.completions.create(
-            model=MODEL_STRONG,
-            max_tokens=16000,
+        done = await complete(
+            "writer", max_tokens=16000, client=self.client,
+            label=f"summariser ({entry.title})",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_message},
             ],
         )
 
-        summary = completion_text(response, label=f"summariser ({entry.title})")
+        summary = done.text
         draft, fidelity = summary, None
         if self.verify:
             summary, fidelity = await verify_script(
@@ -149,7 +150,7 @@ Content:
                 label=entry.title, client=self.client)
             entry.fidelity = fidelity.to_dict()
         entry.bundle = writer_bundle(
-            title=entry.title, model=MODEL_STRONG, system_prompt=system_prompt,
+            title=entry.title, model=done.target.label, system_prompt=system_prompt,
             user_message=user_message, response=summary,
             notes=fidelity_markdown(fidelity, draft if fidelity and fidelity.revised else None))
         return summary

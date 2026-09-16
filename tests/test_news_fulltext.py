@@ -91,4 +91,6 @@ def test_generate_briefing_wires_select_fetch_write(monkeypatch):
     writer_input = client.calls[1]["messages"][1]["content"]
     assert "FULL 2" in writer_input and "Story 0" in writer_input and "Blurb 0" not in writer_input
     assert "FULL 2" in entry.bundle and entry.fidelity is None
-    assert len(entry.sources) == 3  # digest can still cite any article
+    # Links for the email come only from the stories the writer was given in
+    # full, not every headline it saw.
+    assert [x["url"] for x in entry.sources] == ["https://example.com/2"]
