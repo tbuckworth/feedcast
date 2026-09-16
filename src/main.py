@@ -23,6 +23,7 @@ from .extractor import ExtractionError, url_to_feed_entry
 from .feed import Episode, FeedGenerator, PodcastConfig
 from .fulltext import enrich_entry
 from .lesswrong import posted_at
+from . import llm
 from .mathiness import MathsVerdict, assess
 from .monitor import DEFAULT_MAX_AGE_HOURS, FeedEntry, FeedMonitor, episode_id
 from .news import NewsAggregator
@@ -907,6 +908,7 @@ def _build_run_report(
             for e, v in (maths_skipped or [])
         ],
         dead_sources=sorted(set(dead_sources or [])),
+        notices=list(llm.fallback_log),
         feed_url=f"{base_url}/feed.xml",
         site_url=base_url,
         total_in_feed=len(episodes),

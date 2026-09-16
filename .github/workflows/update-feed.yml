@@ -170,7 +170,12 @@ jobs:
         # overran 50 min mid-TTS and threw the whole run away (2026-08-27).
         timeout-minutes: 90
         env:
+          # Three LLM accounts (src/llm.py): OpenRouter carries the Claude
+          # roles, OpenAI direct writes the email bullets, Anthropic direct is
+          # the backup for the Claude roles. An unset one is skipped.
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           DEEPINFRA_API_KEY: ${{ secrets.DEEPINFRA_API_KEY }}
           REPROCESS_ENTRY: ${{ inputs.entry_url }}
           FORCE_VERBATIM: ${{ inputs.force_verbatim }}

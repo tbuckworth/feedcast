@@ -75,6 +75,10 @@ class RunReport:
     failures: list[tuple[str, str]] = field(default_factory=list)
     linked: list[LinkedPost] = field(default_factory=list)
     dead_sources: list[str] = field(default_factory=list)
+    # Model fallbacks this run ("digest: served by ... after ..."): worth a
+    # line, because a backup that quietly serves for weeks is a primary that
+    # has quietly died.
+    notices: list[str] = field(default_factory=list)
     feed_url: str = ""
     site_url: str = ""
     total_in_feed: int = 0
@@ -397,6 +401,14 @@ def build_html(report: RunReport, when: datetime) -> str:
             f'<ol style="margin:0;padding-left:18px;">{rows}</ol></td></tr>',
         ))
 
+    if report.notices:
+        rows = "".join(
+            f'<tr><td style="padding:6px 0;border-bottom:1px solid {RULE};'
+            f'font-size:12px;color:{MUTED};">{escape(n)}</td></tr>'
+            for n in report.notices
+        )
+        parts.append(section("Model fallbacks this run", rows))
+
     if report.recent:
         items = "".join(
             f'<li style="margin:0 0 6px 0;font-size:13px;line-height:1.45;">'
@@ -499,6 +511,9 @@ def build_text(report: RunReport, when: datetime) -> str:
                 lines.append(f"    {p.link}")
         lines.append("")
 
+    if report.notices:
+        lines.append("Model fallbacks this run:")
+        lines += [f"  - {n}" for n in report.notices] + [""]
     if report.recent:
         lines.append("Also published this week:")
         lines += [f"  - {e.title} ({e.author or e.feed_name}"

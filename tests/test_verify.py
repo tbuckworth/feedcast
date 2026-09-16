@@ -99,7 +99,10 @@ def test_email_line():
     assert fidelity_summary({"status": "clean", "flags": []}) == "Checked against source: no issues"
     two = [{"severity": "high"}, {"severity": "medium"}, {"severity": "low"}]
     assert fidelity_summary({"status": "revised", "flags": two, "remaining": []}) == "Checked against source: 2 issues corrected"
-    assert fidelity_summary({"status": "revised", "flags": two, "remaining": [{"severity": "high"}]}) == "Checked against source: 1 corrected, 1 still flagged"
+    # No subtraction: the re-check is a fresh read and can raise flags the
+    # first pass did not, which once printed "-1 corrected".
+    assert fidelity_summary({"status": "revised", "flags": two, "remaining": [{"severity": "high"}]}) == (
+        "Checked against source: 3 issues flagged in the draft (2 material), revised once; 1 still flagged")
     assert fidelity_summary({"status": "flagged", "flags": two[:1], "remaining": []}) == "Checked against source: 1 issue flagged, not corrected"
 
 
