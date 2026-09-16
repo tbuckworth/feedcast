@@ -267,3 +267,44 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # Podcast apps do not poll on our schedule. Pocket Casts fetches feeds
+      # server-side and, for a small private feed, only every few hours — so
+      # the episode email arrived and the app showed nothing (2026-09-15). It
+      # honours WebSub: feed.xml names a hub, and a publish ping here makes the
+      # hub fetch the feed and push it to every subscribed app within a minute.
+      # The Pages CDN caches for 10 minutes, so wait until the live feed is
+      # byte-identical to the one this run committed before pinging, or the
+      # hub would fetch and cache the previous day's feed.
+      - name: Notify the WebSub hub
+        timeout-minutes: 12
+        env:
+          FEED_URL: https://tbuckworth.github.io/feedcast/feed.xml
+        run: |
+          set -uo pipefail
+          hub="$(grep -o '<atom:link[^>]*rel="hub"[^>]*>' output/feed.xml \
+                 | grep -o 'href="[^"]*"' | head -1 | cut -d'"' -f2)"
+          if [[ -z "$hub" ]]; then
+            echo "feed.xml declares no WebSub hub; nothing to notify"
+            exit 0
+          fi
+          want="$(sha256sum output/feed.xml | cut -d' ' -f1)"
+          for attempt in $(seq 1 20); do
+            have="$(curl -sSf --max-time 30 -H 'Cache-Control: no-cache' "$FEED_URL" | sha256sum | cut -d' ' -f1)"
+            if [[ "$have" == "$want" ]]; then
+              echo "Live feed matches the committed feed.xml (attempt ${attempt})"
+              break
+            fi
+            echo "Live feed still differs from the committed feed.xml (attempt ${attempt}/20); waiting 30s"
+            sleep 30
+          done
+          if [[ "$have" != "$want" ]]; then
+            echo "::warning::Live feed.xml never matched the committed one; pinging the hub anyway"
+          fi
+          code="$(curl -sS --max-time 30 -o /dev/null -w '%{http_code}' -X POST "$hub" \
+                    --data-urlencode "hub.mode=publish" --data-urlencode "hub.url=$FEED_URL")"
+          if [[ "$code" =~ ^2 ]]; then
+            echo "Pinged $hub for $FEED_URL (HTTP $code)"
+          else
+            echo "::warning::WebSub ping to $hub returned HTTP $code; apps will fall back to polling"
+          fi

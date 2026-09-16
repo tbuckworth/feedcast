@@ -32,3 +32,16 @@ def test_dev_mode_is_the_default_for_every_operator_input():
     # notify_list must not make a bare dispatch skip the daily guard.
     guard = wf["jobs"]["guard"]["steps"][0]["env"]["ON_DEMAND"]
     assert "notify_list" not in guard and "test_run" not in guard
+
+
+def test_deploy_pings_the_websub_hub_after_pages_is_live():
+    """Pocket Casts polls a small feed only every few hours; the hub ping is
+    what makes new episodes appear in the app minutes after the email."""
+    wf, _ = _workflow()
+    names = [s.get("name") for s in wf["jobs"]["deploy"]["steps"]]
+    assert names.index("Notify the WebSub hub") > names.index("Deploy to GitHub Pages")
+    (ping,) = [s for s in wf["jobs"]["deploy"]["steps"] if s.get("name") == "Notify the WebSub hub"]
+    assert ping["env"]["FEED_URL"] == "https://tbuckworth.github.io/feedcast/feed.xml"
+    # Must wait for the CDN to serve this run's feed before the hub fetches it.
+    assert "sha256sum output/feed.xml" in ping["run"]
+    assert "hub.mode=publish" in ping["run"]
