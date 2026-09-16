@@ -131,12 +131,18 @@ def _btn(url: str, label: str) -> str:
 
 
 def _bullet_html(b) -> str:
-    """One bullet, with a 'Source' link when it names the article it used."""
+    """One bullet, with a 'Source' link when it names the article it used.
+
+    A bullet may also carry a short `label` (the full-detail digest opens each
+    briefing story with one); it is set in bold as a run-in heading.
+    """
     text, url = bullet_parts(b)
+    label = str(b.get("label", "")) if isinstance(b, dict) else ""
+    html = f"<strong>{escape(label)}:</strong> {escape(text)}" if label else escape(text)
     if not url:
-        return escape(text)
+        return html
     return (
-        f'{escape(text)} '
+        f'{html} '
         f'<a href="{escape(url, quote=True)}" style="color:{ACCENT};'
         f'text-decoration:none;white-space:nowrap;">Source&nbsp;&rarr;</a>'
     )
@@ -310,8 +316,10 @@ def build_text(report: RunReport, when: datetime) -> str:
         if ep.audio_url:
             lines.append(f"  Audio:  {ep.audio_url}")
         if ep.bullets:
-            lines += ["", *(f"  - {t}" + (f" ({u})" if u else "")
-                            for t, u in map(bullet_parts, ep.bullets))]
+            lines += ["", *(
+                f"  - " + (f"{b['label']}: " if isinstance(b, dict) and b.get("label") else "")
+                + t + (f" ({u})" if u else "")
+                for b, (t, u) in zip(ep.bullets, map(bullet_parts, ep.bullets)))]
         elif ep.is_briefing and ep.briefing_text:
             lines += ["", *(f"  {p.strip()}" for p in ep.briefing_text.split("\n\n") if p.strip())]
         if fidelity_summary(ep.fidelity):
