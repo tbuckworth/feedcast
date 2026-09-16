@@ -115,19 +115,24 @@ CHECK_ATTEMPTS = (
 async def check(script: str, source: str, client=None) -> tuple[int, list[dict]]:
     user = f"SOURCE:\n{source}\n\nSCRIPT:\n{script}"
     last = ""
-    for reasoning in CHECK_ATTEMPTS:
-        finish, content, usage = None, "", None
+    for i, reasoning in enumerate(CHECK_ATTEMPTS):
         try:
             done = await complete(
                 "checker", max_tokens=16000, temperature=0, client=client,
                 reasoning=reasoning, label="checker",
                 messages=[{"role": "system", "content": CHECK_PROMPT},
-                          {"role": "user", "content": user}])
-            finish, content, usage = done.finish_reason, done.text or "", done.usage
+                          {"role": "user", "content": user}],
+                # An empty first reply is the budget-eaten case this loop
+                # exists for: retry with reasoning off (from the primary
+                # again) rather than hand the check to a sibling model and
+                # report a fallback. The last attempt may fall back like any
+                # other call.
+                fallback_on_empty=(i == len(CHECK_ATTEMPTS) - 1))
         except EmptyCompletion as e:
-            # No text at all (every target); treat as the empty reply it is
-            # and let the second attempt run with reasoning off.
             last = str(e)
+            print(f"    checker: empty reply {reasoning}: {e}")
+            continue
+        finish, content, usage = done.finish_reason, done.text or "", done.usage
         print(f"    checker: finish={finish} "
               f"out={getattr(usage, 'completion_tokens', '?')} chars={len(content)} {reasoning}")
         try:
