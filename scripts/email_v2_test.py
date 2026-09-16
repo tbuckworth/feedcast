@@ -23,7 +23,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from src import digest, digest_full  # noqa: E402
+from src import digest, digest_full, digest_variants  # noqa: E402
 from src.email_report import build_html, build_text  # noqa: E402
 from src.feed import Episode  # noqa: E402
 from src.llm import MODEL_WRITER, completion_text, get_client  # noqa: E402
@@ -38,6 +38,7 @@ PRICES = {
     "anthropic/claude-opus-5": (5.00, 25.00),
     "anthropic/claude-sonnet-5": (2.00, 10.00),
     "anthropic/claude-sonnet-4.6": (3.00, 15.00),
+    "openai/gpt-5.6-sol": (2.00, 10.00),
 }
 
 
@@ -124,11 +125,14 @@ def briefing_sources(row: dict) -> list[dict]:
     return uniq
 
 
-async def measured(client, model: str, messages: list[dict], max_tokens: int) -> tuple[str, dict]:
+async def measured(client, model: str, messages: list[dict], max_tokens: int,
+                   no_reasoning: bool = False) -> tuple[str, dict]:
     t0 = time.monotonic()
+    extra = {"usage": {"include": True}}
+    if no_reasoning:
+        extra["reasoning"] = {"enabled": False}   # as verify.py does for the checker
     resp = await client.chat.completions.create(
-        model=model, max_tokens=max_tokens, messages=messages,
-        extra_body={"usage": {"include": True}},
+        model=model, max_tokens=max_tokens, messages=messages, extra_body=extra,
     )
     text = completion_text(resp, model)
     u = resp.usage
@@ -166,6 +170,9 @@ async def main() -> None:
                     help="extra model(s) to run the full digest on, for cost comparison only")
     ap.add_argument("--skip-current", action="store_true",
                     help="do not re-run today's real digest for token counts")
+    ap.add_argument("--variant", default="full", choices=("full", "uncapped", "tiered"))
+    ap.add_argument("--also-no-reasoning", action="store_true",
+                    help="run the --also-model calls with reasoning disabled")
     args = ap.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
 
@@ -205,9 +212,15 @@ async def main() -> None:
             variants.setdefault(row["id"], {})["current_raw"] = raw
             print(f"  current digest ({MODEL_WRITER}): {u}")
 
-        msgs, allowed = digest_full.build_messages(text, is_briefing, sources)
+        if args.variant == "full":
+            msgs, allowed = digest_full.build_messages(text, is_briefing, sources)
+            parse = lambda r: digest_full.parse_bullets(r, allowed, is_briefing)  # noqa: E731
+        else:
+            msgs, allowed = digest_variants.build_messages(args.variant, text, is_briefing, sources)
+            parse = (lambda r: digest_variants.parse_tiered(r, allowed)) if args.variant == "tiered" \
+                else (lambda r: digest_variants.parse_flat(r, allowed))  # noqa: E731
         raw, u = await measured(client, args.model, msgs, 6000)
-        bullets = digest_full.parse_bullets(raw, allowed, is_briefing)
+        bullets = parse(raw)
         u["episode"] = ep.title
         u["bullets_kept"] = len(bullets)
         usage["full"].append(u)
@@ -216,27 +229,34 @@ async def main() -> None:
         print(f"  full digest ({args.model}): {u}")
 
         for m in args.also_model:
-            raw2, u2 = await measured(client, m, msgs, 6000)
+            raw2, u2 = await measured(client, m, msgs, 6000, args.also_no_reasoning)
             u2["episode"] = ep.title
-            u2["bullets_kept"] = len(digest_full.parse_bullets(raw2, allowed, is_briefing))
+            u2["reasoning_disabled"] = args.also_no_reasoning
+            u2["bullets_kept"] = len(parse(raw2))
             usage["also"].append(u2)
             variants[row["id"]][f"full_raw::{m}"] = raw2
             print(f"  full digest ({m}): {u2}")
 
     when = datetime.fromisoformat(todays[0]["processed_at"])
+    blurb = {
+        "full": "bullets restate the audio rather than condensing it",
+        "uncapped": "today's digest prompt, with the 240-character bullet cap removed",
+        "tiered": "headline bullets with the detail indented beneath each",
+    }[args.variant]
     note = ('<p style="font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:12px;'
-            'color:#6b6b6b;text-align:center;margin:12px 0 0 0;">Experimental variant: '
-            'bullets restate the audio rather than condensing it. Sent to Titus only.</p>')
+            f'color:#6b6b6b;text-align:center;margin:12px 0 0 0;">Experimental variant ({args.variant}): '
+            f'{blurb}. Sent to Titus only.</p>')
     html = build_html(report, when)
     html = html.replace('<div style="margin:0;padding:0;background:#f4f4f2;">',
                         '<div style="margin:0;padding:0;background:#f4f4f2;">' + note, 1)
-    (args.out / "email_v2.html").write_text(html, encoding="utf-8")
-    (args.out / "email_v2.txt").write_text(
-        "[TEST] Experimental variant: bullets restate the audio rather than condensing it.\n\n"
+    stem = f"email_{args.variant}"
+    (args.out / f"{stem}.html").write_text(html, encoding="utf-8")
+    (args.out / f"{stem}.txt").write_text(
+        f"[TEST] Experimental variant ({args.variant}): {blurb}.\n\n"
         + build_text(report, when), encoding="utf-8")
-    (args.out / "usage.json").write_text(json.dumps(usage, indent=2), encoding="utf-8")
-    (args.out / "raw_outputs.json").write_text(json.dumps(variants, indent=2), encoding="utf-8")
-    print(f"\nWrote {args.out}/email_v2.html, email_v2.txt, usage.json, raw_outputs.json")
+    (args.out / f"usage_{args.variant}.json").write_text(json.dumps(usage, indent=2), encoding="utf-8")
+    (args.out / f"raw_{args.variant}.json").write_text(json.dumps(variants, indent=2), encoding="utf-8")
+    print(f"\nWrote {args.out}/{stem}.html, {stem}.txt, usage_{args.variant}.json, raw_{args.variant}.json")
 
 
 if __name__ == "__main__":

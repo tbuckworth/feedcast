@@ -7,6 +7,7 @@ never fail a pipeline run that otherwise succeeded.
 """
 
 import os
+import re
 import smtplib
 import ssl
 from dataclasses import dataclass, field
@@ -130,22 +131,106 @@ def _btn(url: str, label: str) -> str:
     )
 
 
-def _bullet_html(b) -> str:
+_STOP = {"that", "this", "with", "from", "have", "were", "been", "their", "which",
+         "about", "into", "than", "then", "they", "them", "what", "when", "while",
+         "would", "could", "should", "also", "more", "most", "over", "under"}
+
+
+def _words(text: str) -> set[str]:
+    return {w for w in re.findall(r"[a-z0-9]+", text.lower()) if len(w) >= 4 and w not in _STOP}
+
+
+def _leaves(bullets: list):
+    """Every bullet and sub-bullet, as (text, is_sub)."""
+    for b in bullets:
+        text, _ = bullet_parts(b)
+        yield text, False
+        if isinstance(b, dict):
+            for sb in b.get("sub", []) or []:
+                yield bullet_parts(sb)[0], True
+
+
+def checker_notes(fid: dict | None) -> list[dict]:
+    """The checker's complaints worth showing: what is still wrong after revision,
+    or what was flagged when nothing was revised."""
+    if not fid:
+        return []
+    if fid.get("status") == "revised":
+        return list(fid.get("remaining") or [])
+    if fid.get("status") == "flagged":
+        return [f for f in fid.get("flags", []) if f.get("severity") in ("high", "medium")]
+    return []
+
+
+def flag_marks(bullets: list, notes: list[dict]) -> dict[str, int]:
+    """bullet text -> note number, for the bullet each complaint most resembles.
+
+    The bullets are a rewrite of the script, not a quotation of it, so the
+    match is by shared content words with the checker's `script_quote`. A
+    weak match marks nothing rather than the wrong bullet.
+    """
+    marks: dict[str, int] = {}
+    leaves = [t for t, _ in _leaves(bullets)]
+    for i, note in enumerate(notes, 1):
+        target = _words(note.get("script_quote", ""))
+        if not target:
+            continue
+        best, best_score = "", 0.0
+        for text in leaves:
+            shared = len(target & _words(text))
+            score = shared / len(target)
+            if shared >= 3 and score > best_score:
+                best, best_score = text, score
+        if best and best_score >= 0.3 and best not in marks:
+            marks[best] = i
+    return marks
+
+
+FLAG_BG = "#fff3c4"
+
+
+def _bullet_html(b, marks: dict[str, int] | None = None) -> str:
     """One bullet, with a 'Source' link when it names the article it used.
 
-    A bullet may also carry a short `label` (the full-detail digest opens each
-    briefing story with one); it is set in bold as a run-in heading.
+    A bullet may carry a short `label` (set in bold as a run-in heading) and
+    `sub`, a list of detail bullets rendered as a nested list. A bullet that
+    matches one of the checker's complaints is tinted and numbered to it.
     """
+    marks = marks or {}
     text, url = bullet_parts(b)
     label = str(b.get("label", "")) if isinstance(b, dict) else ""
     html = f"<strong>{escape(label)}:</strong> {escape(text)}" if label else escape(text)
-    if not url:
-        return html
-    return (
-        f'{html} '
-        f'<a href="{escape(url, quote=True)}" style="color:{ACCENT};'
-        f'text-decoration:none;white-space:nowrap;">Source&nbsp;&rarr;</a>'
-    )
+    if url:
+        html += (f' <a href="{escape(url, quote=True)}" style="color:{ACCENT};'
+                 f'text-decoration:none;white-space:nowrap;">Source&nbsp;&rarr;</a>')
+    n = marks.get(text)
+    if n:
+        html = (f'<span style="background:{FLAG_BG};">{html}</span>'
+                f'<sup style="color:#a33;font-size:10px;"> [{n}]</sup>')
+    subs = b.get("sub") if isinstance(b, dict) else None
+    if subs:
+        items = "".join(
+            f'<li style="margin:4px 0 0 0;font-size:13px;line-height:1.45;color:{INK};">'
+            f"{_bullet_html(sb, marks)}</li>" for sb in subs)
+        html += f'<ul style="margin:2px 0 6px 0;padding-left:18px;">{items}</ul>'
+    return html
+
+
+def _notes_html(notes: list[dict], heading: str) -> str:
+    if not notes:
+        return ""
+    items = "".join(
+        f'<li style="margin:0 0 8px 0;">'
+        f'<span style="color:#a33;">[{escape(str(n.get("severity", "")))}, '
+        f'{escape(str(n.get("verdict", "")))}]</span> '
+        f'{escape(str(n.get("explanation", "")))}<br>'
+        f'<span style="color:{MUTED};">Script:</span> &ldquo;{escape(str(n.get("script_quote", "")))}&rdquo;<br>'
+        f'<span style="color:{MUTED};">Source:</span> &ldquo;{escape(str(n.get("source_quote", "")))}&rdquo;</li>'
+        for n in notes)
+    return (f'<div style="margin-top:12px;padding:10px 12px;background:#fbf7ec;'
+            f'border-left:3px solid #d9a441;font-size:12px;line-height:1.5;color:{INK};">'
+            f'<div style="font-weight:600;margin-bottom:6px;">{escape(heading)}</div>'
+            f'<ol style="margin:0;padding-left:18px;">{items}</ol></div>')
 
 
 def _episode_html(ep: ReportEpisode) -> str:
@@ -156,10 +241,12 @@ def _episode_html(ep: ReportEpisode) -> str:
     )
     meta = " &middot; ".join(escape(bit) for bit in _meta_bits(ep))
     body = ""
+    notes = checker_notes(ep.fidelity)
+    marks = flag_marks(ep.bullets, notes) if ep.bullets else {}
     if ep.bullets:
         items = "".join(
             f'<li style="margin:0 0 7px 0;font-size:14px;line-height:1.5;color:{INK};">'
-            f"{_bullet_html(b)}</li>"
+            f"{_bullet_html(b, marks)}</li>"
             for b in ep.bullets
         )
         # Outlook ignores list-style padding on <ul>, hence the margin as well.
@@ -174,7 +261,9 @@ def _episode_html(ep: ReportEpisode) -> str:
         )
         body = f'<div style="margin:12px 0 4px 0;">{paras}</div>'
     check = fidelity_summary(ep.fidelity)
-    if check:
+    if notes:
+        body += _notes_html(notes, check)
+    elif check:
         body += (f'<div style="font-size:12px;color:{MUTED};margin-top:8px;">'
                  f'{escape(check)}</div>')
 
@@ -316,14 +405,29 @@ def build_text(report: RunReport, when: datetime) -> str:
         if ep.audio_url:
             lines.append(f"  Audio:  {ep.audio_url}")
         if ep.bullets:
-            lines += ["", *(
-                f"  - " + (f"{b['label']}: " if isinstance(b, dict) and b.get("label") else "")
-                + t + (f" ({u})" if u else "")
-                for b, (t, u) in zip(ep.bullets, map(bullet_parts, ep.bullets)))]
+            notes = checker_notes(ep.fidelity)
+            marks = flag_marks(ep.bullets, notes)
+
+            def line_for(b, indent: str) -> list[str]:
+                t, u = bullet_parts(b)
+                label = f"{b['label']}: " if isinstance(b, dict) and b.get("label") else ""
+                mark = f" [{marks[t]}]" if t in marks else ""
+                out = [f"{indent}- {label}{t}{mark}" + (f" ({u})" if u else "")]
+                for sb in (b.get("sub", []) if isinstance(b, dict) else []):
+                    out += line_for(sb, indent + "    ")
+                return out
+
+            lines.append("")
+            for b in ep.bullets:
+                lines += line_for(b, "  ")
         elif ep.is_briefing and ep.briefing_text:
             lines += ["", *(f"  {p.strip()}" for p in ep.briefing_text.split("\n\n") if p.strip())]
         if fidelity_summary(ep.fidelity):
             lines.append(f"  ({fidelity_summary(ep.fidelity)})")
+            for i, n in enumerate(checker_notes(ep.fidelity), 1):
+                lines.append(f"    [{i}] {n.get('severity')}, {n.get('verdict')}: {n.get('explanation')}")
+                lines.append(f"        script: \"{n.get('script_quote')}\"")
+                lines.append(f"        source: \"{n.get('source_quote')}\"")
         lines.append("")
     if report.failures:
         lines.append("Failed:")

@@ -197,8 +197,13 @@ def fidelity_summary(fid: dict | None) -> str:
         return "Checked against source: no issues"
     if fid["status"] == "flagged":
         return f"Checked against source: {n} {plural(n)} flagged, not corrected"
+    # `remaining` is a fresh read of the revised script, so it can hold flags
+    # the first pass never raised; subtracting it from the draft count went
+    # negative ("-1 corrected", 2026-09-16). Say what each number is instead.
     if rem:
-        return f"Checked against source: {n - rem} corrected, {rem} still flagged"
+        total = len(fid.get("flags", []))
+        return (f"Checked against source: {total} {plural(total)} flagged in the draft "
+                f"({n} material), revised once; {rem} still flagged")
     return f"Checked against source: {n} {plural(n)} corrected"
 
 
