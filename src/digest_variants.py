@@ -41,7 +41,8 @@ Rules:
 - Keep attributions ("Zvi argues", "the CBO found").
 - This is read, not spoken. Keep numerals, percent signs, currency and symbols, \
 and convert anything spelled out for speech back into figures: "forty-five \
-percent" becomes 45%, "two thousand twenty-six" becomes 2026.
+percent" becomes 45%, "two thousand twenty-six" becomes 2026. Leave words \
+inside a direct quotation exactly as spoken ("the two most successful").
 - No preamble, no closing line, no headings, no markdown, no bold.
 - Format: a top-level bullet is a line starting with "- ". A sub-bullet is a \
 line starting with two spaces then "- ". Nothing else.

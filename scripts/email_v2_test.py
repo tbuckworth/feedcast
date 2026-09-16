@@ -94,8 +94,14 @@ _ART = re.compile(r"^- \[(?P<source>[^\]]+)\] (?P<title>.+?)(?:\s+(?P<url>https?
 _URL = re.compile(r"^\s+URL: (https?://\S+)$")
 
 
-def briefing_sources(row: dict) -> list[dict]:
-    """Rebuild the article list the briefing was written from, from its bundle."""
+def briefing_sources(row: dict, selected_only: bool = True) -> list[dict]:
+    """Rebuild the article list the briefing was written from, from its bundle.
+
+    `selected_only` keeps just the stories the writer was given in full (the
+    "Selected stories" block, 12 a day) and drops the "Other headlines" list.
+    On 2026-09-16 the digest lifted a SpaceX story from those headlines that
+    the briefing never told; links only need the articles the script used.
+    """
     path = ROOT / "data/sources" / f"{generate_episode_id(row['id'])}.md"
     if not path.exists():
         return []
@@ -105,6 +111,11 @@ def briefing_sources(row: dict) -> list[dict]:
     start = text.find("## What the writer was given")
     end = text.find("## What the writer wrote")
     given = text[start:end] if 0 <= start < end else ""
+    if selected_only:
+        s0 = given.find("## Selected stories")
+        s1 = given.find("## Other headlines")
+        if s0 >= 0:
+            given = given[s0:s1] if s1 > s0 else given[s0:]
     out, pending = [], None
     for line in given.splitlines():
         m = _ART.match(line)
