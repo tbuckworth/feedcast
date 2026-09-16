@@ -21,6 +21,37 @@
     </image>
     <itunes:category text="Technology" />
     <item>
+      <title>Daily News Briefing - 2026-09-16</title>
+      <description>Daily News Briefing - 2026-09-16
+
+Topics covered:
+- The top story today is a significant development in AI industry coordination on safety
+- On the economic front, US ten-year Treasury yields climbed to five-point-zero-four percent on Tuesday — their highest level since two thousand seven — even as Treasury Secretary Scott Bessent told Congress that recent bond buybacks were "the two most successful treasury auctions we've had in twenty years." The Federal Reserve's rate decision comes today, with markets widely expecting a hike that would be the first since July two thousand twenty-three
+- In Congress, the US House voted for a third time to end the war in Iran, two hundred twenty to two hundred four, hours after a Congressional Budget Office report revealed the conflict has cost at least thirty-eight billion dollars and left America's stockpile of defensive interceptor missiles so depleted it could take five years to rebuild
+- On European security, the pattern of Russian provocations escalated further
+- Finally, a New York Times and Siena University poll confirms that AI and data centers are deeply unpopular with the American public
+- Looking ahead, the Federal Reserve's decision today will set the tone for markets and the midterm campaign, while the emerging trilateral safety talks between OpenAI, Anthropic, and Google could determine whether industry self-regulation takes concrete shape before governments act</description>
+      <pubDate>Wed, 16 Sep 2026 04:34:14 +0000</pubDate>
+      <guid>news-briefing-2026-09-16</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8db06cdb2826_daily_news_briefing_-_2026-09-16.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:05:27</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-16.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“The Bad Guy With An AI Named Claude” by Zvi</title>
+      <description>Audio version of “The Bad Guy With An AI Named Claude” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 15 Sep 2026 14:11:43 +0000</pubDate>
+      <guid>e6e815c2-a385-4aea-b3eb-ec11380c9f71</guid>
+      <link>https://www.lesswrong.com/posts/qSjH9T83xCfWQkmk2/the-bad-guy-with-an-ai-named-claude</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/292b7945fa17_the_bad_guy_with_an_ai_named_claude_by_zvi.mp3" type="audio/mpeg" length="0" />
+      <itunes:duration>00:04:30</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Daily News Briefing - 2026-09-15</title>
       <description>Daily News Briefing - 2026-09-15
 
