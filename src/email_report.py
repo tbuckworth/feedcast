@@ -286,6 +286,9 @@ def _episode_html(ep: ReportEpisode, marks: dict[str, int] | None = None,
     if notes and notes_inline:
         body += _notes_html(notes, check)
     elif check:
+        # With the complaints deferred to the foot of the email the one-line
+        # verdict still belongs here, so an episode with issues is not the
+        # only one left without a "checked" line.
         body += (f'<div style="font-size:12px;color:{MUTED};margin-top:8px;">'
                  f'{escape(check)}</div>')
 
