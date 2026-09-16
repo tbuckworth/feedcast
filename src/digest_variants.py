@@ -111,25 +111,43 @@ def parse_flat(raw: str, allowed: set[str] | None = None, max_bullets: int = 8) 
     return out[:max_bullets]
 
 
-_INDENTED = re.compile(r"^(?:\s{2,}|\t)\s*(?:[-*•–—]|\d+[.)])\s+")
+_MARKER = re.compile(r"^(\s*)(?:[-*•–—]|\d+[.)])\s+")
+
+
+def _indent_of(line: str) -> int:
+    """Leading whitespace before the bullet marker; -1 for a line without one."""
+    m = _MARKER.match(line)
+    return len(m.group(1).expandtabs(4)) if m else -1
 
 
 def parse_tiered(raw: str, allowed: set[str] | None = None, max_top: int = 8) -> list:
-    """Two-level reply -> [{"text", "url"?, "sub": [...]}]. Orphan sub-bullets are dropped."""
+    """Two-level reply -> [{"text", "url"?, "sub": [...]}].
+
+    Level is relative, not absolute: the shallowest marker indent seen in the
+    reply is the top level, anything deeper is a sub-bullet. A model that
+    indents its whole answer by two spaces therefore still yields headlines.
+    Sub-bullets of a headline the parser rejected (a heading, an over-long
+    line) are dropped with it rather than attached to the previous headline.
+    """
     allowed = allowed or set()
+    lines = [l for l in (raw or "").splitlines() if l.strip()]
+    indents = [_indent_of(l) for l in lines]
+    tops = [i for i in indents if i >= 0]
+    base = min(tops) if tops else 0
     out: list[dict] = []
-    for line in (raw or "").splitlines():
-        if not line.strip():
-            continue
+    open_parent = False   # the last top-level line was kept
+    for line, indent in zip(lines, indents):
         b = _one(line, allowed)
+        if indent > base:
+            if b is not None and open_parent:
+                out[-1].setdefault("sub", []).append(b if isinstance(b, dict) and b.get("url") else
+                                                     (b["text"] if isinstance(b, dict) else b))
+            continue
         if b is None:
+            open_parent = False
             continue
-        b = b if isinstance(b, dict) else {"text": b}
-        if _INDENTED.match(line):
-            if out:
-                out[-1].setdefault("sub", []).append(b if b.get("url") else b["text"])
-            continue
-        out.append(b)
+        out.append(b if isinstance(b, dict) else {"text": b})
+        open_parent = True
     for b in out:
         if not b.get("url"):
             b.pop("url", None)

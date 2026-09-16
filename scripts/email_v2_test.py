@@ -223,6 +223,7 @@ async def main() -> None:
         bullets = parse(raw)
         u["episode"] = ep.title
         u["bullets_kept"] = len(bullets)
+        u["sub_bullets_kept"] = sum(len(b.get("sub", [])) for b in bullets if isinstance(b, dict))
         usage["full"].append(u)
         variants.setdefault(row["id"], {})["full_raw"] = raw
         ep.bullets = bullets
