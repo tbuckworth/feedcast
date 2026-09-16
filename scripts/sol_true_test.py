@@ -52,6 +52,10 @@ async def sol(client, system: str, user: str, effort: str, max_out: int, label: 
         "seconds": round(time.monotonic() - t0, 1), "finish": resp.choices[0].finish_reason,
     }
     print(f"    {label}: {usage}")
+    if resp.choices[0].finish_reason == "length":
+        # A cut-off draft would sail through the check and into the email as
+        # if complete; the pipeline's own guard only covers the revision.
+        raise RuntimeError(f"{label}: output truncated at {max_out} tokens")
     return text, usage
 
 
