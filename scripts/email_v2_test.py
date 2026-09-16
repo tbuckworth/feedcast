@@ -13,6 +13,7 @@ output/feed.xml for durations.
 import argparse
 import asyncio
 import json
+import os
 import re
 import sqlite3
 import sys
@@ -38,7 +39,8 @@ PRICES = {
     "anthropic/claude-opus-5": (5.00, 25.00),
     "anthropic/claude-sonnet-5": (2.00, 10.00),
     "anthropic/claude-sonnet-4.6": (3.00, 15.00),
-    "openai/gpt-5.6-sol": (2.00, 10.00),
+    "openai/gpt-5.6-sol": (2.00, 10.00),      # OpenRouter's listing; billed ~3x this on 2026-09-16
+    "gpt-5.6-sol": (4.00, 20.00),             # OpenAI direct, developers.openai.com, 2026-09-16
 }
 
 
@@ -125,26 +127,47 @@ def briefing_sources(row: dict) -> list[dict]:
     return uniq
 
 
+def openai_direct_client():
+    """OpenAI's own API on Titus's ARROW key (delivered by bwsrun), not OpenRouter."""
+    from openai import AsyncOpenAI
+    return AsyncOpenAI(api_key=os.environ["ARROW_OPENAI_API_KEY"], timeout=300, max_retries=2)
+
+
 async def measured(client, model: str, messages: list[dict], max_tokens: int,
-                   no_reasoning: bool = False) -> tuple[str, dict]:
+                   no_reasoning: bool = False, reasoning_effort: str = "",
+                   direct: bool = False) -> tuple[str, dict]:
     t0 = time.monotonic()
-    extra = {"usage": {"include": True}}
-    if no_reasoning:
-        extra["reasoning"] = {"enabled": False}   # as verify.py does for the checker
-    resp = await client.chat.completions.create(
-        model=model, max_tokens=max_tokens, messages=messages, extra_body=extra,
-    )
+    kwargs: dict = {}
+    if direct:
+        # OpenAI direct: max_completion_tokens, reasoning_effort (none|low|medium|high|xhigh|max)
+        kwargs["max_completion_tokens"] = max_tokens
+        if reasoning_effort:
+            kwargs["reasoning_effort"] = reasoning_effort
+    else:
+        kwargs["max_tokens"] = max_tokens
+        extra = {"usage": {"include": True}}
+        if no_reasoning:
+            extra["reasoning"] = {"enabled": False}   # as verify.py does for the checker
+        elif reasoning_effort:
+            extra["reasoning"] = {"effort": reasoning_effort}
+        kwargs["extra_body"] = extra
+    resp = await client.chat.completions.create(model=model, messages=messages, **kwargs)
     text = completion_text(resp, model)
     u = resp.usage
     extra = getattr(u, "model_extra", None) or {}
     pin, pout = u.prompt_tokens, u.completion_tokens
+    details = getattr(u, "completion_tokens_details", None)
+    reasoning = getattr(details, "reasoning_tokens", None) if details else None
     unit_in, unit_out = PRICES.get(model, (0, 0))
     return text, {
         "model": model,
+        "provider": "openai-direct" if direct else "openrouter",
+        "reasoning_effort": reasoning_effort or ("disabled" if no_reasoning else "default"),
         "prompt_tokens": pin,
         "completion_tokens": pout,
+        "reasoning_tokens": reasoning,
         "openrouter_cost_usd": extra.get("cost"),
-        "list_price_usd": round(pin * unit_in / 1e6 + pout * unit_out / 1e6, 5),
+        "list_price_usd": round(pin * unit_in / 1e6 + pout * unit_out / 1e6, 5) if unit_in else None,
         "seconds": round(time.monotonic() - t0, 1),
     }
 
@@ -173,6 +196,12 @@ async def main() -> None:
     ap.add_argument("--variant", default="full", choices=("full", "uncapped", "tiered"))
     ap.add_argument("--also-no-reasoning", action="store_true",
                     help="run the --also-model calls with reasoning disabled")
+    ap.add_argument("--provider", default="openrouter", choices=("openrouter", "openai"),
+                    help="where --model is called: OpenRouter (pipeline default) or OpenAI direct")
+    ap.add_argument("--reasoning-effort", default="",
+                    help="reasoning effort for --model (OpenAI: none|low|medium|high; OpenRouter: low|medium|high)")
+    ap.add_argument("--also-effort", action="append", default=[],
+                    help="extra reasoning-effort levels to measure for --model (usage only, not emailed)")
     args = ap.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
 
@@ -192,6 +221,8 @@ async def main() -> None:
     report = _build_run_report(episodes, db, {r["id"] for r in todays}, [], BASE_URL)
 
     client = get_client()
+    main_client = openai_direct_client() if args.provider == "openai" else client
+    direct = args.provider == "openai"
     usage: dict[str, list[dict]] = {"current": [], "full": [], "also": []}
     variants: dict[str, dict] = {}
     for ep in report.episodes:
@@ -219,8 +250,17 @@ async def main() -> None:
             msgs, allowed = digest_variants.build_messages(args.variant, text, is_briefing, sources)
             parse = (lambda r: digest_variants.parse_tiered(r, allowed)) if args.variant == "tiered" \
                 else (lambda r: digest_variants.parse_flat(r, allowed))  # noqa: E731
-        raw, u = await measured(client, args.model, msgs, 6000)
+        raw, u = await measured(main_client, args.model, msgs, 6000,
+                                reasoning_effort=args.reasoning_effort, direct=direct)
         bullets = parse(raw)
+        for eff in args.also_effort:
+            raw3, u3 = await measured(main_client, args.model, msgs, 6000,
+                                      reasoning_effort=eff, direct=direct)
+            u3["episode"] = ep.title
+            u3["bullets_kept"] = len(parse(raw3))
+            usage["also"].append(u3)
+            variants.setdefault(row["id"], {})[f"full_raw::{args.model}::{eff}"] = raw3
+            print(f"  full digest ({args.model}, effort={eff}): {u3}")
         u["episode"] = ep.title
         u["bullets_kept"] = len(bullets)
         u["sub_bullets_kept"] = sum(len(b.get("sub", [])) for b in bullets if isinstance(b, dict))
@@ -250,14 +290,15 @@ async def main() -> None:
     html = build_html(report, when)
     html = html.replace('<div style="margin:0;padding:0;background:#f4f4f2;">',
                         '<div style="margin:0;padding:0;background:#f4f4f2;">' + note, 1)
-    stem = f"email_{args.variant}"
+    stem = f"email_{args.variant}" + (f"_{args.model.replace('/', '_')}" if args.provider == "openai" else "")
     (args.out / f"{stem}.html").write_text(html, encoding="utf-8")
     (args.out / f"{stem}.txt").write_text(
         f"[TEST] Experimental variant ({args.variant}): {blurb}.\n\n"
         + build_text(report, when), encoding="utf-8")
-    (args.out / f"usage_{args.variant}.json").write_text(json.dumps(usage, indent=2), encoding="utf-8")
-    (args.out / f"raw_{args.variant}.json").write_text(json.dumps(variants, indent=2), encoding="utf-8")
-    print(f"\nWrote {args.out}/{stem}.html, {stem}.txt, usage_{args.variant}.json, raw_{args.variant}.json")
+    tag = stem[len("email_"):]
+    (args.out / f"usage_{tag}.json").write_text(json.dumps(usage, indent=2), encoding="utf-8")
+    (args.out / f"raw_{tag}.json").write_text(json.dumps(variants, indent=2), encoding="utf-8")
+    print(f"\nWrote {args.out}/{stem}.html, {stem}.txt, usage_{tag}.json, raw_{tag}.json")
 
 
 if __name__ == "__main__":
