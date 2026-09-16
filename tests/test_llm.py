@@ -22,6 +22,8 @@ class FakeApi:
         reply = self.replies.pop(0)
         if isinstance(reply, Exception):
             raise reply
+        if reply == "<no-choices>":
+            return SimpleNamespace(choices=None, error={"code": 502})
         content = None if reply == "<empty>" else reply
         return SimpleNamespace(
             choices=[SimpleNamespace(message=SimpleNamespace(content=content), finish_reason="stop")],
@@ -161,3 +163,12 @@ def test_a_switch_before_a_non_fallback_empty_reply_is_still_logged(routes):
         asyncio.run(complete("bullets", MSGS, max_tokens=50, label="digest", fallback_on_empty=False))
     assert len(llm.fallback_log) == 1
     assert "openai down" in llm.fallback_log[0] and "(empty)" in llm.fallback_log[0]
+
+
+def test_a_provider_failure_falls_back_even_when_empty_replies_are_held(routes):
+    # choices=None is OpenRouter saying the provider failed: that is the route
+    # being down, not a budget spent, so the hold does not apply.
+    routes["openrouter"] = FakeApi(["<no-choices>", "sibling answered"])
+    done = asyncio.run(complete("checker", MSGS, max_tokens=50, fallback_on_empty=False))
+    assert done.text == "sibling answered"
+    assert len(llm.fallback_log) == 1 and "NoChoices" in llm.fallback_log[0]

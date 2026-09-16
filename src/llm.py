@@ -118,6 +118,12 @@ fallback_log: list[str] = []
 class EmptyCompletion(RuntimeError):
     """The model returned no text, though the HTTP call itself succeeded.
 
+    Two kinds, told apart by `NoChoices`: a body with no choices at all is the
+    provider failing (quota, upstream error, filter) and is treated like any
+    other failure, i.e. the next target is tried; choices present but content
+    None is the model returning nothing (typically a reasoning budget spent
+    before any text), which a caller may prefer to retry differently.
+
     OpenRouter reports a provider-side failure (a filtered response, an upstream
     error, a quota) as a 200 whose body has `error` set and `choices` absent;
     the SDK parses that into a ChatCompletion with `choices=None`, and the SDK's
@@ -126,6 +132,10 @@ class EmptyCompletion(RuntimeError):
     subscriptable" that took out an ACX book review twice (2026-09-06, -08),
     with nothing in the log to say which call or why.
     """
+
+
+class NoChoices(EmptyCompletion):
+    """Provider-side failure reported as a 200 with no choices."""
 
 
 def completion_text(response, label: str = "") -> str:
@@ -140,7 +150,7 @@ def completion_text(response, label: str = "") -> str:
     if not choices:
         extra = getattr(response, "model_extra", None) or {}
         error = getattr(response, "error", None) or extra.get("error")
-        raise EmptyCompletion(f"{where}response has no choices (provider error: {error!r})")
+        raise NoChoices(f"{where}response has no choices (provider error: {error!r})")
     choice = choices[0]
     content = getattr(choice.message, "content", None)
     if content is None:
@@ -227,10 +237,11 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
     used — for the bullets role that is `openai/gpt-5.6-sol`, not the OpenAI
     direct spelling. `reasoning` overrides the target's default for this call.
 
-    `fallback_on_empty=False` lets an empty reply (EmptyCompletion) propagate
-    instead of trying the next target: the checker's first attempt wants to
-    retry the *same* model with reasoning off, because a budget eaten by
-    hidden reasoning is not the model being down.
+    `fallback_on_empty=False` lets an empty reply (choices present, no text)
+    propagate instead of trying the next target: the checker's first attempt
+    wants to retry with reasoning off, because a budget eaten by hidden
+    reasoning is not the model being down. A reply with no choices at all is
+    the provider failing and falls back regardless.
 
     Raises the last error when every target fails, and EmptyCompletion when
     the text is missing, so callers keep their existing handling.
@@ -259,7 +270,7 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
                 **_kwargs(route, target, messages, max_tokens, temperature, reasoning))
             done = _completion(response, target, where)
         except EmptyCompletion as e:
-            if not fallback_on_empty:
+            if not fallback_on_empty and not isinstance(e, NoChoices):
                 # The caller will retry from the top; record any switch that
                 # happened on the way here so it still reaches the report.
                 if tried:
