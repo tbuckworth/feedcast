@@ -188,7 +188,8 @@ async def main() -> None:
     usage: dict[str, list[dict]] = {"current": [], "full": [], "also": []}
     variants: dict[str, dict] = {}
     for ep in report.episodes:
-        row = next(r for r in todays if r["id"] == ep.id)
+        # ReportEpisode carries no id; the audio filename is unique per episode.
+        row = next(r for r in todays if ep.audio_url.endswith("/" + r["audio_file"]))
         is_briefing = ep.is_briefing
         text = script_for(row)
         sources = briefing_sources(row) if is_briefing else []
@@ -201,7 +202,7 @@ async def main() -> None:
             u["bullets_kept"] = len(digest.parse_bullets(raw, allowed))
             u["bullets_raw_lines"] = len([l for l in raw.splitlines() if l.strip()])
             usage["current"].append(u)
-            variants.setdefault(ep.id, {})["current_raw"] = raw
+            variants.setdefault(row["id"], {})["current_raw"] = raw
             print(f"  current digest ({MODEL_WRITER}): {u}")
 
         msgs, allowed = digest_full.build_messages(text, is_briefing, sources)
@@ -210,7 +211,7 @@ async def main() -> None:
         u["episode"] = ep.title
         u["bullets_kept"] = len(bullets)
         usage["full"].append(u)
-        variants.setdefault(ep.id, {})["full_raw"] = raw
+        variants.setdefault(row["id"], {})["full_raw"] = raw
         ep.bullets = bullets
         print(f"  full digest ({args.model}): {u}")
 
@@ -219,7 +220,7 @@ async def main() -> None:
             u2["episode"] = ep.title
             u2["bullets_kept"] = len(digest_full.parse_bullets(raw2, allowed, is_briefing))
             usage["also"].append(u2)
-            variants[ep.id][f"full_raw::{m}"] = raw2
+            variants[row["id"]][f"full_raw::{m}"] = raw2
             print(f"  full digest ({m}): {u2}")
 
     when = datetime.fromisoformat(todays[0]["processed_at"])
