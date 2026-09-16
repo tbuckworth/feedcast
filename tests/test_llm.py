@@ -133,3 +133,20 @@ def test_every_role_target_names_a_known_route():
     for role, targets in ROLES.items():
         for t in targets:
             assert t.route in ROUTES, (role, t)
+
+
+def test_empty_reply_can_be_told_not_to_fall_back(routes):
+    routes["openrouter"] = FakeApi(["<empty>"])
+    with pytest.raises(llm.EmptyCompletion):
+        asyncio.run(complete("checker", MSGS, max_tokens=50, fallback_on_empty=False))
+    assert llm.fallback_log == [] and len(routes["openrouter"].calls) == 1
+
+
+def test_a_pinned_client_gets_the_openrouter_spelling_of_the_model(routes):
+    # get_client() is OpenRouter's client; the bullets role's primary is the
+    # OpenAI-direct spelling, which OpenRouter does not know.
+    pinned = FakeApi(["ok"])
+    asyncio.run(complete("bullets", MSGS, max_tokens=50, client=pinned))
+    call = pinned.calls[0]
+    assert call["model"] == "openai/gpt-5.6-sol" and call["max_tokens"] == 50
+    assert call["extra_body"] == {"reasoning": {"enabled": False}}
