@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Thu, 17 Sep 2026 05:53:27 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 18 Sep 2026 05:09:06 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-09-18</title>
+      <description>Daily News Briefing - 2026-09-18
+
+Topics covered:
+- The most significant development today is a wave of concrete new disclosures about AI model misalignment from OpenAI, which substantially deepen the safety debate
+- Complementing this, Google DeepMind launched a new institute to advance the conversation around artificial general intelligence
+- On geopolitics, two major stories
+- Separately, a UN fact-finding mission reported reasonable grounds to believe the United States committed war crimes in two February strikes in Iran that killed at least one hundred seventy-seven civilians, including a hundred twenty children at a primary school in Minab struck by Tomahawk missiles
+- Finally, newly unsealed court filings in the New York Times copyright lawsuit against Microsoft and OpenAI revealed that a Microsoft director of applied science repeatedly warned internally that scraping news content for AI training was "the largest theft of labor in human history" and made "a complete mockery of fair use." OpenAI's ChatGPT head wrote internally that publishers faced an "existential threat" from commercial products trained on their content
+- Looking ahead, the Trump-Xi state dinner next week and the UN General Assembly session will test whether any of the safety proposals gaining momentum this week translate into international commitments</description>
+      <pubDate>Fri, 18 Sep 2026 04:33:55 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-09-18</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b5fb6e31f39f_daily_news_briefing_-_2026-09-18.mp3" type="audio/mpeg" length="2935197" />
+      <itunes:duration>00:05:06</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-18.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“AI #186: The World Takes Notice” by Zvi</title>
+      <description>Audio version of “AI #186: The World Takes Notice” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 17 Sep 2026 12:13:45 +0000</pubDate>
+      <guid isPermaLink="false">5491a682-0a2a-4b37-9dec-96654ac5eb09</guid>
+      <link>https://www.lesswrong.com/posts/aa3HprreFktzLQiaW/ai-186-the-world-takes-notice</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/96e7b095a6a0_ai_186_the_world_takes_notice_by_zvi.mp3" type="audio/mpeg" length="2535213" />
+      <itunes:duration>00:04:28</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-09-17</title>
       <description>Daily News Briefing - 2026-09-17
