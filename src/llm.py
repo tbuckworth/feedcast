@@ -73,20 +73,24 @@ class Target:
         return f"{self.model} via {self.route}"
 
 
-# Same model on the other account where possible, so a fallback does not
-# change the product; a sibling model only as the last resort. The Anthropic
-# direct route is listed second for the Claude roles: it is the one backup that
-# still works if the OpenRouter account itself is the problem.
+# Prefer the same model on another account, then a sibling, but do not make
+# every backup depend on the same provider. On 2026-09-19 OpenRouter rejected
+# all Claude calls while Anthropic direct had no credit. GPT and Gemini still
+# worked. The final writer/checker fallbacks use different model families so
+# the fidelity check remains independent of the writer.
 ROLES: dict[str, tuple[Target, ...]] = {
     "writer": (
         Target("openrouter", "anthropic/claude-opus-4.6"),
         Target("anthropic", "claude-opus-4-6"),
         Target("openrouter", "anthropic/claude-opus-5"),
+        Target("openai", "gpt-5.6-sol", {"off": True}),
+        Target("openrouter", "openai/gpt-5.6-sol", {"off": True}),
     ),
     "checker": (
         Target("openrouter", "anthropic/claude-sonnet-5"),
         Target("anthropic", "claude-sonnet-5"),
         Target("openrouter", "anthropic/claude-sonnet-4.6"),
+        Target("openrouter", "google/gemini-3-flash-preview"),
     ),
     "bullets": (
         Target("openai", "gpt-5.6-sol", {"off": True}),
