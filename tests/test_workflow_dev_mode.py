@@ -45,3 +45,19 @@ def test_deploy_pings_the_websub_hub_after_pages_is_live():
     # Must wait for the CDN to serve this run's feed before the hub fetches it.
     assert "sha256sum output/feed.xml" in ping["run"]
     assert "hub.mode=publish" in ping["run"]
+
+
+def test_llm_smoke_test_cannot_enter_the_publishing_jobs_or_send_mail():
+    wf, on = _workflow()
+    assert on["workflow_dispatch"]["inputs"]["llm_smoke_test"]["default"] is False
+    assert wf["jobs"]["check-llm"]["if"] == "inputs.llm_smoke_test == true"
+    assert wf["jobs"]["guard"]["if"] == "inputs.llm_smoke_test != true"
+    assert wf["jobs"]["update"]["needs"] == "guard"
+    assert wf["jobs"]["deploy"]["needs"] == "update"
+    smoke = wf["jobs"]["check-llm"]
+    assert smoke["permissions"] == {"contents": "read"}
+    (check,) = [s for s in smoke["steps"] if s.get("name") == "Check live LLM routes"]
+    (pipeline,) = [s for s in wf["jobs"]["update"]["steps"] if s.get("name") == "Run pipeline"]
+    assert set(check["env"]) == {"OPENROUTER_API_KEY", "OPENAI_API_KEY", "ANTHROPIC_API_KEY"}
+    assert all(value == pipeline["env"][key] for key, value in check["env"].items())
+    assert check["run"] == "uv run python -m scripts.check_llm"

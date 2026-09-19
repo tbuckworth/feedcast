@@ -51,19 +51,17 @@ uv sync
 
 ### Environment Variables
 
-Create a `.env` file:
+On the desktop, inject the stored keys with `bwsrun`; `.bws-profile` maps all
+three LLM keys to the same `ARROW_*` accounts used in GitHub Actions:
 
 ```bash
-OPENROUTER_API_KEY=your_key    # Required — Claude Opus 4.6 (writer), Sonnet 5 (checker), Gemini 3 Flash (TTS normaliser)
-OPENAI_API_KEY=your_key        # GPT-5.6 Sol writes the email bullets; falls back to OpenRouter if unset
-ANTHROPIC_API_KEY=your_key     # Optional — backup route for the Claude roles
-DEEPINFRA_API_KEY=your_key     # Required — DeepInfra Chatterbox TTS
+bwsrun uv run python -m src.main
 ```
 
 | Variable | Required | Purpose |
 |----------|----------|---------|
 | `OPENROUTER_API_KEY` | Yes | OpenRouter: Claude Opus 4.6 (writer), Claude Sonnet 5 (checker), Gemini 3 Flash (TTS normaliser) |
-| `OPENAI_API_KEY` | No | OpenAI direct: GPT-5.6 Sol writes the email bullets. Unset falls back to Sol via OpenRouter, then Opus |
+| `OPENAI_API_KEY` | No | OpenAI direct: GPT-5.6 Sol writes email bullets and backs up the writer when Claude is unavailable. Sol via OpenRouter is also a writer backup |
 | `ANTHROPIC_API_KEY` | No | Anthropic direct: backup route for the writer and checker roles |
 | `DEEPINFRA_API_KEY` | Yes | DeepInfra Chatterbox TTS API |
 | `REPROCESS_ENTRY` | No | Entry ID/URL to reprocess from RSS feeds |
@@ -83,6 +81,18 @@ DEEPINFRA_API_KEY=your_key     # Required — DeepInfra Chatterbox TTS
 | `SMTP_PORT` | No | SMTP port (default 587 STARTTLS; 465 switches to implicit TLS) |
 | `FEEDCAST_EMAIL_FROM` | No | From address (defaults to `SMTP_USER`) |
 | `FEEDCAST_EMAIL_ALWAYS` | No | Send the report even when a run produced nothing new |
+
+The writer tries Claude on OpenRouter, Claude direct, and a sibling Claude,
+then GPT-5.6 Sol direct and via OpenRouter. The checker tries its Claude
+targets, then Gemini 3 Flash, keeping the backup checker distinct from the
+backup writer. Every fallback is reported in the run log and completion email.
+
+To verify live LLM access without sending email or publishing, run
+`bwsrun uv run python -m scripts.check_llm`, or dispatch **Update Podcast Feed**
+with `llm_smoke_test=true`. This checks story selection, a short fictional
+briefing, factual checking, TTS text normalization, and the bullet digest.
+The smoke run skips the daily guard, pipeline, and deploy jobs, and does not
+count as a successful daily publish. It does not check TTS audio or email delivery.
 
 ### Configuration
 
