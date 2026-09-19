@@ -4,6 +4,8 @@ import asyncio
 from types import SimpleNamespace
 
 import pytest
+import httpx
+from openai import BadRequestError, PermissionDeniedError
 
 from src import llm
 from src.llm import ROLES, ROUTES, Target, complete
@@ -172,3 +174,58 @@ def test_a_provider_failure_falls_back_even_when_empty_replies_are_held(routes):
     done = asyncio.run(complete("checker", MSGS, max_tokens=50, fallback_on_empty=False))
     assert done.text == "sibling answered"
     assert len(llm.fallback_log) == 1 and "NoChoices" in llm.fallback_log[0]
+
+
+def _provider_error(error_class, status, message):
+    response = httpx.Response(status, request=httpx.Request("POST", "https://example.com"))
+    return error_class(message, response=response, body={"error": {"message": message}})
+
+
+@pytest.mark.parametrize("direct_openai", [True, False])
+def test_writer_recovers_when_claude_is_blocked_and_anthropic_has_no_credit(routes, direct_openai):
+    """Both daily runs on 2026-09-19 exhausted the all-Claude fallback chain."""
+    denied = _provider_error(PermissionDeniedError, 403, "Provider Terms Of Service")
+    no_credit = _provider_error(BadRequestError, 400, "Your credit balance is too low")
+    routes["openrouter"] = FakeApi([denied, denied, '["https://example.com/story"]'])
+    routes["anthropic"] = FakeApi([no_credit])
+    if direct_openai:
+        routes["openai"] = FakeApi(['["https://example.com/story"]'])
+
+    done = asyncio.run(complete("writer", MSGS, max_tokens=2000, label="story selection"))
+
+    assert done.text == '["https://example.com/story"]'
+    assert done.target.route == ("openai" if direct_openai else "openrouter")
+    assert done.target.model.endswith("gpt-5.6-sol")
+    assert len(llm.fallback_log) == 1
+    assert "PermissionDeniedError" in llm.fallback_log[0]
+    assert "credit balance" in llm.fallback_log[0]
+    call = routes[done.target.route].calls[-1]
+    if direct_openai:
+        assert call["max_completion_tokens"] == 2000
+        assert call["reasoning_effort"] == "none"
+    else:
+        assert call["max_tokens"] == 2000
+        assert call["extra_body"] == {"reasoning": {"enabled": False}}
+
+
+def test_checker_recovers_on_a_different_model_family_from_the_backup_writer(routes):
+    denied = _provider_error(PermissionDeniedError, 403, "Provider Terms Of Service")
+    no_credit = _provider_error(BadRequestError, 400, "Your credit balance is too low")
+    routes["openrouter"] = FakeApi([denied, denied, '{"claims_total": 1, "flags": []}'])
+    routes["anthropic"] = FakeApi([no_credit])
+
+    done = asyncio.run(complete("checker", MSGS, max_tokens=16000, temperature=0,
+                               reasoning={"budget": 4000}, fallback_on_empty=False))
+
+    assert done.target == Target("openrouter", "google/gemini-3-flash-preview")
+    assert routes["openrouter"].calls[-1]["extra_body"] == {"reasoning": {"max_tokens": 4000}}
+    assert "served by google/gemini-3-flash-preview" in llm.fallback_log[0]
+
+
+def test_writer_raises_when_the_non_claude_backups_also_fail(routes):
+    routes["openrouter"] = FakeApi([RuntimeError("Claude blocked"), RuntimeError("Claude blocked"),
+                                   RuntimeError("GPT unavailable")])
+    routes["anthropic"] = FakeApi([RuntimeError("no credit")])
+    routes["openai"] = FakeApi([RuntimeError("OpenAI unavailable")])
+    with pytest.raises(RuntimeError, match="GPT unavailable"):
+        asyncio.run(complete("writer", MSGS, max_tokens=2000))

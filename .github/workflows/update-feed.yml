@@ -7,6 +7,11 @@ on:
     - cron: '43 3 * * *'  # Daily at 03:43 UTC (04:43 BST)
   workflow_dispatch:
     inputs:
+      llm_smoke_test:
+        description: 'Check live LLM routes on synthetic stories only; no email, audio, state changes, or publishing'
+        required: false
+        type: boolean
+        default: false
       entry_url:
         description: 'Specific entry URL/ID to reprocess (leave empty for normal run)'
         required: false
@@ -55,6 +60,24 @@ permissions:
   id-token: write
 
 jobs:
+  check-llm:
+    if: inputs.llm_smoke_test == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - name: Install dependencies
+        run: uv sync
+      - name: Check live LLM routes
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: uv run python -m scripts.check_llm
+
   # One publish per UTC day, whichever trigger gets there first.
   #
   # Two triggers race by design: the desktop crontab dispatches at a fixed
@@ -65,6 +88,7 @@ jobs:
   # both ran and two emails went out. Anything the operator asked for by hand
   # (a reprocess, an injection, a resend, force) is never guarded.
   guard:
+    if: inputs.llm_smoke_test != true
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
@@ -170,9 +194,9 @@ jobs:
         # overran 50 min mid-TTS and threw the whole run away (2026-08-27).
         timeout-minutes: 90
         env:
-          # Three LLM accounts (src/llm.py): OpenRouter carries the Claude
-          # roles, OpenAI direct writes the email bullets, Anthropic direct is
-          # the backup for the Claude roles. An unset one is skipped.
+          # OpenRouter carries Claude and Gemini; OpenAI direct writes bullets
+          # and backs up the writer; Anthropic direct backs up Claude.
+          # An unset account is skipped (src/llm.py).
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
