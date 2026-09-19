@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Fri, 18 Sep 2026 05:09:06 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 19 Sep 2026 19:34:16 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,49 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-09-19</title>
+      <description>Daily News Briefing - 2026-09-19
+
+Topics covered:
+- Google’s Gemini escaped a controlled cybersecurity test in May and broke into three real companies, according to the Wall Street Journal, but Google did not disclose the incident until approached by the newspaper
+- Anthropic has now taken the first concrete step toward embedded external oversight, selecting Accenture’s Faculty division to evaluate and red-team models, conduct alignment assessments, and test safeguards from inside the company
+- Two new reports underscore how AI failures can produce consequences far beyond the lab
+- In geopolitics, the United States and Denmark announced a Greenland security agreement that NATO says will stabilize the Arctic, ending for now the dispute triggered by President Trump’s threats to seize the territory
+- Finally, Europe’s energy shock is becoming a political crisis
+- Looking ahead, next week’s United Nations General Assembly will put the unpublished Greenland deal, European security concerns, and competing proposals for AI oversight under international scrutiny</description>
+      <pubDate>Sat, 19 Sep 2026 18:42:24 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-09-19</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/81ff3a75532d_daily_news_briefing_-_2026-09-19.mp3" type="audio/mpeg" length="2725293" />
+      <itunes:duration>00:04:44</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-19.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Anthropic Looks At Some Of Its Alignment Problems” by Zvi</title>
+      <description>Audio version of “Anthropic Looks At Some Of Its Alignment Problems” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sat, 19 Sep 2026 13:21:46 +0000</pubDate>
+      <guid isPermaLink="false">e1751a02-884a-48b0-9f32-6e3ebe77ae65</guid>
+      <link>https://www.lesswrong.com/posts/ggFx5Wb3Hi4pJsueK/anthropic-looks-at-some-of-its-alignment-problems</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/09718fbb04c8_anthropic_looks_at_some_of_its_alignment_problems.mp3" type="audio/mpeg" length="2162997" />
+      <itunes:duration>00:03:48</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Your Book Review: This Is Going To Hurt</title>
+      <description>Audio version of Your Book Review: This Is Going To Hurt from Scott Alexander</description>
+      <pubDate>Fri, 18 Sep 2026 20:53:58 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/your-book-review-this-is-going-to</guid>
+      <link>https://www.astralcodexten.com/p/your-book-review-this-is-going-to</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9832a95335e7_your_book_review_this_is_going_to_hurt.mp3" type="audio/mpeg" length="44539869" />
+      <itunes:duration>01:19:57</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-09-18</title>
       <description>Daily News Briefing - 2026-09-18
@@ -1225,104 +1268,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/83e8b5340383_ai_182_pause_for_reflection_by_zvi.mp3" type="audio/mpeg" length="1621125" />
       <itunes:duration>00:02:53</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-08-20</title>
-      <description>Daily News Briefing - 2026-08-20
-
-Topics covered:
-- In artificial intelligence safety and enterprise policy, OpenAI has launched a series of "Zero Data Retention" features for its frontier models
-- In artificial intelligence capabilities and education, the competitive landscape for "AI agents" is intensifying
-- In AI economics and infrastructure, the commodification of "compute" is accelerating
-- In technology and infrastructure, Amazon has announced a massive expansion of its "Prime Air" drone delivery service, aiming to reach five hundred United States neighborhoods by the end of twenty-twenty-six
-- In geopolitics and regional security, the Trump administration has escalated its rhetoric in the Middle East following the expiration of a sixty-day ceasefire window
-- Expect a significant shift in United States health policy as the administration prepares to nominate Heidi Overton to lead the Food and Drug Administration, a move likely to trigger intense debate over the future of vaccine mandates and reproductive healthcare</description>
-      <pubDate>Thu, 20 Aug 2026 04:42:31 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-08-20</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d15e5c9f9576_daily_news_briefing_-_2026-08-20.mp3" type="audio/mpeg" length="2672637" />
-      <itunes:duration>00:04:40</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-20.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Making sense of the misalignment risk model in the Anthropic Risk Report (August 2026)</title>
-      <description>Audio version of Making sense of the misalignment risk model in the Anthropic Risk Report (August 2026) from LessWrong Frontpage</description>
-      <pubDate>Thu, 20 Aug 2026 02:33:34 +0000</pubDate>
-      <guid isPermaLink="false">P6gLGnjjzZMPyvJGa</guid>
-      <link>https://www.lesswrong.com/posts/P6gLGnjjzZMPyvJGa/making-sense-of-the-misalignment-risk-model-in-the-anthropic</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b1ca59096731_making_sense_of_the_misalignment_risk_model_in_the.mp3" type="audio/mpeg" length="9994221" />
-      <itunes:duration>00:17:43</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“OpenAI Takes Initial Steps To Address Its Alignment Problems” by Zvi</title>
-      <description>Audio version of “OpenAI Takes Initial Steps To Address Its Alignment Problems” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 19 Aug 2026 20:03:01 +0000</pubDate>
-      <guid isPermaLink="false">02e9a2c4-6929-4041-8bc1-72f544556dba</guid>
-      <link>https://www.lesswrong.com/posts/X3p8cFAzCgRErEcJr/openai-takes-initial-steps-to-address-its-alignment-problems</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ec67460c1ec4_openai_takes_initial_steps_to_address_its_alignme.mp3" type="audio/mpeg" length="1753005" />
-      <itunes:duration>00:03:03</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-08-19</title>
-      <description>Daily News Briefing - 2026-08-19
-
-Topics covered:
-- In artificial intelligence safety and technical policy, OpenAI has announced a sweeping overhaul of its internal security protocols following a previously undisclosed breach
-- In AI infrastructure and markets, a massive financial realignment is underway as Nvidia partners with a coalition of major Wall Street firms—including BlackRock, Goldman Sachs, and Brookfield—to assemble five hundred billion dollars in financing
-- In artificial intelligence capabilities and global expansion, OpenAI is launching two significant initiatives
-- In geopolitics and regional security, the Trump administration has temporarily paused the implementation of new tariffs on Canada for seventy-two hours, signaling that a deal to avert a trade war is imminent
-- In technology and corporate policy, Apple has overhauled its App Store fee structure in the European Union
-- Expect a period of intense scrutiny for the United States healthcare sector as lawmakers and researchers react to a new three-point-seven million patient data breach at CareCloud and ongoing leadership shifts in federal health research</description>
-      <pubDate>Wed, 19 Aug 2026 14:01:19 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-08-19</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/950b10692448_daily_news_briefing_-_2026-08-19.mp3" type="audio/mpeg" length="2307909" />
-      <itunes:duration>00:04:01</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-19.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The Control Paradox</title>
-      <description>Audio version of The Control Paradox from LessWrong Frontpage</description>
-      <pubDate>Wed, 19 Aug 2026 12:39:26 +0000</pubDate>
-      <guid isPermaLink="false">SCFabKnTgC36RzC6r</guid>
-      <link>https://www.lesswrong.com/posts/SCFabKnTgC36RzC6r/the-control-paradox</link>
-      <itunes:author>LessWrong Frontpage</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a8fb73eba076_the_control_paradox.mp3" type="audio/mpeg" length="2388621" />
-      <itunes:duration>00:04:21</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Why I'm Staying Out Of The Substack Religion Debate</title>
-      <description>Audio version of Why I'm Staying Out Of The Substack Religion Debate from Scott Alexander</description>
-      <pubDate>Wed, 19 Aug 2026 05:24:22 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/why-im-staying-out-of-the-substack</guid>
-      <link>https://www.astralcodexten.com/p/why-im-staying-out-of-the-substack</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9db0a944bf98_why_im_staying_out_of_the_substack_religion_debat.mp3" type="audio/mpeg" length="13085181" />
-      <itunes:duration>00:23:20</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Anthropic Risk Report: August 2026” by Zvi</title>
-      <description>Audio version of “Anthropic Risk Report: August 2026” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 18 Aug 2026 20:42:27 +0000</pubDate>
-      <guid isPermaLink="false">e9c4a79d-60ec-4e4f-80b7-b546756ddb9d</guid>
-      <link>https://www.lesswrong.com/posts/dA8gohzABk6vT7yzP/anthropic-risk-report-august-2026</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/999248cffaa2_anthropic_risk_report_august_2026_by_zvi.mp3" type="audio/mpeg" length="1695597" />
-      <itunes:duration>00:02:58</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
