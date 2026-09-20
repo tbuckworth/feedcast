@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sat, 19 Sep 2026 19:34:16 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 04:48:39 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,24 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-09-20</title>
+      <description>Daily News Briefing - 2026-09-20
+
+Topics covered:
+- President Trump has announced an “AI Force” and plans to appoint an artificial intelligence tsar, while explicitly rejecting calls to slow development
+- The artificial intelligence industry itself remains divided over regulation
+- In the Middle East, the Houthis say they attacked sensitive sites in Riyadh with missiles and drones after flames and thick smoke appeared near the Saudi capital’s airport
+- Finally, voters in Berlin and Mecklenburg-Western Pomerania are casting ballots in elections that could determine German Chancellor Friedrich Merz’s political survival
+- Looking ahead, today’s German results and forthcoming details of Trump’s AI Force will show whether political pressure is producing substantive policy change or mainly new institutional branding</description>
+      <pubDate>Sun, 20 Sep 2026 04:33:19 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-09-20</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/dac256237df5_daily_news_briefing_-_2026-09-20.mp3" type="audio/mpeg" length="1778829" />
+      <itunes:duration>00:03:07</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-20.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-09-19</title>
       <description>Daily News Briefing - 2026-09-19
@@ -62,6 +80,18 @@ Topics covered:
       <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/9832a95335e7_your_book_review_this_is_going_to_hurt.mp3" type="audio/mpeg" length="44539869" />
       <itunes:duration>01:19:57</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“The Preference Cascade Is Only Getting Started” by Zvi</title>
+      <description>Audio version of “The Preference Cascade Is Only Getting Started” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 18 Sep 2026 14:41:20 +0000</pubDate>
+      <guid isPermaLink="false">44d9a209-5afd-442c-a11d-752de7072ce2</guid>
+      <link>https://www.lesswrong.com/posts/sDiSqZmctQ78hsLcP/the-preference-cascade-is-only-getting-started</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1e892eb8e3a7_the_preference_cascade_is_only_getting_started_b.mp3" type="audio/mpeg" length="2175813" />
+      <itunes:duration>00:03:50</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
