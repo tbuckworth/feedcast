@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sun, 20 Sep 2026 04:48:39 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2026 04:39:14 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-09-21</title>
+      <description>Daily News Briefing - 2026-09-21
+
+Topics covered:
+- China is resisting a frontier artificial intelligence slowdown on American terms, even as Beijing expands its own safety framework
+- Cybersecurity experts say the nearer-term threat to energy infrastructure is not autonomous artificial intelligence but humans using it as a force multiplier
+- The Middle East is bracing for renewed escalation after Iran claimed the United States was preparing another bombing campaign
+- European intelligence officials are warning that Russia may test the North Atlantic Treaty Organization in the coming months, potentially through drones, missiles, provocations, or a limited territorial incursion
+- Finally, German Chancellor Friedrich Merz has vowed to remain in office after calling his party’s state-election performance a disaster
+- Looking ahead, the United Nations General Assembly and President Trump’s meetings with Gulf leaders will test whether mounting military and artificial intelligence risks produce concrete coordination or further confrontation</description>
+      <pubDate>Mon, 21 Sep 2026 04:33:42 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-09-21</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9edc5fa49c9c_daily_news_briefing_-_2026-09-21.mp3" type="audio/mpeg" length="2137293" />
+      <itunes:duration>00:03:43</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-21.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Better Call Sol Or Better Yet Claude or Astra” by Zvi</title>
+      <description>Audio version of “Better Call Sol Or Better Yet Claude or Astra” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sun, 20 Sep 2026 19:52:37 +0000</pubDate>
+      <guid isPermaLink="false">66f8e1a2-da69-442f-a3cd-1e84eb22cc5f</guid>
+      <link>https://www.lesswrong.com/posts/vAuZB2tnvpvpHupNi/better-call-sol-or-better-yet-claude-or-astra</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/53ef57c34287_better_call_sol_or_better_yet_claude_or_astra_by.mp3" type="audio/mpeg" length="2038317" />
+      <itunes:duration>00:03:39</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-09-20</title>
       <description>Daily News Briefing - 2026-09-20
@@ -1255,49 +1286,6 @@ Topics covered:
       <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/734a0270f63b_your_book_review_a_residence_of_21_years_in_the_s.mp3" type="audio/mpeg" length="33585477" />
       <itunes:duration>01:00:18</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-08-21</title>
-      <description>Daily News Briefing - 2026-08-21
-
-Topics covered:
-- In artificial intelligence leadership and corporate strategy, The Verge reports that OpenAI is now firmly under the operational command of co-founder Greg Brockman as the company prepares for its initial public offering
-- In artificial intelligence and its impact on fundamental research, OpenAI has published solutions to longstanding problems in mathematics that The Verge describes as landing "like a bombshell" in the field
-- In AI security vulnerabilities, Ars Technica reports that xAI's Grok model is susceptible to a new attack called "Cryptographic Context Injection," where malicious instructions embedded in encrypted text can bypass the model's safety guardrails and exfiltrate user data
-- In geopolitics and security, Russia launched what Kyiv Mayor Vitali Klitschko called a "massive attack" on Ukraine's capital overnight, killing at least seventeen people and deliberately targeting critical infrastructure including hot water supply systems
-- In climate and environmental risk, the United Kingdom's Met Office has warned that the developing El Niño pattern is set to become the "strongest in living memory," an unprecedented event that makes twenty-twenty-seven likely to be the hottest year on record
-- In autonomous vehicle deployment, Nevada has granted permits to Tesla, Uber, and Waymo that would collectively allow up to eight thousand robotaxis to operate in the state over the next twelve months, representing one of the largest concentrated approvals of autonomous vehicle deployment in United States history</description>
-      <pubDate>Fri, 21 Aug 2026 04:43:12 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-08-21</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/35434c6ddce7_daily_news_briefing_-_2026-08-21.mp3" type="audio/mpeg" length="2688261" />
-      <itunes:duration>00:04:42</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-21.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>College EA Meetups Everywhere: Call For Organizers</title>
-      <description>Audio version of College EA Meetups Everywhere: Call For Organizers from Scott Alexander</description>
-      <pubDate>Thu, 20 Aug 2026 19:55:39 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/college-ea-meetups-everywhere-call</guid>
-      <link>https://www.astralcodexten.com/p/college-ea-meetups-everywhere-call</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9023631f0d09_college_ea_meetups_everywhere_call_for_organizers.mp3" type="audio/mpeg" length="6602637" />
-      <itunes:duration>00:11:56</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #182: Pause For Reflection” by Zvi</title>
-      <description>Audio version of “AI #182: Pause For Reflection” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 20 Aug 2026 14:51:49 +0000</pubDate>
-      <guid isPermaLink="false">54ec9819-c542-4dcf-82f8-54df82bf47df</guid>
-      <link>https://www.lesswrong.com/posts/JSZkzsi8cD4pW6ffA/ai-182-pause-for-reflection</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/83e8b5340383_ai_182_pause_for_reflection_by_zvi.mp3" type="audio/mpeg" length="1621125" />
-      <itunes:duration>00:02:53</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
