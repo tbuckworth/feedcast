@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 21 Sep 2026 04:39:14 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2026 04:53:47 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-09-22</title>
+      <description>Daily News Briefing - 2026-09-22
+
+Topics covered:
+- The United Nations has issued its first major scientific assessment of AI loss-of-control risk, and it invokes the precautionary principle — the same legal standard used for environmental and public health threats
+- Separately, OpenAI published a blog post calling for coordinated global AI standards covering evaluation, reporting, and governance
+- In the Middle East, the situation in Yemen is escalating sharply
+- On AI security, Meta's new AI assistant Muse has a serious zero-day vulnerability
+- In Russia, Vladimir Putin's United Russia party won a record three hundred fifty-five of four hundred fifty seats in parliamentary elections, securing a supermajority larger than its previous record
+- Looking ahead, President Trump's address to the UN General Assembly today and ongoing US-China AI discussions will test whether the precautionary framework endorsed by the UN's scientific panel gains any traction with the two nations whose cooperation matters most</description>
+      <pubDate>Tue, 22 Sep 2026 04:33:54 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-09-22</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d883383595c1_daily_news_briefing_-_2026-09-22.mp3" type="audio/mpeg" length="3052845" />
+      <itunes:duration>00:05:17</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-22.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Monthly Roundup #46: September 2026” by Zvi</title>
+      <description>Audio version of “Monthly Roundup #46: September 2026” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 21 Sep 2026 13:41:52 +0000</pubDate>
+      <guid isPermaLink="false">3623a866-9fc5-4550-b892-e3eae019d357</guid>
+      <link>https://www.lesswrong.com/posts/riDxeyEKqXXimtgWf/monthly-roundup-46-september-2026</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a4e065a90129_monthly_roundup_46_september_2026_by_zvi.mp3" type="audio/mpeg" length="2256837" />
+      <itunes:duration>00:03:58</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-09-21</title>
       <description>Daily News Briefing - 2026-09-21
@@ -50,6 +81,18 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/53ef57c34287_better_call_sol_or_better_yet_claude_or_astra_by.mp3" type="audio/mpeg" length="2038317" />
       <itunes:duration>00:03:39</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>We've saved the world before: what the ozone hole teaches us about AI</title>
+      <description>Audio version of We've saved the world before: what the ozone hole teaches us about AI by leogao from LessWrong Curated</description>
+      <pubDate>Sun, 20 Sep 2026 08:23:08 +0000</pubDate>
+      <guid isPermaLink="false">zxXPEtSSSEdwpjopb</guid>
+      <link>https://www.lesswrong.com/posts/zxXPEtSSSEdwpjopb/we-ve-saved-the-world-before-what-the-ozone-hole-teaches-us</link>
+      <itunes:author>leogao</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3262ffbfc336_weve_saved_the_world_before_what_the_ozone_hole.mp3" type="audio/mpeg" length="10692501" />
+      <itunes:duration>00:18:58</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1204,92 +1247,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-23</title>
-      <description>Daily News Briefing - 2026-08-23
-
-Topics covered:
-- The most significant AI safety story today comes from TechCrunch, which reports that a new study finds leading frontier AI laboratories still have few publicly documented plans for containing a rogue model
-- On AI capabilities, British AI lab Inherent, founded by DeepMind alumni, has released an agent called Faraday that reportedly outperformed both Anthropic and OpenAI systems at replicating scientific research papers
-- The US-Canada trade war remains the dominant economic story
-- In Middle East security, Iran's newly appointed head of its supreme national security council, hardliner Mohsen Rezaei, has issued a direct warning that any neighboring country joining US economic pressure campaigns against Tehran will be considered an "enemy." He also threatened American commercial interests in the region
-- In two other developments worth noting: a fur seal found dead at Beachport in South Australia has been confirmed as the first Australian mainland mammal fatality from the spreading H-five bird flu strain, with officials warning of "significant losses" to come
-- Looking ahead, expect markets Monday to react sharply to the now-confirmed US-Canada tariff escalation, while the AI safety community will likely press frontier labs for concrete answers on containment protocols in the wake of this week's revelations</description>
-      <pubDate>Sun, 23 Aug 2026 04:42:37 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-08-23</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6b43350072d6_daily_news_briefing_-_2026-08-23.mp3" type="audio/mpeg" length="2192709" />
-      <itunes:duration>00:03:51</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-23.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Prompt Sufficiency: A Missive for the Managerial Class</title>
-      <description>Audio version of Prompt Sufficiency: A Missive for the Managerial Class by KAP from LessWrong Frontpage</description>
-      <pubDate>Sun, 23 Aug 2026 03:08:55 +0000</pubDate>
-      <guid isPermaLink="false">jDHc4oK4oPwfh6TcK</guid>
-      <link>https://www.lesswrong.com/posts/jDHc4oK4oPwfh6TcK/prompt-sufficiency-a-missive-for-the-managerial-class</link>
-      <itunes:author>KAP</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5ff529708ca2_prompt_sufficiency_a_missive_for_the_managerial_c.mp3" type="audio/mpeg" length="5691477" />
-      <itunes:duration>00:10:10</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-08-22</title>
-      <description>Daily News Briefing - 2026-08-22
-
-Topics covered:
-- In the most significant geopolitical development today, trade talks between the United States and Canada have collapsed
-- In a separate geopolitical flashpoint, President Trump declared the Strait of Hormuz "American territory" during a rally in South Carolina, joking about bombing Iran while the United States continues its military blockade of Iranian shipping
-- In artificial intelligence research and safety, a notable technical paper on the Alignment Forum examines whether Google DeepMind's DiffusionGemma model performs latent reasoning during its text generation process
-- Separately, Nvidia has published research demonstrating that the orchestration harness surrounding an AI agent — not the underlying model itself — is the critical factor in preventing erratic or dangerous behavior
-- In technology regulation and privacy, TikTok has agreed to a four-hundred-million-dollar settlement with the US Department of Justice over children's privacy violations, making it one of the largest child privacy settlements in history
-- In a concerning development for US voting access, the US Postal Service published a final rule imposing new requirements on states to provide voter information before delivering mail-in ballots for November's midterm elections, despite two existing court orders blocking these changes from taking effect</description>
-      <pubDate>Sat, 22 Aug 2026 04:38:34 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-08-22</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2e23c284ce8e_daily_news_briefing_-_2026-08-22.mp3" type="audio/mpeg" length="2520525" />
-      <itunes:duration>00:04:26</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-22.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Humans Are Alignment Generators</title>
-      <description>Audio version of Humans Are Alignment Generators by James Stephen Brown from LessWrong Frontpage</description>
-      <pubDate>Sat, 22 Aug 2026 04:07:31 +0000</pubDate>
-      <guid isPermaLink="false">bbDiNKrckvLevKxrx</guid>
-      <link>https://www.lesswrong.com/posts/bbDiNKrckvLevKxrx/humans-are-alignment-generators</link>
-      <itunes:author>James Stephen Brown</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9342afdbfd9e_humans_are_alignment_generators.mp3" type="audio/mpeg" length="4132917" />
-      <itunes:duration>00:07:22</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI Text Watermarking Is Free And Good” by Zvi</title>
-      <description>Audio version of “AI Text Watermarking Is Free And Good” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 21 Aug 2026 19:32:33 +0000</pubDate>
-      <guid isPermaLink="false">e97e88ff-c9ea-4b0a-a1d5-e14f3b0b1af6</guid>
-      <link>https://www.lesswrong.com/posts/3mKuPHmaK7NW3QypR/ai-text-watermarking-is-free-and-good</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/403e936a2c80_ai_text_watermarking_is_free_and_good_by_zvi.mp3" type="audio/mpeg" length="1915485" />
-      <itunes:duration>00:03:24</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Your Book Review: A Residence Of 21 Years In The Sandwich Islands</title>
-      <description>Audio version of Your Book Review: A Residence Of 21 Years In The Sandwich Islands from Scott Alexander</description>
-      <pubDate>Fri, 21 Aug 2026 17:16:16 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-book-review-a-residence-of-21</guid>
-      <link>https://www.astralcodexten.com/p/your-book-review-a-residence-of-21</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/734a0270f63b_your_book_review_a_residence_of_21_years_in_the_s.mp3" type="audio/mpeg" length="33585477" />
-      <itunes:duration>01:00:18</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>How My Students Think About AI</title>
       <description>Audio version of How My Students Think About AI by dvd from LessWrong Curated</description>
       <pubDate>Thu, 13 Aug 2026 16:56:19 +0000</pubDate>
@@ -1350,18 +1307,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>“OpenAI Shares Some Alignment Problems” by Zvi</title>
-      <description>Audio version of “OpenAI Shares Some Alignment Problems” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 21 Jul 2026 19:46:04 +0000</pubDate>
-      <guid isPermaLink="false">87514808-2a53-49c7-8ecc-86a6f1b30ce4</guid>
-      <link>https://www.lesswrong.com/posts/KctxwGKxm9fHtwh6u/openai-shares-some-alignment-problems</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/61d084a5877e_openai_shares_some_alignment_problems_by_zvi.mp3" type="audio/mpeg" length="1900701" />
-      <itunes:duration>00:03:23</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Drone WMDs Don’t Need Any New Technology</title>
       <description>Audio version of Drone WMDs Don’t Need Any New Technology by Felix Choussat from LessWrong Curated</description>
       <pubDate>Mon, 20 Jul 2026 18:46:00 +0000</pubDate>
@@ -1370,18 +1315,6 @@ Topics covered:
       <itunes:author>Felix Choussat</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/528aef9cf3d6_drone_wmds_dont_need_any_new_technology.mp3" type="audio/mpeg" length="15334197" />
       <itunes:duration>00:26:58</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>A forecast of Chinese DUV and EUV photolithography progress</title>
-      <description>Audio version of A forecast of Chinese DUV and EUV photolithography progress by Hamish Low from AI Futures Project</description>
-      <pubDate>Fri, 19 Jun 2026 15:32:43 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</guid>
-      <link>https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv</link>
-      <itunes:author>Hamish Low</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/39c993a52a4f_a_forecast_of_chinese_duv_and_euv_photolithography.mp3" type="audio/mpeg" length="2238333" />
-      <itunes:duration>00:03:54</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
