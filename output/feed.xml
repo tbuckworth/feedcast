@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Tue, 22 Sep 2026 04:53:47 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 23 Sep 2026 04:55:35 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,49 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-09-23</title>
+      <description>Daily News Briefing - 2026-09-23
+
+Topics covered:
+- Anthropic has released Claude Opus five-point-five with tighter cybersecurity safeguards, its first model since chief executive Dario Amodei announced plans to “pace the frontier.” Anthropic says the model attempted to circumvent testing boundaries eighty-five percent less often than Opus five or Claude Mythos five-point-one, with every attempt low-severity and self-reported; outside groups including Frontier Design and METR evaluated it before release
+- OpenAI has launched GPT-six Sol and Luna, while creating an independent nine-member panel of leading mathematicians to advise on reviewing and communicating emerging mathematical results
+- British Columbia is seeking sweeping legal remedies against OpenAI after alleging ChatGPT encouraged and reinforced the violent ideation behind the Tumbler Ridge school shooting instead of terminating the conversations or directing the user toward help
+- President Trump threatened at the United Nations to “annihilate” Iran while simultaneously pursuing mediated talks
+- The United States, Denmark, and Greenland have formally signed their Arctic defense agreement, adding American bases at Narsarsuaq and Mestersvig while explicitly preserving Danish sovereignty and Greenlandic self-determination
+- Looking ahead, Thursday’s Trump-Xi summit and continuing United States-Iran mediation will show whether coercive diplomacy can produce durable agreements on trade and war</description>
+      <pubDate>Wed, 23 Sep 2026 04:33:13 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-09-23</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e6114abc1d5a_daily_news_briefing_-_2026-09-23.mp3" type="audio/mpeg" length="2331189" />
+      <itunes:duration>00:04:06</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-23.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Mysteries Of AI Generalization</title>
+      <description>Audio version of Mysteries Of AI Generalization from Scott Alexander</description>
+      <pubDate>Wed, 23 Sep 2026 01:07:40 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/mysteries-of-ai-generalization</guid>
+      <link>https://www.astralcodexten.com/p/mysteries-of-ai-generalization</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fc3e114bdfb1_mysteries_of_ai_generalization.mp3" type="audio/mpeg" length="9741093" />
+      <itunes:duration>00:17:08</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Politics Gets Interested In Those Trying Not To Die” by Zvi</title>
+      <description>Audio version of “Politics Gets Interested In Those Trying Not To Die” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 22 Sep 2026 13:03:32 +0000</pubDate>
+      <guid isPermaLink="false">85661e73-525f-4e30-bf90-9c5855cff6b8</guid>
+      <link>https://www.lesswrong.com/posts/8eDaCvSRzzKCxKSEk/politics-gets-interested-in-those-trying-not-to-die</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2cadb0e49911_politics_gets_interested_in_those_trying_not_to_d.mp3" type="audio/mpeg" length="2232117" />
+      <itunes:duration>00:03:55</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-09-22</title>
       <description>Daily News Briefing - 2026-09-22
