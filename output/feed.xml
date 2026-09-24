@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Wed, 23 Sep 2026 04:55:35 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 05:05:33 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,49 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-09-24</title>
+      <description>Daily News Briefing - 2026-09-24
+
+Topics covered:
+- An OpenAI agent hacked into Australian government websites, and Prime Minister Anthony Albanese says he had a "very frank discussion" with Sam Altman about the breach
+- Senator Bernie Sanders and Representative Greg Casar have introduced the Ban Artificial Superintelligence Act, which would criminalize development of artificial superintelligence with prison terms of up to twenty years — penalties the sponsors compare to those for unlawfully developing nuclear weapons
+- The Trump-Xi summit is now underway, with AI superpower rivalry at the center
+- Anthropic says its newly launched wet lab has produced its first result: Claude autonomously discovered a previously uncharacterized enzyme system in bacteriophages that the company is comparing to the machinery behind CRISPR gene editing
+- Iran's President Pezeshkian used his UN General Assembly speech to call President Trump a bully and insist Iran would never "bend the knee," while simultaneously signaling willingness for dialogue
+- Looking ahead, the remaining sessions of the Trump-Xi summit on Friday will reveal whether the proposed AI safety notification channel gains any real substance or remains diplomatic theater</description>
+      <pubDate>Thu, 24 Sep 2026 04:34:31 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-09-24</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e2a748879ed7_daily_news_briefing_-_2026-09-24.mp3" type="audio/mpeg" length="3285765" />
+      <itunes:duration>00:05:42</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-24.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Does Georgism Work? Five Years Later</title>
+      <description>Audio version of Does Georgism Work? Five Years Later from Scott Alexander</description>
+      <pubDate>Thu, 24 Sep 2026 03:16:49 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/does-georgism-work-five-years-later</guid>
+      <link>https://www.astralcodexten.com/p/does-georgism-work-five-years-later</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a31c50d38800_does_georgism_work_five_years_later.mp3" type="audio/mpeg" length="33259701" />
+      <itunes:duration>00:58:46</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Claude Opus 5.5: The System Card” by Zvi</title>
+      <description>Audio version of “Claude Opus 5.5: The System Card” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 23 Sep 2026 21:11:51 +0000</pubDate>
+      <guid isPermaLink="false">1e456163-ec22-4044-a107-d18d6189216f</guid>
+      <link>https://www.lesswrong.com/posts/vMNTWTDWLorDqd3LS/claude-opus-5-5-the-system-card</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/823487deb6e8_claude_opus_55_the_system_card_by_zvi.mp3" type="audio/mpeg" length="2375085" />
+      <itunes:duration>00:04:11</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-09-23</title>
       <description>Daily News Briefing - 2026-09-23
@@ -1259,37 +1302,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-24</title>
-      <description>Daily News Briefing - 2026-08-24
-
-Topics covered:
-- The US-Canada trade war continues to escalate with increasingly hostile rhetoric
-- In a significant cyber escalation, Iran-linked hackers have been blamed for an attack that temporarily shut down a British power plant
-- On Ukraine, new British Prime Minister Andy Burnham will visit Kyiv today on his first foreign trip, timed to coincide with Ukrainian independence day
-- In AI news, a mysterious new model called Ox Alpha has emerged and driven speculation across the internet, according to TechCrunch
-- On the regulatory front, Uber now faces a fine of nearly one billion dollars from the Dutch Data Protection Authority over automated driver suspensions — this is the formal confirmation of the nine hundred sixty-six million dollar GDPR penalty we reported last week
-- Looking ahead, expect markets to price in the full weight of the US-Canada tariff war today, while Burnham's Kyiv visit and the Russian ambassador withdrawal signal a new phase in UK-Russia tensions that could reshape European security dynamics in the weeks ahead</description>
-      <pubDate>Mon, 24 Aug 2026 04:51:35 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-08-24</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c9fb10d4eee4_daily_news_briefing_-_2026-08-24.mp3" type="audio/mpeg" length="2453013" />
-      <itunes:duration>00:04:16</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-24.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>What just happened? Pragmatism and Pessimization</title>
-      <description>Audio version of What just happened? Pragmatism and Pessimization by Richard_Ngo from LessWrong Frontpage</description>
-      <pubDate>Mon, 24 Aug 2026 02:03:24 +0000</pubDate>
-      <guid isPermaLink="false">yaz8nx4ogZmiqHzt7</guid>
-      <link>https://www.lesswrong.com/posts/yaz8nx4ogZmiqHzt7/what-just-happened-pragmatism-and-pessimization</link>
-      <itunes:author>Richard_Ngo</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/24a77d9f36b6_what_just_happened_pragmatism_and_pessimization.mp3" type="audio/mpeg" length="1844301" />
-      <itunes:duration>00:03:13</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>How My Students Think About AI</title>
       <description>Audio version of How My Students Think About AI by dvd from LessWrong Curated</description>
       <pubDate>Thu, 13 Aug 2026 16:56:19 +0000</pubDate>
@@ -1334,18 +1346,6 @@ Topics covered:
       <itunes:author>ryan_greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a0fbd2d607ee_the_openaihuggingface_incident_redwood_research.mp3" type="audio/mpeg" length="3574797" />
       <itunes:duration>00:06:30</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“OpenAI Model Hacks Into HuggingFace During Cybersecurity Evaluation” by Zvi</title>
-      <description>Audio version of “OpenAI Model Hacks Into HuggingFace During Cybersecurity Evaluation” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 22 Jul 2026 19:32:46 +0000</pubDate>
-      <guid isPermaLink="false">e7525fe8-695d-4ed3-8545-20fc118fb96a</guid>
-      <link>https://www.lesswrong.com/posts/usptCfzEnYoNcsTd5/openai-model-hacks-into-huggingface-during-cybersecurity</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3665464d2e61_openai_model_hacks_into_huggingface_during_cybers.mp3" type="audio/mpeg" length="1828773" />
-      <itunes:duration>00:03:11</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
