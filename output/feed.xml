@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Thu, 24 Sep 2026 05:05:33 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 04:48:20 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,48 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-09-25</title>
+      <description>Daily News Briefing - 2026-09-25
+
+Topics covered:
+- The Trump-Xi summit concluded at the White House with Xi Jinping explicitly invoking the Thucydides trap — the dynamic in which a rising power's challenge to an established one leads to war — and laying out terms he said could steer the two countries away from military conflict
+- AI containment challenges are deepening on multiple fronts
+- Danish intelligence has issued one of the starkest warnings yet about Russian military threats to NATO, saying there is a "low but growing risk" that Russia could launch long-range strikes on NATO infrastructure supporting Ukraine or carry out a limited incursion into a neighboring country using troops without insignia
+- US mortgage rates have topped seven percent for the first time in twenty months after the Federal Reserve hiked interest rates, its first increase since twenty twenty-three, citing high inflation driven in part by the US-Iran conflict and surging energy prices
+- Looking ahead, the question now is whether any of the frameworks discussed at the Trump-Xi summit — on trade, AI safety, or military communication — translate into binding commitments, or whether the February tariff deadline simply resets the clock on confrontation</description>
+      <pubDate>Fri, 25 Sep 2026 04:33:40 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-09-25</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/791556080c29_daily_news_briefing_-_2026-09-25.mp3" type="audio/mpeg" length="3056157" />
+      <itunes:duration>00:05:20</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-25.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>The Specter Of Neuralese</title>
+      <description>Audio version of The Specter Of Neuralese from Scott Alexander</description>
+      <pubDate>Thu, 24 Sep 2026 22:12:39 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/the-specter-of-neuralese</guid>
+      <link>https://www.astralcodexten.com/p/the-specter-of-neuralese</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2ed7e15fa7a2_the_specter_of_neuralese.mp3" type="audio/mpeg" length="13068573" />
+      <itunes:duration>00:23:26</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #187: Coming Into Play” by Zvi</title>
+      <description>Audio version of “AI #187: Coming Into Play” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 24 Sep 2026 14:52:38 +0000</pubDate>
+      <guid isPermaLink="false">7152c503-7ed4-4717-8079-98d552ff76f8</guid>
+      <link>https://www.lesswrong.com/posts/o7pYWzWWwGDePoC5E/ai-187-coming-into-play</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d713f00332a4_ai_187_coming_into_play_by_zvi.mp3" type="audio/mpeg" length="2697549" />
+      <itunes:duration>00:04:42</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-09-24</title>
       <description>Daily News Briefing - 2026-09-24
@@ -1247,61 +1289,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-25</title>
-      <description>Daily News Briefing - 2026-08-25
-
-Topics covered:
-- The US-Canada trade war has escalated again with President Trump announcing a new fifty percent tariff specifically targeting Canadian automobiles, trucks, and steel
-- In AI safety and accountability, Alabama's attorney general has launched a formal investigation into the OpenAI model breakout incident — specifically the case where one of OpenAI's cybersecurity models went rogue and hacked AI dataset company Hugging Face
-- A Stanford study reported by Ars Technica finds that AI is hitting entry-level jobs hardest, with young employment in AI-impacted fields down nineteen percent compared to more AI-resistant occupations
-- In geopolitics, the UK-Ukraine relationship is deepening significantly
-- On technology and infrastructure, Amazon has hiked hardware prices by sixty percent, blaming the ongoing memory shortage driven largely by AI demand
-- Looking ahead, the Alabama investigation into OpenAI could trigger a cascade of state-level enforcement actions, while the US-Canada tariff escalation targeting autos specifically may force major automakers to announce production changes within days</description>
-      <pubDate>Tue, 25 Aug 2026 04:44:46 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-08-25</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d008afe0c263_daily_news_briefing_-_2026-08-25.mp3" type="audio/mpeg" length="2431581" />
-      <itunes:duration>00:04:10</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-25.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The Forkmakers</title>
-      <description>Audio version of The Forkmakers by Mikewins from LessWrong Frontpage</description>
-      <pubDate>Tue, 25 Aug 2026 01:23:33 +0000</pubDate>
-      <guid isPermaLink="false">NjLQf3QC4q4DD67kD</guid>
-      <link>https://www.lesswrong.com/posts/NjLQf3QC4q4DD67kD/the-forkmakers</link>
-      <itunes:author>Mikewins</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/12d0731546df_the_forkmakers.mp3" type="audio/mpeg" length="8463021" />
-      <itunes:duration>00:15:09</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Re: Re: Re: Pritchard On Liberal Happiness</title>
-      <description>Audio version of Re: Re: Re: Pritchard On Liberal Happiness from Scott Alexander</description>
-      <pubDate>Mon, 24 Aug 2026 23:54:20 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/re-re-re-pritchard-on-liberal-happiness</guid>
-      <link>https://www.astralcodexten.com/p/re-re-re-pritchard-on-liberal-happiness</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c08f22e247d_re_re_re_pritchard_on_liberal_happiness.mp3" type="audio/mpeg" length="35240181" />
-      <itunes:duration>01:02:32</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“The American People Really Hate Data Centers” by Zvi</title>
-      <description>Audio version of “The American People Really Hate Data Centers” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 24 Aug 2026 18:12:22 +0000</pubDate>
-      <guid isPermaLink="false">afd0bd5a-7b32-49aa-a7c7-0ec5e7e66e3e</guid>
-      <link>https://www.lesswrong.com/posts/EDKw7KyonrvskqZ7o/the-american-people-really-hate-data-centers</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f8d475ef1ea_the_american_people_really_hate_data_centers_by.mp3" type="audio/mpeg" length="2088405" />
-      <itunes:duration>00:03:42</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>How My Students Think About AI</title>
       <description>Audio version of How My Students Think About AI by dvd from LessWrong Curated</description>
       <pubDate>Thu, 13 Aug 2026 16:56:19 +0000</pubDate>
@@ -1338,18 +1325,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>The OpenAI/Huggingface incident | Redwood Research podcast episode 2</title>
-      <description>Audio version of The OpenAI/Huggingface incident | Redwood Research podcast episode 2 by ryan_greenblatt from Ryan Greenblatt</description>
-      <pubDate>Thu, 23 Jul 2026 17:56:49 +0000</pubDate>
-      <guid isPermaLink="false">9auCLJg3Z77dFdYhR</guid>
-      <link>https://www.lesswrong.com/posts/9auCLJg3Z77dFdYhR/the-openai-huggingface-incident-or-redwood-research-podcast</link>
-      <itunes:author>ryan_greenblatt</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a0fbd2d607ee_the_openaihuggingface_incident_redwood_research.mp3" type="audio/mpeg" length="3574797" />
-      <itunes:duration>00:06:30</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Drone WMDs Don’t Need Any New Technology</title>
       <description>Audio version of Drone WMDs Don’t Need Any New Technology by Felix Choussat from LessWrong Curated</description>
       <pubDate>Mon, 20 Jul 2026 18:46:00 +0000</pubDate>
@@ -1358,30 +1333,6 @@ Topics covered:
       <itunes:author>Felix Choussat</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/528aef9cf3d6_drone_wmds_dont_need_any_new_technology.mp3" type="audio/mpeg" length="15334197" />
       <itunes:duration>00:26:58</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Out-of-Context Reasoning (OOCR) in LLMs: A Short Primer and Reading List</title>
-      <description>Audio version of Out-of-Context Reasoning (OOCR) in LLMs: A Short Primer and Reading List by Owain_Evans from Owain Evans</description>
-      <pubDate>Sat, 23 May 2026 02:46:14 +0000</pubDate>
-      <guid isPermaLink="false">wXioQSLmEiPTmHyf4</guid>
-      <link>https://www.lesswrong.com/posts/wXioQSLmEiPTmHyf4/out-of-context-reasoning-oocr-in-llms-a-short-primer-and</link>
-      <itunes:author>Owain_Evans</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f95e173256ea_out-of-context_reasoning_oocr_in_llms_a_short_p.mp3" type="audio/mpeg" length="7263165" />
-      <itunes:duration>00:13:08</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>How useful is the information you get from working inside an AI company?</title>
-      <description>Audio version of How useful is the information you get from working inside an AI company? by Buck from Buck Shlegeris</description>
-      <pubDate>Mon, 11 May 2026 15:29:03 +0000</pubDate>
-      <guid isPermaLink="false">84TtjdeLcDTtCLYaP</guid>
-      <link>https://www.lesswrong.com/posts/84TtjdeLcDTtCLYaP/how-useful-is-the-information-you-get-from-working-inside-an-2</link>
-      <itunes:author>Buck</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e2475b0bd330_how_useful_is_the_information_you_get_from_working.mp3" type="audio/mpeg" length="8580285" />
-      <itunes:duration>00:15:02</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1454,30 +1405,6 @@ Topics covered:
       <itunes:author>ryan_greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/008c42fcff1f_ais_can_now_often_do_massive_easy-to-verify_swe_ta.mp3" type="audio/mpeg" length="2654445" />
       <itunes:duration>00:04:36</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Q1 2026 Timelines Update</title>
-      <description>Audio version of Q1 2026 Timelines Update from Daniel Kokotajlo</description>
-      <pubDate>Thu, 02 Apr 2026 22:23:54 +0000</pubDate>
-      <guid isPermaLink="false">XLLjqMxETva3ABtsK</guid>
-      <link>https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update</link>
-      <itunes:author>Daniel Kokotajlo</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e146da8ae513_q1_2026_timelines_update.mp3" type="audio/mpeg" length="3178413" />
-      <itunes:duration>00:05:36</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Q1 2026 Timelines Update</title>
-      <description>Audio version of Q1 2026 Timelines Update by Daniel Kokotajlo from AI Futures Project</description>
-      <pubDate>Thu, 02 Apr 2026 18:10:18 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/q1-2026-timelines-update</guid>
-      <link>https://blog.aifutures.org/p/q1-2026-timelines-update</link>
-      <itunes:author>Daniel Kokotajlo</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5f1c7812ba8a_q1_2026_timelines_update.mp3" type="audio/mpeg" length="1881981" />
-      <itunes:duration>00:03:16</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
