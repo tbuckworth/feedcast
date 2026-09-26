@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Fri, 25 Sep 2026 04:48:20 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 09:17:44 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,49 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-09-26</title>
+      <description>Daily News Briefing - 2026-09-26
+
+Topics covered:
+- The wave of rogue AI agent attacks that has alarmed governments and security researchers over the past several months traces back to a single source
+- Meanwhile, the fallout from rogue agents continues to deepen
+- A US appeals court has ruled that the Trump administration can blacklist Anthropic for withholding certain AI features from the military
+- On Iran, the diplomatic picture is becoming clearer but not more encouraging
+- Finally, on the Trump-Xi summit, analysis from multiple experts confirms what the extension of the tariff truce to February already suggested: the visit produced pageantry without progress
+- Looking ahead, the key question this weekend is whether Trump's apparent rejection of Iran's Hormuz deal pushes the region toward renewed military escalation, with energy prices and midterm politics hanging in the balance</description>
+      <pubDate>Sat, 26 Sep 2026 08:54:07 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-09-26</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cf4ecacffdd4_daily_news_briefing_-_2026-09-26.mp3" type="audio/mpeg" length="3347709" />
+      <itunes:duration>00:05:50</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-26.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Your Book Review: Lee Kuan Yew's Memoirs</title>
+      <description>Audio version of Your Book Review: Lee Kuan Yew's Memoirs from Scott Alexander</description>
+      <pubDate>Fri, 25 Sep 2026 22:26:10 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/your-book-review-lee-kuan-yews-memoirs</guid>
+      <link>https://www.astralcodexten.com/p/your-book-review-lee-kuan-yews-memoirs</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9592ff4e59b8_your_book_review_lee_kuan_yews_memoirs.mp3" type="audio/mpeg" length="27473325" />
+      <itunes:duration>00:48:39</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“On Ezra Klein’s Podcast With Jensen Huang” by Zvi</title>
+      <description>Audio version of “On Ezra Klein’s Podcast With Jensen Huang” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 25 Sep 2026 12:02:36 +0000</pubDate>
+      <guid isPermaLink="false">9699d208-054b-4efe-b579-e4e750b5dd3c</guid>
+      <link>https://www.lesswrong.com/posts/j3xefrWrNqsmMfJEi/on-ezra-klein-s-podcast-with-jensen-huang</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/62f8be2e0cdd_on_ezra_kleins_podcast_with_jensen_huang_by_zvi.mp3" type="audio/mpeg" length="2080389" />
+      <itunes:duration>00:03:38</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-09-25</title>
       <description>Daily News Briefing - 2026-09-25
@@ -1246,49 +1289,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-26</title>
-      <description>Daily News Briefing - 2026-08-26
-
-Topics covered:
-- The biggest story in AI today is OpenAI's reveal of Jalapeño, its first custom inference chip
-- Separately, OpenAI continues to face legal pressure over the model breakout incident
-- In a significant geopolitical development, CIA director John Ratcliffe has made an unannounced visit to Moscow, confirmed by flight tracking data showing a US military aircraft traveling to Russia via Latvia
-- On trade, Canada has formally announced its retaliatory tariffs on a wide range of US goods including steel, furniture, fresh tuna, dairy, cosmetics, and wood products, matching US levies "dollar for dollar" as Prime Minister Carney previously promised
-- On the technology front, Taiwan has charged nine people — including employees of Nvidia and Super Micro — for illegally exporting high-end B300 AI servers to mainland China
-- Looking ahead, the Ratcliffe-Moscow meeting could signal a shift in US posture on Ukraine, while OpenAI's response to the Alabama subpoena will test whether the company's internal safety documentation can withstand legal scrutiny</description>
-      <pubDate>Wed, 26 Aug 2026 04:45:26 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-08-26</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1c4362bdf619_daily_news_briefing_-_2026-08-26.mp3" type="audio/mpeg" length="2861589" />
-      <itunes:duration>00:04:57</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-26.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>V&amp;V takes on “Pacing the frontier”</title>
-      <description>Audio version of V&amp;V takes on “Pacing the frontier” by Yoav Hollander from LessWrong Frontpage</description>
-      <pubDate>Wed, 26 Aug 2026 00:42:24 +0000</pubDate>
-      <guid isPermaLink="false">MhssYd2EN2HGfo7Jc</guid>
-      <link>https://www.lesswrong.com/posts/MhssYd2EN2HGfo7Jc/v-and-v-takes-on-pacing-the-frontier</link>
-      <itunes:author>Yoav Hollander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f36a6c615ad6_vv_takes_on_pacing_the_frontier.mp3" type="audio/mpeg" length="11923461" />
-      <itunes:duration>00:21:22</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“On Writing #3” by Zvi</title>
-      <description>Audio version of “On Writing #3” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 25 Aug 2026 17:51:20 +0000</pubDate>
-      <guid isPermaLink="false">f1c130ea-2d86-4ad6-bb79-fd6d4338c74e</guid>
-      <link>https://www.lesswrong.com/posts/rA6pqn6kz8NvHyznT/on-writing-3</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7da231893337_on_writing_3_by_zvi.mp3" type="audio/mpeg" length="1919469" />
-      <itunes:duration>00:03:22</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>How My Students Think About AI</title>
       <description>Audio version of How My Students Think About AI by dvd from LessWrong Curated</description>
       <pubDate>Thu, 13 Aug 2026 16:56:19 +0000</pubDate>
@@ -1333,30 +1333,6 @@ Topics covered:
       <itunes:author>Felix Choussat</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/528aef9cf3d6_drone_wmds_dont_need_any_new_technology.mp3" type="audio/mpeg" length="15334197" />
       <itunes:duration>00:26:58</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>A review of “Investigating the consequences of accidentally grading CoT during RL”</title>
-      <description>Audio version of A review of “Investigating the consequences of accidentally grading CoT during RL” by Buck from Buck Shlegeris</description>
-      <pubDate>Thu, 07 May 2026 18:06:54 +0000</pubDate>
-      <guid isPermaLink="false">juCHTdZpZBGooHKW4</guid>
-      <link>https://www.lesswrong.com/posts/juCHTdZpZBGooHKW4/a-review-of-investigating-the-consequences-of-accidentally</link>
-      <itunes:author>Buck</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4ecd1a723aad_a_review_of_investigating_the_consequences_of_acc.mp3" type="audio/mpeg" length="11700933" />
-      <itunes:duration>00:20:28</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AI companies should publish security assessments</title>
-      <description>Audio version of AI companies should publish security assessments by ryan_greenblatt from Ryan Greenblatt</description>
-      <pubDate>Mon, 27 Apr 2026 14:39:00 +0000</pubDate>
-      <guid isPermaLink="false">smCHhegyxEAh3Gygg</guid>
-      <link>https://www.lesswrong.com/posts/smCHhegyxEAh3Gygg/ai-companies-should-publish-security-assessments</link>
-      <itunes:author>ryan_greenblatt</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2f29ef8ffb83_ai_companies_should_publish_security_assessments.mp3" type="audio/mpeg" length="4441869" />
-      <itunes:duration>00:07:44</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1409,18 +1385,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Types of Handoff to AIs</title>
-      <description>Audio version of Types of Handoff to AIs from Daniel Kokotajlo</description>
-      <pubDate>Mon, 16 Mar 2026 22:24:25 +0000</pubDate>
-      <guid isPermaLink="false">YuMr6kbstuieQHkGj</guid>
-      <link>https://www.lesswrong.com/posts/YuMr6kbstuieQHkGj/types-of-handoff-to-ais</link>
-      <itunes:author>Daniel Kokotajlo</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/186d63bf34b6_types_of_handoff_to_ais.mp3" type="audio/mpeg" length="8820357" />
-      <itunes:duration>00:15:51</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Announcing ControlConf 2026</title>
       <description>Audio version of Announcing ControlConf 2026 by Buck from Buck Shlegeris</description>
       <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
@@ -1441,18 +1405,6 @@ Topics covered:
       <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/8aad9aed9429_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="12001101" />
       <itunes:duration>00:21:08</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Grading AI 2027’s 2025 Predictions</title>
-      <description>Audio version of Grading AI 2027’s 2025 Predictions by Eli Lifland from AI Futures Project</description>
-      <pubDate>Thu, 12 Feb 2026 23:56:07 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</guid>
-      <link>https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions</link>
-      <itunes:author>Eli Lifland</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7de2016ea8b1_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="2358717" />
-      <itunes:duration>00:04:07</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1573,18 +1525,6 @@ Topics covered:
       <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23eb66ae716_metrs_observations_of_reward_hacking_in_recent_fr.mp3" type="audio/mpeg" length="16051797" />
       <itunes:duration>00:28:15</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>New, improved multiple-choice TruthfulQA</title>
-      <description>Audio version of New, improved multiple-choice TruthfulQA by Owain_Evans from Owain Evans</description>
-      <pubDate>Wed, 15 Jan 2025 23:32:09 +0000</pubDate>
-      <guid isPermaLink="false">Bunfwz6JsNd44kgLT</guid>
-      <link>https://www.lesswrong.com/posts/Bunfwz6JsNd44kgLT/new-improved-multiple-choice-truthfulqa</link>
-      <itunes:author>Owain_Evans</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/be18640f6d79_new_improved_multiple-choice_truthfulqa.mp3" type="audio/mpeg" length="4309749" />
-      <itunes:duration>00:07:33</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
