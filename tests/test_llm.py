@@ -37,6 +37,13 @@ def routes(monkeypatch):
     """Fake clients per route name; a route missing from the dict has no key."""
     fakes: dict[str, FakeApi] = {}
     monkeypatch.setattr(llm, "client_for", lambda route: fakes.get(route.name))
+
+    # Effort-carrying anthropic calls take the native API; the fake anthropic
+    # route answers those too, recording the effort it was sent.
+    async def native(model, messages, max_tokens, effort):
+        return await fakes["anthropic"]._create(model=model, messages=messages,
+                                                max_tokens=max_tokens, effort=effort)
+    monkeypatch.setattr(llm, "_anthropic_native", native)
     monkeypatch.setattr(llm, "fallback_log", [])
     return fakes
 
@@ -105,9 +112,9 @@ def test_routes_without_a_key_are_skipped_and_the_skip_is_logged(routes):
     routes["openrouter"] = FakeApi([RuntimeError("primary down"), "sibling model"])
     done = asyncio.run(complete("writer", MSGS, max_tokens=50))
     assert done.text == "sibling model"
-    assert done.target.model == "anthropic/claude-opus-5"
+    assert done.target.model == "openai/gpt-5.6-sol"
     assert [c["model"] for c in routes["openrouter"].calls] == [
-        "anthropic/claude-opus-4.6", "anthropic/claude-opus-5"]
+        "anthropic/claude-opus-5.5", "openai/gpt-5.6-sol"]
     assert "ANTHROPIC_API_KEY not set" in llm.fallback_log[0]
 
 
@@ -124,7 +131,8 @@ def test_a_missing_primary_key_is_reported_not_swallowed(routes):
 
 def test_every_target_failing_raises_the_last_error(routes):
     routes["openai"] = FakeApi([RuntimeError("a")])
-    routes["openrouter"] = FakeApi([RuntimeError("b"), RuntimeError("c")])
+    routes["openrouter"] = FakeApi([RuntimeError("b")])
+    routes["anthropic"] = FakeApi([RuntimeError("c")])
     with pytest.raises(RuntimeError, match="c"):
         asyncio.run(complete("bullets", MSGS, max_tokens=50))
 
@@ -196,8 +204,8 @@ def test_writer_recovers_when_claude_is_blocked_and_anthropic_has_no_credit(rout
     """Both daily runs on 2026-09-19 exhausted the all-Claude fallback chain."""
     denied = _provider_error(PermissionDeniedError, 403, "Provider Terms Of Service")
     no_credit = _provider_error(BadRequestError, 400, "Your credit balance is too low")
-    routes["openrouter"] = FakeApi([denied, denied, '["https://example.com/story"]'])
-    routes["anthropic"] = FakeApi([no_credit])
+    routes["openrouter"] = FakeApi([denied, '["https://example.com/story"]'])
+    routes["anthropic"] = FakeApi([no_credit, no_credit])
     if direct_openai:
         routes["openai"] = FakeApi(['["https://example.com/story"]'])
 
@@ -233,9 +241,26 @@ def test_checker_recovers_on_a_different_model_family_from_the_backup_writer(rou
 
 
 def test_writer_raises_when_the_non_claude_backups_also_fail(routes):
-    routes["openrouter"] = FakeApi([RuntimeError("Claude blocked"), RuntimeError("Claude blocked"),
-                                   RuntimeError("GPT unavailable")])
-    routes["anthropic"] = FakeApi([RuntimeError("no credit")])
+    routes["openrouter"] = FakeApi([RuntimeError("Claude blocked"), RuntimeError("GPT unavailable")])
+    routes["anthropic"] = FakeApi([RuntimeError("no credit"), RuntimeError("no credit")])
     routes["openai"] = FakeApi([RuntimeError("OpenAI unavailable")])
     with pytest.raises(RuntimeError, match="GPT unavailable"):
         asyncio.run(complete("writer", MSGS, max_tokens=2000))
+
+
+def test_anthropic_effort_goes_to_the_native_api(routes):
+    # The compat endpoint ignores reasoning_effort, so an effort-carrying
+    # anthropic call goes native (the fixture's fake records `effort`).
+    routes["openrouter"] = FakeApi([RuntimeError("403")])
+    routes["anthropic"] = FakeApi(["native"])
+    done = asyncio.run(complete("writer", [{"role": "system", "content": "s"}] + MSGS, max_tokens=50))
+    assert done.text == "native" and done.target.model == "claude-opus-5-5"
+    call = routes["anthropic"].calls[0]
+    assert call["effort"] == "low" and "temperature" not in call and "reasoning_effort" not in call
+
+
+def test_anthropic_without_effort_stays_on_the_compat_endpoint(routes):
+    routes["openrouter"] = FakeApi([RuntimeError("403")])
+    routes["anthropic"] = FakeApi(["compat"])
+    done = asyncio.run(complete("checker", MSGS, max_tokens=50, reasoning={"budget": 4000}))
+    assert done.text == "compat" and len(routes["anthropic"].calls) == 1

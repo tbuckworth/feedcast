@@ -48,6 +48,8 @@ PRICES = {
 # production's writer and checker are served by their Anthropic-direct
 # backups. Primaries only here, so a fallback cannot muddy the meter.
 SETUPS = {
+    # Whatever src/llm.py ships, fallbacks included.
+    "main": dict(llm.ROLES),
     "current": {
         "writer": (Target("anthropic", "claude-opus-4-6"),),
         "checker": (Target("anthropic", "claude-sonnet-5"),),
