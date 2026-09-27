@@ -147,7 +147,7 @@ def test_a_pinned_client_gets_the_primary_model_and_no_fallback(routes):
     routes["openrouter"] = FakeApi(["would have served"])
     with pytest.raises(RuntimeError, match="pinned"):
         asyncio.run(complete("writer", MSGS, max_tokens=50, client=pinned))
-    assert pinned.calls[0]["model"] == llm.MODEL_WRITER
+    assert pinned.calls[0]["model"] == llm.pinned_target("writer").model
     assert routes["openrouter"].calls == []
 
 
@@ -158,10 +158,10 @@ def test_every_role_target_names_a_known_route():
 
 
 def test_empty_reply_can_be_told_not_to_fall_back(routes):
-    routes["openrouter"] = FakeApi(["<empty>"])
+    routes["anthropic"] = FakeApi(["<empty>"])
     with pytest.raises(llm.EmptyCompletion):
         asyncio.run(complete("checker", MSGS, max_tokens=50, fallback_on_empty=False))
-    assert llm.fallback_log == [] and len(routes["openrouter"].calls) == 1
+    assert llm.fallback_log == [] and len(routes["anthropic"].calls) == 1
 
 
 def test_a_pinned_client_gets_the_openrouter_spelling_of_the_model(routes):
@@ -264,3 +264,13 @@ def test_anthropic_without_effort_stays_on_the_compat_endpoint(routes):
     routes["anthropic"] = FakeApi(["compat"])
     done = asyncio.run(complete("checker", MSGS, max_tokens=50, reasoning={"budget": 4000}))
     assert done.text == "compat" and len(routes["anthropic"].calls) == 1
+
+
+def test_claude_roles_try_anthropic_direct_first(routes):
+    # OpenRouter has refused Claude since 2026-09-22; with Anthropic first a
+    # healthy run logs no fallback at all.
+    routes["anthropic"] = FakeApi(["script", "checked"])
+    asyncio.run(complete("writer", MSGS, max_tokens=50))
+    asyncio.run(complete("checker", MSGS, max_tokens=50))
+    assert [c["model"] for c in routes["anthropic"].calls] == ["claude-opus-5-5", "claude-sonnet-5"]
+    assert llm.fallback_log == []
