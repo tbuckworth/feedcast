@@ -10,12 +10,16 @@ OpenAI chat-completions shape, so one SDK covers them; the per-route quirks
 
 Roles, and why each model:
 
-- writer (Claude Opus 4.6): prose a person listens to — summaries, the daily
-  briefing, table descriptions, the one-shot revision after the fidelity
-  check. Measured against Gemini 3 Flash on a real maths post, Flash emitted
-  14 raw LaTeX expressions into the spoken script; Opus emitted none. Compared
-  with GPT-5.6 Sol on 2026-09-16, Opus wrote the more concrete, listenable
-  script (the figures, names and examples a listener remembers).
+- writer (Claude Opus 5.5, effort low): prose a person listens to — summaries,
+  the daily briefing, story selection, table descriptions, the one-shot
+  revision after the fidelity check. Measured against Gemini 3 Flash on a real
+  maths post, Flash emitted 14 raw LaTeX expressions into the spoken script;
+  Opus emitted none. Compared with GPT-5.6 Sol on 2026-09-16, Opus wrote the
+  more concrete, listenable script. Opus 5.5 replaced Opus 4.6 on 2026-09-27
+  after a side-by-side (scripts/model_upgrade_test.py): more careful
+  attribution, no longer, ~7% dearer a month because its tokenizer counts
+  ~1.46x the tokens for the same text. Its thinking cannot be switched off,
+  and low effort is plenty for writing.
 - checker (Claude Sonnet 5): reads a finished script against its source and
   lists what is contradicted, distorted or unsupported (src/verify.py). A
   different model from the writer, so its blind spots are not the same ones.
@@ -32,7 +36,9 @@ Roles, and why each model:
 
 import os
 from dataclasses import dataclass
+from types import SimpleNamespace
 
+from anthropic import AsyncAnthropic
 from openai import AsyncOpenAI
 
 
@@ -52,7 +58,12 @@ class Route:
 ROUTES = {
     "openrouter": Route("openrouter", "OPENROUTER_API_KEY", "https://openrouter.ai/api/v1"),
     "openai": Route("openai", "OPENAI_API_KEY", None, "max_completion_tokens", False),
-    "anthropic": Route("anthropic", "ANTHROPIC_API_KEY", "https://api.anthropic.com/v1/"),
+    # Sonnet 5 and Opus 5.5 reject any sampling parameter ("`temperature` is
+    # deprecated for this model"), so the checker's temperature=0 400'd here
+    # and, with OpenRouter refusing Claude since 2026-09-22, every check fell
+    # through to Gemini 3 Flash.
+    "anthropic": Route("anthropic", "ANTHROPIC_API_KEY", "https://api.anthropic.com/v1/",
+                       accepts_temperature=False),
 }
 
 
@@ -80,9 +91,9 @@ class Target:
 # the fidelity check remains independent of the writer.
 ROLES: dict[str, tuple[Target, ...]] = {
     "writer": (
-        Target("openrouter", "anthropic/claude-opus-4.6"),
+        Target("openrouter", "anthropic/claude-opus-5.5", {"effort": "low"}),
+        Target("anthropic", "claude-opus-5-5", {"effort": "low"}),
         Target("anthropic", "claude-opus-4-6"),
-        Target("openrouter", "anthropic/claude-opus-5"),
         Target("openai", "gpt-5.6-sol", {"off": True}),
         Target("openrouter", "openai/gpt-5.6-sol", {"off": True}),
     ),
@@ -95,7 +106,7 @@ ROLES: dict[str, tuple[Target, ...]] = {
     "bullets": (
         Target("openai", "gpt-5.6-sol", {"off": True}),
         Target("openrouter", "openai/gpt-5.6-sol", {"off": True}),
-        Target("openrouter", "anthropic/claude-opus-4.6"),
+        Target("anthropic", "claude-opus-5-5", {"effort": "low"}),
     ),
     "normalizer": (
         Target("openrouter", "google/gemini-3-flash-preview"),
@@ -180,6 +191,48 @@ def client_for(route: Route) -> AsyncOpenAI | None:
     return _clients[route.name]
 
 
+_native: AsyncAnthropic | None = None
+
+
+def native_anthropic() -> AsyncAnthropic:
+    """Anthropic's own Messages API, for calls that set an effort.
+
+    The OpenAI-compatible endpoint ignores `reasoning_effort` (measured
+    2026-09-27: Opus 5.5 produced the same ~3,150 output tokens with it set
+    to low or left unset) and rejects adaptive thinking outright, so effort
+    only takes hold here: ~1,280 tokens for the same digest at low.
+    """
+    global _native
+    if _native is None:
+        _native = AsyncAnthropic(api_key=os.environ.get(ROUTES["anthropic"].key_env, ""),
+                                 timeout=LLM_TIMEOUT_SECONDS, max_retries=3)
+    return _native
+
+
+async def _anthropic_native(model: str, messages: list[dict], max_tokens: int, effort: str):
+    """One native call, returned in the chat-completions shape the rest expects."""
+    system = "\n\n".join(m["content"] for m in messages if m["role"] == "system")
+    msg = await native_anthropic().messages.create(
+        model=model, max_tokens=max_tokens,
+        messages=[m for m in messages if m["role"] != "system"],
+        output_config={"effort": effort}, **({"system": system} if system else {}))
+    text = "".join(b.text for b in msg.content if b.type == "text")
+    finish = {"end_turn": "stop", "max_tokens": "length"}.get(msg.stop_reason, msg.stop_reason)
+    return SimpleNamespace(
+        choices=[SimpleNamespace(message=SimpleNamespace(content=text or None, refusal=None),
+                                 finish_reason=finish)],
+        usage=SimpleNamespace(prompt_tokens=msg.usage.input_tokens,
+                              completion_tokens=msg.usage.output_tokens))
+
+
+def _native_effort(route: Route, reasoning: dict | None) -> str | None:
+    """The effort to send natively, for an anthropic-route call that sets one."""
+    if route.name != "anthropic" or not reasoning or reasoning.get("off"):
+        return None
+    effort = reasoning.get("effort")
+    return effort if effort and effort != "none" else None
+
+
 def get_client() -> AsyncOpenAI:
     """The OpenRouter client. Kept for callers that manage their own calls."""
     return AsyncOpenAI(
@@ -207,9 +260,9 @@ def _reasoning_kwargs(route: Route, reasoning: dict | None) -> dict:
         if "budget" in reasoning:
             return {"extra_body": {"reasoning": {"max_tokens": reasoning["budget"]}}}
         return {"extra_body": {"reasoning": {"effort": reasoning["effort"]}}}
-    # Anthropic's OpenAI-compatible endpoint: thinking is off unless asked for,
-    # and the pipeline never needs it on. Untested past authentication (the
-    # account was at its monthly cap on 2026-09-16), so nothing extra is sent.
+    # Anthropic's OpenAI-compatible endpoint takes no reasoning setting that
+    # works; a call with an effort goes to the native API instead
+    # (`_native_effort`), and anything else is sent without one.
     return {}
 
 
@@ -270,8 +323,12 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
             print(f"    {where}: {tried[-1]}")
             continue
         try:
-            response = await api.chat.completions.create(
-                **_kwargs(route, target, messages, max_tokens, temperature, reasoning))
+            effort = _native_effort(route, reasoning if reasoning is not None else target.reasoning)
+            if effort:
+                response = await _anthropic_native(target.model, messages, max_tokens, effort)
+            else:
+                response = await api.chat.completions.create(
+                    **_kwargs(route, target, messages, max_tokens, temperature, reasoning))
             done = _completion(response, target, where)
         except EmptyCompletion as e:
             if not fallback_on_empty and not isinstance(e, NoChoices):
