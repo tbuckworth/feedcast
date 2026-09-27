@@ -52,7 +52,12 @@ class Route:
 ROUTES = {
     "openrouter": Route("openrouter", "OPENROUTER_API_KEY", "https://openrouter.ai/api/v1"),
     "openai": Route("openai", "OPENAI_API_KEY", None, "max_completion_tokens", False),
-    "anthropic": Route("anthropic", "ANTHROPIC_API_KEY", "https://api.anthropic.com/v1/"),
+    # Sonnet 5 and Opus 5.5 reject any sampling parameter ("`temperature` is
+    # deprecated for this model"), so the checker's temperature=0 400'd here
+    # and, with OpenRouter refusing Claude since 2026-09-22, every check fell
+    # through to Gemini 3 Flash.
+    "anthropic": Route("anthropic", "ANTHROPIC_API_KEY", "https://api.anthropic.com/v1/",
+                       accepts_temperature=False),
 }
 
 

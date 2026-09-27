@@ -71,6 +71,16 @@ def test_openrouter_route_translates_reasoning_into_extra_body(routes):
     assert b["extra_body"] == {"reasoning": {"enabled": False}}
 
 
+def test_anthropic_route_sends_no_temperature(routes):
+    # Sonnet 5 400s on any temperature; the checker passes 0. With OpenRouter
+    # down this sent every check to Gemini Flash (2026-09-22 to -27).
+    routes["openrouter"] = FakeApi([RuntimeError("403")])
+    routes["anthropic"] = FakeApi(["ok"])
+    done = asyncio.run(complete("checker", MSGS, max_tokens=50, temperature=0))
+    assert done.target.route == "anthropic"
+    assert "temperature" not in routes["anthropic"].calls[0]
+
+
 def test_failure_falls_through_to_the_next_target_and_is_logged(routes):
     routes["openai"] = FakeApi([RuntimeError("openai down")])
     routes["openrouter"] = FakeApi(["from openrouter"])
