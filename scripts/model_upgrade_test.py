@@ -74,7 +74,7 @@ _orig_reasoning = llm._reasoning_kwargs
 
 
 def _effort_on_anthropic(route, reasoning):
-    if route.name == "anthropic" and reasoning and reasoning.get("effort"):
+    if route.name == "anthropic" and reasoning and reasoning.get("effort") not in (None, "none"):
         return {"reasoning_effort": reasoning["effort"]}
     return _orig_reasoning(route, reasoning)
 
@@ -206,7 +206,8 @@ async def main() -> None:
     if args.current_prompts and is_briefing:
         from src.main import load_config
         from src.news import PREVIOUS_BRIEFINGS_HEADER
-        system = load_config(Path("config.yaml")).news_briefing.prompt
+        if not args.system_file:
+            system = load_config(Path("config.yaml")).news_briefing.prompt
         user = re.sub(r"^## Previous briefings.*$", lambda _: PREVIOUS_BRIEFINGS_HEADER, user,
                       count=1, flags=re.M)
     sources = selected_sources(user) if is_briefing else []
