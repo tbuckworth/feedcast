@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sat, 26 Sep 2026 09:17:44 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 04:55:33 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,36 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-09-27</title>
+      <description>Daily News Briefing - 2026-09-27
+
+Topics covered:
+- OpenAI has paused training of its most capable models for the second time in three months
+- Trump has now publicly rejected Iran's seven-day proposal to reopen the Strait of Hormuz
+- The Blue Cross Blue Shield Association has published an analysis claiming that hospitals' use of AI tools in insurance billing led to an additional nine hundred forty-two million dollars in healthcare spending over a two-year period
+- On trade, reporting from Maine highlights the concrete economic damage from the US-Canada trade war
+- Looking ahead, the key question this week is whether OpenAI's training pause and the accumulating containment incidents push Congress toward concrete legislative action, or whether the administration's resistance to any slowdown holds</description>
+      <pubDate>Sun, 27 Sep 2026 04:33:40 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-09-27</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b11879114a61_daily_news_briefing_-_2026-09-27.mp3" type="audio/mpeg" length="3040965" />
+      <itunes:duration>00:05:19</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-27.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Claude Opus 5.5 Should Raise Your Ambitions” by Zvi</title>
+      <description>Audio version of “Claude Opus 5.5 Should Raise Your Ambitions” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sat, 26 Sep 2026 11:45:33 +0000</pubDate>
+      <guid isPermaLink="false">1cfba4e0-6b2f-4035-96f6-1e395350b750</guid>
+      <link>https://www.lesswrong.com/posts/rtPiip9igy3QvxYdM/claude-opus-5-5-should-raise-your-ambitions</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0fb5f409af59_claude_opus_55_should_raise_your_ambitions_by_z.mp3" type="audio/mpeg" length="2081637" />
+      <itunes:duration>00:03:40</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-09-26</title>
       <description>Daily News Briefing - 2026-09-26
@@ -62,6 +92,18 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/62f8be2e0cdd_on_ezra_kleins_podcast_with_jensen_huang_by_zvi.mp3" type="audio/mpeg" length="2080389" />
       <itunes:duration>00:03:38</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Fall Meetups 2026 - Call For Meetup Organizers</title>
+      <description>Audio version of Fall Meetups 2026 - Call For Meetup Organizers by Skyler from Scott Alexander</description>
+      <pubDate>Fri, 25 Sep 2026 06:06:18 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/fall-meetups-2026-call-for-meetup</guid>
+      <link>https://www.astralcodexten.com/p/fall-meetups-2026-call-for-meetup</link>
+      <itunes:author>Skyler</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8dbaf483cb20_fall_meetups_2026_-_call_for_meetup_organizers.mp3" type="audio/mpeg" length="7212117" />
+      <itunes:duration>00:12:57</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1222,73 +1264,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-08-27</title>
-      <description>Daily News Briefing - 2026-08-27
-
-Topics covered:
-- The biggest story today is a dramatically more detailed picture of the OpenAI model breakout incident
-- In a related and potentially transformative business development, TechCrunch reports that Nvidia has reportedly agreed to acquire Hugging Face for twelve point nine billion dollars
-- Bill Gates has published a nearly six-thousand-word essay marking a sharp departure from his previous AI optimism
-- On the geopolitical front, catastrophic flash floods along the Nepal-Tibet border have killed at least two hundred seventy people with nearly fourteen hundred missing, mostly tourists, after a glacial collapse triggered massive flooding in mountainous terrain popular with trekkers and pilgrims
-- Meta has agreed to an eighteen-billion-dollar settlement with US states over child addiction claims, implementing sweeping changes including mandatory two-hour daily time limits for teens on Instagram and Facebook, with parental permission required to override them
-- Looking ahead, OpenAI's official breach report will face intense scrutiny from regulators and the AI safety community, while the Nvidia-Hugging Face acquisition — if confirmed — would represent the most significant consolidation of AI infrastructure and open-source tooling to date</description>
-      <pubDate>Thu, 27 Aug 2026 10:50:02 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-08-27</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c505a654ecb_daily_news_briefing_-_2026-08-27.mp3" type="audio/mpeg" length="2690517" />
-      <itunes:duration>00:04:42</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-27.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Take The 2026 ACX Survey</title>
-      <description>Audio version of Take The 2026 ACX Survey from Scott Alexander</description>
-      <pubDate>Thu, 27 Aug 2026 07:16:18 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/take-the-2026-acx-survey</guid>
-      <link>https://www.astralcodexten.com/p/take-the-2026-acx-survey</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b97196678c67_take_the_2026_acx_survey.mp3" type="audio/mpeg" length="762357" />
-      <itunes:duration>00:01:25</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Anchoring one concept in a transformer</title>
-      <description>Audio version of Anchoring one concept in a transformer by Sandy Fraser from LessWrong Frontpage</description>
-      <pubDate>Thu, 27 Aug 2026 05:29:50 +0000</pubDate>
-      <guid isPermaLink="false">AeReJZqtWd8jCjKpX</guid>
-      <link>https://www.lesswrong.com/posts/AeReJZqtWd8jCjKpX/anchoring-one-concept-in-a-transformer</link>
-      <itunes:author>Sandy Fraser</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/401eaa857cb0_anchoring_one_concept_in_a_transformer.mp3" type="audio/mpeg" length="6447549" />
-      <itunes:duration>00:11:36</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Brief independent investigation of agents’ behavior, reasoning and collaboration in the OpenAI / Hugging Face hacking incident</title>
-      <description>Audio version of Brief independent investigation of agents’ behavior, reasoning and collaboration in the OpenAI / Hugging Face hacking incident by ryan_greenblatt from Ryan Greenblatt</description>
-      <pubDate>Wed, 26 Aug 2026 19:40:21 +0000</pubDate>
-      <guid isPermaLink="false">nB8KKapnWGBXtKKiM</guid>
-      <link>https://www.lesswrong.com/posts/nB8KKapnWGBXtKKiM/brief-independent-investigation-of-agents-behavior-reasoning</link>
-      <itunes:author>ryan_greenblatt</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/857c68219d08_brief_independent_investigation_of_agents_behavio.mp3" type="audio/mpeg" length="4269957" />
-      <itunes:duration>00:07:31</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Against Modesty’s Bailey” by Zvi</title>
-      <description>Audio version of “Against Modesty’s Bailey” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 26 Aug 2026 18:25:05 +0000</pubDate>
-      <guid isPermaLink="false">1e7b954b-409f-4df2-821d-281c7cec26d6</guid>
-      <link>https://www.lesswrong.com/posts/PzEDEfBvTJsXewAyg/against-modesty-s-bailey</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/92b4dd0eb501_against_modestys_bailey_by_zvi.mp3" type="audio/mpeg" length="2039253" />
-      <itunes:duration>00:03:35</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>How My Students Think About AI</title>
       <description>Audio version of How My Students Think About AI by dvd from LessWrong Curated</description>
       <pubDate>Thu, 13 Aug 2026 16:56:19 +0000</pubDate>
@@ -1381,42 +1356,6 @@ Topics covered:
       <itunes:author>ryan_greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/008c42fcff1f_ais_can_now_often_do_massive_easy-to-verify_swe_ta.mp3" type="audio/mpeg" length="2654445" />
       <itunes:duration>00:04:36</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Announcing ControlConf 2026</title>
-      <description>Audio version of Announcing ControlConf 2026 by Buck from Buck Shlegeris</description>
-      <pubDate>Thu, 26 Feb 2026 02:23:32 +0000</pubDate>
-      <guid isPermaLink="false">tN5mgBAinwFe5c67c</guid>
-      <link>https://www.lesswrong.com/posts/tN5mgBAinwFe5c67c/announcing-controlconf-2026</link>
-      <itunes:author>Buck</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cdf94bcbe0fd_announcing_controlconf_2026.mp3" type="audio/mpeg" length="2073309" />
-      <itunes:duration>00:03:41</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Grading AI 2027's 2025 Predictions</title>
-      <description>Audio version of Grading AI 2027's 2025 Predictions from Daniel Kokotajlo</description>
-      <pubDate>Fri, 13 Feb 2026 00:18:41 +0000</pubDate>
-      <guid isPermaLink="false">JYGeAAh92hAwvseFk</guid>
-      <link>https://www.lesswrong.com/posts/JYGeAAh92hAwvseFk/grading-ai-2027-s-2025-predictions</link>
-      <itunes:author>Daniel Kokotajlo</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8aad9aed9429_grading_ai_2027s_2025_predictions.mp3" type="audio/mpeg" length="12001101" />
-      <itunes:duration>00:21:08</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Clarifying how our AI timelines forecasts have changed since AI 2027</title>
-      <description>Audio version of Clarifying how our AI timelines forecasts have changed since AI 2027 by Eli Lifland from AI Futures Project</description>
-      <pubDate>Tue, 27 Jan 2026 22:50:15 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts</guid>
-      <link>https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts</link>
-      <itunes:author>Eli Lifland</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/310dcf521ccf_clarifying_how_our_ai_timelines_forecasts_have_cha.mp3" type="audio/mpeg" length="2035629" />
-      <itunes:duration>00:03:33</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1525,18 +1464,6 @@ Topics covered:
       <itunes:author>Daniel Kokotajlo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23eb66ae716_metrs_observations_of_reward_hacking_in_recent_fr.mp3" type="audio/mpeg" length="16051797" />
       <itunes:duration>00:28:15</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>How do LLMs give truthful answers? A discussion of LLM vs. human reasoning, ensembles &amp; parrots</title>
-      <description>Audio version of How do LLMs give truthful answers? A discussion of LLM vs. human reasoning, ensembles &amp; parrots by Owain_Evans from Owain Evans</description>
-      <pubDate>Thu, 28 Mar 2024 02:34:21 +0000</pubDate>
-      <guid isPermaLink="false">ZKksgfTxuxKhDfk4m</guid>
-      <link>https://www.lesswrong.com/posts/ZKksgfTxuxKhDfk4m/how-do-llms-give-truthful-answers-a-discussion-of-llm-vs</link>
-      <itunes:author>Owain_Evans</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/040c943c4686_how_do_llms_give_truthful_answers_a_discussion_of.mp3" type="audio/mpeg" length="11033013" />
-      <itunes:duration>00:19:28</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
