@@ -84,6 +84,11 @@ class Target:
         return f"{self.model} via {self.route}"
 
 
+# Claude goes to Anthropic direct first: since 2026-09-22 OpenRouter has
+# refused every Claude request on the Arrow key (403 "violation of provider
+# Terms Of Service"), so an OpenRouter primary put a fallback notice in every
+# email. OpenRouter stays as the Claude backup.
+#
 # Prefer the same model on another account, then a sibling, but do not make
 # every backup depend on the same provider. On 2026-09-19 OpenRouter rejected
 # all Claude calls while Anthropic direct had no credit. GPT and Gemini still
@@ -91,15 +96,15 @@ class Target:
 # the fidelity check remains independent of the writer.
 ROLES: dict[str, tuple[Target, ...]] = {
     "writer": (
-        Target("openrouter", "anthropic/claude-opus-5.5", {"effort": "low"}),
         Target("anthropic", "claude-opus-5-5", {"effort": "low"}),
+        Target("openrouter", "anthropic/claude-opus-5.5", {"effort": "low"}),
         Target("anthropic", "claude-opus-4-6"),
         Target("openai", "gpt-5.6-sol", {"off": True}),
         Target("openrouter", "openai/gpt-5.6-sol", {"off": True}),
     ),
     "checker": (
-        Target("openrouter", "anthropic/claude-sonnet-5"),
         Target("anthropic", "claude-sonnet-5"),
+        Target("openrouter", "anthropic/claude-sonnet-5"),
         Target("openrouter", "anthropic/claude-sonnet-4.6"),
         Target("openrouter", "google/gemini-3-flash-preview"),
     ),
@@ -306,7 +311,7 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
     targets = ROLES[role]
     where = label or role
     if client is not None:
-        target = next((t for t in targets if t.route == "openrouter"), targets[0])
+        target = pinned_target(role)
         response = await client.chat.completions.create(
             **_kwargs(ROUTES["openrouter"], target, messages, max_tokens, temperature, reasoning))
         return _completion(response, target, where)
@@ -355,6 +360,12 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
         raise RuntimeError(f"{where}: no route for role {role!r} has an API key set "
                            f"({'; '.join(tried)})")
     raise last
+
+
+def pinned_target(role: str) -> Target:
+    """The target a pinned (OpenRouter) client is sent: the role's first OpenRouter one."""
+    targets = ROLES[role]
+    return next((t for t in targets if t.route == "openrouter"), targets[0])
 
 
 def _completion(response, target: Target, where: str) -> Completion:

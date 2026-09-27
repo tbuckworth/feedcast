@@ -5,8 +5,13 @@ from types import SimpleNamespace
 
 import pytest
 
-from src.verify import (MODEL_CHECKER, MODEL_WRITER, Fidelity, fidelity_markdown,
+from src.llm import pinned_target
+from src.verify import (MODEL_CHECKER, Fidelity, fidelity_markdown,
                         fidelity_summary, parse_flags, verify_script)
+
+# A pinned client is OpenRouter's, so it is sent each role's OpenRouter spelling.
+PINNED_CHECKER = pinned_target("checker").model
+PINNED_WRITER = pinned_target("writer").model
 
 
 class FakeClient:
@@ -54,7 +59,7 @@ def test_clean_script_is_returned_untouched():
     client = FakeClient([CLEAN])
     script, fid = asyncio.run(verify_script("The script.", "The source.", writer_system_prompt="sys", client=client))
     assert script == "The script." and fid.status == "clean" and fid.claims_total == 12
-    assert len(client.calls) == 1 and client.calls[0]["model"] == MODEL_CHECKER
+    assert len(client.calls) == 1 and client.calls[0]["model"] == PINNED_CHECKER
     assert "SOURCE:\nThe source." in client.calls[0]["messages"][1]["content"]
 
 
@@ -65,7 +70,7 @@ def test_material_flag_triggers_one_revision_then_a_recheck():
                                             writer_system_prompt="Summarise for audio.", client=client))
     assert script == revised_text.strip()
     assert fid.status == "revised" and fid.revised and fid.remaining == []
-    assert [c["model"] for c in client.calls] == [MODEL_CHECKER, MODEL_WRITER, MODEL_CHECKER]
+    assert [c["model"] for c in client.calls] == [PINNED_CHECKER, PINNED_WRITER, PINNED_CHECKER]
     revise_call = client.calls[1]
     assert revise_call["messages"][0]["content"] == "Summarise for audio."
     # Only the material flag is handed to the writer; the low-severity one is not.
@@ -111,12 +116,13 @@ def test_an_empty_first_check_retries_with_reasoning_off_not_a_sibling_model(mon
                       usage=NS(completion_tokens=1))
 
     api = Api([None, CLEAN])
-    monkeypatch.setattr(llm, "client_for", lambda route: api if route.name == "openrouter" else None)
+    monkeypatch.setattr(llm, "client_for", lambda route: api if route.name == "anthropic" else None)
     monkeypatch.setattr(llm, "fallback_log", [])
     script, fid = asyncio.run(verify_script("s", "src", writer_system_prompt="p"))
     assert fid.status == "clean"
+    # The same primary twice (the compat endpoint takes no reasoning setting,
+    # so "off" sends nothing extra), never a sibling model.
     assert [c["model"] for c in api.calls] == [MODEL_CHECKER, MODEL_CHECKER]
-    assert api.calls[1]["extra_body"] == {"reasoning": {"enabled": False}}
     assert llm.fallback_log == []
 
 
