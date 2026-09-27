@@ -13,6 +13,17 @@ from .llm import complete
 from .monitor import FeedEntry, warn_if_dead
 from .verify import fidelity_markdown, verify_script
 
+# The previous briefings are there for dedup, but the writer also reads them
+# as a style guide. Sol, a fallback writer on 19-21 Sep, closed three to five
+# stories a day with "This matters because"; those briefings came back as
+# context and Opus 4.6, which had used the phrase about once a week, then
+# used it on nearly every story (5 of 5 on 24 Sep).
+PREVIOUS_BRIEFINGS_HEADER = (
+    "## Previous briefings (only so you know what was already covered: do NOT repeat "
+    "stories unless there is genuinely new information, and do not copy their wording "
+    "or sentence patterns):"
+)
+
 SELECT_PROMPT = """You are choosing which stories a daily news briefing will cover, from a list of RSS headlines with short blurbs.
 
 Pick the {n} most worth covering for a technically sophisticated audience, in priority order: AI safety and policy first, then AI capabilities, geopolitics, economics, markets. Prefer one strong item per story over several near-duplicates. Skip trivia, listicles and product fluff.
@@ -187,9 +198,7 @@ class NewsAggregator:
         # Build user message with dedup context from recent briefings
         user_message_parts = []
         if self.recent_briefings:
-            user_message_parts.append(
-                "## Previous briefings (do NOT repeat stories unless there is genuinely new information):"
-            )
+            user_message_parts.append(PREVIOUS_BRIEFINGS_HEADER)
             for briefing in self.recent_briefings:
                 user_message_parts.append(f"### {briefing['date']}")
                 user_message_parts.append(briefing["briefing_text"])
