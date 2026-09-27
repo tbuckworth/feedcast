@@ -10,16 +10,21 @@ anything material comes back, re-check, and the email digest. The setups swap
         OPENAI_API_KEY="$ARROW_OPENAI_API_KEY"; \
         uv run python -m scripts.model_upgrade_test data/sources/<id>.md --out DIR'
 
-`--system-file` replaces the bundle's system prompt (to test a prompt change
-on the same input); `--setups` picks which setups to run.
+`--system-file` replaces the bundle's system prompt, and `--current-prompts`
+swaps in today's briefing prompt and previous-briefings header, to test a
+prompt change on the same input; `--setups` picks which setups to run.
 """
 
 import argparse
 import asyncio
 import json
 import re
+import os
 import time
 from pathlib import Path
+from types import SimpleNamespace
+
+import httpx
 
 from src import digest, llm, verify
 from src.llm import Target
@@ -56,7 +61,70 @@ SETUPS = {
         "checker": (Target("anthropic", "claude-sonnet-5"),),
         "bullets": (Target("anthropic", "claude-opus-5-5"),),
     },
+    # The same at low effort, over the native API (see NativeEffort). The
+    # pipeline's anthropic route cannot do this today.
+    "proposed-low": {
+        "writer": (Target("anthropic", "claude-opus-5-5", {"effort": "low"}),),
+        "checker": (Target("anthropic", "claude-sonnet-5"),),
+        "bullets": (Target("anthropic", "claude-opus-5-5", {"effort": "low"}),),
+    },
 }
+
+_orig_reasoning = llm._reasoning_kwargs
+
+
+def _effort_on_anthropic(route, reasoning):
+    if route.name == "anthropic" and reasoning and reasoning.get("effort"):
+        return {"reasoning_effort": reasoning["effort"]}
+    return _orig_reasoning(route, reasoning)
+
+
+llm._reasoning_kwargs = _effort_on_anthropic
+
+
+class NativeEffort:
+    """Anthropic's OpenAI-compatible endpoint ignores effort (measured: the
+    digest thought ~3,150 tokens at "low", "medium" or unset alike) and 400s
+    on adaptive thinking. Calls that carry an effort go to the native Messages
+    API instead, which honours it (~1,280 at low); the rest pass through."""
+
+    def __init__(self, compat):
+        self.compat = compat
+        self.chat = SimpleNamespace(completions=SimpleNamespace(create=self.create))
+
+    async def create(self, **kw):
+        effort = kw.pop("reasoning_effort", None)
+        if effort is None:
+            return await self.compat.chat.completions.create(**kw)
+        msgs = kw["messages"]
+        body = {"model": kw["model"], "max_tokens": kw["max_tokens"],
+                "system": "\n\n".join(m["content"] for m in msgs if m["role"] == "system"),
+                "messages": [m for m in msgs if m["role"] != "system"],
+                "output_config": {"effort": effort}}
+        async with httpx.AsyncClient(timeout=600) as h:
+            r = await h.post("https://api.anthropic.com/v1/messages", json=body, headers={
+                "x-api-key": os.environ["ANTHROPIC_API_KEY"], "anthropic-version": "2023-06-01"})
+        r.raise_for_status()
+        j = r.json()
+        text = "".join(b.get("text", "") for b in j["content"] if b["type"] == "text")
+        finish = {"end_turn": "stop", "max_tokens": "length"}.get(j["stop_reason"], j["stop_reason"])
+        return SimpleNamespace(
+            choices=[SimpleNamespace(message=SimpleNamespace(content=text, refusal=None),
+                                     finish_reason=finish)],
+            usage=SimpleNamespace(prompt_tokens=j["usage"]["input_tokens"],
+                                  completion_tokens=j["usage"]["output_tokens"],
+                                  completion_tokens_details=None, model_extra={}))
+
+
+_orig_client_for = llm.client_for
+
+
+def _client_for(route):
+    api = _orig_client_for(route)
+    return NativeEffort(api) if api is not None and route.name == "anthropic" else api
+
+
+llm.client_for = _client_for
 
 calls: list[dict] = []
 _orig_completion = llm._completion
@@ -126,6 +194,8 @@ async def main() -> None:
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--setups", default="current,proposed")
     ap.add_argument("--system-file", type=Path)
+    ap.add_argument("--current-prompts", action="store_true",
+                    help="briefing: today's config.yaml prompt and previous-briefings header")
     args = ap.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
 
@@ -133,6 +203,12 @@ async def main() -> None:
     system = args.system_file.read_text() if args.system_file else secs["System prompt"]
     user = secs["What the writer was given"]
     is_briefing = "## Today's articles:" in user
+    if args.current_prompts and is_briefing:
+        from src.main import load_config
+        from src.news import PREVIOUS_BRIEFINGS_HEADER
+        system = load_config(Path("config.yaml")).news_briefing.prompt
+        user = re.sub(r"^## Previous briefings.*$", lambda _: PREVIOUS_BRIEFINGS_HEADER, user,
+                      count=1, flags=re.M)
     sources = selected_sources(user) if is_briefing else []
     print(f"{args.bundle.name}: system {len(system)} chars, user {len(user)} chars, "
           f"{len(sources)} link targets")
