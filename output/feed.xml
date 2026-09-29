@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 28 Sep 2026 04:41:12 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 04:41:57 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-09-29</title>
+      <description>Daily News Briefing - 2026-09-29
+
+Topics covered:
+- OpenAI has scrapped the release of GPT-6.1 Astra, a next-generation model planned for an October debut in ChatGPT and Codex
+- OpenAI is also now apologizing in Australia
+- Pressure is also mounting in the courts and in capital markets
+- Nvidia is pitching the problem as solvable with engineering
+- On Iran, President Trump confirmed that American negotiators spoke with Iranian officials through mediators, even though Tehran says it has no plans to negotiate
+- Next week's Canberra hearing will show whether OpenAI's contrition satisfies lawmakers already drafting rules</description>
+      <pubDate>Tue, 29 Sep 2026 04:35:30 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-09-29</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4ad18d5829b1_daily_news_briefing_-_2026-09-29.mp3" type="audio/mpeg" length="2508357" />
+      <itunes:duration>00:04:25</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-29.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“What Also Happened: #NotOnlyHuggingFace” by Zvi</title>
+      <description>Audio version of “What Also Happened: #NotOnlyHuggingFace” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 28 Sep 2026 15:31:56 +0000</pubDate>
+      <guid isPermaLink="false">e4c3296e-4804-4dfc-9ad0-1e44092830d5</guid>
+      <link>https://www.lesswrong.com/posts/8BL8bdeQACdgJR69Y/what-also-happened-notonlyhuggingface</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f46b67aa5e26_what_also_happened_notonlyhuggingface_by_zvi.mp3" type="audio/mpeg" length="2331117" />
+      <itunes:duration>00:04:04</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-09-28</title>
       <description>Daily News Briefing - 2026-09-28
@@ -1161,73 +1192,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Tales of rebellion against externally-opaque meritocracies</title>
-      <description>Audio version of Tales of rebellion against externally-opaque meritocracies by Steven Byrnes from LessWrong Frontpage</description>
-      <pubDate>Sat, 29 Aug 2026 11:37:39 +0000</pubDate>
-      <guid isPermaLink="false">m8cP9KfkYMMCCQGrb</guid>
-      <link>https://www.lesswrong.com/posts/m8cP9KfkYMMCCQGrb/tales-of-rebellion-against-externally-opaque-meritocracies</link>
-      <itunes:author>Steven Byrnes</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9e199e6ac132_tales_of_rebellion_against_externally-opaque_merit.mp3" type="audio/mpeg" length="11790549" />
-      <itunes:duration>00:21:04</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Book Notes: Chokepoints</title>
-      <description>Audio version of Book Notes: Chokepoints by Jakub Halmeš from LessWrong Frontpage</description>
-      <pubDate>Sat, 29 Aug 2026 09:02:21 +0000</pubDate>
-      <guid isPermaLink="false">WwxKPMw5CKx8f5skR</guid>
-      <link>https://www.lesswrong.com/posts/WwxKPMw5CKx8f5skR/book-notes-chokepoints</link>
-      <itunes:author>Jakub Halmeš</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b6507b955798_book_notes_chokepoints.mp3" type="audio/mpeg" length="10277613" />
-      <itunes:duration>00:18:11</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-08-29</title>
-      <description>Daily News Briefing - 2026-08-29
-
-Topics covered:
-- The most important AI story today comes from Anthropic's research division, where TechCrunch reports a researcher has demonstrated a system capable of self-improving AI alignment
-- Separately, OpenAI has announced it is winding down its contract providing models to Cursor, the popular AI-powered code editor, following Cursor's acquisition by SpaceX
-- On the venture capital front, Andreessen Horowitz has launched a one-point-one billion dollar fund called "Machine Age" explicitly aimed at accelerating the physical buildout of AI infrastructure
-- In geopolitics, the biggest development is Trump's announcement of what he calls a "historic" deal giving the United States majority control over sixty-five billion barrels of Venezuela's proven oil reserves, brokered through interim president Delcy Rodríguez
-- Meanwhile, western officials have provided new intelligence assessments on Russia's war in Ukraine, telling the Guardian that Moscow is now losing approximately six thousand more troops per month than it can recruit
-- The Nepal-Tibet flood disaster continues to worsen</description>
-      <pubDate>Sat, 29 Aug 2026 05:32:11 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-08-29</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/714114178bcd_daily_news_briefing_-_2026-08-29.mp3" type="audio/mpeg" length="2801061" />
-      <itunes:duration>00:04:54</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-29.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>AI Tweets</title>
-      <description>Audio version of AI Tweets by jefftk from LessWrong Frontpage</description>
-      <pubDate>Sat, 29 Aug 2026 03:01:47 +0000</pubDate>
-      <guid isPermaLink="false">BQksdkrtXDbr3CtoE</guid>
-      <link>https://www.lesswrong.com/posts/BQksdkrtXDbr3CtoE/ai-tweets</link>
-      <itunes:author>jefftk</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/015513b8d85b_ai_tweets.mp3" type="audio/mpeg" length="1591629" />
-      <itunes:duration>00:02:51</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Your Book Review: Thomas Urquhart’s Translation Of Rabelais</title>
-      <description>Audio version of Your Book Review: Thomas Urquhart’s Translation Of Rabelais from Scott Alexander</description>
-      <pubDate>Fri, 28 Aug 2026 17:32:14 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-book-review-thomas-urquharts</guid>
-      <link>https://www.astralcodexten.com/p/your-book-review-thomas-urquharts</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bec3833b519e_your_book_review_thomas_urquharts_translation_of.mp3" type="audio/mpeg" length="17926173" />
-      <itunes:duration>00:32:26</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>How My Students Think About AI</title>
       <description>Audio version of How My Students Think About AI by dvd from LessWrong Curated</description>
       <pubDate>Thu, 13 Aug 2026 16:56:19 +0000</pubDate>
@@ -1252,18 +1216,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>“Claude Opus 5: Model Welfare” by Zvi</title>
-      <description>Audio version of “Claude Opus 5: Model Welfare” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 27 Jul 2026 20:03:44 +0000</pubDate>
-      <guid isPermaLink="false">08d2a7d0-e222-4ff0-8ca8-53b05e06a3d1</guid>
-      <link>https://www.lesswrong.com/posts/bBXBpsyKAvJ5CqPzA/claude-opus-5-model-welfare</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/10ff467b9895_claude_opus_5_model_welfare_by_zvi.mp3" type="audio/mpeg" length="2503461" />
-      <itunes:duration>00:04:20</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Drone WMDs Don’t Need Any New Technology</title>
       <description>Audio version of Drone WMDs Don’t Need Any New Technology by Felix Choussat from LessWrong Curated</description>
       <pubDate>Mon, 20 Jul 2026 18:46:00 +0000</pubDate>
@@ -1272,78 +1224,6 @@ Topics covered:
       <itunes:author>Felix Choussat</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/528aef9cf3d6_drone_wmds_dont_need_any_new_technology.mp3" type="audio/mpeg" length="15334197" />
       <itunes:duration>00:26:58</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>My picture of the present in AI</title>
-      <description>Audio version of My picture of the present in AI by ryan_greenblatt from Ryan Greenblatt</description>
-      <pubDate>Tue, 07 Apr 2026 16:44:58 +0000</pubDate>
-      <guid isPermaLink="false">WjaGAA4xCAXeFpyWm</guid>
-      <link>https://www.lesswrong.com/posts/WjaGAA4xCAXeFpyWm/my-picture-of-the-present-in-ai</link>
-      <itunes:author>ryan_greenblatt</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/edfbb161e75d_my_picture_of_the_present_in_ai.mp3" type="audio/mpeg" length="15193317" />
-      <itunes:duration>00:26:29</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AIs can now often do massive easy-to-verify SWE tasks and I've updated towards shorter timelines</title>
-      <description>Audio version of AIs can now often do massive easy-to-verify SWE tasks and I've updated towards shorter timelines by ryan_greenblatt from Ryan Greenblatt</description>
-      <pubDate>Mon, 06 Apr 2026 16:01:56 +0000</pubDate>
-      <guid isPermaLink="false">dKpC6wHFqDrGZwnah</guid>
-      <link>https://www.lesswrong.com/posts/dKpC6wHFqDrGZwnah/ais-can-now-often-do-massive-easy-to-verify-swe-tasks-and-i</link>
-      <itunes:author>ryan_greenblatt</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/008c42fcff1f_ais_can_now_often_do_massive_easy-to-verify_swe_ta.mp3" type="audio/mpeg" length="2654445" />
-      <itunes:duration>00:04:36</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>AI Futures Model: Dec 2025 Update</title>
-      <description>Audio version of AI Futures Model: Dec 2025 Update by Daniel Kokotajlo from AI Futures Project</description>
-      <pubDate>Wed, 31 Dec 2025 02:08:48 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/ai-futures-model-dec-2025-update</guid>
-      <link>https://blog.aifutures.org/p/ai-futures-model-dec-2025-update</link>
-      <itunes:author>Daniel Kokotajlo</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/271107ce0b83_ai_futures_model_dec_2025_update.mp3" type="audio/mpeg" length="2607717" />
-      <itunes:duration>00:04:33</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Christian homeschoolers in the year 3000</title>
-      <description>Audio version of Christian homeschoolers in the year 3000 by Buck from Buck Shlegeris</description>
-      <pubDate>Wed, 17 Sep 2025 14:44:04 +0000</pubDate>
-      <guid isPermaLink="false">8aRFB2qGyjQGJkEdZ</guid>
-      <link>https://www.lesswrong.com/posts/8aRFB2qGyjQGJkEdZ/christian-homeschoolers-in-the-year-3000</link>
-      <itunes:author>Buck</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c374d7dda1f9_christian_homeschoolers_in_the_year_3000.mp3" type="audio/mpeg" length="8600613" />
-      <itunes:duration>00:15:14</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>METR's Observations of Reward Hacking in Recent Frontier Models</title>
-      <description>Audio version of METR's Observations of Reward Hacking in Recent Frontier Models from Daniel Kokotajlo</description>
-      <pubDate>Mon, 09 Jun 2025 18:03:31 +0000</pubDate>
-      <guid isPermaLink="false">Zu4ai9GFpwezyfB2K</guid>
-      <link>https://www.lesswrong.com/posts/Zu4ai9GFpwezyfB2K/metr-s-observations-of-reward-hacking-in-recent-frontier</link>
-      <itunes:author>Daniel Kokotajlo</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e23eb66ae716_metrs_observations_of_reward_hacking_in_recent_fr.mp3" type="audio/mpeg" length="16051797" />
-      <itunes:duration>00:28:15</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Paper: Forecasting world events with neural nets</title>
-      <description>Audio version of Paper: Forecasting world events with neural nets by Owain_Evans from Owain Evans</description>
-      <pubDate>Fri, 01 Jul 2022 19:40:12 +0000</pubDate>
-      <guid isPermaLink="false">ixiCECkFFguFcHWFa</guid>
-      <link>https://www.lesswrong.com/posts/ixiCECkFFguFcHWFa/paper-forecasting-world-events-with-neural-nets</link>
-      <itunes:author>Owain_Evans</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/12b351aa4801_paper_forecasting_world_events_with_neural_nets.mp3" type="audio/mpeg" length="5097117" />
-      <itunes:duration>00:09:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
