@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Tue, 29 Sep 2026 04:41:57 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2026 04:42:41 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-09-30</title>
+      <description>Daily News Briefing - 2026-09-30
+
+Topics covered:
+- President Trump hosted top technology leaders at the White House on Tuesday
+- Representative Ro Khanna, the top Democrat on the House China committee, had in advance called a planned Tuesday meeting between the White House, House Speaker Mike Johnson and tech executives a branding exercise
+- Moonshot is also under separate scrutiny
+- At DevDay, OpenAI filled the slot left by the cancelled GPT-6.1 Astra with GPT-6.1 Sol
+- In Europe, Estonian Prime Minister Kristen Michal said Russian special services ordered the August arson attack on the drone maker Milrem Robotics, which supplies Ukraine
+- The open question now is whether Trump's promised safety board gives the White House accord any teeth before next Tuesday's Canberra hearing tests OpenAI's contrition</description>
+      <pubDate>Wed, 30 Sep 2026 04:34:50 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-09-30</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cf1ee4081948_daily_news_briefing_-_2026-09-30.mp3" type="audio/mpeg" length="2934885" />
+      <itunes:duration>00:05:11</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-30.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Astra 6.1 Pulled As Insufficiently Aligned” by Zvi</title>
+      <description>Audio version of “Astra 6.1 Pulled As Insufficiently Aligned” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 29 Sep 2026 16:51:35 +0000</pubDate>
+      <guid isPermaLink="false">bb6df991-1665-4626-9a0d-53725a6b1b19</guid>
+      <link>https://www.lesswrong.com/posts/gEDNSiCY2GGQrFS65/astra-6-1-pulled-as-insufficiently-aligned</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/51968e3248c7_astra_61_pulled_as_insufficiently_aligned_by_zv.mp3" type="audio/mpeg" length="2393805" />
+      <itunes:duration>00:04:13</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-09-29</title>
       <description>Daily News Briefing - 2026-09-29
@@ -1159,37 +1190,6 @@ Topics covered:
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-31.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-08-30</title>
-      <description>Daily News Briefing - 2026-08-30
-
-Topics covered:
-- The most significant new development today is a deadly Russian drone strike on a warehouse near Kyiv that was storing military weapons and munitions, killing at least thirty-seven people and damaging more than fifty residential buildings including a care home for the elderly
-- The Nepal-Tibet flood disaster continues to worsen
-- In AI legal news, Sony Music and Warner Chappell have filed a major copyright lawsuit against Anthropic in US District Court for the Northern District of California
-- On the US-Canada front, the consumer boycott is now deeply embedded in Canadian daily life
-- Rounding out today's news, Iceland is holding a referendum on whether to resume European Union membership talks, and the vote is on a knife edge as counting continues
-- Looking ahead, the Anthropic copyright case could set important precedent for how music industry IP is treated in AI training, while the Nepal disaster's rising missing count suggests the final toll may be far worse than current figures indicate</description>
-      <pubDate>Sun, 30 Aug 2026 05:32:24 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-08-30</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f9ae2f6e3a2f_daily_news_briefing_-_2026-08-30.mp3" type="audio/mpeg" length="2579133" />
-      <itunes:duration>00:04:31</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-30.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“METR and Redwood Offer Holy #%^@ Postmortem Of The HuggingFace Hack” by Zvi</title>
-      <description>Audio version of “METR and Redwood Offer Holy #%^@ Postmortem Of The HuggingFace Hack” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sat, 29 Aug 2026 12:42:12 +0000</pubDate>
-      <guid isPermaLink="false">b7c84480-20ac-416c-af18-360dce0fda43</guid>
-      <link>https://www.lesswrong.com/posts/bvBQmLrF5QKut8gRH/metr-and-redwood-offer-holy-postmortem-of-the-huggingface</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/11b92a2b34b6_metr_and_redwood_offer_holy_postmortem_of_th.mp3" type="audio/mpeg" length="2837781" />
-      <itunes:duration>00:05:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
       <title>How My Students Think About AI</title>
