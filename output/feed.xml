@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Wed, 30 Sep 2026 04:42:41 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 04:51:55 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -1171,25 +1171,6 @@ Topics covered:
       <itunes:duration>00:04:48</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-08-31</title>
-      <description>Daily News Briefing - 2026-08-31
-
-Topics covered:
-- The most significant new development today is a dangerous escalation between the United States and Iran
-- On the Nepal-Tibet flood disaster, the death toll has now reached at least eight hundred ten, with more than three thousand people still missing
-- Iceland's EU referendum, which we flagged yesterday as being on a knife edge, has now been decided
-- In the US-Canada confrontation, the symbolic war over Lake Ontario continues to escalate in an almost farcical fashion
-- Venezuela's interim president Delcy Rodríguez has publicly defended her oil deal with Trump, insisting Venezuela will maintain ownership and sovereignty over its reserves despite the agreement reportedly giving the US control of sixty-five billion barrels
-- A ferry disaster off northern Cyprus has killed at least eight people with eighteen still missing after a vessel carrying nearly two hundred seventy passengers capsized after leaving port</description>
-      <pubDate>Mon, 31 Aug 2026 05:32:22 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-08-31</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/588d8ff7f4ce_daily_news_briefing_-_2026-08-31.mp3" type="audio/mpeg" length="2558637" />
-      <itunes:duration>00:04:29</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-08-31.txt" type="text/plain" />
     </item>
     <item>
       <title>How My Students Think About AI</title>
