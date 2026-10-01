@@ -10,6 +10,8 @@ from pathlib import Path
 
 import httpx
 
+from . import llm
+
 DEFAULT_VOICE_SAMPLE = "voice_samples/derek_perkins.wav"
 MAX_CHUNK_CHARS = 500  # Tested: 650 works but 500 has better pacing (see tests/test_chunk_sizes.py)
 
@@ -19,7 +21,22 @@ VOICE_UPLOAD_DELAY_SECONDS = int(os.environ.get("VOICE_UPLOAD_DELAY_SECONDS", "0
 
 # DeepInfra API endpoints
 DEEPINFRA_VOICE_UPLOAD_URL = "https://api.deepinfra.com/v1/voices/add"
-DEEPINFRA_API_URL = "https://api.deepinfra.com/v1/inference/ResembleAI/chatterbox-turbo"
+DEEPINFRA_INFERENCE_URL = "https://api.deepinfra.com/v1/inference/"
+
+# TTS models in order of preference, with any extra payload each needs. On
+# 2026-10-01 DeepInfra answered every turbo and standard Chatterbox request
+# with 429 "Model busy, retry later" for hours and the run produced no audio;
+# multilingual was up, takes the same uploaded voice_id (median pitch 95 Hz
+# against the sample's 93; its default voice is 159) and costs the same.
+TTS_MODELS: tuple[tuple[str, dict], ...] = (
+    ("ResembleAI/chatterbox-turbo", {}),
+    ("ResembleAI/chatterbox-multilingual", {"language_id": "en"}),
+)
+DEEPINFRA_API_URL = DEEPINFRA_INFERENCE_URL + TTS_MODELS[0][0]
+
+
+class ModelBusy(RuntimeError):
+    """DeepInfra kept answering 429 for this model after every retry."""
 
 
 def upload_voice_to_deepinfra(voice_path: Path, api_key: str, max_retries: int = 5) -> str:
@@ -120,6 +137,7 @@ def split_into_chunks(text: str, max_chars: int = MAX_CHUNK_CHARS) -> list[str]:
 async def generate_with_deepinfra_async(
     text: str, voice_id: str, api_key: str, http_client: httpx.AsyncClient,
     save_debug_wav: Path | None = None, tag: str = "",
+    model: tuple[str, dict] = TTS_MODELS[0],
 ) -> bytes:
     """Generate audio using DeepInfra inference endpoint with voice cloning."""
     # Diagnostic logging
@@ -135,13 +153,15 @@ async def generate_with_deepinfra_async(
         "voice_id": voice_id,
         "cfg_weight": 0.5,
         "exaggeration": 0.3,  # Lower exaggeration sounds more natural
+        **model[1],
     }
+    url = DEEPINFRA_INFERENCE_URL + model[0]
 
     max_retries = 5
     for attempt in range(max_retries):
         try:
             if attempt == 0:
-                response = await http_client.post(DEEPINFRA_API_URL, headers=headers, json=payload)
+                response = await http_client.post(url, headers=headers, json=payload)
             else:
                 # A ReadError is the server closing the connection on us, and
                 # the shared pool can hand the same dead keepalive straight
@@ -150,7 +170,7 @@ async def generate_with_deepinfra_async(
                 fresh_limits = httpx.Limits(max_keepalive_connections=0, max_connections=1)
                 async with httpx.AsyncClient(timeout=http_client.timeout,
                                              limits=fresh_limits) as fresh:
-                    response = await fresh.post(DEEPINFRA_API_URL, headers=headers, json=payload)
+                    response = await fresh.post(url, headers=headers, json=payload)
         except (httpx.TimeoutException, httpx.ConnectError, httpx.ReadError) as e:
             if attempt < max_retries - 1:
                 # Jittered, so chunks that failed together do not retry together.
@@ -168,7 +188,8 @@ async def generate_with_deepinfra_async(
                 print(f"      Rate limited, retry {attempt + 2}/{max_retries} in {wait_time}s")
                 await asyncio.sleep(wait_time)
                 continue
-            raise RuntimeError(f"DeepInfra rate limited after {max_retries} retries")
+            raise ModelBusy(f"DeepInfra rate limited after {max_retries} retries "
+                            f"({model[0]}: {response.text[:100]})")
 
         if response.status_code != 200:
             raise RuntimeError(f"DeepInfra error {response.status_code}: {response.text}")
@@ -220,6 +241,9 @@ class AudioGenerator:
         # Concurrency limit for TTS API calls (shared across all entries)
         # Reduced from 10 to 5 to avoid httpx ReadError issues
         self._semaphore = asyncio.Semaphore(5)
+        # Index into TTS_MODELS. Moves forward when a model stays busy and
+        # never back within a run, so an episode does not alternate voices.
+        self._model = 0
 
         # Optional delay for voice replication across DeepInfra servers
         if VOICE_UPLOAD_DELAY_SECONDS > 0:
@@ -227,6 +251,16 @@ class AudioGenerator:
             print(f"    [DIAG] Waiting {VOICE_UPLOAD_DELAY_SECONDS}s for voice replication...")
             time.sleep(VOICE_UPLOAD_DELAY_SECONDS)
             print(f"    [DIAG] Done waiting, proceeding with inference")
+
+    def _switch_model(self, failed: int, error: Exception) -> None:
+        """Move past a busy model, once, however many chunks saw it fail."""
+        if self._model != failed:
+            return  # another chunk already switched
+        self._model = failed + 1
+        note = (f"TTS: {TTS_MODELS[failed][0]} busy ({error}); "
+                f"rest of run on {TTS_MODELS[self._model][0]}")
+        print(f"    {note}")
+        llm.fallback_log.append(note)
 
     def _sanitize_filename(self, text: str) -> str:
         safe = re.sub(r"[^a-zA-Z0-9\s-]", "", text[:50])
@@ -274,10 +308,18 @@ class AudioGenerator:
                 async with self._semaphore:
                     print(f"    {tag}Chunk {i+1}/{len(chunks)} ({len(chunk)} chars)")
                     debug_path = debug_dir / f"chunk_{i:03d}.wav" if debug_dir else None
-                    audio_bytes = await generate_with_deepinfra_async(
-                        chunk, self._voice_id, self._api_key, http_client,
-                        save_debug_wav=debug_path, tag=tag,
-                    )
+                    while True:
+                        used = self._model
+                        try:
+                            audio_bytes = await generate_with_deepinfra_async(
+                                chunk, self._voice_id, self._api_key, http_client,
+                                save_debug_wav=debug_path, tag=tag, model=TTS_MODELS[used],
+                            )
+                            break
+                        except ModelBusy as e:
+                            if used + 1 >= len(TTS_MODELS):
+                                raise
+                            self._switch_model(used, e)
                     if not audio_bytes:
                         return None
                     chunk_path.write_bytes(audio_bytes)
