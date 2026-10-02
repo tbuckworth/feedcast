@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Thu, 01 Oct 2026 05:25:07 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 Oct 2026 04:38:32 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,49 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-02</title>
+      <description>Daily News Briefing - 2026-10-02
+
+Topics covered:
+- OpenAI has fired three researchers for what it calls mishandling sensitive information, and the BBC reports at least two of them worked on safety
+- The incidents are also shaping safety research
+- On the commercial side, The Verge looks at OpenAI's Dots agents, which go head to head with Meta's free Muse platform
+- In geopolitics, Vladimir Putin told the Valdai forum that Russia would use all weapons at its disposal, including nuclear, if Kaliningrad came under direct attack or blockade
+- Energy is now driving the markets
+- Today's jobs report and the EU's diesel talks will show whether the bond market's inflation fears ease or deepen</description>
+      <pubDate>Fri, 02 Oct 2026 04:35:15 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-02</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d14390d8c6f4_daily_news_briefing_-_2026-10-02.mp3" type="audio/mpeg" length="2680701" />
+      <itunes:duration>00:04:45</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-02.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Our AI Midwife</title>
+      <description>Audio version of Our AI Midwife from Scott Alexander</description>
+      <pubDate>Fri, 02 Oct 2026 01:08:13 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/our-ai-midwife</guid>
+      <link>https://www.astralcodexten.com/p/our-ai-midwife</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/52cc1b275c2a_our_ai_midwife.mp3" type="audio/mpeg" length="5511429" />
+      <itunes:duration>00:09:49</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI #188: Gemini Dot Argon” by Zvi</title>
+      <description>Audio version of “AI #188: Gemini Dot Argon” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 01 Oct 2026 15:01:58 +0000</pubDate>
+      <guid isPermaLink="false">ca2c0641-f5b3-4a10-93d9-b695482b6341</guid>
+      <link>https://www.lesswrong.com/posts/S2EAn9v4BwRdptsom/ai-188-gemini-dot-argon</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1315d9e31256_ai_188_gemini_dot_argon_by_zvi.mp3" type="audio/mpeg" length="2605341" />
+      <itunes:duration>00:04:35</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-01</title>
       <description>Daily News Briefing - 2026-10-01
@@ -1181,37 +1224,6 @@ Topics covered:
       <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/40e0a848a649_nicholas_decker_in_hell.mp3" type="audio/mpeg" length="13307277" />
       <itunes:duration>00:23:45</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-01</title>
-      <description>Daily News Briefing - 2026-09-01
-
-Topics covered:
-- The most significant new development today is the escalating US-Iran confrontation
-- The Nepal-Tibet flood disaster continues to worsen on multiple fronts
-- In AI regulatory news, two significant developments
-- Bank of England governor Andrew Bailey has issued a notable warning to G-twenty finance ministers, stating that frontier AI models risk destabilizing the global financial system
-- Finally, the FTC and twenty-two US states have filed a major lawsuit against Amazon, alleging the company secretly and systematically overcharged advertisers through what regulators are calling a hidden ad surcharge scheme, extracting an estimated twenty billion dollars
-- Looking ahead, the US-Iran military situation remains the most volatile flashpoint, with Trump's explicit threat of further strikes suggesting this cycle of escalation is far from over</description>
-      <pubDate>Tue, 01 Sep 2026 05:32:20 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-01</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8807fd1f3891_daily_news_briefing_-_2026-09-01.mp3" type="audio/mpeg" length="2873757" />
-      <itunes:duration>00:05:02</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-01.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“HuggingFace Attack Postmortem: Fleshing Out the Facts” by Zvi</title>
-      <description>Audio version of “HuggingFace Attack Postmortem: Fleshing Out the Facts” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 31 Aug 2026 15:21:59 +0000</pubDate>
-      <guid isPermaLink="false">654f96ac-a5eb-409a-88e2-c4bdd489d26e</guid>
-      <link>https://www.lesswrong.com/posts/r3eEPto5ohzESuqa9/huggingface-attack-postmortem-fleshing-out-the-facts</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f92af8e2aa44_huggingface_attack_postmortem_fleshing_out_the_f.mp3" type="audio/mpeg" length="2741109" />
-      <itunes:duration>00:04:48</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
