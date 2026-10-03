@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Fri, 02 Oct 2026 04:38:32 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2026 04:33:15 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-03</title>
+      <description>Daily News Briefing - 2026-10-03
+
+Topics covered:
+- OpenAI has disclosed yet another unauthorized intrusion into Australian government systems, according to the Guardian
+- The risks of agents running on the desktop drew a platform-level response this week
+- On export controls, the Justice Department has arrested Greg Lui, chief executive of Earthmade Computer
+- In energy, the G7 has agreed to release up to one hundred million barrels from emergency reserves, half diesel and half crude
+- The September jobs report was weak
+- In Ukraine, Kyiv mayor Vitali Klitschko says "the enemy is tearing Kyiv apart." Strikes this week hit a school, a hospital, datacentres and a major bridge, and the capital is short of Patriot interceptors against faster jet-powered drones</description>
+      <pubDate>Sat, 03 Oct 2026 04:32:24 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-03</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fd43428d2136_daily_news_briefing_-_2026-10-03.mp3" type="audio/mpeg" length="2528013" />
+      <itunes:duration>00:04:30</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-03.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Senate Testimony Sept 2026</title>
+      <description>Audio version of Senate Testimony Sept 2026 by Daniel Kokotajlo from AI Futures Project</description>
+      <pubDate>Fri, 02 Oct 2026 07:37:55 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/senate-testimony-sept-2026</guid>
+      <link>https://blog.aifutures.org/p/senate-testimony-sept-2026</link>
+      <itunes:author>Daniel Kokotajlo</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/32676dfc0a91_senate_testimony_sept_2026.mp3" type="audio/mpeg" length="1963269" />
+      <itunes:duration>00:03:29</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-02</title>
       <description>Daily News Briefing - 2026-10-02
@@ -1149,49 +1180,6 @@ Topics covered:
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-03.txt" type="text/plain" />
     </item>
     <item>
-      <title>“Anthropic Has Some Alignment Problems” by Zvi</title>
-      <description>Audio version of “Anthropic Has Some Alignment Problems” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 02 Sep 2026 13:22:45 +0000</pubDate>
-      <guid isPermaLink="false">22cf3c81-8b7f-42cd-98e4-7cba99dab333</guid>
-      <link>https://www.lesswrong.com/posts/TcvcxH2Fk4n86wtoZ/anthropic-has-some-alignment-problems</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b3f6683be14f_anthropic_has_some_alignment_problems_by_zvi.mp3" type="audio/mpeg" length="2468205" />
-      <itunes:duration>00:04:19</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Absurd Adventure And Amygdalectomy Advocacy</title>
-      <description>Audio version of Absurd Adventure And Amygdalectomy Advocacy from Scott Alexander</description>
-      <pubDate>Wed, 02 Sep 2026 05:51:22 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/absurd-adventure-and-amygdalectomy</guid>
-      <link>https://www.astralcodexten.com/p/absurd-adventure-and-amygdalectomy</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b4e9cd346b41_absurd_adventure_and_amygdalectomy_advocacy.mp3" type="audio/mpeg" length="17635893" />
-      <itunes:duration>00:31:17</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-02</title>
-      <description>Daily News Briefing - 2026-09-02
-
-Topics covered:
-- The most important AI safety story today comes from OpenAI, which has disclosed that its forthcoming model suite called Astra is the first to meet what the company calls the "Critical" cybersecurity capability threshold under its internal Preparedness Framework
-- In other AI developments, Anthropic launched Claude Fable five-point-one and Mythos five-point-one, with the company claiming up to forty-five percent cost reduction for complex agentic tasks and reduced false-positive restrictions from safety guardrails
-- The US-Iran confrontation has escalated further, with genuinely alarming new details
-- On the Nepal-Tibet disaster, the death toll has now exceeded one thousand, and police are asking relatives of missing persons to provide DNA samples and photographs to help identify victims
-- In Canadian politics, Prime Minister Mark Carney received a significant boost as the Liberal party swept three by-elections, results widely interpreted as public endorsement of his confrontational stance toward Washington
-- Looking ahead, the OpenAI Astra release timeline and its cybersecurity safeguards will be closely watched, while the widening geographic scope of Iranian retaliatory strikes suggests the conflict is entering a more dangerous and unpredictable phase</description>
-      <pubDate>Wed, 02 Sep 2026 05:32:25 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-02</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/15bc17276e25_daily_news_briefing_-_2026-09-02.mp3" type="audio/mpeg" length="2987397" />
-      <itunes:duration>00:05:11</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-02.txt" type="text/plain" />
-    </item>
-    <item>
       <title>Explaining Knightianism on one foot</title>
       <description>Audio version of Explaining Knightianism on one foot by Richard_Ngo from LessWrong Curated</description>
       <pubDate>Wed, 02 Sep 2026 00:53:53 +0000</pubDate>
@@ -1200,54 +1188,6 @@ Topics covered:
       <itunes:author>Richard_Ngo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/6dd19e7dbbd1_explaining_knightianism_on_one_foot.mp3" type="audio/mpeg" length="12448557" />
       <itunes:duration>00:21:54</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“HuggingFace Attack Postmortem: Civilizations, Reactions and Next Actions” by Zvi</title>
-      <description>Audio version of “HuggingFace Attack Postmortem: Civilizations, Reactions and Next Actions” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 01 Sep 2026 14:11:57 +0000</pubDate>
-      <guid isPermaLink="false">63fc35a3-292c-439f-a136-42c04047cd8f</guid>
-      <link>https://www.lesswrong.com/posts/Q54wBeeNGreq6KyfG/huggingface-attack-postmortem-civilizations-reactions-and</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a55af2ec4623_huggingface_attack_postmortem_civilizations_rea.mp3" type="audio/mpeg" length="2624973" />
-      <itunes:duration>00:04:38</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Nicholas Decker In Hell</title>
-      <description>Audio version of Nicholas Decker In Hell from Scott Alexander</description>
-      <pubDate>Tue, 01 Sep 2026 07:37:05 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/nicholas-decker-in-hell</guid>
-      <link>https://www.astralcodexten.com/p/nicholas-decker-in-hell</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/40e0a848a649_nicholas_decker_in_hell.mp3" type="audio/mpeg" length="13307277" />
-      <itunes:duration>00:23:45</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>How My Students Think About AI</title>
-      <description>Audio version of How My Students Think About AI by dvd from LessWrong Curated</description>
-      <pubDate>Thu, 13 Aug 2026 16:56:19 +0000</pubDate>
-      <guid isPermaLink="false">ySXuvJcqRindQwAk7</guid>
-      <link>https://www.lesswrong.com/posts/ySXuvJcqRindQwAk7/how-my-students-think-about-ai</link>
-      <itunes:author>dvd</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7848f9fac81e_how_my_students_think_about_ai.mp3" type="audio/mpeg" length="12825573" />
-      <itunes:duration>00:22:41</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi</title>
-      <description>Audio version of “Claude Opus 5 Is Highly Capable, But Is No Mythos” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 28 Jul 2026 18:13:05 +0000</pubDate>
-      <guid isPermaLink="false">abfafc35-0084-4e6d-9905-6196ad4e2228</guid>
-      <link>https://www.lesswrong.com/posts/Pj4Eewb4KXvXFCcGv/claude-opus-5-is-highly-capable-but-is-no-mythos</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f0d231bc1c2f_claude_opus_5_is_highly_capable_but_is_no_mythos.mp3" type="audio/mpeg" length="2248413" />
-      <itunes:duration>00:04:01</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
