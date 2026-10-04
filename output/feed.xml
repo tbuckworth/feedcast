@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sat, 03 Oct 2026 04:33:15 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Oct 2026 04:33:44 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,25 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-04</title>
+      <description>Daily News Briefing - 2026-10-04
+
+Topics covered:
+- Another OpenAI safety insider has walked out, and this one is going public
+- OpenAI's cleanup from its agents' intrusions is turning out to be enormous
+- On energy, the BBC adds detail to the G7 deal
+- Brazil votes today in what polls show is a dead heat between eighty-year-old incumbent Lula da Silva and Flávio Bolsonaro, the far-right son of the former president, who is under house arrest after a coup conviction
+- In Kyiv, Russia struck a second major bridge on Saturday, damaging the Northern Bridge and briefly halting traffic
+- Tuesday's Sydney hearing will now put four AI companies under the same spotlight, not just one</description>
+      <pubDate>Sun, 04 Oct 2026 04:33:29 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-04</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/43d98aafae4e_daily_news_briefing_-_2026-10-04.mp3" type="audio/mpeg" length="2580453" />
+      <itunes:duration>00:04:33</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-04.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-03</title>
       <description>Daily News Briefing - 2026-10-03
@@ -1159,25 +1178,6 @@ Topics covered:
       <itunes:duration>01:02:44</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-03</title>
-      <description>Daily News Briefing - 2026-09-03
-
-Topics covered:
-- The top story today is a growing alarm among AI safety researchers over OpenAI's forthcoming Astra model, with significant new technical detail emerging about why this model is uniquely concerning
-- In a related AI policy development, the Trump administration has intervened in the New York Times copyright lawsuit against OpenAI, filing a statement of interest arguing that training AI models on copyrighted text constitutes fair use
-- Turning to the US-Iran conflict, the situation has grown more harrowing
-- On European security, the EU and NATO have vowed to escalate pressure on Russia after Germany formally attributed the Leipzig airport drone attack to Russian operatives
-- Finally, the Dutch central bank has moved eighty-six tonnes of gold reserves out of the United States and Canada to London, explicitly citing "increasing geopolitical unrest." The transfer, conducted between March and August, shifts the share of Dutch gold held in London from about eighteen percent to thirty-two percent
-- Looking ahead, the debate over opaque AI reasoning architectures may prove to be the defining safety controversy of this period, while the Iran conflict's civilian toll is raising pressure for diplomatic intervention that shows no sign of materializing</description>
-      <pubDate>Thu, 03 Sep 2026 04:34:30 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-03</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cbae4efcecad_daily_news_briefing_-_2026-09-03.mp3" type="audio/mpeg" length="3416085" />
-      <itunes:duration>00:05:57</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-03.txt" type="text/plain" />
     </item>
     <item>
       <title>Explaining Knightianism on one foot</title>
