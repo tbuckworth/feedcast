@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sun, 04 Oct 2026 04:33:44 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Oct 2026 04:35:49 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,25 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-05</title>
+      <description>Daily News Briefing - 2026-10-05
+
+Topics covered:
+- President Trump has named Director of National Intelligence Jay Clayton as the new White House AI czar, putting him in charge of what Trump calls the Super Intelligence Force
+- Agents breaking the rules have reached the gaming world
+- Brazil is headed to a runoff, and the right has the momentum
+- The rumoured Yemen offensive flagged by oil traders last week is now official
+- In Kyiv, a Russian drone hit the Northern Bridge again, the fourth straight day of attacks on the city's crossings
+- In Ethiopia, Tigrayan rebels have pulled out of the regional capital, Mekelle, and residents tell the BBC that pro-government forces now control it</description>
+      <pubDate>Mon, 05 Oct 2026 04:35:04 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-05</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9da5ae78394b_daily_news_briefing_-_2026-10-05.mp3" type="audio/mpeg" length="2767461" />
+      <itunes:duration>00:04:55</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-05.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-04</title>
       <description>Daily News Briefing - 2026-10-04
@@ -100,6 +119,18 @@ Topics covered:
       <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/52cc1b275c2a_our_ai_midwife.mp3" type="audio/mpeg" length="5511429" />
       <itunes:duration>00:09:49</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>On Social Reality in China</title>
+      <description>Audio version of On Social Reality in China by alkjash from LessWrong Curated</description>
+      <pubDate>Thu, 01 Oct 2026 20:49:52 +0000</pubDate>
+      <guid isPermaLink="false">b5cSYh4emQb2qrGmK</guid>
+      <link>https://www.lesswrong.com/posts/b5cSYh4emQb2qrGmK/on-social-reality-in-china</link>
+      <itunes:author>alkjash</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/90b99d2af086_on_social_reality_in_china.mp3" type="audio/mpeg" length="9215253" />
+      <itunes:duration>00:16:23</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1133,49 +1164,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/324173b47e3b_claude_fable_51_and_mythos_51_the_system_card.mp3" type="audio/mpeg" length="2490813" />
       <itunes:duration>00:04:25</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-04</title>
-      <description>Daily News Briefing - 2026-09-04
-
-Topics covered:
-- The biggest story today is the official launch of OpenAI's GPT-6 Astra, the model that has dominated safety discussions all week
-- In a closely related development, Nvidia has agreed to acquire Hugging Face for nearly thirteen billion dollars, in what would be the chip giant's largest-ever acquisition
-- A troubling AI safety story emerged from TechCrunch: a startup called Abliteration.ai has commercialized the removal of safety guardrails from open-weight AI models, turning what was previously an underground technique into a hosted service anyone can use from a web browser
-- On the US-Iran conflict, Iran continued striking US bases this week, targeting the Ahmad al-Jaber air base in Kuwait and the Al Minhad air base in the United Arab Emirates with missiles and drones
-- Volkswagen has confirmed the largest restructuring in global automotive history, with its supervisory board unanimously approving plans to cut one hundred thousand jobs by twenty-thirty — about fifteen percent of its workforce
-- Finally, four major AI services — ChatGPT, Claude, Grok, and Google's models — suffered a rare overlapping outage Thursday morning, with service disruptions spanning several hours before being resolved</description>
-      <pubDate>Fri, 04 Sep 2026 08:16:59 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-04</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1c92ffeb4194_daily_news_briefing_-_2026-09-04.mp3" type="audio/mpeg" length="3290061" />
-      <itunes:duration>00:05:48</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-04.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“AI #184: Post Post Mortem” by Zvi</title>
-      <description>Audio version of “AI #184: Post Post Mortem” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 03 Sep 2026 14:31:50 +0000</pubDate>
-      <guid isPermaLink="false">ce4b3e48-8d9f-48fd-9736-6d5255f00fd8</guid>
-      <link>https://www.lesswrong.com/posts/W4zWCphxQftwum5kc/ai-184-post-post-mortem</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b65a3e5e3dd4_ai_184_post_post_mortem_by_zvi.mp3" type="audio/mpeg" length="2305341" />
-      <itunes:duration>00:04:05</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>College EA Meetups Everywhere: Times &amp; Places</title>
-      <description>Audio version of College EA Meetups Everywhere: Times &amp; Places from Scott Alexander</description>
-      <pubDate>Thu, 03 Sep 2026 08:10:42 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/college-ea-meetups-everywhere-times</guid>
-      <link>https://www.astralcodexten.com/p/college-ea-meetups-everywhere-times</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bf58bc6fa073_college_ea_meetups_everywhere_times_places.mp3" type="audio/mpeg" length="33795453" />
-      <itunes:duration>01:02:44</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
