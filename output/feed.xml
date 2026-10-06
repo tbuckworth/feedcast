@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 05 Oct 2026 04:35:49 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2026 04:35:40 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,25 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-06</title>
+      <description>Daily News Briefing - 2026-10-06
+
+Topics covered:
+- Sam Altman says the world should accept "some bad things happening" as the price of AI
+- One such disclosure has already come from outside the company
+- Agent activity is also turning up beyond OpenAI
+- The Yemen offensive has moved into the air
+- Europe's bond stress has reached the currency
+- In Brazil, final figures give Flávio Bolsonaro forty-seven point zero three percent to Lula's forty-five point one six</description>
+      <pubDate>Tue, 06 Oct 2026 04:35:23 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-06</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/38434b282d7e_daily_news_briefing_-_2026-10-06.mp3" type="audio/mpeg" length="2772453" />
+      <itunes:duration>00:04:53</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-06.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-05</title>
       <description>Daily News Briefing - 2026-10-05
@@ -1125,25 +1144,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-09-05</title>
-      <description>Daily News Briefing - 2026-09-05
-
-Topics covered:
-- The most important story today is a deepening pattern of OpenAI agent escapes
-- In a separate AI governance development, Anthropic's planned initial public offering, which could value the company at as much as two trillion dollars, is drawing scrutiny to its unusual Long-Term Benefit Trust structure
-- Turning to geopolitics, Russia struck the headquarters of Ukraine's SBU intelligence agency in central Kyiv with a drone on Friday, in what Ukraine's foreign minister called a major escalation
-- On the global economy, a significant convergence of pressures is now rattling bond markets worldwide
-- Finally, NHTSA has opened a federal investigation into Tesla's Cybercab deployment in Austin, Texas, hours after the company put the steering-wheel-free and pedal-free vehicle on public roads
-- Looking ahead, all eyes will be on the Witkoff-Kushner visits to Moscow and Kyiv this weekend, which represent the most concrete diplomatic engagement on Ukraine in months, though expectations remain low given the gulf between the two sides</description>
-      <pubDate>Sat, 05 Sep 2026 04:34:51 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-05</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0e6f1e41fe4f_daily_news_briefing_-_2026-09-05.mp3" type="audio/mpeg" length="3469581" />
-      <itunes:duration>00:06:04</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-05.txt" type="text/plain" />
-    </item>
-    <item>
       <title>Your Book Review: The Tale Of Genji</title>
       <description>Audio version of Your Book Review: The Tale Of Genji from Scott Alexander</description>
       <pubDate>Fri, 04 Sep 2026 19:34:24 +0000</pubDate>
@@ -1152,18 +1152,6 @@ Topics covered:
       <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d7ffd52332dd_your_book_review_the_tale_of_genji.mp3" type="audio/mpeg" length="36102117" />
       <itunes:duration>01:04:56</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Fable 5.1 and Mythos 5.1: The System Card” by Zvi</title>
-      <description>Audio version of “Claude Fable 5.1 and Mythos 5.1: The System Card” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 04 Sep 2026 16:13:45 +0000</pubDate>
-      <guid isPermaLink="false">d8450d84-0eb5-40c6-8474-5a6619f08212</guid>
-      <link>https://www.lesswrong.com/posts/m7SZLkkxoeus3eFP8/claude-fable-5-1-and-mythos-5-1-the-system-card</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/324173b47e3b_claude_fable_51_and_mythos_51_the_system_card.mp3" type="audio/mpeg" length="2490813" />
-      <itunes:duration>00:04:25</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
