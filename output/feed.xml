@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Tue, 06 Oct 2026 04:35:40 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Oct 2026 04:35:34 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,49 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-07</title>
+      <description>Daily News Briefing - 2026-10-07
+
+Topics covered:
+- A human accomplice has surfaced in the Canadian school shooting that became infamous for its links to ChatGPT
+- OpenAI is also bowing to European law
+- On capabilities, OpenAI has released seven hundred twenty-two manuscripts from an unreleased frontier model
+- The Black Sea war has spilled into NATO waters
+- Ebola has crossed into a new country
+- On Wall Street, the S&amp;P five hundred topped seven thousand eight hundred for the first time, as chipmaker gains and easing Treasury yields lifted both it and the Nasdaq to records</description>
+      <pubDate>Wed, 07 Oct 2026 04:32:48 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-07</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b0a2ab3809c5_daily_news_briefing_-_2026-10-07.mp3" type="audio/mpeg" length="2738181" />
+      <itunes:duration>00:04:49</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-07.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Childhood and Education #21: Grades and Standards” by Zvi</title>
+      <description>Audio version of “Childhood and Education #21: Grades and Standards” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 06 Oct 2026 22:02:26 +0000</pubDate>
+      <guid isPermaLink="false">d28ecf39-900c-4d20-a9b4-831330d1e983</guid>
+      <link>https://www.lesswrong.com/posts/QXmyxaQnB57reu7ie/childhood-and-education-21-grades-and-standards</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c67677c548d3_childhood_and_education_21_grades_and_standards.mp3" type="audio/mpeg" length="2218989" />
+      <itunes:duration>00:03:55</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>An Open Letter To Steven Pinker On AI</title>
+      <description>Audio version of An Open Letter To Steven Pinker On AI from Scott Alexander</description>
+      <pubDate>Tue, 06 Oct 2026 21:23:06 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/an-open-letter-to-steven-pinker-on</guid>
+      <link>https://www.astralcodexten.com/p/an-open-letter-to-steven-pinker-on</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4b6284bac42a_an_open_letter_to_steven_pinker_on_ai.mp3" type="audio/mpeg" length="40487877" />
+      <itunes:duration>01:11:59</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-06</title>
       <description>Daily News Briefing - 2026-10-06
@@ -1110,36 +1153,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/dbbf5f948125_openai_and_the_wiki_incident_by_zvi.mp3" type="audio/mpeg" length="2380293" />
       <itunes:duration>00:04:10</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-06</title>
-      <description>Daily News Briefing - 2026-09-06
-
-Topics covered:
-- The top story today is a significant shift from OpenAI on transparency
-- In the US-Iran conflict, the situation escalated sharply on Saturday with both sides attacking each other's ships
-- On Ukraine, Trump's envoys Jared Kushner and Steve Witkoff met with Vladimir Putin in Moscow on Saturday in what the White House called discussions of "substantive plans for next steps" to end the war, with announcements expected in coming weeks
-- Finally, the NHTSA investigation into Tesla's Cybercab continues to develop
-- Looking ahead, the Kushner-Witkoff meetings in Kyiv today will be the most closely watched diplomatic moment of the week, while OpenAI's promised disclosure framework could set important precedent for how the entire AI industry handles misalignment incidents going forward</description>
-      <pubDate>Sun, 06 Sep 2026 04:34:01 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-06</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c67f1e83f295_daily_news_briefing_-_2026-09-06.mp3" type="audio/mpeg" length="2819325" />
-      <itunes:duration>00:04:55</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-06.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“Claude Mythos 5.1 and Fable 5.1: Capabilities” by Zvi</title>
-      <description>Audio version of “Claude Mythos 5.1 and Fable 5.1: Capabilities” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sat, 05 Sep 2026 19:54:17 +0000</pubDate>
-      <guid isPermaLink="false">4340172b-3016-4a6b-b480-ae237fdd457c</guid>
-      <link>https://www.lesswrong.com/posts/QHoF3tJvryRtmAmMg/claude-mythos-5-1-and-fable-5-1-capabilities</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/88e4da4d856b_claude_mythos_51_and_fable_51_capabilities_by.mp3" type="audio/mpeg" length="2255493" />
-      <itunes:duration>00:03:55</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
