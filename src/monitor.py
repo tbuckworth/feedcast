@@ -92,6 +92,9 @@ class FeedEntry:
     bundle: Optional[str] = None
     # Result of the source check (src/verify.py), as a plain dict.
     fidelity: Optional[dict] = None
+    # The briefing's prediction-market context (MarketContext.to_dict()), for
+    # the trial email's charts and for not reporting a move twice.
+    markets: Optional[dict] = None
 
 
 def entry_to_dict(entry: FeedEntry) -> dict:
@@ -245,7 +248,35 @@ class FeedMonitor:
                     deferred_at TEXT NOT NULL
                 )
             """)
+            # Prediction-market moves the briefing has reported, so a market
+            # that keeps drifting is not announced every morning: it comes
+            # back only once it has moved another threshold's worth.
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS market_reports (
+                    market_key TEXT PRIMARY KEY,
+                    prob REAL NOT NULL,
+                    reported_at TEXT NOT NULL
+                )
+            """)
             conn.commit()
+
+    def record_market_reports(self, moves: list[dict]) -> None:
+        """Remember the price at which each reported move was announced."""
+        now = datetime.now().isoformat()
+        with sqlite3.connect(self.db_path) as conn:
+            conn.executemany(
+                "INSERT OR REPLACE INTO market_reports (market_key, prob, reported_at) "
+                "VALUES (?, ?, ?)", [(m["key"], m["prob"], now) for m in moves])
+            conn.commit()
+
+    def recent_market_reports(self, days: int = 7) -> dict[str, float]:
+        """market key -> price when last reported, for moves reported within `days`."""
+        cutoff = (datetime.now() - timedelta(days=days)).isoformat()
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("DELETE FROM market_reports WHERE reported_at < ?", (cutoff,))
+            rows = conn.execute("SELECT market_key, prob FROM market_reports").fetchall()
+            conn.commit()
+        return dict(rows)
 
     def is_processed(self, entry_id: str) -> bool:
         """Check if a post has already been processed."""

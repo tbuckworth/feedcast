@@ -10,6 +10,7 @@ import feedparser
 from .bundle import writer_bundle
 from .extractor import extract_article
 from .llm import complete
+from .markets import MarketContext, MarketScout
 from .monitor import FeedEntry, warn_if_dead
 from .verify import fidelity_markdown, verify_script
 
@@ -43,6 +44,7 @@ class NewsAggregator:
         full_text_stories: int = 12,
         max_article_chars: int = 6000,
         verify: bool = True,
+        markets: MarketScout | None = None,
     ):
         self.sources = sources
         self.prompt = prompt
@@ -58,6 +60,10 @@ class NewsAggregator:
         self.full_text_stories = full_text_stories
         self.max_article_chars = max_article_chars
         self.verify = verify
+        # Prediction-market odds for the chosen stories, and the day's big
+        # unexplained moves (src/markets.py). None leaves the briefing as it was.
+        self.markets = markets
+        self.last_markets = MarketContext()
         self.recent_briefings = recent_briefings or []
         self.client = None   # None: llm.complete() routes with fallbacks; tests pin a fake
         # Sources that returned nothing this run. A dead feed reads as a slow
@@ -115,8 +121,12 @@ class NewsAggregator:
 
         return all_articles
 
-    def _format_articles_for_prompt(self, articles: list[dict]) -> str:
-        """Group articles by category and format as structured text."""
+    def _format_articles_for_prompt(self, articles: list[dict],
+                                    notes: MarketContext | None = None) -> str:
+        """Group articles by category and format as structured text.
+
+        `notes` appends each story's prediction-market odds, where it has any.
+        """
         by_category: dict[str, list[dict]] = {}
         for article in articles:
             by_category.setdefault(article["category"], []).append(article)
@@ -129,8 +139,10 @@ class NewsAggregator:
                 # back to the article it came from.
                 url = f"\n  URL: {item['url']}" if item.get("url") else ""
                 body = item.get("text") or item["summary"]
+                odds = notes.story_block(item.get("url", "")) if notes else ""
                 section_lines.append(
                     f"- [{item['source']}] {item['title']}{url}\n  {body}"
+                    + (f"\n{odds}" if odds else "")
                 )
             sections.append("\n".join(section_lines))
 
@@ -179,22 +191,35 @@ class NewsAggregator:
         results = await asyncio.gather(*[one(a) for a in articles])
         return sum(results)
 
-    def _format_briefing_input(self, articles: list[dict], selected: list[dict]) -> str:
-        """What the writer sees: chosen stories in full, everything else as headlines."""
-        if not selected:
-            return self._format_articles_for_prompt(articles)
-        chosen = {id(a) for a in selected}
-        rest = [a for a in articles if id(a) not in chosen]
-        parts = ["## Selected stories (full text where available)", "",
-                 self._format_articles_for_prompt(selected)]
-        if rest:
-            parts += ["", "## Other headlines (not selected; mention only if essential)", ""]
-            parts += [f"- [{a['source']}] {a['title']}" + (f" {a['url']}" if a.get("url") else "")
-                      for a in rest]
-        return "\n".join(parts)
+    def _format_briefing_input(self, articles: list[dict], selected: list[dict],
+                               markets: MarketContext | None = None) -> str:
+        """What the writer sees: chosen stories in full, everything else as headlines.
 
-    async def synthesize_briefing(self, formatted_articles: str) -> str:
-        """Synthesize the briefing from formatted articles with the writer role."""
+        With market data, the chosen stories carry their odds and a closing
+        section lists the day's unexplained moves.
+        """
+        markets = markets or MarketContext()
+        if not selected:
+            text = self._format_articles_for_prompt(articles)
+        else:
+            chosen = {id(a) for a in selected}
+            rest = [a for a in articles if id(a) not in chosen]
+            parts = ["## Selected stories (full text where available)", "",
+                     self._format_articles_for_prompt(selected, markets)]
+            if rest:
+                parts += ["", "## Other headlines (not selected; mention only if essential)", ""]
+                parts += [f"- [{a['source']}] {a['title']}" + (f" {a['url']}" if a.get("url") else "")
+                          for a in rest]
+            text = "\n".join(parts)
+        moves = markets.moves_section()
+        return f"{text}\n\n{moves}" if moves else text
+
+    async def synthesize_briefing(self, formatted_articles: str, extra_instructions: str = "") -> str:
+        """Synthesize the briefing from formatted articles with the writer role.
+
+        `extra_instructions` goes just before the articles, so a day without
+        market data sends exactly the message it always did.
+        """
         # Build user message with dedup context from recent briefings
         user_message_parts = []
         if self.recent_briefings:
@@ -214,6 +239,8 @@ class NewsAggregator:
                f"Use this date when you open the briefing, not a date taken "
                f"from any article.")
         user_message_parts.insert(1, "")
+        if extra_instructions:
+            user_message_parts += [extra_instructions, ""]
         user_message_parts.append("## Today's articles:")
         user_message_parts.append(formatted_articles)
         user_message = "\n".join(user_message_parts)
@@ -254,9 +281,12 @@ class NewsAggregator:
         if selected:
             got = await self.fetch_full_text(selected)
             print(f"  Selected {len(selected)} stories; full text for {got}")
-        formatted = self._format_briefing_input(articles, selected)
+        markets = (await self.markets.build((selected or articles)[:self.full_text_stories or 12])
+                   if self.markets else MarketContext())
+        self.last_markets = markets
+        formatted = self._format_briefing_input(articles, selected, markets)
         print("  Synthesizing briefing via LLM...")
-        briefing_text = await self.synthesize_briefing(formatted)
+        briefing_text = await self.synthesize_briefing(formatted, markets.instructions())
         bundle = self.last_bundle
 
         today = datetime.now().strftime("%Y-%m-%d")
@@ -276,5 +306,6 @@ class NewsAggregator:
             # story the briefing never told (a SpaceX launch, 2026-09-16) and
             # cost ~4k tokens a call for the list alone.
             sources=[{"title": a["title"], "url": a["url"], "source": a["source"]}
-                     for a in (selected or articles) if a.get("url")],
+                     for a in (selected or articles) if a.get("url")] + markets.sources(),
+            markets=markets.to_dict() if markets else None,
         )

@@ -1,6 +1,7 @@
 """Main entry point for feedcast pipeline."""
 
 import asyncio
+import dataclasses
 import hashlib
 import json
 import os
@@ -18,12 +19,14 @@ from pydantic import BaseModel
 from .audio import AudioGenerator
 from .bundle import write_bundle
 from .digest import safe_bullets
-from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
+from .email_report import (ChartNote, LinkedPost, ReportEpisode, RunReport, _addresses,
+                           bullet_parts, is_test_run, send_report)
 from .extractor import ExtractionError, url_to_feed_entry
 from .feed import Episode, FeedGenerator, PodcastConfig, episode_page_url
 from .fulltext import enrich_entry
 from .lesswrong import posted_at
 from . import llm
+from .markets import MarketRules, MarketScout
 from .mathiness import MathsVerdict, assess
 from .monitor import DEFAULT_MAX_AGE_HOURS, FeedEntry, FeedMonitor, episode_id
 from .news import NewsAggregator
@@ -95,6 +98,24 @@ class NewsBriefingConfig(BaseModel):
     max_article_chars: int = 6000
 
 
+class PredictionMarketsConfig(BaseModel):
+    """Prediction-market odds on the briefing's stories, and big unexplained moves.
+
+    See src/markets.py. The rest of the rules (volume floors, exclusions,
+    topics) live in MarketRules, with defaults from a 30-day backtest.
+    """
+
+    enabled: bool = False
+    polymarket_tags: list[str] = ["ai", "openai", "anthropic"]
+    # Kalshi has no search; these are the AI series scanned for moves and
+    # matched against stories. Its own tag listing caps out before the AGI
+    # and OpenAI IPO series, so they are named here.
+    kalshi_series: list[str] = []
+    move: float = 0.15
+    major_move: float = 0.20
+    max_moves: int = 3
+
+
 class Config(BaseModel):
     """Full application configuration."""
 
@@ -106,6 +127,7 @@ class Config(BaseModel):
     maths_filter: MathsFilterConfig = MathsFilterConfig()
     # Second-model check of every written script against its source.
     fidelity_check: bool = True
+    prediction_markets: PredictionMarketsConfig = PredictionMarketsConfig()
 
 
 def load_config(config_path: Path) -> Config:
@@ -589,6 +611,12 @@ async def async_main(config_path: Path | None = None) -> None:
         # Generate daily news briefing if configured
         if config.news_briefing and config.news_briefing.enabled:
             recent_briefings = monitor.get_recent_briefings(5)
+            pm = config.prediction_markets
+            scout = MarketScout(
+                rules=MarketRules(move=pm.move, major_move=pm.major_move, max_moves=pm.max_moves),
+                polymarket_tags=pm.polymarket_tags, kalshi_series=pm.kalshi_series,
+                recently_reported=monitor.recent_market_reports(),
+            ) if pm.enabled else None
             aggregator = NewsAggregator(
                 sources=[s.model_dump() for s in config.news_briefing.sources],
                 prompt=config.news_briefing.prompt,
@@ -597,6 +625,7 @@ async def async_main(config_path: Path | None = None) -> None:
                 full_text_stories=config.news_briefing.full_text_stories,
                 max_article_chars=config.news_briefing.max_article_chars,
                 verify=config.fidelity_check,
+                markets=scout,
             )
             # Idempotent per day: the briefing id is date-keyed, so once it is in
             # the database a second run today (a reprocess, a test run, the late
@@ -733,6 +762,8 @@ async def async_main(config_path: Path | None = None) -> None:
             if entry.id.startswith("news-briefing-") and briefing_entry:
                 today = datetime.now().strftime("%Y-%m-%d")
                 monitor.store_news_briefing(today, briefing_entry.content)
+                if briefing_entry.markets:
+                    monitor.record_market_reports(briefing_entry.markets["moves"])
             new_episodes += 1
 
         print(f"  {new_episodes} new episodes created")
@@ -799,6 +830,8 @@ async def async_main(config_path: Path | None = None) -> None:
             maths_skipped, dead_sources, pending=waiting,
         )
         send_report(report)
+        if briefing_entry and briefing_entry.id in new_entry_ids:
+            _send_markets_trial(report, briefing_entry)
     else:
         print("  Nothing new — email report skipped (set FEEDCAST_EMAIL_ALWAYS=true to send anyway)")
 
@@ -826,6 +859,60 @@ async def _correct_publication_dates(entries: list[FeedEntry]) -> None:
         print(f"    {entry.title[:48]}: posted {real:%Y-%m-%d}, "
               f"curated {entry.feed_date:%Y-%m-%d}")
         entry.published = real
+
+
+def _send_markets_trial(report: RunReport, briefing: FeedEntry) -> None:
+    """The prediction-markets trial: the day's email again, with price charts.
+
+    Goes to FEEDCAST_DEV_EMAIL_TO (Titus and Jason, while the charts are on
+    trial) under a "[DEV - Prediction Markets]" subject, and only on days the
+    briefing used a market. A chart is drawn for each unexplained move and for
+    each story market the script names, and sits under the bullet that links
+    its story. A hand-dispatched dev run sends it to FEEDCAST_EMAIL_TO only.
+    Never raises.
+    """
+    try:
+        from .market_charts import render_chart
+
+        recipients = _addresses(os.environ.get("FEEDCAST_DEV_EMAIL_TO", ""))
+        data = briefing.markets
+        if not recipients or not data:
+            return
+        if is_test_run():
+            recipients = _addresses(os.environ.get("FEEDCAST_EMAIL_TO", ""))
+        script = (briefing.content or "").lower()
+        bullet_urls = {u for b in briefing.bullets for u in [bullet_parts(b)[1]] if u}
+        charts: list[ChartNote] = []
+        images: dict[str, bytes] = {}
+
+        def add(m: dict, anchor: str, story_time: datetime | None, caption: str) -> None:
+            history = [(datetime.fromisoformat(when), p) for when, p in m.get("history") or []]
+            png = render_chart(history, story_time)
+            if png:
+                cid = f"market-{len(images)}@feedcast"
+                images[cid] = png
+                charts.append(ChartNote(cid=cid, title=m["title"], platform=m["platform"],
+                                        url=m["url"], caption=caption, anchor=anchor))
+
+        for m in data.get("moves") or []:
+            add(m, m["url"] if m["url"] in bullet_urls else "", None,
+                f"{m['prob_24h']:.0%} to {m['prob']:.0%} in the last 24 hours · {m['traded']}")
+        for story_url, markets in (data.get("stories") or {}).items():
+            raw_time = (data.get("story_times") or {}).get(story_url)
+            story_time = datetime.fromisoformat(raw_time) if raw_time else None
+            for m in markets:
+                # Only markets the writer actually used, on stories it covered.
+                if m["platform"].lower() not in script:
+                    continue
+                if story_url not in bullet_urls and m["url"] not in bullet_urls:
+                    continue
+                add(m, story_url if story_url in bullet_urls else m["url"], story_time,
+                    f"Now {m['prob']:.0%} · {m['traded']} · dashed line: the story")
+        if charts:
+            send_report(dataclasses.replace(report, charts=charts), recipients=recipients,
+                        subject_tag="[DEV - Prediction Markets]", images=images)
+    except Exception as e:  # noqa: BLE001 — a trial must never cost the day's run
+        print(f"  Prediction-markets trial email failed: {type(e).__name__}: {e}")
 
 
 def _run_pass() -> str:

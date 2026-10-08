@@ -112,6 +112,23 @@ maths_filter:
   enabled: true
   threshold_per_1k: 8.0
 
+# Prediction-market odds on the briefing's stories ("Polymarket had this at
+# twenty percent a week ago"), and a closing segment on big 24-hour moves in AI
+# markets that none of the day's stories explains, with the cause found by a
+# web search. Both are left out on days with nothing. Thresholds come from a
+# 30-day backtest (src/markets.py); at these the segment ran about once or
+# twice a week.
+prediction_markets:
+  enabled: true
+  polymarket_tags: [ai, openai, anthropic]
+  kalshi_series: [KXIPOANTHROPIC, KXIPOOPENAI, KXOAIAGI, KXAGICO, KXCLAUDE, KXGEMINI,
+                  KXAISPIKE, KXMODELHIGH, KXOAIHARDWARE, KXOAIPERSONALAGENT, KXLASTEXAM,
+                  KXANTHROPICMILLENNIUM, KXOPENAIANOTHERMILLENNIUM, KXOPENAICEOCHANGE,
+                  KXAIREVIEW, KXAIBILL, KXSPACEDATACENTER, KXCHINAAI]
+  move: 0.15        # a 15-point move in 24 hours
+  major_move: 0.20  # IPO, valuation and boardroom markets need 20
+  max_moves: 3
+
 news_briefing:
   enabled: true
   lookback_hours: 24
