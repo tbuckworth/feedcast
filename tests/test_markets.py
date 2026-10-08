@@ -294,3 +294,71 @@ def test_preview_writes_a_briefing_and_emails_it_without_publishing(tmp_path, mo
     digest, script = report.episodes
     assert digest.bullets and script.briefing_text == "On Polymarket, odds rose."
     assert monitor.get_processed_entries() == [] and monitor.get_recent_briefings() == []
+
+
+def _png_height(png: bytes) -> int:
+    return int.from_bytes(png[20:24], "big")   # IHDR height
+
+
+class TestLongHistoryCharts:
+
+    def test_zoom_panel_only_when_asked_and_short_history_draws_nothing(self):
+        from src.market_charts import render_chart
+        line = [(NOW - timedelta(days=d), 0.4) for d in range(90, -1, -1)]
+        assert _png_height(render_chart(line, NOW)) == 190
+        assert _png_height(render_chart(line, NOW, zoom=line[-8:])) == 300
+        assert render_chart(line[:1]) is None
+
+    def test_thin_keeps_the_latest_point(self):
+        pts = list(range(1000))
+        thin = markets._thin(pts, 100)
+        assert len(thin) == 100 and thin[-1] == 999 and thin[0] == 0
+
+    def test_long_history_reads_a_markets_whole_life_and_pages_manifold(self):
+        import httpx
+        seen = []
+
+        def handler(request):
+            seen.append(request.url)
+            if "prices-history" in str(request.url):
+                start = int((NOW - timedelta(days=200)).timestamp())
+                return httpx.Response(200, json={"history": [
+                    {"t": start + i * 43200, "p": 0.5} for i in range(400)]})
+            # Manifold: a full page, then a short one.
+            page = 1000 if "before" not in str(request.url) else 3
+            return httpx.Response(200, json=[
+                {"id": f"b{i}", "createdTime": int((NOW - timedelta(hours=i)).timestamp() * 1000),
+                 "probAfter": 0.3} for i in range(page)])
+
+        async def run():
+            async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+                pm, mf = _m(), _m(platform="Manifold")
+                pm.history_ref, mf.history_ref = "tok", "abc"
+                await markets.fetch_long_history(client, pm)
+                await markets.fetch_long_history(client, mf)
+                return pm, mf
+
+        pm, mf = asyncio.run(run())
+        assert "interval=max" in str(seen[0]) and len(pm.long_history) == 400
+        assert len(mf.long_history) == 800 and any("before=b999" in str(u) for u in seen)
+
+    def test_trial_zooms_on_a_story_market_that_moved_and_not_on_a_flat_one(self, monkeypatch):
+        calls = []
+        monkeypatch.setattr(main, "send_report", lambda report, **kw: calls.append(kw))
+        monkeypatch.setenv("FEEDCAST_MARKETS_TRIAL_TO", "titus@x")
+        monkeypatch.delenv("FEEDCAST_TEST_RUN", raising=False)
+        heights = {}
+        for name, jump in (("moved", 0.10), ("flat", 0.0)):
+            ctx = MarketContext()
+            m = _m(f"Will Democrats win the Ohio Senate race ({name})?", prob=0.6 + jump, before=None)
+            m.history = [(NOW - timedelta(hours=h), 0.6 + (jump if h < 10 else 0)) for h in range(200, -1, -1)]
+            m.long_history = [(NOW - timedelta(days=d), 0.5) for d in range(120, 8, -1)]
+            ctx.stories["https://news/ohio"] = [m]
+            ctx.story_times["https://news/ohio"] = NOW - timedelta(hours=12)
+            briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
+                                 content="Polymarket", bullets=[{"text": "Ohio", "url": "https://news/ohio"}],
+                                 markets=ctx.to_dict())
+            main._send_markets_trial(TestTrialEmail()._report(), briefing)
+            (png,) = calls[-1]["images"].values()
+            heights[name] = _png_height(png)
+        assert heights == {"moved": 300, "flat": 190}

@@ -920,7 +920,7 @@ def _send_markets_trial(report: RunReport, briefing: FeedEntry) -> None:
     Never raises.
     """
     try:
-        from .market_charts import render_chart
+        from .market_charts import render_chart, zoom_window
 
         recipients = _addresses(os.environ.get("FEEDCAST_MARKETS_TRIAL_TO", ""))
         data = briefing.markets
@@ -933,9 +933,21 @@ def _send_markets_trial(report: RunReport, briefing: FeedEntry) -> None:
         charts: list[ChartNote] = []
         images: dict[str, bytes] = {}
 
-        def add(m: dict, anchor: str, story_time: datetime | None, caption: str) -> None:
-            history = [(datetime.fromisoformat(when), p) for when, p in m.get("history") or []]
-            png = render_chart(history, story_time)
+        def points(m: dict, key: str) -> list:
+            return [(datetime.fromisoformat(when), p) for when, p in m.get(key) or []]
+
+        def add(m: dict, anchor: str, story_time: datetime | None, caption: str,
+                always_zoom: bool = False) -> None:
+            # The whole life for context, with the hourly last 30 days spliced
+            # onto the end for detail.
+            recent, life = points(m, "history"), points(m, "long_history")
+            line = [pt for pt in life if not recent or pt[0] < recent[0][0]] + recent
+            # Zoom on the last week when the market moved around the story:
+            # that is where "how surprising was this" shows.
+            zoom = zoom_window(recent, recent[-1][0]) if recent else []
+            around = [p for when, p in recent if story_time and when >= story_time - timedelta(days=2)]
+            moved = always_zoom or (around and max(around) - min(around) >= 0.05)
+            png = render_chart(line, story_time, zoom if moved else None)
             if png:
                 cid = f"market-{len(images)}@feedcast"
                 images[cid] = png
@@ -944,7 +956,8 @@ def _send_markets_trial(report: RunReport, briefing: FeedEntry) -> None:
 
         for m in data.get("moves") or []:
             add(m, m["url"] if m["url"] in bullet_urls else "", None,
-                f"{m['prob_24h']:.0%} to {m['prob']:.0%} in the last 24 hours · {m['traded']}")
+                f"{m['prob_24h']:.0%} to {m['prob']:.0%} in the last 24 hours · {m['traded']}",
+                always_zoom=True)
         for story_url, markets in (data.get("stories") or {}).items():
             raw_time = (data.get("story_times") or {}).get(story_url)
             story_time = datetime.fromisoformat(raw_time) if raw_time else None

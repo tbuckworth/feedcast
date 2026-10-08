@@ -89,7 +89,11 @@ class Market:
     closes: datetime | None = None
     event: str = ""               # groups the outcomes of one question
     history_ref: str = ""         # what the history endpoint wants
-    history: list = field(default_factory=list)   # [(datetime, prob)], oldest first
+    history: list = field(default_factory=list)   # [(datetime, prob)], hourly, last 30 days
+    # The market's whole life (capped at a year), coarser, for the charts: a
+    # long-running question needs months of context to show how surprising a
+    # move was, and a short-dated one simply has a short line.
+    long_history: list = field(default_factory=list)
 
     @property
     def move(self) -> float | None:
@@ -116,6 +120,7 @@ class Market:
             "platform": self.platform, "key": self.key, "title": self.title, "url": self.url,
             "prob": self.prob, "prob_24h": self.prob_24h, "traded": self.traded(),
             "history": [[t.isoformat(), p] for t, p in self.history],
+            "long_history": [[t.isoformat(), p] for t, p in self.long_history],
         }
 
 
@@ -259,6 +264,55 @@ async def fetch_history(client: httpx.AsyncClient, market: Market, since: dateti
     except Exception as e:  # noqa: BLE001 — a missing chart is not a failed run
         print(f"    market history unavailable ({market.key}): {type(e).__name__}")
         market.history = []
+
+
+async def fetch_long_history(client: httpx.AsyncClient, market: Market,
+                             max_days: int = 365) -> None:
+    """Fill market.long_history: about two points a day since the market opened,
+    at most `max_days` back. Leaves it empty on any failure."""
+    since = _utcnow() - timedelta(days=max_days)
+    try:
+        if market.platform == "Polymarket":
+            data = await _get(client, f"{POLY_CLOB}/prices-history", market=market.history_ref,
+                              interval="max", fidelity=720)
+            points = [(datetime.fromtimestamp(h["t"], tz=timezone.utc), float(h["p"]))
+                      for h in data.get("history") or []]
+        elif market.platform == "Kalshi":
+            series, ticker = market.history_ref.split("|", 1)
+            data = await _get(client, f"{KALSHI}/series/{series}/markets/{ticker}/candlesticks",
+                              start_ts=int(since.timestamp()),
+                              end_ts=int(_utcnow().timestamp()), period_interval=1440)
+            points = []
+            for c in data.get("candlesticks") or []:
+                price = c.get("price") or {}
+                p = _float(price.get("close_dollars")) or _float(price.get("previous_dollars"))
+                if p is not None:
+                    points.append((datetime.fromtimestamp(c["end_period_ts"], tz=timezone.utc), p))
+        else:
+            # Newest first, 1,000 a page; three pages reach back far enough
+            # for all but the busiest markets.
+            bets, before = [], None
+            for _ in range(3):
+                page = await _get(client, f"{MANIFOLD}/bets", contractId=market.history_ref,
+                                  limit=1000, **({"before": before} if before else {}))
+                bets += page or []
+                if len(page or []) < 1000:
+                    break
+                before = page[-1]["id"]
+            points = sorted((_when(b["createdTime"]), float(b["probAfter"]))
+                            for b in bets if b.get("probAfter") is not None)
+        market.long_history = _thin([pt for pt in sorted(points) if pt[0] >= since], 800)
+    except Exception as e:  # noqa: BLE001 — the chart falls back to the 30-day history
+        print(f"    long market history unavailable ({market.key}): {type(e).__name__}")
+        market.long_history = []
+
+
+def _thin(points: list, limit: int) -> list:
+    """At most `limit` points, evenly spaced through the list, keeping the last."""
+    if len(points) <= limit:
+        return points
+    step = len(points) / limit
+    return [points[int(i * step)] for i in range(limit - 1)] + [points[-1]]
 
 
 # --- Rules ------------------------------------------------------------------
@@ -640,7 +694,8 @@ class MarketScout:
 
             since = now - timedelta(days=30)
             everything = [*ctx.moves, *(m for ms in ctx.stories.values() for m in ms)]
-            await asyncio.gather(*[fetch_history(client, m, since) for m in everything])
+            await asyncio.gather(*[fetch_history(client, m, since) for m in everything],
+                                 *[fetch_long_history(client, m) for m in everything])
         causes = await asyncio.gather(*[find_cause(m, now) for m in ctx.moves])
         ctx.causes = {m.key: c for m, c in zip(ctx.moves, causes)}
         print(f"  Prediction markets: {sum(len(v) for v in ctx.stories.values())} linked to "
