@@ -217,7 +217,7 @@ Content:
         elif mode == "summarize":
             summary = await self.summarize(entry, prompt)
             # Add intro for context
-            intro = f"Summary of {episode_title} by {entry.author}."
+            intro = f"Summary of {spoken_title(entry.title, entry.author)} by {entry.author}."
             text = f"{intro}\n\n{summary}"
         elif mode == "verbatim":
             text = await self.process_verbatim(entry)
@@ -229,7 +229,7 @@ Content:
             else:
                 print(f"    Auto mode: {len(clean_text)} chars > {AUTO_VERBATIM_LIMIT} → summarize")
                 summary = await self.summarize(entry, prompt)
-                intro = f"Summary of {episode_title} by {entry.author}."
+                intro = f"Summary of {spoken_title(entry.title, entry.author)} by {entry.author}."
                 text = f"{intro}\n\n{summary}"
         else:
             raise ValueError(f"Unknown processing mode: {mode}")
