@@ -26,9 +26,12 @@ def test_dev_mode_is_the_default_for_every_operator_input():
     steps = wf["jobs"]["update"]["steps"]
     (run,) = [s for s in steps if s.get("name") == "Run pipeline"]
     expr = run["env"]["FEEDCAST_TEST_RUN"]
+    guard_on_demand = wf["jobs"]["guard"]["steps"][0]["env"]["ON_DEMAND"]
     for operator_input in ("inputs.entry_url != ''", "inputs.inject_url != ''",
-                           "inputs.resend_report == true", "inputs.force == true"):
+                           "inputs.resend_report == true", "inputs.force == true",
+                           "inputs.preview_briefing == true"):
         assert operator_input in expr, operator_input
+        assert operator_input in guard_on_demand, operator_input
     assert "inputs.notify_list != true" in expr
     # notify_list must not make a bare dispatch skip the daily guard.
     guard = wf["jobs"]["guard"]["steps"][0]["env"]["ON_DEMAND"]

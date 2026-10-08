@@ -39,6 +39,11 @@ on:
         required: false
         type: boolean
         default: false
+      preview_briefing:
+        description: 'Write a fresh briefing (with prediction markets) and email it to FEEDCAST_EMAIL_TO only; publishes nothing'
+        required: false
+        type: boolean
+        default: false
       force:
         description: 'Run even if today''s daily run already published'
         required: false
@@ -100,7 +105,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
           RUN_ID: ${{ github.run_id }}
-          ON_DEMAND: ${{ inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true }}
+          ON_DEMAND: ${{ inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true || inputs.preview_briefing == true }}
         run: |
           set -euo pipefail
           if [[ "$ON_DEMAND" == "true" ]]; then
@@ -181,6 +186,7 @@ jobs:
           INJECT_URL: ${{ inputs.inject_url }}
           INJECT_MODE: ${{ inputs.inject_mode }}
           RESEND_REPORT: ${{ inputs.resend_report }}
+          PREVIEW_BRIEFING: ${{ inputs.preview_briefing }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           # Completion email. Absent secrets simply skip the report.
           SMTP_HOST: ${{ vars.SMTP_HOST }}
@@ -189,6 +195,8 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           FEEDCAST_EMAIL_TO: ${{ secrets.FEEDCAST_EMAIL_TO }}
           FEEDCAST_EMAIL_BCC: ${{ secrets.FEEDCAST_EMAIL_BCC }}
+          # Prediction-markets trial email with charts (Titus and Jason).
+          FEEDCAST_MARKETS_TRIAL_TO: ${{ secrets.FEEDCAST_MARKETS_TRIAL_TO }}
           FEEDCAST_EMAIL_ALWAYS: ${{ vars.FEEDCAST_EMAIL_ALWAYS }}
           FEEDCAST_MAX_AGE_HOURS: ${{ vars.FEEDCAST_MAX_AGE_HOURS }}
           # Dev mode: every run an operator asked for by hand (the same set the
@@ -197,7 +205,7 @@ jobs:
           # dispatch from scripts/cron-backstop.sh — is the only one that
           # reaches the list on its own. Two debugging re-runs on 2026-09-08
           # each emailed everyone, one of them about nothing but a failure.
-          FEEDCAST_TEST_RUN: ${{ (inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true) && inputs.notify_list != true }}
+          FEEDCAST_TEST_RUN: ${{ (inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true || inputs.preview_briefing == true) && inputs.notify_list != true }}
           VOICE_UPLOAD_DELAY_SECONDS: "5"
           SAVE_DEBUG_WAVS: "false"
           # Briefing and summaries now; posts read out in full are cleaned,
@@ -219,6 +227,8 @@ jobs:
 
   deploy:
     needs: update
+    # A preview publishes nothing, so there is nothing to deploy.
+    if: inputs.preview_briefing != true
     uses: ./.github/workflows/publish-pages.yml
     with:
       artifact_name: github-pages
@@ -275,7 +285,7 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           FEEDCAST_EMAIL_TO: ${{ secrets.FEEDCAST_EMAIL_TO }}
-          FEEDCAST_TEST_RUN: ${{ (inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true) && inputs.notify_list != true }}
+          FEEDCAST_TEST_RUN: ${{ (inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true || inputs.preview_briefing == true) && inputs.notify_list != true }}
           VOICE_UPLOAD_DELAY_SECONDS: "5"
           SAVE_DEBUG_WAVS: "false"
           FEEDCAST_PASS: narrate

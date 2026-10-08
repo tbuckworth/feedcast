@@ -58,6 +58,18 @@ class ReportEpisode:
 
 
 @dataclass
+class ChartNote:
+    """A prediction-market chart for the trial email, shown under its bullet."""
+
+    cid: str            # Content-ID of the attached PNG
+    title: str          # the market's question
+    platform: str
+    url: str
+    caption: str        # "55% a week before the story, 3% now · $1.2M traded"
+    anchor: str = ""    # bullet URL to sit under; unplaced charts get their own section
+
+
+@dataclass
 class LinkedPost:
     """A post deliberately not narrated — too mathematical to follow by ear."""
 
@@ -85,6 +97,8 @@ class RunReport:
     feed_url: str = ""
     site_url: str = ""
     total_in_feed: int = 0
+    # Only the prediction-markets trial email sets these.
+    charts: list[ChartNote] = field(default_factory=list)
 
 
 def format_duration(seconds: int) -> str:
@@ -261,8 +275,20 @@ def number_notes(episodes: list) -> tuple[dict[int, dict[str, int]], list[tuple[
     return marks, ordered
 
 
+def _chart_html(c: ChartNote) -> str:
+    return (f'<div style="margin:6px 0 12px 0;padding:8px 10px;border:1px solid {RULE};'
+            f'border-radius:4px;background:#fafafa;">'
+            f'<div style="font-size:12px;color:{INK};margin-bottom:4px;">'
+            f'<a href="{escape(c.url, quote=True)}" style="color:{ACCENT};text-decoration:none;">'
+            f'{escape(c.platform)}: {escape(c.title)}</a></div>'
+            f'<img src="cid:{escape(c.cid, quote=True)}" width="560" alt="{escape(c.title, quote=True)}"'
+            f' style="display:block;max-width:100%;height:auto;">'
+            f'<div style="font-size:11px;color:{MUTED};margin-top:3px;">{escape(c.caption)}</div></div>')
+
+
 def _episode_html(ep: ReportEpisode, marks: dict[str, int] | None = None,
-                  notes_inline: bool = True) -> str:
+                  notes_inline: bool = True,
+                  charts: dict[str, list[ChartNote]] | None = None) -> str:
     title = escape(ep.title)
     title_html = (
         f'<a href="{escape(ep.link, quote=True)}" style="color:{INK};text-decoration:none;">{title}</a>'
@@ -274,9 +300,14 @@ def _episode_html(ep: ReportEpisode, marks: dict[str, int] | None = None,
     if marks is None:
         marks = flag_marks(ep.bullets, notes) if ep.bullets else {}
     if ep.bullets:
+        # A market chart sits under the first bullet that links its story.
+        charts = dict(charts or {})
         items = "".join(
             f'<li style="margin:0 0 7px 0;font-size:14px;line-height:1.5;color:{INK};">'
-            f"{_bullet_html(b, marks)}</li>"
+            f"{_bullet_html(b, marks)}"
+            + "".join(_chart_html(c) for c in
+                      (charts.pop(bullet_parts(b)[1], []) if bullet_parts(b)[1] else []))
+            + "</li>"
             for b in ep.bullets
         )
         # Outlook ignores list-style padding on <ul>, hence the margin as well.
@@ -327,10 +358,21 @@ def build_html(report: RunReport, when: datetime) -> str:
     ordered_eps = briefings + others
     marks_by_idx, all_notes = number_notes(ordered_eps)
 
+    by_anchor: dict[str, list[ChartNote]] = {}
+    for c in report.charts:
+        by_anchor.setdefault(c.anchor, []).append(c)
+    placed = {b_url for e in briefings for b in e.bullets
+              for b_url in [bullet_parts(b)[1]] if b_url and b_url in by_anchor}
+
     def ep_html(e: ReportEpisode) -> str:
-        return _episode_html(e, marks_by_idx.get(ordered_eps.index(e), {}), notes_inline=False)
+        return _episode_html(e, marks_by_idx.get(ordered_eps.index(e), {}), notes_inline=False,
+                             charts=by_anchor if e.is_briefing else None)
 
     parts = [section("Daily news briefing", "".join(ep_html(e) for e in briefings))]
+    loose = [c for c in report.charts if c.anchor not in placed]
+    if loose:
+        parts.append(section("Prediction markets", "".join(
+            f'<tr><td style="padding:8px 0;">{_chart_html(c)}</td></tr>' for c in loose)))
     parts.append(section(
         "New episodes" if len(others) != 1 else "New episode",
         "".join(ep_html(e) for e in others),
@@ -549,11 +591,15 @@ def _addresses(raw: str) -> list[str]:
 
 
 def send_report(report: RunReport, when: datetime | None = None,
-                operator_only: bool = False) -> bool:
+                operator_only: bool = False, recipients: list[str] | None = None,
+                subject_tag: str = "", images: dict[str, bytes] | None = None) -> bool:
     """Email the run report. Returns True if sent, False if skipped or failed.
 
     `operator_only` leaves out the BCC list, as a dev run does: the narration
     pass uses it to say a verbatim post failed after the day's email went out.
+    `recipients` replaces the To list (and drops the BCC list) for a trial
+    email; `subject_tag` prefixes its subject; `images` are inline PNGs keyed
+    by the Content-ID the HTML cites.
     Never raises: a broken mailbox must not fail an otherwise-good run.
     """
     when = when or datetime.now()
@@ -562,6 +608,8 @@ def send_report(report: RunReport, when: datetime | None = None,
     test_run = is_test_run()
     if test_run or operator_only:
         bcc_addrs = []
+    if recipients:
+        to_addrs, bcc_addrs = list(recipients), []
     user = os.environ.get("SMTP_USER", "").strip()
     password = (
         os.environ.get("SMTP_PASSWORD", "")
@@ -594,6 +642,8 @@ def send_report(report: RunReport, when: datetime | None = None,
             subject = f"Feedcast — {when.strftime('%d %b')} — {len(report.failures)} failed"
 
         msg = EmailMessage()
+        if subject_tag:
+            subject = f"{subject_tag} {subject}"
         if test_run:
             subject = f"[DEV] {subject}"
         msg["Subject"] = subject
@@ -605,6 +655,10 @@ def send_report(report: RunReport, when: datetime | None = None,
             msg["Bcc"] = ", ".join(bcc_addrs)
         msg.set_content(build_text(report, when))
         msg.add_alternative(build_html(report, when), subtype="html")
+        if images:
+            html_part = msg.get_payload()[1]
+            for cid, png in images.items():
+                html_part.add_related(png, maintype="image", subtype="png", cid=f"<{cid}>")
 
         # Port 465 is implicit TLS; 587 is STARTTLS. Gmail accepts both.
         if port == 465:
