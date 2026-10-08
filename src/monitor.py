@@ -94,6 +94,31 @@ class FeedEntry:
     fidelity: Optional[dict] = None
 
 
+def entry_to_dict(entry: FeedEntry) -> dict:
+    """The fields a post needs to be narrated later, as plain JSON types.
+
+    Leaves out the bullets, bundle and fidelity check, which the deferred row
+    stores separately or which a verbatim post does not have.
+    """
+    return {
+        "id": entry.id, "title": entry.title, "link": entry.link,
+        "content": entry.content, "published": entry.published.isoformat(),
+        "author": entry.author, "feed_name": entry.feed_name,
+        "authors": list(entry.authors),
+        "feed_date": entry.feed_date.isoformat() if entry.feed_date else None,
+    }
+
+
+def entry_from_dict(data: dict) -> FeedEntry:
+    """Inverse of entry_to_dict."""
+    return FeedEntry(
+        id=data["id"], title=data["title"], link=data["link"], content=data["content"],
+        published=datetime.fromisoformat(data["published"]), author=data["author"],
+        feed_name=data["feed_name"], authors=list(data.get("authors") or []),
+        feed_date=datetime.fromisoformat(data["feed_date"]) if data.get("feed_date") else None,
+    )
+
+
 def warn_if_dead(feed, name: str, url: str) -> bool:
     """Say so when a feed returns nothing, and report True if it did.
 
@@ -199,6 +224,27 @@ class FeedMonitor:
                     normalized_text TEXT NOT NULL DEFAULT ''
                 )
             """)
+            # Posts read out in full, held back from the first publish so a
+            # long one cannot delay the briefing and the summaries (on
+            # 2026-09-26 a 113-chunk book review timed the whole run out).
+            # The first pass cleans and digests them and parks them here; a
+            # second pass narrates them and publishes again. The row is the
+            # hand-over between the two, and it outlives a pass that was
+            # killed, so tomorrow's run picks the post up where it stopped.
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS deferred_entries (
+                    id TEXT PRIMARY KEY,
+                    link TEXT NOT NULL DEFAULT '',
+                    entry TEXT NOT NULL,
+                    mode TEXT NOT NULL,
+                    processed_text TEXT NOT NULL DEFAULT '',
+                    normalized_text TEXT NOT NULL DEFAULT '',
+                    bullets TEXT NOT NULL DEFAULT '',
+                    attempts INTEGER NOT NULL DEFAULT 0,
+                    last_error TEXT NOT NULL DEFAULT '',
+                    deferred_at TEXT NOT NULL
+                )
+            """)
             conn.commit()
 
     def is_processed(self, entry_id: str) -> bool:
@@ -300,6 +346,83 @@ class FeedMonitor:
             ).fetchall()
             return [dict(r) for r in rows]
 
+    def defer_entry(self, entry: FeedEntry, mode: str, processed_text: Optional[str],
+                    normalized_text: Optional[str], bullets: list) -> None:
+        """Park a verbatim post for the narration pass, with what is ready so far."""
+        with sqlite3.connect(self.db_path) as conn:
+            # Deferring a post that is already waiting keeps its attempt count
+            # and the furthest-along script, as record_failure does.
+            row = conn.execute(
+                "SELECT attempts, deferred_at, processed_text, normalized_text "
+                "FROM deferred_entries WHERE id = ?", (entry.id,)).fetchone()
+            conn.execute(
+                """
+                INSERT OR REPLACE INTO deferred_entries
+                (id, link, entry, mode, processed_text, normalized_text, bullets,
+                 attempts, last_error, deferred_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, '', ?)
+                """,
+                (entry.id, entry.link or "", json.dumps(entry_to_dict(entry)), mode,
+                 processed_text or (row[2] if row else ""),
+                 normalized_text or (row[3] if row else ""),
+                 json.dumps(bullets) if bullets else "",
+                 row[0] if row else 0, row[1] if row else datetime.now().isoformat()),
+            )
+            conn.commit()
+
+    def deferred_entries(self) -> list[dict]:
+        """Posts waiting for narration, oldest first, with `entry` as a FeedEntry."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            rows = conn.execute(
+                "SELECT * FROM deferred_entries ORDER BY deferred_at").fetchall()
+        out = []
+        for r in rows:
+            row = dict(r)
+            row["entry"] = entry_from_dict(json.loads(row["entry"]))
+            try:
+                row["bullets"] = json.loads(row["bullets"] or "[]")
+            except ValueError:
+                row["bullets"] = []
+            out.append(row)
+        return out
+
+    def is_deferred(self, entry_id: str = "", link: str = "") -> bool:
+        """Whether a post is already waiting for narration, by id or link."""
+        with sqlite3.connect(self.db_path) as conn:
+            row = conn.execute(
+                "SELECT 1 FROM deferred_entries WHERE id = ? OR (? != '' AND link = ?)",
+                (entry_id, link, link)).fetchone()
+        return row is not None
+
+    def start_narration(self) -> None:
+        """Count an attempt for every waiting post, before narrating any of them.
+
+        Counted up front because a pass the job timeout kills records nothing
+        afterwards; this way a post that hangs every morning still runs out of
+        attempts instead of being retried for ever.
+        """
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("UPDATE deferred_entries SET attempts = attempts + 1")
+            conn.commit()
+
+    def note_deferred_failure(self, entry_id: str, error: str,
+                              normalized_text: Optional[str] = None) -> None:
+        """Record why narration failed, keeping the furthest-along script."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute(
+                "UPDATE deferred_entries SET last_error = ?, "
+                "normalized_text = CASE WHEN ? != '' THEN ? ELSE normalized_text END "
+                "WHERE id = ?",
+                (error[:2000], normalized_text or "", normalized_text or "", entry_id))
+            conn.commit()
+
+    def drop_deferred(self, entry_id: str) -> None:
+        """Forget a waiting post: it was narrated, or it ran out of attempts."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("DELETE FROM deferred_entries WHERE id = ?", (entry_id,))
+            conn.commit()
+
     def prune_failures(self, days: int = 30) -> int:
         """Forget failures older than `days`, given up on or not."""
         cutoff = (datetime.now() - timedelta(days=days)).isoformat()
@@ -389,7 +512,9 @@ class FeedMonitor:
             if skip_patterns and any(re.search(p, title, re.IGNORECASE) for p in skip_patterns):
                 continue
 
-            if self.is_processed(entry_id):
+            # A post waiting for the narration pass is not in processed_posts
+            # yet, and must not come back as new while it waits.
+            if self.is_processed(entry_id) or self.is_deferred(entry_id):
                 continue
 
             # Extract content - try different fields
@@ -427,7 +552,7 @@ class FeedMonitor:
             # "On Writing #3" — guid f1c130ea… there, rA6pqn6kz8NvHyznT here).
             # Without this the curated copy is narrated a second time.
             link = entry.get("link", "")
-            if link and self.is_processed_by_link(link):
+            if link and (self.is_processed_by_link(link) or self.is_deferred(link=link)):
                 already += 1
                 continue
 

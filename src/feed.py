@@ -9,10 +9,17 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
+from .monitor import episode_id
+
 # Register namespace prefixes
 ET.register_namespace("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd")
 ET.register_namespace("atom", "http://www.w3.org/2005/Atom")
 ET.register_namespace("podcast", "https://podcastindex.org/namespace/1.0")
+
+
+def episode_page_url(base_url: str, entry_id: str) -> str:
+    """Where an episode's own page lives. Stable from before its audio exists."""
+    return f"{base_url}/episodes/{episode_id(entry_id)}.html"
 
 
 @dataclass
@@ -161,6 +168,80 @@ li a{{color:#1b2024;text-decoration:none;font-weight:600}} li a:hover{{text-deco
 """
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(html, encoding="utf-8")
+
+    def write_episode_pages(self, episodes: list[Episode], waiting: list[dict],
+                            pages_dir: Path) -> None:
+        """One page per episode, including the ones still being narrated.
+
+        The email goes out before the verbatim posts are narrated, so their
+        "Listen" link cannot point at an MP3 yet. It points here instead: the
+        page says the audio is on its way and refreshes itself, and once the
+        narration pass has published it plays the episode. `waiting` is
+        FeedMonitor.deferred_entries(). Pages of episodes that left the feed
+        are removed, so the directory always mirrors the feed.
+        """
+        c = self.config
+        pages_dir.mkdir(parents=True, exist_ok=True)
+        wanted: dict[str, str] = {}
+
+        def page(title: str, meta: str, body: str, refresh: bool = False) -> str:
+            head = '<meta http-equiv="refresh" content="120">' if refresh else ""
+            return f"""<!doctype html>
+<html lang="{escape(c.language)}"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">{head}
+<title>{escape(title)} &middot; {escape(c.title)}</title>
+<style>
+body{{margin:0;padding:32px 20px 60px;background:#f5f7f6;color:#1b2024;font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}}
+main{{max-width:680px;margin:0 auto}} h1{{font-size:24px;line-height:1.3;margin:0 0 6px}}
+.m{{color:#66717a;font-size:13px;margin:0 0 22px}} a{{color:#1f6f78}} audio{{width:100%;margin:6px 0 14px}}
+.note{{background:#fff;border-left:3px solid #1f6f78;padding:12px 16px;margin:0 0 18px}}
+</style></head><body><main>
+<h1>{escape(title)}</h1>
+<p class="m">{meta}</p>
+{body}
+<p class="m"><a href="../">{escape(c.title)}</a> &middot; <a href="../feed.xml">RSS feed</a></p>
+</main></body></html>
+"""
+
+        for ep in episodes:
+            mins = max(1, round(ep.duration_seconds / 60)) if ep.duration_seconds else 0
+            meta = " &middot; ".join(filter(None, [
+                escape(ep.author), f"{ep.published:%d %b %Y}", f"{mins} min" if mins else ""]))
+            src = escape(f"../audio/{ep.audio_file}", quote=True)
+            link = (f' &middot; <a href="{escape(ep.link, quote=True)}">Read the original</a>'
+                    if ep.link else "")
+            wanted[f"{episode_id(ep.id)}.html"] = page(ep.title, meta, (
+                f'<audio controls preload="none" src="{src}"></audio>\n'
+                f'<p><a href="{src}">Download the MP3</a>{link}</p>'))
+
+        for row in waiting:
+            entry = row["entry"]
+            name = f"{episode_id(entry.id)}.html"
+            if name in wanted:
+                continue  # narrated after all; the real page wins
+            meta = " &middot; ".join(filter(None, [
+                escape(entry.author), f"{entry.published:%d %b %Y}"]))
+            if row.get("last_error"):
+                note = ("Narration failed on the last attempt. It will be tried again "
+                        "on the next run, and this page will play the episode once it "
+                        "works.")
+            else:
+                note = ("This post is being read out in full, which takes longer than "
+                        "the summaries. It will appear in the podcast feed shortly, "
+                        "usually within half an hour. This page updates itself and "
+                        "will play the episode once it is ready.")
+            link = (f'<p><a href="{escape(entry.link, quote=True)}">Read the original</a></p>'
+                    if entry.link else "")
+            wanted[name] = page(entry.title, meta,
+                                f'<div class="note">{escape(note)}</div>\n{link}', refresh=True)
+
+        for stale in pages_dir.glob("*.html"):
+            if stale.name not in wanted:
+                stale.unlink()
+        for name, html in wanted.items():
+            path = pages_dir / name
+            if not path.exists() or path.read_text(encoding="utf-8") != html:
+                path.write_text(html, encoding="utf-8")
 
     def generate(self, episodes: list[Episode], output_path: Path) -> None:
         """Generate the podcast RSS feed XML."""

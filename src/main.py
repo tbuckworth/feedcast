@@ -20,7 +20,7 @@ from .bundle import write_bundle
 from .digest import safe_bullets
 from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
 from .extractor import ExtractionError, url_to_feed_entry
-from .feed import Episode, FeedGenerator, PodcastConfig
+from .feed import Episode, FeedGenerator, PodcastConfig, episode_page_url
 from .fulltext import enrich_entry
 from .lesswrong import posted_at
 from . import llm
@@ -160,8 +160,10 @@ async def process_entry(
     # "45%", not the "forty-five percent" a voice needs — and run it alongside
     # the audio, which takes minutes to the digest's seconds. Free wall-clock.
     # A retry that only has the normalised script digests that instead: spoken
-    # numbers in the bullets beat no episode.
+    # numbers in the bullets beat no episode. A post the first pass deferred
+    # arrives with its bullets already written (and already emailed).
     digest_task = asyncio.create_task(
+        _same(entry.bullets) if entry.bullets else
         safe_bullets(attempt.processed_text or attempt.normalized_text or "",
                      is_briefing=entry.id.startswith("news-briefing-"),
                      label=entry.title,
@@ -195,6 +197,82 @@ async def process_entry(
     entry.bullets = await digest_task
     print(f"    Digest: {len(entry.bullets)} bullets")
     return (entry, audio_path)
+
+
+async def _same(value):
+    return value
+
+
+async def _run_entries(
+    items: list[tuple[FeedEntry, str, str]], attempts: dict[str, Attempt],
+    processor: ContentProcessor, audio_gen: AudioGenerator,
+    normalizer: TextNormalizer, audio_dir: Path,
+) -> list:
+    """Run process_entry over `items` concurrently, then retry failures serially.
+
+    Returns one result per item, in order: (entry, audio_path) or the
+    exception. The second pass resumes each failure at the stage that failed
+    and reuses the TTS chunks already on disk, on a fresh connection pool, so
+    a transient blip costs minutes here rather than a day (2026-09-08: three
+    dropped DeepInfra connections cost the episode).
+    """
+    # Configure connection limits to avoid ReadError issues with concurrent TTS requests
+    limits = httpx.Limits(max_keepalive_connections=5, max_connections=10)
+
+    async def run_all(batch, concurrently: bool) -> list:
+        async with httpx.AsyncClient(timeout=httpx.Timeout(300.0), limits=limits) as http_client:
+            coros = [
+                process_entry(e, m, p, processor, audio_gen, normalizer, audio_dir,
+                              http_client, attempts[e.id])
+                for e, m, p in batch
+            ]
+            if concurrently:
+                return await asyncio.gather(*coros, return_exceptions=True)
+            out = []
+            for coro in coros:
+                try:
+                    out.append(await coro)
+                except Exception as exc:
+                    out.append(exc)
+            return out
+
+    results = await run_all(items, concurrently=True)
+    retry = [(item, r) for item, r in zip(items, results) if isinstance(r, BaseException)]
+    if retry:
+        print(f"\n  Second pass: retrying {len(retry)} failed "
+              f"{'entry' if len(retry) == 1 else 'entries'} serially...")
+        for (submitted, _m, _p), exc in retry:
+            print(f"    {submitted.title}: failed at {attempts[submitted.id].stage}: "
+                  f"{type(exc).__name__}: {exc}")
+        second = await run_all([item for item, _ in retry], concurrently=False)
+        second_by_id = {item[0].id: r for (item, _), r in zip(retry, second)}
+        results = [second_by_id.get(e.id, r) for (e, _m, _p), r in zip(items, results)]
+    return results
+
+
+async def _prepare_deferred(
+    items: list[tuple[FeedEntry, str, str]], attempts: dict[str, Attempt],
+    processor: ContentProcessor,
+) -> list:
+    """Everything a verbatim post needs before narration, for the first email.
+
+    Cleaning the post takes seconds and the bullets one model call, so both
+    happen in the first pass: the email lists the post with its digest while
+    the slow part, narration, waits for the second. Returns, per item, the
+    Attempt with its script filled in, or the exception.
+    """
+    async def one(entry: FeedEntry, mode: str, prompt: str) -> Attempt:
+        attempt = attempts[entry.id]
+        if attempt.normalized_text is None and attempt.processed_text is None:
+            attempt.stage = "process"
+            attempt.processed_text = await processor.process(entry, mode, prompt, title=entry.title)
+        attempt.stage = "digest"
+        entry.bullets = await safe_bullets(
+            attempt.processed_text or attempt.normalized_text or "",
+            is_briefing=False, label=entry.title)
+        return attempt
+
+    return await asyncio.gather(*[one(e, m, p) for e, m, p in items], return_exceptions=True)
 
 
 async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> None:
@@ -372,6 +450,9 @@ async def async_main(config_path: Path | None = None) -> None:
     # and uploads the voice sample, and a resend makes no audio at all.
     if os.environ.get("RESEND_REPORT", "").strip().lower() in ("true", "1", "yes"):
         await _resend_report(monitor, config, feed_gen, audio_dir, output_dir)
+        return
+    if _run_pass() == "narrate":
+        await _narrate_deferred(monitor, config, feed_gen, audio_dir, output_dir)
         return
 
     processor = ContentProcessor(config.default_prompt, verify=config.fidelity_check)
@@ -593,64 +674,44 @@ async def async_main(config_path: Path | None = None) -> None:
                       f"narrating the feed body ({gain.before:,} chars), which may "
                       f"be an excerpt")
 
+    # The briefing and the summaries are narrated and published first; posts
+    # read out in full wait for the narration pass (FEEDCAST_PASS=narrate) and
+    # a second publish, so a long one cannot hold the rest back. Inject and
+    # reprocess runs are one episode each and stay in a single pass.
+    deferring: list[tuple[FeedEntry, str, str]] = []
+    if _run_pass() == "first" and not inject_url and not reprocess_entry:
+        deferring = [t for t in entries_to_process if processor.reads_verbatim(t[0], t[1])]
+        deferred_ids = {e.id for e, _m, _p in deferring}
+        entries_to_process = [t for t in entries_to_process if t[0].id not in deferred_ids]
+        if deferring:
+            print("\nNarrating after the first publish: "
+                  + "; ".join(e.title for e, _m, _p in deferring))
+
     print(f"\n{len(entries_to_process)} entries to process")
 
     new_entry_ids: set[str] = set()
     failures: list[tuple[str, str]] = []
+    feed_names = {fc.name for fc in config.feeds}
     if not inject_url and reprocess_entry and reprocess_missing:
         failures.append((reprocess_missing, "not found in any feed; the existing episode was kept"))
+
+    attempts = {e.id: resumed.get(e.id, Attempt())
+                for e, _m, _p in entries_to_process + deferring}
+    # Cleaning and digesting the deferred posts takes seconds; it runs
+    # alongside Phase 2 so they can be in the email with their bullets.
+    prepare = asyncio.create_task(_prepare_deferred(deferring, attempts, processor))
 
     if not entries_to_process:
         print("No new entries to process.")
     else:
         # PHASE 2: Parallel processing (content + audio)
         print(f"\nPhase 2: Processing {len(entries_to_process)} entries in parallel...")
-        attempts = {e.id: resumed.get(e.id, Attempt()) for e, _m, _p in entries_to_process}
-
-        # Configure connection limits to avoid ReadError issues with concurrent TTS requests
-        limits = httpx.Limits(max_keepalive_connections=5, max_connections=10)
-
-        async def run_all(items, concurrently: bool) -> list:
-            async with httpx.AsyncClient(timeout=httpx.Timeout(300.0), limits=limits) as http_client:
-                coros = [
-                    process_entry(e, m, p, processor, audio_gen, normalizer, audio_dir,
-                                  http_client, attempts[e.id])
-                    for e, m, p in items
-                ]
-                if concurrently:
-                    return await asyncio.gather(*coros, return_exceptions=True)
-                out = []
-                for coro in coros:
-                    try:
-                        out.append(await coro)
-                    except Exception as exc:
-                        out.append(exc)
-                return out
-
-        results = await run_all(entries_to_process, concurrently=True)
-
-        # Second pass: whatever failed gets one more go, one at a time, on a
-        # fresh connection pool. It resumes at the stage that failed and
-        # reuses the TTS chunks already on disk, so a transient blip costs
-        # minutes here rather than a day (2026-09-08: three dropped DeepInfra
-        # connections cost the episode).
-        retry = [(item, r) for item, r in zip(entries_to_process, results)
-                 if isinstance(r, BaseException)]
-        if retry:
-            print(f"\n  Second pass: retrying {len(retry)} failed "
-                  f"{'entry' if len(retry) == 1 else 'entries'} serially...")
-            for (submitted, _m, _p), exc in retry:
-                print(f"    {submitted.title}: failed at {attempts[submitted.id].stage}: "
-                      f"{type(exc).__name__}: {exc}")
-            second = await run_all([item for item, _ in retry], concurrently=False)
-            second_by_id = {item[0].id: r for (item, _), r in zip(retry, second)}
-            results = [second_by_id.get(e.id, r)
-                       for (e, _m, _p), r in zip(entries_to_process, results)]
+        results = await _run_entries(entries_to_process, attempts, processor,
+                                     audio_gen, normalizer, audio_dir)
 
         # PHASE 3: Sequential finalization
         print(f"\nPhase 3: Finalizing...")
         new_episodes = 0
-        feed_names = {fc.name for fc in config.feeds}
         # gather() preserves input order, so zipping recovers which entry each
         # exception came from — the report needs to name what failed.
         for (submitted, _mode, _prompt), result in zip(entries_to_process, results):
@@ -681,6 +742,17 @@ async def async_main(config_path: Path | None = None) -> None:
             print(f"  WARNING: {msg}")
             if os.environ.get("GITHUB_ACTIONS"):
                 print(f"::warning title=Feedcast normaliser::{msg}")
+
+    # Park the deferred posts for the narration pass. One that could not even
+    # be cleaned failed like any other entry and is queued the same way.
+    for (submitted, mode, _prompt), prepared in zip(deferring, await prepare):
+        if isinstance(prepared, BaseException):
+            _report_entry_failure(submitted, attempts[submitted.id], prepared, monitor,
+                                  failures, queue=submitted.feed_name in feed_names)
+            continue
+        monitor.defer_entry(submitted, mode, prepared.processed_text,
+                            prepared.normalized_text, submitted.bullets)
+        monitor.clear_failure(submitted.id)
 
     # Record the maths-skipped posts with no audio file. This dedups them so they
     # are not re-detected daily, and the feed generator already skips any entry
@@ -714,12 +786,17 @@ async def async_main(config_path: Path | None = None) -> None:
     feed_gen.generate(episodes, feed_path)
     print(f"  Generated feed with {len(episodes)} episodes: {feed_path}")
     feed_gen.write_index(episodes, output_dir / "index.html")
+    waiting = monitor.deferred_entries()
+    feed_gen.write_episode_pages(episodes, waiting, output_dir / "episodes")
+    # Tells the workflow whether the narration job has anything to do.
+    _gh_output(deferred=len(waiting))
 
     # Email the run report. Skipped silently when the SMTP vars are unset.
-    if new_entry_ids or failures or maths_skipped or dead_sources or _email_always():
+    if (new_entry_ids or failures or maths_skipped or dead_sources or deferring
+            or _email_always()):
         report = _build_run_report(
             episodes, db_entries, new_entry_ids, failures, config.podcast.base_url,
-            maths_skipped, dead_sources,
+            maths_skipped, dead_sources, pending=waiting,
         )
         send_report(report)
     else:
@@ -749,6 +826,107 @@ async def _correct_publication_dates(entries: list[FeedEntry]) -> None:
         print(f"    {entry.title[:48]}: posted {real:%Y-%m-%d}, "
               f"curated {entry.feed_date:%Y-%m-%d}")
         entry.published = real
+
+
+def _run_pass() -> str:
+    """FEEDCAST_PASS: which half of a split run this process is.
+
+    "first" fetches, writes and narrates everything except posts read out in
+    full, publishes, and sends the email; "narrate" narrates those posts and
+    publishes again. Unset (local runs, tests) does everything in one pass.
+    """
+    value = os.environ.get("FEEDCAST_PASS", "").strip().lower()
+    return value if value in ("first", "narrate") else "all"
+
+
+def _gh_output(**values) -> None:
+    """Hand values to later workflow steps. A no-op outside GitHub Actions."""
+    path = os.environ.get("GITHUB_OUTPUT", "").strip()
+    if not path:
+        return
+    with open(path, "a", encoding="utf-8") as f:
+        f.writelines(f"{key}={value}\n" for key, value in values.items())
+
+
+async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: FeedGenerator,
+                            audio_dir: Path, output_dir: Path) -> None:
+    """FEEDCAST_PASS=narrate: narrate the posts the first pass deferred, publish again.
+
+    The day's email has already gone out with these posts listed, so this pass
+    mails only on failure, and only the operator. A post that fails stays
+    parked with its script and is retried by the next run's narration pass,
+    up to MAX_ATTEMPTS counted from the first try.
+    """
+    if not monitor.deferred_entries():
+        print("Nothing waiting to be narrated.")
+        _gh_output(narrated=0)
+        return
+    monitor.start_narration()
+    failures: list[tuple[str, str]] = []
+    todo: list[tuple[dict, FeedEntry]] = []
+    for row in monitor.deferred_entries():
+        entry = row["entry"]
+        if row["attempts"] > monitor.MAX_ATTEMPTS:
+            # Counted up front, so this is a post whose last pass was cut off.
+            monitor.drop_deferred(entry.id)
+            reason = row["last_error"] or "the run was cut off"
+            failures.append((entry.title, (f"narration: gave up after "
+                                           f"{monitor.MAX_ATTEMPTS} attempts ({reason})")))
+            continue
+        entry.bullets = row["bullets"]
+        todo.append((row, entry))
+
+    narrated = 0
+    if todo:
+        print(f"\nNarration pass: {len(todo)} "
+              f"{'post' if len(todo) == 1 else 'posts'} read out in full")
+        attempts = {
+            entry.id: Attempt(stage="tts" if row["normalized_text"] else "normalize",
+                              processed_text=row["processed_text"] or None,
+                              normalized_text=row["normalized_text"] or None,
+                              number=row["attempts"])
+            for row, entry in todo
+        }
+        items = [(entry, row["mode"], config.default_prompt) for row, entry in todo]
+        processor = ContentProcessor(config.default_prompt, verify=config.fidelity_check)
+        normalizer = TextNormalizer()
+        audio_gen = AudioGenerator(voice=config.tts.voice, speed=config.tts.speed)
+        results = await _run_entries(items, attempts, processor, audio_gen, normalizer, audio_dir)
+        for (entry, _mode, _prompt), result in zip(items, results):
+            attempt = attempts[entry.id]
+            if isinstance(result, BaseException):
+                monitor.note_deferred_failure(
+                    entry.id, f"{attempt.stage}: {type(result).__name__}: {result}",
+                    attempt.normalized_text)
+                if attempt.number >= monitor.MAX_ATTEMPTS:
+                    monitor.drop_deferred(entry.id)
+                    note = f" — attempt {attempt.number} of {monitor.MAX_ATTEMPTS}, giving up"
+                else:
+                    note = (f" — attempt {attempt.number} of {monitor.MAX_ATTEMPTS}, "
+                            f"will retry next run")
+                _report_entry_failure(entry, attempt, result, monitor, failures,
+                                      queue=False, note=note)
+                continue
+            entry, audio_path = result
+            monitor.mark_processed(entry, audio_path.name, content=entry.content)
+            monitor.drop_deferred(entry.id)
+            monitor.clear_failure(entry.id)
+            narrated += 1
+        print(f"  {narrated} narrated")
+
+    transcript_dir = output_dir / "transcripts"
+    episodes = feed_gen.load_episodes_from_db(monitor.get_processed_entries(),
+                                              audio_dir, transcript_dir)
+    feed_gen.generate(episodes, output_dir / "feed.xml")
+    feed_gen.write_index(episodes, output_dir / "index.html")
+    feed_gen.write_episode_pages(episodes, monitor.deferred_entries(), output_dir / "episodes")
+    print(f"  Feed now has {len(episodes)} episodes")
+    _gh_output(narrated=narrated)
+    if failures:
+        send_report(RunReport(
+            failures=failures, notices=list(llm.fallback_log),
+            feed_url=f"{config.podcast.base_url}/feed.xml", site_url=config.podcast.base_url,
+            total_in_feed=len(episodes)), operator_only=True)
 
 
 def _max_age_hours() -> float | None:
@@ -799,17 +977,19 @@ async def _find_in_feeds(
 def _report_entry_failure(
     entry: FeedEntry, attempt: Attempt, exc: BaseException,
     monitor: FeedMonitor, failures: list[tuple[str, str]], *, queue: bool,
+    note: str = "",
 ) -> None:
     """Log a failed entry with its stage and traceback, queue it, tell the email.
 
     The bare `TypeError: 'NoneType' object is not subscriptable` this replaces
     took a log archaeology session to place (2026-09-08); the stage and the
     traceback go in the log, and the stage and the attempt count in the email.
+    `note` carries the attempt count for a caller that keeps its own (the
+    narration pass, whose posts wait in deferred_entries rather than here).
     """
     summary = f"{attempt.stage}: {type(exc).__name__}: {exc}"
     print(f"  Error processing {entry.title} at {summary}")
     print("".join(traceback.format_exception(type(exc), exc, exc.__traceback__)).rstrip())
-    note = ""
     if queue:
         n = monitor.record_failure(entry, summary, attempt.normalized_text)
         if n < monitor.MAX_ATTEMPTS:
@@ -872,8 +1052,14 @@ def _build_run_report(
     failures: list[tuple[str, str]], base_url: str,
     maths_skipped: list[tuple[FeedEntry, MathsVerdict]] | None = None,
     dead_sources: list[str] | None = None,
+    pending: list[dict] | None = None,
 ) -> RunReport:
-    """Assemble the emailed report from this run's episodes and the feed."""
+    """Assemble the emailed report from this run's episodes and the feed.
+
+    `pending` is FeedMonitor.deferred_entries(): posts read out in full that
+    the narration pass has yet to publish. They are listed with their bullets
+    and a link to the episode's page, which plays the audio once it exists.
+    """
     db_by_id = {d["id"]: d for d in db_entries}
     cutoff = datetime.now() - timedelta(days=7)
 
@@ -897,9 +1083,22 @@ def _build_run_report(
             fidelity=_fidelity_of(row),
         )
 
+    def waiting(row: dict) -> ReportEpisode:
+        e: FeedEntry = row["entry"]
+        curated = (e.feed_date if e.feed_date
+                   and abs((e.feed_date - e.published).total_seconds()) >= 86400 else None)
+        return ReportEpisode(
+            title=e.title, author=e.author or e.feed_name, feed_name=e.feed_name,
+            link=e.link or "", audio_url=episode_page_url(base_url, e.id),
+            duration_seconds=0, bullets=row.get("bullets") or [], published=e.published,
+            curated=curated, pending=True,
+        )
+
     ordered = sorted(episodes, key=lambda e: e.published, reverse=True)
+    pending_rows = sorted(pending or [], key=lambda r: r["entry"].published, reverse=True)
     return RunReport(
-        episodes=[to_report(e) for e in ordered if e.id in new_entry_ids],
+        episodes=[to_report(e) for e in ordered if e.id in new_entry_ids]
+                 + [waiting(r) for r in pending_rows],
         recent=[
             to_report(e) for e in ordered
             if e.id not in new_entry_ids and e.published >= cutoff

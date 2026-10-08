@@ -52,6 +52,9 @@ class ReportEpisode:
     curated: datetime | None = None
     # Result of the second-model source check, when one ran.
     fidelity: dict | None = None
+    # Read out in full and still being narrated when the email went out:
+    # `audio_url` is then the episode's page, which plays it once it is ready.
+    pending: bool = False
 
 
 @dataclass
@@ -121,7 +124,8 @@ def _meta_bits(ep: "ReportEpisode") -> list[str]:
     bits.append(format_published(ep.published))
     if ep.curated:
         bits.append(f"curated {format_published(ep.curated)}")
-    bits.append(format_duration(ep.duration_seconds))
+    bits.append("narrating now, in your feed shortly" if ep.pending
+                else format_duration(ep.duration_seconds))
     return [b for b in bits if b]
 
 
@@ -301,7 +305,7 @@ def _episode_html(ep: ReportEpisode, marks: dict[str, int] | None = None,
         <div style="font-size:17px;font-weight:600;line-height:1.35;color:{INK};">{title_html}</div>
         <div style="font-size:12px;color:{MUTED};margin-top:5px;">{meta}</div>
         {body}
-        <div style="margin-top:12px;">{_btn(ep.audio_url, "Listen")}{_btn(ep.link, "Read source")}</div>
+        <div style="margin-top:12px;">{_btn(ep.audio_url, "Listen (narrating)" if ep.pending else "Listen")}{_btn(ep.link, "Read source")}</div>
       </td></tr>"""
 
 
@@ -428,6 +432,10 @@ def build_html(report: RunReport, when: datetime) -> str:
     headline = f"{n} new episode{'s' if n != 1 else ''}"
     if not n:
         headline = "No new episodes"
+    pending_note = (
+        " Posts read out in full are narrated after this email: their Listen link"
+        " opens a page that plays the episode once it is ready, usually within half"
+        " an hour." if any(e.pending for e in report.episodes) else "")
 
     return f"""<div style="margin:0;padding:0;background:#f4f4f2;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f2;padding:24px 12px;">
@@ -444,7 +452,7 @@ def build_html(report: RunReport, when: datetime) -> str:
         <tr><td style="padding-top:24px;font-size:12px;color:{MUTED};line-height:1.6;">
           {_btn(report.site_url, "Open site")}{_btn(report.feed_url, "RSS feed")}
           <div style="margin-top:14px;">
-            Audio links go live once the GitHub Pages deploy finishes, a minute or two after this email.
+            Audio links go live once the GitHub Pages deploy finishes, a minute or two after this email.{escape(pending_note)}
           </div>
         </td></tr>
       </table>
@@ -468,7 +476,8 @@ def build_text(report: RunReport, when: datetime) -> str:
         if ep.link:
             lines.append(f"  Source: {ep.link}")
         if ep.audio_url:
-            lines.append(f"  Audio:  {ep.audio_url}")
+            lines.append(f"  Audio:  {ep.audio_url}"
+                         + (" (still narrating; this page plays it once ready)" if ep.pending else ""))
         if ep.bullets:
             marks = marks_by_idx.get(idx, {})
 
@@ -539,16 +548,19 @@ def _addresses(raw: str) -> list[str]:
     return [a.strip() for a in raw.replace(";", ",").split(",") if a.strip()]
 
 
-def send_report(report: RunReport, when: datetime | None = None) -> bool:
+def send_report(report: RunReport, when: datetime | None = None,
+                operator_only: bool = False) -> bool:
     """Email the run report. Returns True if sent, False if skipped or failed.
 
+    `operator_only` leaves out the BCC list, as a dev run does: the narration
+    pass uses it to say a verbatim post failed after the day's email went out.
     Never raises: a broken mailbox must not fail an otherwise-good run.
     """
     when = when or datetime.now()
     to_addrs = _addresses(os.environ.get("FEEDCAST_EMAIL_TO", ""))
     bcc_addrs = _addresses(os.environ.get("FEEDCAST_EMAIL_BCC", ""))
     test_run = is_test_run()
-    if test_run:
+    if test_run or operator_only:
         bcc_addrs = []
     user = os.environ.get("SMTP_USER", "").strip()
     password = (

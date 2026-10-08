@@ -27,6 +27,18 @@ class ContentProcessor:
         # them once (src/verify.py). Off in tests and when config says so.
         self.verify = verify
 
+    def reads_verbatim(self, entry: FeedEntry, mode: str) -> bool:
+        """Whether `process` will read this entry out in full rather than summarise it.
+
+        Decides which publish an episode goes out in: everything a writer
+        produced (summaries, the briefing) first, full readings after.
+        """
+        if entry.id.startswith("news-briefing-"):
+            return False
+        if mode == "auto":
+            return len(self.clean_html(entry.content)) <= AUTO_VERBATIM_LIMIT
+        return mode == "verbatim"
+
     def clean_html(self, html_content: str) -> str:
         """Extract clean text from HTML content."""
         soup = BeautifulSoup(html_content, "html.parser")
@@ -193,7 +205,7 @@ Content:
             text = await self.process_verbatim(entry)
         elif mode == "auto":
             clean_text = self.clean_html(entry.content)
-            if len(clean_text) <= AUTO_VERBATIM_LIMIT:
+            if self.reads_verbatim(entry, mode):
                 print(f"    Auto mode: {len(clean_text)} chars ≤ {AUTO_VERBATIM_LIMIT} → verbatim")
                 text = await self.process_verbatim(entry)
             else:
