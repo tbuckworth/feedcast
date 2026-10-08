@@ -384,7 +384,7 @@ QUERY_PROMPT = """For each news story below, give one or two short search querie
 
 Return ONLY JSON: {"<story number>": ["query", ...], ...}"""
 
-MATCH_PROMPT = """Below are news stories, each followed by candidate prediction markets found by keyword search. For each story, pick the markets (at most two) whose question is directly about the story's subject or its immediate consequence, so that the odds would tell a listener how expected the news was or how it changed expectations. Reject anything only loosely related, and reject a market when the story gives no reason to care about it.
+MATCH_PROMPT = """Below are news stories, each followed by candidate prediction markets found by keyword search. For each story, pick the markets (at most two) whose question is directly about the story's subject or its immediate consequence, so that the odds would tell a listener how expected the news was or how it changed expectations. Reject anything only loosely related, and reject a market when the story gives no reason to care about it. Never pick two markets that ask the same question on different platforms: keep the one with real money behind it (Polymarket or Kalshi over Manifold).
 
 Return ONLY JSON: {"<story number>": ["<market key>", ...], ...} listing only stories with a match."""
 

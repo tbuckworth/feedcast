@@ -5,7 +5,7 @@ probability over the last 30 days, with a dashed line where the story broke.
 """
 
 import io
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import matplotlib
 
@@ -30,7 +30,8 @@ def render_chart(history: list[tuple[datetime, float]], story_time: datetime | N
     try:
         ax.plot(times, probs, color=LINE, linewidth=1.6)
         ax.fill_between(times, probs, color=LINE, alpha=0.08)
-        if story_time and times[0] <= story_time <= times[-1]:
+        # A story from this morning can postdate the last trade: still mark it.
+        if story_time and times[0] <= story_time <= times[-1] + timedelta(days=2):
             ax.axvline(story_time, color=MARK, linestyle="--", linewidth=1)
             ax.annotate("story", (story_time, 100), xytext=(3, -10), textcoords="offset points",
                         color=MARK, fontsize=8)
