@@ -26,6 +26,19 @@ MIN_FALLBACK_CHARS = 1500
 _SENTENCE_BREAK = re.compile(r"(?<=[.!?])\s+")
 
 
+def respell(text: str, table: dict[str, str]) -> str:
+    """Replace each whole word in `table` with the spelling the voice says right.
+
+    Case-sensitive and on word boundaries, so "METR" becomes "Meter" but
+    "METRO" and "metric" are left alone, and "Amodei's" keeps its "'s".
+    Applied after normalisation, to the spoken text only: the email, the
+    transcripts and the fidelity check all read the script as written.
+    """
+    for word, spoken in table.items():
+        text = re.sub(rf"(?<![\w-]){re.escape(word)}(?![\w-])", spoken, text)
+    return text
+
+
 class NormalizationTruncated(RuntimeError):
     """The model hit its output ceiling, so the tail of the text is missing."""
 
@@ -51,8 +64,13 @@ IMPORTANT: Preserve ALL other text exactly as-is. Do not summarize, rephrase, or
 class TextNormalizer:
     """Normalizes text for TTS using MODEL_NORMALIZER via OpenRouter."""
 
-    def __init__(self):
+    respellings: dict[str, str] = {}   # set per instance in __init__; read-only
+
+    def __init__(self, respellings: dict[str, str] | None = None):
         self.client = get_client()
+        # Words the voice says wrong, mapped to spellings it says right
+        # (config.yaml `pronunciations`, each one measured).
+        self.respellings = respellings or {}
         # Characters passed through as written because the model returned
         # nothing for them; the run log reports it so it does not go unnoticed.
         self.unnormalized_chars = 0
@@ -64,9 +82,12 @@ class TextNormalizer:
 
         # For long texts, split into paragraph batches to stay within token limits
         if len(text) > MAX_BATCH_CHARS:
-            return await self._normalize_in_batches(text)
-
-        return await self._normalize_resilient(text.split("\n\n"))
+            spoken = await self._normalize_in_batches(text)
+        else:
+            spoken = await self._normalize_resilient(text.split("\n\n"))
+        # In code, not in the prompt: certain, free, and still applied to a
+        # passage the model refused and that is narrated as written.
+        return respell(spoken, self.respellings)
 
     async def _normalize_resilient(self, paragraphs: list[str]) -> str:
         """Normalise a batch, narrowing down to the paragraph the model won't take.

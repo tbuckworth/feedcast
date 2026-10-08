@@ -112,6 +112,26 @@ maths_filter:
   enabled: true
   threshold_per_1k: 8.0
 
+# Words the voice gets wrong, respelled the way it says them right. Applied in
+# code after normalisation, to the audio only (the email and transcripts keep
+# the real spelling). Every entry was measured, not guessed: 8-12 generations
+# with the production voice, read back by a phoneme recogniser
+# (scripts/pronunciation_check.py). About half of the plausible respellings
+# tried did NOT help, so check a new one before adding it. OpenAI is
+# deliberately absent: it is said right ~80% of the time and no spelling did
+# better; the misses are random.
+pronunciations:
+  METR: Meter              # "meter"; plain varied (M-E-T-R, "met-ar", "metch-er"); 12/12
+  AfD: AFD                 # letters; plain was "af-tee" 8/12; now ~10/12
+  OSINT: Oh-sint           # plain mixed letters and "oh-sin"; now ~11/12
+  Amodei: Amo-day          # plain was different nearly every time; now ends "-day" 12/12
+  Kokotajlo: Kokotai-lo    # plain "koko-ta-zhlo"; now "koko-tie-lo" 12/12
+  Metaculus: Metack-yulus  # plain half "meh-di-koo-ler"; now ~9/12 "meh-tack-yoo-lus"
+  xAI: X-A-I               # plain "ex-eye" 5/12; now 11/12
+  Kalshi: Kahl-shee        # plain often dropped the l ("kow-shee"); now 9/12
+  Hormuz: Hormooz          # modest: more "hor-mooz", fewer "hoh-mer"
+  GitHub: Git Hub          # modest: keeps the h more often
+
 # Prediction-market odds on the briefing's stories ("Polymarket had this at
 # twenty percent a week ago"), and a closing segment on big 24-hour moves in AI
 # markets that none of the day's stories explains, with the cause found by a
