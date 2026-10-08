@@ -476,6 +476,9 @@ async def async_main(config_path: Path | None = None) -> None:
     if _run_pass() == "narrate":
         await _narrate_deferred(monitor, config, feed_gen, audio_dir, output_dir)
         return
+    if os.environ.get("PREVIEW_BRIEFING", "").strip().lower() in ("true", "1", "yes"):
+        await _preview_briefing(monitor, config)
+        return
 
     processor = ContentProcessor(config.default_prompt, verify=config.fidelity_check)
     normalizer = TextNormalizer()
@@ -611,22 +614,7 @@ async def async_main(config_path: Path | None = None) -> None:
         # Generate daily news briefing if configured
         if config.news_briefing and config.news_briefing.enabled:
             recent_briefings = monitor.get_recent_briefings(5)
-            pm = config.prediction_markets
-            scout = MarketScout(
-                rules=MarketRules(move=pm.move, major_move=pm.major_move, max_moves=pm.max_moves),
-                polymarket_tags=pm.polymarket_tags, kalshi_series=pm.kalshi_series,
-                recently_reported=monitor.recent_market_reports(),
-            ) if pm.enabled else None
-            aggregator = NewsAggregator(
-                sources=[s.model_dump() for s in config.news_briefing.sources],
-                prompt=config.news_briefing.prompt,
-                lookback_hours=config.news_briefing.lookback_hours,
-                recent_briefings=recent_briefings,
-                full_text_stories=config.news_briefing.full_text_stories,
-                max_article_chars=config.news_briefing.max_article_chars,
-                verify=config.fidelity_check,
-                markets=scout,
-            )
+            aggregator = _make_aggregator(config, monitor, recent_briefings)
             # Idempotent per day: the briefing id is date-keyed, so once it is in
             # the database a second run today (a reprocess, a test run, the late
             # GitHub fire) must not pay for selection, fetches, writing and
@@ -861,10 +849,70 @@ async def _correct_publication_dates(entries: list[FeedEntry]) -> None:
         entry.published = real
 
 
+def _make_aggregator(config: Config, monitor: FeedMonitor,
+                     recent_briefings: list[dict]) -> NewsAggregator:
+    """The briefing writer as configured, with the prediction-market scout if enabled."""
+    nb, pm = config.news_briefing, config.prediction_markets
+    scout = MarketScout(
+        rules=MarketRules(move=pm.move, major_move=pm.major_move, max_moves=pm.max_moves),
+        polymarket_tags=pm.polymarket_tags, kalshi_series=pm.kalshi_series,
+        recently_reported=monitor.recent_market_reports(),
+    ) if pm.enabled else None
+    return NewsAggregator(
+        sources=[s.model_dump() for s in nb.sources],
+        prompt=nb.prompt,
+        lookback_hours=nb.lookback_hours,
+        recent_briefings=recent_briefings,
+        full_text_stories=nb.full_text_stories,
+        max_article_chars=nb.max_article_chars,
+        verify=config.fidelity_check,
+        markets=scout,
+    )
+
+
+async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
+    """PREVIEW_BRIEFING: write a fresh briefing and email it. Publishes nothing.
+
+    The briefing is made once a day, so after the morning run there is no other
+    way to see a change to it before tomorrow. This writes one from the news of
+    the last day, prediction markets and fidelity check included, and sends the
+    regular email and the markets trial email. The workflow marks it a dev run,
+    so both go to FEEDCAST_EMAIL_TO only. Nothing is narrated, and nothing is
+    written to the database, the feed or the site.
+    """
+    if not (config.news_briefing and config.news_briefing.enabled):
+        print("Preview: the news briefing is disabled in config.yaml")
+        return
+    aggregator = _make_aggregator(config, monitor, monitor.get_recent_briefings(5))
+    entry = await aggregator.generate_briefing()
+    if not entry:
+        print("Preview: no recent articles, no briefing")
+        return
+    entry.bullets = await safe_bullets(entry.content, is_briefing=True, label=entry.title,
+                                       sources=entry.sources)
+    base = config.podcast.base_url
+
+    def item(**kw) -> ReportEpisode:
+        return ReportEpisode(author="", feed_name=entry.feed_name, link="", audio_url="",
+                             duration_seconds=0, is_briefing=True, published=entry.published,
+                             **kw)
+
+    # The digest as the daily email shows it, then the whole script, which is
+    # where the market lines actually are.
+    report = RunReport(
+        episodes=[item(title=f"Preview: {entry.title}", bullets=entry.bullets,
+                       fidelity=entry.fidelity),
+                  item(title="Full script", briefing_text=entry.content)],
+        notices=list(llm.fallback_log), feed_url=f"{base}/feed.xml", site_url=base,
+    )
+    send_report(report, subject_tag="[Preview]")
+    _send_markets_trial(report, entry)
+
+
 def _send_markets_trial(report: RunReport, briefing: FeedEntry) -> None:
     """The prediction-markets trial: the day's email again, with price charts.
 
-    Goes to FEEDCAST_DEV_EMAIL_TO (Titus and Jason, while the charts are on
+    Goes to FEEDCAST_MARKETS_TRIAL_TO (Titus and Jason, while the charts are on
     trial) under a "[DEV - Prediction Markets]" subject, and only on days the
     briefing used a market. A chart is drawn for each unexplained move and for
     each story market the script names, and sits under the bullet that links
@@ -874,7 +922,7 @@ def _send_markets_trial(report: RunReport, briefing: FeedEntry) -> None:
     try:
         from .market_charts import render_chart
 
-        recipients = _addresses(os.environ.get("FEEDCAST_DEV_EMAIL_TO", ""))
+        recipients = _addresses(os.environ.get("FEEDCAST_MARKETS_TRIAL_TO", ""))
         data = briefing.markets
         if not recipients or not data:
             return

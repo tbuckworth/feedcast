@@ -230,7 +230,7 @@ class TestTrialEmail:
     def test_only_markets_the_script_used_are_charted(self, monkeypatch):
         calls = []
         monkeypatch.setattr(main, "send_report", lambda report, **kw: calls.append((report, kw)))
-        monkeypatch.setenv("FEEDCAST_DEV_EMAIL_TO", "titus@x,jason@x")
+        monkeypatch.setenv("FEEDCAST_MARKETS_TRIAL_TO", "titus@x,jason@x")
         monkeypatch.delenv("FEEDCAST_TEST_RUN", raising=False)
         ctx = _ctx_with_story_and_move({"found": False})
         for m in ctx.moves:
@@ -254,7 +254,7 @@ class TestTrialEmail:
     def test_no_trial_list_no_trial_email(self, monkeypatch):
         calls = []
         monkeypatch.setattr(main, "send_report", lambda report, **kw: calls.append(kw))
-        monkeypatch.delenv("FEEDCAST_DEV_EMAIL_TO", raising=False)
+        monkeypatch.delenv("FEEDCAST_MARKETS_TRIAL_TO", raising=False)
         briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
                              content="Polymarket", markets=_ctx_with_story_and_move(None).to_dict())
         main._send_markets_trial(self._report(), briefing)
@@ -267,3 +267,30 @@ def test_market_record_round_trips_through_json():
     assert data["moves"][0]["prob_24h"] == pytest.approx(0.55)
     assert data["stories"]["https://news/ohio"][0]["history"][0][1] == 0.58
     assert [s["url"] for s in ctx.sources()] == [ctx.moves[0].url, ctx.stories["https://news/ohio"][0].url]
+
+
+def test_preview_writes_a_briefing_and_emails_it_without_publishing(tmp_path, monkeypatch):
+    sent = []
+    monkeypatch.setattr(main, "send_report", lambda report, **kw: sent.append((report, kw)))
+    monkeypatch.setattr(main, "_send_markets_trial",
+                        lambda report, entry: sent.append(("trial", entry.markets)))
+
+    async def fake_bullets(text, **kw):
+        return [{"text": "Ohio odds rose", "url": "https://news/ohio"}]
+    monkeypatch.setattr(main, "safe_bullets", fake_bullets)
+
+    class Aggregator:
+        async def generate_briefing(self):
+            return FeedEntry(id="news-briefing-2026-10-08", title="Daily News Briefing - 2026-10-08",
+                             link="", published=NOW, author="Feedcast Bot",
+                             feed_name="Daily News Briefing", content="On Polymarket, odds rose.",
+                             markets={"moves": [], "stories": {}})
+    monkeypatch.setattr(main, "_make_aggregator", lambda *a: Aggregator())
+    config = main.load_config(main.Path(__file__).resolve().parent.parent / "config.yaml")
+    monitor = FeedMonitor(tmp_path / "posts.db")
+    asyncio.run(main._preview_briefing(monitor, config))
+    (report, kw), trial = sent
+    assert kw == {"subject_tag": "[Preview]"} and trial[0] == "trial"
+    digest, script = report.episodes
+    assert digest.bullets and script.briefing_text == "On Polymarket, odds rose."
+    assert monitor.get_processed_entries() == [] and monitor.get_recent_briefings() == []

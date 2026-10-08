@@ -33,7 +33,7 @@ An automated podcast generator that monitors RSS feeds, summarizes or reads post
 
 3. **Phase 3 — Finalization**: Entries marked as processed in SQLite, `feed.xml` generated, old entries cleaned up (30 days). For injected URLs, a push notification is sent via ntfy.sh.
 
-The briefing also carries prediction-market odds where a market is about one of its stories, and on some days it ends with a short segment on big AI-market moves that no story explains, each with a cause found by web search (`src/markets.py`, `prediction_markets` in `config.yaml`). Public Polymarket, Kalshi and Manifold APIs; no keys. While it is on trial, a second email with price charts goes to `FEEDCAST_DEV_EMAIL_TO`.
+The briefing also carries prediction-market odds where a market is about one of its stories, and on some days it ends with a short segment on big AI-market moves that no story explains, each with a cause found by web search (`src/markets.py`, `prediction_markets` in `config.yaml`). Public Polymarket, Kalshi and Manifold APIs; no keys. While it is on trial, a second email with price charts goes to `FEEDCAST_MARKETS_TRIAL_TO`.
 
 In CI a daily run publishes twice. The first pass (`FEEDCAST_PASS=first`) narrates the briefing and the summaries, publishes them, and sends the email. Posts read out in full are only cleaned and digested at this stage. They appear in the email with their bullets and a link to their page under `episodes/`, which says the audio is coming and plays it once it exists. A second pass (`FEEDCAST_PASS=narrate`) narrates them and publishes again. Locally, with `FEEDCAST_PASS` unset, everything runs in one pass as before.
 
