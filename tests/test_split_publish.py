@@ -151,6 +151,8 @@ class TestEmail:
 
 class _Normalizer:
     unnormalized_chars = 0
+    def __init__(self, **kw):
+        pass
     async def normalize_for_tts(self, text):
         return f"spoken: {text}"
 

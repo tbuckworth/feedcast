@@ -128,6 +128,8 @@ class Config(BaseModel):
     # Second-model check of every written script against its source.
     fidelity_check: bool = True
     prediction_markets: PredictionMarketsConfig = PredictionMarketsConfig()
+    # Word -> spelling the voice says right, applied to the spoken text only.
+    pronunciations: dict[str, str] = {}
 
 
 def load_config(config_path: Path) -> Config:
@@ -481,7 +483,7 @@ async def async_main(config_path: Path | None = None) -> None:
         return
 
     processor = ContentProcessor(config.default_prompt, verify=config.fidelity_check)
-    normalizer = TextNormalizer()
+    normalizer = TextNormalizer(respellings=config.pronunciations)
     audio_gen = AudioGenerator(voice=config.tts.voice, speed=config.tts.speed)
 
     entries_to_process: list[tuple[FeedEntry, str, str]] = []
@@ -1037,7 +1039,7 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
         }
         items = [(entry, row["mode"], config.default_prompt) for row, entry in todo]
         processor = ContentProcessor(config.default_prompt, verify=config.fidelity_check)
-        normalizer = TextNormalizer()
+        normalizer = TextNormalizer(respellings=config.pronunciations)
         audio_gen = AudioGenerator(voice=config.tts.voice, speed=config.tts.speed)
         results = await _run_entries(items, attempts, processor, audio_gen, normalizer, audio_dir)
         for (entry, _mode, _prompt), result in zip(items, results):
