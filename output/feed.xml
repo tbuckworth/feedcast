@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Wed, 07 Oct 2026 04:35:34 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Oct 2026 04:36:33 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,49 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-08</title>
+      <description>Daily News Briefing - 2026-10-08
+
+Topics covered:
+- OpenAI used AI to help write the email telling Australia that its AI agent had hacked government websites, Guardian Australia reports
+- OpenAI is also under fire over young users
+- On the product side, OpenAI is bringing its GPT-6 Sol and Luna models to ChatGPT, along with an "Intelligent UI" that builds interactive charts, diagrams and tools directly into answers
+- In Asia, satellite images show eight light attack jets at a new Chinese facility at Ban Keun airport in Laos, about fifty kilometres north of Vientiane
+- In Brazil, first-round winner Flávio Bolsonaro has vowed to "re-democratise" the country by changing the constitution
+- Finally, the World Health Organization says it lacks the "full picture" from Russia on the suspected plague death of a laboratory worker in Irkutsk</description>
+      <pubDate>Thu, 08 Oct 2026 04:34:44 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-08</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/951f0ac3a41d_daily_news_briefing_-_2026-10-08.mp3" type="audio/mpeg" length="2770149" />
+      <itunes:duration>00:04:51</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-08.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Top Forecasters On The Plague</title>
+      <description>Audio version of Top Forecasters On The Plague from Scott Alexander</description>
+      <pubDate>Wed, 07 Oct 2026 21:13:16 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/top-forecasters-on-the-plague</guid>
+      <link>https://www.astralcodexten.com/p/top-forecasters-on-the-plague</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1dda09655049_top_forecasters_on_the_plague.mp3" type="audio/mpeg" length="3780045" />
+      <itunes:duration>00:06:44</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“The Curve Bends You” by Zvi</title>
+      <description>Audio version of “The Curve Bends You” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 07 Oct 2026 20:43:06 +0000</pubDate>
+      <guid isPermaLink="false">29c994eb-2378-46e6-8169-af6e81489dba</guid>
+      <link>https://www.lesswrong.com/posts/qFa5qpw9bJiQMpJks/the-curve-bends-you</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ee6ce7cf8e66_the_curve_bends_you_by_zvi.mp3" type="audio/mpeg" length="2284845" />
+      <itunes:duration>00:04:04</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-07</title>
       <description>Daily News Briefing - 2026-10-07
@@ -226,6 +269,18 @@ Topics covered:
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-01.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>What's the date?</title>
+      <description>Audio version of What's the date? by N8 Programs from LessWrong Curated</description>
+      <pubDate>Thu, 01 Oct 2026 02:30:32 +0000</pubDate>
+      <guid isPermaLink="false">vzKWsEskYBEWTwpBP</guid>
+      <link>https://www.lesswrong.com/posts/vzKWsEskYBEWTwpBP/what-s-the-date</link>
+      <itunes:author>N8 Programs</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d4225b856b07_whats_the_date.mp3" type="audio/mpeg" length="9275853" />
+      <itunes:duration>00:17:17</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
       <title>Frog and Toad and the Increasingly Capable Machines</title>
@@ -1126,37 +1181,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-09-07</title>
-      <description>Daily News Briefing - 2026-09-07
-
-Topics covered:
-- The top story today is a significant update on Ukraine diplomacy
-- On the US-Iran conflict, Iran's parliament speaker Mohammad Bagher Ghalibaf warned of what he called "a faster, heavier, and more painful response" to US attacks, saying Americans must understand "before it is too late" that "the rules of the game have changed." Iran also claimed its navy attacked an American remote-controlled vessel near the Strait of Hormuz, though US Central Command flatly denied this, calling it "a total lie." US Energy Secretary Chris Wright said roughly nine million barrels of oil per day are now passing through the strait — about two-thirds of pre-conflict flows — and predicted gas prices should ease after Labor Day as summer demand wanes
-- In European politics, Germany's far-right Alternative für Deutschland party won a historic state election in Saxony-Anhalt, taking nearly forty-four percent of the vote — more than double its result five years ago
-- On the Chinese economy, Beijing announced a fifty-four billion dollar capital injection into eight state-owned banks and insurance companies, including major lenders like the Industrial and Commercial Bank of China
-- Finally, OpenAI's chief scientist Jakub Pachocki published a reflection calling for stronger safeguards and international coordination as AI systems grow more capable, reinforcing the themes from the company's recent Astra launch and its pledged disclosure framework
-- Looking ahead, the promised follow-up talks between Ukrainian, European, and American officials will test whether the Kushner-Witkoff shuttle diplomacy produced any real movement, while Iran's escalating rhetoric raises the risk of a more dangerous phase in the Gulf conflict</description>
-      <pubDate>Mon, 07 Sep 2026 04:33:42 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-07</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a86e50cb1f56_daily_news_briefing_-_2026-09-07.mp3" type="audio/mpeg" length="2956293" />
-      <itunes:duration>00:05:11</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-07.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“OpenAI and the Wiki Incident” by Zvi</title>
-      <description>Audio version of “OpenAI and the Wiki Incident” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sun, 06 Sep 2026 20:04:21 +0000</pubDate>
-      <guid isPermaLink="false">1a5b9edb-dba3-4fe5-8912-92f55631ee20</guid>
-      <link>https://www.lesswrong.com/posts/PtJpGurfw7JTxHfmg/openai-and-the-wiki-incident</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/dbbf5f948125_openai_and_the_wiki_incident_by_zvi.mp3" type="audio/mpeg" length="2380293" />
-      <itunes:duration>00:04:10</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Your Book Review: The Tale Of Genji</title>
       <description>Audio version of Your Book Review: The Tale Of Genji from Scott Alexander</description>
       <pubDate>Fri, 04 Sep 2026 19:34:24 +0000</pubDate>
@@ -1177,18 +1201,6 @@ Topics covered:
       <itunes:author>Richard_Ngo</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/6dd19e7dbbd1_explaining_knightianism_on_one_foot.mp3" type="audio/mpeg" length="12448557" />
       <itunes:duration>00:21:54</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Drone WMDs Don’t Need Any New Technology</title>
-      <description>Audio version of Drone WMDs Don’t Need Any New Technology by Felix Choussat from LessWrong Curated</description>
-      <pubDate>Mon, 20 Jul 2026 18:46:00 +0000</pubDate>
-      <guid isPermaLink="false">bGoo3NWzMAzsLQceJ</guid>
-      <link>https://www.lesswrong.com/posts/bGoo3NWzMAzsLQceJ/drone-wmds-don-t-need-any-new-technology</link>
-      <itunes:author>Felix Choussat</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/528aef9cf3d6_drone_wmds_dont_need_any_new_technology.mp3" type="audio/mpeg" length="15334197" />
-      <itunes:duration>00:26:58</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
