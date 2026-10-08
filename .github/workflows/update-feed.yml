@@ -135,6 +135,9 @@ jobs:
     needs: guard
     if: needs.guard.outputs.should_run == 'true'
     runs-on: ubuntu-latest
+    outputs:
+      # Posts read out in full that wait for the narrate job (0 skips it).
+      deferred: ${{ steps.pipeline.outputs.deferred }}
     # Backstop: normal runs take 12-30 min. Without this the job inherits the
     # 6h GitHub default, so any network stall burns 6h of minutes (2026-08-19).
     timeout-minutes: 115
@@ -152,44 +155,16 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v4
 
-      # apt hung here indefinitely on 2026-08-19: the azure.archive.ubuntu.com
-      # mirror failed every index (Ign:), the fallback stalled mid-fetch, and
-      # apt has no default timeout. Skip apt when ffmpeg is already on the
-      # image, and bound + retry it when it isn't.
       - name: Install ffmpeg
         timeout-minutes: 12
-        run: |
-          set -uo pipefail
-          if command -v ffmpeg >/dev/null 2>&1; then
-            echo "ffmpeg already present: $(ffmpeg -version | head -1)"
-            exit 0
-          fi
-          APT_OPTS=(
-            -o Acquire::Retries=3
-            -o Acquire::http::Timeout=20
-            -o Acquire::https::Timeout=20
-            -o Acquire::ForceIPv4=true
-          )
-          for attempt in 1 2 3; do
-            echo "::group::ffmpeg install attempt ${attempt}/3"
-            if sudo timeout 90 apt-get update "${APT_OPTS[@]}" \
-               && sudo timeout 240 apt-get install -y --no-install-recommends "${APT_OPTS[@]}" ffmpeg; then
-              echo "::endgroup::"
-              ffmpeg -version | head -1
-              exit 0
-            fi
-            echo "::endgroup::"
-            echo "Attempt ${attempt} failed or timed out; retrying in 10s"
-            sleep 10
-          done
-          echo "::error::Could not install ffmpeg after 3 attempts"
-          exit 1
+        run: scripts/ci-install-ffmpeg.sh
 
       - name: Install dependencies
         timeout-minutes: 10
         run: uv sync
 
       - name: Run pipeline
+        id: pipeline
         # A backlog day (a late or skipped fire, so two days of posts at once)
         # overran 50 min mid-TTS and threw the whole run away (2026-08-27).
         timeout-minutes: 90
@@ -225,6 +200,9 @@ jobs:
           FEEDCAST_TEST_RUN: ${{ (inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true) && inputs.notify_list != true }}
           VOICE_UPLOAD_DELAY_SECONDS: "5"
           SAVE_DEBUG_WAVS: "false"
+          # Briefing and summaries now; posts read out in full are cleaned,
+          # digested and emailed, then narrated by the narrate job below.
+          FEEDCAST_PASS: first
         run: uv run python -m src.main
 
       - name: Upload debug WAVs
@@ -237,98 +215,82 @@ jobs:
 
       - name: Commit and push
         timeout-minutes: 10
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          # The database and MP3s are gitignored here; they go to the
-          # `state` branch below. Main gets the feed, transcripts and the
-          # small per-episode source bundles.
-          git add output/ data/sources/
-          git diff --staged --quiet || git commit -m "Update podcast feed"
-          # Pull latest — if rebase fails (e.g. binary conflicts), fall back to merge
-          if ! git pull --rebase origin main; then
-            echo "Rebase failed, falling back to merge..."
-            git rebase --abort
-            git pull --no-rebase origin main -X ours
-            git add output/ data/sources/
-            git diff --staged --quiet || git commit -m "Update podcast feed (merge)"
-          fi
-          # State first: if this push lands and the main push fails, the
-          # next run regenerates feed.xml from the database anyway. The
-          # other order can advertise audio that was never published.
-          scripts/state.sh push
-          git push
+        run: scripts/ci-commit-and-push.sh
 
   deploy:
     needs: update
+    uses: ./.github/workflows/publish-pages.yml
+    with:
+      artifact_name: github-pages
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+  # The slow half: posts read out in full, narrated after the briefing and the
+  # summaries are already published and emailed. On 2026-09-26 a 113-chunk
+  # book review ran into the pipeline timeout and took the day's briefing and
+  # summary down with it; here it can only take itself. Runs alongside the
+  # first deploy. A failed or timed-out narration still commits, so the
+  # attempt count and the episode pages are published, and the post is
+  # retried by the next run's narrate job.
+  narrate:
+    needs: update
+    if: needs.update.outputs.deferred != '0' && needs.update.outputs.deferred != ''
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    timeout-minutes: 115
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main  # Get latest after update job
 
-      - name: Pull latest changes
+      - name: Pull the first pass's commit
+        timeout-minutes: 5
         run: git pull origin main
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+      - name: Restore database and audio from the state branch
+        timeout-minutes: 10
+        run: scripts/state.sh pull
 
-      - name: Copy audio from the state branch to output
-        run: |
-          scripts/state.sh pull
-          mkdir -p output/audio
-          cp data/audio/*.mp3 output/audio/ 2>/dev/null || true
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: output
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
-      # Podcast apps do not poll on our schedule. Pocket Casts fetches feeds
-      # server-side and, for a small private feed, only every few hours — so
-      # the episode email arrived and the app showed nothing (2026-09-15). It
-      # honours WebSub: feed.xml names a hub, and a publish ping here makes the
-      # hub fetch the feed and push it to every subscribed app within a minute.
-      # The Pages CDN caches for 10 minutes, so wait until the live feed is
-      # byte-identical to the one this run committed before pinging, or the
-      # hub would fetch and cache the previous day's feed.
-      - name: Notify the WebSub hub
+      - name: Install ffmpeg
         timeout-minutes: 12
+        run: scripts/ci-install-ffmpeg.sh
+
+      - name: Install dependencies
+        timeout-minutes: 10
+        run: uv sync
+
+      - name: Narrate deferred posts
+        timeout-minutes: 80
+        continue-on-error: true
         env:
-          FEED_URL: https://tbuckworth.github.io/feedcast/feed.xml
-        run: |
-          set -uo pipefail
-          hub="$(grep -o '<atom:link[^>]*rel="hub"[^>]*>' output/feed.xml \
-                 | grep -o 'href="[^"]*"' | head -1 | cut -d'"' -f2)"
-          if [[ -z "$hub" ]]; then
-            echo "feed.xml declares no WebSub hub; nothing to notify"
-            exit 0
-          fi
-          want="$(sha256sum output/feed.xml | cut -d' ' -f1)"
-          for attempt in $(seq 1 20); do
-            have="$(curl -sSf --max-time 30 -H 'Cache-Control: no-cache' "$FEED_URL" | sha256sum | cut -d' ' -f1)"
-            if [[ "$have" == "$want" ]]; then
-              echo "Live feed matches the committed feed.xml (attempt ${attempt})"
-              break
-            fi
-            echo "Live feed still differs from the committed feed.xml (attempt ${attempt}/20); waiting 30s"
-            sleep 30
-          done
-          if [[ "$have" != "$want" ]]; then
-            echo "::warning::Live feed.xml never matched the committed one; pinging the hub anyway"
-          fi
-          code="$(curl -sS --max-time 30 -o /dev/null -w '%{http_code}' -X POST "$hub" \
-                    --data-urlencode "hub.mode=publish" --data-urlencode "hub.url=$FEED_URL")"
-          if [[ "$code" =~ ^2 ]]; then
-            echo "Pinged $hub for $FEED_URL (HTTP $code)"
-          else
-            echo "::warning::WebSub ping to $hub returned HTTP $code; apps will fall back to polling"
-          fi
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          DEEPINFRA_API_KEY: ${{ secrets.DEEPINFRA_API_KEY }}
+          # Mails the operator, and only when a narration fails.
+          SMTP_HOST: ${{ vars.SMTP_HOST }}
+          SMTP_PORT: ${{ vars.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          FEEDCAST_EMAIL_TO: ${{ secrets.FEEDCAST_EMAIL_TO }}
+          FEEDCAST_TEST_RUN: ${{ (inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true) && inputs.notify_list != true }}
+          VOICE_UPLOAD_DELAY_SECONDS: "5"
+          SAVE_DEBUG_WAVS: "false"
+          FEEDCAST_PASS: narrate
+        run: uv run python -m src.main
+
+      - name: Commit and push
+        timeout-minutes: 10
+        run: scripts/ci-commit-and-push.sh "Add narrated episodes"
+
+  deploy-narrated:
+    needs: [deploy, narrate]
+    uses: ./.github/workflows/publish-pages.yml
+    with:
+      artifact_name: github-pages-narrated
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

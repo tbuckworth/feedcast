@@ -33,6 +33,8 @@ An automated podcast generator that monitors RSS feeds, summarizes or reads post
 
 3. **Phase 3 — Finalization**: Entries marked as processed in SQLite, `feed.xml` generated, old entries cleaned up (30 days). For injected URLs, a push notification is sent via ntfy.sh.
 
+In CI a daily run publishes twice. The first pass (`FEEDCAST_PASS=first`) narrates the briefing and the summaries, publishes them, and sends the email. Posts read out in full are only cleaned and digested at this stage. They appear in the email with their bullets and a link to their page under `episodes/`, which says the audio is coming and plays it once it exists. A second pass (`FEEDCAST_PASS=narrate`) narrates them and publishes again. Locally, with `FEEDCAST_PASS` unset, everything runs in one pass as before.
+
 ## Setup
 
 ### Prerequisites
@@ -196,9 +198,9 @@ The pipeline sends notifications via [ntfy.sh](https://ntfy.sh) when injected UR
 
 GitHub Actions workflow (`.github/workflows/update-feed.yml`) runs daily at 03:43 UTC:
 
-1. Fetches feeds, processes new entries, generates audio
-2. Commits results to the repo
-3. Deploys `output/` to GitHub Pages
+1. Fetches feeds, writes and narrates the briefing and summaries, cleans and digests posts read out in full, and emails the report
+2. Commits results to the repo and deploys `output/` to GitHub Pages
+3. Narrates the posts read out in full (`narrate` job), commits, and deploys again (`deploy-narrated`)
 
 **Manual dispatch** supports:
 - `entry_url` — reprocess a specific RSS entry
