@@ -12,6 +12,23 @@ from .llm import complete
 from .monitor import FeedEntry
 
 AUTO_VERBATIM_LIMIT = 24000  # ~25 min of audio at ~0.063 sec/char
+
+
+def spoken_title(title: str, author: str) -> str:
+    """The title as the intro and outro say it, without a "by <author>" tail.
+
+    Zvi's feed titles every post '“The Curve Bends You” by Zvi', so episodes
+    opened "Summary of ... by Zvi by Zvi Mowshowitz" and closed "End of ... by
+    Zvi": his name three times, in two forms, by a voice that already says it
+    a different way each time. The tail is dropped only when the name after
+    the last " by " is the author (whole, or their first or last name), so a
+    title like "Stand by Me" is left alone.
+    """
+    head, sep, tail = title.rpartition(" by ")
+    if not sep or not head.strip():
+        return title
+    names = {author.strip().lower()} | {n.lower() for n in author.split()} if author else set()
+    return head.rstrip(" ,:-—") if tail.strip().strip(".").lower() in names else title
 MAX_PROMPT_CHARS = 400000    # ~100k tokens; a cost ceiling, not a context limit
 
 
@@ -173,7 +190,8 @@ Content:
         clean_content = self.clean_html(content_with_tables)
 
         # Add intro
-        intro = f"{entry.title}. By {entry.author}. Published {entry.published.strftime('%B %d, %Y')}."
+        intro = (f"{spoken_title(entry.title, entry.author)}. By {entry.author}. "
+                 f"Published {entry.published.strftime('%B %d, %Y')}.")
 
         return f"{intro}\n\n{clean_content}"
 
@@ -189,7 +207,7 @@ Content:
             title: Title for the end announcement (defaults to entry.title)
         """
         # Use provided title or fall back to entry title
-        episode_title = title or entry.title
+        episode_title = spoken_title(title or entry.title, entry.author)
         is_news_briefing = entry.id.startswith("news-briefing-")
 
         if is_news_briefing and mode == "verbatim":
@@ -199,7 +217,7 @@ Content:
         elif mode == "summarize":
             summary = await self.summarize(entry, prompt)
             # Add intro for context
-            intro = f"Summary of {entry.title} by {entry.author}."
+            intro = f"Summary of {episode_title} by {entry.author}."
             text = f"{intro}\n\n{summary}"
         elif mode == "verbatim":
             text = await self.process_verbatim(entry)
@@ -211,7 +229,7 @@ Content:
             else:
                 print(f"    Auto mode: {len(clean_text)} chars > {AUTO_VERBATIM_LIMIT} → summarize")
                 summary = await self.summarize(entry, prompt)
-                intro = f"Summary of {entry.title} by {entry.author}."
+                intro = f"Summary of {episode_title} by {entry.author}."
                 text = f"{intro}\n\n{summary}"
         else:
             raise ValueError(f"Unknown processing mode: {mode}")
