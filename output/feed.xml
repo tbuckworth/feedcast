@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Fri, 09 Oct 2026 04:35:03 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 04:37:14 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -40,6 +40,18 @@ Topics covered:
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-09.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Ballots Everywhere: Times &amp; Places</title>
+      <description>Audio version of Ballots Everywhere: Times &amp; Places by Skyler from Scott Alexander</description>
+      <pubDate>Thu, 08 Oct 2026 22:00:52 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/ballots-everywhere-times-and-places-673</guid>
+      <link>https://www.astralcodexten.com/p/ballots-everywhere-times-and-places-673</link>
+      <itunes:author>Skyler</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7cee4fee91bd_ballots_everywhere_times_places.mp3" type="audio/mpeg" length="1988133" />
+      <itunes:duration>00:03:41</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
       <title>“AI #189: New Math” by Zvi</title>
