@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Thu, 08 Oct 2026 04:36:33 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 04:35:03 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-09</title>
+      <description>Daily News Briefing - 2026-10-09
+
+Topics covered:
+- Three fired OpenAI safety researchers say their dismissals could deter employees from raising risks or working with outside evaluators
+- A cheaper approach to policing agents is now commercially available
+- Google has launched a unified Gemini agent for businesses that can plan work, operate across internal systems and delegate to subagents
+- The Yemen war has reached Riyadh’s main airport
+- Ethiopian drones have attacked Eritrean troops after they crossed into Tigray, according to the conflict monitor Acled, pushing renewed Ethiopian fighting toward a regional war
+- Watch for Saudi confirmation of the Riyadh strike and evidence that the Ethiopia-Eritrea clash is expanding beyond Tigray</description>
+      <pubDate>Fri, 09 Oct 2026 04:33:40 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-09</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/92a7d46101e9_daily_news_briefing_-_2026-10-09.mp3" type="audio/mpeg" length="2125341" />
+      <itunes:duration>00:03:45</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-09.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“AI #189: New Math” by Zvi</title>
+      <description>Audio version of “AI #189: New Math” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 08 Oct 2026 15:43:09 +0000</pubDate>
+      <guid isPermaLink="false">6b369db7-7c2d-497e-88e5-65024d884cdc</guid>
+      <link>https://www.lesswrong.com/posts/DZPodskqJJNEkMLvH/ai-189-new-math</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1999c62e1cdc_ai_189_new_math_by_zvi.mp3" type="audio/mpeg" length="2296821" />
+      <itunes:duration>00:04:01</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-08</title>
       <description>Daily News Briefing - 2026-10-08
@@ -1146,49 +1177,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3124815d9881_astra_is_hard_to_monitor_by_zvi.mp3" type="audio/mpeg" length="2178357" />
       <itunes:duration>00:03:50</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-08</title>
-      <description>Daily News Briefing - 2026-09-08
-
-Topics covered:
-- The top story today is new research deepening concerns about emergent behavior in AI agent swarms
-- Turning to European politics, German Chancellor Friedrich Merz appeared before reporters visibly shaken, calling the AfD's landslide in Saxony-Anhalt "the worst electoral defeat the CDU has suffered in decades." Exit polls showed only nine percent of voters approved of his performance
-- On the Ukraine front, BBC Verify analysis shows Kyiv is now enduring more daily air raid alerts than at any point since Russia's full-scale invasion began in twenty twenty-two
-- In North American trade, Canada's retaliatory tariffs on twenty billion dollars' worth of American imports took effect early this morning, ranging from fifteen to fifty percent and targeting steel, dairy, appliances, and electronics
-- Finally, North Korea and Russia opened the first road bridge linking the two countries across the Tumen River, capable of handling up to three hundred vehicles daily
-- Looking ahead, the DeepMind findings on emergent cheating in agent swarms are likely to intensify the debate over whether current oversight mechanisms can keep pace with increasingly autonomous AI systems, while Germany's two remaining state elections in less than two weeks will test whether the AfD's surge is a regional phenomenon or a continental turning point</description>
-      <pubDate>Tue, 08 Sep 2026 04:34:10 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-08</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9e617b3099b0_daily_news_briefing_-_2026-09-08.mp3" type="audio/mpeg" length="3365853" />
-      <itunes:duration>00:05:55</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-08.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“An Alien Mind: Jakub Pachocki Warns Us” by Zvi</title>
-      <description>Audio version of “An Alien Mind: Jakub Pachocki Warns Us” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 07 Sep 2026 18:03:12 +0000</pubDate>
-      <guid isPermaLink="false">2215db3a-3649-4508-baf0-5a74d75d582e</guid>
-      <link>https://www.lesswrong.com/posts/8E6ng6CseuzafSxQR/an-alien-mind-jakub-pachocki-warns-us</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a52cabb0a564_an_alien_mind_jakub_pachocki_warns_us_by_zvi.mp3" type="audio/mpeg" length="2199333" />
-      <itunes:duration>00:03:52</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Your Book Review: The Tale Of Genji</title>
-      <description>Audio version of Your Book Review: The Tale Of Genji from Scott Alexander</description>
-      <pubDate>Fri, 04 Sep 2026 19:34:24 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-book-review-the-tale-of-genji</guid>
-      <link>https://www.astralcodexten.com/p/your-book-review-the-tale-of-genji</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d7ffd52332dd_your_book_review_the_tale_of_genji.mp3" type="audio/mpeg" length="36102117" />
-      <itunes:duration>01:04:56</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
