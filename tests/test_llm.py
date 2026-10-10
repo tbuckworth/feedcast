@@ -1,7 +1,6 @@
 """Role routing: per-route parameter translation, fallback order, and the log."""
 
 import asyncio
-from types import SimpleNamespace
 
 import pytest
 import httpx
@@ -9,43 +8,7 @@ from openai import BadRequestError, PermissionDeniedError
 
 from src import llm
 from src.llm import ROLES, ROUTES, Target, complete
-
-
-class FakeApi:
-    """One route's client: replies in order, records calls. An Exception reply raises."""
-
-    def __init__(self, replies):
-        self.replies = list(replies)
-        self.calls = []
-        self.chat = SimpleNamespace(completions=SimpleNamespace(create=self._create))
-
-    async def _create(self, **kw):
-        self.calls.append(kw)
-        reply = self.replies.pop(0)
-        if isinstance(reply, Exception):
-            raise reply
-        if reply == "<no-choices>":
-            return SimpleNamespace(choices=None, error={"code": 502})
-        content = None if reply == "<empty>" else reply
-        return SimpleNamespace(
-            choices=[SimpleNamespace(message=SimpleNamespace(content=content), finish_reason="stop")],
-            usage=SimpleNamespace(completion_tokens=3))
-
-
-@pytest.fixture
-def routes(monkeypatch):
-    """Fake clients per route name; a route missing from the dict has no key."""
-    fakes: dict[str, FakeApi] = {}
-    monkeypatch.setattr(llm, "client_for", lambda route: fakes.get(route.name))
-
-    # Effort-carrying anthropic calls take the native API; the fake anthropic
-    # route answers those too, recording the effort it was sent.
-    async def native(model, messages, max_tokens, effort):
-        return await fakes["anthropic"]._create(model=model, messages=messages,
-                                                max_tokens=max_tokens, effort=effort)
-    monkeypatch.setattr(llm, "_anthropic_native", native)
-    monkeypatch.setattr(llm, "fallback_log", [])
-    return fakes
+from tests.conftest import FakeApi
 
 
 MSGS = [{"role": "user", "content": "hi"}]
@@ -112,9 +75,9 @@ def test_routes_without_a_key_are_skipped_and_the_skip_is_logged(routes):
     routes["openrouter"] = FakeApi([RuntimeError("primary down"), "sibling model"])
     done = asyncio.run(complete("writer", MSGS, max_tokens=50))
     assert done.text == "sibling model"
-    assert done.target.model == "openai/gpt-5.6-sol"
+    assert done.target.model == "openai/gpt-6.1-sol"
     assert [c["model"] for c in routes["openrouter"].calls] == [
-        "anthropic/claude-opus-5.5", "openai/gpt-5.6-sol"]
+        "anthropic/claude-opus-5.5", "openai/gpt-6.1-sol"]
     assert "ANTHROPIC_API_KEY not set" in llm.fallback_log[0]
 
 
@@ -213,17 +176,20 @@ def test_writer_recovers_when_claude_is_blocked_and_anthropic_has_no_credit(rout
 
     assert done.text == '["https://example.com/story"]'
     assert done.target.route == ("openai" if direct_openai else "openrouter")
-    assert done.target.model.endswith("gpt-5.6-sol")
+    assert done.target.model.endswith("gpt-6.1-sol")
     assert len(llm.fallback_log) == 1
     assert "PermissionDeniedError" in llm.fallback_log[0]
     assert "credit balance" in llm.fallback_log[0]
+    # Out of credit is the whole account: Opus 4.6 on it is not even tried.
+    assert len(routes["anthropic"].calls) == 1
     call = routes[done.target.route].calls[-1]
+    # Sol cannot switch reasoning off, so it writes at low, like Opus.
     if direct_openai:
         assert call["max_completion_tokens"] == 2000
-        assert call["reasoning_effort"] == "none"
+        assert call["reasoning_effort"] == "low"
     else:
         assert call["max_tokens"] == 2000
-        assert call["extra_body"] == {"reasoning": {"enabled": False}}
+        assert call["extra_body"] == {"reasoning": {"effort": "low"}}
 
 
 def test_checker_recovers_on_a_different_model_family_from_the_backup_writer(routes):

@@ -31,10 +31,19 @@ Roles, and why each model:
   billed ~3x that in testing, so direct is primary and OpenRouter the backup.
 - normalizer (Gemini 3 Flash): only transforms, "45%" -> "forty-five percent".
   ~47% of all tokens; a stronger model is not better at "preserve everything
-  else exactly", and Flash did it for 168 episodes without incident.
+  else exactly", and Flash did it for 168 episodes without incident. Its
+  backups are on the other two accounts (Haiku 5.5, then GPT-6.1 Sol): on
+  2026-10-10 the OpenRouter account ran out of credit (402) and, with
+  OpenRouter its only route, every episode failed at normalisation.
+
+An account that refuses for a reason that lasts (out of credit, a bad key) is
+skipped for the rest of the run, so each later call goes straight to a
+working one instead of failing first (`account_failure`).
 """
 
 import os
+import re
+from collections import Counter
 from dataclasses import dataclass
 from types import SimpleNamespace
 
@@ -73,11 +82,15 @@ class Target:
 
     `reasoning` is provider-neutral: {"off": True}, {"effort": "low"} or
     {"budget": 4000} (a thinking-token ceiling). Each route translates it.
+    `min_effort` is for a model that cannot switch reasoning off: "off" is
+    sent as that effort instead. GPT-6.1 Sol 400s on reasoning_effort "none"
+    ("Supported values are: 'low', 'medium', 'high', and 'xhigh'", 2026-10-10).
     """
 
     route: str
     model: str
     reasoning: dict | None = None
+    min_effort: str | None = None
 
     @property
     def label(self) -> str:
@@ -93,28 +106,41 @@ class Target:
 # every backup depend on the same provider. On 2026-09-19 OpenRouter rejected
 # all Claude calls while Anthropic direct had no credit. GPT and Gemini still
 # worked. The final writer/checker fallbacks use different model families so
-# the fidelity check remains independent of the writer.
+# the fidelity check remains independent of the writer. Every role has a
+# target on at least two of the three accounts.
+#
+# The writer's non-Claude backup is GPT-6.1 Sol (Titus's pick, 2026-10-10) at
+# effort low, the same setting Opus writes at; Sol cannot switch reasoning off.
+SOL_WRITER = dict(reasoning={"effort": "low"}, min_effort="low")
 ROLES: dict[str, tuple[Target, ...]] = {
     "writer": (
         Target("anthropic", "claude-opus-5-5", {"effort": "low"}),
         Target("openrouter", "anthropic/claude-opus-5.5", {"effort": "low"}),
         Target("anthropic", "claude-opus-4-6"),
-        Target("openai", "gpt-5.6-sol", {"off": True}),
-        Target("openrouter", "openai/gpt-5.6-sol", {"off": True}),
+        Target("openai", "gpt-6.1-sol", **SOL_WRITER),
+        Target("openrouter", "openai/gpt-6.1-sol", **SOL_WRITER),
     ),
     "checker": (
         Target("anthropic", "claude-sonnet-5"),
         Target("openrouter", "anthropic/claude-sonnet-5"),
         Target("openrouter", "anthropic/claude-sonnet-4.6"),
         Target("openrouter", "google/gemini-3-flash-preview"),
+        # Last: the same family as the writer's backup, but a check by a
+        # sibling beats no check when Anthropic and OpenRouter are both down.
+        Target("openai", "gpt-6.1-sol", min_effort="low"),
     ),
     "bullets": (
         Target("openai", "gpt-5.6-sol", {"off": True}),
         Target("openrouter", "openai/gpt-5.6-sol", {"off": True}),
         Target("anthropic", "claude-opus-5-5", {"effort": "low"}),
     ),
+    # Haiku before Sol: on a test passage Haiku 5.5 normalised everything in
+    # 1.3s; Sol at effort low took 4.8s and left "$1.5M/yr" and "~3x" as
+    # written. Haiku is also a twentieth of Sol's price.
     "normalizer": (
         Target("openrouter", "google/gemini-3-flash-preview"),
+        Target("anthropic", "claude-haiku-5-5"),
+        Target("openai", "gpt-6.1-sol", {"effort": "low"}, min_effort="low"),
     ),
 }
 
@@ -132,7 +158,58 @@ MODEL_CHEAP = MODEL_WRITER
 LLM_TIMEOUT_SECONDS = float(os.environ.get("LLM_TIMEOUT_SECONDS", "180"))
 
 # Every switch to a backup target this run, in order, for the run report.
+# Mutated in place, never rebound: other modules import the list itself.
 fallback_log: list[str] = []
+
+# Routes whose account failed in a way that lasts the run (out of credit, bad
+# key), with the error. Later calls skip every target on them.
+dead_routes: dict[str, Exception] = {}
+
+# What an account-level refusal says, as opposed to a model-level one (OpenRouter's
+# 403 "Terms Of Service" for Claude only ever applied to Claude) or a transient
+# one (a 429 "rate limit exceeded" passes in seconds). Anthropic says "Your
+# credit balance is too low" with a 400; OpenAI "exceeded your current quota"
+# with a 429; OpenRouter 402 "Insufficient credits", or 403 "Key limit exceeded".
+_ACCOUNT_WORDING = re.compile(
+    r"credit|insufficient.?(funds|quota|balance)|quota|billing|key limit|payment", re.I)
+
+
+def account_failure(e: BaseException) -> bool:
+    """Whether `e` says the whole account is unusable, not just this model or moment."""
+    status = getattr(e, "status_code", None)
+    if status in (401, 402):
+        return True
+    return status in (400, 403, 429) and bool(_ACCOUNT_WORDING.search(str(e)))
+
+
+def fallback_notices() -> list[str]:
+    """The run's fallback log for the email: dead accounts first, repeats collapsed.
+
+    One dead account touches every call on it, so without collapsing, a long
+    post's normalisation alone would print a dozen identical lines.
+    """
+    heads = [f"{ROUTES[name].name} account unavailable for the rest of the run "
+             f"after: {type(e).__name__}: {str(e)[:200]}"
+             for name, e in dead_routes.items()]
+    counts = Counter(fallback_log)
+    return heads + [note if counts[note] == 1 else f"{note} ({counts[note]} calls)"
+                    for note in dict.fromkeys(fallback_log)]
+
+
+def model_name(model: str) -> str:
+    """A model id as people say it: 'claude-opus-5-5' and 'anthropic/claude-opus-5.5'
+    are both 'Claude Opus 5.5'; 'gpt-6.1-sol' is 'GPT-6.1 Sol'."""
+    m = model.split("/")[-1].removesuffix("-preview")
+    if m.startswith("claude-"):
+        family, *version = m.removeprefix("claude-").split("-")
+        return f"Claude {family.title()} {'.'.join(version)}".rstrip()
+    if m.startswith("gpt-"):
+        _gpt, version, *rest = m.split("-") + [""]
+        return " ".join([f"GPT-{version}", *(w.title() for w in rest if w)])
+    if m.startswith("gemini-"):
+        return "Gemini " + " ".join(w if w[:1].isdigit() else w.title()
+                                    for w in m.split("-")[1:])
+    return m
 
 
 class EmptyCompletion(RuntimeError):
@@ -248,11 +325,13 @@ def get_client() -> AsyncOpenAI:
     )
 
 
-def _reasoning_kwargs(route: Route, reasoning: dict | None) -> dict:
+def _reasoning_kwargs(route: Route, reasoning: dict | None, min_effort: str | None = None) -> dict:
     """Translate the neutral reasoning setting into what this route expects."""
     if not reasoning:
         return {}
     off = reasoning.get("off") or reasoning.get("effort") == "none"
+    if off and min_effort:
+        reasoning, off = {"effort": min_effort}, False
     if route.name == "openai":
         if off:
             return {"reasoning_effort": "none"}
@@ -276,7 +355,8 @@ def _kwargs(route: Route, target: Target, messages: list[dict], max_tokens: int,
     kw: dict = {"model": target.model, "messages": messages, route.max_tokens_param: max_tokens}
     if temperature is not None and route.accepts_temperature:
         kw["temperature"] = temperature
-    kw.update(_reasoning_kwargs(route, reasoning if reasoning is not None else target.reasoning))
+    kw.update(_reasoning_kwargs(route, reasoning if reasoning is not None else target.reasoning,
+                                target.min_effort))
     return kw
 
 
@@ -286,6 +366,17 @@ class Completion:
     finish_reason: str | None
     target: Target
     usage: object = None
+
+    def credit(self, role: str = "writer") -> dict:
+        """Who wrote this, for the email and the database.
+
+        `backup` means a different model from the role's primary. The same
+        model on another account reads the same, so it is not flagged here
+        (the fallback section of the email still lists the switch).
+        """
+        primary = ROLES[role][0].model
+        return {"model": self.target.model, "route": self.target.route, "primary": primary,
+                "backup": model_name(self.target.model) != model_name(primary)}
 
 
 async def complete(role: str, messages: list[dict], *, max_tokens: int, label: str = "",
@@ -320,6 +411,10 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
     tried: list[str] = []
     for target in targets:
         route = ROUTES[target.route]
+        if route.name in dead_routes:
+            last = last or dead_routes[route.name]
+            tried.append(f"{target.label}: skipped, {route.name} account unavailable this run")
+            continue
         api = client_for(route)
         if api is None:
             # Counts as a fallback: a primary whose key is missing in CI would
@@ -350,6 +445,9 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
             last = e
             tried.append(f"{target.label}: {type(e).__name__}: {str(e)[:160]}")
             print(f"    {where}: {tried[-1]}")
+            if account_failure(e):
+                dead_routes.setdefault(route.name, e)
+                print(f"    {where}: {route.name} account unusable; skipping it for the rest of the run")
             continue
         if tried:
             note = f"{where}: served by {target.label} after " + "; ".join(tried)

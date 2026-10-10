@@ -92,6 +92,9 @@ class FeedEntry:
     bundle: Optional[str] = None
     # Result of the source check (src/verify.py), as a plain dict.
     fidelity: Optional[dict] = None
+    # Which model wrote the script (llm.Completion.credit()), for the email's
+    # "Written by" line. None for verbatim episodes.
+    writer: Optional[dict] = None
     # The briefing's prediction-market context (MarketContext.to_dict()), for
     # the trial email's charts and for not reporting a move twice.
     markets: Optional[dict] = None
@@ -206,6 +209,12 @@ class FeedMonitor:
                 pass  # Column already exists
             try:
                 conn.execute("ALTER TABLE processed_posts ADD COLUMN fidelity TEXT DEFAULT ''")
+            except sqlite3.OperationalError:
+                pass  # Column already exists
+            # Which model wrote the script, as JSON. Older rows keep '' and the
+            # email simply has no "Written by" line for them.
+            try:
+                conn.execute("ALTER TABLE processed_posts ADD COLUMN writer TEXT DEFAULT ''")
             except sqlite3.OperationalError:
                 pass  # Column already exists
             # Entries that failed mid-pipeline, so the next run tries them
@@ -472,8 +481,8 @@ class FeedMonitor:
             conn.execute(
                 """
                 INSERT OR REPLACE INTO processed_posts
-                (id, feed_name, title, link, published, processed_at, audio_file, content, author, bullets, maths, feed_date, fidelity)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (id, feed_name, title, link, published, processed_at, audio_file, content, author, bullets, maths, feed_date, fidelity, writer)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     entry.id,
@@ -489,6 +498,7 @@ class FeedMonitor:
                     json.dumps(maths) if maths else "",
                     entry.feed_date.isoformat() if entry.feed_date else "",
                     json.dumps(entry.fidelity) if entry.fidelity else "",
+                    json.dumps(entry.writer) if entry.writer else "",
                 ),
             )
             conn.commit()

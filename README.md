@@ -65,7 +65,7 @@ bwsrun uv run python -m src.main
 | Variable | Required | Purpose |
 |----------|----------|---------|
 | `OPENROUTER_API_KEY` | Yes | OpenRouter: Claude Opus 4.6 (writer), Claude Sonnet 5 (checker), Gemini 3 Flash (TTS normaliser) |
-| `OPENAI_API_KEY` | No | OpenAI direct: GPT-5.6 Sol writes email bullets and backs up the writer when Claude is unavailable. Sol via OpenRouter is also a writer backup |
+| `OPENAI_API_KEY` | No | OpenAI direct: GPT-5.6 Sol writes email bullets; GPT-6.1 Sol backs up the writer, checker and normaliser. Sol via OpenRouter is also a writer backup |
 | `ANTHROPIC_API_KEY` | No | Anthropic direct: backup route for the writer and checker roles |
 | `DEEPINFRA_API_KEY` | Yes | DeepInfra Chatterbox TTS API |
 | `REPROCESS_ENTRY` | No | Entry ID/URL to reprocess from RSS feeds |
@@ -86,10 +86,14 @@ bwsrun uv run python -m src.main
 | `FEEDCAST_EMAIL_FROM` | No | From address (defaults to `SMTP_USER`) |
 | `FEEDCAST_EMAIL_ALWAYS` | No | Send the report even when a run produced nothing new |
 
-The writer tries Claude on OpenRouter, Claude direct, and a sibling Claude,
-then GPT-5.6 Sol direct and via OpenRouter. The checker tries its Claude
+The writer tries Claude direct, Claude on OpenRouter, and a sibling Claude,
+then GPT-6.1 Sol direct and via OpenRouter. The checker tries its Claude
 targets, then Gemini 3 Flash, keeping the backup checker distinct from the
-backup writer. Every fallback is reported in the run log and completion email.
+backup writer, and GPT-6.1 Sol last. The TTS normaliser tries Gemini 3 Flash,
+then Claude Haiku 5.5 direct, then GPT-6.1 Sol direct. An account that is out
+of credit or refuses its key is skipped for the rest of the run. Every
+fallback is reported in the run log and completion email, and the email says
+under each written episode which model wrote it, flagging a backup.
 
 To verify live LLM access without sending email or publishing, run
 `bwsrun uv run python -m scripts.check_llm`, or dispatch **Update Podcast Feed**

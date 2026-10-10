@@ -903,9 +903,9 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
     # where the market lines actually are.
     report = RunReport(
         episodes=[item(title=f"Preview: {entry.title}", bullets=entry.bullets,
-                       fidelity=entry.fidelity),
+                       fidelity=entry.fidelity, writer=entry.writer),
                   item(title="Full script", briefing_text=entry.content)],
-        notices=list(llm.fallback_log), feed_url=f"{base}/feed.xml", site_url=base,
+        notices=llm.fallback_notices(), feed_url=f"{base}/feed.xml", site_url=base,
     )
     send_report(report, subject_tag="[Preview]")
     _send_markets_trial(report, entry)
@@ -1074,7 +1074,7 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
     _gh_output(narrated=narrated)
     if failures:
         send_report(RunReport(
-            failures=failures, notices=list(llm.fallback_log),
+            failures=failures, notices=llm.fallback_notices(),
             feed_url=f"{config.podcast.base_url}/feed.xml", site_url=config.podcast.base_url,
             total_in_feed=len(episodes)), operator_only=True)
 
@@ -1160,8 +1160,13 @@ def _email_always() -> bool:
 
 def _fidelity_of(row: dict) -> dict | None:
     """Read a stored fidelity check; None for rows without one."""
+    return _json_dict(row, "fidelity")
+
+
+def _json_dict(row: dict, column: str) -> dict | None:
+    """A JSON object stored in `column`; None when absent or malformed."""
     try:
-        parsed = json.loads(row.get("fidelity") or "null")
+        parsed = json.loads(row.get(column) or "null")
     except (ValueError, TypeError):
         return None
     return parsed if isinstance(parsed, dict) else None
@@ -1231,6 +1236,7 @@ def _build_run_report(
             published=ep.published,
             curated=_curated_date(row, ep.published),
             fidelity=_fidelity_of(row),
+            writer=_json_dict(row, "writer"),
         )
 
     def waiting(row: dict) -> ReportEpisode:
@@ -1260,7 +1266,7 @@ def _build_run_report(
             for e, v in (maths_skipped or [])
         ],
         dead_sources=sorted(set(dead_sources or [])),
-        notices=list(llm.fallback_log),
+        notices=llm.fallback_notices(),
         feed_url=f"{base_url}/feed.xml",
         site_url=base_url,
         total_in_feed=len(episodes),

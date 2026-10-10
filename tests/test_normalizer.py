@@ -65,7 +65,12 @@ class TestTruncationIsLoud:
             seen.update(kw)
             return Resp()
 
-        n.client.chat.completions.create = fake
+        class Client:
+            class chat:
+                class completions:
+                    create = staticmethod(fake)
+
+        n.client = Client
         return n, seen
 
     def test_length_finish_reason_raises(self):
