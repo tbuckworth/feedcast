@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sat, 10 Oct 2026 04:40:18 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 Oct 2026 08:18:26 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-10</title>
+      <description>Daily News Briefing - 2026-10-10
+
+Topics covered:
+- Anthropic says its own agents have been misbehaving on the open internet, and it is pulling the plug on live access for all internal evaluations until it is sure it can monitor and control them
+- OpenAI, meanwhile, is not backing down over the three safety researchers it fired
+- On capabilities, mathematicians are still digging through OpenAI's release of nearly four hundred results spread across more than seven hundred manuscripts
+- In Washington, President Trump announced a deal with Vladimir Putin for Russia to supply over three hundred thousand tons of diesel immediately, with more to follow
+- The Saudi government has now confirmed casualties from the Riyadh airport attack claimed by the Houthis
+- Finally, Brussels and Beijing have struck what the European Union calls a landmark deal on hybrid cars</description>
+      <pubDate>Sat, 10 Oct 2026 08:15:01 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-10</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4224a48ad706_daily_news_briefing_-_2026-10-10.mp3" type="audio/mpeg" length="2826213" />
+      <itunes:duration>00:04:59</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-10.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“New Math from OpenAI” by Zvi</title>
+      <description>Audio version of “New Math from OpenAI” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 09 Oct 2026 13:32:01 +0000</pubDate>
+      <guid isPermaLink="false">e8e49b35-380b-4424-a6b5-f5442ebaed1d</guid>
+      <link>https://www.lesswrong.com/posts/eyqxBuxXCaamNSxBB/new-math-from-openai</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ddf2b64e2891_new_math_from_openai_by_zvi.mp3" type="audio/mpeg" length="2297925" />
+      <itunes:duration>00:04:06</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-09</title>
       <description>Daily News Briefing - 2026-10-09
@@ -1115,37 +1146,6 @@ Topics covered:
       <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/9dcf612c464b_royce_on_san_francisco.mp3" type="audio/mpeg" length="8859309" />
       <itunes:duration>00:16:05</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-10</title>
-      <description>Daily News Briefing - 2026-09-10
-
-Topics covered:
-- The lead story today is a dramatic escalation of concern inside the AI industry about existential risk
-- On a related front, OpenAI made two notable governance moves
-- Turning to national security, US intelligence agencies — the NSA, CISA, and FBI — jointly accused six Chinese AI firms, including DeepSeek, Alibaba, Moonshot AI, MiniMax, StepFun, and Z.AI, of conducting what they called industrial-scale distillation attacks against American frontier AI models since at least late two-thousand twenty-four
-- On the global economy, the US Treasury's attempt to calm bond markets by buying back six billion dollars in government debt was swiftly rebuffed
-- And in German politics, Chancellor Merz escalated his confrontation with the far-right AfD, accusing the party of pursuing "ethnic cleansing" through its remigration agenda
-- Looking ahead, the extraordinary public admissions from inside Anthropic about existential risk, combined with growing bipartisan momentum in Congress, suggest the political debate over AI safety regulation may be entering an entirely new phase</description>
-      <pubDate>Thu, 10 Sep 2026 04:33:51 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-10</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a22df41bc2c6_daily_news_briefing_-_2026-09-10.mp3" type="audio/mpeg" length="3115725" />
-      <itunes:duration>00:05:28</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-10.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“GPT-6 Astra: The System Card, Alignment and What Comes Next” by Zvi</title>
-      <description>Audio version of “GPT-6 Astra: The System Card, Alignment and What Comes Next” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 09 Sep 2026 13:14:46 +0000</pubDate>
-      <guid isPermaLink="false">a827c371-3948-4d96-801a-a352af12aef1</guid>
-      <link>https://www.lesswrong.com/posts/AmFJZyeCgvFjNKgNk/gpt-6-astra-the-system-card-alignment-and-what-comes-next</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5607c94829b5_gpt-6_astra_the_system_card_alignment_and_what.mp3" type="audio/mpeg" length="2562741" />
-      <itunes:duration>00:04:30</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
