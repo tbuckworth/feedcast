@@ -23,9 +23,12 @@ INK = "#1a1a1a"
 MUTED = "#6b6b6b"
 RULE = "#e3e3e3"
 ACCENT = "#1f5f8b"
+# A backup model wrote the script: noticeable on a second look, not an alarm.
+BACKUP = "#9a5b00"
 
 DEFAULT_PORT = 587
 
+from .llm import model_name
 from .verify import fidelity_summary
 
 
@@ -55,6 +58,9 @@ class ReportEpisode:
     # Read out in full and still being narrated when the email went out:
     # `audio_url` is then the episode's page, which plays it once it is ready.
     pending: bool = False
+    # Which model wrote the script (llm.Completion.credit()); None when no
+    # model did (verbatim posts) or the row predates the record.
+    writer: dict | None = None
 
 
 @dataclass
@@ -122,6 +128,22 @@ def bullet_parts(b) -> tuple[str, str]:
     if isinstance(b, dict):
         return str(b.get("text", "")), str(b.get("url", ""))
     return str(b), ""
+
+
+def writer_line(writer: dict | None) -> tuple[str, bool]:
+    """('Written by Claude Opus 5.5', False), or the backup that stood in, flagged.
+
+    ('', False) when nothing is recorded, so old rows and verbatim posts
+    simply have no line.
+    """
+    if not writer or not writer.get("model"):
+        return "", False
+    line = f"Written by {model_name(writer['model'])}"
+    if not writer.get("backup"):
+        return line, False
+    primary = writer.get("primary")
+    return line + (f" (backup: {model_name(primary)} was unavailable)" if primary
+                   else " (backup model)"), True
 
 
 def _meta_bits(ep: "ReportEpisode") -> list[str]:
@@ -330,6 +352,10 @@ def _episode_html(ep: ReportEpisode, marks: dict[str, int] | None = None,
         # only one left without a "checked" line.
         body += (f'<div style="font-size:12px;color:{MUTED};margin-top:8px;">'
                  f'{escape(check)}</div>')
+    written, backup = writer_line(ep.writer)
+    if written:
+        body += (f'<div style="font-size:11px;color:{BACKUP if backup else MUTED};'
+                 f'margin-top:4px;">{escape(written)}</div>')
 
     return f"""
       <tr><td style="padding:18px 0;border-bottom:1px solid {RULE};">
@@ -539,6 +565,8 @@ def build_text(report: RunReport, when: datetime) -> str:
             lines += ["", *(f"  {p.strip()}" for p in ep.briefing_text.split("\n\n") if p.strip())]
         if fidelity_summary(ep.fidelity):
             lines.append(f"  ({fidelity_summary(ep.fidelity)})")
+        if writer_line(ep.writer)[0]:
+            lines.append(f"  ({writer_line(ep.writer)[0]})")
         lines.append("")
     if all_notes:
         lines.append("Checked against source (numbers match the marked bullets):")

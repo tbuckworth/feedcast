@@ -51,6 +51,7 @@ class NewsAggregator:
         self.lookback_hours = lookback_hours
         self.last_bundle: str | None = None
         self.last_fidelity: dict | None = None
+        self.last_writer: dict | None = None
         # Two calls, not one. The writer used to see only each item's RSS
         # blurb (a title and up to 500 characters the publisher wrote), so
         # everything beyond that in the briefing came from the model's memory.
@@ -253,6 +254,7 @@ class NewsAggregator:
             ],
         )
         briefing = done.text
+        self.last_writer = done.credit()
         draft, fidelity = briefing, None
         if self.verify:
             briefing, fidelity = await verify_script(
@@ -293,6 +295,7 @@ class NewsAggregator:
         return FeedEntry(
             bundle=bundle,
             fidelity=self.last_fidelity,
+            writer=self.last_writer,
             id=f"news-briefing-{today}",
             title=f"Daily News Briefing - {today}",
             link="",

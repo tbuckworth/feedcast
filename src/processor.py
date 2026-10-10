@@ -172,6 +172,7 @@ Content:
         )
 
         summary = done.text
+        entry.writer = done.credit()
         draft, fidelity = summary, None
         if self.verify:
             summary, fidelity = await verify_script(

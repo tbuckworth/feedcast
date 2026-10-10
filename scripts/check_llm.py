@@ -7,7 +7,7 @@ with llm_smoke_test=true to check the actual GitHub Actions secrets.
 import asyncio
 
 from src.digest import safe_bullets
-from src.llm import fallback_log
+from src.llm import fallback_notices, model_name
 from src.news import NewsAggregator
 from src.normalizer import TextNormalizer
 from src.verify import check
@@ -41,7 +41,9 @@ async def main():
         aggregator._format_briefing_input(articles, selected))
     if not briefing.strip() or aggregator.last_fidelity["status"] == "skipped":
         raise RuntimeError("Briefing generation or fidelity check failed")
-    print("PASS: briefing and fidelity check")
+    print(f"PASS: briefing and fidelity check (written by "
+          f"{model_name(aggregator.last_writer['model'])}"
+          f"{', a backup' if aggregator.last_writer['backup'] else ''})")
 
     # Availability alone is not enough: the backup must parse and catch an
     # obvious factual error using the real checker's prompt and token settings.
@@ -59,7 +61,10 @@ async def main():
     if not bullets:
         raise RuntimeError("Bullet digest returned no bullets")
     print("PASS: bullet digest")
-    print(f"All live LLM checks passed; {len(fallback_log)} fallback notices.")
+    notices = fallback_notices()
+    print(f"All live LLM checks passed; {len(notices)} fallback notices.")
+    for note in notices:
+        print(f"  - {note}")
 
 
 if __name__ == "__main__":

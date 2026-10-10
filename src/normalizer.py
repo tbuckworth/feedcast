@@ -2,7 +2,7 @@
 
 import re
 
-from .llm import EmptyCompletion, MODEL_NORMALIZER, completion_text, get_client
+from .llm import EmptyCompletion, complete
 
 # One request's worth of input. Normalisation EXPANDS text — "1,234" becomes
 # nine words — so the output ceiling has to clear this comfortably.
@@ -10,9 +10,9 @@ MAX_BATCH_CHARS = 18000
 
 # Measured on a real 17,458-char batch: Gemini 3 Flash returned 3,698 output
 # tokens, so this is ~2x headroom. It is a ceiling, not a spend. Raise it if
-# MAX_BATCH_CHARS or MODEL_NORMALIZER changes — a thinking model bills its
-# reasoning against this too, and gemini-3.7-flash needed 8,547 for the same
-# input, which truncates at 8,000.
+# MAX_BATCH_CHARS or the normalizer role's models change — a thinking model
+# bills its reasoning against this too, and gemini-3.7-flash needed 8,547 for
+# the same input, which truncates at 8,000.
 MAX_OUTPUT_TOKENS = 12000
 
 
@@ -62,12 +62,15 @@ IMPORTANT: Preserve ALL other text exactly as-is. Do not summarize, rephrase, or
 
 
 class TextNormalizer:
-    """Normalizes text for TTS using MODEL_NORMALIZER via OpenRouter."""
+    """Normalizes text for TTS with the normalizer role (src/llm.py), backups included."""
 
     respellings: dict[str, str] = {}   # set per instance in __init__; read-only
 
     def __init__(self, respellings: dict[str, str] | None = None):
-        self.client = get_client()
+        # None routes each call through llm.complete() with its fallbacks;
+        # tests pin a fake. A bare OpenRouter client here had no backup, so
+        # OpenRouter running out of credit (2026-10-10) failed every episode.
+        self.client = None
         # Words the voice says wrong, mapped to spellings it says right
         # (config.yaml `pronunciations`, each one measured).
         self.respellings = respellings or {}
@@ -124,27 +127,32 @@ class TextNormalizer:
             return text
 
     async def _normalize_chunk(self, text: str) -> str:
-        """Normalize a single chunk of text."""
-        response = await self.client.chat.completions.create(
-            model=MODEL_NORMALIZER,
-            max_tokens=MAX_OUTPUT_TOKENS,
+        """Normalize a single chunk of text.
+
+        An empty reply tries the backups too: a passage Gemini's filter will
+        not take is usually fine for the next model. Only when every model
+        returns nothing does the EmptyCompletion reach `_normalize_resilient`.
+        """
+        # One label for every chunk, so the email can collapse a dead
+        # account's repeated switches into one line.
+        done = await complete(
+            "normalizer", max_tokens=MAX_OUTPUT_TOKENS, client=self.client, label="normaliser",
             messages=[
                 {"role": "system", "content": NORMALIZE_PROMPT},
                 {"role": "user", "content": text},
             ],
         )
-        content = completion_text(response, label=f"normaliser ({len(text):,} chars)")
 
         # A truncated completion is indistinguishable from a complete one in the
         # returned text: the episode simply ends mid-article and the MP3 stops.
         # Fail loudly instead — the run reports the entry and the rest continue.
-        if response.choices[0].finish_reason == "length":
+        if done.finish_reason == "length":
             raise NormalizationTruncated(
-                f"{MODEL_NORMALIZER} hit its {MAX_OUTPUT_TOKENS}-token output "
+                f"{done.target.model} hit its {MAX_OUTPUT_TOKENS}-token output "
                 f"ceiling on a {len(text)}-char chunk; text would be silently "
                 f"cut short"
             )
-        return content
+        return done.text
 
     @staticmethod
     def _split_oversized(paragraph: str) -> list[str]:
