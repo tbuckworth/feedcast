@@ -44,6 +44,7 @@ working one instead of failing first (`account_failure`).
 import os
 import re
 from collections import Counter
+from collections.abc import Callable
 from dataclasses import dataclass
 from types import SimpleNamespace
 
@@ -134,9 +135,15 @@ ROLES: dict[str, tuple[Target, ...]] = {
         Target("openrouter", "openai/gpt-5.6-sol", {"off": True}),
         Target("anthropic", "claude-opus-5-5", {"effort": "low"}),
     ),
-    # Haiku before Sol: on a test passage Haiku 5.5 normalised everything in
-    # 1.3s; Sol at effort low took 4.8s and left "$1.5M/yr" and "~3x" as
-    # written. Haiku is also a twentieth of Sol's price.
+    # Gemini stays first after a head-to-head with Haiku 5.5 (2026-10-10,
+    # docs/normaliser-model-test-2026-10-10.md): on the same prompt two blind
+    # judges preferred Gemini 8 to 4, mostly for converting more of what the
+    # voice stumbles on, and it is ~1.5x faster. Haiku would save ~$0.30 a
+    # month. Haiku is the backup because it took the Genji review passage
+    # Gemini's filter blocks. It runs with its default adaptive thinking; at
+    # effort low it refused an odd post in prose, which would have been read
+    # out. Sol last: on a test passage it was slower than Haiku and left
+    # "$1.5M/yr" and "~3x" as written.
     "normalizer": (
         Target("openrouter", "google/gemini-3-flash-preview"),
         Target("anthropic", "claude-haiku-5-5"),
@@ -381,7 +388,8 @@ class Completion:
 
 async def complete(role: str, messages: list[dict], *, max_tokens: int, label: str = "",
                    client=None, temperature: float | None = None,
-                   reasoning: dict | None = None, fallback_on_empty: bool = True) -> Completion:
+                   reasoning: dict | None = None, fallback_on_empty: bool = True,
+                   check: Callable[[str], str | None] | None = None) -> Completion:
     """Run one chat completion for `role`, falling back along its target list.
 
     `client` pins the call to one client with no fallback: tests use it, and
@@ -396,6 +404,9 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
     reasoning is not the model being down. A reply with no choices at all is
     the provider failing and falls back regardless.
 
+    `check` reads a reply's text and returns why it is unusable, or None. An
+    unusable reply is treated like an empty one: the next target is tried.
+
     Raises the last error when every target fails, and EmptyCompletion when
     the text is missing, so callers keep their existing handling.
     """
@@ -405,7 +416,7 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
         target = pinned_target(role)
         response = await client.chat.completions.create(
             **_kwargs(ROUTES["openrouter"], target, messages, max_tokens, temperature, reasoning))
-        return _completion(response, target, where)
+        return _checked(_completion(response, target, where), check, where)
 
     last: Exception | None = None
     tried: list[str] = []
@@ -429,7 +440,7 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
             else:
                 response = await api.chat.completions.create(
                     **_kwargs(route, target, messages, max_tokens, temperature, reasoning))
-            done = _completion(response, target, where)
+            done = _checked(_completion(response, target, where), check, where)
         except EmptyCompletion as e:
             if not fallback_on_empty and not isinstance(e, NoChoices):
                 # The caller will retry from the top; record any switch that
@@ -466,8 +477,21 @@ def pinned_target(role: str) -> Target:
     return next((t for t in targets if t.route == "openrouter"), targets[0])
 
 
+def _checked(done: Completion, check, where: str) -> Completion:
+    problem = check(done.text) if check else None
+    if problem:
+        raise EmptyCompletion(f"{where}: {problem}")
+    return done
+
+
 def _completion(response, target: Target, where: str) -> Completion:
     text = completion_text(response, where)
     choice = response.choices[0]
-    return Completion(text=text, finish_reason=getattr(choice, "finish_reason", None),
+    finish = getattr(choice, "finish_reason", None)
+    if finish == "error":
+        # OpenRouter's word for a provider that died mid-reply: the text is a
+        # fragment. Gemini returned 88% of a 17,859-char batch this way
+        # (2026-10-10), and only "length" was ever checked.
+        raise NoChoices(f"{where}: reply cut off by a provider error after {len(text):,} chars")
+    return Completion(text=text, finish_reason=finish,
                       target=target, usage=getattr(response, "usage", None))
