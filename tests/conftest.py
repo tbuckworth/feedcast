@@ -18,7 +18,8 @@ def _fresh_accounts(monkeypatch):
 
 
 class FakeApi:
-    """One route's client: replies in order, records calls. An Exception reply raises."""
+    """One route's client: replies in order, records calls. An Exception reply raises;
+    a (text, finish_reason) pair sets the finish reason, which is otherwise "stop"."""
 
     def __init__(self, replies):
         self.replies = list(replies)
@@ -32,9 +33,10 @@ class FakeApi:
             raise reply
         if reply == "<no-choices>":
             return SimpleNamespace(choices=None, error={"code": 502})
+        reply, finish = reply if isinstance(reply, tuple) else (reply, "stop")
         content = None if reply == "<empty>" else reply
         return SimpleNamespace(
-            choices=[SimpleNamespace(message=SimpleNamespace(content=content), finish_reason="stop")],
+            choices=[SimpleNamespace(message=SimpleNamespace(content=content), finish_reason=finish)],
             usage=SimpleNamespace(completion_tokens=3))
 
 
