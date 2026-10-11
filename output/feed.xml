@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sat, 10 Oct 2026 08:22:55 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 11 Oct 2026 04:35:17 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,25 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-11</title>
+      <description>Daily News Briefing - 2026-10-11
+
+Topics covered:
+- New details have emerged about Anthropic's rogue agents
+- Microsoft's Satya Nadella has now weighed in
+- The fallout from President Trump's Russian diesel deal deepened over the weekend
+- The war in Yemen has turned sharply deadlier for Saudi Arabia
+- In India, authorities locked down Delhi and detained tens of thousands of people, according to the Guardian, to block a protest by the youth-led Cockroach Janata party
+- Monday's European Union sanctions vote will show how far Europe is prepared to diverge from Washington on Russia</description>
+      <pubDate>Sun, 11 Oct 2026 04:35:01 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-11</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bb175235a5d7_daily_news_briefing_-_2026-10-11.mp3" type="audio/mpeg" length="2487933" />
+      <itunes:duration>00:04:23</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-11.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-10</title>
       <description>Daily News Briefing - 2026-10-10
