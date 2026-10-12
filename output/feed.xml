@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 12 Oct 2026 04:35:51 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2026 04:38:10 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -100,6 +100,18 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ddf2b64e2891_new_math_from_openai_by_zvi.mp3" type="audio/mpeg" length="2297925" />
       <itunes:duration>00:04:06</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>A critical look at Lean4</title>
+      <description>Audio version of A critical look at Lean4 by Milo Moses from LessWrong Curated</description>
+      <pubDate>Fri, 09 Oct 2026 07:51:08 +0000</pubDate>
+      <guid isPermaLink="false">zHhGa3iQBQcdSifFL</guid>
+      <link>https://www.lesswrong.com/posts/zHhGa3iQBQcdSifFL/a-critical-look-at-lean4-1</link>
+      <itunes:author>Milo Moses</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/44e73f257106_a_critical_look_at_lean4.mp3" type="audio/mpeg" length="9793269" />
+      <itunes:duration>00:17:22</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
