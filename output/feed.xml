@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sun, 11 Oct 2026 04:35:17 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2026 04:35:51 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,25 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-12</title>
+      <description>Daily News Briefing - 2026-10-12
+
+Topics covered:
+- Britain is preparing to tell frontier AI companies they must do more on safety
+- The Verge reports that Silicon Valley is adopting President Trump's push to rename artificial intelligence as "super intelligence." An executive order requires federal agencies to use the term, and Trump has called anyone who sticks with the old phrase "the enemy." Elon Musk, Marc Benioff and Jensen Huang have already gone along with the change
+- On Ukraine, Trump declared an "energy ceasefire" on Truth Social, saying "both parties have agreed." Volodymyr Zelenskyy said the deal was "news to me," though he would accept it if Vladimir Putin did the same
+- The Houthi campaign against Saudi Arabia continues
+- In Pakistan, President Asif Ali Zardari declared an emergency in Khyber Pakhtunkhwa and suspended its government, which is run by Imran Khan's party
+- The day's EU sanctions vote and London's AI speech will each test how far allies are willing to break with Washington's line</description>
+      <pubDate>Mon, 12 Oct 2026 04:35:34 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-12</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8a0331422d1f_daily_news_briefing_-_2026-10-12.mp3" type="audio/mpeg" length="2558853" />
+      <itunes:duration>00:04:33</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-12.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-11</title>
       <description>Daily News Briefing - 2026-10-11
@@ -1115,36 +1134,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-09-11</title>
-      <description>Daily News Briefing - 2026-09-11
-
-Topics covered:
-- The lead story today is a deepening crisis in global bond markets and energy prices, driven by a significant escalation in Yemen
-- Turning to AI safety, a personal-capacity analysis posted on the Alignment Forum — though the author flags it as heavily dependent on LLM-generated evaluation — finds that OpenAI's Astra model can perform a concerning amount of reasoning without any visible chain of thought
-- On the OpenAI training data controversy, the dispute over the company's mathematical breakthroughs is widening
-- Finally, Anthropic published a detailed report on Chinese distillation campaigns that significantly expands on the intelligence community's allegations from earlier this week
-- Looking ahead, next week's Federal Reserve meeting and Bank of England decision will test whether central banks can navigate the collision between surging energy costs and already fragile economies, while the widening mathematician revolt against OpenAI shows no signs of abating</description>
-      <pubDate>Fri, 11 Sep 2026 04:36:08 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-11</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/48eb54236604_daily_news_briefing_-_2026-09-11.mp3" type="audio/mpeg" length="3339549" />
-      <itunes:duration>00:05:51</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-11.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>An operationalization of opaque serial depth</title>
-      <description>Audio version of An operationalization of opaque serial depth by ryan_greenblatt from Ryan Greenblatt</description>
-      <pubDate>Thu, 10 Sep 2026 17:26:39 +0000</pubDate>
-      <guid isPermaLink="false">x8BvtWxtoajBGHS3g</guid>
-      <link>https://www.lesswrong.com/posts/x8BvtWxtoajBGHS3g/an-operationalization-of-opaque-serial-depth</link>
-      <itunes:author>ryan_greenblatt</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2943bd9ca56f_an_operationalization_of_opaque_serial_depth.mp3" type="audio/mpeg" length="2831229" />
-      <itunes:duration>00:04:57</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Proposal for tracking the effects of architecture on monitorability</title>
       <description>Audio version of Proposal for tracking the effects of architecture on monitorability by ryan_greenblatt from Ryan Greenblatt</description>
       <pubDate>Thu, 10 Sep 2026 17:18:38 +0000</pubDate>
@@ -1153,30 +1142,6 @@ Topics covered:
       <itunes:author>ryan_greenblatt</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/9a89548b5d67_proposal_for_tracking_the_effects_of_architecture.mp3" type="audio/mpeg" length="9636717" />
       <itunes:duration>00:16:49</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #185: Preference Cascade” by Zvi</title>
-      <description>Audio version of “AI #185: Preference Cascade” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 10 Sep 2026 15:12:49 +0000</pubDate>
-      <guid isPermaLink="false">25aa08df-e11e-4f6e-b883-5ac45aeb14b1</guid>
-      <link>https://www.lesswrong.com/posts/tFmtz9HW6c2X9dw2B/ai-185-preference-cascade</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e80a21e6cd6f_ai_185_preference_cascade_by_zvi.mp3" type="audio/mpeg" length="2460813" />
-      <itunes:duration>00:04:18</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Royce On San Francisco</title>
-      <description>Audio version of Royce On San Francisco from Scott Alexander</description>
-      <pubDate>Thu, 10 Sep 2026 11:10:18 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/royce-on-san-francisco</guid>
-      <link>https://www.astralcodexten.com/p/royce-on-san-francisco</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9dcf612c464b_royce_on_san_francisco.mp3" type="audio/mpeg" length="8859309" />
-      <itunes:duration>00:16:05</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
