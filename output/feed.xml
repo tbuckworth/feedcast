@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 12 Oct 2026 04:38:10 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2026 04:37:47 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-13</title>
+      <description>Daily News Briefing - 2026-10-13
+
+Topics covered:
+- Microsoft president Brad Smith is calling for urgent AI regulation, and says Britain rather than the United States or the European Union is best placed to lead it
+- On capabilities, Meta's Superintelligence Lab has released Muse Wonder and Muse Wonder Full, its first frontier models
+- The International Monetary Fund warns that an AI share crash now threatens global financial stability
+- On Ukraine, the Kremlin has flatly rejected Trump's energy ceasefire
+- In France, hackers drove supermarket fridges to fifty degrees Celsius in what retailers call an unprecedented attack
+- Saudi Arabia has suspended all Riyadh airport flights until Saturday after further Houthi strikes</description>
+      <pubDate>Tue, 13 Oct 2026 04:34:45 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-13</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/baaceb902981_daily_news_briefing_-_2026-10-13.mp3" type="audio/mpeg" length="2918109" />
+      <itunes:duration>00:05:10</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-13.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“OpenAI Fires Three Safety Researchers” by Zvi</title>
+      <description>Audio version of “OpenAI Fires Three Safety Researchers” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 12 Oct 2026 22:33:17 +0000</pubDate>
+      <guid isPermaLink="false">6ee214ec-5323-4cce-b6da-e0150974b72e</guid>
+      <link>https://www.lesswrong.com/posts/zCNm2PnqE5Zp6Z2FW/openai-fires-three-safety-researchers</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0250556bc61d_openai_fires_three_safety_researchers_by_zvi.mp3" type="audio/mpeg" length="2318493" />
+      <itunes:duration>00:04:06</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-12</title>
       <description>Daily News Briefing - 2026-10-12
@@ -1111,61 +1142,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/2a34cfc9ea36_gpt-6-astra_can_do_ambitious_things_by_zvi.mp3" type="audio/mpeg" length="2348613" />
       <itunes:duration>00:04:07</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-12</title>
-      <description>Daily News Briefing - 2026-09-12
-
-Topics covered:
-- The top story today is a significant escalation in the AI cybersecurity crisis
-- Anthropic also disclosed that it identified and blocked attempts by scientists to use Claude for research that could support biological weapons development
-- On the economy, US consumer prices remained stubbornly high in August, with annualized inflation at three-point-four percent
-- In Yemen, the Houthis captured the strategic island of Perim in the Bab al-Mandab strait, expanding their control over one of the world's most vital shipping chokepoints
-- Finally, the dispute between OpenAI and the mathematics community escalated further
-- Looking ahead, next week's Federal Reserve meeting will be the most consequential in months, while the Gulf Cooperation Council's Monday meeting in Oman on shipping routes through the Strait of Hormuz could reshape the dynamics of the Iran conflict</description>
-      <pubDate>Sat, 12 Sep 2026 04:36:00 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-12</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b10089b54c74_daily_news_briefing_-_2026-09-12.mp3" type="audio/mpeg" length="3368541" />
-      <itunes:duration>00:05:53</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-12.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“Jacob Coxon Warns of Human Extinction and Triggers a Preference Cascade” by Zvi</title>
-      <description>Audio version of “Jacob Coxon Warns of Human Extinction and Triggers a Preference Cascade” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 11 Sep 2026 14:41:54 +0000</pubDate>
-      <guid isPermaLink="false">b73e2858-ebff-47e3-b267-c298c4ab153f</guid>
-      <link>https://www.lesswrong.com/posts/5MB7KENgEAW6Q4JtJ/jacob-coxon-warns-of-human-extinction-and-triggers-a</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c8c526585c91_jacob_coxon_warns_of_human_extinction_and_trigger.mp3" type="audio/mpeg" length="2344629" />
-      <itunes:duration>00:04:08</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Proposal for tracking the effects of architecture on monitorability</title>
-      <description>Audio version of Proposal for tracking the effects of architecture on monitorability by ryan_greenblatt from Ryan Greenblatt</description>
-      <pubDate>Thu, 10 Sep 2026 17:18:38 +0000</pubDate>
-      <guid isPermaLink="false">hLPGv8QjPcNLtDp3A</guid>
-      <link>https://www.lesswrong.com/posts/hLPGv8QjPcNLtDp3A/proposal-for-tracking-the-effects-of-architecture-on</link>
-      <itunes:author>ryan_greenblatt</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9a89548b5d67_proposal_for_tracking_the_effects_of_architecture.mp3" type="audio/mpeg" length="9636717" />
-      <itunes:duration>00:16:49</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Explaining Knightianism on one foot</title>
-      <description>Audio version of Explaining Knightianism on one foot by Richard_Ngo from LessWrong Curated</description>
-      <pubDate>Wed, 02 Sep 2026 00:53:53 +0000</pubDate>
-      <guid isPermaLink="false">pYFBD2SnqiWkuNns5</guid>
-      <link>https://www.lesswrong.com/posts/pYFBD2SnqiWkuNns5/explaining-knightianism-on-one-foot</link>
-      <itunes:author>Richard_Ngo</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6dd19e7dbbd1_explaining_knightianism_on_one_foot.mp3" type="audio/mpeg" length="12448557" />
-      <itunes:duration>00:21:54</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
