@@ -2,10 +2,11 @@
 
 PNG, because Gmail renders neither SVG nor scripts. The main panel is the
 market's whole life (capped at a year by the fetch), so a long-running question
-shows months of context and a short-dated one its short life. When the market
-moved around the story, a second panel zooms in on the last seven days, where
-the intraday move that shows how surprising the news was would otherwise be a
-few pixels at the end of a year-long line.
+shows months of context and a short-dated one its short life. When that life
+goes back more than ZOOM_MIN_HISTORY_DAYS, a second panel zooms in on the last
+seven days, where the intraday move that shows how surprising the news was
+would otherwise be a few pixels at the end of a months-long line. A younger
+market gets the one panel: its last week is already wide enough to read.
 """
 
 import io
@@ -21,6 +22,22 @@ LINE = "#1f5f8b"
 MARK = "#b5532c"
 MUTED = "#6b6b6b"
 ZOOM_DAYS = 7
+# The 7-day zoom only for a market whose history goes back more than this:
+# three months, Titus's call on 2026-10-14. Younger ones get the one panel.
+ZOOM_MIN_HISTORY_DAYS = 90
+
+
+def history_days(history: list[tuple[datetime, float]]) -> float:
+    """How far back `history` goes from its latest point, in days."""
+    if len(history) < 2:
+        return 0.0
+    times = [t for t, _ in history]
+    return (max(times) - min(times)).total_seconds() / 86400
+
+
+def wants_zoom(history: list[tuple[datetime, float]]) -> bool:
+    """True when the market's history goes back more than ZOOM_MIN_HISTORY_DAYS."""
+    return history_days(history) > ZOOM_MIN_HISTORY_DAYS
 
 
 def zoom_window(history: list[tuple[datetime, float]], end: datetime) -> list:
