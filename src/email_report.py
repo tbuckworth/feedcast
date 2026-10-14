@@ -72,7 +72,7 @@ class ChartNote:
     platform: str
     url: str
     caption: str        # "55% a week before the story, 3% now · $1.2M traded"
-    anchor: str = ""    # bullet URL to sit under; unplaced charts get their own section
+    anchor: str = ""    # bullet or sub-bullet URL to sit under; unplaced charts get their own section
 
 
 @dataclass
@@ -128,6 +128,12 @@ def bullet_parts(b) -> tuple[str, str]:
     if isinstance(b, dict):
         return str(b.get("text", "")), str(b.get("url", ""))
     return str(b), ""
+
+
+def bullet_urls(b) -> list[str]:
+    """Every link a top-level bullet carries: its own, then its sub-bullets'."""
+    subs = (b.get("sub") or []) if isinstance(b, dict) else []
+    return [u for u in [bullet_parts(b)[1], *(bullet_parts(sb)[1] for sb in subs)] if u]
 
 
 def writer_line(writer: dict | None) -> tuple[str, bool]:
@@ -322,13 +328,13 @@ def _episode_html(ep: ReportEpisode, marks: dict[str, int] | None = None,
     if marks is None:
         marks = flag_marks(ep.bullets, notes) if ep.bullets else {}
     if ep.bullets:
-        # A market chart sits under the first bullet that links its story.
+        # A market chart sits under the first bullet, or the parent of the
+        # first sub-bullet, that links its anchor.
         charts = dict(charts or {})
         items = "".join(
             f'<li style="margin:0 0 7px 0;font-size:14px;line-height:1.5;color:{INK};">'
             f"{_bullet_html(b, marks)}"
-            + "".join(_chart_html(c) for c in
-                      (charts.pop(bullet_parts(b)[1], []) if bullet_parts(b)[1] else []))
+            + "".join(_chart_html(c) for u in bullet_urls(b) for c in charts.pop(u, []))
             + "</li>"
             for b in ep.bullets
         )
@@ -387,8 +393,7 @@ def build_html(report: RunReport, when: datetime) -> str:
     by_anchor: dict[str, list[ChartNote]] = {}
     for c in report.charts:
         by_anchor.setdefault(c.anchor, []).append(c)
-    placed = {b_url for e in briefings for b in e.bullets
-              for b_url in [bullet_parts(b)[1]] if b_url and b_url in by_anchor}
+    placed = {u for e in briefings for b in e.bullets for u in bullet_urls(b) if u in by_anchor}
 
     def ep_html(e: ReportEpisode) -> str:
         return _episode_html(e, marks_by_idx.get(ordered_eps.index(e), {}), notes_inline=False,
