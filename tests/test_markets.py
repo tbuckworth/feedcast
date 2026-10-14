@@ -342,23 +342,86 @@ class TestLongHistoryCharts:
         assert "interval=max" in str(seen[0]) and len(pm.long_history) == 400
         assert len(mf.long_history) == 800 and any("before=b999" in str(u) for u in seen)
 
-    def test_trial_zooms_on_a_story_market_that_moved_and_not_on_a_flat_one(self, monkeypatch):
+    # Exactly three months is not more than three months: one panel.
+    @pytest.mark.parametrize("back, zoomed", [
+        (timedelta(days=90) - timedelta(hours=1), False),
+        (timedelta(days=90), False),
+        (timedelta(days=90) + timedelta(hours=1), True),
+    ])
+    def test_zoom_only_past_three_months_of_history(self, back, zoomed):
+        from src.market_charts import ZOOM_MIN_HISTORY_DAYS, wants_zoom
+        assert ZOOM_MIN_HISTORY_DAYS == 90
+        line = [(NOW - back, 0.5), (NOW - timedelta(days=3), 0.5), (NOW, 0.6)]
+        assert wants_zoom(line) is zoomed
+        assert wants_zoom(list(reversed(line))) is zoomed   # order does not matter
+        assert not wants_zoom(line[:1]) and not wants_zoom([])
+
+    def _trial_heights(self, monkeypatch, story_days_back: dict, move_days_back: dict | None = None,
+                       jump: float = 0.10) -> dict[str, int]:
+        """Each market's chart height in the trial email: 300 with the zoom, 190 without."""
+        calls = []
+        monkeypatch.setattr(main, "send_report", lambda report, **kw: calls.append((report, kw)))
+        monkeypatch.setenv("FEEDCAST_MARKETS_TRIAL_TO", "titus@x")
+        monkeypatch.delenv("FEEDCAST_TEST_RUN", raising=False)
+
+        def market(name: str, back: timedelta) -> Market:
+            m = _m(f"Will Democrats win the Ohio Senate race ({name})?", prob=0.6 + jump, before=0.6,
+                   key=f"pm:{name}")
+            # The market moves in the last ten hours, so the old rule (zoom on a
+            # move around the story) would have zoomed on every one of these.
+            hourly = min(back, timedelta(days=30))
+            m.history = [(NOW - timedelta(hours=h), 0.6 + (jump if h < 10 else 0))
+                         for h in range(int(hourly.total_seconds() // 3600), -1, -1)]
+            m.long_history = [(NOW - back + timedelta(hours=12 * i), 0.5)
+                              for i in range(int(back.total_seconds() // 43200))]
+            return m
+
+        ctx = MarketContext()
+        ctx.stories["https://news/ohio"] = [market(n, b) for n, b in story_days_back.items()]
+        ctx.story_times["https://news/ohio"] = NOW - timedelta(hours=12)
+        ctx.moves = [market(n, b) for n, b in (move_days_back or {}).items()]
+        briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
+                             content="Polymarket", bullets=[{"text": "Ohio", "url": "https://news/ohio"}],
+                             markets=ctx.to_dict())
+        main._send_markets_trial(TestTrialEmail()._report(), briefing)
+        ((report, kw),) = calls
+        return {c.title.split("(")[1].rstrip(")?"): _png_height(kw["images"][c.cid])
+                for c in report.charts}
+
+    def test_trial_zooms_only_on_markets_older_than_three_months(self, monkeypatch, capsys):
+        heights = self._trial_heights(monkeypatch, {
+            "twelve days": timedelta(days=12),
+            "just under": timedelta(days=90) - timedelta(hours=1),
+            "just over": timedelta(days=90) + timedelta(hours=1),
+            "a year": timedelta(days=365),
+        })
+        assert heights == {"twelve days": 190, "just under": 190, "just over": 300, "a year": 300}
+        log = capsys.readouterr().out
+        assert "(twelve days)?: 12 days of history, whole life only" in log
+        assert "(a year)?: 365 days of history, whole life plus a 7-day zoom" in log
+
+    def test_an_unexplained_move_follows_the_same_rule(self, monkeypatch):
+        # Moves used to zoom always; now only an old market's does.
+        heights = self._trial_heights(monkeypatch, {}, {"young move": timedelta(days=20),
+                                                        "old move": timedelta(days=200)},
+                                      jump=-0.30)
+        assert heights == {"young move": 190, "old move": 300}
+
+    def test_a_flat_old_market_still_gets_the_zoom(self, monkeypatch):
+        heights = self._trial_heights(monkeypatch, {"flat": timedelta(days=150)}, jump=0.0)
+        assert heights == {"flat": 300}
+
+    def test_no_long_history_falls_back_to_thirty_days_and_one_panel(self, monkeypatch):
         calls = []
         monkeypatch.setattr(main, "send_report", lambda report, **kw: calls.append(kw))
         monkeypatch.setenv("FEEDCAST_MARKETS_TRIAL_TO", "titus@x")
         monkeypatch.delenv("FEEDCAST_TEST_RUN", raising=False)
-        heights = {}
-        for name, jump in (("moved", 0.10), ("flat", 0.0)):
-            ctx = MarketContext()
-            m = _m(f"Will Democrats win the Ohio Senate race ({name})?", prob=0.6 + jump, before=None)
-            m.history = [(NOW - timedelta(hours=h), 0.6 + (jump if h < 10 else 0)) for h in range(200, -1, -1)]
-            m.long_history = [(NOW - timedelta(days=d), 0.5) for d in range(120, 8, -1)]
-            ctx.stories["https://news/ohio"] = [m]
-            ctx.story_times["https://news/ohio"] = NOW - timedelta(hours=12)
-            briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
-                                 content="Polymarket", bullets=[{"text": "Ohio", "url": "https://news/ohio"}],
-                                 markets=ctx.to_dict())
-            main._send_markets_trial(TestTrialEmail()._report(), briefing)
-            (png,) = calls[-1]["images"].values()
-            heights[name] = _png_height(png)
-        assert heights == {"moved": 300, "flat": 190}
+        m = _m("Will Democrats win the Ohio Senate race?", prob=0.6, before=None)
+        m.history = [(NOW - timedelta(hours=h), 0.6) for h in range(720, -1, -1)]
+        ctx = MarketContext(stories={"https://news/ohio": [m]})
+        briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
+                             content="Polymarket", bullets=[{"text": "Ohio", "url": "https://news/ohio"}],
+                             markets=ctx.to_dict())
+        main._send_markets_trial(TestTrialEmail()._report(), briefing)
+        (png,) = calls[-1]["images"].values()
+        assert _png_height(png) == 190

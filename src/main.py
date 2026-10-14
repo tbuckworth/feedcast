@@ -918,11 +918,13 @@ def _send_markets_trial(report: RunReport, briefing: FeedEntry) -> None:
     trial) under a "[DEV - Prediction Markets]" subject, and only on days the
     briefing used a market. A chart is drawn for each unexplained move and for
     each story market the script names, and sits under the bullet that links
-    its story. A hand-dispatched dev run sends it to FEEDCAST_EMAIL_TO only.
-    Never raises.
+    its story. Every chart shows the market's whole life; one whose history
+    goes back more than three months also gets a 7-day zoom (market_charts).
+    A hand-dispatched dev run sends it to FEEDCAST_EMAIL_TO only. Never raises.
     """
     try:
-        from .market_charts import render_chart, zoom_window
+        from .market_charts import (ZOOM_DAYS, history_days, render_chart, wants_zoom,
+                                    zoom_window)
 
         recipients = _addresses(os.environ.get("FEEDCAST_MARKETS_TRIAL_TO", ""))
         data = briefing.markets
@@ -938,18 +940,19 @@ def _send_markets_trial(report: RunReport, briefing: FeedEntry) -> None:
         def points(m: dict, key: str) -> list:
             return [(datetime.fromisoformat(when), p) for when, p in m.get(key) or []]
 
-        def add(m: dict, anchor: str, story_time: datetime | None, caption: str,
-                always_zoom: bool = False) -> None:
+        def add(m: dict, anchor: str, story_time: datetime | None, caption: str) -> None:
             # The whole life for context, with the hourly last 30 days spliced
             # onto the end for detail.
             recent, life = points(m, "history"), points(m, "long_history")
             line = [pt for pt in life if not recent or pt[0] < recent[0][0]] + recent
-            # Zoom on the last week when the market moved around the story:
-            # that is where "how surprising was this" shows.
-            zoom = zoom_window(recent, recent[-1][0]) if recent else []
-            around = [p for when, p in recent if story_time and when >= story_time - timedelta(days=2)]
-            moved = always_zoom or (around and max(around) - min(around) >= 0.05)
-            png = render_chart(line, story_time, zoom if moved else None)
+            # Past three months the last week is a sliver at the end of the
+            # line, so it gets a panel of its own.
+            zoom = zoom_window(line, line[-1][0]) if wants_zoom(line) else []
+            png = render_chart(line, story_time, zoom)
+            panels = ("not drawn, too little history" if not png else
+                      f"whole life plus a {ZOOM_DAYS}-day zoom" if len(zoom) >= 2 else
+                      "whole life only")
+            print(f"    chart: {m['title'][:70]}: {history_days(line):.0f} days of history, {panels}")
             if png:
                 cid = f"market-{len(images)}@feedcast"
                 images[cid] = png
@@ -958,8 +961,7 @@ def _send_markets_trial(report: RunReport, briefing: FeedEntry) -> None:
 
         for m in data.get("moves") or []:
             add(m, m["url"] if m["url"] in bullet_urls else "", None,
-                f"{m['prob_24h']:.0%} to {m['prob']:.0%} in the last 24 hours · {m['traded']}",
-                always_zoom=True)
+                f"{m['prob_24h']:.0%} to {m['prob']:.0%} in the last 24 hours · {m['traded']}")
         for story_url, markets in (data.get("stories") or {}).items():
             raw_time = (data.get("story_times") or {}).get(story_url)
             story_time = datetime.fromisoformat(raw_time) if raw_time else None
