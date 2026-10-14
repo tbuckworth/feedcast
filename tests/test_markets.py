@@ -1,5 +1,5 @@
 """Prediction markets in the briefing: parsing, the move rules, the writer's input,
-and the trial email's charts. No network: every API reply here is a fixture."""
+and the daily email's charts. No network: every API reply here is a fixture."""
 
 import asyncio
 import json
@@ -178,7 +178,7 @@ class TestReportedMoves:
         assert m.recent_market_reports(days=0) == {}
 
 
-class TestTrialEmail:
+class TestChartsInTheEmail:
 
     def _report(self):
         briefing = ReportEpisode(title="Daily News Briefing - 2026-09-19", author="", feed_name="",
@@ -201,7 +201,7 @@ class TestTrialEmail:
         assert html.index("Prediction markets") < html.index("cid:c1@f")
         assert "cid:" not in build_html(self._report(), datetime(2026, 9, 19))
 
-    def test_trial_goes_to_its_own_list_with_inline_images(self, monkeypatch):
+    def test_charts_go_in_the_daily_email_to_the_whole_list(self, monkeypatch):
         sent = []
 
         class SMTP:
@@ -219,19 +219,15 @@ class TestTrialEmail:
         report = self._report()
         report.charts = [ChartNote(cid="c0@f", title="t", platform="Polymarket", url="u",
                                    caption="c", anchor="https://news/ohio")]
-        assert send_report(report, recipients=["titus@x", "jason@x"],
-                           subject_tag="[DEV - Prediction Markets]", images={"c0@f": b"\x89PNG"})
+        assert send_report(report, images={"c0@f": b"\x89PNG"})
         (msg,) = sent
-        assert msg["To"] == "titus@x, jason@x" and msg["Bcc"] is None
-        assert msg["Subject"].startswith("[DEV - Prediction Markets] Feedcast")
+        # The one daily email: the operator plus the list.
+        assert msg["To"] == "titus@x" and msg["Bcc"] == "list@x"
+        assert msg["Subject"].startswith("Feedcast")
         raw = msg.as_string()
         assert "Content-ID: <c0@f>" in raw and "multipart/related" in raw
 
-    def test_only_markets_the_digest_cites_are_charted(self, monkeypatch):
-        calls = []
-        monkeypatch.setattr(main, "send_report", lambda report, **kw: calls.append((report, kw)))
-        monkeypatch.setenv("FEEDCAST_MARKETS_TRIAL_TO", "titus@x,jason@x")
-        monkeypatch.delenv("FEEDCAST_TEST_RUN", raising=False)
+    def test_only_markets_the_digest_cites_are_charted(self):
         ctx = _ctx_with_story_and_move({"found": False})
         for m in ctx.moves:
             m.history = [(NOW - timedelta(days=2), 0.55), (NOW, 0.03)]
@@ -256,15 +252,13 @@ class TestTrialEmail:
                                           {"text": "Strikes", "url": "https://news/yemen"},
                                           {"text": "Polymarket: 65%", "url": yemen.url}]}],
                              markets=ctx.to_dict())
-        main._send_markets_trial(self._report(), briefing)
-        ((report, kw),) = calls
-        assert kw["recipients"] == ["titus@x", "jason@x"]
-        assert [c.title for c in report.charts] == [
+        charts, images = main._market_charts(briefing)
+        assert [c.title for c in charts] == [
             "Anthropic IPO by October 31, 2026?", "Will Democrats win the Ohio Senate race in 2026?",
             "Houthi military action against Saudi Arabia on October 15?"]
-        assert [c.anchor for c in report.charts] == ["", ohio.url, yemen.url]
-        assert set(kw["images"]) == {c.cid for c in report.charts}
-        assert all(png.startswith(b"\x89PNG") for png in kw["images"].values())
+        assert [c.anchor for c in charts] == ["", ohio.url, yemen.url]
+        assert set(images) == {c.cid for c in charts}
+        assert all(png.startswith(b"\x89PNG") for png in images.values())
 
     def test_a_chart_cited_from_a_sub_bullet_sits_under_its_parent(self):
         report = self._report()
@@ -278,14 +272,20 @@ class TestTrialEmail:
         assert html.index("Odds 65%") < html.index("cid:c0@f") < html.index("Ohio race")
         assert html.count("cid:c0@f") == 1 and "Prediction markets" not in html
 
-    def test_no_trial_list_no_trial_email(self, monkeypatch):
-        calls = []
-        monkeypatch.setattr(main, "send_report", lambda report, **kw: calls.append(kw))
-        monkeypatch.delenv("FEEDCAST_MARKETS_TRIAL_TO", raising=False)
+    def test_no_market_data_no_charts(self):
+        briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
+                             content="Polymarket")
+        assert main._market_charts(briefing) == ([], {})
+
+    def test_a_chart_that_fails_costs_the_charts_not_the_email(self, monkeypatch):
+        import src.market_charts as market_charts
+
+        def broken(*a, **kw):
+            raise ValueError("bad history")
+        monkeypatch.setattr(market_charts, "render_chart", broken)
         briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
                              content="Polymarket", markets=_ctx_with_story_and_move(None).to_dict())
-        main._send_markets_trial(self._report(), briefing)
-        assert calls == []
+        assert main._market_charts(briefing) == ([], {})
 
 
 def test_market_record_round_trips_through_json():
@@ -299,8 +299,10 @@ def test_market_record_round_trips_through_json():
 def test_preview_writes_a_briefing_and_emails_it_without_publishing(tmp_path, monkeypatch):
     sent = []
     monkeypatch.setattr(main, "send_report", lambda report, **kw: sent.append((report, kw)))
-    monkeypatch.setattr(main, "_send_markets_trial",
-                        lambda report, entry: sent.append(("trial", entry.markets)))
+    chart = ChartNote(cid="market-0@feedcast", title="Ohio?", platform="Polymarket",
+                      url="https://pm/ohio", caption="Now 62%", anchor="https://pm/ohio")
+    monkeypatch.setattr(main, "_market_charts",
+                        lambda entry: ([chart], {"market-0@feedcast": b"\x89PNG"}))
 
     async def fake_bullets(text, **kw):
         return [{"text": "Ohio odds rose", "url": "https://news/ohio"}]
@@ -316,8 +318,9 @@ def test_preview_writes_a_briefing_and_emails_it_without_publishing(tmp_path, mo
     config = main.load_config(main.Path(__file__).resolve().parent.parent / "config.yaml")
     monitor = FeedMonitor(tmp_path / "posts.db")
     asyncio.run(main._preview_briefing(monitor, config))
-    (report, kw), trial = sent
-    assert kw == {"subject_tag": "[Preview]"} and trial[0] == "trial"
+    ((report, kw),) = sent   # one email, charts in it
+    assert kw == {"subject_tag": "[Preview]", "images": {"market-0@feedcast": b"\x89PNG"}}
+    assert report.charts == [chart]
     digest, script = report.episodes
     assert digest.bullets and script.briefing_text == "On Polymarket, odds rose."
     assert monitor.get_processed_entries() == [] and monitor.get_recent_briefings() == []
@@ -383,13 +386,9 @@ class TestLongHistoryCharts:
         assert wants_zoom(list(reversed(line))) is zoomed   # order does not matter
         assert not wants_zoom(line[:1]) and not wants_zoom([])
 
-    def _trial_heights(self, monkeypatch, story_days_back: dict, move_days_back: dict | None = None,
+    def _chart_heights(self, story_days_back: dict, move_days_back: dict | None = None,
                        jump: float = 0.10) -> dict[str, int]:
-        """Each market's chart height in the trial email: 300 with the zoom, 190 without."""
-        calls = []
-        monkeypatch.setattr(main, "send_report", lambda report, **kw: calls.append((report, kw)))
-        monkeypatch.setenv("FEEDCAST_MARKETS_TRIAL_TO", "titus@x")
-        monkeypatch.delenv("FEEDCAST_TEST_RUN", raising=False)
+        """Each market's chart height in the email: 300 with the zoom, 190 without."""
 
         def market(name: str, back: timedelta) -> Market:
             m = _m(f"Will Democrats win the Ohio Senate race ({name})?", prob=0.6 + jump, before=0.6,
@@ -413,13 +412,11 @@ class TestLongHistoryCharts:
                              content="Polymarket",
                              bullets=[{"text": "Ohio", "url": "https://news/ohio", "sub": cites}],
                              markets=ctx.to_dict())
-        main._send_markets_trial(TestTrialEmail()._report(), briefing)
-        ((report, kw),) = calls
-        return {c.title.split("(")[1].rstrip(")?"): _png_height(kw["images"][c.cid])
-                for c in report.charts}
+        charts, images = main._market_charts(briefing)
+        return {c.title.split("(")[1].rstrip(")?"): _png_height(images[c.cid]) for c in charts}
 
-    def test_trial_zooms_only_on_markets_older_than_three_months(self, monkeypatch, capsys):
-        heights = self._trial_heights(monkeypatch, {
+    def test_zoom_only_on_markets_older_than_three_months(self, capsys):
+        heights = self._chart_heights({
             "twelve days": timedelta(days=12),
             "just under": timedelta(days=90) - timedelta(hours=1),
             "just over": timedelta(days=90) + timedelta(hours=1),
@@ -430,28 +427,24 @@ class TestLongHistoryCharts:
         assert "(twelve days)?: 12 days of history, whole life only" in log
         assert "(a year)?: 365 days of history, whole life plus a 7-day zoom" in log
 
-    def test_an_unexplained_move_follows_the_same_rule(self, monkeypatch):
+    def test_an_unexplained_move_follows_the_same_rule(self):
         # Moves used to zoom always; now only an old market's does.
-        heights = self._trial_heights(monkeypatch, {}, {"young move": timedelta(days=20),
+        heights = self._chart_heights({}, {"young move": timedelta(days=20),
                                                         "old move": timedelta(days=200)},
                                       jump=-0.30)
         assert heights == {"young move": 190, "old move": 300}
 
-    def test_a_flat_old_market_still_gets_the_zoom(self, monkeypatch):
-        heights = self._trial_heights(monkeypatch, {"flat": timedelta(days=150)}, jump=0.0)
+    def test_a_flat_old_market_still_gets_the_zoom(self):
+        heights = self._chart_heights({"flat": timedelta(days=150)}, jump=0.0)
         assert heights == {"flat": 300}
 
-    def test_no_long_history_falls_back_to_thirty_days_and_one_panel(self, monkeypatch):
-        calls = []
-        monkeypatch.setattr(main, "send_report", lambda report, **kw: calls.append(kw))
-        monkeypatch.setenv("FEEDCAST_MARKETS_TRIAL_TO", "titus@x")
-        monkeypatch.delenv("FEEDCAST_TEST_RUN", raising=False)
+    def test_no_long_history_falls_back_to_thirty_days_and_one_panel(self):
         m = _m("Will Democrats win the Ohio Senate race?", prob=0.6, before=None)
         m.history = [(NOW - timedelta(hours=h), 0.6) for h in range(720, -1, -1)]
         ctx = MarketContext(stories={"https://news/ohio": [m]})
         briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
                              content="Polymarket", bullets=[{"text": "Ohio", "url": m.url}],
                              markets=ctx.to_dict())
-        main._send_markets_trial(TestTrialEmail()._report(), briefing)
-        (png,) = calls[-1]["images"].values()
+        _, images = main._market_charts(briefing)
+        (png,) = images.values()
         assert _png_height(png) == 190

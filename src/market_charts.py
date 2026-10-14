@@ -1,4 +1,4 @@
-"""Small price charts of prediction markets, for the trial email.
+"""Small price charts of prediction markets, for the daily email.
 
 PNG, because Gmail renders neither SVG nor scripts. The main panel is the
 market's whole life (capped at a year by the fetch), so a long-running question

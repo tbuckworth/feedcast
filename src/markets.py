@@ -115,7 +115,7 @@ class Market:
         return before[-1] if before else None
 
     def to_dict(self) -> dict:
-        """Plain JSON for the episode record and the trial email."""
+        """Plain JSON for the episode record and the email's charts."""
         return {
             "platform": self.platform, "key": self.key, "title": self.title, "url": self.url,
             "prob": self.prob, "prob_24h": self.prob_24h, "traded": self.traded(),
