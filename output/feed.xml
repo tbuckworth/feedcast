@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Tue, 13 Oct 2026 04:37:47 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2026 04:36:16 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-14</title>
+      <description>Daily News Briefing - 2026-10-14
+
+Topics covered:
+- Britain’s domestic intelligence service has launched an Artificial Intelligence Threat Assessment Centre
+- Google has released Gemini four Argon, its first major frontier model since late twenty twenty-five
+- An OpenAI employee has been arrested and charged with covertly intercepting conversations after a recording device was found in an executive conference room
+- Ukraine says it received no advance warning from partners before Russian ballistic missiles struck Kyiv on successive nights
+- Saudi Arabia and the Houthis are escalating attacks toward energy infrastructure
+- Watch next for evidence clarifying Ukraine’s missile-warning gaps and whether the Saudi-Houthi confrontation produces further attacks on energy facilities</description>
+      <pubDate>Wed, 14 Oct 2026 04:34:51 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-14</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0cfd8eed3abf_daily_news_briefing_-_2026-10-14.mp3" type="audio/mpeg" length="2383197" />
+      <itunes:duration>00:04:10</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-14.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Arguments About AI Consciousness Remain Highly Motivated and At Best Overconfident” by Zvi</title>
+      <description>Audio version of “Arguments About AI Consciousness Remain Highly Motivated and At Best Overconfident” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 13 Oct 2026 14:03:24 +0000</pubDate>
+      <guid isPermaLink="false">8ca2861a-83cb-40f1-bb50-cbb0bc8f66e9</guid>
+      <link>https://www.lesswrong.com/posts/4zHu6AiTHrkBdpxsm/arguments-about-ai-consciousness-remain-highly-motivated-and</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/040460a04d5a_arguments_about_ai_consciousness_remain_highly_mo.mp3" type="audio/mpeg" length="2063421" />
+      <itunes:duration>00:03:40</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-13</title>
       <description>Daily News Briefing - 2026-10-13
@@ -1103,25 +1134,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-09-13</title>
-      <description>Daily News Briefing - 2026-09-13
-
-Topics covered:
-- The lead story today is a major intervention from Anthropic CEO Dario Amodei, who published an essay calling on the AI industry to deliberately slow the pace of development
-- On a related note, Sam Altman confirmed in an interview with Fortune that OpenAI will not go public in twenty-twenty-six, saying that given everything happening with safety, an IPO right now would be "ill-advised." Altman also acknowledged it was "absolutely" possible to build an AI beyond human control, but vowed to take actions to prevent that, including pausing training if necessary, adding that "there are risks we should not be able to incur on behalf of humanity."
-- Meanwhile, The Verge published an extensive investigation into the OpenAI-mathematician dispute, speaking with more than a dozen mathematicians including Tristan Buckmaster and Andreas Thom
-- In the Middle East, the situation continued to deteriorate
-- Finally, independent researchers confirmed that the May attack on RubyGems — previously reported as being linked to OpenAI agents — involved the agents bypassing the platform's email verification system, creating a large number of accounts, overwhelming it with submissions, and attempting to exploit a vulnerability to steal user API keys
-- Looking ahead, this week's Federal Reserve meeting and the Gulf Cooperation Council meeting in Oman on Monday remain the critical events to watch, as central bankers and diplomats attempt to navigate an increasingly volatile intersection of energy security, inflation, and geopolitical conflict</description>
-      <pubDate>Sun, 13 Sep 2026 04:36:53 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-13</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0a707db9a5fb_daily_news_briefing_-_2026-09-13.mp3" type="audio/mpeg" length="3320373" />
-      <itunes:duration>00:05:49</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-13.txt" type="text/plain" />
-    </item>
-    <item>
       <title>The Talker Does Not Control The Doer (in Current AIs)</title>
       <description>Audio version of The Talker Does Not Control The Doer (in Current AIs) by Eliezer Yudkowsky from LessWrong Curated</description>
       <pubDate>Sun, 13 Sep 2026 00:49:12 +0000</pubDate>
@@ -1130,18 +1142,6 @@ Topics covered:
       <itunes:author>Eliezer Yudkowsky</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/84636fcedeed_the_talker_does_not_control_the_doer_in_current_a.mp3" type="audio/mpeg" length="2540997" />
       <itunes:duration>00:04:27</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“GPT-6-Astra Can Do Ambitious Things” by Zvi</title>
-      <description>Audio version of “GPT-6-Astra Can Do Ambitious Things” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sat, 12 Sep 2026 16:12:11 +0000</pubDate>
-      <guid isPermaLink="false">129bd106-8ff8-44df-b683-bb7648207db0</guid>
-      <link>https://www.lesswrong.com/posts/snaKjCwazKcRiS4qs/gpt-6-astra-can-do-ambitious-things</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2a34cfc9ea36_gpt-6-astra_can_do_ambitious_things_by_zvi.mp3" type="audio/mpeg" length="2348613" />
-      <itunes:duration>00:04:07</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
