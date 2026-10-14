@@ -1,7 +1,6 @@
 """Main entry point for feedcast pipeline."""
 
 import asyncio
-import dataclasses
 import hashlib
 import json
 import os
@@ -19,8 +18,8 @@ from pydantic import BaseModel
 from .audio import AudioGenerator
 from .bundle import write_bundle
 from .digest import safe_bullets
-from .email_report import (ChartNote, LinkedPost, ReportEpisode, RunReport, _addresses,
-                           bullet_urls, is_test_run, send_report)
+from .email_report import (ChartNote, LinkedPost, ReportEpisode, RunReport, bullet_urls,
+                           send_report)
 from .extractor import ExtractionError, url_to_feed_entry
 from .feed import Episode, FeedGenerator, PodcastConfig, episode_page_url
 from .fulltext import enrich_entry
@@ -819,9 +818,10 @@ async def async_main(config_path: Path | None = None) -> None:
             episodes, db_entries, new_entry_ids, failures, config.podcast.base_url,
             maths_skipped, dead_sources, pending=waiting,
         )
-        send_report(report)
+        images: dict[str, bytes] = {}
         if briefing_entry and briefing_entry.id in new_entry_ids:
-            _send_markets_trial(report, briefing_entry)
+            report.charts, images = _market_charts(briefing_entry)
+        send_report(report, images=images)
     else:
         print("  Nothing new — email report skipped (set FEEDCAST_EMAIL_ALWAYS=true to send anyway)")
 
@@ -877,10 +877,10 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
 
     The briefing is made once a day, so after the morning run there is no other
     way to see a change to it before tomorrow. This writes one from the news of
-    the last day, prediction markets and fidelity check included, and sends the
-    regular email and the markets trial email. The workflow marks it a dev run,
-    so both go to FEEDCAST_EMAIL_TO only. Nothing is narrated, and nothing is
-    written to the database, the feed or the site.
+    the last day, prediction markets and fidelity check included, and emails
+    it as the daily email would show it, charts and all. The workflow marks it
+    a dev run, so it goes to FEEDCAST_EMAIL_TO only. Nothing is narrated, and
+    nothing is written to the database, the feed or the site.
     """
     if not (config.news_briefing and config.news_briefing.enabled):
         print("Preview: the news briefing is disabled in config.yaml")
@@ -901,41 +901,38 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
 
     # The digest as the daily email shows it, then the whole script, which is
     # where the market lines actually are.
+    charts, images = _market_charts(entry)
     report = RunReport(
         episodes=[item(title=f"Preview: {entry.title}", bullets=entry.bullets,
                        fidelity=entry.fidelity, writer=entry.writer),
                   item(title="Full script", briefing_text=entry.content)],
         notices=llm.fallback_notices(), feed_url=f"{base}/feed.xml", site_url=base,
+        charts=charts,
     )
-    send_report(report, subject_tag="[Preview]")
-    _send_markets_trial(report, entry)
+    send_report(report, subject_tag="[Preview]", images=images)
 
 
-def _send_markets_trial(report: RunReport, briefing: FeedEntry) -> None:
-    """The prediction-markets trial: the day's email again, with price charts.
+def _market_charts(briefing: FeedEntry) -> tuple[list[ChartNote], dict[str, bytes]]:
+    """Price charts for the daily email: the notes, and the PNGs by Content-ID.
 
-    Goes to FEEDCAST_MARKETS_TRIAL_TO (Titus and Jason, while the charts are on
-    trial) under a "[DEV - Prediction Markets]" subject, and only on days the
-    briefing used a market. A chart is drawn for each unexplained move and for
-    each story market the digest cites, and sits under the bullet that links
-    it. Every chart shows the market's whole life; one whose history
-    goes back more than three months also gets a 7-day zoom (market_charts).
-    A hand-dispatched dev run sends it to FEEDCAST_EMAIL_TO only. Never raises.
+    A chart is drawn for each unexplained move and for each story market the
+    digest cites, and sits under the bullet that links it. Every chart shows
+    the market's whole life; one whose history goes back more than three
+    months also gets a 7-day zoom (market_charts). Nothing on days the
+    briefing used no market. Ran as a separate trial email to Titus and Jason
+    from 8 to 14 Oct 2026. Never raises: a missing chart must not cost the
+    day's email.
     """
+    charts: list[ChartNote] = []
+    images: dict[str, bytes] = {}
     try:
         from .market_charts import (ZOOM_DAYS, history_days, render_chart, wants_zoom,
                                     zoom_window)
 
-        recipients = _addresses(os.environ.get("FEEDCAST_MARKETS_TRIAL_TO", ""))
         data = briefing.markets
-        if not recipients or not data:
-            return
-        if is_test_run():
-            recipients = _addresses(os.environ.get("FEEDCAST_EMAIL_TO", ""))
+        if not data:
+            return [], {}
         cited = {u for b in briefing.bullets for u in bullet_urls(b)}
-        charts: list[ChartNote] = []
-        images: dict[str, bytes] = {}
-
         drawn: set[str] = set()
 
         def points(m: dict, key: str) -> list:
@@ -980,11 +977,10 @@ def _send_markets_trial(report: RunReport, briefing: FeedEntry) -> None:
                     continue
                 add(m, m["url"], story_time,
                     f"Now {m['prob']:.0%} · {m['traded']} · dashed line: the story")
-        if charts:
-            send_report(dataclasses.replace(report, charts=charts), recipients=recipients,
-                        subject_tag="[DEV - Prediction Markets]", images=images)
-    except Exception as e:  # noqa: BLE001 — a trial must never cost the day's run
-        print(f"  Prediction-markets trial email failed: {type(e).__name__}: {e}")
+    except Exception as e:  # noqa: BLE001 — the email goes out without charts
+        print(f"  Prediction-market charts failed: {type(e).__name__}: {e}")
+        return [], {}
+    return charts, images
 
 
 def _run_pass() -> str:

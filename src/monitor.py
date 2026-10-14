@@ -96,7 +96,7 @@ class FeedEntry:
     # "Written by" line. None for verbatim episodes.
     writer: Optional[dict] = None
     # The briefing's prediction-market context (MarketContext.to_dict()), for
-    # the trial email's charts and for not reporting a move twice.
+    # the email's charts and for not reporting a move twice.
     markets: Optional[dict] = None
 
 

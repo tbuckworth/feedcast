@@ -65,7 +65,7 @@ class ReportEpisode:
 
 @dataclass
 class ChartNote:
-    """A prediction-market chart for the trial email, shown under its bullet."""
+    """A prediction-market chart in the daily email, shown under its bullet."""
 
     cid: str            # Content-ID of the attached PNG
     title: str          # the market's question
@@ -103,7 +103,7 @@ class RunReport:
     feed_url: str = ""
     site_url: str = ""
     total_in_feed: int = 0
-    # Only the prediction-markets trial email sets these.
+    # The briefing's prediction-market charts (main._market_charts).
     charts: list[ChartNote] = field(default_factory=list)
 
 
@@ -624,15 +624,14 @@ def _addresses(raw: str) -> list[str]:
 
 
 def send_report(report: RunReport, when: datetime | None = None,
-                operator_only: bool = False, recipients: list[str] | None = None,
-                subject_tag: str = "", images: dict[str, bytes] | None = None) -> bool:
+                operator_only: bool = False, subject_tag: str = "",
+                images: dict[str, bytes] | None = None) -> bool:
     """Email the run report. Returns True if sent, False if skipped or failed.
 
     `operator_only` leaves out the BCC list, as a dev run does: the narration
     pass uses it to say a verbatim post failed after the day's email went out.
-    `recipients` replaces the To list (and drops the BCC list) for a trial
-    email; `subject_tag` prefixes its subject; `images` are inline PNGs keyed
-    by the Content-ID the HTML cites.
+    `subject_tag` prefixes the subject; `images` are inline PNGs (the market
+    charts) keyed by the Content-ID the HTML cites.
     Never raises: a broken mailbox must not fail an otherwise-good run.
     """
     when = when or datetime.now()
@@ -641,8 +640,6 @@ def send_report(report: RunReport, when: datetime | None = None,
     test_run = is_test_run()
     if test_run or operator_only:
         bcc_addrs = []
-    if recipients:
-        to_addrs, bcc_addrs = list(recipients), []
     user = os.environ.get("SMTP_USER", "").strip()
     password = (
         os.environ.get("SMTP_PASSWORD", "")
