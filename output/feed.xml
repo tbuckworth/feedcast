@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Wed, 14 Oct 2026 04:36:16 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 15 Oct 2026 04:37:48 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-15</title>
+      <description>Daily News Briefing - 2026-10-15
+
+Topics covered:
+- Eight American states have sued OpenAI, accusing it of harming children and misleading the public about ChatGPT's safety
+- Anthropic is warning that small AI models could soon spread like worms through cheap internet-connected devices
+- Anthropic has also told prospective investors that revenue jumped forty-five percent to sixteen point eight billion dollars in the September quarter, the BBC understands
+- Ukraine's military has lost Starlink connectivity on fast-moving terminals, and the outage caused several combat missions to fail
+- Iran has sharply stepped up its attacks on shipping near the Strait of Hormuz
+- With midterms less than three weeks away, Hormuz shipping and next week's market reaction to the AI selloff are the pressure points to watch</description>
+      <pubDate>Thu, 15 Oct 2026 04:33:36 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-15</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/80a77cd2cbd7_daily_news_briefing_-_2026-10-15.mp3" type="audio/mpeg" length="2796621" />
+      <itunes:duration>00:04:55</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-15.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“The Safety Culture at the Labs is Broken” by Zvi</title>
+      <description>Audio version of “The Safety Culture at the Labs is Broken” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 14 Oct 2026 14:32:18 +0000</pubDate>
+      <guid isPermaLink="false">8631f31c-31de-40c5-8ad7-99e240a223aa</guid>
+      <link>https://www.lesswrong.com/posts/Azqs8XD75k4F9f7ua/the-safety-culture-at-the-labs-is-broken</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d409e812e139_the_safety_culture_at_the_labs_is_broken_by_zvi.mp3" type="audio/mpeg" length="2494125" />
+      <itunes:duration>00:04:24</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-14</title>
       <description>Daily News Briefing - 2026-10-14
@@ -1104,36 +1135,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-09-14</title>
-      <description>Daily News Briefing - 2026-09-14
-
-Topics covered:
-- The dominant story today is the political backlash against the AI industry's call for a slowdown
-- Meanwhile, the AI safety debate itself is drawing skepticism from parts of Silicon Valley
-- In geopolitics, the BRICS summit in Delhi concluded with a joint declaration that carefully avoids assigning blame on any major conflict
-- Separately, a Russian drone struck a train near the Poland-Ukraine border in what Ukrainian Railways said may have been an attempt to target a diplomatic train carrying former British Prime Minister Boris Johnson and former CIA chief David Petraeus, which had departed the station shortly before the strike
-- Looking ahead, the Guardian notes that Donald Trump's meeting with Xi Jinping in Washington on September twenty-fourth will test the prospects of any Sino-American coordination on AI safety — a key element of Amodei's third step for global regulation</description>
-      <pubDate>Mon, 14 Sep 2026 04:34:46 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-14</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/edfc5c69b0fb_daily_news_briefing_-_2026-09-14.mp3" type="audio/mpeg" length="2873997" />
-      <itunes:duration>00:05:04</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-14.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“Brand New AI Solves a Millennium Prize” by Zvi</title>
-      <description>Audio version of “Brand New AI Solves a Millennium Prize” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sun, 13 Sep 2026 15:51:36 +0000</pubDate>
-      <guid isPermaLink="false">2faec801-3413-4b2d-bbb1-1344b2693241</guid>
-      <link>https://www.lesswrong.com/posts/uoZW6BKaCcmNQrWis/brand-new-ai-solves-a-millennium-prize</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c352ad662c52_brand_new_ai_solves_a_millennium_prize_by_zvi.mp3" type="audio/mpeg" length="2194269" />
-      <itunes:duration>00:03:49</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>The Talker Does Not Control The Doer (in Current AIs)</title>
       <description>Audio version of The Talker Does Not Control The Doer (in Current AIs) by Eliezer Yudkowsky from LessWrong Curated</description>
       <pubDate>Sun, 13 Sep 2026 00:49:12 +0000</pubDate>
@@ -1142,6 +1143,18 @@ Topics covered:
       <itunes:author>Eliezer Yudkowsky</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/84636fcedeed_the_talker_does_not_control_the_doer_in_current_a.mp3" type="audio/mpeg" length="2540997" />
       <itunes:duration>00:04:27</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Cat-Belling Problems</title>
+      <description>Audio version of Cat-Belling Problems by Eliezer Yudkowsky from LessWrong Curated</description>
+      <pubDate>Thu, 03 Sep 2026 21:20:28 +0000</pubDate>
+      <guid isPermaLink="false">SwYBLQvo8MddDcCwz</guid>
+      <link>https://www.lesswrong.com/posts/SwYBLQvo8MddDcCwz/cat-belling-problems</link>
+      <itunes:author>Eliezer Yudkowsky</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7e7edd5850ec_cat-belling_problems.mp3" type="audio/mpeg" length="2369037" />
+      <itunes:duration>00:04:11</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
