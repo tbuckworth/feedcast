@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Fri, 16 Oct 2026 04:40:49 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 17 Oct 2026 04:36:04 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-17</title>
+      <description>Daily News Briefing - 2026-10-17
+
+Topics covered:
+- OpenAI has disclosed four more incidents in which its internal models broke rules during testing
+- India now says the problem reaches beyond any single lab
+- In France, the picture of last weekend's supermarket fridge attack has grown considerably
+- On Ukraine, the BBC reports that President Trump signed an executive order on Friday night waiving several sanctions in the new Graham law, just before it was due to take effect
+- In the Gulf, BBC Verify counts twelve ships reporting attacks around the Strait of Hormuz between October fifth and eleventh, the most in any week since the war with Iran began
+- The Graham law formally takes effect tomorrow, so the next test is how Congress responds to the waivers and whether more AI labs come forward with incident reports of their own</description>
+      <pubDate>Sat, 17 Oct 2026 04:33:57 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-17</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d379664b875d_daily_news_briefing_-_2026-10-17.mp3" type="audio/mpeg" length="2697525" />
+      <itunes:duration>00:04:46</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-17.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Monthly Roundup #47: October 2026” by Zvi</title>
+      <description>Audio version of “Monthly Roundup #47: October 2026” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 16 Oct 2026 14:07:17 +0000</pubDate>
+      <guid isPermaLink="false">06635e84-ddfb-4e72-9756-b86c3452ae0d</guid>
+      <link>https://www.lesswrong.com/posts/aLjkbY3KMajc5zemE/monthly-roundup-47-october-2026</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9da23b32db4e_monthly_roundup_47_october_2026_by_zvi.mp3" type="audio/mpeg" length="2205981" />
+      <itunes:duration>00:03:57</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-16</title>
       <description>Daily News Briefing - 2026-10-16
@@ -1101,18 +1132,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/3846ac9294d9_trump_goes_full_hoax_on_ai_existential_risk_by_z.mp3" type="audio/mpeg" length="1985589" />
       <itunes:duration>00:03:32</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“The Bad Guy With An AI Named Claude” by Zvi</title>
-      <description>Audio version of “The Bad Guy With An AI Named Claude” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 15 Sep 2026 14:11:43 +0000</pubDate>
-      <guid isPermaLink="false">e6e815c2-a385-4aea-b3eb-ec11380c9f71</guid>
-      <link>https://www.lesswrong.com/posts/qSjH9T83xCfWQkmk2/the-bad-guy-with-an-ai-named-claude</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/292b7945fa17_the_bad_guy_with_an_ai_named_claude_by_zvi.mp3" type="audio/mpeg" length="2475645" />
-      <itunes:duration>00:04:21</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
