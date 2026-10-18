@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sat, 17 Oct 2026 04:39:53 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 18 Oct 2026 04:36:54 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-18</title>
+      <description>Daily News Briefing - 2026-10-18
+
+Topics covered:
+- Popular websites are shutting AI agents out
+- Separately, Meta has dropped language from its commercial terms that critics, including the Cornell law professor James Grimmelmann, read as letting it scrape news sites for AI training regardless of robots dot text instructions
+- Anthropic, meanwhile, may be losing a major customer
+- On Ukraine, Zelenskyy called Trump's sanctions waiver a "reward" for Putin and predicted that more sanctions will be lifted
+- In Yemen, sources tell the Guardian that the United Arab Emirates will resume paying southern government forces fighting the Houthis, with Saudi Arabia providing air cover
+- France saw more than twelve hundred arrests and one hundred fifty police injured on Saturday, as protests in support of high school students, swelled by anger over high prices, turned violent</description>
+      <pubDate>Sun, 18 Oct 2026 04:34:27 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-18</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bd0d4a72c7c5_daily_news_briefing_-_2026-10-18.mp3" type="audio/mpeg" length="2477037" />
+      <itunes:duration>00:04:24</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-18.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Leaked Anthropic Draft AI Regulatory Bill Is Unacceptable and Troubling” by Zvi</title>
+      <description>Audio version of “Leaked Anthropic Draft AI Regulatory Bill Is Unacceptable and Troubling” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Sat, 17 Oct 2026 14:56:28 +0000</pubDate>
+      <guid isPermaLink="false">dc947991-e0ce-40c6-ac8f-70afa50a5d97</guid>
+      <link>https://www.lesswrong.com/posts/NW4b7m6798byAndeB/leaked-anthropic-draft-ai-regulatory-bill-is-unacceptable</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/49d92631b11c_leaked_anthropic_draft_ai_regulatory_bill_is_unac.mp3" type="audio/mpeg" length="2211621" />
+      <itunes:duration>00:03:57</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-17</title>
       <description>Daily News Briefing - 2026-10-17
@@ -1102,60 +1133,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/96e7b095a6a0_ai_186_the_world_takes_notice_by_zvi.mp3" type="audio/mpeg" length="2535213" />
       <itunes:duration>00:04:28</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-17</title>
-      <description>Daily News Briefing - 2026-09-17
-
-Topics covered:
-- The Federal Reserve raised interest rates on Wednesday for the first time since July twenty-twenty-three, lifting its benchmark rate by a quarter percentage point to a range of three-point-seven-five to four percent
-- On AI safety governance, the debate is sharpening around whether embedded third-party evaluators can truly function as independent watchdogs
-- In the Iran conflict, CBS obtained photographs from active military personnel showing extensive damage to US bases across the Gulf that has not been widely communicated to the American public
-- And in a significant geopolitical move, European Commission President von der Leyen invited Canada to become the first ever "associate member" of the European Union — an unprecedented category that does not yet formally exist
-- Looking ahead, the Fed's hawkish posture and Trump's furious response set the stage for an intensifying collision between monetary policy and political pressure as midterm campaigns enter their final stretch</description>
-      <pubDate>Thu, 17 Sep 2026 04:35:25 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-17</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/26c2366c4675_daily_news_briefing_-_2026-09-17.mp3" type="audio/mpeg" length="3402093" />
-      <itunes:duration>00:05:59</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-17.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>AI Superforecasting Should Transform The FDA</title>
-      <description>Audio version of AI Superforecasting Should Transform The FDA from Scott Alexander</description>
-      <pubDate>Wed, 16 Sep 2026 23:33:42 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/ai-superforecasting-should-transform</guid>
-      <link>https://www.astralcodexten.com/p/ai-superforecasting-should-transform</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0f0a92bdd2fd_ai_superforecasting_should_transform_the_fda.mp3" type="audio/mpeg" length="5755101" />
-      <itunes:duration>00:10:04</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Trump Goes Full Hoax on AI Existential Risk” by Zvi</title>
-      <description>Audio version of “Trump Goes Full Hoax on AI Existential Risk” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 16 Sep 2026 15:13:25 +0000</pubDate>
-      <guid isPermaLink="false">edd24039-6441-44b2-8752-83cff3a0d08e</guid>
-      <link>https://www.lesswrong.com/posts/Kqgco8vLFMeBhdrQY/trump-goes-full-hoax-on-ai-existential-risk</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3846ac9294d9_trump_goes_full_hoax_on_ai_existential_risk_by_z.mp3" type="audio/mpeg" length="1985589" />
-      <itunes:duration>00:03:32</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>The Talker Does Not Control The Doer (in Current AIs)</title>
-      <description>Audio version of The Talker Does Not Control The Doer (in Current AIs) by Eliezer Yudkowsky from LessWrong Curated</description>
-      <pubDate>Sun, 13 Sep 2026 00:49:12 +0000</pubDate>
-      <guid isPermaLink="false">cJX2ssssGoYqnijwi</guid>
-      <link>https://www.lesswrong.com/posts/cJX2ssssGoYqnijwi/the-talker-does-not-control-the-doer-in-current-ais</link>
-      <itunes:author>Eliezer Yudkowsky</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/84636fcedeed_the_talker_does_not_control_the_doer_in_current_a.mp3" type="audio/mpeg" length="2540997" />
-      <itunes:duration>00:04:27</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
