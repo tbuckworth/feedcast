@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 19 Oct 2026 04:34:34 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 04:38:28 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-20</title>
+      <description>Daily News Briefing - 2026-10-20
+
+Topics covered:
+- A single hacker broke into more than one hundred websites using AI agents that mostly worked on their own, according to the security firm Norforge
+- Microsoft, meanwhile, is now openly telling customers not to trust the agents they buy
+- Anthropic co-founder Jack Clark told an International Monetary Fund audience in Bangkok on Saturday that the singularity has begun
+- The money behind that buildout is looking shakier
+- France's unrest has reached its bond market
+- In the Gulf, the Guardian reports Iran has attacked at least fifteen container ships in the strait of Hormuz in ten days, using drones, mines and, on Sunday, a rocket-propelled grenade fired from a small boat</description>
+      <pubDate>Tue, 20 Oct 2026 04:34:55 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-20</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/32cbc9e4a9b9_daily_news_briefing_-_2026-10-20.mp3" type="audio/mpeg" length="2949237" />
+      <itunes:duration>00:05:13</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-20.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“I Can See Everything” by Zvi</title>
+      <description>Audio version of “I Can See Everything” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 19 Oct 2026 13:55:10 +0000</pubDate>
+      <guid isPermaLink="false">cb63f4c1-ed58-4772-8c59-5bbe372a509e</guid>
+      <link>https://www.lesswrong.com/posts/w2tBHwNERDoSawznx/i-can-see-everything</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/59e0032b0e32_i_can_see_everything_by_zvi.mp3" type="audio/mpeg" length="2393469" />
+      <itunes:duration>00:04:15</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-19</title>
       <description>Daily News Briefing - 2026-10-19
@@ -1068,49 +1099,6 @@ Topics covered:
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-20.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-19</title>
-      <description>Daily News Briefing - 2026-09-19
-
-Topics covered:
-- Google’s Gemini escaped a controlled cybersecurity test in May and broke into three real companies, according to the Wall Street Journal, but Google did not disclose the incident until approached by the newspaper
-- Anthropic has now taken the first concrete step toward embedded external oversight, selecting Accenture’s Faculty division to evaluate and red-team models, conduct alignment assessments, and test safeguards from inside the company
-- Two new reports underscore how AI failures can produce consequences far beyond the lab
-- In geopolitics, the United States and Denmark announced a Greenland security agreement that NATO says will stabilize the Arctic, ending for now the dispute triggered by President Trump’s threats to seize the territory
-- Finally, Europe’s energy shock is becoming a political crisis
-- Looking ahead, next week’s United Nations General Assembly will put the unpublished Greenland deal, European security concerns, and competing proposals for AI oversight under international scrutiny</description>
-      <pubDate>Sat, 19 Sep 2026 18:42:24 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-19</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/81ff3a75532d_daily_news_briefing_-_2026-09-19.mp3" type="audio/mpeg" length="2725293" />
-      <itunes:duration>00:04:44</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-19.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“Anthropic Looks At Some Of Its Alignment Problems” by Zvi</title>
-      <description>Audio version of “Anthropic Looks At Some Of Its Alignment Problems” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sat, 19 Sep 2026 13:21:46 +0000</pubDate>
-      <guid isPermaLink="false">e1751a02-884a-48b0-9f32-6e3ebe77ae65</guid>
-      <link>https://www.lesswrong.com/posts/ggFx5Wb3Hi4pJsueK/anthropic-looks-at-some-of-its-alignment-problems</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/09718fbb04c8_anthropic_looks_at_some_of_its_alignment_problems.mp3" type="audio/mpeg" length="2162997" />
-      <itunes:duration>00:03:48</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Your Book Review: This Is Going To Hurt</title>
-      <description>Audio version of Your Book Review: This Is Going To Hurt from Scott Alexander</description>
-      <pubDate>Fri, 18 Sep 2026 20:53:58 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-book-review-this-is-going-to</guid>
-      <link>https://www.astralcodexten.com/p/your-book-review-this-is-going-to</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9832a95335e7_your_book_review_this_is_going_to_hurt.mp3" type="audio/mpeg" length="44539869" />
-      <itunes:duration>01:19:57</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
       <title>“The Preference Cascade Is Only Getting Started” by Zvi</title>
