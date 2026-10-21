@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Wed, 21 Oct 2026 04:36:27 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 04:39:01 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -50,6 +50,18 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/b87e3c2b7d03_anthropic_does_not_understand_why_its_draft_bill.mp3" type="audio/mpeg" length="2110341" />
       <itunes:duration>00:03:46</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Against Against Handover</title>
+      <description>Audio version of Against Against Handover from Scott Alexander</description>
+      <pubDate>Tue, 20 Oct 2026 20:32:59 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/against-against-handover</guid>
+      <link>https://www.astralcodexten.com/p/against-against-handover</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f94b01ac680b_against_against_handover.mp3" type="audio/mpeg" length="16517469" />
+      <itunes:duration>00:29:55</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
