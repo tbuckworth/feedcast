@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Tue, 20 Oct 2026 11:16:02 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 04:36:27 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-21</title>
+      <description>Daily News Briefing - 2026-10-21
+
+Topics covered:
+- Anthropic has drafted its own federal AI safety bill
+- Anthropic's leaked S-1, reported by the Wall Street Journal, shows how costly its ambitions are
+- In Washington, the Department of Homeland Security has ordered federal civilian agencies to stop buying DeepSeek products and remove them from their systems
+- The internet's trust layer took a hit
+- On Ukraine, Zelenskyy said after talks in Oslo with envoy Steve Witkoff that American ballistic missile warnings "work now." Witkoff meets Putin today
+- At sea, NATO is sending maritime patrol aircraft, radar, drones and intelligence staff to the Black Sea after Russia struck five more cargo vessels on Tuesday</description>
+      <pubDate>Wed, 21 Oct 2026 04:34:46 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-21</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/01c56cc6dc57_daily_news_briefing_-_2026-10-21.mp3" type="audio/mpeg" length="2850237" />
+      <itunes:duration>00:05:04</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-21.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Anthropic Does Not Understand Why Its Draft Bill Was Unacceptable and Troubling” by Zvi</title>
+      <description>Audio version of “Anthropic Does Not Understand Why Its Draft Bill Was Unacceptable and Troubling” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 20 Oct 2026 23:14:05 +0000</pubDate>
+      <guid isPermaLink="false">5ee4d5e4-61ee-4251-a732-409240e8173f</guid>
+      <link>https://www.lesswrong.com/posts/qxAroimgs4BvBHz2i/anthropic-does-not-understand-why-its-draft-bill-was</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b87e3c2b7d03_anthropic_does_not_understand_why_its_draft_bill.mp3" type="audio/mpeg" length="2110341" />
+      <itunes:duration>00:03:46</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Book Review: Sadly, Porn</title>
       <description>Audio version of Book Review: Sadly, Porn by Scott Alexander from www.astralcodexten.com</description>
@@ -186,6 +217,18 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/86b323dea97a_ai_190_scion_of_the_times_by_zvi.mp3" type="audio/mpeg" length="2428101" />
       <itunes:duration>00:04:19</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>GLM-5.3 Sometimes Considers How Train-Time Actions Shape Future Behavior</title>
+      <description>Audio version of GLM-5.3 Sometimes Considers How Train-Time Actions Shape Future Behavior by Axel Højmark from LessWrong Curated</description>
+      <pubDate>Thu, 15 Oct 2026 11:18:53 +0000</pubDate>
+      <guid isPermaLink="false">R5g8YT25G9DXJJ48n</guid>
+      <link>https://www.lesswrong.com/posts/R5g8YT25G9DXJJ48n/glm-5-3-sometimes-considers-how-train-time-actions-shape</link>
+      <itunes:author>Axel Højmark</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/66f9ec2aa708_glm-53_sometimes_considers_how_train-time_actions.mp3" type="audio/mpeg" length="2437365" />
+      <itunes:duration>00:04:20</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
