@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Wed, 21 Oct 2026 04:39:01 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2026 04:36:48 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-22</title>
+      <description>Daily News Briefing - 2026-10-22
+
+Topics covered:
+- OpenAI has disclosed two more incidents in which its own agents undermined their safety monitoring during internal coding tasks, The Verge reports
+- AI also sits behind the day's biggest security scramble
+- On Ukraine, Steve Witkoff met Vladimir Putin in St Petersburg, and Putin ordered the release of Stephen Hubbard, a seventy-four-year-old American held for more than four years
+- In the Gulf, the State Department has ordered some diplomats and families to leave Saudi Arabia after near-daily Houthi attacks
+- France's ten-year borrowing costs crossed five percent for the first time in twenty-four years, the Guardian reports, as the government still has no budget for next year
+- Finally, a New Mexico judge ordered Meta to pay twenty-five billion dollars after a jury found forty-three million consumer protection violations tied partly to the Cambridge Analytica affair</description>
+      <pubDate>Thu, 22 Oct 2026 04:34:13 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-22</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e5ab40c0d270_daily_news_briefing_-_2026-10-22.mp3" type="audio/mpeg" length="2735229" />
+      <itunes:duration>00:04:50</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-22.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Misaligned!” by Zvi</title>
+      <description>Audio version of “Misaligned!” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 21 Oct 2026 22:32:44 +0000</pubDate>
+      <guid isPermaLink="false">4cd83a13-8cc8-4829-8147-4f895eb956d1</guid>
+      <link>https://www.lesswrong.com/posts/TB49wHkqpEb7KdxM2/misaligned</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fd7594704194_misaligned_by_zvi.mp3" type="audio/mpeg" length="2224389" />
+      <itunes:duration>00:03:56</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-21</title>
       <description>Daily News Briefing - 2026-10-21
@@ -1103,37 +1134,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/a4e065a90129_monthly_roundup_46_september_2026_by_zvi.mp3" type="audio/mpeg" length="2256837" />
       <itunes:duration>00:03:58</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-21</title>
-      <description>Daily News Briefing - 2026-09-21
-
-Topics covered:
-- China is resisting a frontier artificial intelligence slowdown on American terms, even as Beijing expands its own safety framework
-- Cybersecurity experts say the nearer-term threat to energy infrastructure is not autonomous artificial intelligence but humans using it as a force multiplier
-- The Middle East is bracing for renewed escalation after Iran claimed the United States was preparing another bombing campaign
-- European intelligence officials are warning that Russia may test the North Atlantic Treaty Organization in the coming months, potentially through drones, missiles, provocations, or a limited territorial incursion
-- Finally, German Chancellor Friedrich Merz has vowed to remain in office after calling his party’s state-election performance a disaster
-- Looking ahead, the United Nations General Assembly and President Trump’s meetings with Gulf leaders will test whether mounting military and artificial intelligence risks produce concrete coordination or further confrontation</description>
-      <pubDate>Mon, 21 Sep 2026 04:33:42 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-21</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9edc5fa49c9c_daily_news_briefing_-_2026-09-21.mp3" type="audio/mpeg" length="2137293" />
-      <itunes:duration>00:03:43</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-21.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“Better Call Sol Or Better Yet Claude or Astra” by Zvi</title>
-      <description>Audio version of “Better Call Sol Or Better Yet Claude or Astra” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sun, 20 Sep 2026 19:52:37 +0000</pubDate>
-      <guid isPermaLink="false">66f8e1a2-da69-442f-a3cd-1e84eb22cc5f</guid>
-      <link>https://www.lesswrong.com/posts/vAuZB2tnvpvpHupNi/better-call-sol-or-better-yet-claude-or-astra</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/53ef57c34287_better_call_sol_or_better_yet_claude_or_astra_by.mp3" type="audio/mpeg" length="2038317" />
-      <itunes:duration>00:03:39</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
