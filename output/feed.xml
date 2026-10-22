@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Thu, 22 Oct 2026 04:38:56 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2026 08:55:29 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -1115,49 +1115,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/2cadb0e49911_politics_gets_interested_in_those_trying_not_to_d.mp3" type="audio/mpeg" length="2232117" />
       <itunes:duration>00:03:55</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-22</title>
-      <description>Daily News Briefing - 2026-09-22
-
-Topics covered:
-- The United Nations has issued its first major scientific assessment of AI loss-of-control risk, and it invokes the precautionary principle — the same legal standard used for environmental and public health threats
-- Separately, OpenAI published a blog post calling for coordinated global AI standards covering evaluation, reporting, and governance
-- In the Middle East, the situation in Yemen is escalating sharply
-- On AI security, Meta's new AI assistant Muse has a serious zero-day vulnerability
-- In Russia, Vladimir Putin's United Russia party won a record three hundred fifty-five of four hundred fifty seats in parliamentary elections, securing a supermajority larger than its previous record
-- Looking ahead, President Trump's address to the UN General Assembly today and ongoing US-China AI discussions will test whether the precautionary framework endorsed by the UN's scientific panel gains any traction with the two nations whose cooperation matters most</description>
-      <pubDate>Tue, 22 Sep 2026 04:33:54 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-22</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d883383595c1_daily_news_briefing_-_2026-09-22.mp3" type="audio/mpeg" length="3052845" />
-      <itunes:duration>00:05:17</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-22.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“Monthly Roundup #46: September 2026” by Zvi</title>
-      <description>Audio version of “Monthly Roundup #46: September 2026” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 21 Sep 2026 13:41:52 +0000</pubDate>
-      <guid isPermaLink="false">3623a866-9fc5-4550-b892-e3eae019d357</guid>
-      <link>https://www.lesswrong.com/posts/riDxeyEKqXXimtgWf/monthly-roundup-46-september-2026</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a4e065a90129_monthly_roundup_46_september_2026_by_zvi.mp3" type="audio/mpeg" length="2256837" />
-      <itunes:duration>00:03:58</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>We've saved the world before: what the ozone hole teaches us about AI</title>
-      <description>Audio version of We've saved the world before: what the ozone hole teaches us about AI by leogao from LessWrong Curated</description>
-      <pubDate>Sun, 20 Sep 2026 08:23:08 +0000</pubDate>
-      <guid isPermaLink="false">zxXPEtSSSEdwpjopb</guid>
-      <link>https://www.lesswrong.com/posts/zxXPEtSSSEdwpjopb/we-ve-saved-the-world-before-what-the-ozone-hole-teaches-us</link>
-      <itunes:author>leogao</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3262ffbfc336_weve_saved_the_world_before_what_the_ozone_hole.mp3" type="audio/mpeg" length="10692501" />
-      <itunes:duration>00:18:58</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
