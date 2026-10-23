@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Thu, 22 Oct 2026 08:55:29 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 23 Oct 2026 04:44:28 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-23</title>
+      <description>Daily News Briefing - 2026-10-23
+
+Topics covered:
+- The PHP crisis has turned from warning into live attack
+- A second mass intrusion landed on top of it
+- That backdrop explains why AI firms are spending heavily in Washington
+- On the money side, CNBC reports OpenAI is working on a raise of up to thirty billion dollars at a one point two five trillion dollar pre-money valuation, led by Coatue and investors in the United Arab Emirates
+- On capabilities, a Microsoft study in Science found its MAI-DxO system diagnosed complex medical cases correctly eighty-three percent of the time, against thirty-six percent for generalist physicians
+- In the Gulf, Brent crude rose three percent to one hundred twelve dollars, a five-month high</description>
+      <pubDate>Fri, 23 Oct 2026 04:41:30 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-23</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b2ef6eca24cf_daily_news_briefing_-_2026-10-23.mp3" type="audio/mpeg" length="2782893" />
+      <itunes:duration>00:04:53</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-23.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“AI #191: The Hackening Begins” by Zvi</title>
+      <description>Audio version of “AI #191: The Hackening Begins” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 22 Oct 2026 15:22:27 +0000</pubDate>
+      <guid isPermaLink="false">8b12fb7d-777d-44d1-afde-7eef84f29ab7</guid>
+      <link>https://www.lesswrong.com/posts/ZoMJdvq9meE4shyzJ/ai-191-the-hackening-begins</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c698c946b24_ai_191_the_hackening_begins_by_zvi.mp3" type="audio/mpeg" length="2524725" />
+      <itunes:duration>00:04:29</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-22</title>
       <description>Daily News Briefing - 2026-10-22
