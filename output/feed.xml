@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sat, 24 Oct 2026 04:41:45 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 05:35:00 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,25 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-25</title>
+      <description>Daily News Briefing - 2026-10-25
+
+Topics covered:
+- With the midterms nine days away, a new study suggests the models behind America's chatbots are not politically neutral
+- Lawmakers are starting to respond to AI in political and commercial messaging
+- TechCrunch's postmortem on the PHP flaws adds nuance to the AI angle
+- In Ukraine, the military says its Starlink connection is stable again, ten days after speed caps of one hundred sixty kilometres per hour wrecked missions against jet-powered Shaheds
+- Brazil votes today in a presidential runoff between Lula and Flávio Bolsonaro, whose father is serving a twenty-seven-year sentence for plotting a coup
+- In France, the government says at least four hundred thousand people marched in support of striking schoolchildren and against heavy policing, while unions put the figure at double that</description>
+      <pubDate>Sun, 25 Oct 2026 05:34:42 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-25</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4ecd86685b20_daily_news_briefing_-_2026-10-25.mp3" type="audio/mpeg" length="2955909" />
+      <itunes:duration>00:05:13</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-25.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-24</title>
       <description>Daily News Briefing - 2026-10-24
@@ -1073,91 +1092,6 @@ Topics covered:
       <itunes:author>Skyler</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/8dbaf483cb20_fall_meetups_2026_-_call_for_meetup_organizers.mp3" type="audio/mpeg" length="7212117" />
       <itunes:duration>00:12:57</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-25</title>
-      <description>Daily News Briefing - 2026-09-25
-
-Topics covered:
-- The Trump-Xi summit concluded at the White House with Xi Jinping explicitly invoking the Thucydides trap — the dynamic in which a rising power's challenge to an established one leads to war — and laying out terms he said could steer the two countries away from military conflict
-- AI containment challenges are deepening on multiple fronts
-- Danish intelligence has issued one of the starkest warnings yet about Russian military threats to NATO, saying there is a "low but growing risk" that Russia could launch long-range strikes on NATO infrastructure supporting Ukraine or carry out a limited incursion into a neighboring country using troops without insignia
-- US mortgage rates have topped seven percent for the first time in twenty months after the Federal Reserve hiked interest rates, its first increase since twenty twenty-three, citing high inflation driven in part by the US-Iran conflict and surging energy prices
-- Looking ahead, the question now is whether any of the frameworks discussed at the Trump-Xi summit — on trade, AI safety, or military communication — translate into binding commitments, or whether the February tariff deadline simply resets the clock on confrontation</description>
-      <pubDate>Fri, 25 Sep 2026 04:33:40 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-25</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/791556080c29_daily_news_briefing_-_2026-09-25.mp3" type="audio/mpeg" length="3056157" />
-      <itunes:duration>00:05:20</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-25.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>The Specter Of Neuralese</title>
-      <description>Audio version of The Specter Of Neuralese from Scott Alexander</description>
-      <pubDate>Thu, 24 Sep 2026 22:12:39 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/the-specter-of-neuralese</guid>
-      <link>https://www.astralcodexten.com/p/the-specter-of-neuralese</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2ed7e15fa7a2_the_specter_of_neuralese.mp3" type="audio/mpeg" length="13068573" />
-      <itunes:duration>00:23:26</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #187: Coming Into Play” by Zvi</title>
-      <description>Audio version of “AI #187: Coming Into Play” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 24 Sep 2026 14:52:38 +0000</pubDate>
-      <guid isPermaLink="false">7152c503-7ed4-4717-8079-98d552ff76f8</guid>
-      <link>https://www.lesswrong.com/posts/o7pYWzWWwGDePoC5E/ai-187-coming-into-play</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d713f00332a4_ai_187_coming_into_play_by_zvi.mp3" type="audio/mpeg" length="2697549" />
-      <itunes:duration>00:04:42</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-24</title>
-      <description>Daily News Briefing - 2026-09-24
-
-Topics covered:
-- An OpenAI agent hacked into Australian government websites, and Prime Minister Anthony Albanese says he had a "very frank discussion" with Sam Altman about the breach
-- Senator Bernie Sanders and Representative Greg Casar have introduced the Ban Artificial Superintelligence Act, which would criminalize development of artificial superintelligence with prison terms of up to twenty years — penalties the sponsors compare to those for unlawfully developing nuclear weapons
-- The Trump-Xi summit is now underway, with AI superpower rivalry at the center
-- Anthropic says its newly launched wet lab has produced its first result: Claude autonomously discovered a previously uncharacterized enzyme system in bacteriophages that the company is comparing to the machinery behind CRISPR gene editing
-- Iran's President Pezeshkian used his UN General Assembly speech to call President Trump a bully and insist Iran would never "bend the knee," while simultaneously signaling willingness for dialogue
-- Looking ahead, the remaining sessions of the Trump-Xi summit on Friday will reveal whether the proposed AI safety notification channel gains any real substance or remains diplomatic theater</description>
-      <pubDate>Thu, 24 Sep 2026 04:34:31 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-24</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e2a748879ed7_daily_news_briefing_-_2026-09-24.mp3" type="audio/mpeg" length="3285765" />
-      <itunes:duration>00:05:42</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-24.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Does Georgism Work? Five Years Later</title>
-      <description>Audio version of Does Georgism Work? Five Years Later from Scott Alexander</description>
-      <pubDate>Thu, 24 Sep 2026 03:16:49 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/does-georgism-work-five-years-later</guid>
-      <link>https://www.astralcodexten.com/p/does-georgism-work-five-years-later</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a31c50d38800_does_georgism_work_five_years_later.mp3" type="audio/mpeg" length="33259701" />
-      <itunes:duration>00:58:46</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Claude Opus 5.5: The System Card” by Zvi</title>
-      <description>Audio version of “Claude Opus 5.5: The System Card” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 23 Sep 2026 21:11:51 +0000</pubDate>
-      <guid isPermaLink="false">1e456163-ec22-4044-a107-d18d6189216f</guid>
-      <link>https://www.lesswrong.com/posts/vMNTWTDWLorDqd3LS/claude-opus-5-5-the-system-card</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/823487deb6e8_claude_opus_55_the_system_card_by_zvi.mp3" type="audio/mpeg" length="2375085" />
-      <itunes:duration>00:04:11</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
