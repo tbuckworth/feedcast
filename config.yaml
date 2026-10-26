@@ -85,6 +85,16 @@ feeds:
     mode: "summarize"
     prompt: null
 
+  # Jack Clark's weekly roundup, out Mondays ~12:30 UTC, full text in the feed.
+  # Summarised, not "auto": 80% of issues are under the 24k-char verbatim
+  # limit, which would read ~18 minutes of benchmark scores and "Read more:"
+  # paper titles aloud. The default prompt gave a ~5-minute script covering
+  # every item with Clark's take; a custom one ran longer and more numeric.
+  - name: "Import AI"
+    url: "https://importai.substack.com/feed"
+    mode: "summarize"
+    prompt: null
+
   # The community's own highlights, not the firehose. frontpage-rss carried
   # every post promoted off Personal Blog — 10 to 14 a day, no quality bar —
   # of which the pipeline narrated whichever happened to be newest. Curation
@@ -196,4 +206,6 @@ news_briefing:
     - { name: "VentureBeat AI", url: "https://venturebeat.com/category/ai/feed/", category: "ai_news" }
     - { name: "Alignment Forum", url: "https://www.alignmentforum.org/feed.xml?view=frontpage-rss", category: "ai_safety" }
     - { name: "OpenAI Blog", url: "https://openai.com/blog/rss.xml", category: "ai_labs" }
-    - { name: "Import AI", url: "https://jack-clark.net/feed/", category: "ai_labs" }
+    # Import AI is a feed of its own above. Left here too, the Tuesday briefing
+    # would retell a story from that morning's Import AI episode (it picked an
+    # issue 3 weeks in 4 and told one of its stories on 13 and 20 Oct).
