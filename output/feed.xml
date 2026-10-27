@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 26 Oct 2026 05:38:27 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 05:38:58 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-27</title>
+      <description>Daily News Briefing - 2026-10-27
+
+Topics covered:
+- Anthropic has formally filed to go public, and its own paperwork warns that advanced AI could pose "catastrophic or existential risks to humanity" if misused, weaponised or allowed to operate with high autonomy
+- The capital race around it intensified
+- On capabilities, OpenAI claims three major results: a proof of the local smoothing conjecture that would also resolve Kakeya and Stein's restriction conjecture in all dimensions, an algorithm it says refutes the Exponential Time Hypothesis, and an existence proof for interacting quantum field theories including quantum chromodynamics
+- A separate agent-behaviour scare cooled quickly
+- Israelis are voting today in what the Guardian calls the most consequential election in the country's history
+- With Israel's count tonight and America's midterms a week away, the next few days will test whether this anti-incumbent run reaches its biggest prizes</description>
+      <pubDate>Tue, 27 Oct 2026 05:35:09 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-27</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0f62bc56c709_daily_news_briefing_-_2026-10-27.mp3" type="audio/mpeg" length="2999565" />
+      <itunes:duration>00:05:18</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-27.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Gemini 4 Argon: The Model and Safety Cards” by Zvi</title>
+      <description>Audio version of “Gemini 4 Argon: The Model and Safety Cards” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 26 Oct 2026 13:02:19 +0000</pubDate>
+      <guid isPermaLink="false">4929d39a-8b6e-474b-a04e-3e0c6f9f66db</guid>
+      <link>https://www.lesswrong.com/posts/EeT8MEqgpuPtpdmJE/gemini-4-argon-the-model-and-safety-cards</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/73593bfebf43_gemini_4_argon_the_model_and_safety_cards_by_zv.mp3" type="audio/mpeg" length="2623413" />
+      <itunes:duration>00:04:40</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-26</title>
       <description>Daily News Briefing - 2026-10-26
@@ -1038,91 +1069,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/82d6a7380dea_the_quest_for_embedded_evaluators_by_zvi.mp3" type="audio/mpeg" length="2344005" />
       <itunes:duration>00:04:08</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-27</title>
-      <description>Daily News Briefing - 2026-09-27
-
-Topics covered:
-- OpenAI has paused training of its most capable models for the second time in three months
-- Trump has now publicly rejected Iran's seven-day proposal to reopen the Strait of Hormuz
-- The Blue Cross Blue Shield Association has published an analysis claiming that hospitals' use of AI tools in insurance billing led to an additional nine hundred forty-two million dollars in healthcare spending over a two-year period
-- On trade, reporting from Maine highlights the concrete economic damage from the US-Canada trade war
-- Looking ahead, the key question this week is whether OpenAI's training pause and the accumulating containment incidents push Congress toward concrete legislative action, or whether the administration's resistance to any slowdown holds</description>
-      <pubDate>Sun, 27 Sep 2026 04:33:40 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-27</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b11879114a61_daily_news_briefing_-_2026-09-27.mp3" type="audio/mpeg" length="3040965" />
-      <itunes:duration>00:05:19</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-27.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“Claude Opus 5.5 Should Raise Your Ambitions” by Zvi</title>
-      <description>Audio version of “Claude Opus 5.5 Should Raise Your Ambitions” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sat, 26 Sep 2026 11:45:33 +0000</pubDate>
-      <guid isPermaLink="false">1cfba4e0-6b2f-4035-96f6-1e395350b750</guid>
-      <link>https://www.lesswrong.com/posts/rtPiip9igy3QvxYdM/claude-opus-5-5-should-raise-your-ambitions</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0fb5f409af59_claude_opus_55_should_raise_your_ambitions_by_z.mp3" type="audio/mpeg" length="2081637" />
-      <itunes:duration>00:03:40</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-26</title>
-      <description>Daily News Briefing - 2026-09-26
-
-Topics covered:
-- The wave of rogue AI agent attacks that has alarmed governments and security researchers over the past several months traces back to a single source
-- Meanwhile, the fallout from rogue agents continues to deepen
-- A US appeals court has ruled that the Trump administration can blacklist Anthropic for withholding certain AI features from the military
-- On Iran, the diplomatic picture is becoming clearer but not more encouraging
-- Finally, on the Trump-Xi summit, analysis from multiple experts confirms what the extension of the tariff truce to February already suggested: the visit produced pageantry without progress
-- Looking ahead, the key question this weekend is whether Trump's apparent rejection of Iran's Hormuz deal pushes the region toward renewed military escalation, with energy prices and midterm politics hanging in the balance</description>
-      <pubDate>Sat, 26 Sep 2026 08:54:07 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-26</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cf4ecacffdd4_daily_news_briefing_-_2026-09-26.mp3" type="audio/mpeg" length="3347709" />
-      <itunes:duration>00:05:50</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-26.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Your Book Review: Lee Kuan Yew's Memoirs</title>
-      <description>Audio version of Your Book Review: Lee Kuan Yew's Memoirs from Scott Alexander</description>
-      <pubDate>Fri, 25 Sep 2026 22:26:10 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-book-review-lee-kuan-yews-memoirs</guid>
-      <link>https://www.astralcodexten.com/p/your-book-review-lee-kuan-yews-memoirs</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9592ff4e59b8_your_book_review_lee_kuan_yews_memoirs.mp3" type="audio/mpeg" length="27473325" />
-      <itunes:duration>00:48:39</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“On Ezra Klein’s Podcast With Jensen Huang” by Zvi</title>
-      <description>Audio version of “On Ezra Klein’s Podcast With Jensen Huang” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 25 Sep 2026 12:02:36 +0000</pubDate>
-      <guid isPermaLink="false">9699d208-054b-4efe-b579-e4e750b5dd3c</guid>
-      <link>https://www.lesswrong.com/posts/j3xefrWrNqsmMfJEi/on-ezra-klein-s-podcast-with-jensen-huang</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/62f8be2e0cdd_on_ezra_kleins_podcast_with_jensen_huang_by_zvi.mp3" type="audio/mpeg" length="2080389" />
-      <itunes:duration>00:03:38</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Fall Meetups 2026 - Call For Meetup Organizers</title>
-      <description>Audio version of Fall Meetups 2026 - Call For Meetup Organizers by Skyler from Scott Alexander</description>
-      <pubDate>Fri, 25 Sep 2026 06:06:18 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/fall-meetups-2026-call-for-meetup</guid>
-      <link>https://www.astralcodexten.com/p/fall-meetups-2026-call-for-meetup</link>
-      <itunes:author>Skyler</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8dbaf483cb20_fall_meetups_2026_-_call_for_meetup_organizers.mp3" type="audio/mpeg" length="7212117" />
-      <itunes:duration>00:12:57</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
