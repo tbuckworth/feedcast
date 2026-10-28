@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Tue, 27 Oct 2026 05:38:58 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 28 Oct 2026 05:39:36 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-28</title>
+      <description>Daily News Briefing - 2026-10-28
+
+Topics covered:
+- OpenAI's three headline results from Monday now have a rival claimant
+- A new lawsuit tests how much latitude chatbots should have on medical questions
+- In Israel, exit polls show no clear winner after the highest turnout in fifty years, seventy-seven point one percent by six in the evening
+- Gulf states are drafting a multipart deal to stop a renewed war between America and Iran
+- Defenders now face a second botched disclosure in a week
+- Israel's coalition haggling and next week's midterms will decide two leaderships, while the Gulf talks determine whether the war resumes after them</description>
+      <pubDate>Wed, 28 Oct 2026 05:35:23 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-28</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1898ec83d6e1_daily_news_briefing_-_2026-10-28.mp3" type="audio/mpeg" length="2849685" />
+      <itunes:duration>00:05:03</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-28.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Anthropic Versus Anthropic” by Zvi</title>
+      <description>Audio version of “Anthropic Versus Anthropic” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 27 Oct 2026 12:52:41 +0000</pubDate>
+      <guid isPermaLink="false">527e98db-f4d9-462e-9534-a5897fa03fc0</guid>
+      <link>https://www.lesswrong.com/posts/ZSrX8gucWsKahsitk/anthropic-versus-anthropic</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7a7b20d63006_anthropic_versus_anthropic_by_zvi.mp3" type="audio/mpeg" length="2467029" />
+      <itunes:duration>00:04:26</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-27</title>
       <description>Daily News Briefing - 2026-10-27
@@ -1038,37 +1069,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/f46b67aa5e26_what_also_happened_notonlyhuggingface_by_zvi.mp3" type="audio/mpeg" length="2331117" />
       <itunes:duration>00:04:04</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-28</title>
-      <description>Daily News Briefing - 2026-09-28
-
-Topics covered:
-- Another OpenAI containment incident has surfaced, this time involving the United Nations
-- That backdrop frames a notable meeting
-- The public mood those two are navigating is souring
-- On Iran, the war is now reaching British soil, possibly
-- On China, the American ambassador, David Perdue, told Fox News that Trump asked Xi Jinping during last week's summit whether China would like to buy American weapons
-- Briefly in Europe: Serbia's President Aleksandar Vučić resigned to run for prime minister in an October twenty-fifth election against a student-backed movement, France's National Rally won a record fourteen Senate seats with its allies, and Swiss voters rejected a strict neutrality rule by roughly seventy percent</description>
-      <pubDate>Mon, 28 Sep 2026 04:33:54 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-28</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/961d97049352_daily_news_briefing_-_2026-09-28.mp3" type="audio/mpeg" length="2742909" />
-      <itunes:duration>00:04:46</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-28.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“The Quest for Embedded Evaluators” by Zvi</title>
-      <description>Audio version of “The Quest for Embedded Evaluators” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sun, 27 Sep 2026 22:11:43 +0000</pubDate>
-      <guid isPermaLink="false">996d1aa5-e4da-4044-aa8c-42c92cc655c3</guid>
-      <link>https://www.lesswrong.com/posts/uLmf3GmBywsmG8LLZ/the-quest-for-embedded-evaluators</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/82d6a7380dea_the_quest_for_embedded_evaluators_by_zvi.mp3" type="audio/mpeg" length="2344005" />
-      <itunes:duration>00:04:08</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
