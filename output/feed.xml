@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Thu, 29 Oct 2026 05:39:05 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Oct 2026 05:43:11 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -40,6 +40,18 @@ Topics covered:
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-29.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>My California Ballot, 2026</title>
+      <description>Audio version of My California Ballot, 2026 from Scott Alexander</description>
+      <pubDate>Wed, 28 Oct 2026 15:29:17 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/my-california-ballot-2026</guid>
+      <link>https://www.astralcodexten.com/p/my-california-ballot-2026</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b175e333ac8f_my_california_ballot_2026.mp3" type="audio/mpeg" length="21404421" />
+      <itunes:duration>00:38:06</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
       <title>“Anthropic Files Its S-1” by Zvi</title>
@@ -1069,6 +1081,18 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/51968e3248c7_astra_61_pulled_as_insufficiently_aligned_by_zv.mp3" type="audio/mpeg" length="2393805" />
       <itunes:duration>00:04:13</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Plan R: AI Safety by ASICs</title>
+      <description>Audio version of Plan R: AI Safety by ASICs by Roko from LessWrong Curated</description>
+      <pubDate>Fri, 25 Sep 2026 23:26:13 +0000</pubDate>
+      <guid isPermaLink="false">n8u3BfqFoGh4jnzpo</guid>
+      <link>https://www.lesswrong.com/posts/n8u3BfqFoGh4jnzpo/plan-r-ai-safety-by-asics</link>
+      <itunes:author>Roko</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b32f7bd406cd_plan_r_ai_safety_by_asics.mp3" type="audio/mpeg" length="6154677" />
+      <itunes:duration>00:10:52</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
