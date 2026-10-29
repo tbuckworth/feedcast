@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Wed, 28 Oct 2026 05:39:36 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Oct 2026 05:39:05 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-29</title>
+      <description>Daily News Briefing - 2026-10-29
+
+Topics covered:
+- Google has announced Gemini four Carbon, only two weeks after Gemini four Argon, and like its predecessor it is being held back in a staged release
+- Earnings filings showed where the AI money is flowing
+- In Israel, Benjamin Netanyahu's bloc has lost its majority, but neither side reaches sixty-one seats
+- In Brazil, Flávio Bolsonaro slipped across the border into Argentina and flew to Miami on a private jet
+- The Federal Reserve held rates at three point seven five to four percent in its last meeting before the midterms, with two officials preferring a hike
+- Next Tuesday's midterms now arrive with inflation rising, the Fed on hold, and Israel's absentee count still deciding who gets the first shot at a coalition</description>
+      <pubDate>Thu, 29 Oct 2026 05:36:26 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-29</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/6cdf8430e7ec_daily_news_briefing_-_2026-10-29.mp3" type="audio/mpeg" length="2749917" />
+      <itunes:duration>00:04:53</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-29.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Anthropic Files Its S-1” by Zvi</title>
+      <description>Audio version of “Anthropic Files Its S-1” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 28 Oct 2026 12:21:47 +0000</pubDate>
+      <guid isPermaLink="false">1d9e980e-435b-4120-98b7-2cf9135d5b6a</guid>
+      <link>https://www.lesswrong.com/posts/dbdz6zb6qjaq6yHKs/anthropic-files-its-s-1</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/24ba044d9062_anthropic_files_its_s-1_by_zvi.mp3" type="audio/mpeg" length="2254461" />
+      <itunes:duration>00:03:59</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-28</title>
       <description>Daily News Briefing - 2026-10-28
@@ -1038,37 +1069,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/51968e3248c7_astra_61_pulled_as_insufficiently_aligned_by_zv.mp3" type="audio/mpeg" length="2393805" />
       <itunes:duration>00:04:13</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-29</title>
-      <description>Daily News Briefing - 2026-09-29
-
-Topics covered:
-- OpenAI has scrapped the release of GPT-6.1 Astra, a next-generation model planned for an October debut in ChatGPT and Codex
-- OpenAI is also now apologizing in Australia
-- Pressure is also mounting in the courts and in capital markets
-- Nvidia is pitching the problem as solvable with engineering
-- On Iran, President Trump confirmed that American negotiators spoke with Iranian officials through mediators, even though Tehran says it has no plans to negotiate
-- Next week's Canberra hearing will show whether OpenAI's contrition satisfies lawmakers already drafting rules</description>
-      <pubDate>Tue, 29 Sep 2026 04:35:30 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-29</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4ad18d5829b1_daily_news_briefing_-_2026-09-29.mp3" type="audio/mpeg" length="2508357" />
-      <itunes:duration>00:04:25</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-29.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“What Also Happened: #NotOnlyHuggingFace” by Zvi</title>
-      <description>Audio version of “What Also Happened: #NotOnlyHuggingFace” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 28 Sep 2026 15:31:56 +0000</pubDate>
-      <guid isPermaLink="false">e4c3296e-4804-4dfc-9ad0-1e44092830d5</guid>
-      <link>https://www.lesswrong.com/posts/8BL8bdeQACdgJR69Y/what-also-happened-notonlyhuggingface</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f46b67aa5e26_what_also_happened_notonlyhuggingface_by_zvi.mp3" type="audio/mpeg" length="2331117" />
-      <itunes:duration>00:04:04</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
