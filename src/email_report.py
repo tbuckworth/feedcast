@@ -53,7 +53,7 @@ class ReportEpisode:
     # When the feed surfaced it, if that is materially later than publication:
     # a LessWrong curation can trail the post by weeks, and without this the
     # email looks like it dug up something from July for no reason.
-    curated: datetime | None = None
+    surfaced: datetime | None = None
     # Result of the second-model source check, when one ran.
     fidelity: dict | None = None
     # Read out in full and still being narrated when the email went out:
@@ -169,8 +169,8 @@ def _meta_bits(ep: "ReportEpisode") -> list[str]:
     # Before the duration: this answers "is this actually new?", which is the
     # first thing you want to know about an item in a daily email.
     bits.append(format_published(ep.published))
-    if ep.curated:
-        bits.append(f"curated {format_published(ep.curated)}")
+    if ep.surfaced:
+        bits.append(f"in feed {format_published(ep.surfaced)}")
     bits.append("narrating now, in your feed shortly" if ep.pending
                 else format_duration(ep.duration_seconds))
     return [b for b in bits if b]

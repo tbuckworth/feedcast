@@ -739,19 +739,17 @@ async def async_main(config_path: Path | None = None) -> None:
 
 
 async def _correct_publication_dates(entries: list[FeedEntry]) -> None:
-    """Replace a curation date with the real posting date, where they differ.
+    """Replace the feed's date with the real posting date, where they differ.
 
     Only LessWrong links can be resolved, and only a difference worth showing
-    is applied — an hour's lag between posting and curation is noise.
+    is applied (FEED_DATE_LAG).
     """
     for entry in entries:
         real = await posted_at(entry.link)
-        if real is None or entry.feed_date is None:
-            continue
-        if abs((entry.feed_date - real).total_seconds()) < 86400:
+        if real is None or _surfaced_date(entry.feed_date, real) is None:
             continue
         print(f"    {entry.title[:48]}: posted {real:%Y-%m-%d}, "
-              f"curated {entry.feed_date:%Y-%m-%d}")
+              f"in feed {entry.feed_date:%Y-%m-%d}")
         entry.published = real
 
 
@@ -1079,18 +1077,32 @@ def _bullets_of(row: dict) -> list:
             if isinstance(b, str) or (isinstance(b, dict) and b.get("text"))]
 
 
-def _curated_date(row: dict, published: datetime | None) -> datetime | None:
-    """When the feed surfaced a post, if that is not when it was written."""
+# How far a post's feed date must be from its posting date before the email
+# gives both: an hour's lag between posting and curation is noise.
+FEED_DATE_LAG = timedelta(days=1)
+
+
+def _surfaced_date(feed_date: datetime | None, published: datetime | None) -> datetime | None:
+    """When the feed surfaced a post, if that is not when it was written.
+
+    None without a feed date, or with one within FEED_DATE_LAG of `published`.
+    """
+    if feed_date is None:
+        return None
+    if published and abs(feed_date - published) < FEED_DATE_LAG:
+        return None
+    return feed_date
+
+
+def _stored_feed_date(row: dict) -> datetime | None:
+    """The feed date a row stores; None for rows from before the column, or unreadable."""
     raw = (row.get("feed_date") or "").strip()
     if not raw:
         return None
     try:
-        surfaced = datetime.fromisoformat(raw)
+        return datetime.fromisoformat(raw)
     except ValueError:
         return None
-    if published and abs((surfaced - published).total_seconds()) < 86400:
-        return None
-    return surfaced
 
 
 def _build_run_report(
@@ -1123,20 +1135,18 @@ def _build_run_report(
             briefing_text=(row.get("content") or "") if briefing else "",
             bullets=_bullets_of(row),
             published=ep.published,
-            curated=_curated_date(row, ep.published),
+            surfaced=_surfaced_date(_stored_feed_date(row), ep.published),
             fidelity=_json_dict(row, "fidelity"),
             writer=_json_dict(row, "writer"),
         )
 
     def waiting(row: dict) -> ReportEpisode:
         e: FeedEntry = row["entry"]
-        curated = (e.feed_date if e.feed_date
-                   and abs((e.feed_date - e.published).total_seconds()) >= 86400 else None)
         return ReportEpisode(
             title=e.title, author=e.author or e.feed_name, feed_name=e.feed_name,
             link=e.link or "", audio_url=episode_page_url(base_url, e.id),
             duration_seconds=0, bullets=row.get("bullets") or [], published=e.published,
-            curated=curated, pending=True,
+            surfaced=_surfaced_date(e.feed_date, e.published), pending=True,
         )
 
     ordered = sorted(episodes, key=lambda e: e.published, reverse=True)
