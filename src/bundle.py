@@ -13,21 +13,42 @@ the audio, written when the episode is marked processed and deleted by the
 same 30-day cleanup. Plain text, tens of kilobytes a day.
 """
 
+import re
 from pathlib import Path
+
+# The bundle's own section headings, in the order it writes them. The writer's
+# input has ## headings of its own (a briefing's categories and "Selected
+# stories"), so `read_bundle` splits on these names and no others.
+SYSTEM_PROMPT = "System prompt"
+WRITER_INPUT = "What the writer was given"
+WRITER_OUTPUT = "What the writer wrote"
+FIDELITY_CHECK = "Fidelity check"
+SECTIONS = (SYSTEM_PROMPT, WRITER_INPUT, WRITER_OUTPUT, FIDELITY_CHECK)
 
 
 def writer_bundle(*, title: str, model: str, system_prompt: str,
                   user_message: str, response: str, notes: str = "") -> str:
     """Render one writer exchange as Markdown, plus any check notes."""
-    tail = ["## Fidelity check", "", notes.rstrip(), ""] if notes.strip() else []
+    tail = [f"## {FIDELITY_CHECK}", "", notes.rstrip(), ""] if notes.strip() else []
     return "\n".join([
         f"# {title}", "",
         f"Writer: {model}", "",
-        "## System prompt", "", system_prompt.rstrip(), "",
-        "## What the writer was given", "", user_message.rstrip(), "",
-        "## What the writer wrote", "", response.rstrip(), "",
+        f"## {SYSTEM_PROMPT}", "", system_prompt.rstrip(), "",
+        f"## {WRITER_INPUT}", "", user_message.rstrip(), "",
+        f"## {WRITER_OUTPUT}", "", response.rstrip(), "",
         *tail,
     ])
+
+
+def read_bundle(text: str) -> dict[str, str]:
+    """The sections of a bundle `writer_bundle` rendered, by heading name.
+
+    A section the bundle lacks (no fidelity notes) is absent from the result.
+    """
+    marks = [m for m in re.finditer(r"^## (.+)$", text, re.M) if m.group(1) in SECTIONS]
+    ends = [m.start() for m in marks[1:]] + [len(text)]
+    return {m.group(1): text[m.end():end].removeprefix("\n\n").rstrip()
+            for m, end in zip(marks, ends)}
 
 
 def write_bundle(sources_dir: Path, episode_id: str, text: str) -> Path:

@@ -8,7 +8,8 @@ import subprocess
 from datetime import datetime, timedelta
 from pathlib import Path
 
-from src.bundle import write_bundle, writer_bundle
+from src.bundle import (FIDELITY_CHECK, SYSTEM_PROMPT, WRITER_INPUT, WRITER_OUTPUT,
+                        read_bundle, write_bundle, writer_bundle)
 from src.monitor import FeedEntry, FeedMonitor, episode_id
 
 REPO = Path(__file__).resolve().parent.parent
@@ -29,6 +30,31 @@ def test_bundle_keeps_prompt_input_and_output_verbatim():
     assert "## System prompt\n\nSummarise for audio." in text
     assert "## What the writer was given\n\nTitle: On Writing #3\n\nContent:\nZvi says 45% of…" in text
     assert text.rstrip().endswith("## What the writer wrote\n\nZvi argues that forty-five percent…")
+
+
+# A briefing's input has ## headings of its own; only the bundle's split it.
+BRIEFING_INPUT = ("Today is Friday, 30 October 2026.\n\n## Today's articles:\n"
+                  "## Selected stories (full text where available)\n\n## AI\n"
+                  "- [Lab blog] A model ships\n  URL: https://example.com/a\n  It shipped.")
+
+
+def test_read_bundle_returns_each_section_as_written():
+    sections = {SYSTEM_PROMPT: "Write a briefing.\n\n## Style\nPlain.",
+                WRITER_INPUT: BRIEFING_INPUT,
+                WRITER_OUTPUT: "  Good morning. A model shipped.",
+                FIDELITY_CHECK: '- [unsupported, low] "shipped"'}
+    text = writer_bundle(title="Daily briefing", model="claude-opus-5-5",
+                         system_prompt=sections[SYSTEM_PROMPT], user_message=BRIEFING_INPUT,
+                         response=sections[WRITER_OUTPUT] + "\n\n",
+                         notes=sections[FIDELITY_CHECK])
+    assert read_bundle(text) == sections
+
+
+def test_read_bundle_leaves_out_a_section_the_bundle_lacks():
+    text = writer_bundle(title="t", model="m", system_prompt="s", user_message="u",
+                         response="", notes="  ")
+    assert read_bundle(text) == {SYSTEM_PROMPT: "s", WRITER_INPUT: "u", WRITER_OUTPUT: ""}
+    assert read_bundle("# Not a bundle\n\n## Something else\nx") == {}
 
 
 def test_bundle_file_is_named_by_episode_id(tmp_path):
