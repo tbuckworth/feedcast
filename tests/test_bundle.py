@@ -10,6 +10,8 @@ from src.bundle import write_bundle, writer_bundle
 from src.monitor import FeedEntry, FeedMonitor, episode_id
 
 REPO = Path(__file__).resolve().parent.parent
+STATE_SH = REPO / "scripts" / "state.sh"
+PUBLISH_AUDIO_SH = REPO / "scripts" / "publish-audio.sh"
 
 
 def test_bundle_keeps_prompt_input_and_output_verbatim():
@@ -58,19 +60,25 @@ def _git(*args, cwd, **kw):
                           capture_output=True, **kw).stdout
 
 
-def test_state_branch_round_trips_db_and_audio_without_history(tmp_path):
-    """push replaces the branch with one parentless commit; pull restores the files."""
+def _clone_without_state(tmp_path):
     remote = tmp_path / "remote.git"
     _git("init", "--bare", "-q", str(remote), cwd=tmp_path)
     work = tmp_path / "work"
     _git("clone", "-q", str(remote), str(work), cwd=tmp_path)
+    return work
+
+
+def test_state_branch_round_trips_db_and_audio_without_history(tmp_path):
+    """push replaces the branch with one parentless commit; pull restores the files."""
+    work = _clone_without_state(tmp_path)
+    remote = tmp_path / "remote.git"
     env = {**os.environ, "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@x",
            "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@x"}
     (work / "README").write_text("main\n")
     (work / ".gitignore").write_text("data/posts.db\ndata/audio/\n")
     _git("add", ".", cwd=work); _git("commit", "-qm", "init", cwd=work, env=env)
     _git("push", "-q", "origin", "HEAD:main", cwd=work)
-    script = REPO / "scripts" / "state.sh"
+    script = STATE_SH
 
     (work / "data" / "audio").mkdir(parents=True)
     (work / "data" / "posts.db").write_bytes(b"db-v1")
@@ -94,3 +102,51 @@ def test_state_branch_round_trips_db_and_audio_without_history(tmp_path):
     assert (fresh / "data" / "posts.db").read_bytes() == b"db-v2"
     assert (fresh / "data" / "audio" / "a.mp3").read_bytes() == b"mp3"
     assert not (fresh / "data" / "audio" / "debug.wav").exists()
+
+
+def test_state_pull_starts_empty_only_when_the_branch_is_absent(tmp_path):
+    work = _clone_without_state(tmp_path)
+    out = subprocess.run([str(STATE_SH), "pull"], cwd=work,
+                         check=True, capture_output=True, text=True).stdout
+    assert "no 'state' branch" in out
+    assert not (work / "data" / "posts.db").exists()
+
+
+def test_state_pull_fails_when_the_remote_cannot_be_read(tmp_path):
+    """An unreachable remote is not a missing branch: carrying on with an empty
+    data/ would let the next push replace 30 days of episodes."""
+    work = _clone_without_state(tmp_path)
+    env = {**os.environ, "STATE_REMOTE": str(tmp_path / "no-such-remote.git")}
+    run = subprocess.run([str(STATE_SH), "pull"], cwd=work,
+                         env=env, capture_output=True, text=True)
+    assert run.returncode != 0
+    assert "starting with empty data/" not in run.stdout
+    assert "::error::" in run.stdout + run.stderr
+
+
+def _site(tmp_path, listed, restored):
+    """A checkout after `state.sh pull`: feed.xml lists `listed`, data/audio holds `restored`."""
+    items = "".join(
+        f'<item><enclosure url="https://example.org/feedcast/audio/{name}" '
+        f'type="audio/mpeg" length="3"/></item>' for name in listed)
+    (tmp_path / "output").mkdir()
+    (tmp_path / "output" / "feed.xml").write_text(
+        f'<?xml version="1.0"?><rss version="2.0"><channel>{items}</channel></rss>')
+    (tmp_path / "data" / "audio").mkdir(parents=True)
+    for name in restored:
+        (tmp_path / "data" / "audio" / name).write_bytes(b"mp3")
+    return subprocess.run([str(PUBLISH_AUDIO_SH)], cwd=tmp_path,
+                          capture_output=True, text=True)
+
+
+def test_publish_audio_copies_every_listed_mp3_into_the_site(tmp_path):
+    run = _site(tmp_path, ["a.mp3", "b.mp3"], ["a.mp3", "b.mp3"])
+    assert run.returncode == 0, run.stdout + run.stderr
+    assert "Copied 2 MP3s" in run.stdout
+    assert sorted(p.name for p in (tmp_path / "output" / "audio").iterdir()) == ["a.mp3", "b.mp3"]
+
+
+def test_publish_audio_fails_when_the_feed_lists_audio_the_state_lacks(tmp_path):
+    run = _site(tmp_path, ["a.mp3", "b.mp3"], ["a.mp3"])
+    assert run.returncode == 1
+    assert "::error::feed.xml lists audio/b.mp3" in run.stdout

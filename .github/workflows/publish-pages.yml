@@ -39,8 +39,7 @@ jobs:
       - name: Copy audio from the state branch to output
         run: |
           scripts/state.sh pull
-          mkdir -p output/audio
-          cp data/audio/*.mp3 output/audio/ 2>/dev/null || true
+          scripts/publish-audio.sh
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

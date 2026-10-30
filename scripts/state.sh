@@ -23,12 +23,25 @@ cd "$(git rev-parse --show-toplevel)"
 
 case "${1:-}" in
   pull)
-    if git fetch --quiet "$REMOTE" "$BRANCH" 2>/dev/null; then
-      git archive FETCH_HEAD | tar -x
-      echo "state: restored data/ from $REMOTE/$BRANCH ($(git rev-parse --short FETCH_HEAD))"
-    else
-      echo "state: no '$BRANCH' branch on $REMOTE yet — starting with empty data/"
-    fi
+    # Only a branch the remote reports as absent (exit 2) means a first run.
+    # Any other failure must stop the run: starting with an empty data/ would
+    # let the next `push` replace the stored episodes with that day's alone.
+    status=0
+    git ls-remote --exit-code --heads "$REMOTE" "$BRANCH" >/dev/null || status=$?
+    case "$status" in
+      0)
+        git fetch --quiet "$REMOTE" "$BRANCH"
+        git archive FETCH_HEAD | tar -x
+        echo "state: restored data/ from $REMOTE/$BRANCH ($(git rev-parse --short FETCH_HEAD))"
+        ;;
+      2)
+        echo "state: no '$BRANCH' branch on $REMOTE yet, starting with empty data/"
+        ;;
+      *)
+        echo "::error::state: could not read $REMOTE (git ls-remote exit $status); refusing to start with empty data/" >&2
+        exit 1
+        ;;
+    esac
     ;;
   push)
     if [[ ! -f data/posts.db ]]; then
