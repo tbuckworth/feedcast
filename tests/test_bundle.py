@@ -94,3 +94,31 @@ def test_state_branch_round_trips_db_and_audio_without_history(tmp_path):
     assert (fresh / "data" / "posts.db").read_bytes() == b"db-v2"
     assert (fresh / "data" / "audio" / "a.mp3").read_bytes() == b"mp3"
     assert not (fresh / "data" / "audio" / "debug.wav").exists()
+
+
+def _clone_without_state(tmp_path):
+    remote = tmp_path / "remote.git"
+    _git("init", "--bare", "-q", str(remote), cwd=tmp_path)
+    work = tmp_path / "work"
+    _git("clone", "-q", str(remote), str(work), cwd=tmp_path)
+    return work
+
+
+def test_state_pull_starts_empty_only_when_the_branch_is_absent(tmp_path):
+    work = _clone_without_state(tmp_path)
+    out = subprocess.run([str(REPO / "scripts" / "state.sh"), "pull"], cwd=work,
+                         check=True, capture_output=True, text=True).stdout
+    assert "no 'state' branch" in out
+    assert not (work / "data" / "posts.db").exists()
+
+
+def test_state_pull_fails_when_the_remote_cannot_be_read(tmp_path):
+    """An unreachable remote is not a missing branch: carrying on with an empty
+    data/ would let the next push replace 30 days of episodes."""
+    work = _clone_without_state(tmp_path)
+    env = {**os.environ, "STATE_REMOTE": str(tmp_path / "no-such-remote.git")}
+    run = subprocess.run([str(REPO / "scripts" / "state.sh"), "pull"], cwd=work,
+                         env=env, capture_output=True, text=True)
+    assert run.returncode != 0
+    assert "starting with empty data/" not in run.stdout
+    assert "::error::" in run.stdout + run.stderr
