@@ -2,9 +2,11 @@
 
 import asyncio
 
+import anthropic
 import pytest
 import httpx
-from openai import BadRequestError, PermissionDeniedError
+from openai import (APIConnectionError, APITimeoutError, BadRequestError, InternalServerError,
+                    NotFoundError, PermissionDeniedError, RateLimitError, UnprocessableEntityError)
 
 from src import llm, notices
 from src.llm import ROLES, ROUTES, Target, complete
@@ -44,7 +46,7 @@ def test_openrouter_route_translates_reasoning_into_extra_body(routes):
 def test_anthropic_route_sends_no_temperature(routes):
     # Sonnet 5 400s on any temperature; the checker passes 0. With OpenRouter
     # down this sent every check to Gemini Flash (2026-09-22 to -27).
-    routes["openrouter"] = FakeApi([RuntimeError("403")])
+    routes["openrouter"] = FakeApi([_down("403")])
     routes["anthropic"] = FakeApi(["ok"])
     done = asyncio.run(complete("checker", MSGS, max_tokens=50, temperature=0))
     assert done.target.route == "anthropic"
@@ -52,7 +54,7 @@ def test_anthropic_route_sends_no_temperature(routes):
 
 
 def test_failure_falls_through_to_the_next_target_and_is_logged(routes):
-    routes["openai"] = FakeApi([RuntimeError("openai down")])
+    routes["openai"] = FakeApi([_down("openai down")])
     routes["openrouter"] = FakeApi(["from openrouter"])
     done = asyncio.run(complete("bullets", MSGS, max_tokens=50, label="digest"))
     assert done.text == "from openrouter"
@@ -60,7 +62,7 @@ def test_failure_falls_through_to_the_next_target_and_is_logged(routes):
                                  min_effort="low")
     assert len(notices.report()) == 1
     assert "digest: served by openai/gpt-6.1-sol via openrouter" in notices.report()[0]
-    assert "RuntimeError: openai down" in notices.report()[0]
+    assert "InternalServerError: openai down" in notices.report()[0]
 
 
 def test_empty_reply_counts_as_a_failure(routes):
@@ -73,7 +75,7 @@ def test_empty_reply_counts_as_a_failure(routes):
 def test_routes_without_a_key_are_skipped_and_the_skip_is_logged(routes):
     # Only OpenRouter is keyed: the Anthropic backup is skipped, not tried,
     # and the note says so alongside the primary's failure.
-    routes["openrouter"] = FakeApi([RuntimeError("primary down"), "sibling model"])
+    routes["openrouter"] = FakeApi([_down("primary down"), "sibling model"])
     done = asyncio.run(complete("writer", MSGS, max_tokens=50))
     assert done.text == "sibling model"
     assert done.target.model == "openai/gpt-6.1-sol"
@@ -94,10 +96,10 @@ def test_a_missing_primary_key_is_reported_not_swallowed(routes):
 
 
 def test_every_target_failing_raises_the_last_error(routes):
-    routes["openai"] = FakeApi([RuntimeError("a")])
-    routes["openrouter"] = FakeApi([RuntimeError("b")])
-    routes["anthropic"] = FakeApi([RuntimeError("c")])
-    with pytest.raises(RuntimeError, match="c"):
+    routes["openai"] = FakeApi([_down("a")])
+    routes["openrouter"] = FakeApi([_down("b")])
+    routes["anthropic"] = FakeApi([_down("c")])
+    with pytest.raises(InternalServerError, match="c"):
         asyncio.run(complete("bullets", MSGS, max_tokens=50))
 
 
@@ -141,7 +143,7 @@ def test_a_pinned_client_gets_the_openrouter_spelling_of_the_model(routes):
 def test_a_switch_before_a_non_fallback_empty_reply_is_still_logged(routes):
     # Primary down, backup empty, fallback_on_empty off: the caller retries,
     # but the primary's failure must not vanish from the report.
-    routes["openai"] = FakeApi([RuntimeError("openai down")])
+    routes["openai"] = FakeApi([_down("openai down")])
     routes["openrouter"] = FakeApi(["<empty>"])
     with pytest.raises(llm.EmptyCompletion):
         asyncio.run(complete("bullets", MSGS, max_tokens=50, label="digest", fallback_on_empty=False))
@@ -161,6 +163,11 @@ def test_a_provider_failure_falls_back_even_when_empty_replies_are_held(routes):
 def _provider_error(error_class, status, message):
     response = httpx.Response(status, request=httpx.Request("POST", "https://example.com"))
     return error_class(message, response=response, body={"error": {"message": message}})
+
+
+def _down(message):
+    """A provider outage: what the SDK raises for a 500."""
+    return _provider_error(InternalServerError, 500, message)
 
 
 @pytest.mark.parametrize("direct_openai", [True, False])
@@ -209,17 +216,17 @@ def test_checker_recovers_on_a_different_model_family_from_the_backup_writer(rou
 
 
 def test_writer_raises_when_the_non_claude_backups_also_fail(routes):
-    routes["openrouter"] = FakeApi([RuntimeError("Claude blocked"), RuntimeError("GPT unavailable")])
-    routes["anthropic"] = FakeApi([RuntimeError("no credit"), RuntimeError("no credit")])
-    routes["openai"] = FakeApi([RuntimeError("OpenAI unavailable")])
-    with pytest.raises(RuntimeError, match="GPT unavailable"):
+    routes["openrouter"] = FakeApi([_down("Claude blocked"), _down("GPT unavailable")])
+    routes["anthropic"] = FakeApi([_down("Opus overloaded"), _down("Opus overloaded")])
+    routes["openai"] = FakeApi([_down("OpenAI unavailable")])
+    with pytest.raises(InternalServerError, match="GPT unavailable"):
         asyncio.run(complete("writer", MSGS, max_tokens=2000))
 
 
 def test_anthropic_effort_goes_to_the_native_api(routes):
     # The compat endpoint ignores reasoning_effort, so an effort-carrying
     # anthropic call goes native (the fixture's fake records `effort`).
-    routes["openrouter"] = FakeApi([RuntimeError("403")])
+    routes["openrouter"] = FakeApi([_down("403")])
     routes["anthropic"] = FakeApi(["native"])
     done = asyncio.run(complete("writer", [{"role": "system", "content": "s"}] + MSGS, max_tokens=50))
     assert done.text == "native" and done.target.model == "claude-opus-5-5"
@@ -228,7 +235,7 @@ def test_anthropic_effort_goes_to_the_native_api(routes):
 
 
 def test_anthropic_without_effort_stays_on_the_compat_endpoint(routes):
-    routes["openrouter"] = FakeApi([RuntimeError("403")])
+    routes["openrouter"] = FakeApi([_down("403")])
     routes["anthropic"] = FakeApi(["compat"])
     done = asyncio.run(complete("checker", MSGS, max_tokens=50, reasoning={"budget": 4000}))
     assert done.text == "compat" and len(routes["anthropic"].calls) == 1
@@ -242,3 +249,78 @@ def test_claude_roles_try_anthropic_direct_first(routes):
     asyncio.run(complete("checker", MSGS, max_tokens=50))
     assert [c["model"] for c in routes["anthropic"].calls] == ["claude-opus-5-5", "claude-sonnet-5-5"]
     assert notices.report() == []
+
+
+# --- what is the provider's failure, and what is our own bug --------------------
+
+def test_a_bug_in_our_own_code_raises_instead_of_reading_as_an_outage(routes):
+    # A TypeError in the native adapter, say: every target would hit it, and
+    # the email would blame each provider in turn.
+    routes["anthropic"] = FakeApi([TypeError("create() got an unexpected keyword argument")])
+    routes["openrouter"] = FakeApi(["would have served"])
+    with pytest.raises(TypeError, match="unexpected keyword"):
+        asyncio.run(complete("writer", MSGS, max_tokens=50))
+    assert routes["openrouter"].calls == [] and notices.report() == []
+
+
+def test_a_request_the_provider_rejects_as_malformed_raises(routes):
+    # Sonnet 5 400s on any temperature. Falling through on it sent every
+    # check to Gemini Flash from 2026-09-22 to -27, reported as a fallback.
+    bad = _provider_error(BadRequestError, 400, "`temperature` is deprecated for this model")
+    routes["anthropic"] = FakeApi([bad])
+    routes["openrouter"] = FakeApi(["would have served"])
+    with pytest.raises(BadRequestError, match="temperature"):
+        asyncio.run(complete("checker", MSGS, max_tokens=50))
+    assert routes["openrouter"].calls == [] and llm.dead_routes == {}
+
+
+def test_a_switch_before_a_malformed_request_still_reaches_the_report(routes):
+    routes["anthropic"] = FakeApi([_provider_error(InternalServerError, 500, "overloaded")])
+    routes["openrouter"] = FakeApi([_provider_error(UnprocessableEntityError, 422,
+                                                    "max_tokens: must be at most 64000")])
+    with pytest.raises(UnprocessableEntityError):
+        asyncio.run(complete("checker", MSGS, max_tokens=50, label="checker"))
+    (note,) = notices.report()
+    assert "checker: reached anthropic/claude-sonnet-5.5 via openrouter (rejected)" in note
+    assert "overloaded" in note
+
+
+_REQUEST = httpx.Request("POST", "https://example.com")
+
+
+@pytest.mark.parametrize("error", [
+    _provider_error(InternalServerError, 500, "upstream error"),
+    _provider_error(RateLimitError, 429, "Rate limit exceeded, retry in 2s"),
+    # OpenRouter refusing Claude only: a model-level refusal, not our request.
+    _provider_error(PermissionDeniedError, 403, "violation of provider Terms Of Service"),
+    _provider_error(NotFoundError, 404, "No endpoints found for anthropic/claude-sonnet-5.5"),
+    # The two 400s that are the provider's: the account, and the content.
+    _provider_error(BadRequestError, 400, "Your credit balance is too low"),
+    _provider_error(BadRequestError, 400, "Invalid prompt: your prompt was flagged as "
+                                          "potentially violating our usage policy"),
+    APIConnectionError(request=_REQUEST),
+    APITimeoutError(request=_REQUEST),
+    anthropic.APIConnectionError(request=_REQUEST),
+    httpx.ConnectError("connection refused"),
+], ids=lambda e: type(e).__name__)
+def test_provider_and_transport_failures_fall_through(routes, error):
+    routes["anthropic"] = FakeApi([error])
+    routes["openrouter"] = FakeApi(["served"])
+    done = asyncio.run(complete("checker", MSGS, max_tokens=50))
+    assert done.text == "served" and done.target.route == "openrouter"
+
+
+@pytest.mark.parametrize("error, ours", [
+    (_provider_error(BadRequestError, 400, "`temperature` is deprecated for this model"), True),
+    (_provider_error(BadRequestError, 400, "reasoning_effort: Supported values are: 'low', "
+                                           "'medium', 'high', and 'xhigh'"), True),
+    (_provider_error(UnprocessableEntityError, 422, "max_tokens: must be at most 64000"), True),
+    (_provider_error(BadRequestError, 400, "Your credit balance is too low"), False),
+    (_provider_error(BadRequestError, 400, "Invalid prompt: flagged as potentially violating "
+                                           "our usage policy"), False),
+    (_provider_error(PermissionDeniedError, 403, "violation of provider Terms Of Service"), False),
+    (_provider_error(InternalServerError, 500, "Bad request upstream"), False),
+    (APIConnectionError(request=_REQUEST), False),
+])
+def test_rejected_request_is_our_malformed_request_only(error, ours):
+    assert llm.rejected_request(error) is ours
