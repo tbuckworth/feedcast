@@ -24,6 +24,7 @@ import json
 import re
 from dataclasses import asdict, dataclass, field
 
+from .bundle import writer_bundle
 from .llm import EmptyCompletion, complete
 
 MATERIAL = ("high", "medium")
@@ -265,3 +266,38 @@ def fidelity_markdown(fid: Fidelity | None, draft: str | None = None) -> str:
         if draft:
             lines += ["### Draft before revision", "", draft.rstrip(), ""]
     return "\n".join(lines)
+
+
+@dataclass
+class Written:
+    """A writer's script after the fidelity check, and what its episode records about it."""
+
+    text: str                 # the script, revised once if the check asked for it
+    writer: dict              # who wrote it (`Completion.credit()`)
+    fidelity: dict | None     # the check (`Fidelity.to_dict()`); None when it is off
+    bundle: str               # what the writer saw and wrote (src/bundle.py)
+
+
+async def write_checked(system_prompt: str, user_message: str, *, title: str, label: str,
+                        check_label: str, verify: bool, client=None) -> Written:
+    """Write a script with the writer role, check it against `user_message`, and bundle both.
+
+    `title` heads the bundle; `label` names the writer call in the logs and the
+    fallback notices, `check_label` the fidelity check in the logs. With
+    `verify` off the draft is the script and no check runs.
+    """
+    done = await complete(
+        "writer", max_tokens=16000, client=client, label=label,
+        messages=[{"role": "system", "content": system_prompt},
+                  {"role": "user", "content": user_message}])
+    script, fidelity = done.text, None
+    if verify:
+        script, fidelity = await verify_script(
+            done.text, user_message, writer_system_prompt=system_prompt,
+            label=check_label, client=client)
+    bundle = writer_bundle(
+        title=title, model=done.target.label, system_prompt=system_prompt,
+        user_message=user_message, response=script,
+        notes=fidelity_markdown(fidelity, done.text if fidelity and fidelity.revised else None))
+    return Written(text=script, writer=done.credit(),
+                   fidelity=fidelity.to_dict() if fidelity else None, bundle=bundle)

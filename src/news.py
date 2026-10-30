@@ -7,12 +7,11 @@ from datetime import datetime, timedelta, timezone
 
 import feedparser
 
-from .bundle import writer_bundle
 from .extractor import extract_article
 from .llm import complete
 from .markets import MarketContext, MarketScout
 from .monitor import FeedEntry, report_skipped, warn_if_dead
-from .verify import fidelity_markdown, verify_script
+from .verify import write_checked
 
 # The previous briefings are there for dedup, but the writer also reads them
 # as a style guide. Sol, a fallback writer on 19-21 Sep, closed three to five
@@ -283,27 +282,13 @@ class NewsAggregator:
         user_message_parts.append(formatted_articles)
         user_message = "\n".join(user_message_parts)
 
-        done = await complete(
-            "writer", max_tokens=16000, client=self.client, label="news briefing",
-            messages=[
-                {"role": "system", "content": self.prompt},
-                {"role": "user", "content": user_message},
-            ],
-        )
-        briefing = done.text
-        self.last_writer = done.credit()
-        draft, fidelity = briefing, None
-        if self.verify:
-            briefing, fidelity = await verify_script(
-                briefing, user_message, writer_system_prompt=self.prompt,
-                label="news briefing", client=self.client)
-            self.last_fidelity = fidelity.to_dict()
-        self.last_bundle = writer_bundle(
-            title=f"Daily News Briefing - {datetime.now():%Y-%m-%d}",
-            model=done.target.label, system_prompt=self.prompt,
-            user_message=user_message, response=briefing,
-            notes=fidelity_markdown(fidelity, draft if fidelity and fidelity.revised else None))
-        return briefing
+        written = await write_checked(
+            self.prompt, user_message, title=f"Daily News Briefing - {datetime.now():%Y-%m-%d}",
+            label="news briefing", check_label="news briefing", verify=self.verify,
+            client=self.client)
+        self.last_writer, self.last_fidelity = written.writer, written.fidelity
+        self.last_bundle = written.bundle
+        return written.text
 
     async def generate_briefing(self) -> FeedEntry | None:
         """Orchestrate fetch → format → synthesize, return a FeedEntry or None."""
