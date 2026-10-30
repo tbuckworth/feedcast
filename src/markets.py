@@ -22,7 +22,10 @@ floor some market moved 15 points every single day.
 Public read APIs only, no keys: Polymarket (Gamma + CLOB), Kalshi (trade API
 v2) and Manifold (play money, so context only, never a "move"). Every network
 call is bounded and every failure degrades to "no market data", never to a
-failed briefing.
+failed briefing. Failed Kalshi series scans, searches and price histories, and
+checker replies that are not JSON, are counted in the run's notices for the
+email (`_report_failures`), and a move whose cause could not be looked up is
+left out.
 """
 
 import asyncio
@@ -226,6 +229,7 @@ async def kalshi_scan(client: httpx.AsyncClient, series: list[str]) -> list[Mark
         return [m for e in data.get("events") or [] for m in kalshi_markets(e)]
 
     found = await asyncio.gather(*[one(s) for s in series], return_exceptions=True)
+    _report_failures("Kalshi series scans", list(zip(series, found)))
     return [m for r in found if not isinstance(r, BaseException) for m in r]
 
 
@@ -236,76 +240,69 @@ async def manifold_search(client: httpx.AsyncClient, term: str) -> list[Market]:
 
 
 async def fetch_history(client: httpx.AsyncClient, market: Market, since: datetime) -> None:
-    """Fill market.history from `since` to now. Leaves it empty on any failure."""
-    try:
-        if market.platform == "Polymarket":
-            data = await _get(client, f"{POLY_CLOB}/prices-history", market=market.history_ref,
-                              startTs=int(since.timestamp()), fidelity=60)
-            points = [(datetime.fromtimestamp(h["t"], tz=timezone.utc), float(h["p"]))
-                      for h in data.get("history") or []]
-        elif market.platform == "Kalshi":
-            series, ticker = market.history_ref.split("|", 1)
-            data = await _get(client, f"{KALSHI}/series/{series}/markets/{ticker}/candlesticks",
-                              start_ts=int(since.timestamp()),
-                              end_ts=int(_utcnow().timestamp()), period_interval=60)
-            points = []
-            for c in data.get("candlesticks") or []:
-                price = c.get("price") or {}
-                p = _float(price.get("close_dollars")) or _float(price.get("previous_dollars"))
-                if p is not None:
-                    points.append((datetime.fromtimestamp(c["end_period_ts"], tz=timezone.utc), p))
-        else:
-            bets = await _get(client, f"{MANIFOLD}/bets", contractId=market.history_ref, limit=1000)
-            points = sorted((_when(b["createdTime"]), float(b["probAfter"]))
-                            for b in bets or [] if b.get("probAfter") is not None)
-            # Keep the last bet before the window as its starting price.
-            early = [pt for pt in points if pt[0] < since]
-            points = early[-1:] + [pt for pt in points if pt[0] >= since]
-        market.history = sorted(points)
-    except Exception as e:  # noqa: BLE001 — a missing chart is not a failed run
-        print(f"    market history unavailable ({market.key}): {type(e).__name__}")
-        market.history = []
+    """Fill market.history from `since` to now. Raises on failure, leaving it empty."""
+    if market.platform == "Polymarket":
+        data = await _get(client, f"{POLY_CLOB}/prices-history", market=market.history_ref,
+                          startTs=int(since.timestamp()), fidelity=60)
+        points = [(datetime.fromtimestamp(h["t"], tz=timezone.utc), float(h["p"]))
+                  for h in data.get("history") or []]
+    elif market.platform == "Kalshi":
+        series, ticker = market.history_ref.split("|", 1)
+        data = await _get(client, f"{KALSHI}/series/{series}/markets/{ticker}/candlesticks",
+                          start_ts=int(since.timestamp()),
+                          end_ts=int(_utcnow().timestamp()), period_interval=60)
+        points = []
+        for c in data.get("candlesticks") or []:
+            price = c.get("price") or {}
+            p = _float(price.get("close_dollars")) or _float(price.get("previous_dollars"))
+            if p is not None:
+                points.append((datetime.fromtimestamp(c["end_period_ts"], tz=timezone.utc), p))
+    else:
+        bets = await _get(client, f"{MANIFOLD}/bets", contractId=market.history_ref, limit=1000)
+        points = sorted((_when(b["createdTime"]), float(b["probAfter"]))
+                        for b in bets or [] if b.get("probAfter") is not None)
+        # Keep the last bet before the window as its starting price.
+        early = [pt for pt in points if pt[0] < since]
+        points = early[-1:] + [pt for pt in points if pt[0] >= since]
+    market.history = sorted(points)
 
 
 async def fetch_long_history(client: httpx.AsyncClient, market: Market,
                              max_days: int = 365) -> None:
     """Fill market.long_history: about two points a day since the market opened,
-    at most `max_days` back. Leaves it empty on any failure."""
+    at most `max_days` back. Raises on failure, leaving it empty; the chart then
+    falls back to the 30-day history."""
     since = _utcnow() - timedelta(days=max_days)
-    try:
-        if market.platform == "Polymarket":
-            data = await _get(client, f"{POLY_CLOB}/prices-history", market=market.history_ref,
-                              interval="max", fidelity=720)
-            points = [(datetime.fromtimestamp(h["t"], tz=timezone.utc), float(h["p"]))
-                      for h in data.get("history") or []]
-        elif market.platform == "Kalshi":
-            series, ticker = market.history_ref.split("|", 1)
-            data = await _get(client, f"{KALSHI}/series/{series}/markets/{ticker}/candlesticks",
-                              start_ts=int(since.timestamp()),
-                              end_ts=int(_utcnow().timestamp()), period_interval=1440)
-            points = []
-            for c in data.get("candlesticks") or []:
-                price = c.get("price") or {}
-                p = _float(price.get("close_dollars")) or _float(price.get("previous_dollars"))
-                if p is not None:
-                    points.append((datetime.fromtimestamp(c["end_period_ts"], tz=timezone.utc), p))
-        else:
-            # Newest first, 1,000 a page; three pages reach back far enough
-            # for all but the busiest markets.
-            bets, before = [], None
-            for _ in range(3):
-                page = await _get(client, f"{MANIFOLD}/bets", contractId=market.history_ref,
-                                  limit=1000, **({"before": before} if before else {}))
-                bets += page or []
-                if len(page or []) < 1000:
-                    break
-                before = page[-1]["id"]
-            points = sorted((_when(b["createdTime"]), float(b["probAfter"]))
-                            for b in bets if b.get("probAfter") is not None)
-        market.long_history = _thin([pt for pt in sorted(points) if pt[0] >= since], 800)
-    except Exception as e:  # noqa: BLE001 — the chart falls back to the 30-day history
-        print(f"    long market history unavailable ({market.key}): {type(e).__name__}")
-        market.long_history = []
+    if market.platform == "Polymarket":
+        data = await _get(client, f"{POLY_CLOB}/prices-history", market=market.history_ref,
+                          interval="max", fidelity=720)
+        points = [(datetime.fromtimestamp(h["t"], tz=timezone.utc), float(h["p"]))
+                  for h in data.get("history") or []]
+    elif market.platform == "Kalshi":
+        series, ticker = market.history_ref.split("|", 1)
+        data = await _get(client, f"{KALSHI}/series/{series}/markets/{ticker}/candlesticks",
+                          start_ts=int(since.timestamp()),
+                          end_ts=int(_utcnow().timestamp()), period_interval=1440)
+        points = []
+        for c in data.get("candlesticks") or []:
+            price = c.get("price") or {}
+            p = _float(price.get("close_dollars")) or _float(price.get("previous_dollars"))
+            if p is not None:
+                points.append((datetime.fromtimestamp(c["end_period_ts"], tz=timezone.utc), p))
+    else:
+        # Newest first, 1,000 a page; three pages reach back far enough
+        # for all but the busiest markets.
+        bets, before = [], None
+        for _ in range(3):
+            page = await _get(client, f"{MANIFOLD}/bets", contractId=market.history_ref,
+                              limit=1000, **({"before": before} if before else {}))
+            bets += page or []
+            if len(page or []) < 1000:
+                break
+            before = page[-1]["id"]
+        points = sorted((_when(b["createdTime"]), float(b["probAfter"]))
+                        for b in bets if b.get("probAfter") is not None)
+    market.long_history = _thin([pt for pt in sorted(points) if pt[0] >= since], 800)
 
 
 def _thin(points: list, limit: int) -> list:
@@ -448,13 +445,41 @@ MATCH_PROMPT = """Below are news stories, each followed by candidate prediction 
 Return ONLY JSON: {"<story number>": ["<market key>", ...], ...} listing only stories with a match."""
 
 
-def _json_object(text: str) -> dict:
+def _json_object(text: str) -> dict | None:
+    """The JSON object in a model's reply, or None when it holds none."""
     m = re.search(r"\{.*\}", text or "", re.S)
+    if not m:
+        return None
     try:
-        data = json.loads(m.group(0)) if m else {}
+        data = json.loads(m.group(0))
     except ValueError:
-        return {}
-    return data if isinstance(data, dict) else {}
+        return None
+    return data if isinstance(data, dict) else None
+
+
+def _report_failures(what: str, outcomes: list[tuple[str, object]]) -> None:
+    """Print each failed call of one kind and add one notice counting them.
+
+    `outcomes` pairs what was asked for with its result or exception, as
+    gather(return_exceptions=True) hands it back. A failure costs the briefing
+    a series' markets, a story's odds or a chart, so it is worth a line in the
+    email; one line per kind keeps that quiet on a bad day.
+    """
+    failed = [(label, r) for label, r in outcomes if isinstance(r, BaseException)]
+    for label, e in failed:
+        print(f"    {what}: {label} failed: {type(e).__name__}: {str(e)[:160]}")
+    if failed:
+        label, e = failed[0]
+        notices.add(f"prediction markets: {len(failed)} of {len(outcomes)} {what} failed "
+                    f"(first: {label}: {type(e).__name__}: {str(e)[:160]})")
+
+
+def _unreadable(label: str, text: str) -> None:
+    """Say that a checker reply held no JSON, so no story got market odds."""
+    note = (f"prediction markets: the {label} reply was not JSON, so no story got its odds "
+            f"({(text or '')[:80]!r})")
+    print(f"    {note}")
+    notices.add(note)
 
 
 async def link_stories(client: httpx.AsyncClient, stories: list[dict], rules: MarketRules,
@@ -467,16 +492,22 @@ async def link_stories(client: httpx.AsyncClient, stories: list[dict], rules: Ma
                         for i, s in enumerate(stories))
     done = await complete("checker", max_tokens=2000, label="market queries", messages=[
         {"role": "system", "content": QUERY_PROMPT}, {"role": "user", "content": listing}])
+    asked = _json_object(done.text)
+    if asked is None:
+        _unreadable("market queries", done.text)
+        return {}
     queries = {int(k): [q for q in v if isinstance(q, str)][:2]
-               for k, v in _json_object(done.text).items()
+               for k, v in asked.items()
                if str(k).isdigit() and int(k) < len(stories) and isinstance(v, list)}
 
     sem = asyncio.Semaphore(6)
+    searches: list[tuple[str, object]] = []   # (what was searched, its result or error)
 
     async def search(q: str) -> list[Market]:
         async with sem:
             found = await asyncio.gather(polymarket_search(client, q), manifold_search(client, q),
                                          return_exceptions=True)
+        searches.extend(zip((f"Polymarket {q!r}", f"Manifold {q!r}"), found))
         return [m for r in found if not isinstance(r, BaseException) for m in r]
 
     candidates: dict[int, dict[str, Market]] = {}
@@ -499,6 +530,7 @@ async def link_stories(client: httpx.AsyncClient, stories: list[dict], rules: Ma
         if per_event:
             candidates[i] = {m.key: m for m in
                              sorted(per_event.values(), key=lambda m: m.volume, reverse=True)[:8]}
+    _report_failures("market searches", searches)
     if not candidates:
         return {}
 
@@ -511,8 +543,12 @@ async def link_stories(client: httpx.AsyncClient, stories: list[dict], rules: Ma
     done = await complete("checker", max_tokens=2000, label="market matching", messages=[
         {"role": "system", "content": MATCH_PROMPT},
         {"role": "user", "content": "\n\n".join(blocks)}])
+    matched = _json_object(done.text)
+    if matched is None:
+        _unreadable("market matching", done.text)
+        return {}
     linked: dict[int, list[Market]] = {}
-    for k, keys in _json_object(done.text).items():
+    for k, keys in matched.items():
         if not str(k).isdigit() or int(k) not in candidates or not isinstance(keys, list):
             continue
         pool = candidates[int(k)]
@@ -536,9 +572,23 @@ Set found to false if nothing you find clearly explains the move. Do not guess."
 
 
 async def find_cause(m: Market, now: datetime) -> dict | None:
-    """Ask a web-searching model why `m` moved. None when the lookup itself fails."""
-    if not os.environ.get(ROUTES["anthropic"].key_env):
-        return None
+    """Ask a web-searching model why `m` moved.
+
+    {"found": False} when the search found nothing that explains the move.
+    None when the lookup itself failed: no key, an error, or a reply that is
+    not the JSON asked for. That is printed and added to the run's notices,
+    and the caller leaves the move out: the writer would otherwise read a
+    failed lookup out as "no clear cause was found".
+    """
+    def failed(reason: str) -> None:
+        note = (f"market cause lookup for {m.title!r} failed ({reason}); "
+                f"the move was left out of the briefing")
+        print(f"    {note}")
+        notices.add(note)
+
+    key_env = ROUTES["anthropic"].key_env
+    if not os.environ.get(key_env):
+        return failed(f"{key_env} not set")
     prompt = CAUSE_PROMPT.format(platform=m.platform, title=m.title, before=m.prob_24h,
                                  after=m.prob, start=f"{now - timedelta(days=1):%d %b %H:%M}",
                                  end=f"{now:%d %b %H:%M}")
@@ -551,12 +601,11 @@ async def find_cause(m: Market, now: datetime) -> dict | None:
                 break
             messages = [*messages, {"role": "assistant", "content": msg.content}]
         text = "".join(b.text for b in msg.content if b.type == "text")
-    except Exception as e:  # noqa: BLE001 — no cause is a sentence, not a failure
-        note = f"market cause lookup: {type(e).__name__}: {str(e)[:160]}"
-        print(f"    {note}")
-        notices.add(note)
-        return None
+    except Exception as e:  # noqa: BLE001 — a failed lookup drops the move, not the briefing
+        return failed(f"{type(e).__name__}: {str(e)[:160]}")
     found = _json_object(text)
+    if found is None:
+        return failed(f"the reply was not JSON: {text[:80]!r}")
     if not found.get("found") or not found.get("summary"):
         return {"found": False}
     return {"found": True, "summary": str(found["summary"])[:500],
@@ -573,7 +622,7 @@ class MarketContext:
     stories: dict[str, list[Market]] = field(default_factory=dict)   # article url -> markets
     story_times: dict[str, datetime] = field(default_factory=dict)  # article url -> published
     moves: list[Market] = field(default_factory=list)
-    causes: dict[str, dict | None] = field(default_factory=dict)     # market key -> cause
+    causes: dict[str, dict] = field(default_factory=dict)            # market key -> cause
 
     def __bool__(self) -> bool:
         return bool(self.stories or self.moves)
@@ -603,14 +652,14 @@ class MarketContext:
         for m in self.moves:
             line = (f'- {m.platform}, "{m.title}": {m.prob_24h:.0%} to {m.prob:.0%} in the last '
                     f"24 hours ({m.traded()}). {m.url}")
-            cause = self.causes.get(m.key)
-            if cause and cause.get("found"):
+            # Every move here had its cause looked up: _build leaves out one
+            # whose lookup failed.
+            cause = self.causes[m.key]
+            if cause["found"]:
                 line += (f"\n  Cause found by a news search: {cause['summary']}"
                          f" Source: {cause.get('source') or 'unnamed'} {cause.get('url') or ''}".rstrip())
-            elif cause is not None:
-                line += "\n  A news search found no clear cause."
             else:
-                line += "\n  The cause was not looked up."
+                line += "\n  A news search found no clear cause."
             lines.append(line)
         return "\n".join(lines)
 
@@ -699,10 +748,17 @@ class MarketScout:
 
             since = now - timedelta(days=30)
             everything = [*ctx.moves, *(m for ms in ctx.stories.values() for m in ms)]
-            await asyncio.gather(*[fetch_history(client, m, since) for m in everything],
-                                 *[fetch_long_history(client, m) for m in everything])
+            fetched = await asyncio.gather(*[fetch_history(client, m, since) for m in everything],
+                                           *[fetch_long_history(client, m) for m in everything],
+                                           return_exceptions=True)
+            keys = [m.key for m in everything]
+            _report_failures("30-day price histories",
+                             list(zip(keys, fetched[:len(everything)])))
+            _report_failures("long price histories", list(zip(keys, fetched[len(everything):])))
         causes = await asyncio.gather(*[find_cause(m, now) for m in ctx.moves])
-        ctx.causes = {m.key: c for m, c in zip(ctx.moves, causes)}
+        looked_up = [(m, c) for m, c in zip(ctx.moves, causes) if c is not None]
+        ctx.moves = [m for m, _c in looked_up]
+        ctx.causes = {m.key: c for m, c in looked_up}
         print(f"  Prediction markets: {sum(len(v) for v in ctx.stories.values())} linked to "
               f"{len(ctx.stories)} stories, {len(ctx.moves)} unexplained moves")
         return ctx

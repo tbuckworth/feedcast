@@ -18,6 +18,7 @@ matplotlib.use("Agg")  # no display on a CI runner
 import matplotlib.dates as mdates  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
 
+from . import notices  # noqa: E402
 from .email_report import ChartNote, bullet_urls  # noqa: E402
 from .monitor import FeedEntry  # noqa: E402
 
@@ -135,7 +136,7 @@ def charts_for_report(briefing: FeedEntry) -> tuple[list[ChartNote], dict[str, b
     the market's whole life; one whose history goes back more than three
     months also gets a 7-day zoom (wants_zoom). Nothing on days the
     briefing used no market. Never raises: a missing chart must not cost the
-    day's email.
+    day's email. A failure is printed and added to the run's notices.
     """
     charts: list[ChartNote] = []
     images: dict[str, bytes] = {}
@@ -189,6 +190,8 @@ def charts_for_report(briefing: FeedEntry) -> tuple[list[ChartNote], dict[str, b
                 add(m, m["url"], story_time,
                     f"Now {m['prob']:.0%} · {m['traded']} · dashed line: the story")
     except Exception as e:  # noqa: BLE001 — the email goes out without charts
-        print(f"  Prediction-market charts failed: {type(e).__name__}: {e}")
+        note = f"prediction-market charts left out of this email: {type(e).__name__}: {e}"
+        print(f"  {note}")
+        notices.add(note)
         return [], {}
     return charts, images

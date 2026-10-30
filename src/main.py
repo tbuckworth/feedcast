@@ -1,7 +1,6 @@
 """Main entry point for feedcast pipeline."""
 
 import asyncio
-import json
 import os
 import socket
 import traceback
@@ -25,7 +24,7 @@ from . import notices
 from .market_charts import charts_for_report
 from .markets import MarketRules, MarketScout
 from .mathiness import MathsVerdict, assess
-from .monitor import FeedEntry, FeedMonitor, episode_id
+from .monitor import FeedEntry, FeedMonitor, episode_id, stored_json
 from .news import NewsAggregator
 from .normalizer import TextNormalizer
 from .processor import ContentProcessor
@@ -198,8 +197,11 @@ async def _prepare_deferred(
     return await asyncio.gather(*[one(e, m, p) for e, m, p in items], return_exceptions=True)
 
 
-async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> None:
+async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> list[tuple[str, str]]:
     """Digest rows that predate the bullets column, in parallel.
+
+    Returns (title, why) for each row whose digest could not be made, for the
+    email's failures.
 
     Digests the post's own text rather than the spoken script, because scripts
     are not kept for anything but the briefing. For a summarised post that
@@ -212,7 +214,7 @@ async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> None:
     # renders them as a link and a score, with nowhere to put bullets.
     todo = [r for r in rows if r["audio_file"] and not (r.get("bullets") or "")]
     if not todo:
-        return
+        return []
     print(f"  Backfilling digests for {len(todo)} entries...")
 
     async def one(row: dict) -> None:
@@ -236,13 +238,17 @@ async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> None:
         print(f"    {len(bullets)} bullets: {row['title'][:56]}")
 
     results = await asyncio.gather(*[one(r) for r in todo], return_exceptions=True)
+    failures = []
     for row, result in zip(todo, results):
         # safe_bullets catches its own API failures; anything arriving here is
-        # something else — a malformed published date, say — and would
-        # otherwise ship a bulletless episode on a run reporting success.
+        # something else — a malformed published date, or LessWrong down for
+        # the full-text recovery — and would otherwise ship a bulletless
+        # episode on a run reporting success.
         if isinstance(result, BaseException):
-            print(f"    Backfill failed for {row['title'][:56]}: "
-                  f"{type(result).__name__}: {result}")
+            why = f"digest backfill: {type(result).__name__}: {result}"
+            print(f"    Backfill failed for {row['title'][:56]}: {why}")
+            failures.append((row["title"], why))
+    return failures
 
 
 def _stored_verdict(row: dict) -> MathsVerdict:
@@ -251,12 +257,10 @@ def _stored_verdict(row: dict) -> MathsVerdict:
     Rows written before the column existed have nothing stored. Those report a
     zero score, which the email renders as "linked, not narrated" with no
     number — honest about not knowing, rather than inventing a figure.
+    Corrupt JSON raises, naming the row (monitor.stored_json).
     """
-    try:
-        data = json.loads(row.get("maths") or "null")
-    except (ValueError, TypeError):
-        data = None
-    if not isinstance(data, dict):
+    data = stored_json(row, "maths", dict)
+    if data is None:
         return MathsVerdict(is_heavy=True, score=0.0, hits=0, source="unrecorded")
     return MathsVerdict(is_heavy=True, score=float(data.get("score") or 0.0),
                         hits=int(data.get("hits") or 0),
@@ -280,16 +284,13 @@ async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
     todays = [d for d in db_entries if d["processed_at"][:10] == latest]
     print(f"Re-sending the report for {latest} ({len(todays)} entries)")
 
-    await _backfill_bullets(monitor, todays)
+    failures = await _backfill_bullets(monitor, todays)
     db_entries = monitor.get_processed_entries()   # reread, now with bullets
 
     # A row with no audio is a post the maths filter linked instead of
     # narrating. Report the verdict that was recorded at the time, not a fresh
-    # one: re-deriving it can disagree with the decision it is explaining. If
-    # the GraphQL fetch fails during a resend, assess() silently falls back to
-    # scoring the RSS body, whose maths LessWrong strips — so the email would
-    # print a low score as the reason a post was dropped for being too
-    # mathematical.
+    # one: re-deriving it can disagree with the decision it is explaining, and
+    # would need the GraphQL fetch again, which can fail.
     linked: list[tuple[FeedEntry, MathsVerdict]] = []
     for row in todays:
         if row["audio_file"]:
@@ -305,7 +306,7 @@ async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
     transcript_dir = output_dir / "transcripts"
     episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir, transcript_dir)
     new_ids = {d["id"] for d in todays if d["audio_file"]}
-    report = _build_run_report(episodes, db_entries, new_ids, [],
+    report = _build_run_report(episodes, db_entries, new_ids, failures,
                                config.podcast.base_url, linked)
     _email(report)
 
@@ -376,6 +377,10 @@ async def async_main(config_path: Path | None = None) -> None:
     # Bound here, before Phase 1: the news-briefing block appends to it, and
     # assigning it later in this function would make it a local everywhere.
     dead_sources: list[str] = []
+    # (title, why) for the email; Phase 1, the maths check and the full-text
+    # recovery fail entries too, before Phase 2.
+    failures: list[tuple[str, str]] = []
+    feed_names = {fc.name for fc in config.feeds}
     # Entries picked up from an earlier run's failure resume part-way through.
     resumed: dict[str, Attempt] = {}
     briefing_entry = None
@@ -389,14 +394,14 @@ async def async_main(config_path: Path | None = None) -> None:
             print(f"  Extraction failed: {e}")
             ntfy_topic = os.environ.get("NTFY_TOPIC", "").strip()
             if ntfy_topic:
-                await _send_ntfy_error(ntfy_topic, inject_url, str(e))
+                await _send_ntfy(ntfy_topic, f"Failed to process: {inject_url}\n{e}", "x")
             raise
         print(f"  Extracted: {entry.title} ({len(entry.content)} chars)")
 
-        # Dedup: check both entry ID and link
-        if monitor.is_processed(entry.id) or monitor.is_processed_by_link(inject_url):
-            print(f"  URL already processed, deleting for re-injection...")
-            monitor.delete_entry(entry.id)
+        # Re-injecting replaces the earlier episode. One stored from a feed
+        # has the feed's id and this URL as its link, so delete by both.
+        for row_id, title in monitor.delete_entry(entry.id) + monitor.delete_entry(inject_url):
+            print(f"  Deleted {row_id} ({title}) for re-injection")
 
         entries_to_process = [(entry, inject_mode, config.default_prompt)]
     else:
@@ -423,7 +428,10 @@ async def async_main(config_path: Path | None = None) -> None:
         feed_results = []
         for fc, result in zip(config.feeds, raw_results):
             if isinstance(result, BaseException):
+                # It returned nothing as surely as an empty feed, which the
+                # email lists, so it is listed too, with the error.
                 print(f"  Warning: failed to fetch {fc.name}: {result!r}")
+                dead_sources.append(f"{fc.name} ({type(result).__name__}: {result})")
                 continue
             feed_results.append(result)
 
@@ -434,6 +442,9 @@ async def async_main(config_path: Path | None = None) -> None:
             if not entries:
                 continue
             entry = entries[-1]  # most recent only
+            if len(entries) > 1:
+                print(f"  {feed_config.name}: taking only the newest, {entry.title}; held back "
+                      f"for a later run: " + "; ".join(e.title for e in entries[:-1]))
             if entry.id in seen_ids or (entry.link and entry.link in seen_links):
                 print(f"  Skipping duplicate: {entry.title}")
                 continue
@@ -453,22 +464,25 @@ async def async_main(config_path: Path | None = None) -> None:
         # is why someone is asking for it again — so the normal fetch above never
         # sees it. Look for it once more with the cutoff off, and take only it.
         # On 2026-09-02 the window silently turned a reprocess into a deletion.
-        reprocess_missing = None
         if reprocess_entry:
             found = await _find_in_feeds(config, monitor, reprocess_entry)
-            if found and found[1].id not in seen_ids:
+            if isinstance(found, tuple):
                 fc, e = found
-                mode = "verbatim" if force_verbatim else fc.mode
-                entries_to_process.append((e, mode, fc.prompt or config.default_prompt))
-                seen_ids.add(e.id)
-                print(f"  Reprocessing: {e.title} ({fc.name}, mode {mode})")
-            elif not found:
-                reprocess_missing = reprocess_entry
+                if e.id not in seen_ids:
+                    mode = "verbatim" if force_verbatim else fc.mode
+                    entries_to_process.append((e, mode, fc.prompt or config.default_prompt))
+                    seen_ids.add(e.id)
+                    print(f"  Reprocessing: {e.title} ({fc.name}, mode {mode})")
+            else:
+                missing = (f"a feed could not be read ({found}), so the post was not looked "
+                           f"for there" if isinstance(found, FetchFailed)
+                           else "not found in any feed")
                 if reprocess_row:
                     monitor.restore_entry(reprocess_row)
-                    print("  Requested entry is in no feed any more; previous episode kept")
+                    print(f"  Requested entry {missing}; previous episode kept")
                 else:
-                    print("  Requested entry is in no feed")
+                    print(f"  Requested entry {missing}")
+                failures.append((reprocess_entry, f"{missing}; the existing episode was kept"))
 
         # Entries that failed on an earlier run. Their feed is fetched with the
         # age cutoff off: a post that failed yesterday is outside the window by
@@ -479,7 +493,12 @@ async def async_main(config_path: Path | None = None) -> None:
                 continue
             found = await _find_in_feeds(config, monitor, row["id"], row["link"],
                                          only_feed=row["feed_name"])
-            if not found:
+            if isinstance(found, FetchFailed):
+                # Not knowing is not "gone": it stays queued for the next run.
+                print(f"  Could not look for an earlier failure, keeping it queued: "
+                      f"{row['title']} ({found})")
+                continue
+            if found is None:
                 print(f"  Earlier failure is no longer in its feed, dropping: {row['title']}")
                 monitor.clear_failure(row["id"])
                 continue
@@ -542,7 +561,13 @@ async def async_main(config_path: Path | None = None) -> None:
         drop: set[int] = set()
         for (idx, entry), verdict in zip(candidates, verdicts):
             if isinstance(verdict, BaseException):
-                print(f"  Maths check failed for {entry.title}: {verdict!r} — keeping")
+                # Keeping the post would score it on its RSS body, which has
+                # its maths stripped. It fails, and the retry queue has it.
+                attempt = resumed.get(entry.id) or Attempt()
+                attempt.stage = "maths check"
+                _report_entry_failure(entry, attempt, verdict, monitor, failures,
+                                      queue=entry.feed_name in feed_names)
+                drop.add(idx)
                 continue
             if verdict.is_heavy:
                 print(f"  Too mathematical for audio ({verdict.score}/1k via "
@@ -567,17 +592,32 @@ async def async_main(config_path: Path | None = None) -> None:
             *[asyncio.to_thread(enrich_entry, e) for e in enrichable],
             return_exceptions=True,
         )
+        unrecovered: set[str] = set()
         for entry, gain in zip(enrichable, gains):
             if isinstance(gain, BaseException):
-                print(f"  Full-text fetch failed for {entry.title}: {gain!r} — using feed body")
+                # The feed body may be an excerpt (Zvi's is three percent of
+                # the post), so it is not narrated: the entry fails, and the
+                # retry queue has it.
+                attempt = resumed.get(entry.id) or Attempt()
+                attempt.stage = "full text"
+                _report_entry_failure(entry, attempt, gain, monitor, failures,
+                                      queue=entry.feed_name in feed_names)
+                unrecovered.add(entry.id)
             elif gain.replaced:
                 print(f"  Recovered full text: {entry.title} "
                       f"({gain.before:,} -> {gain.after:,} chars)")
             elif gain.is_failure:
-                # Silence here is how a three-percent blurb ships as an episode.
-                print(f"  WARNING: could not reach the full text of {entry.title} — "
-                      f"narrating the feed body ({gain.before:,} chars), which may "
-                      f"be an excerpt")
+                # LessWrong answered, and the post has no markdown (deleted, a
+                # draft, or not a post): a permanent answer that a retry
+                # cannot change, so the feed body is narrated. It may be an
+                # excerpt, and silence is how a three-percent blurb ships as an
+                # episode, so the email names it.
+                note = (f"{entry.title}: LessWrong has no markdown for it, so it was "
+                        f"narrated from the feed body ({gain.before:,} chars), which "
+                        f"may be an excerpt")
+                print(f"  WARNING: {note}")
+                notices.add(note)
+        entries_to_process = [t for t in entries_to_process if t[0].id not in unrecovered]
 
     # The briefing and the summaries are narrated and published first; posts
     # read out in full wait for the narration pass (FEEDCAST_PASS=narrate) and
@@ -595,10 +635,6 @@ async def async_main(config_path: Path | None = None) -> None:
     print(f"\n{len(entries_to_process)} entries to process")
 
     new_entry_ids: set[str] = set()
-    failures: list[tuple[str, str]] = []
-    feed_names = {fc.name for fc in config.feeds}
-    if not inject_url and reprocess_entry and reprocess_missing:
-        failures.append((reprocess_missing, "not found in any feed; the existing episode was kept"))
 
     attempts = {e.id: resumed.get(e.id, Attempt())
                 for e, _m, _p in entries_to_process + deferring}
@@ -693,26 +729,34 @@ async def async_main(config_path: Path | None = None) -> None:
     # Tells the workflow whether the narration job has anything to do.
     _gh_output(deferred=len(waiting))
 
+    # Send ntfy notification for injected URLs: what was published, or why not.
+    # Before the email, so a push that fails is among the email's notices.
+    if inject_url:
+        ntfy_topic = os.environ.get("NTFY_TOPIC", "").strip()
+        if ntfy_topic:
+            made = [e for e, _m, _p in entries_to_process if e.id in new_entry_ids]
+            if made:
+                await _send_ntfy(ntfy_topic, f"New episode: {made[0].title}", "white_check_mark")
+            else:
+                await _send_ntfy(ntfy_topic, f"Failed to process: {inject_url}\n"
+                                 + "\n".join(why for _title, why in failures), "x")
+
     # Email the run report. Off when FEEDCAST_EMAIL_TO is unset; a send that
     # fails is recorded, and the workflow fails the run after publishing.
     if (new_entry_ids or failures or maths_skipped or dead_sources or deferring
             or _email_always()):
+        # Charts first: a chart that fails is a notice, and the report takes
+        # the notices as they stand when it is built.
+        charts, images = (charts_for_report(briefing_entry)
+                          if briefing_entry and briefing_entry.id in new_entry_ids else ([], {}))
         report = _build_run_report(
             episodes, db_entries, new_entry_ids, failures, config.podcast.base_url,
             maths_skipped, dead_sources, pending=waiting,
         )
-        images: dict[str, bytes] = {}
-        if briefing_entry and briefing_entry.id in new_entry_ids:
-            report.charts, images = charts_for_report(briefing_entry)
+        report.charts = charts
         _email(report, images=images)
     else:
         print("  Nothing new — email report skipped (set FEEDCAST_EMAIL_ALWAYS=true to send anyway)")
-
-    # Send ntfy notification for injected URLs
-    if inject_url:
-        ntfy_topic = os.environ.get("NTFY_TOPIC", "").strip()
-        if ntfy_topic:
-            await _send_ntfy(ntfy_topic, inject_url, entries_to_process)
 
     print(f"\nPipeline complete.")
 
@@ -866,8 +910,11 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
             # Counted up front, so this is a post whose last pass was cut off.
             monitor.drop_deferred(entry.id)
             reason = row["last_error"] or "the run was cut off"
-            failures.append((entry.title, (f"narration: gave up after "
-                                           f"{monitor.MAX_ATTEMPTS} attempts ({reason})")))
+            why = f"narration: gave up after {monitor.MAX_ATTEMPTS} attempts ({reason})"
+            print(f"  Giving up on {entry.title}: {why}")
+            failures.append((entry.title, why))
+            if os.environ.get("GITHUB_ACTIONS"):
+                print(f"::warning title=Feedcast entry failed::{entry.title} — {why}")
             continue
         entry.bullets = row["bullets"]
         todo.append((row, entry))
@@ -925,13 +972,27 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
             total_in_feed=len(episodes)), operator_only=True)
 
 
+@dataclass
+class FetchFailed:
+    """_find_in_feeds could not read a feed it searched, so "not found" is not known."""
+
+    feeds: list[str]   # "<feed>: <what went wrong>"
+
+    def __str__(self) -> str:
+        return "; ".join(self.feeds)
+
+
 async def _find_in_feeds(
     config: Config, monitor: FeedMonitor, *keys: str, only_feed: str | None = None,
-) -> tuple[FeedConfig, FeedEntry] | None:
+) -> tuple[FeedConfig, FeedEntry] | FetchFailed | None:
     """Find an entry by id or link across the feeds, with the age cutoff off.
 
     Shared by reprocessing and the failed-entry queue: both want a post the
-    normal windowed fetch has already stopped seeing.
+    normal windowed fetch has already stopped seeing. None means every feed
+    searched was read and none has the entry. FetchFailed means it was not
+    found but a feed could not be read (its fetch raised, or it returned
+    nothing), so it may be there: the queue keeps a failed entry rather than
+    forgetting it for good, and a reprocess says why it found nothing.
     """
     feeds = [fc for fc in config.feeds if only_feed is None or fc.name == only_feed]
     feeds = feeds or config.feeds
@@ -941,13 +1002,18 @@ async def _find_in_feeds(
             monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns, max_age_hours=None)
 
     fetched = await asyncio.gather(*[fetch_all(fc) for fc in feeds], return_exceptions=True)
+    unread: list[str] = []
     for fc, result in zip(feeds, fetched):
         if isinstance(result, BaseException):
+            unread.append(f"{fc.name}: {type(result).__name__}: {result}")
+            print(f"  Could not read {fc.name} to look for {keys[0]}: {unread[-1]}")
             continue
         for e in result:
             if e.id in keys or (e.link and e.link in keys):
                 return (fc, e)
-    return None
+        if fc.name in monitor.dead_feeds:   # warn_if_dead has said so in the log
+            unread.append(f"{fc.name}: returned no entries")
+    return FetchFailed(unread) if unread else None
 
 
 def _report_entry_failure(
@@ -1006,12 +1072,8 @@ def _fidelity_of(row: dict) -> dict | None:
 
 
 def _json_dict(row: dict, column: str) -> dict | None:
-    """A JSON object stored in `column`; None when absent or malformed."""
-    try:
-        parsed = json.loads(row.get(column) or "null")
-    except (ValueError, TypeError):
-        return None
-    return parsed if isinstance(parsed, dict) else None
+    """A JSON object stored in `column`; None when the row has none. Corrupt JSON raises."""
+    return stored_json(row, column, dict)
 
 
 def _bullets_of(row: dict) -> list:
@@ -1019,13 +1081,9 @@ def _bullets_of(row: dict) -> list:
 
     Bullets are strings, or {"text", "url"} once they cite a source; rows
     written before that keep the old shape and render without a link.
+    Corrupt JSON raises, naming the row.
     """
-    try:
-        parsed = json.loads(row.get("bullets") or "[]")
-    except (ValueError, TypeError):
-        return []
-    if not isinstance(parsed, list):
-        return []
+    parsed = stored_json(row, "bullets", list) or []
     return [b for b in parsed
             if isinstance(b, str) or (isinstance(b, dict) and b.get("text"))]
 
@@ -1115,39 +1173,31 @@ def _build_run_report(
     )
 
 
-async def _send_ntfy(
-    topic: str, url: str, entries: list[tuple[FeedEntry, str, str]],
-) -> None:
-    """Send ntfy push notification about injection result."""
+async def _send_ntfy(topic: str, message: str, tags: str) -> None:
+    """Push an injection's outcome to ntfy.sh. A push that fails or is refused is a notice."""
     try:
-        if entries:
-            title = entries[0][0].title
-            message = f"New episode: {title}"
-            tags = "white_check_mark"
-        else:
-            message = f"No new content from: {url}"
-            tags = "warning"
         async with httpx.AsyncClient() as client:
-            await client.post(
+            response = await client.post(
                 f"https://ntfy.sh/{topic}",
                 content=message,
                 headers={"Title": "Feedcast", "Tags": tags},
             )
+            response.raise_for_status()
+        return
+    except httpx.HTTPStatusError as e:
+        # Only the status: the error's text holds the URL, and the URL the
+        # topic, which is a secret and must not reach the email or the log.
+        why = f"HTTPStatusError: HTTP {e.response.status_code}"
     except Exception as e:
-        print(f"  ntfy notification failed: {e}")
-
-
-async def _send_ntfy_error(topic: str, url: str, error: str) -> None:
-    """Send ntfy push notification about injection failure."""
-    try:
-        async with httpx.AsyncClient() as client:
-            await client.post(
-                f"https://ntfy.sh/{topic}",
-                content=f"Failed to process: {url}\n{error}",
-                headers={"Title": "Feedcast", "Tags": "x"},
-            )
-    except Exception as e:
-        print(f"  ntfy notification failed: {e}")
+        # A transport error's text can hold the URL too.
+        why = f"{type(e).__name__}: {str(e).replace(topic, '<topic>')}"
+    # A lost push does not fail the run. The push only repeats an outcome the
+    # run has already reached (an episode made, or a failure the email or the
+    # failed job reports), and failing over it would read as the episode
+    # failing. It goes to the email's notices instead, so it is still seen.
+    note = f"ntfy notification failed: {why}"
+    print(f"  {note}")
+    notices.add(note)
 
 
 def main(config_path: Path | None = None) -> None:

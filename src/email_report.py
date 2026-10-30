@@ -661,13 +661,13 @@ def send_report(report: RunReport, when: datetime | None = None,
 
     # An unset GitHub Actions `vars.X` interpolates to an empty string rather
     # than being absent, so fall back on emptiness, not just on the key missing.
+    # A port that is set but not a number is a misconfiguration, not unset.
     host = os.environ.get("SMTP_HOST", "").strip() or "smtp.gmail.com"
     raw_port = os.environ.get("SMTP_PORT", "").strip()
-    try:
-        port = int(raw_port) if raw_port else DEFAULT_PORT
-    except ValueError:
-        print(f"  Email report: SMTP_PORT={raw_port!r} is not a number, using {DEFAULT_PORT}")
-        port = DEFAULT_PORT
+    if raw_port and not raw_port.isdigit():
+        print(f"  Email report failed: SMTP_PORT={raw_port!r} is not a number")
+        return False
+    port = int(raw_port) if raw_port else DEFAULT_PORT
 
     try:
         from_addr = os.environ.get("FEEDCAST_EMAIL_FROM", "").strip() or user

@@ -60,9 +60,11 @@ def maths_score(text: str) -> tuple[int, float]:
 
 
 def assess(link: str, fallback_text: str, threshold: float) -> MathsVerdict:
-    """Judge a post, preferring the markdown source when one is reachable.
+    """Judge a post on its markdown source where it has one, else on `fallback_text`.
 
-    `threshold` is matches per 1000 words (config.yaml `maths_filter`).
+    `threshold` is matches per 1000 words (config.yaml `maths_filter`). A
+    LessWrong fetch that fails raises (fetch_lesswrong_markdown): the RSS body
+    has its maths stripped, so scoring it instead would pass every post.
     """
     md = fetch_lesswrong_markdown(link)
     text, source = (md, "markdown") if md else (fallback_text, "rss")

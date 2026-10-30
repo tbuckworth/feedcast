@@ -288,9 +288,11 @@ class TestRegressions:
         assert len(names) == 6, "extraction must keep every author"
         assert format_authors(names) == "A, B, C, D, E and others"
 
-    def test_malformed_smtp_port_does_not_raise(self, monkeypatch):
+    def test_malformed_smtp_port_is_a_failed_send(self, monkeypatch, capsys):
         """send_report promises never to raise; a bad SMTP_PORT repo var used to
-        throw ValueError straight through and fail the whole pipeline run."""
+        throw ValueError straight through and fail the whole pipeline run. It
+        then quietly became 587 instead; now it is a send that failed, which
+        the workflow turns into a failed job, and nothing is sent."""
         from src.email_report import send_report
 
         captured = {}
@@ -320,5 +322,6 @@ class TestRegressions:
         monkeypatch.setenv("GMAIL_APP_PASSWORD", "pw")
         monkeypatch.setenv("SMTP_PORT", "not-a-number")
 
-        assert send_report(RunReport(), datetime(2026, 8, 19)) is True
-        assert captured["port"] == 587
+        assert send_report(RunReport(), datetime(2026, 8, 19)) is False
+        assert captured == {}
+        assert "SMTP_PORT='not-a-number' is not a number" in capsys.readouterr().out

@@ -3,6 +3,7 @@ writer's, is answered by a recording fake."""
 
 import asyncio
 import hashlib
+import subprocess
 from datetime import datetime
 
 import pytest
@@ -14,7 +15,7 @@ from src.main import generate_episode_id
 from src.html_text import clean_html, small_table_to_prose
 from src.monitor import FeedMonitor
 from src.news import PREVIOUS_BRIEFINGS_HEADER, NewsAggregator
-from tests.conftest import FakeApi, feed_xml
+from tests.conftest import FakeApi, feed_xml, needs_ffmpeg, silent_mp3
 
 
 # --- split_into_chunks (src/audio.py) ---
@@ -409,12 +410,38 @@ class TestGenerateFeedForCrawlers:
         lengths = {i.findtext("title"): i.find("enclosure").get("length") for i in channel.findall("item")}
         assert lengths == {"Briefing": "2927229", "King Ludd": "0"}
 
+    @needs_ffmpeg
     def test_load_episodes_reads_the_audio_size(self, tmp_path):
         config = PodcastMetaConfig(title="T", description="D", author="A", email="e@e.com",
                                    language="en", base_url="https://x.test/pod",
                                    category="Technology")
-        (tmp_path / "a.mp3").write_bytes(b"\0" * 1234)
+        (tmp_path / "a.mp3").write_bytes(silent_mp3())
         eps = FeedGenerator(config, retention_days=30).load_episodes_from_db(
-            [{"id": "a", "title": "A", "audio_file": "a.mp3", "published": "2026-09-15T04:00:00",
-              "feed_name": "Zvi", "author": "Zvi", "link": None, "content": ""}], tmp_path)
-        assert eps[0].audio_bytes == 1234
+            [self._row("a.mp3")], tmp_path)
+        assert eps[0].audio_bytes == len(silent_mp3()) and eps[0].duration_seconds == 2
+
+    @staticmethod
+    def _row(audio_file: str, entry_id: str = "a") -> dict:
+        return {"id": entry_id, "title": "A", "audio_file": audio_file,
+                "published": "2026-09-15T04:00:00", "feed_name": "Zvi", "author": "Zvi",
+                "link": None, "content": ""}
+
+    def _gen(self):
+        return FeedGenerator(PodcastMetaConfig(
+            title="T", description="D", author="A", email="e@e.com", language="en",
+            base_url="https://x.test/pod", category="Technology"), retention_days=30)
+
+    @needs_ffmpeg
+    def test_an_mp3_ffprobe_cannot_read_fails_the_feed(self, tmp_path):
+        """It used to publish as a 00:00:00 episode with no error anywhere."""
+        (tmp_path / "a.mp3").write_bytes(b"\0" * 1234)
+        with pytest.raises(subprocess.CalledProcessError):
+            self._gen().load_episodes_from_db([self._row("a.mp3")], tmp_path)
+
+    @needs_ffmpeg
+    def test_a_row_whose_mp3_is_missing_is_named_in_the_log(self, tmp_path, capsys):
+        (tmp_path / "a.mp3").write_bytes(silent_mp3())
+        eps = self._gen().load_episodes_from_db(
+            [self._row("a.mp3"), self._row("gone.mp3", entry_id="https://lw/gone")], tmp_path)
+        assert [e.id for e in eps] == ["a"]
+        assert "WARNING: https://lw/gone (A): gone.mp3 is missing" in capsys.readouterr().out

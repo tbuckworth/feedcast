@@ -11,7 +11,7 @@ from .bundle import writer_bundle
 from .extractor import extract_article
 from .llm import complete
 from .markets import MarketContext, MarketScout
-from .monitor import FeedEntry, warn_if_dead
+from .monitor import FeedEntry, report_skipped, warn_if_dead
 from .verify import fidelity_markdown, verify_script
 
 # The previous briefings are there for dedup, but the writer also reads them
@@ -36,6 +36,26 @@ SELECT_PROMPT = """You are choosing which stories a daily news briefing will cov
 Pick the {n} most worth covering for a technically sophisticated audience, in priority order: AI safety and policy first, then AI capabilities, geopolitics, economics, markets. Prefer one strong item per story over several near-duplicates. Skip trivia, listicles and product fluff.
 
 Return ONLY a JSON array of the chosen URLs, copied exactly from the list."""
+
+
+def _selection(raw: str, by_url: dict[str, dict]) -> tuple[list[dict], str]:
+    """The articles a story-selection reply chose, in its order, and what is wrong with it.
+
+    The problem is "" for a usable reply: a JSON array naming at least one
+    article from the list. Unknown and repeated URLs are dropped.
+    """
+    m = re.search(r"\[.*\]", raw or "", re.S)
+    if not m:
+        return [], "no JSON array in the reply"
+    try:
+        urls = json.loads(m.group(0))
+    except ValueError as e:
+        return [], f"the array is not valid JSON ({e})"
+    chosen, seen = [], set()
+    for u in urls:
+        if isinstance(u, str) and u in by_url and u not in seen:
+            seen.add(u); chosen.append(by_url[u])
+    return chosen, "" if chosen else "none of the URLs is in the list"
 
 
 class NewsAggregator:
@@ -91,6 +111,7 @@ class NewsAggregator:
                     self.dead_sources.append(source["name"])
                 return []
             articles = []
+            stale = undated = 0
             for entry in feed.entries:
                 published = None
                 if hasattr(entry, "published_parsed") and entry.published_parsed:
@@ -98,7 +119,13 @@ class NewsAggregator:
                 elif hasattr(entry, "updated_parsed") and entry.updated_parsed:
                     published = datetime(*entry.updated_parsed[:6], tzinfo=timezone.utc)
 
-                if published is None or published < cutoff:
+                # Counted for report_skipped: a source that stops dating its
+                # items would otherwise just look quiet.
+                if published is None:
+                    undated += 1
+                    continue
+                if published < cutoff:
+                    stale += 1
                     continue
 
                 summary = ""
@@ -115,6 +142,8 @@ class NewsAggregator:
                     "published": published,
                     "url": entry.get("link", ""),
                 })
+            report_skipped(source["name"], self.lookback_hours, stale=stale, undated=undated,
+                           already=0, skipped=0)
             return articles
 
         results = await asyncio.gather(
@@ -123,9 +152,12 @@ class NewsAggregator:
         )
 
         all_articles = []
-        for i, result in enumerate(results):
+        for source, result in zip(self.sources, results):
             if isinstance(result, Exception):
-                print(f"  Warning: failed to fetch {self.sources[i]['name']}: {result}")
+                # feedparser raises on a socket timeout; the source returned
+                # nothing as surely as an empty feed does, so the email lists it.
+                print(f"  Warning: failed to fetch {source['name']}: {result!r}")
+                self.dead_sources.append(f"{source['name']} ({type(result).__name__}: {result})")
                 continue
             all_articles.extend(result)
 
@@ -159,7 +191,12 @@ class NewsAggregator:
         return "\n\n".join(sections)
 
     async def select_stories(self, articles: list[dict]) -> list[dict]:
-        """Ask the writer which stories deserve full text. [] means: use blurbs only."""
+        """Ask the writer which stories deserve full text. [] means: use blurbs only.
+
+        A reply with no usable selection goes to the next writer, like an empty
+        one; when none gives one, this raises and the briefing fails, to be
+        retried, rather than being written from blurbs without a word.
+        """
         n = self.full_text_stories
         if n <= 0 or not articles:
             return []
@@ -168,19 +205,10 @@ class NewsAggregator:
         by_url = {a["url"]: a for a in articles if a.get("url")}
         done = await complete(
             "writer", max_tokens=2000, client=self.client, label="story selection",
+            check=lambda raw: _selection(raw, by_url)[1] or None,
             messages=[{"role": "system", "content": SELECT_PROMPT.format(n=n)},
                       {"role": "user", "content": self._format_articles_for_prompt(articles)}])
-        raw = done.text or ""
-        m = re.search(r"\[.*\]", raw, re.S)
-        try:
-            urls = json.loads(m.group(0)) if m else []
-        except ValueError:
-            urls = []
-        chosen, seen = [], set()
-        for u in urls:
-            if isinstance(u, str) and u in by_url and u not in seen:
-                seen.add(u); chosen.append(by_url[u])
-        return chosen[:n]
+        return _selection(done.text, by_url)[0][:n]
 
     async def fetch_full_text(self, articles: list[dict]) -> int:
         """Fill in article["text"] from the page. Keeps the blurb where fetching fails."""
@@ -292,12 +320,10 @@ class NewsAggregator:
         if selected:
             got = await self.fetch_full_text(selected)
             print(f"  Selected {len(selected)} stories; full text for {got}")
-        # The scout attaches odds to the stories the writer reads in full, or,
-        # when the selection came back empty, to as many of the fetched ones.
-        # With full_text_stories at 0 the writer reads none in full, so the
-        # scout gets no stories and only looks for unexplained moves.
-        market_stories = (selected or articles)[:self.full_text_stories]
-        markets = (await self.markets.build(market_stories)
+        # The scout attaches odds to the stories the writer reads in full. With
+        # full_text_stories at 0 the writer reads none in full, so the scout
+        # gets no stories and only looks for unexplained moves.
+        markets = (await self.markets.build(selected)
                    if self.markets else MarketContext())
         formatted = self._format_briefing_input(articles, selected, markets)
         print("  Synthesizing briefing via LLM...")

@@ -53,27 +53,31 @@ class Enrichment:
     """What happened when we tried to recover a post's full text.
 
     The outcomes have to be distinguishable. "The feed already had the whole
-    post" and "we could not reach the post" both leave the body alone, but only
-    one of them is a problem — and the silent one ships a blurb as an episode.
+    post" (feed-complete) and "LessWrong has no markdown for the post"
+    (no-markdown) both leave the body alone, but only the second may leave an
+    excerpt in place, so only it is a failure. A post that cannot be reached
+    raises instead of returning one of these.
     """
 
     replaced: bool
-    reason: str      # replaced | feed-complete | unreachable | not-lesswrong
+    reason: str      # replaced | feed-complete | no-markdown | not-lesswrong
     before: int
     after: int
 
     @property
     def is_failure(self) -> bool:
-        return self.reason == "unreachable"
+        return self.reason == "no-markdown"
 
 
 def enrich_entry(entry: FeedEntry) -> Enrichment:
     """Swap in the full post text when the feed shipped an excerpt.
 
-    Mutates ``entry.content`` in place. Never raises: a partial episode beats a
-    failed run, and the caller has no better body than the one it already has.
-    It does report the difference, so a failure is visible in the log instead of
-    looking like a feed that was fine all along.
+    Mutates ``entry.content`` in place. Raises when the post cannot be fetched,
+    so the entry fails and is retried rather than narrated from an excerpt.
+    When the site answers that the post has no markdown, the body is left
+    alone and the result says so ("no-markdown"), so the run can name the
+    episode in the email instead of it looking like a feed that was fine all
+    along.
     """
     before = _visible_length(entry.content)
     if not lesswrong_post_id(entry.link):
@@ -81,7 +85,7 @@ def enrich_entry(entry: FeedEntry) -> Enrichment:
 
     md = fetch_lesswrong_markdown(entry.link)
     if not md:
-        return Enrichment(False, "unreachable", before, before)
+        return Enrichment(False, "no-markdown", before, before)
 
     html = markdown_to_html(md)
     after = _visible_length(html)

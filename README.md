@@ -248,10 +248,12 @@ each emailed the whole list, one of them announcing nothing but a failure.
 second pass in the same run — serially, on a fresh connection pool, resuming
 at the stage that failed and reusing the TTS chunks already on disk — and is
 then queued in `failed_entries` with its normalised script, so the next runs
-try it again regardless of the age window, straight from narration. Three
-attempts, then the email says it gave up. Before this a transient blip was
-permanent: the run counted as published, the guard stopped the same-day retry,
-and the window had closed by morning (Zvi 2026-09-08, an ACX review 2026-09-06).
+try it again regardless of the age window, straight from narration. An entry
+whose maths check or full-text recovery cannot reach LessWrong is queued the
+same way rather than narrated from its feed body. Three attempts, then the
+email says it gave up. Before this a transient blip was permanent: the run
+counted as published, the guard stopped the same-day retry, and the window had
+closed by morning (Zvi 2026-09-08, an ACX review 2026-09-06).
 
 **Fidelity check.** Every script a writer model produces (summaries and the
 briefing) is read against its source by a second model, Claude Sonnet 5.5, which
@@ -340,7 +342,8 @@ That feed dates an item by its **curation**, and curation trails publication by
 up to several weeks. Both dates are kept: the curation date decides whether an
 item is new to us, and `src/lesswrong.py` asks LessWrong's GraphQL API when the
 post was actually written, which is what the email shows ("30 Jul 2026 ·
-curated 21 Aug 2026"). A failed lookup falls back to the feed's date.
+curated 21 Aug 2026"). A failed lookup leaves the feed's date, and the email's
+notices name it.
 
 Because an author feed and the curated feed carry the same post under different
 guids, entries are also deduped by link.
