@@ -89,6 +89,9 @@ class ContentProcessor:
     async def clean_text(self, entry: FeedEntry) -> str:
         """The post as plain text, its tables turned to prose. Raises on an empty post.
 
+        A table of more than three data rows is turned to prose by the writer
+        model (process_tables), so this can make a model call.
+
         Narrating nothing would publish an episode that is only its intro and
         outro, so an empty post fails like any other entry: the run reports
         it, and a feed entry is queued for a retry.

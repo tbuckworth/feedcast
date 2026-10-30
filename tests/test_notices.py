@@ -1,6 +1,5 @@
 """The run's notices: what it fell back on or skipped, whichever module did it."""
 
-import asyncio
 from datetime import datetime
 
 from src import notices
