@@ -1,12 +1,26 @@
-"""A retried entry resumes at the stage that failed; it does not redo the writer."""
+"""A retried entry resumes at the stage that failed; it does not redo the writer.
+
+The real ContentProcessor, TextNormalizer, AudioGenerator and digest run. Only
+the paid APIs behind them are faked: the model routes (`routes`), and
+DeepInfra's voice upload and TTS (`narrator`, `tts`). Which stages ran is read
+off the requests those fakes saw.
+"""
 
 import asyncio
 from datetime import datetime
-from pathlib import Path
 
-import src.main as main
+import pytest
+
 from src.main import Attempt, process_entry
 from src.monitor import FeedEntry
+from src.normalizer import TextNormalizer
+from src.processor import ContentProcessor
+from tests.conftest import FakeApi, needs_ffmpeg
+
+pytestmark = needs_ffmpeg
+
+SPOKEN = "Summary of T by A.\n\nScript with forty-five percent.\n\nEnd of T."
+BULLET = "The script puts the figure at 45%, the post says."
 
 
 def _entry():
@@ -14,78 +28,51 @@ def _entry():
                      published=datetime.now(), author="A", feed_name="F")
 
 
-class Processor:
-    calls = 0
-    async def process(self, entry, mode, prompt, title=None):
-        Processor.calls += 1
-        return "Script with 45%."
+def _processor():
+    return ContentProcessor("p", verify=False, auto_verbatim_limit=24000)
 
 
-class Normalizer:
-    calls = 0
-    unnormalized: dict[str, int] = {}
-    async def normalize_for_tts(self, text, *, label):
-        Normalizer.calls += 1
-        return "Script with forty-five percent."
+def _asked(api: FakeApi) -> list[str]:
+    """The text each request asked the model to work on."""
+    return [call["messages"][-1]["content"] for call in api.calls]
 
 
-class Audio:
-    def __init__(self, fail_first: bool):
-        self.fail_first, self.calls = fail_first, 0
-    async def generate_episode(self, text, audio_dir, episode_id, title, http_client):
-        self.calls += 1
-        if self.fail_first:
-            self.fail_first = False
-            raise RuntimeError("3 of 10 TTS chunks failed")
-        p = Path(audio_dir) / f"{episode_id}.mp3"
-        p.write_bytes(b"mp3")
-        return p
+def test_second_attempt_skips_the_stages_that_already_produced_text(tmp_path, routes, narrator, tts):
+    routes["anthropic"] = FakeApi(["Script with 45%."])          # the writer
+    routes["openrouter"] = FakeApi([SPOKEN])                      # the normaliser
+    routes["openai"] = FakeApi([f"- {BULLET}", f"- {BULLET}"])     # the digest, once per attempt
+    audio, attempt = narrator(), Attempt()
+    tts.fail_on.add("forty-five")
 
-
-def _run(coro):
-    return asyncio.run(coro)
-
-
-def test_second_attempt_skips_the_stages_that_already_produced_text(tmp_path, monkeypatch):
-    digested = []
-    async def fake_bullets(text, **kw):
-        digested.append(text)
-        return ["a bullet"]
-    monkeypatch.setattr(main, "safe_bullets", fake_bullets)
-    Processor.calls = Normalizer.calls = 0
-    audio, attempt = Audio(fail_first=True), Attempt()
-
-    try:
-        _run(process_entry(_entry(), "summarize", "p", Processor(), audio, Normalizer(),
-                           tmp_path, None, attempt))
-        raise AssertionError("first attempt should fail at tts")
-    except RuntimeError:
-        pass
+    with pytest.raises(RuntimeError, match="TTS chunks failed"):
+        asyncio.run(process_entry(_entry(), "summarize", "p", _processor(), audio,
+                                  TextNormalizer(), tmp_path, None, attempt))
     assert attempt.stage == "tts"
-    assert attempt.processed_text == "Script with 45%."
-    assert attempt.normalized_text == "Script with forty-five percent."
+    assert "Script with 45%." in attempt.processed_text
+    assert attempt.normalized_text == SPOKEN
 
-    entry, path = _run(process_entry(_entry(), "summarize", "p", Processor(), audio, Normalizer(),
-                                     tmp_path, None, attempt))
-    assert path.exists() and entry.bullets == ["a bullet"]
-    assert (Processor.calls, Normalizer.calls, audio.calls) == (1, 1, 2)
+    tts.fail_on.clear()
+    entry, path = asyncio.run(process_entry(_entry(), "summarize", "p", _processor(), audio,
+                                            TextNormalizer(), tmp_path, None, attempt))
+    assert path.exists() and path.stat().st_size > 0 and entry.bullets == [BULLET]
+    # One writer call and one normaliser call across both attempts; narrated twice.
+    assert len(routes["anthropic"].calls) == 1 and len(routes["openrouter"].calls) == 1
+    assert len(tts.texts) == 2 and all("forty-five percent" in t for t in tts.texts)
     # The first attempt's digest is cancelled with the failure; the retry's
     # bullets still come from the unspoken script, not the normalised one.
-    assert digested[-1] == "Script with 45%."
+    assert _asked(routes["openai"])[-1] == attempt.processed_text
 
 
-def test_resume_from_a_stored_script_goes_straight_to_narration(tmp_path, monkeypatch):
-    digested = []
-    async def fake_bullets(text, **kw):
-        digested.append(text)
-        return []
-    monkeypatch.setattr(main, "safe_bullets", fake_bullets)
-    Processor.calls = Normalizer.calls = 0
-    audio = Audio(fail_first=False)
+def test_resume_from_a_stored_script_goes_straight_to_narration(tmp_path, routes, narrator, tts):
+    routes["anthropic"] = FakeApi([])                 # the writer: not called
+    routes["openrouter"] = FakeApi([])                # the normaliser: not called
+    routes["openai"] = FakeApi([f"- {BULLET}"])
     attempt = Attempt(stage="tts", normalized_text="kept script", number=2)
 
-    _run(process_entry(_entry(), "verbatim", "p", Processor(), audio, Normalizer(),
-                       tmp_path, None, attempt))
-    assert (Processor.calls, Normalizer.calls, audio.calls) == (0, 0, 1)
-    assert digested == ["kept script"]
+    asyncio.run(process_entry(_entry(), "verbatim", "p", _processor(), narrator(),
+                              TextNormalizer(), tmp_path, None, attempt))
+    assert attempt.processed_text is None             # the post was not cleaned again
+    assert routes["anthropic"].calls == [] and routes["openrouter"].calls == []
+    assert tts.texts == ["kept script"]
+    assert _asked(routes["openai"]) == ["kept script"]
     assert attempt.stage == "digest"

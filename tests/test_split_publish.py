@@ -9,20 +9,19 @@ deferred_entries; the narration pass narrates them and publishes again.
 import asyncio
 import sqlite3
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
 
 import pytest
 
 import src.main as main
 from src.config import PodcastMetaConfig, load_config
-from src.email_report import ReportEpisode, RunReport, build_html, build_text, send_report
+from src.email_report import ReportEpisode, RunReport, build_html, build_text
 from src.feed import Episode, FeedGenerator, episode_page_url
 from src.main import Attempt, _build_run_report, _prepare_deferred, process_entry
 from src import notices
 from src.monitor import FeedEntry, FeedMonitor, episode_id
 from src.normalizer import TextNormalizer
 from src.processor import ContentProcessor
-from tests.conftest import FakeApi
+from tests.conftest import FakeApi, needs_ffmpeg
 
 BASE = "https://tbuckworth.github.io/feedcast"
 
@@ -156,81 +155,68 @@ class TestEmail:
         assert "2 min 05 sec" in html and "narrated after this email" not in html
 
 
-class _Normalizer:
-    unnormalized: dict[str, int] = {}
-    def __init__(self, **kw):
-        pass
-    async def normalize_for_tts(self, text, *, label):
-        return f"spoken: {text}"
+# What the fake normaliser model makes of "Clean text.", the deferred post's script.
+SPOKEN = "Clean text, read aloud."
 
 
-class _Audio:
-    fail = False
-    def __init__(self, *a, **kw):
-        pass
-    async def generate_episode(self, text, audio_dir, ep_id, title, http_client):
-        if _Audio.fail:
-            raise RuntimeError("3 of 10 TTS chunks failed")
-        path = Path(audio_dir) / f"{ep_id}.mp3"
-        path.write_bytes(b"mp3")
-        return path
+def _email_text(msg) -> str:
+    return msg.get_body(("plain",)).get_content()
 
 
+@needs_ffmpeg
 class TestNarrationPass:
+    """The real normaliser, narrator and email. Only the paid APIs behind them
+    (`routes`, `narrator`, `tts`) and the mail server (`smtp`) are faked."""
 
     @pytest.fixture
-    def setup(self, tmp_path, monkeypatch):
-        monkeypatch.setattr(main, "AudioGenerator", _Audio)
-        monkeypatch.setattr(main, "TextNormalizer", _Normalizer)
-        async def no_digest(*a, **kw):
-            raise AssertionError("bullets were written by the first pass")
-        monkeypatch.setattr(main, "safe_bullets", no_digest)
-        sent = []
-        monkeypatch.setattr(main, "send_report",
-                            lambda report, operator_only=False: sent.append((report, operator_only)))
+    def setup(self, tmp_path, monkeypatch, routes, narrator, tts, smtp):
+        routes["openrouter"] = FakeApi([SPOKEN])     # the normaliser
+        routes["openai"] = FakeApi([])               # the digest: the first pass wrote the bullets
         monkeypatch.delenv("GITHUB_OUTPUT", raising=False)
-        _Audio.fail = False
         config = load_config()
         monitor = FeedMonitor(tmp_path / "posts.db")
         audio_dir, out = tmp_path / "audio", tmp_path / "output"
         audio_dir.mkdir()
-        return config, monitor, audio_dir, out, sent
+        return config, monitor, audio_dir, out, smtp
 
     def _narrate(self, setup):
         config, monitor, audio_dir, out, _ = setup
         asyncio.run(main._narrate_deferred(monitor, config, _gen(), audio_dir, out))
 
-    def test_narrated_post_joins_the_feed_and_leaves_the_queue(self, setup):
+    def test_narrated_post_joins_the_feed_and_leaves_the_queue(self, setup, routes, tts):
         config, monitor, audio_dir, out, sent = setup
         monitor.defer_entry(_entry(), "verbatim", "Clean text.", None, ["b1"])
         self._narrate(setup)
         assert monitor.deferred_entries() == []
         row = monitor.get_entry("acx-1")
-        assert row["audio_file"] == f"{episode_id('acx-1')}.mp3" and '"b1"' in row["bullets"]
+        assert row["audio_file"] == f"{episode_id('acx-1')}_does_georgism_work.mp3"
+        assert (audio_dir / row["audio_file"]).stat().st_size > 0 and tts.texts == [SPOKEN]
+        assert '"b1"' in row["bullets"] and routes["openai"].calls == []   # not digested again
         assert "<guid isPermaLink=\"false\">acx-1</guid>" in (out / "feed.xml").read_text()
         assert "<audio" in (out / "episodes" / f"{episode_id('acx-1')}.html").read_text()
         assert sent == []                       # the day's email already went out
 
-    def test_failure_keeps_the_post_waiting_and_tells_only_the_operator(self, setup):
+    def test_failure_keeps_the_post_waiting_and_tells_only_the_operator(self, setup, tts):
         config, monitor, audio_dir, out, sent = setup
         monitor.defer_entry(_entry(), "verbatim", "Clean text.", None, ["b1"])
-        _Audio.fail = True
+        tts.fail_on.add(SPOKEN)
         self._narrate(setup)
         (row,) = monitor.deferred_entries()
         assert row["attempts"] == 1 and row["last_error"].startswith("tts:")
-        assert row["normalized_text"] == "spoken: Clean text."    # retry skips straight to TTS
+        assert row["normalized_text"] == SPOKEN    # retry skips straight to TTS
         assert monitor.get_entry("acx-1") is None
-        (report, operator_only), = sent
-        assert operator_only and "attempt 1 of 3, will retry next run" in report.failures[0][1]
+        (msg,) = sent
+        assert msg["To"] == "operator@example.com" and msg["Bcc"] is None   # operator only
+        assert "attempt 1 of 3, will retry next run" in _email_text(msg)
         assert "failed on the last attempt" in \
                (out / "episodes" / f"{episode_id('acx-1')}.html").read_text()
 
-    def test_a_failure_email_that_was_not_sent_fails_the_job(self, setup, tmp_path, monkeypatch):
+    def test_a_failure_email_that_was_not_sent_fails_the_job(self, setup, tts, tmp_path,
+                                                             monkeypatch):
         _, monitor, *_ = setup
         monitor.defer_entry(_entry(), "verbatim", "Clean text.", None, ["b1"])
-        _Audio.fail = True
+        tts.fail_on.add(SPOKEN)
         # The real send_report, with a recipient but no login: a failed send.
-        monkeypatch.setattr(main, "send_report", send_report)
         monkeypatch.setenv("FEEDCAST_EMAIL_TO", "operator@example.com")
         monkeypatch.setenv("SMTP_USER", "")
         outputs = tmp_path / "github_output"
@@ -245,14 +231,15 @@ class TestNarrationPass:
             monitor.start_narration()
         self._narrate(setup)
         assert monitor.deferred_entries() == []
-        (report, _), = sent
-        assert "gave up after 3 attempts (the run was cut off)" in report.failures[0][1]
+        (msg,) = sent
+        assert "gave up after 3 attempts (the run was cut off)" in _email_text(msg)
 
     def test_a_passage_narrated_as_written_is_reported_with_its_episode(
             self, setup, routes, monkeypatch, capsys):
-        # The real normaliser, whose only model returns nothing for the post.
-        monkeypatch.setattr(main, "TextNormalizer", TextNormalizer)
+        # Every normaliser model with a key returns nothing for the post
+        # (Gemini on OpenRouter, then GPT-6.1 Sol; Haiku's account has none here).
         routes["openrouter"] = FakeApi(["<no-choices>"])
+        routes["openai"] = FakeApi(["<no-choices>"])
         monkeypatch.setenv("GITHUB_ACTIONS", "true")
         config, monitor, audio_dir, out, sent = setup
         monitor.defer_entry(_entry(), "verbatim", "Clean text.", None, ["b1"])
@@ -269,33 +256,31 @@ class TestNarrationPass:
         assert not (out / "feed.xml").exists()
 
 
-def test_deferred_post_keeps_its_first_pass_bullets(tmp_path, monkeypatch):
-    async def no_digest(*a, **kw):
-        raise AssertionError("must not digest again")
-    monkeypatch.setattr(main, "safe_bullets", no_digest)
+@needs_ffmpeg
+def test_deferred_post_keeps_its_first_pass_bullets(tmp_path, routes, narrator, tts):
+    # The real normaliser, narrator and digest; the paid APIs behind them are faked.
+    routes["openrouter"] = FakeApi([SPOKEN])     # the normaliser
+    routes["openai"] = FakeApi([])               # the digest, which must not run again
     e = _entry()
     e.bullets = ["from the first pass"]
     entry, _path = asyncio.run(process_entry(
-        e, "verbatim", "p", None, _Audio(), _Normalizer(), tmp_path, None,
+        e, "verbatim", "p", None, narrator(), TextNormalizer(), tmp_path, None,
         Attempt(stage="normalize", processed_text="Clean text.")))
-    assert entry.bullets == ["from the first pass"]
+    assert entry.bullets == ["from the first pass"] and routes["openai"].calls == []
 
 
-def test_prepare_cleans_and_digests_but_does_not_narrate(monkeypatch):
-    digested = []
-    async def fake_bullets(text, **kw):
-        digested.append(text)
-        return ["bullet"]
-    monkeypatch.setattr(main, "safe_bullets", fake_bullets)
-
-    class Processor:
-        async def process(self, entry, mode, prompt, title=None):
-            return f"Cleaned {entry.id}."
-
+def test_prepare_cleans_and_digests_but_does_not_narrate(routes):
+    # The digest's model is a paid API; this fake answers both posts' requests.
+    bullet = "Land value tax is the one tax that does no harm, Scott argues."
+    routes["openai"] = FakeApi([f"- {bullet}", f"- {bullet}"])
     fresh, resumed = _entry("a"), _entry("b")
     attempts = {"a": Attempt(), "b": Attempt(stage="tts", normalized_text="kept script")}
+    processor = ContentProcessor("p", verify=False, auto_verbatim_limit=24000)
     out = asyncio.run(_prepare_deferred([(fresh, "verbatim", "p"), (resumed, "verbatim", "p")],
-                                        attempts, Processor()))
-    assert out[0].processed_text == "Cleaned a." and fresh.bullets == ["bullet"]
+                                        attempts, processor))
+    cleaned = out[0].processed_text
+    assert "Land." in cleaned and "<p>" not in cleaned and fresh.bullets == [bullet]
+    assert out[0].normalized_text is None                      # cleaned, not narrated
     assert out[1].processed_text is None and out[1].normalized_text == "kept script"
-    assert digested == ["Cleaned a.", "kept script"]
+    digested = [call["messages"][-1]["content"] for call in routes["openai"].calls]
+    assert sorted(digested) == sorted([out[0].processed_text, "kept script"])

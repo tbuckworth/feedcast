@@ -4,7 +4,6 @@ and the daily email's charts. No network: every API reply here is a fixture."""
 import asyncio
 import json
 from datetime import datetime, timedelta, timezone
-from email import message_from_string
 from types import SimpleNamespace
 
 import pytest
@@ -19,6 +18,7 @@ from src.markets import (Market, MarketContext, MarketRules, MarketScout, is_mov
                          kalshi_markets, pick_moves, polymarket_markets)
 from src.monitor import FeedEntry, FeedMonitor
 from src.news import NewsAggregator
+from tests.conftest import FakeApi
 
 NOW = datetime(2026, 9, 19, 4, 0, tzinfo=timezone.utc)
 # The backtest's move sizes, which config.yaml `prediction_markets` sets.
@@ -303,33 +303,36 @@ def test_market_record_round_trips_through_json():
     assert [s["url"] for s in ctx.sources()] == [ctx.moves[0].url, ctx.stories["https://news/ohio"][0].url]
 
 
-def test_preview_writes_a_briefing_and_emails_it_without_publishing(tmp_path, monkeypatch):
-    sent = []
-    monkeypatch.setattr(main, "send_report", lambda report, **kw: sent.append((report, kw)))
-    chart = ChartNote(cid="market-0@feedcast", title="Ohio?", platform="Polymarket",
-                      url="https://pm/ohio", caption="Now 62%", anchor="https://pm/ohio")
-    monkeypatch.setattr(main, "charts_for_report",
-                        lambda entry: ([chart], {"market-0@feedcast": b"\x89PNG"}))
-
-    async def fake_bullets(text, **kw):
-        return [{"text": "Ohio odds rose", "url": "https://news/ohio"}]
-    monkeypatch.setattr(main, "safe_bullets", fake_bullets)
+def test_preview_writes_a_briefing_and_emails_it_without_publishing(tmp_path, monkeypatch,
+                                                                   routes, smtp):
+    ctx = _ctx_with_story_and_move({"found": False})
+    (ohio,) = ctx.stories["https://news/ohio"]
+    # The digest's model (a paid API) cites the Ohio market, so its chart is drawn.
+    routes["openai"] = FakeApi([f"- Democratic odds in Ohio rose to 62% on Polymarket. || {ohio.url}"])
 
     class Aggregator:
+        """Stands in for NewsAggregator, whose briefing takes live RSS fetches and the
+        paid writer model. Its briefing carries a real markets record."""
         async def generate_briefing(self):
             return FeedEntry(id="news-briefing-2026-10-08", title="Daily News Briefing - 2026-10-08",
                              link="", published=NOW, author="Feedcast Bot",
                              feed_name="Daily News Briefing", content="On Polymarket, odds rose.",
-                             markets={"moves": [], "stories": {}})
+                             sources=ctx.sources(), markets=ctx.to_dict())
     monkeypatch.setattr(main, "_make_aggregator", lambda *a: Aggregator())
     config = load_config()
     monitor = FeedMonitor(tmp_path / "posts.db")
     asyncio.run(main._preview_briefing(monitor, config))
-    ((report, kw),) = sent   # one email, charts in it
-    assert kw == {"subject_tag": "[Preview]", "images": {"market-0@feedcast": b"\x89PNG"}}
-    assert report.charts == [chart]
-    digest, script = report.episodes
-    assert digest.bullets and script.briefing_text == "On Polymarket, odds rose."
+    (msg,) = smtp   # one email, charts in it
+    assert msg["Subject"].startswith("[Preview] Feedcast")
+    # The cited market's chart, inline; the uncited move has no history to draw.
+    (png,) = [part for part in msg.walk() if part.get_content_type() == "image/png"]
+    assert png["Content-ID"] == "<market-0@feedcast>"
+    assert png.get_payload(decode=True).startswith(b"\x89PNG")
+    html = msg.get_body(("html",)).get_content()
+    assert html.index("Democratic odds in Ohio rose") < html.index("cid:market-0@feedcast")
+    text = msg.get_body(("plain",)).get_content()
+    assert "Democratic odds in Ohio rose to 62% on Polymarket." in text   # the digest
+    assert "On Polymarket, odds rose." in text                            # the full script
     assert monitor.get_processed_entries() == [] and monitor.get_recent_briefings() == []
 
 
