@@ -21,6 +21,8 @@ from src.monitor import FeedEntry, FeedMonitor
 from src.news import NewsAggregator
 
 NOW = datetime(2026, 9, 19, 4, 0, tzinfo=timezone.utc)
+# The backtest's move sizes, which config.yaml `prediction_markets` sets.
+RULES = MarketRules(move=0.15, major_move=0.20, max_moves=3)
 
 
 def _m(title="Will Congress pass an AI safety bill in 2026?", platform="Polymarket", prob=0.30,
@@ -68,7 +70,7 @@ class TestParsing:
 class TestMoveRules:
 
     def test_a_big_liquid_on_topic_move_counts(self):
-        assert is_move(_m(), MarketRules(), NOW)
+        assert is_move(_m(), RULES, NOW)
 
     @pytest.mark.parametrize("change", [
         dict(before=0.40),                               # 10 points: too small
@@ -79,15 +81,15 @@ class TestMoveRules:
         dict(title="Will SpaceXAI rename itself by October 31?"),  # off topic
     ])
     def test_what_does_not_count(self, change):
-        assert not is_move(_m(**change), MarketRules(), NOW)
+        assert not is_move(_m(**change), RULES, NOW)
 
     def test_corporate_markets_need_the_major_threshold(self):
         ipo = dict(title="Anthropic IPO by October 31, 2026?")
-        assert not is_move(_m(prob=0.40, before=0.57, **ipo), MarketRules(), NOW)   # 17 points
-        assert is_move(_m(prob=0.03, before=0.55, **ipo), MarketRules(), NOW)
+        assert not is_move(_m(prob=0.40, before=0.57, **ipo), RULES, NOW)   # 17 points
+        assert is_move(_m(prob=0.03, before=0.55, **ipo), RULES, NOW)
 
     def test_manifold_is_context_never_a_move(self):
-        assert not is_move(_m(platform="Manifold", traders=900), MarketRules(), NOW)
+        assert not is_move(_m(platform="Manifold", traders=900), RULES, NOW)
 
     def test_one_line_per_story_most_liquid_first_and_no_repeats(self):
         a = _m("Anthropic IPO by October 31, 2026?", prob=0.03, before=0.55, event="pm:ipo",
@@ -98,12 +100,12 @@ class TestMoveRules:
                platform="Kalshi", prob=0.06, before=0.53, volume=478_276, volume_24h=40_565,
                key="ks:1", event="ks:ipo")
         bill = _m(key="pm:bill", event="pm:bill", volume_24h=10_000)
-        moves = pick_moves([a, a2, k, bill], MarketRules(), NOW)
+        moves = pick_moves([a, a2, k, bill], RULES, NOW)
         assert [m.key for m in moves] == ["pm:1", "pm:bill"]   # biggest move per event; Kalshi dupe dropped
-        assert pick_moves([a, bill], MarketRules(), NOW, skip_events={"pm:ipo"}) == [bill]
+        assert pick_moves([a, bill], RULES, NOW, skip_events={"pm:ipo"}) == [bill]
         # Reported yesterday at 3%: not again until it moves another 15 points.
-        assert pick_moves([a], MarketRules(), NOW, recently_reported={"pm:1": 0.04}) == []
-        assert pick_moves([a], MarketRules(), NOW, recently_reported={"pm:1": 0.30}) == [a]
+        assert pick_moves([a], RULES, NOW, recently_reported={"pm:1": 0.04}) == []
+        assert pick_moves([a], RULES, NOW, recently_reported={"pm:1": 0.30}) == [a]
 
 
 def _ctx_with_story_and_move(cause):
@@ -144,7 +146,9 @@ class TestWriterInput:
                 return SimpleNamespace(choices=[SimpleNamespace(
                     message=SimpleNamespace(content="Briefing."), finish_reason="stop")])
 
-        agg = NewsAggregator(sources=[], prompt="Write.", verify=False)
+        agg = NewsAggregator(sources=[], prompt="Write.", lookback_hours=24,
+                             full_text_stories=12, max_article_chars=6000,
+                             author="Feedcast Bot", verify=False)
         agg.client = Client()
         asyncio.run(agg.synthesize_briefing("ARTICLES"))
         asyncio.run(agg.synthesize_briefing("ARTICLES", MarketContext().instructions()))
@@ -154,7 +158,9 @@ class TestWriterInput:
         assert sent[2].index("prediction markets") < sent[2].index("## Today's articles:")
 
     def test_briefing_input_carries_the_odds_and_the_moves(self):
-        agg = NewsAggregator(sources=[], prompt="Write.", verify=False)
+        agg = NewsAggregator(sources=[], prompt="Write.", lookback_hours=24,
+                             full_text_stories=12, max_article_chars=6000,
+                             author="Feedcast Bot", verify=False)
         story = {"title": "Brown runs on datacenters", "source": "Guardian", "category": "politics",
                  "summary": "b", "url": "https://news/ohio", "published": NOW}
         text = agg._format_briefing_input([story], [story], _ctx_with_story_and_move(None))
@@ -168,7 +174,7 @@ class TestWriterInput:
         monkeypatch.setattr(MarketScout, "_build", boom)
         log = []
         monkeypatch.setattr(markets, "fallback_log", log)
-        ctx = asyncio.run(MarketScout().build([]))
+        ctx = asyncio.run(MarketScout(rules=RULES, polymarket_tags=["ai"]).build([]))
         assert not ctx and "prediction markets skipped" in log[0]
 
 

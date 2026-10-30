@@ -1,7 +1,7 @@
 {
   "name": "Feedcast",
   "short_name": "Feedcast",
-  "start_url": "/feedcast/app/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#f8fafc",
   "theme_color": "#2563eb",
@@ -10,7 +10,7 @@
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
   ],
   "share_target": {
-    "action": "/feedcast/app/",
+    "action": "./",
     "method": "GET",
     "params": {
       "url": "url",

@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 from types import SimpleNamespace
 
 from src import news
+from src.markets import MarketContext
 from src.news import NewsAggregator
 
 
@@ -25,7 +26,9 @@ def _articles(n):
 
 
 def _agg(client, **kw):
-    agg = NewsAggregator(sources=[], prompt="Write the briefing.", verify=False, **kw)
+    settings = dict(lookback_hours=24, full_text_stories=12, max_article_chars=6000,
+                    author="Feedcast Bot", verify=False) | kw
+    agg = NewsAggregator(sources=[], prompt="Write the briefing.", **settings)
     agg.client = client
     return agg
 
@@ -79,7 +82,7 @@ def test_writer_input_has_full_text_for_chosen_and_headlines_for_the_rest():
 def test_generate_briefing_wires_select_fetch_write(monkeypatch):
     arts = _articles(3)
     client = FakeClient(['["https://example.com/2"]', "Here is your daily news briefing."])
-    agg = _agg(client, full_text_stories=1)
+    agg = _agg(client, full_text_stories=1, author="The Podcast")
 
     async def fake_fetch_all():
         return arts
@@ -88,9 +91,39 @@ def test_generate_briefing_wires_select_fetch_write(monkeypatch):
 
     entry = asyncio.run(agg.generate_briefing())
     assert entry.content == "Here is your daily news briefing."
+    assert entry.author == "The Podcast" and entry.authors == ["The Podcast"]
     writer_input = client.calls[1]["messages"][1]["content"]
     assert "FULL 2" in writer_input and "Story 0" in writer_input and "Blurb 0" not in writer_input
     assert "FULL 2" in entry.bundle and entry.fidelity is None
     # Links for the email come only from the stories the writer was given in
     # full, not every headline it saw.
     assert [x["url"] for x in entry.sources] == ["https://example.com/2"]
+
+
+class _Scout:
+    def __init__(self):
+        self.given = None
+
+    async def build(self, stories):
+        self.given = stories
+        return MarketContext()
+
+
+def test_market_odds_are_looked_up_for_the_stories_read_in_full(monkeypatch):
+    arts = _articles(5)
+    scout = _Scout()
+    agg = _agg(FakeClient(['["https://example.com/3", "https://example.com/1"]', "Briefing."]),
+               full_text_stories=2, markets=scout)
+    monkeypatch.setattr(agg, "fetch_all_sources", lambda: asyncio.sleep(0, arts))
+    monkeypatch.setattr(news, "extract_article", lambda url: {"text": "FULL"})
+    asyncio.run(agg.generate_briefing())
+    assert [a["url"] for a in scout.given] == ["https://example.com/3", "https://example.com/1"]
+
+
+def test_with_no_stories_read_in_full_the_scout_gets_none(monkeypatch):
+    """It used to get the first 12 articles in fetch order: a silent `or 12`."""
+    scout = _Scout()
+    agg = _agg(FakeClient(["Briefing."]), full_text_stories=0, markets=scout)
+    monkeypatch.setattr(agg, "fetch_all_sources", lambda: asyncio.sleep(0, _articles(20)))
+    asyncio.run(agg.generate_briefing())
+    assert scout.given == []

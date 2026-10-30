@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
+from .config import PodcastMetaConfig
 from .monitor import episode_id
 
 # Register namespace prefixes
@@ -19,24 +20,6 @@ ET.register_namespace("podcast", "https://podcastindex.org/namespace/1.0")
 def episode_page_url(base_url: str, entry_id: str) -> str:
     """Where an episode's own page lives. Stable from before its audio exists."""
     return f"{base_url}/episodes/{episode_id(entry_id)}.html"
-
-
-@dataclass
-class PodcastConfig:
-    """Configuration for the podcast feed."""
-
-    title: str
-    description: str
-    author: str
-    email: str
-    language: str
-    base_url: str
-    image_url: Optional[str] = None
-    # WebSub hub (the W3C standard, formerly PubSubHubbub). Declared in the
-    # channel so apps can subscribe; CI pings it after each deploy. Pocket Casts
-    # polls a small private feed on its own schedule — hours, on a bad day — but
-    # acts on a hub notification within a minute or two. None or "" omits it.
-    hub_url: Optional[str] = "https://pubsubhubbub.appspot.com/"
 
 
 @dataclass
@@ -61,8 +44,10 @@ class FeedGenerator:
     ITUNES_NS = "http://www.itunes.com/dtds/podcast-1.0.dtd"
     PODCAST_NS = "https://podcastindex.org/namespace/1.0"
 
-    def __init__(self, config: PodcastConfig):
+    def __init__(self, config: PodcastMetaConfig, *, retention_days: int):
         self.config = config
+        # How long an episode stays in the feed, for the site's footer.
+        self.retention_days = retention_days
 
     @staticmethod
     def _build_briefing_description(title: str, content: str) -> str:
@@ -162,7 +147,7 @@ li a{{color:#1b2024;text-decoration:none;font-weight:600}} li a:hover{{text-deco
 <p>{escape(c.description)}</p>
 <div class="sub"><a href="feed.xml">Subscribe (RSS)</a><a href="app/">Send a URL</a></div>
 <ul>{"".join(rows)}</ul>
-<p style="margin-top:28px;font-size:13px">{len(episodes)} episodes in the feed. Episodes are kept for 30 days.</p>
+<p style="margin-top:28px;font-size:13px">{len(episodes)} episodes in the feed. Episodes are kept for {self.retention_days} days.</p>
 </main></body></html>
 """
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -297,7 +282,7 @@ main{{max-width:680px;margin:0 auto}} h1{{font-size:24px;line-height:1.3;margin:
 
         # Category
         category = ET.SubElement(channel, f"{{{self.ITUNES_NS}}}category")
-        category.set("text", "Technology")
+        category.set("text", self.config.category)
 
         # Add episodes
         for episode in sorted(episodes, key=lambda e: e.published, reverse=True):

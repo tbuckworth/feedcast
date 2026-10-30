@@ -36,7 +36,7 @@ def test_failed_chunk_keeps_the_others_and_the_retry_only_redoes_it(tmp_path, mo
     calls: list[str] = []
     fail_on = {"Sentence 1"}
 
-    async def fake_tts(text, voice_id, api_key, http_client, save_debug_wav=None, tag="", model=None):
+    async def fake_tts(text, voice_id, api_key, http_client, *, model, save_debug_wav=None, tag=""):
         calls.append(text[:10])
         if any(text.startswith(f) for f in fail_on):
             raise audio.httpx.ReadError("")
@@ -63,7 +63,7 @@ def test_a_busy_model_moves_the_rest_of_the_run_to_the_next_one(tmp_path, monkey
     # 2026-10-01: turbo answered 429 "Model busy" for hours; multilingual was up.
     models: list[str] = []
 
-    async def fake_tts(text, voice_id, api_key, http_client, save_debug_wav=None, tag="", model=None):
+    async def fake_tts(text, voice_id, api_key, http_client, *, model, save_debug_wav=None, tag=""):
         models.append(model[0])
         if model[0].endswith("turbo"):
             raise audio.ModelBusy("DeepInfra rate limited after 5 retries")
@@ -83,7 +83,7 @@ def test_a_busy_model_moves_the_rest_of_the_run_to_the_next_one(tmp_path, monkey
 
 
 def test_when_every_model_is_busy_the_chunk_fails(tmp_path, monkeypatch):
-    async def fake_tts(text, voice_id, api_key, http_client, save_debug_wav=None, tag="", model=None):
+    async def fake_tts(text, voice_id, api_key, http_client, *, model, save_debug_wav=None, tag=""):
         raise audio.ModelBusy("busy")
 
     monkeypatch.setattr(audio, "generate_with_deepinfra_async", fake_tts)

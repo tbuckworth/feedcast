@@ -6,6 +6,7 @@ podcast:
   language: "en-us"
   image_url: "https://tbuckworth.github.io/feedcast/artwork.png"
   base_url: "https://tbuckworth.github.io/feedcast"
+  category: "Technology"   # the iTunes category the channel is listed under
   # WebSub hub declared in the feed and pinged by CI after every deploy, so
   # subscribed apps (Pocket Casts among them) learn of new episodes at once
   # instead of on their own polling schedule. Empty string disables both.
@@ -26,6 +27,23 @@ default_prompt: |
 
   - Write out numbers, dates, and percentages in spoken form (e.g., "forty-five percent" not "45%")
   - Spell out abbreviations (e.g., "for example" not "e.g.")
+
+# How recent, in hours, a post must be to be narrated. Dedup by id alone is
+# not enough: a feed that changes its guids, moves host, or is added
+# here presents its whole archive as unseen, and the pipeline happily worked
+# through it one post per run (250 Zvi items back to Sep 2025, 2026-08-29). A
+# date cutoff makes that structurally impossible rather than merely unlikely.
+# null disables the cutoff, which only a deliberate backfill should ask for.
+max_age_hours: 48
+
+# Days an episode stays in the feed (with its audio, transcript and source
+# bundle), and a failure stays in the retry queue. The site footer says so.
+retention_days: 30
+
+# An "auto" feed's post is read out in full up to this many characters (~25
+# min of audio at ~0.063 s a character) and summarised above it. A post read
+# in full goes out in the second publish of the day, after the summaries.
+auto_verbatim_limit: 24000
 
 feeds:
   - name: "Zvi Mowshowitz"
@@ -105,16 +123,28 @@ feeds:
     mode: "auto"
     prompt: null
 
-# Posts built on real mathematics are linked in the email rather than narrated —
-# even a good spoken explanation is hard to follow without seeing the notation.
-# Threshold is LaTeX matches per 1000 words, measured on the markdown source.
 # Every written script (summaries, the briefing) is read against its source by
 # a second model and corrected once if it misattributes, distorts or invents.
 fidelity_check: true
 
+# Posts built on real mathematics are linked in the email rather than narrated —
+# even a good spoken explanation is hard to follow without seeing the notation.
+# Threshold is LaTeX matches per 1000 words, measured on the markdown source,
+# re-measured after the inline-LaTeX pattern was tightened to exclude currency
+# (which lowered every score). Across 20 recent LessWrong and Alignment Forum
+# posts the mathematical ones now score 99.0, 23.1 and 9.8, and every prose
+# post scores 6.6 or below. 8 sits in that gap.
+#
+# Recalibrate the threshold whenever _PATTERNS in src/mathiness.py changes —
+# the two numbers are coupled, and a pattern change silently moves every score.
 maths_filter:
   enabled: true
   threshold_per_1k: 8.0
+
+tts:
+  # The recording the narrating voice is cloned from, relative to the
+  # repository root. Uploaded to DeepInfra fresh at the start of every run.
+  voice_sample: voice_samples/derek_perkins.wav
 
 # Words the voice gets wrong, respelled the way it says them right. Applied in
 # code after normalisation, to the audio only (the email and transcripts keep

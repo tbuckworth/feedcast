@@ -30,15 +30,19 @@ from pathlib import Path
 
 import httpx
 
-from src.audio import DEEPINFRA_INFERENCE_URL, DEFAULT_VOICE_SAMPLE, TTS_MODELS, upload_voice_to_deepinfra
+from src.audio import DEEPINFRA_INFERENCE_URL, TTS_MODELS, upload_voice_to_deepinfra
+from src.config import load_config
 
+ROOT = Path(__file__).resolve().parent.parent
 CARRIER = "Today, {x} said yes, and {x} said no."
 PHONEME_MODEL = "facebook/wav2vec2-lv-60-espeak-cv-ft"
 
 
 async def synthesise(spellings: list[str], n: int, out: Path) -> None:
     key = os.environ["DEEPINFRA_API_KEY"]
-    voice = upload_voice_to_deepinfra(Path(__file__).resolve().parent.parent / DEFAULT_VOICE_SAMPLE, key)
+    # The production voice, as config.yaml names it.
+    sample = ROOT / load_config(ROOT / "config.yaml").tts.voice_sample
+    voice = upload_voice_to_deepinfra(sample, key)
     await asyncio.sleep(5)   # the uploaded voice takes a moment to reach every server
     sem = asyncio.Semaphore(6)
     model, extra = TTS_MODELS[0]

@@ -5,7 +5,9 @@ with llm_smoke_test=true to check the actual GitHub Actions secrets.
 """
 
 import asyncio
+from pathlib import Path
 
+from src.config import load_config
 from src.digest import safe_bullets
 from src.llm import fallback_notices, model_name
 from src.news import NewsAggregator
@@ -54,10 +56,14 @@ async def main():
          "category": "business", "url": "https://example.com/mug",
          "summary": "A fictional shop introduced a blue mug."},
     ]
+    config = load_config(Path(__file__).resolve().parent.parent / "config.yaml")
     aggregator = NewsAggregator(
         sources=[], full_text_stories=2,
         prompt="Write a short spoken briefing of at most 150 words from the supplied "
                "fictional test stories. Preserve the numbers; invent nothing.",
+        lookback_hours=config.news_briefing.lookback_hours,
+        max_article_chars=config.news_briefing.max_article_chars,
+        author=config.podcast.author, verify=True,
     )
     selected = await aggregator.select_stories(articles)
     if len(selected) != 2:

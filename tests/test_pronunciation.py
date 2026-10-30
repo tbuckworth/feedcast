@@ -28,7 +28,8 @@ def test_intro_and_outro_say_the_name_once():
     entry = FeedEntry(id="z", title="“The Curve Bends You” by Zvi", link="", content="<p>Body.</p>",
                       published=datetime(2026, 10, 8), author="Zvi Mowshowitz",
                       feed_name="Zvi Mowshowitz")
-    text = asyncio.run(ContentProcessor("p").process(entry, "verbatim"))
+    processor = ContentProcessor("p", verify=False, auto_verbatim_limit=24000)
+    text = asyncio.run(processor.process(entry, "verbatim"))
     assert text.startswith("“The Curve Bends You”. By Zvi Mowshowitz.")
     assert text.endswith("End of “The Curve Bends You”.") and text.count("Zvi") == 1
 

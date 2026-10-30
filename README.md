@@ -31,11 +31,11 @@ An automated podcast generator that monitors RSS feeds, summarizes or reads post
 
 2. **Phase 2 — Content + audio**: For each entry, the content is summarized (Gemini 3 Flash) or cleaned for verbatim reading, normalized for TTS (numbers/dates/symbols to spoken form via Gemini 2.5 Flash), chunked (max 500 chars at sentence boundaries), converted to speech via DeepInfra Chatterbox TTS with voice cloning, and concatenated to MP3 with ffmpeg.
 
-3. **Phase 3 — Finalization**: Entries marked as processed in SQLite, `feed.xml` generated, old entries cleaned up (30 days). For injected URLs, a push notification is sent via ntfy.sh.
+3. **Phase 3 — Finalization**: Entries marked as processed in SQLite, `feed.xml` generated, old entries cleaned up (after `retention_days` in `config.yaml`, 30). For injected URLs, a push notification is sent via ntfy.sh.
 
 The briefing also carries prediction-market odds where a market is about one of its stories, and on some days it ends with a short segment on big AI-market moves that no story explains, each with a cause found by web search (`src/markets.py`, `prediction_markets` in `config.yaml`). Public Polymarket, Kalshi and Manifold APIs; no keys. The daily email shows a price chart of each market under the bullet that cites it (`src/market_charts.py`).
 
-In CI a daily run publishes twice. The first pass (`FEEDCAST_PASS=first`) narrates the briefing and the summaries, publishes them, and sends the email. Posts read out in full are only cleaned and digested at this stage. They appear in the email with their bullets and a link to their page under `episodes/`, which says the audio is coming and plays it once it exists. A second pass (`FEEDCAST_PASS=narrate`) narrates them and publishes again. Locally, with `FEEDCAST_PASS` unset, everything runs in one pass as before.
+In CI a daily run publishes twice. The first pass (`FEEDCAST_PASS=first`) narrates the briefing and the summaries, publishes them, and sends the email. Posts read out in full are only cleaned and digested at this stage. They appear in the email with their bullets and a link to their page under `episodes/`, which says the audio is coming and plays it once it exists. A second pass (`FEEDCAST_PASS=narrate`) narrates them and publishes again. Locally, with `FEEDCAST_PASS` unset, everything runs in one pass as before; any other value stops the run.
 
 ## Setup
 
@@ -77,7 +77,6 @@ bwsrun uv run python -m src.main
 | `SAVE_DEBUG_WAVS` | No | Save intermediate WAV chunks for debugging |
 | `LLM_TIMEOUT_SECONDS` | No | Per-request timeout for OpenRouter calls (default 180, 3 retries) |
 | `FEEDCAST_EMAIL_TO` | No | Recipient of the HTML run report. Unset disables the email entirely; set, the SMTP credentials must be too, or the send fails and so does the CI run (after it publishes) |
-| `FEEDCAST_MAX_AGE_HOURS` | No | How recent a post must be to be narrated (default 48; `0` disables the cutoff) |
 | `FEEDCAST_EMAIL_BCC` | No | Extra recipients, comma-separated, blind-copied so they stay hidden from each other |
 | `SMTP_USER` | No | SMTP username (the sending Gmail address) |
 | `GMAIL_APP_PASSWORD` | No | Google App Password. `SMTP_PASSWORD` is accepted as an alias |
@@ -126,7 +125,7 @@ news_briefing:
 **Mode behavior:**
 - `summarize` — LLM summary (~300-450 words, 2-3 min audio)
 - `verbatim` — Full text cleaned for TTS
-- `auto` — Verbatim if under 24,000 chars, summarize otherwise
+- `auto` — Verbatim up to `auto_verbatim_limit` (24,000 chars), summarize above it
 
 ## Usage
 
@@ -346,7 +345,7 @@ guids, entries are also deduped by link.
 
 ## Freshness Window
 
-Only posts published within `FEEDCAST_MAX_AGE_HOURS` (default 48) are narrated.
+Only posts published within `max_age_hours` (48, in `config.yaml`) are narrated.
 Dedup by feed id alone is not enough: a feed that rotates its guids, changes
 host, or is newly added to `config.yaml` presents its entire archive as unseen.
 On 2026-08-29 the Zvi feed offered 250 items going back to September 2025 and

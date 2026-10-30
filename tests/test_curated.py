@@ -151,10 +151,11 @@ class TestCrossFeedDuplicates:
         now = datetime.now(timezone.utc).replace(tzinfo=None)
         m = FeedMonitor(tmp_path / "posts.db")
 
-        first = m.fetch_feed(self._xml("f1c130ea", now - timedelta(hours=5)), "Zvi")
+        first = m.fetch_feed(self._xml("f1c130ea", now - timedelta(hours=5)), "Zvi",
+                             max_age_hours=48)
         assert len(first) == 1
         m.mark_processed(first[0], audio_file="a.mp3")
 
         again = m.fetch_feed(self._xml("rA6pqn6kz8NvHyznT", now - timedelta(hours=1)),
-                             "LessWrong Curated")
+                             "LessWrong Curated", max_age_hours=48)
         assert again == []

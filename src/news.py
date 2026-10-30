@@ -39,16 +39,20 @@ class NewsAggregator:
         self,
         sources: list[dict],
         prompt: str,
-        lookback_hours: int = 48,
+        *,
+        lookback_hours: int,
+        full_text_stories: int,
+        max_article_chars: int,
+        author: str,
+        verify: bool,
         recent_briefings: list[dict] | None = None,
-        full_text_stories: int = 12,
-        max_article_chars: int = 6000,
-        verify: bool = True,
         markets: MarketScout | None = None,
     ):
         self.sources = sources
         self.prompt = prompt
         self.lookback_hours = lookback_hours
+        # Credited as the briefing's author: the podcast's own (config.yaml).
+        self.author = author
         self.last_bundle: str | None = None
         self.last_fidelity: dict | None = None
         self.last_writer: dict | None = None
@@ -282,7 +286,12 @@ class NewsAggregator:
         if selected:
             got = await self.fetch_full_text(selected)
             print(f"  Selected {len(selected)} stories; full text for {got}")
-        markets = (await self.markets.build((selected or articles)[:self.full_text_stories or 12])
+        # The scout attaches odds to the stories the writer reads in full, or,
+        # when the selection came back empty, to as many of the fetched ones.
+        # With full_text_stories at 0 the writer reads none in full, so the
+        # scout gets no stories and only looks for unexplained moves.
+        market_stories = (selected or articles)[:self.full_text_stories]
+        markets = (await self.markets.build(market_stories)
                    if self.markets else MarketContext())
         formatted = self._format_briefing_input(articles, selected, markets)
         print("  Synthesizing briefing via LLM...")
@@ -299,9 +308,9 @@ class NewsAggregator:
             link="",
             content=briefing_text,
             published=datetime.now(),
-            author="Feedcast Bot",
+            author=self.author,
             feed_name="Daily News Briefing",
-            authors=["Feedcast Bot"],
+            authors=[self.author],
             # For the email's per-bullet links: only the stories the writer
             # was given in full. Passing every headline let the digest lift a
             # story the briefing never told (a SpaceX launch, 2026-09-16) and

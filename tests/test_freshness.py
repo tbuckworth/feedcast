@@ -6,13 +6,18 @@ narrated its way through the archive one post per run.
 """
 
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import pytest
 
 from src.digest import parse_bullets
 from src.email_report import (ReportEpisode, RunReport, build_html, build_text,
                               bullet_parts, format_published)
-from src.monitor import DEFAULT_MAX_AGE_HOURS, FeedMonitor
+from src.config import load_config
+from src.monitor import FeedMonitor
+
+# The production window, from config.yaml.
+MAX_AGE = load_config(Path(__file__).resolve().parent.parent / "config.yaml").max_age_hours
 
 
 def rfc822(when: datetime) -> str:
@@ -48,26 +53,26 @@ class TestFreshnessWindow:
 
     def test_recent_entries_survive(self, monitor):
         xml = feed_xml(("Fresh", self._now() - timedelta(hours=3)))
-        entries = monitor.fetch_feed(xml, "Test")
+        entries = monitor.fetch_feed(xml, "Test", max_age_hours=MAX_AGE)
         assert [e.title for e in entries] == ["Fresh"]
 
     def test_the_archive_is_not_narrated(self, monitor):
         """The incident in one test: one new post, 250 old ones."""
         items = [("Fresh", self._now() - timedelta(hours=6))]
         items += [(f"Old {i}", self._now() - timedelta(days=30 + i)) for i in range(250)]
-        entries = monitor.fetch_feed(feed_xml(*items), "Zvi Mowshowitz")
+        entries = monitor.fetch_feed(feed_xml(*items), "Zvi Mowshowitz", max_age_hours=MAX_AGE)
         assert [e.title for e in entries] == ["Fresh"]
 
     def test_the_boundary_is_the_max_age(self, monitor):
-        xml = feed_xml(("JustInside", self._now() - timedelta(hours=47)),
-                       ("JustOutside", self._now() - timedelta(hours=49)))
-        entries = monitor.fetch_feed(xml, "Test")
+        xml = feed_xml(("JustInside", self._now() - timedelta(hours=MAX_AGE - 1)),
+                       ("JustOutside", self._now() - timedelta(hours=MAX_AGE + 1)))
+        entries = monitor.fetch_feed(xml, "Test", max_age_hours=MAX_AGE)
         assert [e.title for e in entries] == ["JustInside"]
 
     def test_an_undated_entry_is_not_assumed_fresh(self, monitor):
         """Undated entries used to inherit datetime.now() and always pass."""
         xml = feed_xml(("Undated", None), ("Fresh", self._now() - timedelta(hours=1)))
-        entries = monitor.fetch_feed(xml, "Test")
+        entries = monitor.fetch_feed(xml, "Test", max_age_hours=MAX_AGE)
         assert [e.title for e in entries] == ["Fresh"]
 
     def test_cutoff_can_be_disabled_for_a_deliberate_backfill(self, monitor):
@@ -80,15 +85,12 @@ class TestFreshnessWindow:
         assert monitor.fetch_feed(xml, "Test", max_age_hours=3) == []
         assert len(monitor.fetch_feed(xml, "Test", max_age_hours=12)) == 1
 
-    def test_default_window_is_two_days(self):
-        assert DEFAULT_MAX_AGE_HOURS == 48.0
-
     def test_the_window_does_not_override_dedup(self, monitor):
         """Fresh but already processed is still processed."""
         xml = feed_xml(("Fresh", self._now() - timedelta(hours=2)))
-        entry = monitor.fetch_feed(xml, "Test")[0]
+        entry = monitor.fetch_feed(xml, "Test", max_age_hours=MAX_AGE)[0]
         monitor.mark_processed(entry, audio_file="a.mp3")
-        assert monitor.fetch_feed(xml, "Test") == []
+        assert monitor.fetch_feed(xml, "Test", max_age_hours=MAX_AGE) == []
 
 
 class TestBulletSources:

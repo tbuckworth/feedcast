@@ -14,13 +14,6 @@ import feedparser
 
 MAX_AUTHORS = 5
 
-# Only narrate what was published recently. Dedup by id alone is not enough:
-# a feed that changes its guids, moves host, or is added to config.yaml
-# presents its whole archive as unseen, and the pipeline happily worked
-# through it one post per run (250 Zvi items back to Sep 2025, 2026-08-29).
-# A date cutoff makes that structurally impossible rather than merely unlikely.
-DEFAULT_MAX_AGE_HOURS = 48.0
-
 
 def format_authors(authors: list[str]) -> str:
     """Render an author list for speech and display: 'A', 'A and B', 'A, B and C'."""
@@ -463,7 +456,7 @@ class FeedMonitor:
             conn.execute("DELETE FROM deferred_entries WHERE id = ?", (entry_id,))
             conn.commit()
 
-    def prune_failures(self, days: int = 30) -> int:
+    def prune_failures(self, days: int) -> int:
         """Forget failures older than `days`, given up on or not."""
         cutoff = (datetime.now() - timedelta(days=days)).isoformat()
         with sqlite3.connect(self.db_path) as conn:
@@ -527,11 +520,11 @@ class FeedMonitor:
             return [dict(row) for row in cursor.fetchall()]
 
     def fetch_feed(self, url: str, feed_name: str, skip_patterns: list[str] | None = None,
-                   max_age_hours: float | None = DEFAULT_MAX_AGE_HOURS) -> list[FeedEntry]:
+                   *, max_age_hours: float | None) -> list[FeedEntry]:
         """Fetch and parse an RSS feed, returning new entries newer than the cutoff.
 
-        `max_age_hours=None` disables the cutoff, which only reprocessing an
-        old post on purpose should ever want.
+        `max_age_hours` is config.yaml's window. None disables the cutoff, which
+        only reprocessing an old post on purpose should ever want.
         """
         feed = feedparser.parse(url)
         if warn_if_dead(feed, feed_name, url) and feed_name not in self.dead_feeds:
@@ -660,7 +653,7 @@ class FeedMonitor:
             return cursor.rowcount
 
     def cleanup_old_entries(
-        self, days: int = 30, audio_dir: Optional[Path] = None,
+        self, days: int, audio_dir: Optional[Path] = None,
         transcript_dir: Optional[Path] = None,
         sources_dir: Optional[Path] = None,
     ) -> int:
