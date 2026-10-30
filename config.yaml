@@ -11,12 +11,6 @@ podcast:
   # instead of on their own polling schedule. Empty string disables both.
   hub_url: "https://pubsubhubbub.appspot.com/"
 
-tts:
-  # NOTE: Now using Chatterbox TTS with Derek Perkins voice cloning
-  # voice/speed params below are deprecated (kept for backward compatibility)
-  voice: "bm_george"
-  speed: 1.0
-
 default_prompt: |
   Summarize this AI safety blog post for a PhD student studying AI safety.
 

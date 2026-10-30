@@ -1,7 +1,6 @@
 """Main entry point for feedcast pipeline."""
 
 import asyncio
-import hashlib
 import json
 import os
 import socket
@@ -47,13 +46,6 @@ class FeedConfig(BaseModel):
     mode: Literal["summarize", "verbatim", "auto"] = "auto"
     prompt: str | None = None
     skip_patterns: list[str] | None = None
-
-
-class TTSConfig(BaseModel):
-    """TTS configuration."""
-
-    voice: str = "bm_george"
-    speed: float = 1.0
 
 
 class PodcastMetaConfig(BaseModel):
@@ -119,7 +111,6 @@ class Config(BaseModel):
     """Full application configuration."""
 
     podcast: PodcastMetaConfig
-    tts: TTSConfig
     default_prompt: str
     feeds: list[FeedConfig]
     news_briefing: NewsBriefingConfig | None = None
@@ -483,7 +474,7 @@ async def async_main(config_path: Path | None = None) -> None:
 
     processor = ContentProcessor(config.default_prompt, verify=config.fidelity_check)
     normalizer = TextNormalizer(respellings=config.pronunciations)
-    audio_gen = AudioGenerator(voice=config.tts.voice, speed=config.tts.speed)
+    audio_gen = AudioGenerator()
 
     entries_to_process: list[tuple[FeedEntry, str, str]] = []
     # Bound here, before Phase 1: the news-briefing block appends to it, and
@@ -1014,7 +1005,6 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
     """
     if not monitor.deferred_entries():
         print("Nothing waiting to be narrated.")
-        _gh_output(narrated=0)
         return
     monitor.start_narration()
     failures: list[tuple[str, str]] = []
@@ -1045,7 +1035,7 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
         items = [(entry, row["mode"], config.default_prompt) for row, entry in todo]
         processor = ContentProcessor(config.default_prompt, verify=config.fidelity_check)
         normalizer = TextNormalizer(respellings=config.pronunciations)
-        audio_gen = AudioGenerator(voice=config.tts.voice, speed=config.tts.speed)
+        audio_gen = AudioGenerator()
         results = await _run_entries(items, attempts, processor, audio_gen, normalizer, audio_dir)
         for (entry, _mode, _prompt), result in zip(items, results):
             attempt = attempts[entry.id]
@@ -1076,7 +1066,6 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
     feed_gen.write_index(episodes, output_dir / "index.html")
     feed_gen.write_episode_pages(episodes, monitor.deferred_entries(), output_dir / "episodes")
     print(f"  Feed now has {len(episodes)} episodes")
-    _gh_output(narrated=narrated)
     if failures:
         send_report(RunReport(
             failures=failures, notices=llm.fallback_notices(),

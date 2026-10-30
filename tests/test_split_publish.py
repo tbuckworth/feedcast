@@ -228,12 +228,10 @@ class TestNarrationPass:
         (report, _), = sent
         assert "gave up after 3 attempts (the run was cut off)" in report.failures[0][1]
 
-    def test_nothing_waiting_is_a_quick_no_op(self, setup, tmp_path, monkeypatch):
-        out_file = tmp_path / "gh_output"
-        monkeypatch.setenv("GITHUB_OUTPUT", str(out_file))
+    def test_nothing_waiting_is_a_quick_no_op(self, setup):
         config, monitor, audio_dir, out, sent = setup
         self._narrate(setup)
-        assert out_file.read_text() == "narrated=0\n" and not (out / "feed.xml").exists()
+        assert not (out / "feed.xml").exists()
 
 
 def test_deferred_post_keeps_its_first_pass_bullets(tmp_path, monkeypatch):

@@ -22,7 +22,7 @@ import json
 import re
 from dataclasses import asdict, dataclass, field
 
-from .llm import EmptyCompletion, MODEL_CHECKER, MODEL_WRITER, complete
+from .llm import EmptyCompletion, complete
 
 MATERIAL = ("high", "medium")
 VERDICTS = ("contradicted", "distorted", "unsupported")
@@ -164,8 +164,7 @@ async def revise(script: str, source: str, flags: list[dict],
 
 
 async def verify_script(script: str, source: str, *, writer_system_prompt: str,
-                        label: str = "", client=None, revise_once: bool = True,
-                        ) -> tuple[str, Fidelity]:
+                        label: str = "", client=None) -> tuple[str, Fidelity]:
     """Check `script` against `source`; fix it once if needed. Returns (script, fidelity)."""
     try:
         total, flags = await check(script, source, client)
@@ -174,9 +173,6 @@ async def verify_script(script: str, source: str, *, writer_system_prompt: str,
         print(f"    Fidelity check{f' ({label})' if label else ''}: "
               f"{total} claims, {len(flags)} flags, {len(material)} material")
         if not material:
-            return script, fid
-        if not revise_once:
-            fid.status = "flagged"
             return script, fid
         revised = await revise(script, source, material, writer_system_prompt, client)
         if len(revised) < 0.6 * len(script):

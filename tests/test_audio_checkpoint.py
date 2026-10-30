@@ -47,13 +47,13 @@ def test_failed_chunk_keeps_the_others_and_the_retry_only_redoes_it(tmp_path, mo
     out = tmp_path / "abc123def456_title.mp3"
 
     with pytest.raises(RuntimeError, match=r"1 of 3 TTS chunks failed \(2 kept for retry\)"):
-        asyncio.run(g.generate(TEXT, out, "title", http_client=None))
+        asyncio.run(g.generate(TEXT, out, http_client=None))
     work = tmp_path / ".partial" / "abc123def456_title"
     assert sorted(p.name for p in work.glob("*.wav")) == ["chunk_000.wav", "chunk_002.wav"]
     assert len(calls) == 3
 
     fail_on.clear()
-    result = asyncio.run(g.generate(TEXT, out, "title", http_client=None))
+    result = asyncio.run(g.generate(TEXT, out, http_client=None))
     assert result == out and out.stat().st_size > 0
     assert calls[3:] == ["Sentence 1"]          # only the missing chunk was synthesised
     assert not work.exists()                    # checkpoints cleared once the MP3 exists
@@ -73,12 +73,12 @@ def test_a_busy_model_moves_the_rest_of_the_run_to_the_next_one(tmp_path, monkey
     monkeypatch.setattr(audio.llm, "fallback_log", [])
     g = _generator()
     out = tmp_path / "abc123def456_title.mp3"
-    assert asyncio.run(g.generate(TEXT, out, "title", http_client=None)) == out
+    assert asyncio.run(g.generate(TEXT, out, http_client=None)) == out
     assert models.count("ResembleAI/chatterbox-multilingual") == 3
     assert len(audio.llm.fallback_log) == 1 and "multilingual" in audio.llm.fallback_log[0]
     # The next episode starts on multilingual and never tries turbo again.
     models.clear()
-    asyncio.run(g.generate(TEXT, tmp_path / "fedcba654321_next.mp3", "next", http_client=None))
+    asyncio.run(g.generate(TEXT, tmp_path / "fedcba654321_next.mp3", http_client=None))
     assert set(models) == {"ResembleAI/chatterbox-multilingual"}
 
 
@@ -89,4 +89,4 @@ def test_when_every_model_is_busy_the_chunk_fails(tmp_path, monkeypatch):
     monkeypatch.setattr(audio, "generate_with_deepinfra_async", fake_tts)
     monkeypatch.setattr(audio.llm, "fallback_log", [])
     with pytest.raises(RuntimeError, match="3 of 3 TTS chunks failed"):
-        asyncio.run(_generator().generate(TEXT, tmp_path / "abc123def456_t.mp3", "t", http_client=None))
+        asyncio.run(_generator().generate(TEXT, tmp_path / "abc123def456_t.mp3", http_client=None))

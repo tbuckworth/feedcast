@@ -64,7 +64,6 @@ class NewsAggregator:
         # Prediction-market odds for the chosen stories, and the day's big
         # unexplained moves (src/markets.py). None leaves the briefing as it was.
         self.markets = markets
-        self.last_markets = MarketContext()
         self.recent_briefings = recent_briefings or []
         self.client = None   # None: llm.complete() routes with fallbacks; tests pin a fake
         # Sources that returned nothing this run. A dead feed reads as a slow
@@ -285,7 +284,6 @@ class NewsAggregator:
             print(f"  Selected {len(selected)} stories; full text for {got}")
         markets = (await self.markets.build((selected or articles)[:self.full_text_stories or 12])
                    if self.markets else MarketContext())
-        self.last_markets = markets
         formatted = self._format_briefing_input(articles, selected, markets)
         print("  Synthesizing briefing via LLM...")
         briefing_text = await self.synthesize_briefing(formatted, markets.instructions())

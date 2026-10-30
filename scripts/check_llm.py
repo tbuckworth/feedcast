@@ -12,6 +12,33 @@ from src.news import NewsAggregator
 from src.normalizer import TextNormalizer
 from src.verify import check
 
+# Text for the normaliser, and what must be gone once it is spoken. Every case
+# has digits, so none may come back with any.
+NORMALIZER_CASES = {
+    "dates_iso": ("The paper was published on 2026-02-07 and revised on 2026-03-15.", []),
+    "dates_us": ("The meeting is scheduled for 02/14/2026 and the deadline is 12/31/2026.", ["/"]),
+    "dates_relative": ("On Jan 3rd, 2025, the 1st version was released. "
+                       "The 23rd revision came on Nov 2nd.", []),
+    "large_numbers": ("The model has 175,000,000,000 parameters and was trained on "
+                      "1.4 trillion tokens over 34 days.", []),
+    "decimals": ("The loss decreased from 3.14159 to 0.0042, a 99.87% improvement.", ["%"]),
+    "currency": ("OpenAI raised $6.6B at a $157B valuation. The compute cost was $100M.", ["$"]),
+    "percentages": ("The accuracy improved from 78.3% to 94.7%, while the false positive "
+                    "rate dropped to 0.2%.", ["%"]),
+    "abbreviations": ("The model (e.g. GPT-4) uses RLHF, i.e. reinforcement learning from "
+                      "human feedback, etc.", ["e.g.", "i.e.", "etc."]),
+    "mixed_content": (
+        "On 2026-01-15, Anthropic released Claude 4.5 with 2x the context window. "
+        "The benchmark scores improved by 23.4% vs. the previous version. "
+        "Training cost approx. $50M over 90 days on 10,000 H100 GPUs. "
+        "See https://anthropic.com/research for details.",
+        ["%", "$", "vs.", "approx.", "https://"]),
+    "date_pronunciation": (
+        "The events of September 11th, 2001 changed the world. "
+        "By 2024-06-15, 23 years had passed. "
+        "The 1st amendment was ratified on 12/15/1791.", ["/"]),
+}
+
 
 async def main():
     articles = [
@@ -52,10 +79,14 @@ async def main():
         raise RuntimeError("Checker missed the deliberate numeric contradiction")
     print("PASS: checker catches a deliberate contradiction")
 
-    normalized = await TextNormalizer().normalize_for_tts("The lab reported that 45% passed.")
-    if not normalized.strip() or "%" in normalized or "45" in normalized:
-        raise RuntimeError("Normalizer did not convert the percentage")
-    print("PASS: TTS normalization (text only)")
+    normalizer = TextNormalizer()
+    spoken = await asyncio.gather(*(normalizer.normalize_for_tts(text)
+                                    for text, _ in NORMALIZER_CASES.values()))
+    for (name, (_, gone)), normalized in zip(NORMALIZER_CASES.items(), spoken):
+        left = [s for s in gone if s in normalized]
+        if not normalized.strip() or any(c.isdigit() for c in normalized) or left:
+            raise RuntimeError(f"Normalizer left digits or {left} in {name}: {normalized!r}")
+    print(f"PASS: TTS normalization, {len(NORMALIZER_CASES)} cases (text only)")
 
     bullets = await safe_bullets(briefing, is_briefing=True, label="Fictional smoke test")
     if not bullets:

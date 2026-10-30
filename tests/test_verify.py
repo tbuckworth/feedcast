@@ -5,8 +5,8 @@ from types import SimpleNamespace
 
 import pytest
 
-from src.llm import pinned_target
-from src.verify import (MODEL_CHECKER, Fidelity, fidelity_markdown,
+from src.llm import MODEL_CHECKER, pinned_target
+from src.verify import (Fidelity, fidelity_markdown,
                         fidelity_summary, parse_flags, verify_script)
 
 # A pinned client is OpenRouter's, so it is sent each role's OpenRouter spelling.

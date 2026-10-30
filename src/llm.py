@@ -156,14 +156,8 @@ ROLES: dict[str, tuple[Target, ...]] = {
     ),
 }
 
-# The primary model of each role, for logs, bundles and tests.
-MODEL_WRITER = ROLES["writer"][0].model
+# The checker role's primary model, for the email and tests.
 MODEL_CHECKER = ROLES["checker"][0].model
-MODEL_BULLETS = ROLES["bullets"][0].model
-MODEL_NORMALIZER = ROLES["normalizer"][0].model
-# Back-compat aliases; prefer the role names above.
-MODEL_STRONG = MODEL_WRITER
-MODEL_CHEAP = MODEL_WRITER
 
 # The SDK default is 600s x 2 retries, so one wedged request can stall a run
 # for ~30 min. Flash calls finish in well under a minute; bound them.
@@ -327,16 +321,6 @@ def _native_effort(route: Route, reasoning: dict | None) -> str | None:
     return effort if effort and effort != "none" else None
 
 
-def get_client() -> AsyncOpenAI:
-    """The OpenRouter client. Kept for callers that manage their own calls."""
-    return AsyncOpenAI(
-        base_url=ROUTES["openrouter"].base_url,
-        api_key=os.environ.get("OPENROUTER_API_KEY", ""),
-        timeout=LLM_TIMEOUT_SECONDS,
-        max_retries=3,
-    )
-
-
 def _reasoning_kwargs(route: Route, reasoning: dict | None, min_effort: str | None = None) -> dict:
     """Translate the neutral reasoning setting into what this route expects."""
     if not reasoning:
@@ -397,11 +381,11 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
                    check: Callable[[str], str | None] | None = None) -> Completion:
     """Run one chat completion for `role`, falling back along its target list.
 
-    `client` pins the call to one client with no fallback: tests use it, and
-    so does anything that manages its own client. Such a client is assumed to
-    be OpenRouter's (`get_client()`), so the role's first OpenRouter target is
-    used — for the bullets role that is `openai/gpt-6.1-sol`, not the OpenAI
-    direct spelling. `reasoning` overrides the target's default for this call.
+    `client` pins the call to one client with no fallback: tests use it. Such
+    a client is assumed to be OpenRouter's, so the role's first OpenRouter
+    target is used — for the bullets role that is `openai/gpt-6.1-sol`, not
+    the OpenAI direct spelling. `reasoning` overrides the target's default for
+    this call.
 
     `fallback_on_empty=False` lets an empty reply (choices present, no text)
     propagate instead of trying the next target: the checker's first attempt
