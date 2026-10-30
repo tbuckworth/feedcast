@@ -6,6 +6,7 @@ import json
 from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 
+import httpx
 import pytest
 
 import src.main as main
@@ -131,8 +132,7 @@ class TestWriterInput:
         assert "Cause found by a news search: The Journal reported" in \
                _ctx_with_story_and_move(found).moves_section()
         assert "no clear cause" in _ctx_with_story_and_move({"found": False}).moves_section()
-        assert "not looked up" in _ctx_with_story_and_move(None).moves_section()
-        assert "55% to 3%" in _ctx_with_story_and_move(None).moves_section()
+        assert "55% to 3%" in _ctx_with_story_and_move({"found": False}).moves_section()
 
     def test_no_market_data_means_no_instructions_and_an_unchanged_message(self):
         assert MarketContext().instructions() == "" and not MarketContext()
@@ -163,8 +163,9 @@ class TestWriterInput:
                              author="Feedcast Bot", verify=False)
         story = {"title": "Brown runs on datacenters", "source": "Guardian", "category": "politics",
                  "summary": "b", "url": "https://news/ohio", "published": NOW}
-        text = agg._format_briefing_input([story], [story], _ctx_with_story_and_move(None))
-        assert "Prediction markets on this story" in text and text.rstrip().endswith("not looked up.")
+        text = agg._format_briefing_input([story], [story],
+                                          _ctx_with_story_and_move({"found": False}))
+        assert "Prediction markets on this story" in text and text.rstrip().endswith("no clear cause.")
         assert agg._format_briefing_input([story], [story]) == \
                agg._format_briefing_input([story], [story], MarketContext())
 
@@ -174,6 +175,117 @@ class TestWriterInput:
         monkeypatch.setattr(MarketScout, "_build", boom)
         ctx = asyncio.run(MarketScout(rules=RULES, polymarket_tags=["ai"]).build([]))
         assert not ctx and "prediction markets skipped" in notices.report()[0]
+
+
+class _Anthropic:
+    """Anthropic's Messages API with web search, for find_cause: a paid API, so
+    each call returns the next of `replies` (a text block's text) or raises it."""
+
+    def __init__(self, *replies):
+        self.replies = list(replies)
+        self.messages = SimpleNamespace(create=self._create)
+
+    async def _create(self, **kw):
+        reply = self.replies.pop(0)
+        if isinstance(reply, Exception):
+            raise reply
+        return SimpleNamespace(stop_reason="end_turn",
+                               content=[SimpleNamespace(type="text", text=reply)])
+
+
+def _market_api(monkeypatch, handler) -> None:
+    """Send every market request to `handler` instead of the network."""
+    real = httpx.AsyncClient
+    monkeypatch.setattr(markets.httpx, "AsyncClient",
+                        lambda **kw: real(transport=httpx.MockTransport(handler), **kw))
+
+
+BILL_EVENT = {"id": 7, "slug": "ai-bill", "title": "AI bill", "markets": [{
+    "id": "1", "question": "Will Congress pass an AI safety bill in 2026?",
+    "outcomes": '["Yes", "No"]', "outcomePrices": '["0.30", "0.70"]',
+    "oneDayPriceChange": -0.25, "volumeNum": 500000, "volume1mo": 100000, "volume24hr": 40000,
+    "endDate": (datetime.now(timezone.utc) + timedelta(days=90)).isoformat(),
+    "clobTokenIds": '["tok1", "tok2"]'}]}
+BILL = "Will Congress pass an AI safety bill in 2026?"
+
+
+class TestFailuresReachTheEmail:
+    """A market call that fails, or a model reply that cannot be read, costs the
+    briefing a market, some odds or a chart. Each used to cost it in silence."""
+
+    def test_a_failed_cause_lookup_drops_the_move_instead_of_reading_as_no_cause(
+            self, monkeypatch):
+        monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
+        monkeypatch.setattr(markets, "native_anthropic",
+                            lambda: _Anthropic("I looked, but here is prose, not JSON."))
+        assert asyncio.run(markets.find_cause(_m(), NOW)) is None
+        (note,) = notices.report()
+        assert note.startswith(f"market cause lookup for {BILL!r} failed (the reply was not JSON")
+        assert note.endswith("left out of the briefing")
+
+    def test_no_anthropic_key_is_a_failed_lookup_too(self, monkeypatch):
+        monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+        assert asyncio.run(markets.find_cause(_m(), NOW)) is None
+        assert "(ANTHROPIC_API_KEY not set)" in notices.report()[0]
+
+    def test_a_search_that_finds_nothing_is_a_finding(self, monkeypatch):
+        monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
+        monkeypatch.setattr(markets, "native_anthropic",
+                            lambda: _Anthropic('{"found": false, "summary": ""}'))
+        assert asyncio.run(markets.find_cause(_m(), NOW)) == {"found": False}
+        assert notices.report() == []
+
+    def test_scan_history_and_cause_failures_are_counted_and_the_move_left_out(
+            self, monkeypatch, routes):
+        def handler(request):
+            if request.url.host == "gamma-api.polymarket.com":
+                return httpx.Response(200, json=[BILL_EVENT])
+            if request.url.host == "api.elections.kalshi.com":
+                if request.url.params["series_ticker"] == "KXBAD":
+                    return httpx.Response(503)
+                return httpx.Response(200, json={"events": []})
+            return httpx.Response(502)          # the CLOB's price history
+        _market_api(monkeypatch, handler)
+        routes["anthropic"] = FakeApi(["Sorry, I can only answer in prose."])   # the checker
+        monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
+        monkeypatch.setattr(markets, "native_anthropic", lambda: _Anthropic(RuntimeError("down")))
+        scout = MarketScout(rules=RULES, polymarket_tags=["ai"], kalshi_series=["KXBAD", "KXOK"])
+        story = {"title": "Senate debates an AI bill", "url": "https://news/bill",
+                 "summary": "The bill would require safety tests.", "published": NOW}
+
+        ctx = asyncio.run(scout._build([story]))
+
+        assert ctx.moves == [] and ctx.causes == {} and ctx.stories == {}
+        kalshi, queries, history, long_history, cause = notices.report()
+        assert kalshi.startswith("prediction markets: 1 of 2 Kalshi series scans failed "
+                                 "(first: KXBAD: HTTPStatusError")
+        assert queries.startswith("prediction markets: the market queries reply was not JSON")
+        assert history.startswith("prediction markets: 1 of 1 30-day price histories failed")
+        assert long_history.startswith("prediction markets: 1 of 1 long price histories failed")
+        assert cause.startswith(f"market cause lookup for {BILL!r} failed (RuntimeError: down)")
+
+    def test_failed_searches_and_an_unreadable_match_are_reported(self, routes):
+        close = int((datetime.now(timezone.utc) + timedelta(days=60)).timestamp() * 1000)
+
+        def handler(request):
+            if request.url.host == "gamma-api.polymarket.com":
+                return httpx.Response(500)
+            return httpx.Response(200, json=[{
+                "id": "m1", "question": "Will the Senate pass an AI bill in 2026?",
+                "probability": 0.4, "volume": 1000, "uniqueBettorCount": 120,
+                "closeTime": close, "url": "https://manifold.markets/m1"}])
+        routes["anthropic"] = FakeApi(['{"0": ["AI bill"]}', "No good match, sorry."])
+
+        async def run():
+            async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+                return await markets.link_stories(
+                    client, [{"title": "Senate debates an AI bill", "summary": "s"}], RULES, [])
+
+        assert asyncio.run(run()) == {}
+        searched, matched = notices.report()
+        assert searched.startswith("prediction markets: 1 of 2 market searches failed "
+                                   "(first: Polymarket 'AI bill': HTTPStatusError")
+        assert matched.startswith("prediction markets: the market matching reply was not JSON")
 
 
 class TestReportedMoves:
