@@ -11,6 +11,8 @@ from typing import Optional
 
 import feedparser
 
+from .bundle import bundle_path
+
 
 MAX_AUTHORS = 5
 
@@ -54,6 +56,28 @@ def extract_authors(entry, feed_name: str) -> list[str]:
 def episode_id(entry_id: str) -> str:
     """Short stable id shared by an episode's audio, transcript and bundle files."""
     return hashlib.sha256(entry_id.encode()).hexdigest()[:12]
+
+
+def transcript_path(transcript_dir: Path, entry_id: str) -> Path:
+    """Where a briefing's script is published for the feed's transcript link.
+
+    feed.py writes it and cleanup deletes it. It lives here, beside episode_id,
+    because feed.py imports this module, so cleanup cannot import from feed.py.
+    """
+    return transcript_dir / f"{entry_id}.txt"
+
+
+_BRIEFING_PREFIX = "news-briefing-"
+
+
+def briefing_id(date: str) -> str:
+    """The entry id of the daily news briefing for `date` (YYYY-MM-DD)."""
+    return f"{_BRIEFING_PREFIX}{date}"
+
+
+def is_briefing(entry_id: str) -> bool:
+    """Whether `entry_id` is a daily news briefing's (briefing_id)."""
+    return entry_id.startswith(_BRIEFING_PREFIX)
 
 
 @dataclass
@@ -715,11 +739,11 @@ class FeedMonitor:
                         if path.exists():
                             path.unlink()
                     if transcript_dir:
-                        txt_path = transcript_dir / f"{entry_id}.txt"
+                        txt_path = transcript_path(transcript_dir, entry_id)
                         if txt_path.exists():
                             txt_path.unlink()
                     if sources_dir:
-                        md_path = sources_dir / f"{episode_id(entry_id)}.md"
+                        md_path = bundle_path(sources_dir, episode_id(entry_id))
                         if md_path.exists():
                             md_path.unlink()
 

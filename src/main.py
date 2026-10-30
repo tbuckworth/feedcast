@@ -15,8 +15,9 @@ from .bundle import write_bundle
 from .config import CONFIG_PATH, ROOT, Config, FeedConfig, load_config
 from .digest import safe_bullets
 from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
+from .env import env_flag
 from .extractor import ExtractionError, url_to_feed_entry
-from .feed import Episode, FeedGenerator, episode_page_url
+from .feed import Episode, FeedGenerator, audio_url, episode_page_url, feed_url
 from .fulltext import enrich_entry
 from .html_text import clean_html
 from .lesswrong import posted_at
@@ -24,7 +25,7 @@ from . import notices
 from .market_charts import charts_for_report
 from .markets import MarketRules, MarketScout
 from .mathiness import MathsVerdict, assess
-from .monitor import FeedEntry, FeedMonitor, episode_id, stored_json
+from .monitor import FeedEntry, FeedMonitor, briefing_id, episode_id, is_briefing, stored_json
 from .news import NewsAggregator
 from .normalizer import TextNormalizer
 from .processor import ContentProcessor
@@ -34,11 +35,6 @@ from .processor import ContentProcessor
 # CI killed it. feedparser 6.x exposes no timeout argument, so bound it at the
 # socket layer. Only affects blocking sockets; asyncio/httpx are unaffected.
 socket.setdefaulttimeout(30)
-
-
-def generate_episode_id(entry_id: str) -> str:
-    """Generate a short, unique episode ID from entry ID."""
-    return episode_id(entry_id)
 
 
 @dataclass
@@ -86,7 +82,7 @@ async def process_entry(
     digest_task = asyncio.create_task(
         _same(entry.bullets) if entry.bullets else
         safe_bullets(attempt.processed_text or attempt.normalized_text or "",
-                     is_briefing=entry.id.startswith("news-briefing-"),
+                     is_briefing=is_briefing(entry.id),
                      label=entry.title,
                      sources=entry.sources)
     )
@@ -106,9 +102,8 @@ async def process_entry(
                   f"({len(attempt.normalized_text)} chars)")
 
         attempt.stage = "tts"
-        episode_id = generate_episode_id(entry.id)
         audio_path = await audio_gen.generate_episode(
-            attempt.normalized_text, audio_dir, episode_id, entry.title, http_client,
+            attempt.normalized_text, audio_dir, episode_id(entry.id), entry.title, http_client,
         )
     except BaseException:
         digest_task.cancel()
@@ -218,8 +213,8 @@ async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> list[tupl
     print(f"  Backfilling digests for {len(todo)} entries...")
 
     async def one(row: dict) -> None:
-        is_briefing = row["id"].startswith("news-briefing-")
-        if is_briefing:
+        briefing = is_briefing(row["id"])
+        if briefing:
             text = row["content"] or ""
         else:
             entry = FeedEntry(
@@ -233,7 +228,7 @@ async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> list[tupl
                 print(f"    Recovered full text for {entry.title} "
                       f"({gain.before:,} -> {gain.after:,})")
             text = clean_html(entry.content)
-        bullets = await safe_bullets(text, is_briefing=is_briefing, label=row["title"])
+        bullets = await safe_bullets(text, is_briefing=briefing, label=row["title"])
         monitor.set_bullets(row["id"], bullets)
         print(f"    {len(bullets)} bullets: {row['title'][:56]}")
 
@@ -327,7 +322,7 @@ async def async_main(config_path: Path | None = None) -> None:
         print(f"Reprocess requested for: {reprocess_entry}")
 
     # Check for force-verbatim override
-    force_verbatim = os.environ.get("FORCE_VERBATIM", "").strip().lower() in ("true", "1", "yes")
+    force_verbatim = env_flag("FORCE_VERBATIM")
     if force_verbatim:
         if not reprocess_entry:
             print("Warning: FORCE_VERBATIM is set but no REPROCESS_ENTRY specified — flag will have no effect")
@@ -359,13 +354,13 @@ async def async_main(config_path: Path | None = None) -> None:
 
     # Before the TTS setup: constructing AudioGenerator demands a DeepInfra key
     # and uploads the voice sample, and a resend makes no audio at all.
-    if os.environ.get("RESEND_REPORT", "").strip().lower() in ("true", "1", "yes"):
+    if env_flag("RESEND_REPORT"):
         await _resend_report(monitor, config, feed_gen, audio_dir, output_dir)
         return
     if _run_pass() == "narrate":
         await _narrate_deferred(monitor, config, feed_gen, audio_dir, output_dir)
         return
-    if os.environ.get("PREVIEW_BRIEFING", "").strip().lower() in ("true", "1", "yes"):
+    if env_flag("PREVIEW_BRIEFING"):
         await _preview_briefing(monitor, config)
         return
 
@@ -526,17 +521,14 @@ async def async_main(config_path: Path | None = None) -> None:
             # the database a second run today (a reprocess, a test run, the late
             # GitHub fire) must not pay for selection, fetches, writing and
             # checking again only to throw the result away.
-            today_id = f"news-briefing-{datetime.now():%Y-%m-%d}"
+            today_id = briefing_id(f"{datetime.now():%Y-%m-%d}")
             if monitor.is_processed(today_id):
                 print(f"  {today_id} already exists; skipping briefing generation")
-                briefing_entry = None
             else:
                 briefing_entry = await aggregator.generate_briefing()
+                if briefing_entry:
+                    entries_to_process.insert(0, (briefing_entry, "verbatim", config.default_prompt))
             dead_sources += aggregator.dead_sources
-            if briefing_entry and not monitor.is_processed(briefing_entry.id):
-                entries_to_process.insert(0, (briefing_entry, "verbatim", config.default_prompt))
-            elif briefing_entry:
-                print(f"  News briefing already processed today")
 
     # Maths filter: posts built on real mathematics are linked, not narrated.
     # Bypassed for inject and reprocess — both are explicit "I want this one"
@@ -550,7 +542,7 @@ async def async_main(config_path: Path | None = None) -> None:
         print(f"\nChecking {len(entries_to_process)} entries for maths density...")
         candidates = [
             (i, e) for i, (e, _m, _p) in enumerate(entries_to_process)
-            if not e.id.startswith("news-briefing-")
+            if not is_briefing(e.id)
         ]
         verdicts = await asyncio.gather(
             *[asyncio.to_thread(assess, e.link, e.content,
@@ -586,8 +578,7 @@ async def async_main(config_path: Path | None = None) -> None:
     # dropped are not fetched twice, and in reprocess mode too, which is usually
     # someone asking for a bad episode to be done again.
     if entries_to_process and not inject_url:
-        enrichable = [e for e, _m, _p in entries_to_process
-                      if not e.id.startswith("news-briefing-")]
+        enrichable = [e for e, _m, _p in entries_to_process if not is_briefing(e.id)]
         gains = await asyncio.gather(
             *[asyncio.to_thread(enrich_entry, e) for e in enrichable],
             return_exceptions=True,
@@ -659,8 +650,7 @@ async def async_main(config_path: Path | None = None) -> None:
             if isinstance(result, BaseException):
                 # Only feed entries can be found again tomorrow. A briefing is
                 # regenerated daily anyway, and an injected URL has ntfy.
-                queue = (submitted.feed_name in feed_names
-                         and not submitted.id.startswith("news-briefing-"))
+                queue = submitted.feed_name in feed_names and not is_briefing(submitted.id)
                 _report_entry_failure(submitted, attempts[submitted.id], result,
                                       monitor, failures, queue=queue)
                 continue
@@ -668,10 +658,10 @@ async def async_main(config_path: Path | None = None) -> None:
             monitor.mark_processed(entry, audio_path.name, content=entry.content)
             monitor.clear_failure(entry.id)
             if entry.bundle:
-                write_bundle(sources_dir, generate_episode_id(entry.id), entry.bundle)
+                write_bundle(sources_dir, episode_id(entry.id), entry.bundle)
             new_entry_ids.add(entry.id)
             # Store news briefing text for future dedup context
-            if entry.id.startswith("news-briefing-") and briefing_entry:
+            if is_briefing(entry.id) and briefing_entry:
                 today = datetime.now().strftime("%Y-%m-%d")
                 monitor.store_news_briefing(today, briefing_entry.content)
                 if briefing_entry.markets:
@@ -743,8 +733,9 @@ async def async_main(config_path: Path | None = None) -> None:
 
     # Email the run report. Off when FEEDCAST_EMAIL_TO is unset; a send that
     # fails is recorded, and the workflow fails the run after publishing.
+    # FEEDCAST_EMAIL_ALWAYS sends it even on a run that produced nothing.
     if (new_entry_ids or failures or maths_skipped or dead_sources or deferring
-            or _email_always()):
+            or env_flag("FEEDCAST_EMAIL_ALWAYS")):
         # Charts first: a chart that fails is a notice, and the report takes
         # the notices as they stand when it is built.
         charts, images = (charts_for_report(briefing_entry)
@@ -845,7 +836,7 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
         episodes=[item(title=f"Preview: {entry.title}", bullets=entry.bullets,
                        fidelity=entry.fidelity, writer=entry.writer),
                   item(title="Full script", briefing_text=entry.content)],
-        notices=notices.report(), feed_url=f"{base}/feed.xml", site_url=base,
+        notices=notices.report(), feed_url=feed_url(base), site_url=base,
         charts=charts,
     )
     _email(report, subject_tag="[Preview]", images=images)
@@ -968,7 +959,7 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
     if failures:
         _email(RunReport(
             failures=failures, notices=notices.report(),
-            feed_url=f"{config.podcast.base_url}/feed.xml", site_url=config.podcast.base_url,
+            feed_url=feed_url(config.podcast.base_url), site_url=config.podcast.base_url,
             total_in_feed=len(episodes)), operator_only=True)
 
 
@@ -1061,16 +1052,6 @@ def _report_unnormalized(normalizer: TextNormalizer) -> None:
             print(f"::warning title=Feedcast normaliser::{msg}")
 
 
-def _email_always() -> bool:
-    """Whether to email even on a run that produced nothing."""
-    return os.environ.get("FEEDCAST_EMAIL_ALWAYS", "").strip().lower() in ("true", "1", "yes")
-
-
-def _fidelity_of(row: dict) -> dict | None:
-    """Read a stored fidelity check; None for rows without one."""
-    return _json_dict(row, "fidelity")
-
-
 def _json_dict(row: dict, column: str) -> dict | None:
     """A JSON object stored in `column`; None when the row has none. Corrupt JSON raises."""
     return stored_json(row, column, dict)
@@ -1120,22 +1101,22 @@ def _build_run_report(
 
     def to_report(ep: Episode) -> ReportEpisode:
         row = db_by_id.get(ep.id, {})
-        is_briefing = ep.id.startswith("news-briefing-")
+        briefing = is_briefing(ep.id)
         feed_name = row.get("feed_name", "")
         author = (row.get("author") or "").strip() or feed_name
         return ReportEpisode(
             title=ep.title,
-            author="" if is_briefing else author,
+            author="" if briefing else author,
             feed_name=feed_name,
             link=ep.link or "",
-            audio_url=f"{base_url}/audio/{ep.audio_file}",
+            audio_url=audio_url(base_url, ep.audio_file),
             duration_seconds=ep.duration_seconds,
-            is_briefing=is_briefing,
-            briefing_text=(row.get("content") or "") if is_briefing else "",
+            is_briefing=briefing,
+            briefing_text=(row.get("content") or "") if briefing else "",
             bullets=_bullets_of(row),
             published=ep.published,
             curated=_curated_date(row, ep.published),
-            fidelity=_fidelity_of(row),
+            fidelity=_json_dict(row, "fidelity"),
             writer=_json_dict(row, "writer"),
         )
 
@@ -1167,7 +1148,7 @@ def _build_run_report(
         ],
         dead_sources=sorted(set(dead_sources or [])),
         notices=notices.report(),
-        feed_url=f"{base_url}/feed.xml",
+        feed_url=feed_url(base_url),
         site_url=base_url,
         total_in_feed=len(episodes),
     )

@@ -28,6 +28,7 @@ BACKUP = "#9a5b00"
 
 DEFAULT_PORT = 587
 
+from .env import env_flag
 from .llm import model_name
 from .verify import fidelity_summary, material_flags
 
@@ -641,7 +642,7 @@ def is_test_run() -> bool:
     On 2026-09-08 two debugging re-runs each emailed the whole BCC list, one of
     them announcing nothing but a failure.
     """
-    return os.environ.get("FEEDCAST_TEST_RUN", "").strip().lower() in ("1", "true", "yes")
+    return env_flag("FEEDCAST_TEST_RUN")
 
 
 def _addresses(raw: str) -> list[str]:
