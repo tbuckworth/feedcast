@@ -71,7 +71,7 @@ async def process_entry(
 
     if attempt.normalized_text is None and attempt.processed_text is None:
         attempt.stage = "process"
-        attempt.processed_text = await processor.process(entry, mode, prompt, title=entry.title)
+        attempt.processed_text = await processor.process(entry, mode, prompt)
         print(f"    Processed text: {len(attempt.processed_text)} chars")
     elif attempt.processed_text is not None:
         print(f"    Resuming with the script from an earlier attempt "
@@ -187,7 +187,7 @@ async def _prepare_deferred(
         attempt = attempts[entry.id]
         if attempt.normalized_text is None and attempt.processed_text is None:
             attempt.stage = "process"
-            attempt.processed_text = await processor.process(entry, mode, prompt, title=entry.title)
+            attempt.processed_text = await processor.process(entry, mode, prompt)
         attempt.stage = "digest"
         entry.bullets = await safe_bullets(
             attempt.processed_text or attempt.normalized_text or "",

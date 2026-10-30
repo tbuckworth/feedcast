@@ -175,6 +175,16 @@ def test_reasoning_off_is_sent_as_sols_lowest_effort(routes):
     assert routes["openai"].calls[0]["reasoning_effort"] == "low"
 
 
+def test_sol_checks_at_low_effort_when_the_call_sets_none(routes):
+    # The market scout's checker calls set no reasoning. When Sol is the only
+    # checker left it serves them at low, as it does in every other role,
+    # rather than at the provider's default.
+    routes["openai"] = FakeApi(["[]"])
+    done = asyncio.run(complete("checker", MSGS, max_tokens=50))
+    assert done.target.model == "gpt-6.1-sol"
+    assert routes["openai"].calls[0]["reasoning_effort"] == "low"
+
+
 def test_bullets_run_sol_at_its_lowest_effort(routes):
     # GPT-6.1 Sol 400s on "none", so the bullets ask for low.
     routes["openai"] = FakeApi(["- a"])

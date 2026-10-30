@@ -11,10 +11,58 @@ from typing import Optional
 from .config import PodcastMetaConfig
 from .monitor import episode_id
 
-# Register namespace prefixes
-ET.register_namespace("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd")
-ET.register_namespace("atom", "http://www.w3.org/2005/Atom")
-ET.register_namespace("podcast", "https://podcastindex.org/namespace/1.0")
+ITUNES_NS = "http://www.itunes.com/dtds/podcast-1.0.dtd"
+ATOM_NS = "http://www.w3.org/2005/Atom"
+PODCAST_NS = "https://podcastindex.org/namespace/1.0"
+ET.register_namespace("itunes", ITUNES_NS)
+ET.register_namespace("atom", ATOM_NS)
+ET.register_namespace("podcast", PODCAST_NS)
+
+# The site's colours and date format, shared by the index and the episode pages.
+_INK, _MUTED, _ACCENT = "#1b2024", "#66717a", "#1f6f78"
+_DATE = "%d %b %Y"
+
+_INDEX_STYLE = f"""\
+h1{{font-size:26px;margin:0 0 6px}} p{{color:{_MUTED};margin:0 0 18px}}
+.sub a{{display:inline-block;background:{_ACCENT};color:#fff;text-decoration:none;padding:8px 14px;border-radius:4px;margin:0 8px 8px 0}}
+ul{{list-style:none;padding:0;margin:26px 0 0}} li{{padding:12px 0;border-top:1px solid #d9e0de}}
+li a{{color:{_INK};text-decoration:none;font-weight:600}} li a:hover{{text-decoration:underline}}
+.m{{display:block;font-size:13px;color:{_MUTED};margin-top:3px}} .m a{{color:{_ACCENT};font-weight:400}}"""
+
+_EPISODE_STYLE = f"""\
+h1{{font-size:24px;line-height:1.3;margin:0 0 6px}}
+.m{{color:{_MUTED};font-size:13px;margin:0 0 22px}} a{{color:{_ACCENT}}} audio{{width:100%;margin:6px 0 14px}}
+.note{{background:#fff;border-left:3px solid {_ACCENT};padding:12px 16px;margin:0 0 18px}}"""
+
+
+def _page(lang: str, title: str, style: str, body: str, head: str = "") -> str:
+    """A page of the site: the head and base style every page shares, around `body`.
+
+    `title` and `body` are HTML, escaped by the caller; `style` is the page's
+    own CSS rules and `head` any further head elements.
+    """
+    return f"""<!doctype html>
+<html lang="{escape(lang)}"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">{head}
+<title>{title}</title>
+<style>
+body{{margin:0;padding:32px 20px 60px;background:#f5f7f6;color:{_INK};font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}}
+main{{max-width:680px;margin:0 auto}}
+{style}
+</style></head><body><main>
+{body}
+</main></body></html>
+"""
+
+
+def _minutes(seconds: int) -> int:
+    """An episode's length in whole minutes, as the pages print it: never under one."""
+    return max(1, round(seconds / 60))
+
+
+def _meta_line(*parts: str) -> str:
+    """The grey line under an episode's title: the parts it has, between middle dots."""
+    return " &middot; ".join(p for p in parts if p)
 
 
 def episode_page_url(base_url: str, entry_id: str) -> str:
@@ -40,9 +88,6 @@ class Episode:
 
 class FeedGenerator:
     """Generates podcast RSS 2.0 XML feed."""
-
-    ITUNES_NS = "http://www.itunes.com/dtds/podcast-1.0.dtd"
-    PODCAST_NS = "https://podcastindex.org/namespace/1.0"
 
     def __init__(self, config: PodcastMetaConfig, *, retention_days: int):
         self.config = config
@@ -117,33 +162,20 @@ class FeedGenerator:
         c = self.config
         rows = []
         for ep in sorted(episodes, key=lambda e: e.published, reverse=True):
-            mins = max(1, round(ep.duration_seconds / 60))
-            src = (f' &middot; <a href="{escape(ep.link, quote=True)}">source</a>'
-                   if ep.link else "")
+            src = (f'<a href="{escape(ep.link, quote=True)}">source</a>' if ep.link else "")
+            meta = _meta_line(f"{ep.published:{_DATE}}", f"{_minutes(ep.duration_seconds)} min",
+                              escape(ep.author), src)
             rows.append(
                 f'<li><a href="audio/{escape(ep.audio_file, quote=True)}">{escape(ep.title)}</a>'
-                f'<span class="m">{ep.published:%d %b %Y} &middot; {mins} min'
-                f'{" &middot; " + escape(ep.author) if ep.author else ""}{src}</span></li>')
-        html = f"""<!doctype html>
-<html lang="{escape(c.language)}"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{escape(c.title)}</title>
-<link rel="alternate" type="application/rss+xml" title="{escape(c.title, quote=True)}" href="feed.xml">
-<style>
-body{{margin:0;padding:32px 20px 60px;background:#f5f7f6;color:#1b2024;font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}}
-main{{max-width:680px;margin:0 auto}} h1{{font-size:26px;margin:0 0 6px}} p{{color:#66717a;margin:0 0 18px}}
-.sub a{{display:inline-block;background:#1f6f78;color:#fff;text-decoration:none;padding:8px 14px;border-radius:4px;margin:0 8px 8px 0}}
-ul{{list-style:none;padding:0;margin:26px 0 0}} li{{padding:12px 0;border-top:1px solid #d9e0de}}
-li a{{color:#1b2024;text-decoration:none;font-weight:600}} li a:hover{{text-decoration:underline}}
-.m{{display:block;font-size:13px;color:#66717a;margin-top:3px}} .m a{{color:#1f6f78;font-weight:400}}
-</style></head><body><main>
+                f'<span class="m">{meta}</span></li>')
+        html = _page(c.language, escape(c.title), _INDEX_STYLE, f"""\
 <h1>{escape(c.title)}</h1>
 <p>{escape(c.description)}</p>
 <div class="sub"><a href="feed.xml">Subscribe (RSS)</a><a href="app/">Send a URL</a></div>
 <ul>{"".join(rows)}</ul>
-<p style="margin-top:28px;font-size:13px">{len(episodes)} episodes in the feed. Episodes are kept for {self.retention_days} days.</p>
-</main></body></html>
-"""
+<p style="margin-top:28px;font-size:13px">{len(episodes)} episodes in the feed. Episodes are kept for {self.retention_days} days.</p>""",
+                     head=f'\n<link rel="alternate" type="application/rss+xml" '
+                          f'title="{escape(c.title, quote=True)}" href="feed.xml">')
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(html, encoding="utf-8")
 
@@ -164,27 +196,17 @@ li a{{color:#1b2024;text-decoration:none;font-weight:600}} li a:hover{{text-deco
 
         def page(title: str, meta: str, body: str, refresh: bool = False) -> str:
             head = '<meta http-equiv="refresh" content="120">' if refresh else ""
-            return f"""<!doctype html>
-<html lang="{escape(c.language)}"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">{head}
-<title>{escape(title)} &middot; {escape(c.title)}</title>
-<style>
-body{{margin:0;padding:32px 20px 60px;background:#f5f7f6;color:#1b2024;font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}}
-main{{max-width:680px;margin:0 auto}} h1{{font-size:24px;line-height:1.3;margin:0 0 6px}}
-.m{{color:#66717a;font-size:13px;margin:0 0 22px}} a{{color:#1f6f78}} audio{{width:100%;margin:6px 0 14px}}
-.note{{background:#fff;border-left:3px solid #1f6f78;padding:12px 16px;margin:0 0 18px}}
-</style></head><body><main>
+            return _page(c.language, f"{escape(title)} &middot; {escape(c.title)}",
+                         _EPISODE_STYLE, f"""\
 <h1>{escape(title)}</h1>
 <p class="m">{meta}</p>
 {body}
-<p class="m"><a href="../">{escape(c.title)}</a> &middot; <a href="../feed.xml">RSS feed</a></p>
-</main></body></html>
-"""
+<p class="m"><a href="../">{escape(c.title)}</a> &middot; <a href="../feed.xml">RSS feed</a></p>""",
+                         head=head)
 
         for ep in episodes:
-            mins = max(1, round(ep.duration_seconds / 60)) if ep.duration_seconds else 0
-            meta = " &middot; ".join(filter(None, [
-                escape(ep.author), f"{ep.published:%d %b %Y}", f"{mins} min" if mins else ""]))
+            meta = _meta_line(escape(ep.author), f"{ep.published:{_DATE}}",
+                              f"{_minutes(ep.duration_seconds)} min" if ep.duration_seconds else "")
             src = escape(f"../audio/{ep.audio_file}", quote=True)
             link = (f' &middot; <a href="{escape(ep.link, quote=True)}">Read the original</a>'
                     if ep.link else "")
@@ -197,8 +219,7 @@ main{{max-width:680px;margin:0 auto}} h1{{font-size:24px;line-height:1.3;margin:
             name = f"{episode_id(entry.id)}.html"
             if name in wanted:
                 continue  # narrated after all; the real page wins
-            meta = " &middot; ".join(filter(None, [
-                escape(entry.author), f"{entry.published:%d %b %Y}"]))
+            meta = _meta_line(escape(entry.author), f"{entry.published:{_DATE}}")
             if row.get("last_error"):
                 note = ("Narration failed on the last attempt. It will be tried again "
                         "on the next run, and this page will play the episode once it "
@@ -223,8 +244,6 @@ main{{max-width:680px;margin:0 auto}} h1{{font-size:24px;line-height:1.3;margin:
 
     def generate(self, episodes: list[Episode], output_path: Path) -> None:
         """Generate the podcast RSS feed XML."""
-        ATOM_NS = "http://www.w3.org/2005/Atom"
-
         # Create root element
         rss = ET.Element("rss")
         rss.set("version", "2.0")
@@ -256,16 +275,16 @@ main{{max-width:680px;margin:0 auto}} h1{{font-size:24px;line-height:1.3;margin:
             datetime.now(timezone.utc))
 
         # iTunes specific tags
-        ET.SubElement(channel, f"{{{self.ITUNES_NS}}}author").text = self.config.author
-        ET.SubElement(channel, f"{{{self.ITUNES_NS}}}explicit").text = "false"
-        ET.SubElement(channel, f"{{{self.ITUNES_NS}}}type").text = "episodic"
+        ET.SubElement(channel, f"{{{ITUNES_NS}}}author").text = self.config.author
+        ET.SubElement(channel, f"{{{ITUNES_NS}}}explicit").text = "false"
+        ET.SubElement(channel, f"{{{ITUNES_NS}}}type").text = "episodic"
 
-        owner = ET.SubElement(channel, f"{{{self.ITUNES_NS}}}owner")
-        ET.SubElement(owner, f"{{{self.ITUNES_NS}}}name").text = self.config.author
-        ET.SubElement(owner, f"{{{self.ITUNES_NS}}}email").text = self.config.email
+        owner = ET.SubElement(channel, f"{{{ITUNES_NS}}}owner")
+        ET.SubElement(owner, f"{{{ITUNES_NS}}}name").text = self.config.author
+        ET.SubElement(owner, f"{{{ITUNES_NS}}}email").text = self.config.email
 
         if self.config.image_url:
-            image = ET.SubElement(channel, f"{{{self.ITUNES_NS}}}image")
+            image = ET.SubElement(channel, f"{{{ITUNES_NS}}}image")
             image.set("href", self.config.image_url)
 
             # Standard RSS <image> for broader player compatibility
@@ -275,7 +294,7 @@ main{{max-width:680px;margin:0 auto}} h1{{font-size:24px;line-height:1.3;margin:
             ET.SubElement(rss_image, "link").text = self.config.base_url
 
         # Category
-        category = ET.SubElement(channel, f"{{{self.ITUNES_NS}}}category")
+        category = ET.SubElement(channel, f"{{{ITUNES_NS}}}category")
         category.set("text", self.config.category)
 
         # Add episodes
@@ -297,7 +316,7 @@ main{{max-width:680px;margin:0 auto}} h1{{font-size:24px;line-height:1.3;margin:
 
             if episode.author:
                 ET.SubElement(
-                    item, f"{{{self.ITUNES_NS}}}author"
+                    item, f"{{{ITUNES_NS}}}author"
                 ).text = episode.author
 
             # Enclosure (audio file)
@@ -313,14 +332,14 @@ main{{max-width:680px;margin:0 auto}} h1{{font-size:24px;line-height:1.3;margin:
 
             # iTunes episode tags
             ET.SubElement(
-                item, f"{{{self.ITUNES_NS}}}duration"
+                item, f"{{{ITUNES_NS}}}duration"
             ).text = self._format_duration(episode.duration_seconds)
-            ET.SubElement(item, f"{{{self.ITUNES_NS}}}explicit").text = "false"
-            ET.SubElement(item, f"{{{self.ITUNES_NS}}}episodeType").text = "full"
+            ET.SubElement(item, f"{{{ITUNES_NS}}}explicit").text = "false"
+            ET.SubElement(item, f"{{{ITUNES_NS}}}episodeType").text = "full"
 
             # Podcast 2.0 transcript
             if episode.transcript_url:
-                transcript = ET.SubElement(item, f"{{{self.PODCAST_NS}}}transcript")
+                transcript = ET.SubElement(item, f"{{{PODCAST_NS}}}transcript")
                 transcript.set("url", episode.transcript_url)
                 transcript.set("type", "text/plain")
 

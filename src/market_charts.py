@@ -19,12 +19,11 @@ import matplotlib.dates as mdates  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
 
 from . import notices  # noqa: E402
-from .email_report import ChartNote, bullet_urls  # noqa: E402
+# The email's palette: the charts appear only in it.
+from .email_report import ACCENT, MUTED, RULE, ChartNote, bullet_urls  # noqa: E402
 from .monitor import FeedEntry  # noqa: E402
 
-LINE = "#1f5f8b"
 MARK = "#b5532c"
-MUTED = "#6b6b6b"
 ZOOM_DAYS = 7
 # The 7-day zoom only for a market whose history goes back more than this:
 # three months, Titus's call on 2026-10-14. Younger ones get the one panel.
@@ -69,7 +68,7 @@ def _style(ax, probs: list[float], full_range: bool, span_days: float) -> None:
     else:
         ax.xaxis.set_major_formatter(mdates.ConciseDateFormatter(locator, show_offset=False))
     ax.tick_params(axis="x", labelsize=8, colors=MUTED)
-    ax.grid(axis="y", color="#e3e3e3", linewidth=0.6)
+    ax.grid(axis="y", color=RULE, linewidth=0.6)
     for side in ("top", "right"):
         ax.spines[side].set_visible(False)
     for side in ("left", "bottom"):
@@ -79,9 +78,9 @@ def _style(ax, probs: list[float], full_range: bool, span_days: float) -> None:
 def _plot(ax, history, story_time, label_end: bool) -> None:
     times = [t for t, _ in history]
     probs = [p * 100 for _, p in history]
-    ax.plot(times, probs, color=LINE, linewidth=1.5)
+    ax.plot(times, probs, color=ACCENT, linewidth=1.5)
     ax.fill_between(times, probs, ax.get_ylim()[0] if ax.get_ylim()[0] > 0 else 0,
-                    color=LINE, alpha=0.08)
+                    color=ACCENT, alpha=0.08)
     # A story from this morning can postdate the last trade: still mark it.
     if story_time and times[0] <= story_time <= times[-1] + timedelta(days=2):
         ax.axvline(story_time, color=MARK, linestyle="--", linewidth=1)
@@ -89,7 +88,7 @@ def _plot(ax, history, story_time, label_end: bool) -> None:
                     xytext=(3, -10), textcoords="offset points", color=MARK, fontsize=8)
     if label_end:
         ax.annotate(f"{probs[-1]:.0f}%", (times[-1], probs[-1]), xytext=(4, 0),
-                    textcoords="offset points", va="center", fontsize=9, color=LINE,
+                    textcoords="offset points", va="center", fontsize=9, color=ACCENT,
                     fontweight="bold")
 
 
@@ -113,11 +112,12 @@ def render_chart(history: list[tuple[datetime, float]], story_time: datetime | N
         fig, ax = plt.subplots(figsize=(width_px / dpi, height_px / dpi), dpi=dpi)
         az = None
     try:
-        span = lambda pts: (pts[-1][0] - pts[0][0]).total_seconds() / 86400  # noqa: E731
-        _style(ax, [p * 100 for _, p in history], full_range=True, span_days=span(history))
+        _style(ax, [p * 100 for _, p in history], full_range=True,
+               span_days=history_days(history))
         _plot(ax, history, story_time, label_end=True)
         if az is not None:
-            _style(az, [p * 100 for _, p in zoom], full_range=False, span_days=span(zoom))
+            _style(az, [p * 100 for _, p in zoom], full_range=False,
+                   span_days=history_days(zoom))
             _plot(az, zoom, story_time, label_end=False)
             az.set_title(f"Last {ZOOM_DAYS} days", fontsize=8, color=MUTED, loc="left", pad=3)
         fig.subplots_adjust(left=0.08, right=0.93, top=0.95, bottom=0.12 if zoom else 0.14)

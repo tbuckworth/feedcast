@@ -1,6 +1,7 @@
 """Tests for author extraction and the emailed run report."""
 
 import ast
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -8,7 +9,8 @@ import pytest
 
 from src import main
 from src.email_report import (
-    ReportEpisode, RunReport, _meta_bits, build_html, build_text, format_duration,
+    ChartNote, LinkedPost, ReportEpisode, RunReport, _meta_bits, build_html, build_text,
+    format_duration,
 )
 from src.monitor import MAX_AUTHORS, extract_authors, format_authors
 
@@ -118,6 +120,42 @@ class TestEmailReport:
         assert "A Post" in txt
         assert "https://example.com/post" in txt
         assert "https://example.com/a.mp3" in txt
+
+    def test_a_post_from_a_feed_named_after_its_author_names_them_once(self):
+        # The "Linked, not narrated" row printed "Scott Alexander · Scott Alexander".
+        r = RunReport(linked=[LinkedPost(title="Maths", author="Scott Alexander",
+                                         feed_name="Scott Alexander", link="https://acx/m"),
+                              LinkedPost(title="Proofs", author="Ada Lovelace",
+                                         feed_name="LessWrong Frontpage", link="")],
+                      recent=[self._ep(author="Scott Alexander", feed_name="Scott Alexander")])
+        html, txt = build_html(r, datetime(2026, 10, 30)), build_text(r, datetime(2026, 10, 30))
+        assert "Scott Alexander &middot; Scott Alexander" not in html
+        assert "Ada Lovelace &middot; LessWrong Frontpage" in html
+        assert "(Scott Alexander)" in txt and "(Ada Lovelace / LessWrong Frontpage)" in txt
+
+    def test_html_and_text_have_the_same_sections_in_the_same_order(self):
+        flag = {"verdict": "distorted", "severity": "high", "script_quote": "the agents were not capable",
+                "source_quote": "they had the access", "explanation": "inverted"}
+        briefing = self._ep(title="Daily News Briefing", is_briefing=True, bullets=["A story."])
+        report = RunReport(
+            episodes=[self._ep(fidelity={"status": "flagged", "flags": [flag]}), briefing],
+            charts=[ChartNote(cid="c0", title="Will it?", platform="Polymarket",
+                              url="https://pm/will-it", caption="Now 40%")],
+            failures=[("Broken", "TTSError: 502")], dead_sources=["Reuters"],
+            linked=[LinkedPost(title="Maths", author="Ada", feed_name="LW", link="https://lw/m")],
+            notices=["digest: served by a backup"], recent=[self._ep(title="Older")],
+            feed_url="https://f/feed.xml", total_in_feed=9)
+        when = datetime(2026, 10, 30)
+        html, txt = build_html(report, when), build_text(report, when)
+        html_titles = re.findall(r'text-transform:uppercase;color:#6b6b6b;">([^<]+)</td>', html)
+        text_titles = [line[:-1] for line in txt.splitlines()
+                       if line.endswith(":") and not line.startswith((" ", "*"))]
+        assert html_titles == text_titles == [
+            "Daily news briefing", "Prediction markets", "New episode", "Failed",
+            "Sources that returned nothing", "Linked, not narrated", "Checked against source",
+            "Fallbacks and skips this run", "Also published this week"]
+        assert "2 new episodes" in html and "2 new episodes; 9 in feed" in txt
+        assert "https://pm/will-it" in txt
 
     def test_email_is_off_without_a_recipient(self, monkeypatch):
         """FEEDCAST_EMAIL_TO is the off switch: unset, nothing is sent and

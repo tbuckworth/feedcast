@@ -49,11 +49,20 @@ class ContentProcessor:
         Decides which publish an episode goes out in: everything a writer
         produced (summaries, the briefing) first, full readings after.
         """
+        return self._reads_verbatim(entry, mode)[0]
+
+    def _reads_verbatim(self, entry: FeedEntry, mode: str) -> tuple[bool, int]:
+        """reads_verbatim, with the cleaned length auto mode measured (0 in other modes).
+
+        The one place the rule lives: `process` resolves auto mode with it too,
+        so the publish an episode goes out in always matches how it is read.
+        """
+        chars = len(clean_html(entry.content)) if mode == "auto" else 0
         if entry.id.startswith("news-briefing-"):
-            return False
+            return False, chars
         if mode == "auto":
-            return len(clean_html(entry.content)) <= self.auto_verbatim_limit
-        return mode == "verbatim"
+            return chars <= self.auto_verbatim_limit, chars
+        return mode == "verbatim", chars
 
     async def process_tables(self, html_content: str) -> str:
         """Convert HTML tables to prose before clean_html strips them."""
@@ -163,20 +172,20 @@ Content:
 
         return f"{intro}\n\n{clean_content}"
 
-    async def process(
-        self, entry: FeedEntry, mode: str, prompt: Optional[str] = None, title: Optional[str] = None
-    ) -> str:
+    async def process(self, entry: FeedEntry, mode: str, prompt: Optional[str] = None) -> str:
         """Process a feed entry based on mode (summarize or verbatim).
 
         Args:
             entry: The feed entry to process
             mode: Processing mode - "summarize", "verbatim", or "auto"
             prompt: Optional custom prompt for summarization
-            title: Title for the end announcement (defaults to entry.title)
         """
-        # Use provided title or fall back to entry title
-        episode_title = spoken_title(title or entry.title, entry.author)
         is_news_briefing = entry.id.startswith("news-briefing-")
+        if mode == "auto":
+            verbatim, chars = self._reads_verbatim(entry, mode)
+            mode = "verbatim" if verbatim else "summarize"
+            sign = "≤" if chars <= self.auto_verbatim_limit else ">"
+            print(f"    Auto mode: {chars} chars {sign} {self.auto_verbatim_limit} → {mode}")
 
         if is_news_briefing and mode == "verbatim":
             # News briefings: the synthesis already opens with the date, skip redundant intro
@@ -188,16 +197,6 @@ Content:
             text = f"{intro}\n\n{summary}"
         elif mode == "verbatim":
             text = await self.process_verbatim(entry)
-        elif mode == "auto":
-            clean_text = clean_html(entry.content)
-            if self.reads_verbatim(entry, mode):
-                print(f"    Auto mode: {len(clean_text)} chars ≤ {self.auto_verbatim_limit} → verbatim")
-                text = await self.process_verbatim(entry)
-            else:
-                print(f"    Auto mode: {len(clean_text)} chars > {self.auto_verbatim_limit} → summarize")
-                summary = await self.summarize(entry, prompt)
-                intro = f"Summary of {spoken_title(entry.title, entry.author)} by {entry.author}."
-                text = f"{intro}\n\n{summary}"
         else:
             raise ValueError(f"Unknown processing mode: {mode}")
 
@@ -205,5 +204,5 @@ Content:
         if is_news_briefing:
             text = f"{text}\n\nEnd of daily news briefing."
         else:
-            text = f"{text}\n\nEnd of {episode_title}."
+            text = f"{text}\n\nEnd of {spoken_title(entry.title, entry.author)}."
         return text

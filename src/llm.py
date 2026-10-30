@@ -69,6 +69,13 @@ class Route:
     name: str
     key_env: str
     base_url: str | None
+    # How the route takes a reasoning setting (`_reasoning_kwargs`):
+    # "effort_param", OpenAI's top-level `reasoning_effort`; "reasoning_object",
+    # OpenRouter's `reasoning` object, which also takes a token budget; or
+    # "native_only", Anthropic, whose OpenAI-compatible endpoint takes no
+    # setting that works, so a call with an effort goes to its native
+    # Messages API instead (`_native_effort`).
+    reasoning_format: str
     # OpenAI's reasoning models take `max_completion_tokens`, reject
     # `max_tokens`, and reject any temperature but the default.
     max_tokens_param: str = "max_tokens"
@@ -76,14 +83,16 @@ class Route:
 
 
 ROUTES = {
-    "openrouter": Route("openrouter", "OPENROUTER_API_KEY", "https://openrouter.ai/api/v1"),
-    "openai": Route("openai", "OPENAI_API_KEY", None, "max_completion_tokens", False),
+    "openrouter": Route("openrouter", "OPENROUTER_API_KEY", "https://openrouter.ai/api/v1",
+                        reasoning_format="reasoning_object"),
+    "openai": Route("openai", "OPENAI_API_KEY", None, reasoning_format="effort_param",
+                    max_tokens_param="max_completion_tokens", accepts_temperature=False),
     # Sonnet 5, Sonnet 5.5 and Opus 5.5 reject any sampling parameter ("`temperature` is
     # deprecated for this model"), so the checker's temperature=0 400'd here
     # and, with OpenRouter refusing Claude since 2026-09-22, every check fell
     # through to Gemini 3 Flash.
     "anthropic": Route("anthropic", "ANTHROPIC_API_KEY", "https://api.anthropic.com/v1/",
-                       accepts_temperature=False),
+                       reasoning_format="native_only", accepts_temperature=False),
 }
 
 
@@ -120,16 +129,17 @@ class Target:
 # the fidelity check remains independent of the writer. Every role has a
 # target on at least two of the three accounts.
 #
-# The writer's non-Claude backup is GPT-6.1 Sol (Titus's pick, 2026-10-10) at
-# effort low, the same setting Opus writes at; Sol cannot switch reasoning off.
-SOL_WRITER = dict(reasoning={"effort": "low"}, min_effort="low")
+# GPT-6.1 Sol runs at effort low wherever it serves: it cannot switch
+# reasoning off, and low is the setting Opus writes at. It is the writer's
+# non-Claude backup (Titus's pick, 2026-10-10).
+SOL_LOW = dict(reasoning={"effort": "low"}, min_effort="low")
 ROLES: dict[str, tuple[Target, ...]] = {
     "writer": (
         Target("anthropic", "claude-opus-5-5", {"effort": "low"}),
         Target("openrouter", "anthropic/claude-opus-5.5", {"effort": "low"}),
         Target("anthropic", "claude-opus-4-6"),
-        Target("openai", "gpt-6.1-sol", **SOL_WRITER),
-        Target("openrouter", "openai/gpt-6.1-sol", **SOL_WRITER),
+        Target("openai", "gpt-6.1-sol", **SOL_LOW),
+        Target("openrouter", "openai/gpt-6.1-sol", **SOL_LOW),
     ),
     "checker": (
         Target("anthropic", "claude-sonnet-5-5"),
@@ -139,11 +149,11 @@ ROLES: dict[str, tuple[Target, ...]] = {
         Target("openrouter", "google/gemini-3-flash-preview"),
         # Last: the same family as the writer's backup, but a check by a
         # sibling beats no check when Anthropic and OpenRouter are both down.
-        Target("openai", "gpt-6.1-sol", min_effort="low"),
+        Target("openai", "gpt-6.1-sol", **SOL_LOW),
     ),
     "bullets": (
-        Target("openai", "gpt-6.1-sol", {"effort": "low"}, min_effort="low"),
-        Target("openrouter", "openai/gpt-6.1-sol", {"effort": "low"}, min_effort="low"),
+        Target("openai", "gpt-6.1-sol", **SOL_LOW),
+        Target("openrouter", "openai/gpt-6.1-sol", **SOL_LOW),
         Target("anthropic", "claude-opus-5-5", {"effort": "low"}),
     ),
     # Gemini stays first after a head-to-head with Haiku 5.5 (2026-10-10,
@@ -158,11 +168,11 @@ ROLES: dict[str, tuple[Target, ...]] = {
     "normalizer": (
         Target("openrouter", "google/gemini-3-flash-preview"),
         Target("anthropic", "claude-haiku-5-5"),
-        Target("openai", "gpt-6.1-sol", {"effort": "low"}, min_effort="low"),
+        Target("openai", "gpt-6.1-sol", **SOL_LOW),
     ),
 }
 
-# The checker role's primary model, for the email and tests.
+# The checker role's primary model, for tests.
 MODEL_CHECKER = ROLES["checker"][0].model
 
 # The SDK default is 600s x 2 retries, so one wedged request can stall a run
@@ -342,8 +352,8 @@ async def _anthropic_native(model: str, messages: list[dict], max_tokens: int, e
 
 
 def _native_effort(route: Route, reasoning: dict | None) -> str | None:
-    """The effort to send natively, for an anthropic-route call that sets one."""
-    if route.name != "anthropic" or not reasoning or reasoning.get("off"):
+    """The effort to send natively, for a call that sets one on a "native_only" route."""
+    if route.reasoning_format != "native_only" or not reasoning or reasoning.get("off"):
         return None
     effort = reasoning.get("effort")
     return effort if effort and effort != "none" else None
@@ -356,20 +366,19 @@ def _reasoning_kwargs(route: Route, reasoning: dict | None, min_effort: str | No
     off = reasoning.get("off") or reasoning.get("effort") == "none"
     if off and min_effort:
         reasoning, off = {"effort": min_effort}, False
-    if route.name == "openai":
+    if route.reasoning_format == "effort_param":
         if off:
             return {"reasoning_effort": "none"}
         if "budget" in reasoning:
             return {"reasoning_effort": "low"}
         return {"reasoning_effort": reasoning["effort"]}
-    if route.name == "openrouter":
+    if route.reasoning_format == "reasoning_object":
         if off:
             return {"extra_body": {"reasoning": {"enabled": False}}}
         if "budget" in reasoning:
             return {"extra_body": {"reasoning": {"max_tokens": reasoning["budget"]}}}
         return {"extra_body": {"reasoning": {"effort": reasoning["effort"]}}}
-    # Anthropic's OpenAI-compatible endpoint takes no reasoning setting that
-    # works; a call with an effort goes to the native API instead
+    # "native_only": a call with an effort goes to the native API instead
     # (`_native_effort`), and anything else is sent without one.
     return {}
 

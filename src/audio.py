@@ -11,6 +11,7 @@ from pathlib import Path
 import httpx
 
 from . import notices
+from .chunking import split_sentences
 
 MAX_CHUNK_CHARS = 500  # Tested: 650 works but 500 has better pacing
 
@@ -99,39 +100,8 @@ def upload_voice_to_deepinfra(voice_path: Path, api_key: str, max_retries: int =
 
 
 def split_into_chunks(text: str, max_chars: int = MAX_CHUNK_CHARS) -> list[str]:
-    """Split text into chunks at sentence boundaries."""
-    sentences = re.split(r'(?<=[.!?])\s+', text)
-
-    chunks = []
-    current_chunk = ""
-
-    for sentence in sentences:
-        if len(sentence) > max_chars:
-            if current_chunk:
-                chunks.append(current_chunk.strip())
-                current_chunk = ""
-            parts = re.split(r'(?<=,)\s+', sentence)
-            for part in parts:
-                if len(part) > max_chars:
-                    for i in range(0, len(part), max_chars):
-                        chunks.append(part[i:i+max_chars].strip())
-                elif len(current_chunk) + len(part) + 1 <= max_chars:
-                    current_chunk = current_chunk + " " + part if current_chunk else part
-                else:
-                    if current_chunk:
-                        chunks.append(current_chunk.strip())
-                    current_chunk = part
-        elif len(current_chunk) + len(sentence) + 1 <= max_chars:
-            current_chunk = current_chunk + " " + sentence if current_chunk else sentence
-        else:
-            if current_chunk:
-                chunks.append(current_chunk.strip())
-            current_chunk = sentence
-
-    if current_chunk:
-        chunks.append(current_chunk.strip())
-
-    return [c for c in chunks if c]
+    """Split text into TTS chunks at sentence boundaries, and an over-long sentence at commas."""
+    return split_sentences(text, max_chars, at_commas=True)
 
 
 async def generate_with_deepinfra_async(
@@ -326,62 +296,38 @@ class AudioGenerator:
 
             mp3_path = output_path.with_suffix(".mp3")
 
-            # Generate 2-second silence for episode start
-            intro_silence_path = Path(tmpdir) / "intro_silence.wav"
-            await asyncio.to_thread(
-                subprocess.run,
-                ["ffmpeg", "-y", "-f", "lavfi", "-i", "anullsrc=r=24000:cl=mono",
-                 "-t", "2.0", str(intro_silence_path)],
-                capture_output=True, timeout=10,
-            )
-
-            if len(chunk_files) == 1:
-                # Still need to concat intro silence with single chunk
-                list_file = Path(tmpdir) / "chunks.txt"
-                with open(list_file, 'w') as f:
-                    f.write(f"file '{intro_silence_path}'\n")
-                    f.write(f"file '{chunk_files[0]}'\n")
-
-                result = await asyncio.to_thread(
-                    subprocess.run,
-                    ["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(list_file),
-                     "-acodec", "libmp3lame", "-q:a", "2", str(mp3_path)],
-                    capture_output=True, text=True, timeout=300,
-                )
-                if result.returncode == 0 and mp3_path.exists():
-                    print(f"      {tag}Saved: {mp3_path}")
-                    shutil.rmtree(work_dir, ignore_errors=True)
-                    return mp3_path
-            else:
-                # Generate a short silence to insert between chunks
-                silence_path = Path(tmpdir) / "silence.wav"
+            async def silence(name: str, seconds: float) -> Path:
+                path = Path(tmpdir) / name
                 await asyncio.to_thread(
                     subprocess.run,
                     ["ffmpeg", "-y", "-f", "lavfi", "-i", "anullsrc=r=24000:cl=mono",
-                     "-t", "0.35", str(silence_path)],
+                     "-t", str(seconds), str(path)],
                     capture_output=True, timeout=10,
                 )
+                return path
 
-                list_file = Path(tmpdir) / "chunks.txt"
-                with open(list_file, 'w') as f:
-                    # Start with 2-second intro silence
-                    f.write(f"file '{intro_silence_path}'\n")
-                    for i, chunk_path in enumerate(chunk_files):
-                        f.write(f"file '{chunk_path}'\n")
-                        if i < len(chunk_files) - 1:
-                            f.write(f"file '{silence_path}'\n")
+            # Two seconds before the episode starts, and a short pause between
+            # chunks; none follows the last.
+            intro_silence_path = await silence("intro_silence.wav", 2.0)
+            silence_path = await silence("silence.wav", 0.35) if len(chunk_files) > 1 else None
+            list_file = Path(tmpdir) / "chunks.txt"
+            with open(list_file, 'w') as f:
+                f.write(f"file '{intro_silence_path}'\n")
+                for i, chunk_path in enumerate(chunk_files):
+                    if i:
+                        f.write(f"file '{silence_path}'\n")
+                    f.write(f"file '{chunk_path}'\n")
 
-                result = await asyncio.to_thread(
-                    subprocess.run,
-                    ["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(list_file),
-                     "-acodec", "libmp3lame", "-q:a", "2", str(mp3_path)],
-                    capture_output=True, text=True, timeout=300,
-                )
-                if result.returncode == 0 and mp3_path.exists():
-                    print(f"      {tag}Concatenated: {mp3_path}")
-                    shutil.rmtree(work_dir, ignore_errors=True)
-                    return mp3_path
-
+            result = await asyncio.to_thread(
+                subprocess.run,
+                ["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(list_file),
+                 "-acodec", "libmp3lame", "-q:a", "2", str(mp3_path)],
+                capture_output=True, text=True, timeout=300,
+            )
+            if result.returncode == 0 and mp3_path.exists():
+                print(f"      {tag}Saved: {mp3_path}")
+                shutil.rmtree(work_dir, ignore_errors=True)
+                return mp3_path
             raise RuntimeError(f"FFmpeg failed: {result.stderr}")
 
     async def generate_episode(
