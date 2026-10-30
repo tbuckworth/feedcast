@@ -288,5 +288,5 @@ def test_summary_and_briefing_record_their_writer(routes):
 
     agg = NewsAggregator(sources=[], prompt="Brief.", lookback_hours=24, full_text_stories=12,
                          max_article_chars=6000, author="Feedcast Bot", verify=False)
-    asyncio.run(agg.synthesize_briefing("articles"))
-    assert agg.last_writer["model"] == "gpt-6.1-sol"
+    briefing = asyncio.run(agg.synthesize_briefing("articles"))
+    assert briefing.writer["model"] == "gpt-6.1-sol"

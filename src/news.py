@@ -9,7 +9,7 @@ from .extractor import extract_article
 from .llm import complete, extract_json
 from .markets import MarketContext, MarketScout
 from .monitor import FeedEntry, entry_body, entry_published, report_skipped, warn_if_dead
-from .verify import write_checked
+from .verify import Written, write_checked
 
 # The previous briefings are there for dedup, but the writer also reads them
 # as a style guide. Sol, a fallback writer on 19-21 Sep, closed three to five
@@ -73,9 +73,6 @@ class NewsAggregator:
         self.lookback_hours = lookback_hours
         # Credited as the briefing's author: the podcast's own (config.yaml).
         self.author = author
-        self.last_bundle: str | None = None
-        self.last_fidelity: dict | None = None
-        self.last_writer: dict | None = None
         # Two calls, not one. The writer used to see only each item's RSS
         # blurb (a title and up to 500 characters the publisher wrote), so
         # everything beyond that in the briefing came from the model's memory.
@@ -237,44 +234,35 @@ class NewsAggregator:
         moves = markets.moves_section()
         return f"{text}\n\n{moves}" if moves else text
 
-    async def synthesize_briefing(self, formatted_articles: str, extra_instructions: str = "") -> str:
-        """Synthesize the briefing from formatted articles with the writer role.
+    async def synthesize_briefing(self, formatted_articles: str,
+                                  extra_instructions: str = "") -> Written:
+        """Write the briefing from formatted articles with the writer role, and check it.
 
         `extra_instructions` goes just before the articles, so a day without
         market data sends exactly the message it always did.
         """
-        # Build user message with dedup context from recent briefings
-        user_message_parts = []
-        if self.recent_briefings:
-            user_message_parts.append(PREVIOUS_BRIEFINGS_HEADER)
-            for briefing in self.recent_briefings:
-                user_message_parts.append(f"### {briefing['date']}")
-                user_message_parts.append(briefing["briefing_text"])
-            user_message_parts.append("---")
-            user_message_parts.append("")
-
         # The prompt tells the model to open with "[today's date]" and never
         # says what today is, so it inferred one from the articles and got it
         # wrong: the briefing filed on 2026-08-21 announced itself as
         # "August twenty-second". State the date.
-        user_message_parts.insert(
-            0, f"Today is {datetime.now().strftime('%A, %d %B %Y')}. "
-               f"Use this date when you open the briefing, not a date taken "
-               f"from any article.")
-        user_message_parts.insert(1, "")
+        parts = [f"Today is {datetime.now().strftime('%A, %d %B %Y')}. "
+                 f"Use this date when you open the briefing, not a date taken "
+                 f"from any article.", ""]
+        # Dedup context from recent briefings.
+        if self.recent_briefings:
+            parts.append(PREVIOUS_BRIEFINGS_HEADER)
+            for briefing in self.recent_briefings:
+                parts += [f"### {briefing['date']}", briefing["briefing_text"]]
+            parts += ["---", ""]
         if extra_instructions:
-            user_message_parts += [extra_instructions, ""]
-        user_message_parts.append(ARTICLES_HEADING)
-        user_message_parts.append(formatted_articles)
-        user_message = "\n".join(user_message_parts)
+            parts += [extra_instructions, ""]
+        parts += [ARTICLES_HEADING, formatted_articles]
 
-        written = await write_checked(
-            self.prompt, user_message, title=f"Daily News Briefing - {datetime.now():%Y-%m-%d}",
+        return await write_checked(
+            self.prompt, "\n".join(parts),
+            title=f"Daily News Briefing - {datetime.now():%Y-%m-%d}",
             label="news briefing", check_label="news briefing", verify=self.verify,
             client=self.client)
-        self.last_writer, self.last_fidelity = written.writer, written.fidelity
-        self.last_bundle = written.bundle
-        return written.text
 
     async def generate_briefing(self) -> FeedEntry | None:
         """Orchestrate fetch → format → synthesize, return a FeedEntry or None."""
@@ -298,18 +286,17 @@ class NewsAggregator:
                    if self.markets else MarketContext())
         formatted = self._format_briefing_input(articles, selected, markets)
         print("  Synthesizing briefing via LLM...")
-        briefing_text = await self.synthesize_briefing(formatted, markets.instructions())
-        bundle = self.last_bundle
+        briefing = await self.synthesize_briefing(formatted, markets.instructions())
 
         today = datetime.now().strftime("%Y-%m-%d")
         return FeedEntry(
-            bundle=bundle,
-            fidelity=self.last_fidelity,
-            writer=self.last_writer,
+            bundle=briefing.bundle,
+            fidelity=briefing.fidelity,
+            writer=briefing.writer,
             id=f"news-briefing-{today}",
             title=f"Daily News Briefing - {today}",
             link="",
-            content=briefing_text,
+            content=briefing.text,
             published=datetime.now(),
             author=self.author,
             feed_name="Daily News Briefing",

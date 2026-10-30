@@ -72,11 +72,11 @@ async def main():
 
     briefing = await aggregator.synthesize_briefing(
         aggregator._format_briefing_input(articles, selected))
-    if not briefing.strip() or aggregator.last_fidelity["status"] == "skipped":
+    if not briefing.text.strip() or briefing.fidelity["status"] == "skipped":
         raise RuntimeError("Briefing generation or fidelity check failed")
     print(f"PASS: briefing and fidelity check (written by "
-          f"{model_name(aggregator.last_writer['model'])}"
-          f"{', a backup' if aggregator.last_writer['backup'] else ''})")
+          f"{model_name(briefing.writer['model'])}"
+          f"{', a backup' if briefing.writer['backup'] else ''})")
 
     # Availability alone is not enough: the backup must parse and catch an
     # obvious factual error using the real checker's prompt and token settings.
@@ -94,7 +94,7 @@ async def main():
             raise RuntimeError(f"Normalizer left digits or {left} in {name}: {normalized!r}")
     print(f"PASS: TTS normalization, {len(NORMALIZER_CASES)} cases (text only)")
 
-    bullets = await safe_bullets(briefing, is_briefing=True, label="Fictional smoke test")
+    bullets = await safe_bullets(briefing.text, is_briefing=True, label="Fictional smoke test")
     if not bullets:
         raise RuntimeError("Bullet digest returned no bullets")
     print("PASS: bullet digest")

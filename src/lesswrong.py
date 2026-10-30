@@ -55,7 +55,7 @@ def _parse(stamp: str | None) -> datetime | None:
     return parsed.astimezone(timezone.utc).replace(tzinfo=None)
 
 
-async def posted_at(link: str, client: httpx.AsyncClient | None = None) -> datetime | None:
+async def posted_at(link: str) -> datetime | None:
     """When the post behind this link was published, or None if unknown.
 
     Never raises: a date that cannot be improved simply stays as the feed
@@ -74,17 +74,12 @@ async def posted_at(link: str, client: httpx.AsyncClient | None = None) -> datet
         notices.add(note)
     query = ('{post(input:{selector:{_id:"%s"}}){result{postedAt}}}' % pid)
     try:
-        owned = client is None
-        client = client or httpx.AsyncClient(timeout=TIMEOUT)
-        try:
+        async with httpx.AsyncClient(timeout=TIMEOUT) as client:
             response = await client.post(
                 _graphql_url(link), json={"query": query}, headers=_UA,
             )
             response.raise_for_status()
             data = response.json()
-        finally:
-            if owned:
-                await client.aclose()
     except Exception as exc:
         return failed(f"{type(exc).__name__}: {str(exc)[:160]}")
 
