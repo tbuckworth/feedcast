@@ -281,7 +281,7 @@ class AudioGenerator:
             print(f"    {tag}Reusing {len(cached)} chunk(s) synthesised by an earlier attempt")
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            async def gen_chunk(i: int, chunk: str) -> Path | None:
+            async def gen_chunk(i: int, chunk: str) -> Path:
                 chunk_path = work_dir / f"chunk_{i:03d}.wav"
                 if chunk_path.name in cached:
                     return chunk_path
@@ -301,7 +301,9 @@ class AudioGenerator:
                                 raise
                             self._switch_model(used, e)
                     if not audio_bytes:
-                        return None
+                        # Leaving it out would publish an episode with a gap.
+                        raise RuntimeError(f"chunk {i+1} of {len(chunks)}: no audio "
+                                           f"in DeepInfra's reply")
                     chunk_path.write_bytes(audio_bytes)
                     return chunk_path
 

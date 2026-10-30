@@ -90,3 +90,17 @@ def test_when_every_model_is_busy_the_chunk_fails(tmp_path, monkeypatch):
     monkeypatch.setattr(audio, "generate_with_deepinfra_async", fake_tts)
     with pytest.raises(RuntimeError, match="3 of 3 TTS chunks failed"):
         asyncio.run(_generator().generate(TEXT, tmp_path / "abc123def456_t.mp3", http_client=None))
+
+
+def test_an_empty_audio_chunk_fails_the_episode(tmp_path, monkeypatch):
+    # One chunk comes back as zero bytes. It used to be left out of the MP3
+    # without a word; now it fails like any other chunk, the rest kept for retry.
+    async def fake_tts(text, voice_id, api_key, http_client, *, model, save_debug_wav=None, tag=""):
+        return b"" if text.startswith("Sentence 1") else _wav_bytes()
+
+    monkeypatch.setattr(audio, "generate_with_deepinfra_async", fake_tts)
+    out = tmp_path / "abc123def456_title.mp3"
+    with pytest.raises(RuntimeError, match=r"1 of 3 TTS chunks failed \(2 kept for retry\)"
+                                           r".*chunk 2 of 3: no audio"):
+        asyncio.run(_generator().generate(TEXT, out, http_client=None))
+    assert not out.exists()
