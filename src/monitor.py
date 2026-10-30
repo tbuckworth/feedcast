@@ -142,6 +142,28 @@ def entry_from_dict(data: dict) -> FeedEntry:
     )
 
 
+def stored_author(row: dict) -> str:
+    """The author a processed_posts row names.
+
+    Rows predating the author column store '': they fall back to the feed
+    name, which for the per-author feeds is already the person's name.
+    """
+    return (row.get("author") or "").strip() or row["feed_name"]
+
+
+def entry_from_row(row: dict) -> FeedEntry:
+    """The post a processed_posts row stores, to work on it again after its run.
+
+    The post only: what the pipeline made of it (bullets, fidelity check,
+    writer) stays in the row, where callers read it.
+    """
+    return FeedEntry(
+        id=row["id"], title=row["title"], link=row["link"], content=row["content"] or "",
+        published=datetime.fromisoformat(row["published"]), author=stored_author(row),
+        feed_name=row["feed_name"],
+    )
+
+
 def warn_if_dead(feed, name: str, url: str) -> bool:
     """Say so when a feed returns nothing, and report True if it did.
 

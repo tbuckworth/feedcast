@@ -2,10 +2,11 @@
 
 Each pass of a split run publishes the whole site: feed.xml, the index, a page
 per episode (a waiting page for a post still being narrated) and the
-briefing's transcript. These run async_main on the scratch repository of the
-`pipeline` fixture.
+briefing's transcript. A resend re-sends the email and publishes nothing.
+These run async_main on the scratch repository of the `pipeline` fixture.
 """
 
+import shutil
 import xml.etree.ElementTree as ET
 from datetime import datetime
 
@@ -111,3 +112,12 @@ def test_the_narration_pass_publishes_the_post_into_the_same_site(day):
     assert "<audio" in site[f"episodes/{episode_id(POST)}.html"]
     assert "Does Georgism Work?" in site["index.html"]
 
+
+def test_a_resend_publishes_nothing(day):
+    """It used to rewrite the transcripts: they were written while the episodes were read."""
+    day.run(FEEDCAST_PASS="first")
+    shutil.rmtree(day.root / "output")
+    email = day.run(RESEND_REPORT="true")
+    assert [line for line in email.splitlines() if line.startswith("* ")] == [
+        f"* Daily News Briefing - {TODAY}"]
+    assert not (day.root / "output").exists()
