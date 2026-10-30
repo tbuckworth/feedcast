@@ -60,19 +60,19 @@ def test_normaliser_survives_openrouter_running_out_of_credit(routes):
     routes["openrouter"] = FakeApi([OUT_OF_CREDIT])
     routes["anthropic"] = FakeApi(["forty-five percent", "twenty twenty-six"])
     n = TextNormalizer()
-    assert asyncio.run(n.normalize_for_tts("45%")) == "forty-five percent"
-    assert asyncio.run(n.normalize_for_tts("2026")) == "twenty twenty-six"
+    assert asyncio.run(n.normalize_for_tts("45%", label="ep")) == "forty-five percent"
+    assert asyncio.run(n.normalize_for_tts("2026", label="ep")) == "twenty twenty-six"
     # Asked once; after a 402 the account is not asked again this run.
     assert len(routes["openrouter"].calls) == 1
     assert [c["model"] for c in routes["anthropic"].calls] == ["claude-haiku-5-5"] * 2
-    assert n.unnormalized_chars == 0
+    assert n.unnormalized == {}
 
 
 def test_normaliser_reaches_gpt_when_anthropic_is_out_too(routes):
     routes["openrouter"] = FakeApi([OUT_OF_CREDIT])
     routes["anthropic"] = FakeApi([_error(BadRequestError, 400, "Your credit balance is too low")])
     routes["openai"] = FakeApi(["forty-five percent"])
-    assert asyncio.run(TextNormalizer().normalize_for_tts("45%")) == "forty-five percent"
+    assert asyncio.run(TextNormalizer().normalize_for_tts("45%", label="ep")) == "forty-five percent"
     call = routes["openai"].calls[0]
     assert call["model"] == "gpt-6.1-sol"
     assert call["reasoning_effort"] == "low" and call["max_completion_tokens"] == MAX_OUTPUT_TOKENS
@@ -83,9 +83,9 @@ def test_a_passage_gemini_will_not_take_goes_to_the_next_model(routes):
     routes["openrouter"] = FakeApi(["<no-choices>"])
     routes["anthropic"] = FakeApi(["Prohibited-sounding forty-five percent."])
     n = TextNormalizer()
-    assert asyncio.run(n.normalize_for_tts("Prohibited-sounding 45%.")) \
+    assert asyncio.run(n.normalize_for_tts("Prohibited-sounding 45%.", label="ep")) \
         == "Prohibited-sounding forty-five percent."
-    assert n.unnormalized_chars == 0
+    assert n.unnormalized == {}
     # A refusal is about the passage, not the account.
     assert llm.dead_routes == {}
 
@@ -102,7 +102,7 @@ def test_a_reply_that_lost_text_goes_to_the_next_model(routes):
     routes["openrouter"] = FakeApi(["January first, ten duotrigintillion"])
     routes["anthropic"] = FakeApi([COT])
     n = TextNormalizer()
-    assert asyncio.run(n.normalize_for_tts(COT)) == COT
+    assert asyncio.run(n.normalize_for_tts(COT, label="ep")) == COT
     assert "text was lost" in notices.report()[0]
     assert llm.dead_routes == {}                       # the passage, not the account
 
@@ -112,7 +112,7 @@ def test_a_reply_cut_off_by_a_provider_error_goes_to_the_next_model(routes):
     # "error"; only "length" was checked, so the fragment would have been read.
     routes["openrouter"] = FakeApi([(COT[:int(len(COT) * 0.88)], "error")])
     routes["anthropic"] = FakeApi([COT])
-    assert asyncio.run(TextNormalizer().normalize_for_tts(COT)) == COT
+    assert asyncio.run(TextNormalizer().normalize_for_tts(COT, label="ep")) == COT
     assert "cut off by a provider error" in notices.report()[0]
 
 
@@ -120,13 +120,13 @@ def test_when_every_model_loses_text_the_passage_is_read_as_written(routes):
     for route in ("openrouter", "anthropic", "openai"):
         routes[route] = FakeApi(["I'm not able to normalise that."])
     n = TextNormalizer()
-    assert asyncio.run(n.normalize_for_tts(COT)) == COT
-    assert n.unnormalized_chars == len(COT)
+    assert asyncio.run(n.normalize_for_tts(COT, label="ep")) == COT
+    assert n.unnormalized == {"ep": len(COT)}
 
 
 def test_normalising_lengthens_text_and_that_is_not_lost_text(routes):
     routes["openrouter"] = FakeApi(["forty-five percent of one point five million dollars"])
-    assert asyncio.run(TextNormalizer().normalize_for_tts("45% of $1.5M")) \
+    assert asyncio.run(TextNormalizer().normalize_for_tts("45% of $1.5M", label="ep")) \
         == "forty-five percent of one point five million dollars"
     assert notices.report() == []
 

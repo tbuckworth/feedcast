@@ -18,8 +18,11 @@ from src.config import PodcastMetaConfig, load_config
 from src.email_report import ReportEpisode, RunReport, build_html, build_text, send_report
 from src.feed import Episode, FeedGenerator, episode_page_url
 from src.main import Attempt, _build_run_report, _prepare_deferred, process_entry
+from src import notices
 from src.monitor import FeedEntry, FeedMonitor, episode_id
+from src.normalizer import TextNormalizer
 from src.processor import ContentProcessor
+from tests.conftest import FakeApi
 
 BASE = "https://tbuckworth.github.io/feedcast"
 
@@ -154,10 +157,10 @@ class TestEmail:
 
 
 class _Normalizer:
-    unnormalized_chars = 0
+    unnormalized: dict[str, int] = {}
     def __init__(self, **kw):
         pass
-    async def normalize_for_tts(self, text):
+    async def normalize_for_tts(self, text, *, label):
         return f"spoken: {text}"
 
 
@@ -244,6 +247,21 @@ class TestNarrationPass:
         assert monitor.deferred_entries() == []
         (report, _), = sent
         assert "gave up after 3 attempts (the run was cut off)" in report.failures[0][1]
+
+    def test_a_passage_narrated_as_written_is_reported_with_its_episode(
+            self, setup, routes, monkeypatch, capsys):
+        # The real normaliser, whose only model returns nothing for the post.
+        monkeypatch.setattr(main, "TextNormalizer", TextNormalizer)
+        routes["openrouter"] = FakeApi(["<no-choices>"])
+        monkeypatch.setenv("GITHUB_ACTIONS", "true")
+        config, monitor, audio_dir, out, sent = setup
+        monitor.defer_entry(_entry(), "verbatim", "Clean text.", None, ["b1"])
+        self._narrate(setup)
+        assert monitor.get_entry("acx-1")["audio_file"]         # still narrated, as written
+        msg = ("Does Georgism Work?: 11 chars narrated as written because every "
+               "normaliser model refused them")
+        assert notices.report() == [msg]
+        assert f"::warning title=Feedcast normaliser::{msg}" in capsys.readouterr().out
 
     def test_nothing_waiting_is_a_quick_no_op(self, setup):
         config, monitor, audio_dir, out, sent = setup

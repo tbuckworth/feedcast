@@ -95,6 +95,6 @@ class TestTruncationIsLoud:
             return text
 
         n._normalize_chunk = fake_chunk
-        asyncio.run(n.normalize_for_tts("word " * 12000))
+        asyncio.run(n.normalize_for_tts("word " * 12000, label="ep"))
         assert len(calls) > 1
         assert all(c <= MAX_BATCH_CHARS for c in calls)

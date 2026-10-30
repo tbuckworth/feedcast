@@ -52,12 +52,12 @@ def test_respell_whole_words_only(text, spoken):
 
 def test_normaliser_respells_its_output_even_when_the_model_returns_nothing(monkeypatch):
     norm = TextNormalizer.__new__(TextNormalizer)
-    norm.respellings, norm.unnormalized_chars = TABLE, 0
+    norm.respellings, norm.unnormalized = TABLE, {}
 
-    async def refuse(paragraphs):
+    async def refuse(paragraphs, label):
         return "\n\n".join(paragraphs)            # the narrate-as-written fallback
     norm._normalize_resilient = refuse
-    assert asyncio.run(norm.normalize_for_tts("METR and Amodei.")) == "Meter and Amo-day."
+    assert asyncio.run(norm.normalize_for_tts("METR and Amodei.", label="ep")) == "Meter and Amo-day."
 
 
 def test_configured_respellings_load():

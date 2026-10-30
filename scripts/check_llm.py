@@ -86,8 +86,8 @@ async def main():
     print("PASS: checker catches a deliberate contradiction")
 
     normalizer = TextNormalizer()
-    spoken = await asyncio.gather(*(normalizer.normalize_for_tts(text)
-                                    for text, _ in NORMALIZER_CASES.values()))
+    spoken = await asyncio.gather(*(normalizer.normalize_for_tts(text, label=name)
+                                    for name, (text, _) in NORMALIZER_CASES.items()))
     for (name, (_, gone)), normalized in zip(NORMALIZER_CASES.items(), spoken):
         left = [s for s in gone if s in normalized]
         if not normalized.strip() or any(c.isdigit() for c in normalized) or left:
