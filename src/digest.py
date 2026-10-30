@@ -1,17 +1,11 @@
 """Two-level bullet digests of each episode, for the email rather than the ear.
 
 The email is meant to say what the audio says, so a reader can skip the
-episode and lose nothing but the voice. A few headline bullets do not do that:
-the previous digest asked for 3-6 one-sentence bullets and then dropped any
-over 240 characters, and on 2026-09-16 that left the Zvi episode with two
-bullets out of five written. The reader's own words for it were "a summary of
-the summary".
-
-So each episode gets 4-6 headline bullets, each with 1-4 indented sub-bullets
-carrying the figures, names, examples and caveats the script gives for that
-point. The headline is what a reader in a hurry reads; the sub-bullets are
-what the audio adds. Chosen over an uncapped flat list and a full restatement
-after all three were sent side by side.
+episode and lose nothing but the voice. A few one-sentence headlines do not
+do that, so each episode gets 3 to 5 headline bullets (4 to 6 for the
+briefing), each with 1 to 4 indented sub-bullets carrying the figures, names,
+examples and caveats the script gives for that point. The headline is what a
+reader in a hurry reads; the sub-bullets are what the audio adds.
 
 Input is the spoken script *after* the fidelity check and revision, and never
 the source: the bullets are not checked themselves, and the source is exactly
@@ -20,8 +14,8 @@ the source side is the briefing's list of selected articles, so bullets can
 carry links. This is the only part of the pipeline written to be *read*, which
 inverts most of the rules elsewhere: keep the digits, keep the percent signs.
 
-Written by the "bullets" role (GPT-6.1 Sol, effort low). One call per
-episode, whatever mode the episode was processed in.
+Written by the bullets role (src/llm.py), one call per episode, whatever mode
+the episode was processed in.
 """
 
 import re
@@ -34,7 +28,7 @@ from .llm import complete
 # standing invitation to a surprise bill.
 MAX_DIGEST_CHARS = 120000
 
-MAX_BULLETS = 8            # headlines; the prompt asks for 4-6
+MAX_BULLETS = 8            # headlines; the prompt asks for at most 6
 # The floor drops headings and stray labels, not content. The ceiling drops a
 # paragraph the model returned as one line, rather than render a wall.
 MIN_BULLET_CHARS = 25

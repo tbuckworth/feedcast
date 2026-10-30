@@ -1,34 +1,41 @@
-"""TTS text normalization using LLM."""
+"""A script rewritten for speech by the normalizer role, then respelled for the voice.
+
+The model turns numbers, dates, symbols and abbreviations into words. The
+respellings (config.yaml `pronunciations`) are applied in code afterwards,
+to the spoken text only: a normaliser asked to respell does so differently
+from run to run, and a writer asked to respell puts the respellings into the
+email, the transcripts and the fidelity check. IPA cannot serve as a
+respelling, because Chatterbox reads the symbols as letters.
+"""
 
 import re
 
 from .chunking import SENTENCE_BREAK, pack, split_sentences
 from .llm import EmptyCompletion, complete
 
-# One request's worth of input. Normalisation EXPANDS text — "1,234" becomes
-# nine words — so the output ceiling has to clear this comfortably.
+# One request's worth of input. Normalisation expands text ("1,234" becomes
+# nine words), so the output ceiling has to clear this comfortably.
 MAX_BATCH_CHARS = 18000
 
 # A ceiling, not a spend. Gemini 3 Flash returns ~3,900 tokens for a full
 # 18,000-char batch, but the backups count higher: Haiku 5.5's tokenizer counts
 # ~1.5x Gemini's and it bills its thinking here too, so a dense technical batch
-# took 10,008 (2026-10-10), close to the old 12,000. Raise it again if
-# MAX_BATCH_CHARS or the normalizer role's models change.
+# takes about 10,000. Raise it if MAX_BATCH_CHARS or the normalizer role's
+# models change.
 MAX_OUTPUT_TOKENS = 32000
 
 # A reply shorter than this share of its input lost text. Normalising only
 # lengthens text (every legitimate reply in testing was 1.00-1.63x), but on a
 # post quoting a model's chain of thought Gemini answered the question in it,
 # kept a third and dropped the rest, and Haiku dropped 70%, each with a clean
-# finish (2026-10-10). Such a reply goes to the next model.
+# finish. Such a reply goes to the next model.
 MIN_KEPT = 0.85
 
 
 # A passage the model refuses is halved at sentence boundaries until it is
-# shorter than this, then narrated as written. Gemini's filter blocked a
-# 17,909-char stretch of an ACX review on 2026-09-08 (PROHIBITED_CONTENT) —
-# single-newline prose that batching sees as one paragraph — and a third of the
-# post went out un-normalised when a few sentences were the problem.
+# shorter than this, then narrated as written. Gemini's filter can refuse a
+# whole batch of single-newline prose, which batching sees as one paragraph,
+# when a few sentences in it are the problem.
 MIN_FALLBACK_CHARS = 1500
 
 
@@ -49,13 +56,11 @@ class NormalizationTruncated(RuntimeError):
     """The model hit its output ceiling, so the tail of the text is missing."""
 
 # Rules 3, 6, 8, the "et al." and footnote rules, the GitHub example and the
-# last two paragraphs were added on 2026-10-10 from what testing caught: Gemini
-# expanding contractions ("Why do not landlords") and acronyms ("AI" into
-# "artificial intelligence"), "et al." read as "etcetera", "5 July 2005" as
-# "five July", "7.29" as "seven point twenty-nine"; Haiku leaving "GPT-6.1"
-# and "bf16" as written. Blind judges preferred Gemini's output under this
-# prompt to its output under the old one in 11 of 13 comparisons
-# (docs/normaliser-model-test-2026-10-10.md).
+# last two paragraphs each answer a mistake testing caught: Gemini expanding
+# contractions ("Why do not landlords") and acronyms ("AI" into "artificial
+# intelligence"), "et al." read as "etcetera", "5 July 2005" as "five July",
+# "7.29" as "seven point twenty-nine"; Haiku leaving "GPT-6.1" and "bf16" as
+# written (docs/normaliser-model-test-2026-10-10.md).
 NORMALIZE_PROMPT = """\
 You are a text normalizer preparing written text for text-to-speech (TTS) synthesis.
 
@@ -85,8 +90,7 @@ class TextNormalizer:
 
     def __init__(self, respellings: dict[str, str] | None = None):
         # None routes each call through llm.complete() with its fallbacks;
-        # tests pin a fake. A bare OpenRouter client here had no backup, so
-        # OpenRouter running out of credit (2026-10-10) failed every episode.
+        # tests pin a fake.
         self.client = None
         # Words the voice says wrong, mapped to spellings it says right
         # (config.yaml `pronunciations`, each one measured).
@@ -115,12 +119,12 @@ class TextNormalizer:
     async def _normalize_resilient(self, paragraphs: list[str], label: str) -> str:
         """Normalise a batch, narrowing down to the paragraph the model won't take.
 
-        An empty completion is almost always about one passage — a provider
-        filter, or content Gemini declines — not about the batch as a whole, so
+        An empty completion is almost always about one passage (a provider
+        filter, or content Gemini declines), not about the batch as a whole, so
         halving the batch and trying each side isolates it: by paragraph first,
         then by sentence once a single paragraph is left. The offending passage
         is then narrated as written, which reads "45%" as "forty-five percent
-        sign" at worst; the alternative was no episode (2026-09-06).
+        sign" at worst, rather than losing the episode.
         """
         text = "\n\n".join(paragraphs)
         try:
@@ -172,7 +176,7 @@ class TextNormalizer:
 
         # A truncated completion is indistinguishable from a complete one in the
         # returned text: the episode simply ends mid-article and the MP3 stops.
-        # Fail loudly instead — the run reports the entry and the rest continue.
+        # So it raises: the run reports the entry and the rest continue.
         if done.finish_reason == "length":
             raise NormalizationTruncated(
                 f"{done.target.model} hit its {MAX_OUTPUT_TOKENS}-token output "

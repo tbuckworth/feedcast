@@ -2,14 +2,12 @@
 
 The writer is a single completion with no tools: when its input is thin it
 fills gaps from memory, and when a post quotes someone the author disagrees
-with, the summary can hand the author the other person's view. An audit of
-three summaries on 2026-09-02 found exactly that — Yudkowsky's "zero of 1,200
-agents" repeated as fact after Zvi had corrected it to six; a claim the agents
-"were not capable enough" where Zvi approvingly quotes the opposite — and a
-listener has no way to notice.
+with, the summary can hand the author the other person's view (a figure the
+author quotes in order to correct it, repeated as fact). A listener has no
+way to notice.
 
-So a cheaper model (Sonnet) reads the script against the source and lists
-what is contradicted, distorted or unsupported. If anything material comes
+So the checker role, a different and cheaper model, reads the script against
+the source and lists what is contradicted, distorted or unsupported. If anything material comes
 back, the writer gets one pass to fix exactly those points, then the checker
 reads the result again so the email can say honestly what remains. Omissions
 and paraphrase are never flagged: the point is fidelity, not completeness,
@@ -72,7 +70,8 @@ class Fidelity:
     note: str = ""
     # Which model read the script for the flags the email shows, as
     # llm.Completion.credit() records it: the re-check's once the script was
-    # revised. None when no check succeeded, and on rows from before 2026-10-30.
+    # revised. None when no check succeeded, and on rows stored before the
+    # field existed.
     checker: dict | None = None
 
     def to_dict(self) -> dict:
@@ -110,12 +109,10 @@ def parse_flags(raw: str) -> tuple[int, list[dict]]:
 
 
 # Sonnet reasons before it answers, and the reasoning counts against
-# max_tokens. Left to the provider's defaults it consumed the whole budget:
-# on 2026-09-02 a 6,000 cap truncated the JSON, and a 16,000 cap came back
-# with finish_reason=length and zero visible characters from the CI runner
-# (the desktop, on a different key and route, used ~5,000). So: a fixed
-# thinking budget first, and if the reply is still empty, once more with
-# reasoning off. Verification does not need a long think.
+# max_tokens. Left to the provider's defaults it can consume the whole budget
+# (a 16,000 cap has come back with finish_reason=length and no visible text).
+# So: a fixed thinking budget first, and if the reply is still empty, once
+# more with reasoning off. Verification does not need a long think.
 CHECK_ATTEMPTS = (
     {"budget": 4000},
     {"off": True},
@@ -239,8 +236,8 @@ def fidelity_summary(fid: dict | None) -> str:
     if fid["status"] == "flagged":
         return f"Checked against source: {n} {plural(n)} flagged, not corrected"
     # `remaining` is a fresh read of the revised script, so it can hold flags
-    # the first pass never raised; subtracting it from the draft count went
-    # negative ("-1 corrected", 2026-09-16). Say what each number is instead.
+    # the first pass never raised, and subtracting it from the draft count can
+    # go negative. Say what each number is instead.
     if rem:
         total = len(fid.get("flags", []))
         return (f"Checked against source: {total} {plural(total)} flagged in the draft "

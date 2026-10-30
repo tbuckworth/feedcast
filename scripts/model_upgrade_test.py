@@ -1,7 +1,7 @@
 """Replay a saved writer bundle through model setups and meter every call.
 
-The side-by-side behind each model swap: Opus 5.5 as writer (2026-09-27), and
-GPT-6.1 Sol for the bullets with Sonnet 5.5 as checker (2026-10-30). Takes the
+The side-by-side for a model change, run before `llm.ROLES` changes: it
+compares the current roles with candidate setups on the same input. Takes the
 writer bundle of one episode (data/sources/<id>.md, `src/bundle.py`: the exact
 system prompt and user message the writer saw), then for each setup runs what
 the pipeline runs after story selection: write, fidelity check, one revision if

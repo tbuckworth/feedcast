@@ -9,15 +9,14 @@ Two things, both optional and both silent when they find nothing:
    news was in a way the article cannot.
 2. Moves. Scan the AI markets for big 24-hour moves that none of today's
    stories explains, look up the cause with a web search, and hand them to
-   the writer for a short closing segment. The Anthropic IPO odds fell from
-   fifty-five to three percent on 19 Sep 2026 on a report none of the
-   briefing's sources carried until the 24th.
+   the writer for a short closing segment. A market can move on a report
+   that the briefing's sources carry only days later.
 
-The thresholds come from a 30-day backtest (8 Sep to 8 Oct 2026, 768 AI
-markets): a 15-point move, a volume floor, no markets about to close, no
-leaderboards, and a topic whitelist fired about three days a week in a busy
-month and about once a week without its one big story. Without the volume
-floor some market moved 15 points every single day.
+The thresholds (`MarketRules`: a 15-point move, a volume floor, no markets
+about to close, no leaderboards, and a topic whitelist) come from a 30-day
+backtest over 768 AI markets, in which they fired between about once and
+three times a week. Without the volume floor some market moves 15 points
+every day.
 
 Public read APIs only, no keys: Polymarket (Gamma + CLOB), Kalshi (trade API
 v2) and Manifold (play money, so context only, never a "move"). Every network

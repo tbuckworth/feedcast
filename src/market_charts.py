@@ -25,8 +25,8 @@ from .monitor import FeedEntry  # noqa: E402
 
 MARK = "#b5532c"
 ZOOM_DAYS = 7
-# The 7-day zoom only for a market whose history goes back more than this:
-# three months, Titus's call on 2026-10-14. Younger ones get the one panel.
+# The 7-day zoom only for a market whose history goes back more than this
+# (three months). Younger ones get the one panel.
 ZOOM_MIN_HISTORY_DAYS = 90
 
 

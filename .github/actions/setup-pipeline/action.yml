@@ -7,9 +7,8 @@ description: >-
   checkout).
 
 # Composite steps take no timeout-minutes, so each command is bounded by
-# `timeout` with the limit its workflow step used to carry. A hang fails the
-# step (exit 124, and -v names the command it stopped) instead of running on
-# to the job's timeout.
+# `timeout`. A hang fails the step (exit 124, and -v names the command it
+# stopped) instead of running on to the job's timeout.
 
 inputs:
   pipeline:

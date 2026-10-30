@@ -72,7 +72,7 @@ class NewsBriefingConfig(_Strict):
     lookback_hours: int
     prompt: str
     sources: list[NewsSource]
-    # Stories fetched in full for the writer; 0 = blurbs only, the old behaviour.
+    # Stories fetched in full for the writer; 0 = blurbs only.
     full_text_stories: int
     max_article_chars: int
 

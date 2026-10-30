@@ -1,47 +1,41 @@
-"""LLM roles, routes and fallbacks. Every model call in the pipeline goes through `complete()`,
-except a web search (`complete_with_web_search()`), which runs on one route with no fallback.
+"""LLM roles, routes and fallbacks.
 
-Four roles, each an ordered list of (route, model) targets. A call tries the
-first target; if the provider fails or the reply comes back empty it moves to
-the next, logs the switch, and the run report says which one served. A request
-the provider rejects as malformed, or an error in our own code, raises instead
-(`rejected_request`): the next target would fail the same way. The routes are the
-three API accounts the pipeline can bill: OpenRouter (the default for the
-Anthropic models), OpenAI direct, and Anthropic direct. All three speak the
-OpenAI chat-completions shape, so one SDK covers them; the per-route quirks
+Every model call in the pipeline goes through `complete()`, except a web search
+(`complete_with_web_search()`), which runs on one route with no fallback.
+
+Each role is an ordered list of (route, model) targets in `ROLES`. A call
+tries the first target; if the provider fails or the reply comes back empty it
+moves to the next, logs the switch, and the run report says which one served. A
+request the provider rejects as malformed, or an error in our own code, raises
+instead (`rejected_request`): the next target would fail the same way. The
+routes are the three API accounts the pipeline can bill: Anthropic direct (the
+primary for the Claude models), OpenAI direct, and OpenRouter. All three speak
+the OpenAI chat-completions shape, so one SDK covers them; the per-route quirks
 (parameter names, what "reasoning" is called) live in `Route`.
 
 Roles, and why each model:
 
-- writer (Claude Opus 5.5, effort low): prose a person listens to — summaries,
-  the daily briefing, story selection, table descriptions, the one-shot
-  revision after the fidelity check. Measured against Gemini 3 Flash on a real
-  maths post, Flash emitted 14 raw LaTeX expressions into the spoken script;
-  Opus emitted none. Compared with GPT-5.6 Sol on 2026-09-16, Opus wrote the
-  more concrete, listenable script. Opus 5.5 replaced Opus 4.6 on 2026-09-27
-  after a side-by-side (scripts/model_upgrade_test.py): more careful
-  attribution, no longer, ~7% dearer a month because its tokenizer counts
-  ~1.46x the tokens for the same text. Its thinking cannot be switched off,
-  and low effort is plenty for writing.
+- writer (Claude Opus 5.5, effort low): prose a person listens to: summaries,
+  the daily briefing, story selection, table descriptions, and the one
+  revision after the fidelity check. Opus writes a more concrete, listenable
+  script than GPT-5.6 Sol, and on a maths post it puts no raw LaTeX into the
+  spoken script where Gemini 3 Flash put 14 expressions. Against Opus 4.6
+  (scripts/model_upgrade_test.py) it attributes more carefully at about 7%
+  more a month, since its tokenizer counts ~1.46x the tokens for the same
+  text. Its thinking cannot be switched off, and low effort is enough.
 - checker (Claude Sonnet 5.5): reads a finished script against its source and
-  lists what is contradicted, distorted or unsupported (src/verify.py). A
-  different model from the writer, so its blind spots are not the same ones.
-  Replaced Sonnet 5 on 2026-10-30 at the same list price, after a side-by-side
-  on six episodes; Sonnet 5 stays as a backup on the same account.
+  lists what is contradicted, distorted or unsupported (src/verify.py). It is
+  a different model from the writer, so its blind spots are not the writer's.
 - bullets (GPT-6.1 Sol, OpenAI direct, effort low): turns the checked script
-  into the email's bullets. Sol was chosen on 2026-09-16 after a side-by-side:
-  its bullets were as faithful as Opus's at about three-quarters of the price,
-  and the email is meant to restate the audio, so it works from the script and
-  never the source. GPT-6.1 Sol replaced GPT-5.6 Sol on 2026-10-30 at half the
-  price per token; it cannot switch reasoning off, so it runs at low. OpenRouter
-  once billed Sol at ~3x its list price in testing, so direct is primary and
-  OpenRouter the backup.
+  into the email's bullets, as faithfully as Opus at a lower price. It works
+  from the script and never the source, because the email restates the
+  audio. It cannot switch reasoning off, so it runs at low. OpenAI direct is
+  primary because OpenRouter has billed Sol at ~3x its list price.
 - normalizer (Gemini 3 Flash): only transforms, "45%" -> "forty-five percent".
-  ~47% of all tokens; a stronger model is not better at "preserve everything
-  else exactly", and Flash did it for 168 episodes without incident. Its
-  backups are on the other two accounts (Haiku 5.5, then GPT-6.1 Sol): on
-  2026-10-10 the OpenRouter account ran out of credit (402) and, with
-  OpenRouter its only route, every episode failed at normalisation.
+  It takes about half of all tokens, and a stronger model is no better at
+  "preserve everything else exactly". Its backups (Haiku 5.5, then GPT-6.1
+  Sol) are on the other two accounts, so an OpenRouter account out of credit
+  does not stop narration.
 
 An account that refuses for a reason that lasts (out of credit, a bad key) is
 skipped for the rest of the run, so each later call goes straight to a
@@ -89,10 +83,9 @@ ROUTES = {
                         reasoning_format="reasoning_object"),
     "openai": Route("openai", "OPENAI_API_KEY", None, reasoning_format="effort_param",
                     max_tokens_param="max_completion_tokens", accepts_temperature=False),
-    # Sonnet 5, Sonnet 5.5 and Opus 5.5 reject any sampling parameter ("`temperature` is
-    # deprecated for this model"), so the checker's temperature=0 400'd here
-    # and, with OpenRouter refusing Claude since 2026-09-22, every check fell
-    # through to Gemini 3 Flash.
+    # Sonnet 5, Sonnet 5.5 and Opus 5.5 answer any sampling parameter with a 400
+    # whose message contains "`temperature` is deprecated for this model", so
+    # no temperature is sent here.
     "anthropic": Route("anthropic", "ANTHROPIC_API_KEY", "https://api.anthropic.com/v1/",
                        reasoning_format="native_only", accepts_temperature=False),
 }
@@ -105,8 +98,9 @@ class Target:
     `reasoning` is provider-neutral: {"off": True}, {"effort": "low"} or
     {"budget": 4000} (a thinking-token ceiling). Each route translates it.
     `min_effort` is for a model that cannot switch reasoning off: "off" is
-    sent as that effort instead. GPT-6.1 Sol 400s on reasoning_effort "none"
-    ("Supported values are: 'low', 'medium', 'high', and 'xhigh'", 2026-10-10).
+    sent as that effort instead. GPT-6.1 Sol answers reasoning_effort "none"
+    with a 400 whose message contains "Supported values are: 'low', 'medium',
+    'high', and 'xhigh'".
     """
 
     route: str
@@ -119,21 +113,20 @@ class Target:
         return f"{self.model} via {self.route}"
 
 
-# Claude goes to Anthropic direct first: since 2026-09-22 OpenRouter has
-# refused every Claude request on the Arrow key (403 "violation of provider
-# Terms Of Service"), so an OpenRouter primary put a fallback notice in every
-# email. OpenRouter stays as the Claude backup.
+# Claude goes to Anthropic direct first: OpenRouter refuses every Claude
+# request on this account with a 403 whose message contains "violation of
+# provider Terms Of Service". OpenRouter stays as the Claude backup.
 #
 # Prefer the same model on another account, then a sibling, but do not make
-# every backup depend on the same provider. On 2026-09-19 OpenRouter rejected
-# all Claude calls while Anthropic direct had no credit. GPT and Gemini still
-# worked. The final writer/checker fallbacks use different model families so
-# the fidelity check remains independent of the writer. Every role has a
-# target on at least two of the three accounts.
+# every backup depend on the same provider: OpenRouter can refuse Claude while
+# Anthropic direct is out of credit (docs/llm-incident-2026-09-19.md), and then
+# only GPT and Gemini answer. The final writer/checker fallbacks use different
+# model families so the fidelity check remains independent of the writer.
+# Every role has a target on at least two of the three accounts.
 #
 # GPT-6.1 Sol runs at effort low wherever it serves: it cannot switch
 # reasoning off, and low is the setting Opus writes at. It is the writer's
-# non-Claude backup (Titus's pick, 2026-10-10).
+# non-Claude backup.
 SOL_LOW = dict(reasoning={"effort": "low"}, min_effort="low")
 ROLES: dict[str, tuple[Target, ...]] = {
     "writer": (
@@ -158,8 +151,8 @@ ROLES: dict[str, tuple[Target, ...]] = {
         Target("openrouter", "openai/gpt-6.1-sol", **SOL_LOW),
         Target("anthropic", "claude-opus-5-5", {"effort": "low"}),
     ),
-    # Gemini stays first after a head-to-head with Haiku 5.5 (2026-10-10,
-    # docs/normaliser-model-test-2026-10-10.md): on the same prompt two blind
+    # Gemini is first: in a head-to-head with Haiku 5.5
+    # (docs/normaliser-model-test-2026-10-10.md), on the same prompt two blind
     # judges preferred Gemini 8 to 4, mostly for converting more of what the
     # voice stumbles on, and it is ~1.5x faster. Haiku would save ~$0.30 a
     # month. Haiku is the backup because it took the Genji review passage
@@ -177,8 +170,9 @@ ROLES: dict[str, tuple[Target, ...]] = {
 # The checker role's primary model, for tests.
 MODEL_CHECKER = ROLES["checker"][0].model
 
-# The SDK default is 600s x 2 retries, so one wedged request can stall a run
-# for ~30 min. Flash calls finish in well under a minute; bound them.
+# Every client here, each route's and the native Anthropic one, uses this
+# timeout with 3 retries. The SDK default, 600 s and 2 retries, lets one
+# wedged request stall a run for ~30 min.
 LLM_TIMEOUT_SECONDS = float(os.environ.get("LLM_TIMEOUT_SECONDS", "180"))
 
 # Routes whose account failed in a way that lasts the run (out of credit, bad
@@ -222,8 +216,7 @@ def rejected_request(e: BaseException) -> bool:
     A 400, 413 or 422 means the request itself is wrong: a parameter the model
     does not take, a value out of range, a prompt too long. The next target
     would get the same request, and falling through hides the bug behind a
-    fallback notice: Sonnet 5's 400 on the checker's `temperature=0` sent every
-    check to Gemini 3 Flash from 2026-09-22 to -27. Two kinds of 400 are the
+    fallback notice while every call goes to a backup. Two kinds of 400 are the
     provider's after all, and still fall through: an account out of credit
     (`account_failure`; Anthropic says so with a 400) and a prompt the
     provider's content policy refuses. Every other status (401-404, 408, 429,
@@ -271,9 +264,8 @@ class EmptyCompletion(RuntimeError):
     error, a quota) as a 200 whose body has `error` set and `choices` absent;
     the SDK parses that into a ChatCompletion with `choices=None`, and the SDK's
     own retries never fire because nothing failed at the transport layer.
-    `response.choices[0]` on that object is the "'NoneType' object is not
-    subscriptable" that took out an ACX book review twice (2026-09-06, -08),
-    with nothing in the log to say which call or why.
+    `response.choices[0]` on that object raises `TypeError: 'NoneType' object
+    is not subscriptable`, which says neither which call failed nor why.
     """
 
 
@@ -348,10 +340,13 @@ _native: AsyncAnthropic | None = None
 def native_anthropic() -> AsyncAnthropic:
     """Anthropic's own Messages API, for calls that set an effort.
 
-    The OpenAI-compatible endpoint ignores `reasoning_effort` (measured
-    2026-09-27: Opus 5.5 produced the same ~3,150 output tokens with it set
-    to low or left unset) and rejects adaptive thinking outright, so effort
-    only takes hold here: ~1,280 tokens for the same digest at low.
+    The OpenAI-compatible endpoint ignores `reasoning_effort` (Opus 5.5 writes
+    as many output tokens with it set to low as with it unset) and rejects
+    adaptive thinking outright, so effort takes hold only here.
+
+    Reads ANTHROPIC_API_KEY once and keeps one client for the whole process
+    (LLM_TIMEOUT_SECONDS, 3 retries). It does not check the key: with it
+    unset, every call on the client raises TypeError, so callers check first.
     """
     global _native
     if _native is None:
@@ -472,9 +467,14 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
                    check: Callable[[str], str | None] | None = None) -> Completion:
     """Run one chat completion for `role`, falling back along its target list.
 
+    Calls the targets' providers over the network, in order until one serves,
+    with the API key each route names in the environment. A fallback is
+    recorded in `notices`, and an account failure adds the route to
+    `dead_routes` for the rest of the run.
+
     `client` pins the call to one client with no fallback: tests use it. Such
     a client is assumed to be OpenRouter's, so the role's first OpenRouter
-    target is used — for the bullets role that is `openai/gpt-6.1-sol`, not
+    target is used: for the bullets role that is `openai/gpt-6.1-sol`, not
     the OpenAI direct spelling. `reasoning` overrides the target's default for
     this call.
 
@@ -579,8 +579,7 @@ def _completion(response, target: Target, role: str, where: str) -> Completion:
     finish = getattr(choice, "finish_reason", None)
     if finish == "error":
         # OpenRouter's word for a provider that died mid-reply: the text is a
-        # fragment. Gemini returned 88% of a 17,859-char batch this way
-        # (2026-10-10), and only "length" was ever checked.
+        # fragment, which Gemini has returned this way with 88% of a batch.
         raise NoChoices(f"{where}: reply cut off by a provider error after {len(text):,} chars")
     return Completion(text=text, finish_reason=finish, target=target, role=role,
                       usage=getattr(response, "usage", None))

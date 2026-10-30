@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Fire the daily pipeline when GitHub's scheduler didn't.
 #
-# `schedule:` is best-effort: GitHub drops fires under load, and dropped them
-# outright on 27 and 28 Aug 2026 (no run object at all, nothing to retry). This
-# runs from the desktop crontab at 05:30 Europe/London (about two hours after
-# the cron slot; the email should be out by 06:00 local), asks
-# whether any run exists for today, and dispatches one only if none does.
+# `schedule:` is best-effort: GitHub delivers fires late under load, or drops
+# them outright (no run object at all, nothing to retry). This runs from the
+# desktop crontab at 05:30 Europe/London, 47 minutes after the 03:43 UTC cron
+# slot in summer time and 1 hour 47 minutes after it in winter, asks whether
+# any run exists for the UTC day, and dispatches one only if none does.
 #
 # Safe to run when the scheduled run is merely late rather than missing: the
 # workflow's `feedcast-pipeline` concurrency group queues the dispatch behind

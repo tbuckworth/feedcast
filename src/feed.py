@@ -134,8 +134,6 @@ class FeedGenerator:
         """Get duration of audio file in seconds. Raises if ffprobe cannot read it.
 
         Uses ffprobe, which ships with the ffmpeg the pipeline already requires.
-        The previous soundfile import was never satisfied (soundfile is not a
-        dependency), so every episode silently published a 00:00:00 duration.
         """
         out = subprocess.run(
             [

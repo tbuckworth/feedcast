@@ -13,10 +13,8 @@ from .monitor import (FeedEntry, briefing_id, entry_body, entry_published, repor
 from .verify import Written, write_checked
 
 # The previous briefings are there for dedup, but the writer also reads them
-# as a style guide. Sol, a fallback writer on 19-21 Sep, closed three to five
-# stories a day with "This matters because"; those briefings came back as
-# context and Opus 4.6, which had used the phrase about once a week, then
-# used it on nearly every story (5 of 5 on 24 Sep).
+# as a style guide: a stock phrase in them ("This matters because") spreads to
+# nearly every story of the next briefing. Hence the ban on copying wording.
 PREVIOUS_BRIEFINGS_HEADER = (
     "## Previous briefings (only so you know what was already covered: do NOT repeat "
     "stories unless there is genuinely new information, and do not copy their wording "
@@ -74,17 +72,17 @@ class NewsAggregator:
         self.lookback_hours = lookback_hours
         # Credited as the briefing's author: the podcast's own (config.yaml).
         self.author = author
-        # Two calls, not one. The writer used to see only each item's RSS
-        # blurb (a title and up to 500 characters the publisher wrote), so
-        # everything beyond that in the briefing came from the model's memory.
-        # Now it first picks the stories worth covering from the blurbs, then
-        # writes from those articles' full text. Roughly three times the
-        # tokens of the old single call; a tenth of fetching everything.
+        # Two calls. The writer first picks the stories worth covering from
+        # each item's RSS blurb (a title and up to 500 characters the publisher
+        # wrote), then writes from those articles' full text, so the detail
+        # comes from the articles rather than the model's memory. Roughly
+        # three times the tokens of writing from the blurbs; a tenth of
+        # fetching every article.
         self.full_text_stories = full_text_stories
         self.max_article_chars = max_article_chars
         self.verify = verify
         # Prediction-market odds for the chosen stories, and the day's big
-        # unexplained moves (src/markets.py). None leaves the briefing as it was.
+        # unexplained moves (src/markets.py). None leaves markets out.
         self.markets = markets
         self.recent_briefings = recent_briefings or []
         self.client = None   # None: llm.complete() routes with fallbacks; tests pin a fake
@@ -243,9 +241,8 @@ class NewsAggregator:
         market data sends exactly the message it always did.
         """
         # The prompt tells the model to open with "[today's date]" and never
-        # says what today is, so it inferred one from the articles and got it
-        # wrong: the briefing filed on 2026-08-21 announced itself as
-        # "August twenty-second". State the date.
+        # says what today is; left to infer it from the articles, the model
+        # can get it wrong. State the date.
         parts = [f"Today is {datetime.now().strftime('%A, %d %B %Y')}. "
                  f"Use this date when you open the briefing, not a date taken "
                  f"from any article.", ""]
@@ -303,9 +300,8 @@ class NewsAggregator:
             feed_name="Daily News Briefing",
             authors=[self.author],
             # For the email's per-bullet links: only the stories the writer
-            # was given in full. Passing every headline let the digest lift a
-            # story the briefing never told (a SpaceX launch, 2026-09-16) and
-            # cost ~4k tokens a call for the list alone.
+            # was given in full. Every headline would let the digest lift a story
+            # the briefing never told, and cost ~4k tokens a call for the list.
             sources=[{"title": a["title"], "url": a["url"], "source": a["source"]}
                      for a in (selected or articles) if a.get("url")] + markets.sources(),
             markets=markets.to_dict() if markets else None,

@@ -1,9 +1,10 @@
 """HTML run report emailed when the pipeline finishes.
 
-Configured entirely through environment variables so the recipient address and
-credentials live in GitHub secrets rather than in the repo. If the required
-ones are absent the report is skipped with a log line — a missing mailbox must
-never fail a pipeline run that otherwise succeeded.
+Configured entirely through environment variables, so the recipient addresses
+and credentials live in GitHub secrets rather than in the repo. With
+FEEDCAST_EMAIL_TO unset the email is off. With it set, a send that fails,
+missing credentials included, is logged and returned as False rather than
+raised, so the run still publishes; the workflow then fails the job.
 """
 
 import os
@@ -220,7 +221,7 @@ def checker_notes(fid: dict | None) -> list[dict]:
 def checker_name(fid: dict | None) -> str:
     """The model that read an episode's script against its source, as people say it.
 
-    'the checker' on rows from before the model was recorded (2026-10-30).
+    'the checker' on rows stored before the model was recorded.
     """
     model = ((fid or {}).get("checker") or {}).get("model")
     return model_name(model) if model else "the checker"
@@ -635,12 +636,11 @@ def build_text(report: RunReport, when: datetime) -> str:
 
 
 def is_test_run() -> bool:
-    """FEEDCAST_TEST_RUN: a dev run — publishes as normal, emails only the operator.
+    """FEEDCAST_TEST_RUN: a dev run, which publishes as normal but emails only the operator.
 
-    The workflow sets this for every run someone asked for by hand (a
-    reprocess, an injection, a resend, a force) unless they tick `notify_list`.
-    On 2026-09-08 two debugging re-runs each emailed the whole BCC list, one of
-    them announcing nothing but a failure.
+    The workflow sets this for every run someone asked for by hand (the
+    workflow's ON_DEMAND) unless they tick `notify_list`, so a debugging
+    re-run does not email the whole BCC list.
     """
     return env_flag("FEEDCAST_TEST_RUN")
 
