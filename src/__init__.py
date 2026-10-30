@@ -53,6 +53,7 @@ The modules, roughly in the order a run uses them:
 - bundle: the per-episode record of what the writer saw and wrote, under data/sources/.
 - feed: feed.xml, the site's index and episode pages, and the briefings' transcripts.
 - market_charts: price charts of the markets the briefing's digest cites, for the email.
+- run_report: the run report, assembled from what the run did and the rows it stored.
 - email_report: the run report email.
 - main: the entry point; runs the pipeline.
 """
