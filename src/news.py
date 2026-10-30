@@ -25,6 +25,12 @@ PREVIOUS_BRIEFINGS_HEADER = (
     "or sentence patterns):"
 )
 
+# Headings of the writer's input. scripts/model_upgrade_test.py finds them in
+# a saved writer bundle, so it reads them from here.
+SELECTED_STORIES_HEADING = "## Selected stories (full text where available)"
+OTHER_HEADLINES_HEADING = "## Other headlines (not selected; mention only if essential)"
+ARTICLES_HEADING = "## Today's articles:"
+
 SELECT_PROMPT = """You are choosing which stories a daily news briefing will cover, from a list of RSS headlines with short blurbs.
 
 Pick the {n} most worth covering for a technically sophisticated audience, in priority order: AI safety and policy first, then AI capabilities, geopolitics, economics, markets. Prefer one strong item per story over several near-duplicates. Skip trivia, listicles and product fluff.
@@ -208,10 +214,10 @@ class NewsAggregator:
         else:
             chosen = {id(a) for a in selected}
             rest = [a for a in articles if id(a) not in chosen]
-            parts = ["## Selected stories (full text where available)", "",
+            parts = [SELECTED_STORIES_HEADING, "",
                      self._format_articles_for_prompt(selected, markets)]
             if rest:
-                parts += ["", "## Other headlines (not selected; mention only if essential)", ""]
+                parts += ["", OTHER_HEADLINES_HEADING, ""]
                 parts += [f"- [{a['source']}] {a['title']}" + (f" {a['url']}" if a.get("url") else "")
                           for a in rest]
             text = "\n".join(parts)
@@ -245,7 +251,7 @@ class NewsAggregator:
         user_message_parts.insert(1, "")
         if extra_instructions:
             user_message_parts += [extra_instructions, ""]
-        user_message_parts.append("## Today's articles:")
+        user_message_parts.append(ARTICLES_HEADING)
         user_message_parts.append(formatted_articles)
         user_message = "\n".join(user_message_parts)
 
