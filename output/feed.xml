@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Fri, 30 Oct 2026 16:11:39 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 30 Oct 2026 16:58:37 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,18 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Your Book Review: The History And Adventures Of An Atom</title>
+      <description>Audio version of Your Book Review: The History And Adventures Of An Atom from Scott Alexander</description>
+      <pubDate>Fri, 30 Oct 2026 16:30:33 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/your-book-review-the-history-and</guid>
+      <link>https://www.astralcodexten.com/p/your-book-review-the-history-and</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/908e62c1e838_your_book_review_the_history_and_adventures_of_an.mp3" type="audio/mpeg" length="23910741" />
+      <itunes:duration>00:43:29</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-30</title>
       <description>Daily News Briefing - 2026-10-30
@@ -48,8 +60,8 @@ Topics covered:
       <guid isPermaLink="false">eeb72c0e-3942-4af3-a759-4ed8aa34ac38</guid>
       <link>https://www.lesswrong.com/posts/mBDkupZa3NagfLW86/ai-192-anthropic-is-going-public</link>
       <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/31a7ca77a0aa_ai_192_anthropic_is_going_public_by_zvi.mp3" type="audio/mpeg" length="2451189" />
-      <itunes:duration>00:04:20</itunes:duration>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/31a7ca77a0aa_ai_192_anthropic_is_going_public_by_zvi.mp3" type="audio/mpeg" length="2370261" />
+      <itunes:duration>00:04:10</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
