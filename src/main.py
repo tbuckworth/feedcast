@@ -19,6 +19,7 @@ from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
 from .extractor import ExtractionError, url_to_feed_entry
 from .feed import Episode, FeedGenerator, PodcastConfig, episode_page_url
 from .fulltext import enrich_entry
+from .html_text import clean_html
 from .lesswrong import posted_at
 from . import llm
 from .market_charts import charts_for_report
@@ -206,15 +207,12 @@ async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> None:
     the full-text recovery first, or a Zvi post would be digested from the
     three-percent podcast blurb.
     """
-    from .processor import ContentProcessor as _CP
-
     # Skip rows with no audio: those are the maths-linked posts, and the email
     # renders them as a link and a score, with nowhere to put bullets.
     todo = [r for r in rows if r["audio_file"] and not (r.get("bullets") or "")]
     if not todo:
         return
     print(f"  Backfilling digests for {len(todo)} entries...")
-    cleaner = _CP("")
 
     async def one(row: dict) -> None:
         is_briefing = row["id"].startswith("news-briefing-")
@@ -231,7 +229,7 @@ async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> None:
             if gain.replaced:
                 print(f"    Recovered full text for {entry.title} "
                       f"({gain.before:,} -> {gain.after:,})")
-            text = cleaner.clean_html(entry.content)
+            text = clean_html(entry.content)
         bullets = await safe_bullets(text, is_briefing=is_briefing, label=row["title"])
         monitor.set_bullets(row["id"], bullets)
         print(f"    {len(bullets)} bullets: {row['title'][:56]}")

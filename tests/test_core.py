@@ -7,8 +7,8 @@ from datetime import datetime
 from src.audio import split_into_chunks
 from src.feed import FeedGenerator, PodcastConfig
 from src.main import generate_episode_id
+from src.html_text import _table_to_prose_simple, clean_html
 from src.news import NewsAggregator
-from src.processor import ContentProcessor
 
 
 # --- split_into_chunks (src/audio.py) ---
@@ -56,16 +56,13 @@ class TestSplitIntoChunks:
             assert len(chunk) <= 100
 
 
-# --- clean_html (src/processor.py) ---
+# --- clean_html (src/html_text.py) ---
 
 
 class TestCleanHtml:
-    def setup_method(self):
-        self.processor = ContentProcessor.__new__(ContentProcessor)
-
     def test_removes_script_and_style(self):
         html = "<p>Hello</p><script>alert('x')</script><style>.x{}</style><p>World</p>"
-        result = self.processor.clean_html(html)
+        result = clean_html(html)
         assert "alert" not in result
         assert ".x{}" not in result
         assert "Hello" in result
@@ -73,44 +70,41 @@ class TestCleanHtml:
 
     def test_collapses_whitespace(self):
         html = "<p>  Hello    World  </p>"
-        result = self.processor.clean_html(html)
+        result = clean_html(html)
         assert "Hello" in result
         assert "World" in result
         # No runs of multiple spaces
         assert "    " not in result
 
     def test_empty_html(self):
-        assert self.processor.clean_html("") == ""
-        assert self.processor.clean_html("<div></div>") == ""
+        assert clean_html("") == ""
+        assert clean_html("<div></div>") == ""
 
     def test_strips_nav_footer_header(self):
         html = "<nav>Menu</nav><p>Content</p><footer>Copyright</footer>"
-        result = self.processor.clean_html(html)
+        result = clean_html(html)
         assert "Menu" not in result
         assert "Copyright" not in result
         assert "Content" in result
 
     def test_preserves_paragraph_breaks(self):
         html = "<p>First paragraph.</p><p>Second paragraph.</p>"
-        result = self.processor.clean_html(html)
+        result = clean_html(html)
         assert "First paragraph." in result
         assert "Second paragraph." in result
 
 
-# --- _table_to_prose_simple (src/processor.py) ---
+# --- _table_to_prose_simple (src/html_text.py) ---
 
 
 class TestTableToProseSimple:
-    def setup_method(self):
-        self.processor = ContentProcessor.__new__(ContentProcessor)
-
     def _make_table(self, html: str):
         from bs4 import BeautifulSoup
         return BeautifulSoup(html, "html.parser").find("table")
 
     def test_header_value_pairs(self):
         html = "<table><tr><th>Name</th><th>Score</th></tr><tr><td>Alice</td><td>95</td></tr></table>"
-        result = self.processor._table_to_prose_simple(self._make_table(html))
+        result = _table_to_prose_simple(self._make_table(html))
         assert "Name: Alice" in result
         assert "Score: 95" in result
 
@@ -120,7 +114,7 @@ class TestTableToProseSimple:
             <tr><td>NYC</td><td>8M</td></tr>
             <tr><td>LA</td><td>4M</td></tr>
         </table>"""
-        result = self.processor._table_to_prose_simple(self._make_table(html))
+        result = _table_to_prose_simple(self._make_table(html))
         assert "City: NYC" in result
         assert "City: LA" in result
         # Rows are joined by ". "
@@ -128,7 +122,7 @@ class TestTableToProseSimple:
 
     def test_empty_table(self):
         html = "<table></table>"
-        result = self.processor._table_to_prose_simple(self._make_table(html))
+        result = _table_to_prose_simple(self._make_table(html))
         assert result == ""
 
 
