@@ -342,7 +342,7 @@ That feed dates an item by its **curation**, and curation trails publication by
 up to several weeks. Both dates are kept: the curation date decides whether an
 item is new to us, and `src/lesswrong.py` asks LessWrong's GraphQL API when the
 post was actually written, which is what the email shows ("30 Jul 2026 ·
-curated 21 Aug 2026"). A failed lookup leaves the feed's date, and the email's
+in feed 21 Aug 2026"). A failed lookup leaves the feed's date, and the email's
 notices name it.
 
 Because an author feed and the curated feed carry the same post under different

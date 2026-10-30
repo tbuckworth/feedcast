@@ -1095,14 +1095,15 @@ def _surfaced_date(feed_date: datetime | None, published: datetime | None) -> da
 
 
 def _stored_feed_date(row: dict) -> datetime | None:
-    """The feed date a row stores; None for rows from before the column, or unreadable."""
+    """The feed date a row stores; None for rows from before the column.
+
+    The pipeline writes a full date or nothing, so anything else is a corrupt
+    row and raises.
+    """
     raw = (row.get("feed_date") or "").strip()
     if not raw:
         return None
-    try:
-        return datetime.fromisoformat(raw)
-    except ValueError:
-        return None
+    return datetime.fromisoformat(raw)
 
 
 def _build_run_report(

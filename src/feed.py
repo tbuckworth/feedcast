@@ -75,6 +75,11 @@ def audio_url(base_url: str, audio_file: str) -> str:
     return f"{base_url}/audio/{audio_file}"
 
 
+def transcript_url(base_url: str, entry_id: str) -> str:
+    """Where an episode's transcript is published (write_transcripts writes it)."""
+    return f"{base_url}/transcripts/{entry_id}.txt"
+
+
 def episode_page_url(base_url: str, entry_id: str) -> str:
     """Where an episode's own page lives. Stable from before its audio exists."""
     return f"{base_url}/episodes/{episode_id(entry_id)}.html"
@@ -394,8 +399,8 @@ class FeedGenerator:
                 description = f"Audio version of {entry['title']} from {entry['feed_name']}"
 
             # A briefing's script is its transcript, published by write_transcripts.
-            transcript_url = (f"{self.config.base_url}/transcripts/{entry['id']}.txt"
-                              if briefing and content else None)
+            transcript = (transcript_url(self.config.base_url, entry["id"])
+                          if briefing and content else None)
 
             episodes.append(
                 Episode(
@@ -406,7 +411,7 @@ class FeedGenerator:
                     published=published,
                     duration_seconds=duration,
                     link=entry.get("link"),
-                    transcript_url=transcript_url,
+                    transcript_url=transcript,
                     author="" if briefing else author,
                     audio_bytes=audio_bytes,
                 )

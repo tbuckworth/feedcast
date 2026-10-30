@@ -9,6 +9,7 @@ import asyncio
 from datetime import datetime
 
 import httpx
+import pytest
 import yaml
 
 from src import lesswrong, notices
@@ -145,7 +146,8 @@ class TestReportShowsBothDates:
         assert _stored_feed_date({"feed_date": "2026-08-21T18:30:00"}) == \
             datetime(2026, 8, 21, 18, 30)
         assert _stored_feed_date({}) is None
-        assert _stored_feed_date({"feed_date": "nonsense"}) is None
+        with pytest.raises(ValueError):
+            _stored_feed_date({"feed_date": "nonsense"})       # a corrupt row is loud
         assert _surfaced_date(None, datetime(2026, 8, 26)) is None
 
     def test_a_post_waiting_for_narration_shows_both_dates_too(self):

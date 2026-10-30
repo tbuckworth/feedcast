@@ -50,9 +50,9 @@ class ReportEpisode:
     # When the source material was published — not when we narrated it. The
     # two diverge whenever a run is late or a post is picked up a day on.
     published: datetime | None = None
-    # When the feed surfaced it, if that is materially later than publication:
-    # a LessWrong curation can trail the post by weeks, and without this the
-    # email looks like it dug up something from July for no reason.
+    # When the feed surfaced it, if that is a day or more away from publication
+    # either way: a LessWrong curation can trail the post by weeks, and without
+    # this the email looks like it dug up something from July for no reason.
     surfaced: datetime | None = None
     # Result of the second-model source check, when one ran.
     fidelity: dict | None = None
