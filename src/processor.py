@@ -49,16 +49,20 @@ class ContentProcessor:
         Decides which publish an episode goes out in: everything a writer
         produced (summaries, the briefing) first, full readings after.
         """
-        if entry.id.startswith("news-briefing-"):
-            return False
-        if mode == "auto":
-            mode, _ = self._auto_mode(entry)
-        return mode == "verbatim"
+        return self._reads_verbatim(entry, mode)[0]
 
-    def _auto_mode(self, entry: FeedEntry) -> tuple[str, int]:
-        """What auto mode does with `entry`, and the cleaned length that decided it."""
-        chars = len(clean_html(entry.content))
-        return ("verbatim" if chars <= self.auto_verbatim_limit else "summarize"), chars
+    def _reads_verbatim(self, entry: FeedEntry, mode: str) -> tuple[bool, int]:
+        """reads_verbatim, with the cleaned length auto mode measured (0 in other modes).
+
+        The one place the rule lives: `process` resolves auto mode with it too,
+        so the publish an episode goes out in always matches how it is read.
+        """
+        chars = len(clean_html(entry.content)) if mode == "auto" else 0
+        if entry.id.startswith("news-briefing-"):
+            return False, chars
+        if mode == "auto":
+            return chars <= self.auto_verbatim_limit, chars
+        return mode == "verbatim", chars
 
     async def process_tables(self, html_content: str) -> str:
         """Convert HTML tables to prose before clean_html strips them."""
@@ -178,8 +182,9 @@ Content:
         """
         is_news_briefing = entry.id.startswith("news-briefing-")
         if mode == "auto":
-            mode, chars = self._auto_mode(entry)
-            sign = "≤" if mode == "verbatim" else ">"
+            verbatim, chars = self._reads_verbatim(entry, mode)
+            mode = "verbatim" if verbatim else "summarize"
+            sign = "≤" if chars <= self.auto_verbatim_limit else ">"
             print(f"    Auto mode: {chars} chars {sign} {self.auto_verbatim_limit} → {mode}")
 
         if is_news_briefing and mode == "verbatim":

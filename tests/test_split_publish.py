@@ -61,6 +61,21 @@ class TestWhichPostsWait:
         assert p.reads_verbatim(short, "auto")
         assert not p.reads_verbatim(long, "auto")
 
+    def test_process_resolves_auto_by_the_same_rule(self, routes):
+        # One rule decides both which publish a post goes out in and how
+        # process() reads it, so the two cannot disagree: a briefing short
+        # enough for auto to read in full is still summarised, as
+        # reads_verbatim says, while a post as short is read out.
+        routes["anthropic"] = FakeApi(["The summary."])
+        p = ContentProcessor("prompt", verify=False, auto_verbatim_limit=1000)
+        briefing = _entry("news-briefing-2026-10-08", "Daily News Briefing - 2026-10-08",
+                          content="<p>Short news.</p>")
+        post = _entry(content="<p>Short post.</p>")
+        assert not p.reads_verbatim(briefing, "auto") and p.reads_verbatim(post, "auto")
+        assert asyncio.run(p.process(briefing, "auto")).startswith("Summary of ")
+        assert asyncio.run(p.process(post, "auto")).startswith("Does Georgism Work?. By ")
+        assert len(routes["anthropic"].calls) == 1      # only the briefing went to the writer
+
 
 class TestDeferredTable:
 
