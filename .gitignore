@@ -48,3 +48,6 @@ worker/node_modules/
 # Ad-hoc TTS experiment outputs
 /test_*.mp3
 /derek_test.mp3
+.claude/settings.local.json
+.claude/reviews/
+.claude/worktrees/
