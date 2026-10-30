@@ -204,7 +204,7 @@ def test_a_feed_whose_fetch_raises_is_listed_with_the_dead_sources(pipeline):
     pipeline.broken_feed("Zvi")
     email = pipeline.run()
     assert listed(email, "Sources that returned nothing:") == ["Zvi (TimeoutError: timed out)"]
-    assert "\n1 new episode(s);" in email and "\n* Does Georgism Work?\n" in email
+    assert "\n1 new episode;" in email and "\nNew episode:\n* Does Georgism Work?\n" in email
 
 
 def test_the_posts_held_back_for_a_later_run_are_named(pipeline, capsys):
@@ -226,7 +226,7 @@ class TestLessWrongUnreachable:
         (failure,) = listed(email, "Failed:")
         assert failure.startswith("On Land: maths check: HTTPStatusError")
         assert failure.endswith("attempt 1 of 3, will retry next run")
-        assert "\n0 new episode(s);" in email and not pipeline.monitor.is_processed(LW)
+        assert "\nNo new episodes;" in email and not pipeline.monitor.is_processed(LW)
         (row,) = pipeline.monitor.pending_failures()
         assert row["id"] == LW
 
@@ -238,7 +238,7 @@ class TestLessWrongUnreachable:
         email = pipeline.run()
         (failure,) = listed(email, "Failed:")
         assert failure.startswith("On Land: full text: HTTPStatusError")
-        assert "\n0 new episode(s);" in email
+        assert "\nNo new episodes;" in email
         assert pipeline.monitor.pending_failures()[0]["id"] == LW
 
     def test_a_failed_digest_backfill_is_in_the_resent_email(self, pipeline):
@@ -258,7 +258,7 @@ def test_a_post_with_no_markdown_is_narrated_from_its_feed_body_and_named(pipeli
     pipeline.feed("Zvi", item("On Land", LW))
     pipeline.answer = lesswrong_without_markdown
     email = pipeline.run()
-    assert "\n1 new episode(s);" in email and pipeline.monitor.is_processed(LW)
+    assert "\n1 new episode;" in email and pipeline.monitor.is_processed(LW)
     assert pipeline.monitor.pending_failures() == []
     (note,) = listed(email, "Fallbacks and skips this run:")
     assert re.fullmatch(r"On Land: LessWrong has no markdown for it, so it was narrated "
@@ -289,7 +289,7 @@ class TestInjection:
         """The episode was made, so the run goes on; the email says the push was lost."""
         pipeline.answer = lambda request: httpx.Response(403)
         email = pipeline.run(INJECT_URL=INJECTED, NTFY_TOPIC="feedcast-test")
-        assert "\n1 new episode(s);" in email
+        assert "\n1 new episode;" in email
         assert listed(email, "Fallbacks and skips this run:") == [
             "ntfy notification failed: HTTPStatusError: HTTP 403"]
         assert "feedcast-test" not in email     # the topic is a secret
