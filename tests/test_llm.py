@@ -10,7 +10,7 @@ from openai import (APIConnectionError, APITimeoutError, BadRequestError, Intern
 
 from src import llm, notices
 from src.llm import ROLES, ROUTES, Target, complete
-from tests.conftest import FakeApi, provider_error
+from tests.conftest import FakeApi, FakeMessagesApi, block, provider_error
 
 
 MSGS = [{"role": "user", "content": "hi"}]
@@ -319,3 +319,69 @@ def test_provider_and_transport_failures_fall_through(routes, error):
 ])
 def test_rejected_request_is_our_malformed_request_only(error, ours):
     assert llm.rejected_request(error) is ours
+
+
+@pytest.mark.parametrize("reply, kind, value", [
+    ('{"a": 1}', dict, {"a": 1}),
+    ('```json\n{"a": [1, 2]}\n```', dict, {"a": [1, 2]}),
+    ('Here it is: {"a": {"b": 2}} and that is all.', dict, {"a": {"b": 2}}),
+    ('```json\n["x", "y"]\n```', list, ["x", "y"]),
+    ('Chosen: ["x"]. Done.', list, ["x"]),
+])
+def test_extract_json_reads_the_value_out_of_fences_and_prose(reply, kind, value):
+    assert llm.extract_json(reply, kind) == value
+
+
+@pytest.mark.parametrize("reply, kind, error", [
+    ("No JSON here.", dict, r"^no JSON object in the reply$"),
+    (None, list, r"^no JSON array in the reply$"),
+    ('{"a": 1,}', dict, r"^the object is not valid JSON \(Expecting property name"),
+    ('["x",]', list, r"^the array is not valid JSON \(Expecting value"),
+    # An array is not an object, and an object is not an array.
+    ('["x"]', dict, r"^no JSON object in the reply$"),
+    ('{"a": 1}', list, r"^no JSON array in the reply$"),
+])
+def test_extract_json_raises_saying_why_there_is_none(reply, kind, error):
+    with pytest.raises(ValueError, match=error):
+        llm.extract_json(reply, kind)
+
+
+def test_web_search_resumes_a_paused_turn_with_the_checkers_anthropic_model(monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
+    # The model follows the checker role, so an upgrade there reaches the search.
+    monkeypatch.setitem(ROLES, "checker", (Target("openrouter", "anthropic/claude-x"),
+                                           Target("anthropic", "claude-sonnet-9")))
+    paused = [block("server_tool_use"), block("text", "Searching")]
+    api = FakeMessagesApi(("pause_turn", paused),
+                          ("end_turn", [block("web_search_tool_result"), block("text", '{"found": '),
+                                        block("text", "false}")]))
+    monkeypatch.setattr(llm, "native_anthropic", lambda: api)
+
+    reply = asyncio.run(llm.complete_with_web_search("Why did it move?", max_tokens=2000))
+
+    assert reply == '{"found": false}'
+    first, second = api.requests
+    assert first["model"] == second["model"] == "claude-sonnet-9"
+    assert first["tools"] == [llm.WEB_SEARCH_TOOL] and first["max_tokens"] == 2000
+    assert first["messages"] == [{"role": "user", "content": "Why did it move?"}]
+    assert second["messages"] == [{"role": "user", "content": "Why did it move?"},
+                                  {"role": "assistant", "content": paused}]
+
+
+def test_web_search_still_paused_after_three_requests_raises(monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
+    api = FakeMessagesApi(*[("pause_turn", [block("text", f"part {i}")]) for i in range(4)])
+    monkeypatch.setattr(llm, "native_anthropic", lambda: api)
+    # The paused turn's text is unfinished, so it is not returned as the reply.
+    with pytest.raises(RuntimeError, match=r"^web search still paused \(pause_turn\) after 3 requests$"):
+        asyncio.run(llm.complete_with_web_search("q", max_tokens=10))
+    assert len(api.requests) == 3
+
+
+def test_web_search_without_an_anthropic_key_raises_before_any_request(monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    api = FakeMessagesApi()
+    monkeypatch.setattr(llm, "native_anthropic", lambda: api)
+    with pytest.raises(RuntimeError, match="^ANTHROPIC_API_KEY not set$"):
+        asyncio.run(llm.complete_with_web_search("q", max_tokens=10))
+    assert api.requests == []

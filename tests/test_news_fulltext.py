@@ -46,6 +46,34 @@ def test_selection_keeps_only_known_urls_in_order_and_caps_n():
     assert "Pick the 2 most worth covering" in client.calls[0]["messages"][0]["content"]
 
 
+@pytest.mark.parametrize("reply, urls, problem", [
+    ('```json\n["https://example.com/1"]\n```', ["https://example.com/1"], ""),
+    ('These two: ["https://example.com/2", "https://example.com/0"]. Done.',
+     ["https://example.com/2", "https://example.com/0"], ""),
+    ("I cannot decide.", [], "no JSON array in the reply"),
+    ('["https://example.com/3",]', [],
+     "the array is not valid JSON (Expecting value: line 1 column 26 (char 25))"),
+])
+def test_selection_reads_the_array_out_of_a_reply(reply, urls, problem):
+    by_url = {a["url"]: a for a in _articles(5)}
+    chosen, why = news._selection(reply, by_url)
+    assert [a["url"] for a in chosen] == urls and why == problem
+
+
+def test_the_briefing_writer_reads_the_date_history_instructions_then_articles(routes):
+    routes["anthropic"] = FakeApi(["Briefing."])   # the writer, a paid model
+    agg = _agg(None, recent_briefings=[{"date": "2026-10-29", "briefing_text": "Yesterday."}])
+    asyncio.run(agg.synthesize_briefing("ARTICLES", "EXTRA INSTRUCTIONS"))
+    (call,) = routes["anthropic"].calls
+    assert call["messages"] == [
+        {"role": "system", "content": "Write the briefing."},
+        {"role": "user", "content":
+            f"Today is {datetime.now():%A, %d %B %Y}. Use this date when you open the briefing, "
+            f"not a date taken from any article.\n\n{news.PREVIOUS_BRIEFINGS_HEADER}\n"
+            "### 2026-10-29\nYesterday.\n---\n\nEXTRA INSTRUCTIONS\n\n"
+            "## Today's articles:\nARTICLES"}]
+
+
 def test_few_articles_skip_the_selection_call():
     client = FakeClient([])
     agg = _agg(client, full_text_stories=12)

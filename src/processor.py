@@ -4,9 +4,8 @@ from typing import Optional
 
 from bs4 import BeautifulSoup
 
-from .bundle import writer_bundle
 from .html_text import clean_html, small_table_to_prose
-from .verify import fidelity_markdown, verify_script
+from .verify import write_checked
 from .llm import complete
 from .monitor import FeedEntry
 
@@ -139,28 +138,12 @@ Content:
                   f"the summary will not cover the whole post")
             user_message = user_message[:MAX_PROMPT_CHARS] + "\n\n[Content truncated due to length]"
 
-        done = await complete(
-            "writer", max_tokens=16000, client=self.client,
-            label=f"summariser ({entry.title})",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_message},
-            ],
-        )
-
-        summary = done.text
-        entry.writer = done.credit()
-        draft, fidelity = summary, None
-        if self.verify:
-            summary, fidelity = await verify_script(
-                summary, user_message, writer_system_prompt=system_prompt,
-                label=entry.title, client=self.client)
-            entry.fidelity = fidelity.to_dict()
-        entry.bundle = writer_bundle(
-            title=entry.title, model=done.target.label, system_prompt=system_prompt,
-            user_message=user_message, response=summary,
-            notes=fidelity_markdown(fidelity, draft if fidelity and fidelity.revised else None))
-        return summary
+        written = await write_checked(
+            system_prompt, user_message, title=entry.title,
+            label=f"summariser ({entry.title})", check_label=entry.title,
+            verify=self.verify, client=self.client)
+        entry.writer, entry.fidelity, entry.bundle = written.writer, written.fidelity, written.bundle
+        return written.text
 
     async def process_verbatim(self, entry: FeedEntry) -> str:
         """Process content for verbatim reading - clean and format for TTS."""

@@ -1,6 +1,7 @@
 """Shared test setup: a fresh run's state, fakes for the paid and networked
-services the real classes call (the LLM routes, DeepInfra's voice upload and
-TTS, and the SMTP server), and a real MP3."""
+services the real classes call (the LLM routes, Anthropic's Messages API for
+the web search, DeepInfra's voice upload and TTS, and the SMTP server), and a
+real MP3."""
 
 import io
 import shutil
@@ -72,6 +73,34 @@ class FakeApi:
     def asked(self) -> list[str]:
         """The text each recorded request asked the model to work on: its last message."""
         return [call["messages"][-1]["content"] for call in self.calls]
+
+
+# Anthropic's native Messages API, a paid network API, is the boundary
+# `llm.native_anthropic()` returns; the web search (`llm.complete_with_web_search`,
+# which markets.find_cause calls) runs on it. Tests patch `llm.native_anthropic`
+# to return a FakeMessagesApi.
+class FakeMessagesApi:
+    """Anthropic's Messages API: each call records its request and answers with
+    the next turn. A turn is a (stop_reason, content blocks) pair, such as a
+    paused search; a str, a finished reply with that one text block; or an
+    Exception, which the call raises."""
+
+    def __init__(self, *turns):
+        self.turns, self.requests = list(turns), []
+        self.messages = SimpleNamespace(create=self._create)
+
+    async def _create(self, **kw):
+        self.requests.append({**kw, "messages": list(kw["messages"])})
+        turn = self.turns.pop(0)
+        if isinstance(turn, Exception):
+            raise turn
+        stop_reason, content = ("end_turn", [block("text", turn)]) if isinstance(turn, str) else turn
+        return SimpleNamespace(stop_reason=stop_reason, content=content)
+
+
+def block(kind: str, text: str = ""):
+    """One content block of a Messages API reply: "text", "server_tool_use"..."""
+    return SimpleNamespace(type=kind, text=text)
 
 
 @pytest.fixture

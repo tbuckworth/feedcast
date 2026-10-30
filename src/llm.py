@@ -1,4 +1,5 @@
-"""LLM roles, routes and fallbacks. Every model call in the pipeline goes through `complete()`.
+"""LLM roles, routes and fallbacks. Every model call in the pipeline goes through `complete()`,
+except a web search (`complete_with_web_search()`), which runs on one route with no fallback.
 
 Four roles, each an ordered list of (route, model) targets. A call tries the
 first target; if the provider fails or the reply comes back empty it moves to
@@ -47,6 +48,7 @@ skipped for the rest of the run, so each later call goes straight to a
 working one instead of failing first (`account_failure`).
 """
 
+import json
 import os
 import re
 from collections.abc import Callable
@@ -301,6 +303,29 @@ def completion_text(response, label: str = "") -> str:
     return content
 
 
+# Each kind of JSON value a reply is asked for: its name, and the span from its
+# first opening bracket to its last closing one.
+_JSON_SPANS = {dict: ("object", re.compile(r"\{.*\}", re.S)),
+               list: ("array", re.compile(r"\[.*\]", re.S))}
+
+
+def extract_json(text: str | None, kind: type[dict] | type[list]) -> dict | list:
+    """The JSON object (`kind=dict`) or array (`kind=list`) in a model's reply.
+
+    Models wrap the JSON they are asked for in code fences and prose, so this
+    reads from the first opening bracket to the last closing one. Raises
+    ValueError saying why when the reply holds none or it does not parse.
+    """
+    name, span = _JSON_SPANS[kind]
+    m = span.search(text or "")
+    if not m:
+        raise ValueError(f"no JSON {name} in the reply")
+    try:
+        return json.loads(m.group(0))
+    except ValueError as e:
+        raise ValueError(f"the {name} is not valid JSON ({e})") from e
+
+
 _clients: dict[str, AsyncOpenAI] = {}
 
 
@@ -349,6 +374,34 @@ async def _anthropic_native(model: str, messages: list[dict], max_tokens: int, e
                                  finish_reason=finish)],
         usage=SimpleNamespace(prompt_tokens=msg.usage.input_tokens,
                               completion_tokens=msg.usage.output_tokens))
+
+
+# Anthropic's server-side web search. It runs on Anthropic's own API only.
+WEB_SEARCH_TOOL = {"type": "web_search_20250305", "name": "web_search", "max_uses": 3}
+
+
+async def complete_with_web_search(prompt: str, *, max_tokens: int) -> str:
+    """The reply to `prompt` from a model that may search the web before answering.
+
+    The model is the checker role's first Anthropic target: web search works
+    only on Anthropic's API, and the checker's model is plenty for "find the
+    news story". So there is no fallback chain. A turn the API pauses mid-search
+    (`pause_turn`) is resumed, not restarted, up to three requests in all.
+    Raises when ANTHROPIC_API_KEY is not set, when the call fails, and when
+    the turn is still paused after the third request: its text is unfinished.
+    """
+    route = ROUTES["anthropic"]
+    if not os.environ.get(route.key_env):
+        raise RuntimeError(f"{route.key_env} not set")
+    model = next(t.model for t in ROLES["checker"] if t.route == route.name)
+    messages = [{"role": "user", "content": prompt}]
+    for _ in range(3):
+        msg = await native_anthropic().messages.create(
+            model=model, max_tokens=max_tokens, messages=messages, tools=[WEB_SEARCH_TOOL])
+        if msg.stop_reason != "pause_turn":
+            return "".join(b.text for b in msg.content if b.type == "text")
+        messages = [*messages, {"role": "assistant", "content": msg.content}]
+    raise RuntimeError("web search still paused (pause_turn) after 3 requests")
 
 
 def _native_effort(route: Route, reasoning: dict | None) -> str | None:

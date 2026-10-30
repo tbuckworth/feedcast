@@ -136,6 +136,25 @@ def warn_if_dead(feed, name: str, url: str) -> bool:
     return True
 
 
+def entry_published(entry) -> datetime | None:
+    """When a feedparser entry was published, as naive UTC; its update time if it
+    gives no publication time, and None if it gives neither."""
+    for field_name in ("published_parsed", "updated_parsed"):
+        parsed = getattr(entry, field_name, None)
+        if parsed:
+            return datetime(*parsed[:6])
+    return None
+
+
+def entry_body(entry) -> str:
+    """A feedparser entry's summary, or its description, or '' when it has neither."""
+    if hasattr(entry, "summary"):
+        return entry.summary
+    if hasattr(entry, "description"):
+        return entry.description
+    return ""
+
+
 def report_skipped(name: str, max_age_hours: float | None, *, stale: int, undated: int,
                    already: int, skipped: int) -> None:
     """Print one line saying how many of a feed's items were left out, and why.
@@ -579,21 +598,13 @@ class FeedMonitor:
             if self.is_processed(entry_id) or self.is_deferred(entry_id):
                 continue
 
-            # Extract content - try different fields
-            content = ""
+            # The full post where the feed carries it, else its summary.
             if hasattr(entry, "content") and entry.content:
                 content = entry.content[0].get("value", "")
-            elif hasattr(entry, "summary"):
-                content = entry.summary
-            elif hasattr(entry, "description"):
-                content = entry.description
+            else:
+                content = entry_body(entry)
 
-            # Parse published date
-            published = None
-            if hasattr(entry, "published_parsed") and entry.published_parsed:
-                published = datetime(*entry.published_parsed[:6])
-            elif hasattr(entry, "updated_parsed") and entry.updated_parsed:
-                published = datetime(*entry.updated_parsed[:6])
+            published = entry_published(entry)
 
             if cutoff is not None:
                 # An undated entry cannot be shown to be recent, and the whole

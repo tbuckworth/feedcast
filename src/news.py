@@ -1,18 +1,15 @@
 """Daily news briefing via RSS aggregation and LLM synthesis."""
 
 import asyncio
-import json
-import re
 from datetime import datetime, timedelta, timezone
 
 import feedparser
 
-from .bundle import writer_bundle
 from .extractor import extract_article
-from .llm import complete
+from .llm import complete, extract_json
 from .markets import MarketContext, MarketScout
-from .monitor import FeedEntry, report_skipped, warn_if_dead
-from .verify import fidelity_markdown, verify_script
+from .monitor import FeedEntry, entry_body, entry_published, report_skipped, warn_if_dead
+from .verify import Written, write_checked
 
 # The previous briefings are there for dedup, but the writer also reads them
 # as a style guide. Sol, a fallback writer on 19-21 Sep, closed three to five
@@ -44,13 +41,10 @@ def _selection(raw: str, by_url: dict[str, dict]) -> tuple[list[dict], str]:
     The problem is "" for a usable reply: a JSON array naming at least one
     article from the list. Unknown and repeated URLs are dropped.
     """
-    m = re.search(r"\[.*\]", raw or "", re.S)
-    if not m:
-        return [], "no JSON array in the reply"
     try:
-        urls = json.loads(m.group(0))
+        urls = extract_json(raw, list)
     except ValueError as e:
-        return [], f"the array is not valid JSON ({e})"
+        return [], str(e)
     chosen, seen = [], set()
     for u in urls:
         if isinstance(u, str) and u in by_url and u not in seen:
@@ -79,9 +73,6 @@ class NewsAggregator:
         self.lookback_hours = lookback_hours
         # Credited as the briefing's author: the podcast's own (config.yaml).
         self.author = author
-        self.last_bundle: str | None = None
-        self.last_fidelity: dict | None = None
-        self.last_writer: dict | None = None
         # Two calls, not one. The writer used to see only each item's RSS
         # blurb (a title and up to 500 characters the publisher wrote), so
         # everything beyond that in the briefing came from the model's memory.
@@ -113,32 +104,23 @@ class NewsAggregator:
             articles = []
             stale = undated = 0
             for entry in feed.entries:
-                published = None
-                if hasattr(entry, "published_parsed") and entry.published_parsed:
-                    published = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc)
-                elif hasattr(entry, "updated_parsed") and entry.updated_parsed:
-                    published = datetime(*entry.updated_parsed[:6], tzinfo=timezone.utc)
+                published = entry_published(entry)
 
                 # Counted for report_skipped: a source that stops dating its
                 # items would otherwise just look quiet.
                 if published is None:
                     undated += 1
                     continue
+                published = published.replace(tzinfo=timezone.utc)
                 if published < cutoff:
                     stale += 1
                     continue
-
-                summary = ""
-                if hasattr(entry, "summary"):
-                    summary = entry.summary
-                elif hasattr(entry, "description"):
-                    summary = entry.description
 
                 articles.append({
                     "title": entry.get("title", "Untitled"),
                     "source": source["name"],
                     "category": source["category"],
-                    "summary": summary[:500],
+                    "summary": entry_body(entry)[:500],
                     "published": published,
                     "url": entry.get("link", ""),
                 })
@@ -252,58 +234,35 @@ class NewsAggregator:
         moves = markets.moves_section()
         return f"{text}\n\n{moves}" if moves else text
 
-    async def synthesize_briefing(self, formatted_articles: str, extra_instructions: str = "") -> str:
-        """Synthesize the briefing from formatted articles with the writer role.
+    async def synthesize_briefing(self, formatted_articles: str,
+                                  extra_instructions: str = "") -> Written:
+        """Write the briefing from formatted articles with the writer role, and check it.
 
         `extra_instructions` goes just before the articles, so a day without
         market data sends exactly the message it always did.
         """
-        # Build user message with dedup context from recent briefings
-        user_message_parts = []
-        if self.recent_briefings:
-            user_message_parts.append(PREVIOUS_BRIEFINGS_HEADER)
-            for briefing in self.recent_briefings:
-                user_message_parts.append(f"### {briefing['date']}")
-                user_message_parts.append(briefing["briefing_text"])
-            user_message_parts.append("---")
-            user_message_parts.append("")
-
         # The prompt tells the model to open with "[today's date]" and never
         # says what today is, so it inferred one from the articles and got it
         # wrong: the briefing filed on 2026-08-21 announced itself as
         # "August twenty-second". State the date.
-        user_message_parts.insert(
-            0, f"Today is {datetime.now().strftime('%A, %d %B %Y')}. "
-               f"Use this date when you open the briefing, not a date taken "
-               f"from any article.")
-        user_message_parts.insert(1, "")
+        parts = [f"Today is {datetime.now().strftime('%A, %d %B %Y')}. "
+                 f"Use this date when you open the briefing, not a date taken "
+                 f"from any article.", ""]
+        # Dedup context from recent briefings.
+        if self.recent_briefings:
+            parts.append(PREVIOUS_BRIEFINGS_HEADER)
+            for briefing in self.recent_briefings:
+                parts += [f"### {briefing['date']}", briefing["briefing_text"]]
+            parts += ["---", ""]
         if extra_instructions:
-            user_message_parts += [extra_instructions, ""]
-        user_message_parts.append(ARTICLES_HEADING)
-        user_message_parts.append(formatted_articles)
-        user_message = "\n".join(user_message_parts)
+            parts += [extra_instructions, ""]
+        parts += [ARTICLES_HEADING, formatted_articles]
 
-        done = await complete(
-            "writer", max_tokens=16000, client=self.client, label="news briefing",
-            messages=[
-                {"role": "system", "content": self.prompt},
-                {"role": "user", "content": user_message},
-            ],
-        )
-        briefing = done.text
-        self.last_writer = done.credit()
-        draft, fidelity = briefing, None
-        if self.verify:
-            briefing, fidelity = await verify_script(
-                briefing, user_message, writer_system_prompt=self.prompt,
-                label="news briefing", client=self.client)
-            self.last_fidelity = fidelity.to_dict()
-        self.last_bundle = writer_bundle(
+        return await write_checked(
+            self.prompt, "\n".join(parts),
             title=f"Daily News Briefing - {datetime.now():%Y-%m-%d}",
-            model=done.target.label, system_prompt=self.prompt,
-            user_message=user_message, response=briefing,
-            notes=fidelity_markdown(fidelity, draft if fidelity and fidelity.revised else None))
-        return briefing
+            label="news briefing", check_label="news briefing", verify=self.verify,
+            client=self.client)
 
     async def generate_briefing(self) -> FeedEntry | None:
         """Orchestrate fetch → format → synthesize, return a FeedEntry or None."""
@@ -327,18 +286,17 @@ class NewsAggregator:
                    if self.markets else MarketContext())
         formatted = self._format_briefing_input(articles, selected, markets)
         print("  Synthesizing briefing via LLM...")
-        briefing_text = await self.synthesize_briefing(formatted, markets.instructions())
-        bundle = self.last_bundle
+        briefing = await self.synthesize_briefing(formatted, markets.instructions())
 
         today = datetime.now().strftime("%Y-%m-%d")
         return FeedEntry(
-            bundle=bundle,
-            fidelity=self.last_fidelity,
-            writer=self.last_writer,
+            bundle=briefing.bundle,
+            fidelity=briefing.fidelity,
+            writer=briefing.writer,
             id=f"news-briefing-{today}",
             title=f"Daily News Briefing - {today}",
             link="",
-            content=briefing_text,
+            content=briefing.text,
             published=datetime.now(),
             author=self.author,
             feed_name="Daily News Briefing",

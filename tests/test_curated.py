@@ -11,12 +11,19 @@ from datetime import datetime
 import httpx
 import yaml
 
-from src import notices
+from src import lesswrong, notices
 from src.config import CONFIG_PATH
 from src.email_report import ReportEpisode, RunReport, build_html, build_text
 from src.lesswrong import _parse, lesswrong_post_id, posted_at
 from src.main import _correct_publication_dates, _curated_date
 from src.monitor import FeedEntry
+
+
+def _lesswrong_answers(monkeypatch, answer) -> None:
+    """Send the date lookup's GraphQL request to `answer` instead of the network."""
+    real = httpx.AsyncClient
+    monkeypatch.setattr(lesswrong.httpx, "AsyncClient",
+                        lambda **kw: real(transport=httpx.MockTransport(answer), **kw))
 
 
 class TestFeedChoice:
@@ -52,7 +59,7 @@ class TestPostIdExtraction:
         assert _parse("not a date") is None
 
 
-    def test_an_alignment_forum_post_is_dated_by_its_own_site(self):
+    def test_an_alignment_forum_post_is_dated_by_its_own_site(self, monkeypatch):
         """The date lookup once knew only lesswrong.com URLs, so Alignment
         Forum posts kept their curation date as their release date."""
         asked = []
@@ -62,35 +69,30 @@ class TestPostIdExtraction:
             return httpx.Response(200, json={"data": {"post": {"result": {
                 "postedAt": "2026-07-30T19:10:28.071Z"}}}})
 
-        async def run():
-            async with httpx.AsyncClient(transport=httpx.MockTransport(answer)) as client:
-                return await posted_at(
-                    "https://www.alignmentforum.org/posts/MhssYd2EN2HGfo7Jc/v-and-v", client)
-
-        assert asyncio.run(run()) == datetime(2026, 7, 30, 19, 10, 28, 71000)
+        _lesswrong_answers(monkeypatch, answer)
+        link = "https://www.alignmentforum.org/posts/MhssYd2EN2HGfo7Jc/v-and-v"
+        assert asyncio.run(posted_at(link)) == datetime(2026, 7, 30, 19, 10, 28, 71000)
         assert asked == ["www.alignmentforum.org"]
 
     @staticmethod
-    def _ask(answer):
-        async def run():
-            async with httpx.AsyncClient(transport=httpx.MockTransport(answer)) as client:
-                return await posted_at(
-                    "https://www.lesswrong.com/posts/MhssYd2EN2HGfo7Jc/v-and-v", client)
-        return asyncio.run(run())
+    def _ask(monkeypatch, answer):
+        _lesswrong_answers(monkeypatch, answer)
+        return asyncio.run(posted_at("https://www.lesswrong.com/posts/MhssYd2EN2HGfo7Jc/v-and-v"))
 
-    def test_a_graphql_error_payload_is_named_with_the_post_and_the_errors(self, capsys):
+    def test_a_graphql_error_payload_is_named_with_the_post_and_the_errors(self, monkeypatch,
+                                                                           capsys):
         """It used to return None in silence: the email then called the
         curation date the release date and nobody knew."""
         errors = [{"message": "Post not found"}]
-        assert self._ask(lambda request: httpx.Response(
+        assert self._ask(monkeypatch, lambda request: httpx.Response(
             200, json={"errors": errors, "data": {"post": None}})) is None
         (note,) = notices.report()
         assert note.startswith("LessWrong date lookup for MhssYd2EN2HGfo7Jc failed")
         assert "Post not found" in note and note.endswith("the feed's date stands")
         assert note in capsys.readouterr().out
 
-    def test_a_failed_request_is_named_too(self):
-        assert self._ask(lambda request: httpx.Response(502)) is None
+    def test_a_failed_request_is_named_too(self, monkeypatch):
+        assert self._ask(monkeypatch, lambda request: httpx.Response(502)) is None
         (note,) = notices.report()
         assert note.startswith(
             "LessWrong date lookup for MhssYd2EN2HGfo7Jc failed (HTTPStatusError")
@@ -104,7 +106,7 @@ class TestDateCorrection:
                          feed_date=feed_date)
 
     def test_a_late_curation_is_corrected_to_the_posting_date(self, monkeypatch):
-        async def fake(link, client=None):
+        async def fake(link):
             return datetime(2026, 7, 30, 19, 10)
         monkeypatch.setattr("src.main.posted_at", fake)
         e = self._entry(datetime(2026, 8, 21, 18, 30))
@@ -113,7 +115,7 @@ class TestDateCorrection:
         assert e.feed_date == datetime(2026, 8, 21, 18, 30), "curation date must survive"
 
     def test_a_few_hours_of_lag_is_left_alone(self, monkeypatch):
-        async def fake(link, client=None):
+        async def fake(link):
             return datetime(2026, 8, 25, 17, 50)
         monkeypatch.setattr("src.main.posted_at", fake)
         e = self._entry(datetime(2026, 8, 26, 0, 23))
@@ -121,7 +123,7 @@ class TestDateCorrection:
         assert e.published == datetime(2026, 8, 26, 0, 23)
 
     def test_a_failed_lookup_leaves_the_feed_date_standing(self, monkeypatch):
-        async def fake(link, client=None):
+        async def fake(link):
             return None
         monkeypatch.setattr("src.main.posted_at", fake)
         e = self._entry(datetime(2026, 8, 21, 18, 30))

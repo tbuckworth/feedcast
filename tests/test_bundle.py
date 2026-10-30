@@ -1,16 +1,21 @@
 """Source bundles: what the writer saw is kept, the state branch round-trips,
 and the CI scripts that commit and publish a run's files."""
 
+import asyncio
+import json
 import os
 import shutil
 import sqlite3
 import subprocess
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from src.bundle import (FIDELITY_CHECK, SYSTEM_PROMPT, WRITER_INPUT, WRITER_OUTPUT,
                         read_bundle, write_bundle, writer_bundle)
 from src.monitor import FeedEntry, FeedMonitor, episode_id
+from src.news import NewsAggregator
+from src.processor import ContentProcessor
+from tests.conftest import FakeApi
 
 REPO = Path(__file__).resolve().parent.parent
 STATE_SH = REPO / "scripts" / "state.sh"
@@ -55,6 +60,86 @@ def test_read_bundle_leaves_out_a_section_the_bundle_lacks():
                          response="", notes="  ")
     assert read_bundle(text) == {SYSTEM_PROMPT: "s", WRITER_INPUT: "u", WRITER_OUTPUT: ""}
     assert read_bundle("# Not a bundle\n\n## Something else\nx") == {}
+
+
+# A written episode keeps its checked script, its bundle and its fidelity check.
+# The writer and the checker are paid models: one fake Anthropic account answers
+# both, in call order: the draft, the check, the revision, the re-check.
+FLAG = {"verdict": "distorted", "severity": "high", "script_quote": "Zvi agrees",
+        "source_quote": "Zvi disagrees", "explanation": "the stance is inverted"}
+DRAFT = "Zvi agrees with the plan, and says so at length."
+REVISED = "Zvi disagrees with the plan, and says so at length."
+CHECKED = [DRAFT, json.dumps({"claims_total": 3, "flags": [FLAG]}), REVISED,
+           json.dumps({"claims_total": 3, "flags": []})]
+# The re-check's model reads the revision, so its credit is the checker's.
+SONNET = {"model": "claude-sonnet-5-5", "route": "anthropic", "primary": "claude-sonnet-5-5",
+          "backup": False}
+FIDELITY = {"status": "revised", "claims_total": 3, "flags": [FLAG], "remaining": [],
+            "revised": True, "note": "", "checker": SONNET}
+FIDELITY_NOTES = (
+    "Status: revised\nClaims: 3; flags: 1; material: 1\n\n"
+    "Flags on the draft:\n"
+    '- [distorted, high] "Zvi agrees" — the stance is inverted (source: "Zvi disagrees")\n\n'
+    "Remaining after revision:\n- none\n\n"
+    f"### Draft before revision\n\n{DRAFT}")
+OPUS = {"model": "claude-opus-5-5", "route": "anthropic", "primary": "claude-opus-5-5",
+        "backup": False}
+
+
+def test_a_summary_keeps_its_checked_script_bundle_and_fidelity(routes):
+    routes["anthropic"] = FakeApi(CHECKED)
+    entry = FeedEntry(id="p", title="On Plans", link="https://e.com/p",
+                      content="<p>Zvi disagrees with the plan.</p>",
+                      published=datetime(2026, 10, 10), author="Zvi", feed_name="Zvi")
+    processor = ContentProcessor("Summarise.", verify=True, auto_verbatim_limit=24000)
+
+    assert asyncio.run(processor.summarize(entry)) == REVISED
+    assert entry.fidelity == FIDELITY and entry.writer == OPUS
+    assert entry.bundle.startswith("# On Plans\n\nWriter: claude-opus-5-5 via anthropic\n\n")
+    assert read_bundle(entry.bundle) == {
+        SYSTEM_PROMPT: "Summarise.",
+        WRITER_INPUT: "Title: On Plans\nAuthor: Zvi\nPublished: 2026-10-10\n\n"
+                      "Content:\nZvi disagrees with the plan.",
+        WRITER_OUTPUT: REVISED,
+        FIDELITY_CHECK: FIDELITY_NOTES}
+
+
+def test_a_briefing_keeps_its_checked_script_bundle_and_fidelity(routes, monkeypatch):
+    routes["anthropic"] = FakeApi(CHECKED)
+    agg = NewsAggregator(sources=[], prompt="Brief.", lookback_hours=24, full_text_stories=0,
+                         max_article_chars=6000, author="Feedcast Bot", verify=True)
+    article = {"title": "A plan", "source": "BBC", "category": "politics",
+               "summary": "Zvi disagrees with the plan.", "url": "https://e.com/plan",
+               "published": datetime.now(timezone.utc)}
+    # The news sources are RSS feeds on the network; one fetched article stands in.
+    monkeypatch.setattr(agg, "fetch_all_sources", lambda: asyncio.sleep(0, [article]))
+
+    entry = asyncio.run(agg.generate_briefing())
+
+    today = datetime.now()
+    assert entry.content == REVISED and entry.fidelity == FIDELITY and entry.writer == OPUS
+    assert entry.bundle.startswith(f"# Daily News Briefing - {today:%Y-%m-%d}\n\n"
+                                   "Writer: claude-opus-5-5 via anthropic\n\n")
+    assert read_bundle(entry.bundle) == {
+        SYSTEM_PROMPT: "Brief.",
+        WRITER_INPUT: f"Today is {today:%A, %d %B %Y}. Use this date when you open the "
+                      "briefing, not a date taken from any article.\n\n## Today's articles:\n"
+                      "## POLITICS\n- [BBC] A plan\n  URL: https://e.com/plan\n"
+                      "  Zvi disagrees with the plan.",
+        WRITER_OUTPUT: REVISED,
+        FIDELITY_CHECK: FIDELITY_NOTES}
+
+
+def test_an_unchecked_script_keeps_a_bundle_without_a_fidelity_section(routes):
+    routes["anthropic"] = FakeApi([DRAFT])
+    entry = FeedEntry(id="p", title="On Plans", link="https://e.com/p", content="<p>Body.</p>",
+                      published=datetime(2026, 10, 10), author="Zvi", feed_name="Zvi")
+    processor = ContentProcessor("Summarise.", verify=False, auto_verbatim_limit=24000)
+
+    assert asyncio.run(processor.summarize(entry)) == DRAFT
+    assert entry.fidelity is None and entry.writer == OPUS
+    assert read_bundle(entry.bundle)[WRITER_OUTPUT] == DRAFT
+    assert FIDELITY_CHECK not in read_bundle(entry.bundle)
 
 
 def test_bundle_file_is_named_by_episode_id(tmp_path):
