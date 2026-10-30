@@ -14,6 +14,7 @@ import src.main as main
 import src.markets as markets
 from src.config import load_config
 from src.email_report import (ChartNote, ReportEpisode, RunReport, build_html, send_report)
+from src.market_charts import charts_for_report
 from src.markets import (Market, MarketContext, MarketRules, MarketScout, is_move,
                          kalshi_markets, pick_moves, polymarket_markets)
 from src.monitor import FeedEntry, FeedMonitor
@@ -254,7 +255,7 @@ class TestChartsInTheEmail:
                                           {"text": "Strikes", "url": "https://news/yemen"},
                                           {"text": "Polymarket: 65%", "url": yemen.url}]}],
                              markets=ctx.to_dict())
-        charts, images = main._market_charts(briefing)
+        charts, images = charts_for_report(briefing)
         assert [c.title for c in charts] == [
             "Anthropic IPO by October 31, 2026?", "Will Democrats win the Ohio Senate race in 2026?",
             "Houthi military action against Saudi Arabia on October 15?"]
@@ -277,7 +278,7 @@ class TestChartsInTheEmail:
     def test_no_market_data_no_charts(self):
         briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
                              content="Polymarket")
-        assert main._market_charts(briefing) == ([], {})
+        assert charts_for_report(briefing) == ([], {})
 
     def test_a_chart_that_fails_costs_the_charts_not_the_email(self, monkeypatch):
         import src.market_charts as market_charts
@@ -287,7 +288,7 @@ class TestChartsInTheEmail:
         monkeypatch.setattr(market_charts, "render_chart", broken)
         briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
                              content="Polymarket", markets=_ctx_with_story_and_move(None).to_dict())
-        assert main._market_charts(briefing) == ([], {})
+        assert charts_for_report(briefing) == ([], {})
 
 
 def test_market_record_round_trips_through_json():
@@ -303,7 +304,7 @@ def test_preview_writes_a_briefing_and_emails_it_without_publishing(tmp_path, mo
     monkeypatch.setattr(main, "send_report", lambda report, **kw: sent.append((report, kw)))
     chart = ChartNote(cid="market-0@feedcast", title="Ohio?", platform="Polymarket",
                       url="https://pm/ohio", caption="Now 62%", anchor="https://pm/ohio")
-    monkeypatch.setattr(main, "_market_charts",
+    monkeypatch.setattr(main, "charts_for_report",
                         lambda entry: ([chart], {"market-0@feedcast": b"\x89PNG"}))
 
     async def fake_bullets(text, **kw):
@@ -414,7 +415,7 @@ class TestLongHistoryCharts:
                              content="Polymarket",
                              bullets=[{"text": "Ohio", "url": "https://news/ohio", "sub": cites}],
                              markets=ctx.to_dict())
-        charts, images = main._market_charts(briefing)
+        charts, images = charts_for_report(briefing)
         return {c.title.split("(")[1].rstrip(")?"): _png_height(images[c.cid]) for c in charts}
 
     def test_zoom_only_on_markets_older_than_three_months(self, capsys):
@@ -447,6 +448,6 @@ class TestLongHistoryCharts:
         briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
                              content="Polymarket", bullets=[{"text": "Ohio", "url": m.url}],
                              markets=ctx.to_dict())
-        _, images = main._market_charts(briefing)
+        _, images = charts_for_report(briefing)
         (png,) = images.values()
         assert _png_height(png) == 190

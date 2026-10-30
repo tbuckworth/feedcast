@@ -15,13 +15,13 @@ from .audio import AudioGenerator
 from .bundle import write_bundle
 from .config import Config, FeedConfig, load_config
 from .digest import safe_bullets
-from .email_report import (ChartNote, LinkedPost, ReportEpisode, RunReport, bullet_urls,
-                           send_report)
+from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
 from .extractor import ExtractionError, url_to_feed_entry
 from .feed import Episode, FeedGenerator, PodcastConfig, episode_page_url
 from .fulltext import enrich_entry
 from .lesswrong import posted_at
 from . import llm
+from .market_charts import charts_for_report
 from .markets import MarketRules, MarketScout
 from .mathiness import MathsVerdict, assess
 from .monitor import DEFAULT_MAX_AGE_HOURS, FeedEntry, FeedMonitor, episode_id
@@ -718,7 +718,7 @@ async def async_main(config_path: Path | None = None) -> None:
         )
         images: dict[str, bytes] = {}
         if briefing_entry and briefing_entry.id in new_entry_ids:
-            report.charts, images = _market_charts(briefing_entry)
+            report.charts, images = charts_for_report(briefing_entry)
         send_report(report, images=images)
     else:
         print("  Nothing new — email report skipped (set FEEDCAST_EMAIL_ALWAYS=true to send anyway)")
@@ -799,7 +799,7 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
 
     # The digest as the daily email shows it, then the whole script, which is
     # where the market lines actually are.
-    charts, images = _market_charts(entry)
+    charts, images = charts_for_report(entry)
     report = RunReport(
         episodes=[item(title=f"Preview: {entry.title}", bullets=entry.bullets,
                        fidelity=entry.fidelity, writer=entry.writer),
@@ -808,77 +808,6 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
         charts=charts,
     )
     send_report(report, subject_tag="[Preview]", images=images)
-
-
-def _market_charts(briefing: FeedEntry) -> tuple[list[ChartNote], dict[str, bytes]]:
-    """Price charts for the daily email: the notes, and the PNGs by Content-ID.
-
-    A chart is drawn for each unexplained move and for each story market the
-    digest cites, and sits under the bullet that links it. Every chart shows
-    the market's whole life; one whose history goes back more than three
-    months also gets a 7-day zoom (market_charts). Nothing on days the
-    briefing used no market. Ran as a separate trial email to Titus and Jason
-    from 8 to 14 Oct 2026. Never raises: a missing chart must not cost the
-    day's email.
-    """
-    charts: list[ChartNote] = []
-    images: dict[str, bytes] = {}
-    try:
-        from .market_charts import (ZOOM_DAYS, history_days, render_chart, wants_zoom,
-                                    zoom_window)
-
-        data = briefing.markets
-        if not data:
-            return [], {}
-        cited = {u for b in briefing.bullets for u in bullet_urls(b)}
-        drawn: set[str] = set()
-
-        def points(m: dict, key: str) -> list:
-            return [(datetime.fromisoformat(when), p) for when, p in m.get(key) or []]
-
-        def add(m: dict, anchor: str, story_time: datetime | None, caption: str) -> None:
-            if m["key"] in drawn:   # one market linked to two stories
-                return
-            drawn.add(m["key"])
-            # The whole life for context, with the hourly last 30 days spliced
-            # onto the end for detail.
-            recent, life = points(m, "history"), points(m, "long_history")
-            line = [pt for pt in life if not recent or pt[0] < recent[0][0]] + recent
-            # Past three months the last week is a sliver at the end of the
-            # line, so it gets a panel of its own.
-            zoom = zoom_window(line, line[-1][0]) if wants_zoom(line) else []
-            png = render_chart(line, story_time, zoom)
-            panels = ("not drawn, too little history" if not png else
-                      f"whole life plus a {ZOOM_DAYS}-day zoom" if len(zoom) >= 2 else
-                      "whole life only")
-            print(f"    chart: {m['title'][:70]}: {history_days(line):.0f} days of history, {panels}")
-            if png:
-                cid = f"market-{len(images)}@feedcast"
-                images[cid] = png
-                charts.append(ChartNote(cid=cid, title=m["title"], platform=m["platform"],
-                                        url=m["url"], caption=caption, anchor=anchor))
-
-        for m in data.get("moves") or []:
-            add(m, m["url"] if m["url"] in cited else "", None,
-                f"{m['prob_24h']:.0%} to {m['prob']:.0%} in the last 24 hours · {m['traded']}")
-        for story_url, markets in (data.get("stories") or {}).items():
-            raw_time = (data.get("story_times") or {}).get(story_url)
-            story_time = datetime.fromisoformat(raw_time) if raw_time else None
-            for m in markets:
-                # Only markets the digest cites, which it does when the script
-                # quotes them. "The platform is named somewhere and the story
-                # has a bullet" charted, on 14 Oct, a Gemini benchmark market
-                # the script never mentioned under the Gemini bullet, and
-                # skipped the Houthi market it did quote: that one was linked
-                # only from a sub-bullet.
-                if m["url"] not in cited:
-                    continue
-                add(m, m["url"], story_time,
-                    f"Now {m['prob']:.0%} · {m['traded']} · dashed line: the story")
-    except Exception as e:  # noqa: BLE001 — the email goes out without charts
-        print(f"  Prediction-market charts failed: {type(e).__name__}: {e}")
-        return [], {}
-    return charts, images
 
 
 def _run_pass() -> str:
