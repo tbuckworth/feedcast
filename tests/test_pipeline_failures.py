@@ -2,14 +2,16 @@
 
 These run async_main end to end on a scratch repository: the real config.yaml
 with local feed files, a real database, and the real cleaning, normaliser,
-digest, retry queue and feed generation. Stood in for, at the edges only:
-DeepInfra's TTS (`Narrator`, a paid API), the LLM accounts (the `routes`
-fixture), every HTTP request (`Pipeline.answer`), the article download for an
-injected URL, and SMTP (the report is captured where main hands it over).
+digest, narrator, retry queue, feed generation and email. Stood in for, at the
+edges only: DeepInfra's voice upload and TTS (`narrator`, `tts`), the LLM
+accounts (`routes`), every other HTTP request (`Pipeline.answer`), the article
+download for an injected URL, and the mail server (`smtp`): paid APIs, the
+network and SMTP.
 """
 
 import asyncio
 import json
+import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -23,7 +25,10 @@ from src import lesswrong, market_charts, notices
 from src.config import CONFIG_PATH
 from src.markets import Market, MarketContext, MarketScout
 from src.monitor import FeedEntry, FeedMonitor
-from tests.conftest import FakeApi, silent_mp3
+from tests.conftest import FakeApi, needs_ffmpeg, silent_mp3
+
+# The real narrator joins its chunks with ffmpeg, and the feed reads each MP3 with ffprobe.
+pytestmark = needs_ffmpeg
 
 LW = "https://www.lesswrong.com/posts/AAAAAAAAAAAAAAAAA/on-land"
 BROKEN = "https://feeds.example/broken.xml"
@@ -44,23 +49,6 @@ class Model(FakeApi):
         return await super()._create(**kw)
 
 
-class Narrator:
-    """DeepInfra's TTS, a paid API: writes a real, silent MP3, or raises `fail`."""
-
-    fail: Exception | None = None
-
-    def __init__(self, *a, **kw):
-        pass
-
-    async def generate_episode(self, text, audio_dir, ep_id, title, http_client):
-        if Narrator.fail:
-            raise Narrator.fail
-        path = Path(audio_dir) / f"{ep_id}.mp3"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_bytes(silent_mp3())
-        return path
-
-
 def item(title: str, link: str, hours_ago: float = 1.0) -> str:
     when = datetime.now(timezone.utc) - timedelta(hours=hours_ago)
     return (f"<item><title>{title}</title><link>{link}</link><guid>{link}</guid>"
@@ -76,6 +64,12 @@ def lesswrong_down(request: httpx.Request) -> httpx.Response:
     return httpx.Response(502)
 
 
+def listed(email: str, heading: str) -> list[str]:
+    """The items the email's plain text lists under `heading`."""
+    block = email.split(f"\n{heading}\n", 1)[1].split("\n\n", 1)[0]
+    return block.removeprefix("  - ").split("\n  - ")
+
+
 def _entry(entry_id: str, title: str, feed_name: str, link: str = "") -> FeedEntry:
     return FeedEntry(id=entry_id, title=title, link=link or entry_id, content="<p>Land.</p>",
                      published=datetime.now() - timedelta(days=3), author="Scott Alexander",
@@ -85,12 +79,11 @@ def _entry(entry_id: str, title: str, feed_name: str, link: str = "") -> FeedEnt
 class Pipeline:
     """One scratch repository: its feeds, its database, and what each run emailed."""
 
-    def __init__(self, root: Path, monkeypatch):
-        self.root, self.mp = root, monkeypatch
+    def __init__(self, root: Path, monkeypatch, sent: list):
+        self.root, self.mp, self.sent = root, monkeypatch, sent
         self.feeds: list[dict] = []
         self.briefing_sources: list[dict] = []
         self.maths = True
-        self.reports = []
         self.requests: list[httpx.Request] = []
         self.answer = lambda request: httpx.Response(404)
         self.monitor = FeedMonitor(root / "data" / "posts.db")
@@ -106,8 +99,8 @@ class Pipeline:
         """A feed whose fetch raises, as feedparser does on a socket timeout."""
         self.feeds.append({"name": name, "url": BROKEN, "mode": "verbatim"})
 
-    def run(self, **env):
-        """Run the pipeline once; the report it emailed, or None."""
+    def run(self, **env) -> str | None:
+        """Run the pipeline once; the plain text of the email it sent, or None."""
         data = yaml.safe_load(CONFIG_PATH.read_text())
         data["feeds"] = self.feeds
         data["fidelity_check"] = False
@@ -119,27 +112,28 @@ class Pipeline:
         config.write_text(yaml.safe_dump(data))
         for key, value in env.items():
             self.mp.setenv(key, value)
-        before = len(self.reports)
+        before = len(self.sent)
         asyncio.run(main.async_main(config))
-        return self.reports[-1] if len(self.reports) > before else None
+        if len(self.sent) == before:
+            return None
+        (msg,) = self.sent[before:]
+        return msg.get_body(("plain",)).get_content()
 
     def ntfy(self) -> list[httpx.Request]:
         return [r for r in self.requests if r.url.host == "ntfy.sh"]
 
 
 @pytest.fixture
-def pipeline(tmp_path, monkeypatch, routes):
+def pipeline(tmp_path, monkeypatch, routes, narrator, tts, smtp):
+    # `narrator` is not called: it sets the key and fake upload for main's own AudioGenerator.
     monkeypatch.setattr(main, "ROOT", tmp_path)
-    monkeypatch.setattr(main, "AudioGenerator", Narrator)
-    Narrator.fail = None
     for var in ("REPROCESS_ENTRY", "FORCE_VERBATIM", "INJECT_URL", "INJECT_MODE", "NTFY_TOPIC",
                 "FEEDCAST_PASS", "RESEND_REPORT", "PREVIEW_BRIEFING", "FEEDCAST_EMAIL_ALWAYS",
                 "GITHUB_OUTPUT", "GITHUB_ACTIONS"):
         monkeypatch.delenv(var, raising=False)
     routes["openrouter"] = Model(lambda m: m[-1]["content"])     # the normaliser repeats it
     routes["openai"] = Model(lambda m: "- Land value taxes work.")  # the digest
-    p = Pipeline(tmp_path, monkeypatch)
-    monkeypatch.setattr(main, "send_report", lambda report, **kw: p.reports.append(report))
+    p = Pipeline(tmp_path, monkeypatch, smtp)
 
     # Every HTTP request goes to the test: LessWrong's GraphQL and ntfy.
     lesswrong._graphql_markdown.cache_clear()
@@ -190,11 +184,10 @@ class TestFindingAnEntryAgain:
         pipeline.monitor.mark_processed(_entry("https://acx/1", "Does Georgism Work?", "Scott"),
                                         "old.mp3")
         pipeline.broken_feed("Scott")
-        report = pipeline.run(REPROCESS_ENTRY="https://acx/1")
-        assert report.failures == [(
-            "https://acx/1",
-            "a feed could not be read (Scott: TimeoutError: timed out), so the post was not "
-            "looked for there; the existing episode was kept")]
+        email = pipeline.run(REPROCESS_ENTRY="https://acx/1")
+        assert listed(email, "Failed:") == [
+            "https://acx/1: a feed could not be read (Scott: TimeoutError: timed out), so the "
+            "post was not looked for there; the existing episode was kept"]
         assert pipeline.monitor.is_processed("https://acx/1")
         assert "Scott: TimeoutError: timed out" in capsys.readouterr().out
 
@@ -202,9 +195,9 @@ class TestFindingAnEntryAgain:
 def test_a_feed_whose_fetch_raises_is_listed_with_the_dead_sources(pipeline):
     pipeline.feed("Scott", item("Does Georgism Work?", "https://acx/1"))
     pipeline.broken_feed("Zvi")
-    report = pipeline.run()
-    assert report.dead_sources == ["Zvi (TimeoutError: timed out)"]
-    assert [e.title for e in report.episodes] == ["Does Georgism Work?"]
+    email = pipeline.run()
+    assert listed(email, "Sources that returned nothing:") == ["Zvi (TimeoutError: timed out)"]
+    assert "\n1 new episode(s);" in email and "\n* Does Georgism Work?\n" in email
 
 
 def test_the_posts_held_back_for_a_later_run_are_named(pipeline, capsys):
@@ -221,11 +214,11 @@ class TestLessWrongUnreachable:
     def test_a_maths_check_that_cannot_reach_lesswrong_fails_the_entry(self, pipeline):
         pipeline.feed("Zvi", item("On Land", LW))
         pipeline.answer = lesswrong_down
-        report = pipeline.run()
-        ((title, why),) = report.failures
-        assert title == "On Land" and why.startswith("maths check: HTTPStatusError")
-        assert why.endswith("attempt 1 of 3, will retry next run")
-        assert report.episodes == [] and not pipeline.monitor.is_processed(LW)
+        email = pipeline.run()
+        (failure,) = listed(email, "Failed:")
+        assert failure.startswith("On Land: maths check: HTTPStatusError")
+        assert failure.endswith("attempt 1 of 3, will retry next run")
+        assert "\n0 new episode(s);" in email and not pipeline.monitor.is_processed(LW)
         (row,) = pipeline.monitor.pending_failures()
         assert row["id"] == LW
 
@@ -234,31 +227,34 @@ class TestLessWrongUnreachable:
         pipeline.maths = False
         pipeline.feed("Zvi", item("On Land", LW))
         pipeline.answer = lesswrong_down
-        report = pipeline.run()
-        ((title, why),) = report.failures
-        assert title == "On Land" and why.startswith("full text: HTTPStatusError")
-        assert report.episodes == [] and pipeline.monitor.pending_failures()[0]["id"] == LW
+        email = pipeline.run()
+        (failure,) = listed(email, "Failed:")
+        assert failure.startswith("On Land: full text: HTTPStatusError")
+        assert "\n0 new episode(s);" in email
+        assert pipeline.monitor.pending_failures()[0]["id"] == LW
 
     def test_a_failed_digest_backfill_is_in_the_resent_email(self, pipeline):
         pipeline.monitor.mark_processed(_entry(LW, "On Land", "Zvi"), "a.mp3")
         (pipeline.root / "data" / "audio").mkdir(parents=True)
         (pipeline.root / "data" / "audio" / "a.mp3").write_bytes(silent_mp3())
         pipeline.answer = lesswrong_down
-        report = pipeline.run(RESEND_REPORT="true")
-        ((title, why),) = report.failures
-        assert title == "On Land" and why.startswith("digest backfill: HTTPStatusError")
+        email = pipeline.run(RESEND_REPORT="true")
+        (failure,) = listed(email, "Failed:")
+        assert failure.startswith("On Land: digest backfill: HTTPStatusError")
 
 
 class TestInjection:
 
-    def test_a_failed_injection_pushes_a_failure_not_a_new_episode(self, pipeline):
-        Narrator.fail = RuntimeError("3 of 10 TTS chunks failed")
+    def test_a_failed_injection_pushes_a_failure_not_a_new_episode(self, pipeline, tts):
+        tts.fail_on.add("Land value taxes")
         pipeline.answer = lambda request: httpx.Response(200)
         pipeline.run(INJECT_URL=INJECTED, NTFY_TOPIC="feedcast-test")
         (push,) = pipeline.ntfy()
         assert push.headers["Tags"] == "x"
-        assert push.content.decode() == (f"Failed to process: {INJECTED}\n"
-                                         f"tts: RuntimeError: 3 of 10 TTS chunks failed")
+        assert re.fullmatch(
+            rf"Failed to process: {re.escape(INJECTED)}\ntts: RuntimeError: \d+ of \d+ TTS "
+            r"chunks failed \(\d+ kept for retry\): ReadError: connection dropped",
+            push.content.decode())
 
     def test_an_injection_that_worked_pushes_its_title(self, pipeline):
         pipeline.answer = lambda request: httpx.Response(200)
@@ -301,7 +297,7 @@ def test_a_chart_failure_reaches_the_email_it_was_left_out_of(pipeline, monkeypa
     def broken(*a, **kw):
         raise ValueError("bad history")
     monkeypatch.setattr(market_charts, "render_chart", broken)
-    report = pipeline.run()
+    email = pipeline.run()
     assert "prediction-market charts left out of this email: ValueError: bad history" \
-        in report.notices
-    assert notices.report() == report.notices
+        in listed(email, "Fallbacks and skips this run:")
+    assert notices.report() == listed(email, "Fallbacks and skips this run:")

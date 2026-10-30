@@ -15,7 +15,7 @@ from src.main import generate_episode_id
 from src.html_text import clean_html, small_table_to_prose
 from src.monitor import FeedMonitor
 from src.news import PREVIOUS_BRIEFINGS_HEADER, NewsAggregator
-from tests.conftest import FakeApi, feed_xml, silent_mp3
+from tests.conftest import FakeApi, feed_xml, needs_ffmpeg, silent_mp3
 
 
 # --- split_into_chunks (src/audio.py) ---
@@ -410,6 +410,7 @@ class TestGenerateFeedForCrawlers:
         lengths = {i.findtext("title"): i.find("enclosure").get("length") for i in channel.findall("item")}
         assert lengths == {"Briefing": "2927229", "King Ludd": "0"}
 
+    @needs_ffmpeg
     def test_load_episodes_reads_the_audio_size(self, tmp_path):
         config = PodcastMetaConfig(title="T", description="D", author="A", email="e@e.com",
                                    language="en", base_url="https://x.test/pod",
@@ -430,12 +431,14 @@ class TestGenerateFeedForCrawlers:
             title="T", description="D", author="A", email="e@e.com", language="en",
             base_url="https://x.test/pod", category="Technology"), retention_days=30)
 
+    @needs_ffmpeg
     def test_an_mp3_ffprobe_cannot_read_fails_the_feed(self, tmp_path):
         """It used to publish as a 00:00:00 episode with no error anywhere."""
         (tmp_path / "a.mp3").write_bytes(b"\0" * 1234)
         with pytest.raises(subprocess.CalledProcessError):
             self._gen().load_episodes_from_db([self._row("a.mp3")], tmp_path)
 
+    @needs_ffmpeg
     def test_a_row_whose_mp3_is_missing_is_named_in_the_log(self, tmp_path, capsys):
         (tmp_path / "a.mp3").write_bytes(silent_mp3())
         eps = self._gen().load_episodes_from_db(
