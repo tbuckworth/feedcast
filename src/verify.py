@@ -15,7 +15,9 @@ reads the result again so the email can say honestly what remains. Omissions
 and paraphrase are never flagged: the point is fidelity, not completeness,
 and a nitpicking checker would push the writer into hedged mush.
 
-Never raises. A check that fails leaves the script as written and says so.
+Never raises. A check that fails leaves the script as written and says so: a
+failed first check is reported as such, and a failed revision or re-check
+keeps the flags the first check found.
 """
 
 import json
@@ -165,35 +167,55 @@ async def revise(script: str, source: str, flags: list[dict],
 
 async def verify_script(script: str, source: str, *, writer_system_prompt: str,
                         label: str = "", client=None) -> tuple[str, Fidelity]:
-    """Check `script` against `source`; fix it once if needed. Returns (script, fidelity)."""
+    """Check `script` against `source`; fix it once if needed. Returns (script, fidelity).
+
+    When the revision or its re-check fails, the draft ships as written with
+    the flags the first check found ("flagged"), so the email still says what
+    is wrong with it; when the first check itself fails it is "skipped", and
+    the email says the check failed and why.
+    """
+    where = f" ({label})" if label else ""
     try:
         total, flags = await check(script, source, client)
-        fid = Fidelity(status="clean", claims_total=total, flags=flags)
-        material = fid.material
-        print(f"    Fidelity check{f' ({label})' if label else ''}: "
-              f"{total} claims, {len(flags)} flags, {len(material)} material")
-        if not material:
-            return script, fid
-        revised = await revise(script, source, material, writer_system_prompt, client)
-        if len(revised) < 0.6 * len(script):
-            fid.status = "flagged"
-            fid.note = f"revision rejected: {len(revised)} chars vs {len(script)}"
-            return script, fid
-        _, after = await check(revised, source, client)
-        fid.status = "revised"
-        fid.revised = True
-        fid.remaining = [f for f in after if f.get("severity") in MATERIAL]
-        print(f"    Revised; {len(fid.remaining)} material flags remain")
-        return revised, fid
     except Exception as e:  # noqa: BLE001 — a failed check must never fail the episode
-        print(f"    Fidelity check skipped{f' ({label})' if label else ''}: {e!r}")
+        print(f"    Fidelity check failed{where}: {e!r}")
         return script, Fidelity(status="skipped", note=repr(e))
+    fid = Fidelity(status="clean", claims_total=total, flags=flags)
+    material = fid.material
+    print(f"    Fidelity check{where}: {total} claims, {len(flags)} flags, {len(material)} material")
+    if not material:
+        return script, fid
+    fid.status = "flagged"
+    try:
+        revised = await revise(script, source, material, writer_system_prompt, client)
+    except Exception as e:  # noqa: BLE001 — the draft ships with its flags instead
+        fid.note = f"revision failed: {e!r}"
+        print(f"    Fidelity{where}: {fid.note}")
+        return script, fid
+    if len(revised) < 0.6 * len(script):
+        fid.note = f"revision rejected: {len(revised)} chars vs {len(script)}"
+        print(f"    Fidelity{where}: {fid.note}")
+        return script, fid
+    try:
+        _, after = await check(revised, source, client)
+    except Exception as e:  # noqa: BLE001 — an unchecked revision does not ship
+        fid.note = f"re-check of the revision failed, draft kept: {e!r}"
+        print(f"    Fidelity{where}: {fid.note}")
+        return script, fid
+    fid.status = "revised"
+    fid.revised = True
+    fid.remaining = [f for f in after if f.get("severity") in MATERIAL]
+    print(f"    Revised; {len(fid.remaining)} material flags remain")
+    return revised, fid
 
 
 def fidelity_summary(fid: dict | None) -> str:
-    """One line for the email. '' when there is nothing worth saying."""
-    if not fid or fid.get("status") in (None, "", "skipped"):
+    """One line for the email. '' when no check ran."""
+    if not fid or not fid.get("status"):
         return ""
+    if fid["status"] == "skipped":
+        note = str(fid.get("note") or "")[:200]
+        return f"Fidelity check failed: {note}" if note else "Fidelity check failed"
     material = [f for f in fid.get("flags", []) if f.get("severity") in MATERIAL]
     n, rem = len(material), len(fid.get("remaining", []))
     plural = lambda k: "issue" if k == 1 else "issues"  # noqa: E731
