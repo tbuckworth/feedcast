@@ -607,10 +607,16 @@ async def async_main(config_path: Path | None = None) -> None:
                 print(f"  Recovered full text: {entry.title} "
                       f"({gain.before:,} -> {gain.after:,} chars)")
             elif gain.is_failure:
-                # Silence here is how a three-percent blurb ships as an episode.
-                print(f"  WARNING: LessWrong has no markdown for {entry.title} — "
-                      f"narrating the feed body ({gain.before:,} chars), which may "
-                      f"be an excerpt")
+                # LessWrong answered, and the post has no markdown (deleted, a
+                # draft, or not a post): a permanent answer that a retry
+                # cannot change, so the feed body is narrated. It may be an
+                # excerpt, and silence is how a three-percent blurb ships as an
+                # episode, so the email names it.
+                note = (f"{entry.title}: LessWrong has no markdown for it, so it was "
+                        f"narrated from the feed body ({gain.before:,} chars), which "
+                        f"may be an excerpt")
+                print(f"  WARNING: {note}")
+                notices.add(note)
         entries_to_process = [t for t in entries_to_process if t[0].id not in unrecovered]
 
     # The briefing and the summaries are narrated and published first; posts
@@ -723,6 +729,18 @@ async def async_main(config_path: Path | None = None) -> None:
     # Tells the workflow whether the narration job has anything to do.
     _gh_output(deferred=len(waiting))
 
+    # Send ntfy notification for injected URLs: what was published, or why not.
+    # Before the email, so a push that fails is among the email's notices.
+    if inject_url:
+        ntfy_topic = os.environ.get("NTFY_TOPIC", "").strip()
+        if ntfy_topic:
+            made = [e for e, _m, _p in entries_to_process if e.id in new_entry_ids]
+            if made:
+                await _send_ntfy(ntfy_topic, f"New episode: {made[0].title}", "white_check_mark")
+            else:
+                await _send_ntfy(ntfy_topic, f"Failed to process: {inject_url}\n"
+                                 + "\n".join(why for _title, why in failures), "x")
+
     # Email the run report. Off when FEEDCAST_EMAIL_TO is unset; a send that
     # fails is recorded, and the workflow fails the run after publishing.
     if (new_entry_ids or failures or maths_skipped or dead_sources or deferring
@@ -739,17 +757,6 @@ async def async_main(config_path: Path | None = None) -> None:
         _email(report, images=images)
     else:
         print("  Nothing new — email report skipped (set FEEDCAST_EMAIL_ALWAYS=true to send anyway)")
-
-    # Send ntfy notification for injected URLs: what was published, or why not.
-    if inject_url:
-        ntfy_topic = os.environ.get("NTFY_TOPIC", "").strip()
-        if ntfy_topic:
-            made = [e for e, _m, _p in entries_to_process if e.id in new_entry_ids]
-            if made:
-                await _send_ntfy(ntfy_topic, f"New episode: {made[0].title}", "white_check_mark")
-            else:
-                await _send_ntfy(ntfy_topic, f"Failed to process: {inject_url}\n"
-                                 + "\n".join(why for _title, why in failures), "x")
 
     print(f"\nPipeline complete.")
 
@@ -1167,7 +1174,7 @@ def _build_run_report(
 
 
 async def _send_ntfy(topic: str, message: str, tags: str) -> None:
-    """Push an injection's outcome to ntfy.sh. A push that fails or is refused is logged."""
+    """Push an injection's outcome to ntfy.sh. A push that fails or is refused is a notice."""
     try:
         async with httpx.AsyncClient() as client:
             response = await client.post(
@@ -1176,8 +1183,20 @@ async def _send_ntfy(topic: str, message: str, tags: str) -> None:
                 headers={"Title": "Feedcast", "Tags": tags},
             )
             response.raise_for_status()
+        return
+    except httpx.HTTPStatusError as e:
+        # Only the status: the error's text holds the URL, and the URL the
+        # topic, which is a secret and must not reach the email.
+        why = f"HTTPStatusError: HTTP {e.response.status_code}"
     except Exception as e:
-        print(f"  ntfy notification failed: {type(e).__name__}: {e}")
+        why = f"{type(e).__name__}: {e}"
+    # A lost push does not fail the run. The push only repeats an outcome the
+    # run has already reached (an episode made, or a failure the email or the
+    # failed job reports), and failing over it would read as the episode
+    # failing. It goes to the email's notices instead, so it is still seen.
+    note = f"ntfy notification failed: {why}"
+    print(f"  {note}")
+    notices.add(note)
 
 
 def main(config_path: Path | None = None) -> None:

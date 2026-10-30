@@ -130,10 +130,9 @@ def fetch_lesswrong_markdown(link: str, timeout: float = 30.0) -> Optional[str]:
 
     None means there is no markdown to have: the link is not a LessWrong or
     Alignment Forum post, or the site answered that the post has none. A
-    request that fails raises. It used to return None too, and then the maths
-    filter scored the RSS body, whose maths is stripped, and full-text
-    recovery narrated Zvi's three-percent blurb; now the entry fails and the
-    retry queue tries it again.
+    request that fails raises, so the caller fails the entry rather than
+    scoring or narrating the feed body, whose maths is stripped and which may
+    be an excerpt.
     """
     post_id = lesswrong_post_id(link)
     if not post_id:

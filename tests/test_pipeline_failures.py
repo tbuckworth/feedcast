@@ -64,6 +64,13 @@ def lesswrong_down(request: httpx.Request) -> httpx.Response:
     return httpx.Response(502)
 
 
+def lesswrong_without_markdown(request: httpx.Request) -> httpx.Response:
+    """LessWrong's GraphQL dates posts and answers that this one has no markdown."""
+    if "postedAt" in json.loads(request.content)["query"]:
+        return lesswrong_down(request)
+    return httpx.Response(200, json={"data": {"post": {"result": {"contents": None}}}})
+
+
 def listed(email: str, heading: str) -> list[str]:
     """The items the email's plain text lists under `heading`."""
     block = email.split(f"\n{heading}\n", 1)[1].split("\n\n", 1)[0]
@@ -209,7 +216,8 @@ def test_the_posts_held_back_for_a_later_run_are_named(pipeline, capsys):
 
 
 class TestLessWrongUnreachable:
-    """Titus's call (T4): fail the entry and retry it, rather than narrate degraded text."""
+    """An entry whose LessWrong fetch fails is failed and retried, not narrated
+    from degraded text."""
 
     def test_a_maths_check_that_cannot_reach_lesswrong_fails_the_entry(self, pipeline):
         pipeline.feed("Zvi", item("On Land", LW))
@@ -243,6 +251,20 @@ class TestLessWrongUnreachable:
         assert failure.startswith("On Land: digest backfill: HTTPStatusError")
 
 
+def test_a_post_with_no_markdown_is_narrated_from_its_feed_body_and_named(pipeline):
+    """No markdown is LessWrong's final answer, so a retry cannot help; the body may be
+    an excerpt, so the email says which episode was made from it."""
+    pipeline.maths = False
+    pipeline.feed("Zvi", item("On Land", LW))
+    pipeline.answer = lesswrong_without_markdown
+    email = pipeline.run()
+    assert "\n1 new episode(s);" in email and pipeline.monitor.is_processed(LW)
+    assert pipeline.monitor.pending_failures() == []
+    (note,) = listed(email, "Fallbacks and skips this run:")
+    assert re.fullmatch(r"On Land: LessWrong has no markdown for it, so it was narrated "
+                        r"from the feed body \(\d+ chars\), which may be an excerpt", note)
+
+
 class TestInjection:
 
     def test_a_failed_injection_pushes_a_failure_not_a_new_episode(self, pipeline, tts):
@@ -263,10 +285,14 @@ class TestInjection:
         assert push.headers["Tags"] == "white_check_mark"
         assert push.content.decode() == "New episode: Land"
 
-    def test_a_push_ntfy_refuses_is_logged(self, pipeline, capsys):
+    def test_a_push_ntfy_refuses_is_in_the_email(self, pipeline):
+        """The episode was made, so the run goes on; the email says the push was lost."""
         pipeline.answer = lambda request: httpx.Response(403)
-        pipeline.run(INJECT_URL=INJECTED, NTFY_TOPIC="feedcast-test")
-        assert "ntfy notification failed: HTTPStatusError" in capsys.readouterr().out
+        email = pipeline.run(INJECT_URL=INJECTED, NTFY_TOPIC="feedcast-test")
+        assert "\n1 new episode(s);" in email
+        assert listed(email, "Fallbacks and skips this run:") == [
+            "ntfy notification failed: HTTPStatusError: HTTP 403"]
+        assert "feedcast-test" not in email     # the topic is a secret
 
     def test_reinjecting_deletes_the_earlier_episode_however_it_was_stored(self, pipeline,
                                                                             capsys):

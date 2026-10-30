@@ -75,8 +75,7 @@ class FeedGenerator:
 
         Uses ffprobe, which ships with the ffmpeg the pipeline already requires.
         The previous soundfile import was never satisfied (soundfile is not a
-        dependency), so every episode silently published a 00:00:00 duration;
-        returning 0 on an ffprobe failure did the same for a broken MP3.
+        dependency), so every episode silently published a 00:00:00 duration.
         """
         out = subprocess.run(
             [

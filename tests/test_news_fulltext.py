@@ -10,7 +10,7 @@ from src import news, notices
 from src.llm import EmptyCompletion
 from src.markets import MarketContext, MarketRules, MarketScout
 from src.news import NewsAggregator
-from tests.conftest import FakeApi
+from tests.conftest import FakeApi, feed_xml
 
 
 class FakeClient:
@@ -69,10 +69,12 @@ def test_an_unusable_selection_goes_to_the_next_writer(routes, unusable):
     assert note.startswith("story selection: served by anthropic/claude-opus-5.5 via openrouter")
 
 
-def test_when_no_writer_gives_a_usable_selection_the_briefing_fails(monkeypatch):
+def test_when_no_writer_gives_a_usable_selection_the_briefing_fails():
     """Not written from blurbs: the briefing is retried by the next run."""
     agg = _agg(FakeClient(["I cannot decide."]), full_text_stories=2)
-    monkeypatch.setattr(agg, "fetch_all_sources", lambda: asyncio.sleep(0, _articles(5)))
+    now = datetime.now(timezone.utc)
+    agg.sources = [{"name": "BBC World", "category": "geopolitics",
+                    "url": feed_xml(*[(f"Story {i}", now) for i in range(5)])}]
     with pytest.raises(EmptyCompletion, match="story selection: no JSON array"):
         asyncio.run(agg.generate_briefing())
 

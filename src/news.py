@@ -11,7 +11,7 @@ from .bundle import writer_bundle
 from .extractor import extract_article
 from .llm import complete
 from .markets import MarketContext, MarketScout
-from .monitor import FeedEntry, warn_if_dead
+from .monitor import FeedEntry, report_skipped, warn_if_dead
 from .verify import fidelity_markdown, verify_script
 
 # The previous briefings are there for dedup, but the writer also reads them
@@ -119,8 +119,8 @@ class NewsAggregator:
                 elif hasattr(entry, "updated_parsed") and entry.updated_parsed:
                     published = datetime(*entry.updated_parsed[:6], tzinfo=timezone.utc)
 
-                # Counted, as monitor.fetch_feed does: a source that stops
-                # dating its items would otherwise just look quiet.
+                # Counted for report_skipped: a source that stops dating its
+                # items would otherwise just look quiet.
                 if published is None:
                     undated += 1
                     continue
@@ -142,12 +142,8 @@ class NewsAggregator:
                     "published": published,
                     "url": entry.get("link", ""),
                 })
-            if stale or undated:
-                detail = ", ".join(filter(None, [
-                    f"{stale} older than {self.lookback_hours:g}h" if stale else "",
-                    f"{undated} with no date" if undated else "",
-                ]))
-                print(f"  {source['name']}: skipped {detail}")
+            report_skipped(source["name"], self.lookback_hours, stale=stale, undated=undated,
+                           already=0, skipped=0)
             return articles
 
         results = await asyncio.gather(
@@ -324,12 +320,10 @@ class NewsAggregator:
         if selected:
             got = await self.fetch_full_text(selected)
             print(f"  Selected {len(selected)} stories; full text for {got}")
-        # The scout attaches odds to the stories the writer reads in full, or,
-        # when the selection came back empty, to as many of the fetched ones.
-        # With full_text_stories at 0 the writer reads none in full, so the
-        # scout gets no stories and only looks for unexplained moves.
-        market_stories = (selected or articles)[:self.full_text_stories]
-        markets = (await self.markets.build(market_stories)
+        # The scout attaches odds to the stories the writer reads in full. With
+        # full_text_stories at 0 the writer reads none in full, so the scout
+        # gets no stories and only looks for unexplained moves.
+        markets = (await self.markets.build(selected)
                    if self.markets else MarketContext())
         formatted = self._format_briefing_input(articles, selected, markets)
         print("  Synthesizing briefing via LLM...")

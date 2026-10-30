@@ -53,8 +53,10 @@ class Enrichment:
     """What happened when we tried to recover a post's full text.
 
     The outcomes have to be distinguishable. "The feed already had the whole
-    post" and "we could not reach the post" both leave the body alone, but only
-    one of them is a problem — and the silent one ships a blurb as an episode.
+    post" (feed-complete) and "LessWrong has no markdown for the post"
+    (no-markdown) both leave the body alone, but only the second may leave an
+    excerpt in place, so only it is a failure. A post that cannot be reached
+    raises instead of returning one of these.
     """
 
     replaced: bool
@@ -73,8 +75,9 @@ def enrich_entry(entry: FeedEntry) -> Enrichment:
     Mutates ``entry.content`` in place. Raises when the post cannot be fetched,
     so the entry fails and is retried rather than narrated from an excerpt.
     When the site answers that the post has no markdown, the body is left
-    alone and the result says so ("no-markdown"), so it is visible in the log
-    instead of looking like a feed that was fine all along.
+    alone and the result says so ("no-markdown"), so the run can name the
+    episode in the email instead of it looking like a feed that was fine all
+    along.
     """
     before = _visible_length(entry.content)
     if not lesswrong_post_id(entry.link):

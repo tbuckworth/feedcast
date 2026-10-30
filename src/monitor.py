@@ -136,6 +136,23 @@ def warn_if_dead(feed, name: str, url: str) -> bool:
     return True
 
 
+def report_skipped(name: str, max_age_hours: float | None, *, stale: int, undated: int,
+                   already: int, skipped: int) -> None:
+    """Print one line saying how many of a feed's items were left out, and why.
+
+    Used by fetch_feed and the news sources. Without it a source whose items
+    are all out of the window, or that stops dating them, looks like a quiet day.
+    """
+    detail = ", ".join(filter(None, [
+        f"{stale} older than {max_age_hours:g}h" if stale else "",
+        f"{undated} with no date" if undated else "",
+        f"{already} already narrated under another feed" if already else "",
+        f"{skipped} matching skip_patterns" if skipped else "",
+    ]))
+    if detail:
+        print(f"  {name}: skipped {detail}")
+
+
 def _add_column(conn: sqlite3.Connection, table: str, column: str) -> None:
     """Add a TEXT column defaulting to '', unless the table has it already."""
     try:
@@ -618,14 +635,8 @@ class FeedMonitor:
                 )
             )
 
-        if stale or undated or already or skipped:
-            detail = ", ".join(filter(None, [
-                f"{stale} older than {max_age_hours:g}h" if stale else "",
-                f"{undated} with no date" if undated else "",
-                f"{already} already narrated under another feed" if already else "",
-                f"{skipped} matching skip_patterns" if skipped else "",
-            ]))
-            print(f"  {feed_name}: skipped {detail}")
+        report_skipped(feed_name, max_age_hours, stale=stale, undated=undated,
+                       already=already, skipped=skipped)
 
         # Sort by published date (oldest first for processing)
         entries.sort(key=lambda e: e.published)
