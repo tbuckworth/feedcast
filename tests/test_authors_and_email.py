@@ -144,10 +144,15 @@ class TestEmailReport:
 class TestFailedSendFailsTheRun:
     """src.main publishes as normal, then the workflow fails the job."""
 
-    @pytest.mark.parametrize("result,recorded", [(True, ""), (None, ""),
-                                                 (False, "report_failed=true\n")])
-    def test_only_a_failed_send_is_recorded(self, monkeypatch, tmp_path, result, recorded):
-        monkeypatch.setattr(main, "send_report", lambda report, **kw: result)
+    @pytest.mark.parametrize("recipient,user,recorded", [
+        ("", "sender@example.com", ""),                      # email off: nothing failed
+        ("reader@example.com", "", "report_failed=true\n"),  # on, but no login to send with
+    ])
+    def test_only_a_failed_send_is_recorded(self, monkeypatch, tmp_path, recipient, user, recorded):
+        monkeypatch.setenv("FEEDCAST_EMAIL_TO", recipient)
+        monkeypatch.setenv("SMTP_USER", user)
+        monkeypatch.setenv("GMAIL_APP_PASSWORD", "app-password")
+        monkeypatch.delenv("SMTP_PASSWORD", raising=False)
         outputs = tmp_path / "github_output"
         outputs.touch()
         monkeypatch.setenv("GITHUB_OUTPUT", str(outputs))
@@ -197,6 +202,14 @@ class TestSendPath:
         monkeypatch.setenv("SMTP_USER", "sender@example.com")
         monkeypatch.setenv("GMAIL_APP_PASSWORD", "app-password")
         return sent
+
+    def test_a_report_that_went_out_records_nothing(self, fake_smtp, monkeypatch, tmp_path):
+        outputs = tmp_path / "github_output"
+        outputs.touch()
+        monkeypatch.setenv("GITHUB_OUTPUT", str(outputs))
+        main._email(RunReport())
+        assert "msg" in fake_smtp
+        assert outputs.read_text() == ""
 
     def _report(self):
         return RunReport(episodes=[ReportEpisode(

@@ -86,10 +86,10 @@ def test_deploy_pings_the_websub_hub_after_pages_is_live():
     what makes new episodes appear in the app minutes after the email."""
     wf, _ = _workflow()
     assert wf["jobs"]["deploy"]["uses"] == "./.github/workflows/publish-pages.yml"
-    steps = yaml.safe_load(PUBLISH.read_text())["jobs"]["publish"]["steps"]
-    names = [s.get("name") for s in steps]
+    publish = yaml.safe_load(PUBLISH.read_text())["jobs"]["publish"]
+    names = [s.get("name") for s in publish["steps"]]
     assert names.index("Notify the WebSub hub") > names.index("Deploy to GitHub Pages")
-    (ping,) = [s for s in steps if s.get("name") == "Notify the WebSub hub"]
+    ping = _step(publish, "Notify the WebSub hub")
     # The feed's address comes from feed.xml itself, not a second copy here.
     assert "FEED_URL" not in ping.get("env", {})
     # Must wait for the CDN to serve this run's feed before the hub fetches it.
@@ -100,8 +100,7 @@ def test_deploy_pings_the_websub_hub_after_pages_is_live():
 def _ping_hub(tmp_path, channel_links: str):
     """Run the WebSub step against a feed.xml with these <atom:link>s, with a
     stand-in curl that serves that feed back and answers the hub with 204."""
-    steps = yaml.safe_load(PUBLISH.read_text())["jobs"]["publish"]["steps"]
-    (ping,) = [s for s in steps if s.get("name") == "Notify the WebSub hub"]
+    ping = _step(yaml.safe_load(PUBLISH.read_text())["jobs"]["publish"], "Notify the WebSub hub")
     (tmp_path / "output").mkdir()
     (tmp_path / "output" / "feed.xml").write_text(
         '<?xml version="1.0"?><rss xmlns:atom="http://www.w3.org/2005/Atom">'
@@ -155,8 +154,8 @@ def test_llm_smoke_test_cannot_enter_the_publishing_jobs_or_send_mail():
     assert wf["jobs"]["deploy"]["needs"] == "update"
     smoke = wf["jobs"]["check-llm"]
     assert smoke["permissions"] == {"contents": "read"}
-    (check,) = [s for s in smoke["steps"] if s.get("name") == "Check live LLM routes"]
-    (pipeline,) = [s for s in wf["jobs"]["update"]["steps"] if s.get("name") == "Run pipeline"]
+    check = _step(smoke, "Check live LLM routes")
+    pipeline = _step(wf["jobs"]["update"], "Run pipeline")
     assert set(check["env"]) == {"OPENROUTER_API_KEY", "OPENAI_API_KEY", "ANTHROPIC_API_KEY"}
     assert all(value == pipeline["env"][key] for key, value in check["env"].items())
     assert check["run"] == "uv run python -m scripts.check_llm"
@@ -167,7 +166,7 @@ def test_verbatim_posts_are_narrated_and_published_after_the_first_deploy():
     can no longer hold them back or take them down (2026-09-26)."""
     wf, _ = _workflow()
     jobs = wf["jobs"]
-    (first,) = [s for s in jobs["update"]["steps"] if s.get("name") == "Run pipeline"]
+    first = _step(jobs["update"], "Run pipeline")
     assert first["env"]["FEEDCAST_PASS"] == "first" and first["id"] == "pipeline"
     assert jobs["update"]["outputs"]["deferred"] == "${{ steps.pipeline.outputs.deferred }}"
 
@@ -201,8 +200,8 @@ def test_verbatim_posts_are_narrated_and_published_after_the_first_deploy():
 
 def test_narrate_job_gets_the_same_secrets_the_pipeline_needs_to_narrate():
     wf, _ = _workflow()
-    (first,) = [s for s in wf["jobs"]["update"]["steps"] if s.get("name") == "Run pipeline"]
-    (step,) = [s for s in wf["jobs"]["narrate"]["steps"] if s.get("name") == "Narrate deferred posts"]
+    first = _step(wf["jobs"]["update"], "Run pipeline")
+    step = _step(wf["jobs"]["narrate"], "Narrate deferred posts")
     for key in ("OPENROUTER_API_KEY", "DEEPINFRA_API_KEY", "FEEDCAST_EMAIL_TO", "SMTP_USER",
                 "GMAIL_APP_PASSWORD", "FEEDCAST_TEST_RUN", "VOICE_UPLOAD_DELAY_SECONDS"):
         assert step["env"][key] == first["env"][key], key
@@ -246,10 +245,10 @@ def test_a_run_that_pushed_is_deployed_and_narrated_even_if_its_job_then_failed(
                                                 ("narrate", "Narrate deferred posts")])
 def test_a_report_email_that_was_not_sent_fails_the_job_after_publishing(job, pipeline_step):
     """src.main records a failed send as the step output report_failed."""
-    steps = _workflow()[0]["jobs"][job]["steps"]
-    names = [s.get("name") for s in steps]
-    pipeline = _step({"steps": steps}, pipeline_step)
-    failed = _step({"steps": steps}, "Fail the job if the report email was not sent")
+    steps_of = _workflow()[0]["jobs"][job]
+    names = [s.get("name") for s in steps_of["steps"]]
+    pipeline = _step(steps_of, pipeline_step)
+    failed = _step(steps_of, "Fail the job if the report email was not sent")
     assert failed["if"] == f"steps.{pipeline['id']}.outputs.report_failed == 'true'"
     assert "exit 1" in failed["run"]
     assert names.index("Fail the job if the report email was not sent") > names.index("Commit and push")
@@ -276,3 +275,53 @@ def test_every_job_that_runs_python_shares_one_setup():
     assert wf["jobs"]["check-llm"]["steps"][1]["with"] == {"pipeline": False}
     assert "with" not in wf["jobs"]["update"]["steps"][1]
     assert "with" not in wf["jobs"]["narrate"]["steps"][1]
+
+
+def _guard(tmp_path, runs: dict) -> str:
+    """Run the guard step with a stand-in gh that knows today's other runs
+    (`runs`: run id -> its jobs, as the Actions API returns them), and return
+    the should_run it decides. The real jq applies the step's --jq filters."""
+    wf, _ = _workflow()
+    check = _step(wf["jobs"]["guard"], "Has today's daily run already published?")
+    bin_dir, outputs = tmp_path / "bin", tmp_path / "github_output"
+    bin_dir.mkdir()
+    gh = bin_dir / "gh"
+    gh.write_text(
+        "#!/usr/bin/env python3\n"
+        "import json, subprocess, sys\n"
+        f"runs = {runs!r}\n"
+        "args = sys.argv[1:]\n"
+        "data = ([{'databaseId': int(i)} for i in runs] if args[:2] == ['run', 'list']\n"
+        "        else runs[args[1].split('/')[-2]])\n"
+        "jq = args[args.index('--jq') + 1]\n"
+        "sys.stdout.write(subprocess.run(['jq', '-r', jq], input=json.dumps(data),\n"
+        "                                capture_output=True, text=True, check=True).stdout)\n")
+    gh.chmod(0o755)
+    env = {**os.environ, **check["env"], "ON_DEMAND": "false", "RUN_ID": "999",
+           "GITHUB_OUTPUT": str(outputs), "PATH": f"{bin_dir}:{os.environ['PATH']}"}
+    run = subprocess.run(["bash", "-e", "-c", check["run"]], env=env,
+                         capture_output=True, text=True, timeout=60)
+    assert run.returncode == 0, run.stdout + run.stderr
+    return outputs.read_text().strip()
+
+
+def _update_job(conclusion: str, pushed: str | None) -> dict:
+    steps = [] if pushed is None else [{"name": "Commit and push", "conclusion": pushed}]
+    return {"jobs": [{"name": "guard", "conclusion": "success", "steps": []},
+                     {"name": "update", "conclusion": conclusion, "steps": steps}]}
+
+
+def test_a_run_that_pushed_then_failed_on_its_email_still_counts_as_published(tmp_path):
+    """The second daily trigger must not run the pipeline again just because
+    the first went red after publishing."""
+    assert _guard(tmp_path, {"101": _update_job("failure", "success")}) == "should_run=false"
+
+
+def test_a_run_that_failed_before_pushing_lets_the_next_trigger_run(tmp_path):
+    assert _guard(tmp_path, {"101": _update_job("failure", "failure")}) == "should_run=true"
+
+
+def test_a_guarded_run_does_not_count_as_published(tmp_path):
+    guarded = {"jobs": [{"name": "guard", "conclusion": "success", "steps": []},
+                        {"name": "update", "conclusion": "skipped", "steps": []}]}
+    assert _guard(tmp_path, {"101": guarded}) == "should_run=true"

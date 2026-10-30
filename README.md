@@ -219,7 +219,8 @@ A concurrency group prevents race conditions between scheduled and on-demand run
 **One publish per day.** A `guard` job asks whether today's daily run already
 published and stops the second one before it fetches anything, so the desktop
 trigger and GitHub's own schedule cannot both email you (they both did on
-2026-08-29). Anything asked for by hand — `entry_url`, `inject_url`,
+2026-08-29). A run counts as published once its commit is pushed, even if it
+then fails on its email or its narration. Anything asked for by hand — `entry_url`, `inject_url`,
 `resend_report`, or `force` — is never guarded.
 
 **Scheduled runs are best-effort.** GitHub delivers `schedule:` late under load —

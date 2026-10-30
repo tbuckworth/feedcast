@@ -119,17 +119,19 @@ jobs:
             exit 0
           fi
           today="$(date -u +%Y-%m-%d)"
-          # A run counts as "already published" only if its update job actually
-          # ran: a guarded run succeeds with that job skipped, and must not
-          # itself block tomorrow's retry logic or today's genuine attempt.
+          # A run counts as "already published" when its update job pushed:
+          # its "Commit and push" step succeeded. The run can still end red
+          # after that (an unsent report email, a failed narration) with
+          # nothing left unpublished. A guarded run skips the update job, so
+          # it never counts, and cannot block today's genuine attempt.
           published=0
           for id in $(gh run list --repo "$REPO" --workflow update-feed.yml \
-                        --created "$today" --status success --limit 20 \
+                        --created "$today" --status completed --limit 20 \
                         --json databaseId --jq '.[].databaseId'); do
             [[ "$id" == "$RUN_ID" ]] && continue
-            concl="$(gh api "/repos/$REPO/actions/runs/$id/jobs" \
-                       --jq '.jobs[] | select(.name=="update") | .conclusion')"
-            if [[ "$concl" == "success" ]]; then
+            pushed="$(gh api "/repos/$REPO/actions/runs/$id/jobs" \
+                       --jq '.jobs[] | select(.name=="update") | .steps[] | select(.name=="Commit and push") | .conclusion')"
+            if [[ "$pushed" == "success" ]]; then
               echo "Run $id already published today"
               published=1
               break
@@ -193,8 +195,8 @@ jobs:
           FEEDCAST_MAX_AGE_HOURS: ${{ vars.FEEDCAST_MAX_AGE_HOURS }}
           # Dev mode: every run an operator asked for by hand (ON_DEMAND, the
           # set the guard waves through) emails only FEEDCAST_EMAIL_TO, unless
-          # they ticked notify_list. The daily run — GitHub's schedule, or the
-          # bare dispatch from scripts/cron-backstop.sh — is the only one that
+          # they ticked notify_list. The daily run (GitHub's schedule, or the
+          # bare dispatch from scripts/cron-backstop.sh) is the only one that
           # reaches the list on its own. Two debugging re-runs on 2026-09-08
           # each emailed everyone, one of them about nothing but a failure.
           FEEDCAST_TEST_RUN: ${{ env.ON_DEMAND == 'true' && inputs.notify_list != true }}

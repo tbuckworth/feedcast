@@ -15,7 +15,7 @@ import pytest
 
 import src.main as main
 from src.config import load_config
-from src.email_report import ReportEpisode, RunReport, build_html, build_text
+from src.email_report import ReportEpisode, RunReport, build_html, build_text, send_report
 from src.feed import Episode, FeedGenerator, PodcastConfig, episode_page_url
 from src.main import Attempt, _build_run_report, _prepare_deferred, process_entry
 from src.monitor import FeedEntry, FeedMonitor, episode_id
@@ -223,7 +223,10 @@ class TestNarrationPass:
         _, monitor, *_ = setup
         monitor.defer_entry(_entry(), "verbatim", "Clean text.", None, ["b1"])
         _Audio.fail = True
-        monkeypatch.setattr(main, "send_report", lambda report, **kw: False)
+        # The real send_report, with a recipient but no login: a failed send.
+        monkeypatch.setattr(main, "send_report", send_report)
+        monkeypatch.setenv("FEEDCAST_EMAIL_TO", "operator@example.com")
+        monkeypatch.setenv("SMTP_USER", "")
         outputs = tmp_path / "github_output"
         monkeypatch.setenv("GITHUB_OUTPUT", str(outputs))
         self._narrate(setup)
