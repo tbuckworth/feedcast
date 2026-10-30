@@ -2,6 +2,7 @@
 
 from types import SimpleNamespace
 
+import httpx
 import pytest
 
 from src import llm, notices
@@ -55,3 +56,10 @@ def routes(monkeypatch):
                                                 max_tokens=max_tokens, effort=effort)
     monkeypatch.setattr(llm, "_anthropic_native", native)
     return fakes
+
+
+def provider_error(error_class, status: int, message: str):
+    """What an SDK raises for a provider's HTTP error: `error_class` is the
+    openai or anthropic exception for `status` (InternalServerError for 500...)."""
+    response = httpx.Response(status, request=httpx.Request("POST", "https://example.com"))
+    return error_class(message, response=response, body={"error": {"message": message}})

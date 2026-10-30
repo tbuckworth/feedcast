@@ -10,7 +10,7 @@ from openai import (APIConnectionError, APITimeoutError, BadRequestError, Intern
 
 from src import llm, notices
 from src.llm import ROLES, ROUTES, Target, complete
-from tests.conftest import FakeApi
+from tests.conftest import FakeApi, provider_error
 
 
 MSGS = [{"role": "user", "content": "hi"}]
@@ -160,21 +160,16 @@ def test_a_provider_failure_falls_back_even_when_empty_replies_are_held(routes):
     assert len(notices.report()) == 1 and "NoChoices" in notices.report()[0]
 
 
-def _provider_error(error_class, status, message):
-    response = httpx.Response(status, request=httpx.Request("POST", "https://example.com"))
-    return error_class(message, response=response, body={"error": {"message": message}})
-
-
 def _down(message):
     """A provider outage: what the SDK raises for a 500."""
-    return _provider_error(InternalServerError, 500, message)
+    return provider_error(InternalServerError, 500, message)
 
 
 @pytest.mark.parametrize("direct_openai", [True, False])
 def test_writer_recovers_when_claude_is_blocked_and_anthropic_has_no_credit(routes, direct_openai):
     """Both daily runs on 2026-09-19 exhausted the all-Claude fallback chain."""
-    denied = _provider_error(PermissionDeniedError, 403, "Provider Terms Of Service")
-    no_credit = _provider_error(BadRequestError, 400, "Your credit balance is too low")
+    denied = provider_error(PermissionDeniedError, 403, "Provider Terms Of Service")
+    no_credit = provider_error(BadRequestError, 400, "Your credit balance is too low")
     routes["openrouter"] = FakeApi([denied, '["https://example.com/story"]'])
     routes["anthropic"] = FakeApi([no_credit, no_credit])
     if direct_openai:
@@ -202,8 +197,8 @@ def test_writer_recovers_when_claude_is_blocked_and_anthropic_has_no_credit(rout
 
 
 def test_checker_recovers_on_a_different_model_family_from_the_backup_writer(routes):
-    denied = _provider_error(PermissionDeniedError, 403, "Provider Terms Of Service")
-    no_credit = _provider_error(BadRequestError, 400, "Your credit balance is too low")
+    denied = provider_error(PermissionDeniedError, 403, "Provider Terms Of Service")
+    no_credit = provider_error(BadRequestError, 400, "Your credit balance is too low")
     routes["openrouter"] = FakeApi([denied, denied, '{"claims_total": 1, "flags": []}'])
     routes["anthropic"] = FakeApi([no_credit])
 
@@ -266,7 +261,7 @@ def test_a_bug_in_our_own_code_raises_instead_of_reading_as_an_outage(routes):
 def test_a_request_the_provider_rejects_as_malformed_raises(routes):
     # Sonnet 5 400s on any temperature. Falling through on it sent every
     # check to Gemini Flash from 2026-09-22 to -27, reported as a fallback.
-    bad = _provider_error(BadRequestError, 400, "`temperature` is deprecated for this model")
+    bad = provider_error(BadRequestError, 400, "`temperature` is deprecated for this model")
     routes["anthropic"] = FakeApi([bad])
     routes["openrouter"] = FakeApi(["would have served"])
     with pytest.raises(BadRequestError, match="temperature"):
@@ -275,8 +270,8 @@ def test_a_request_the_provider_rejects_as_malformed_raises(routes):
 
 
 def test_a_switch_before_a_malformed_request_still_reaches_the_report(routes):
-    routes["anthropic"] = FakeApi([_provider_error(InternalServerError, 500, "overloaded")])
-    routes["openrouter"] = FakeApi([_provider_error(UnprocessableEntityError, 422,
+    routes["anthropic"] = FakeApi([provider_error(InternalServerError, 500, "overloaded")])
+    routes["openrouter"] = FakeApi([provider_error(UnprocessableEntityError, 422,
                                                     "max_tokens: must be at most 64000")])
     with pytest.raises(UnprocessableEntityError):
         asyncio.run(complete("checker", MSGS, max_tokens=50, label="checker"))
@@ -289,14 +284,14 @@ _REQUEST = httpx.Request("POST", "https://example.com")
 
 
 @pytest.mark.parametrize("error", [
-    _provider_error(InternalServerError, 500, "upstream error"),
-    _provider_error(RateLimitError, 429, "Rate limit exceeded, retry in 2s"),
+    provider_error(InternalServerError, 500, "upstream error"),
+    provider_error(RateLimitError, 429, "Rate limit exceeded, retry in 2s"),
     # OpenRouter refusing Claude only: a model-level refusal, not our request.
-    _provider_error(PermissionDeniedError, 403, "violation of provider Terms Of Service"),
-    _provider_error(NotFoundError, 404, "No endpoints found for anthropic/claude-sonnet-5.5"),
+    provider_error(PermissionDeniedError, 403, "violation of provider Terms Of Service"),
+    provider_error(NotFoundError, 404, "No endpoints found for anthropic/claude-sonnet-5.5"),
     # The two 400s that are the provider's: the account, and the content.
-    _provider_error(BadRequestError, 400, "Your credit balance is too low"),
-    _provider_error(BadRequestError, 400, "Invalid prompt: your prompt was flagged as "
+    provider_error(BadRequestError, 400, "Your credit balance is too low"),
+    provider_error(BadRequestError, 400, "Invalid prompt: your prompt was flagged as "
                                           "potentially violating our usage policy"),
     APIConnectionError(request=_REQUEST),
     APITimeoutError(request=_REQUEST),
@@ -311,15 +306,15 @@ def test_provider_and_transport_failures_fall_through(routes, error):
 
 
 @pytest.mark.parametrize("error, ours", [
-    (_provider_error(BadRequestError, 400, "`temperature` is deprecated for this model"), True),
-    (_provider_error(BadRequestError, 400, "reasoning_effort: Supported values are: 'low', "
+    (provider_error(BadRequestError, 400, "`temperature` is deprecated for this model"), True),
+    (provider_error(BadRequestError, 400, "reasoning_effort: Supported values are: 'low', "
                                            "'medium', 'high', and 'xhigh'"), True),
-    (_provider_error(UnprocessableEntityError, 422, "max_tokens: must be at most 64000"), True),
-    (_provider_error(BadRequestError, 400, "Your credit balance is too low"), False),
-    (_provider_error(BadRequestError, 400, "Invalid prompt: flagged as potentially violating "
+    (provider_error(UnprocessableEntityError, 422, "max_tokens: must be at most 64000"), True),
+    (provider_error(BadRequestError, 400, "Your credit balance is too low"), False),
+    (provider_error(BadRequestError, 400, "Invalid prompt: flagged as potentially violating "
                                            "our usage policy"), False),
-    (_provider_error(PermissionDeniedError, 403, "violation of provider Terms Of Service"), False),
-    (_provider_error(InternalServerError, 500, "Bad request upstream"), False),
+    (provider_error(PermissionDeniedError, 403, "violation of provider Terms Of Service"), False),
+    (provider_error(InternalServerError, 500, "Bad request upstream"), False),
     (APIConnectionError(request=_REQUEST), False),
 ])
 def test_rejected_request_is_our_malformed_request_only(error, ours):

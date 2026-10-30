@@ -15,10 +15,12 @@ from types import SimpleNamespace
 
 import pytest
 from anthropic.types import Message
+from openai import InternalServerError
 from openai.types.chat import ChatCompletion
 
 from src import bundle, digest, llm, verify
 from src.llm import Target
+from tests.conftest import provider_error
 
 SCRIPT = "scripts.model_upgrade_test"
 
@@ -98,7 +100,6 @@ def api(monkeypatch):
              "native": FakeMessages((DRAFT, 1000, 500))}
     monkeypatch.setattr(llm, "client_for", lambda route: fakes.get(route.name))
     monkeypatch.setattr(llm, "native_anthropic", lambda: fakes["native"])
-    monkeypatch.setattr(llm, "fallback_log", [])
     return fakes
 
 
@@ -127,7 +128,7 @@ def test_meter_reads_the_tokens_and_list_price_of_each_reply(upgrade, api):
 
 
 def test_meter_counts_the_reply_that_served_the_call(upgrade, api):
-    api["anthropic"].replies = [RuntimeError("529 overloaded")]
+    api["anthropic"].replies = [provider_error(InternalServerError, 529, "overloaded")]
     api["openrouter"].replies = [(CLEAN_CHECK, usage(2100, 90, cost=0.0042))]
 
     asyncio.run(upgrade.metered("checker", [{"role": "user", "content": "x"}], max_tokens=100))

@@ -8,7 +8,6 @@ and an ACX review all failed at normalisation and the day had no episodes.
 
 import asyncio
 from datetime import datetime
-import httpx
 import pytest
 from openai import APIStatusError, BadRequestError, PermissionDeniedError, RateLimitError
 
@@ -19,17 +18,12 @@ from src.llm import ROLES, Completion, Target, account_failure, complete, model_
 from src.main import _build_run_report
 from src.monitor import FeedEntry, FeedMonitor
 from src.normalizer import MAX_OUTPUT_TOKENS, NORMALIZE_PROMPT, TextNormalizer
-from tests.conftest import FakeApi
+from tests.conftest import FakeApi, provider_error
 
 MSGS = [{"role": "user", "content": "hi"}]
 
 
-def _error(cls, status, message):
-    response = httpx.Response(status, request=httpx.Request("POST", "https://example.com"))
-    return cls(message, response=response, body={"error": {"message": message}})
-
-
-OUT_OF_CREDIT = _error(APIStatusError, 402,
+OUT_OF_CREDIT = provider_error(APIStatusError, 402,
                        "Error code: 402 - {'error': {'message': 'Insufficient credits. Add more "
                        "using https://openrouter.ai/settings/credits', 'code': 402}}")
 
@@ -38,16 +32,16 @@ OUT_OF_CREDIT = _error(APIStatusError, 402,
 
 @pytest.mark.parametrize("error, dead", [
     (OUT_OF_CREDIT, True),                                                      # OpenRouter, 10 Oct
-    (_error(BadRequestError, 400, "Your credit balance is too low to access the "
+    (provider_error(BadRequestError, 400, "Your credit balance is too low to access the "
                                   "Anthropic API"), True),                      # Anthropic, 19 Sep
-    (_error(RateLimitError, 429, "You exceeded your current quota, please check "
+    (provider_error(RateLimitError, 429, "You exceeded your current quota, please check "
                                  "your plan and billing details"), True),       # OpenAI
-    (_error(APIStatusError, 401, "invalid x-api-key"), True),
-    (_error(PermissionDeniedError, 403, "Key limit exceeded (monthly limit)"), True),
+    (provider_error(APIStatusError, 401, "invalid x-api-key"), True),
+    (provider_error(PermissionDeniedError, 403, "Key limit exceeded (monthly limit)"), True),
     # Model-level: OpenRouter refused Claude only, and Gemini on the same key worked.
-    (_error(PermissionDeniedError, 403, "violation of provider Terms Of Service"), False),
-    (_error(RateLimitError, 429, "Rate limit exceeded, retry in 2s"), False),   # passes
-    (_error(BadRequestError, 400, "max_tokens is too large"), False),
+    (provider_error(PermissionDeniedError, 403, "violation of provider Terms Of Service"), False),
+    (provider_error(RateLimitError, 429, "Rate limit exceeded, retry in 2s"), False),   # passes
+    (provider_error(BadRequestError, 400, "max_tokens is too large"), False),
     (RuntimeError("connection reset"), False),
 ])
 def test_account_failure_tells_a_dead_account_from_a_bad_moment(error, dead):
@@ -70,7 +64,7 @@ def test_normaliser_survives_openrouter_running_out_of_credit(routes):
 
 def test_normaliser_reaches_gpt_when_anthropic_is_out_too(routes):
     routes["openrouter"] = FakeApi([OUT_OF_CREDIT])
-    routes["anthropic"] = FakeApi([_error(BadRequestError, 400, "Your credit balance is too low")])
+    routes["anthropic"] = FakeApi([provider_error(BadRequestError, 400, "Your credit balance is too low")])
     routes["openai"] = FakeApi(["forty-five percent"])
     assert asyncio.run(TextNormalizer().normalize_for_tts("45%", label="ep")) == "forty-five percent"
     call = routes["openai"].calls[0]
@@ -152,9 +146,9 @@ def test_a_dead_account_is_one_headline_and_repeats_collapse(routes):
 
 def test_every_account_dead_raises_the_original_error(routes):
     routes["openrouter"] = FakeApi([OUT_OF_CREDIT])
-    no_credit = _error(BadRequestError, 400, "Your credit balance is too low")
+    no_credit = provider_error(BadRequestError, 400, "Your credit balance is too low")
     routes["anthropic"] = FakeApi([no_credit])
-    quota = _error(RateLimitError, 429, "You exceeded your current quota")
+    quota = provider_error(RateLimitError, 429, "You exceeded your current quota")
     routes["openai"] = FakeApi([quota])
     with pytest.raises(RateLimitError):
         asyncio.run(complete("normalizer", MSGS, max_tokens=50))
