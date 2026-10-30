@@ -1,15 +1,21 @@
-"""Unit tests for pure functions — no API calls, no mocking."""
+"""Unit tests for pure functions — no API calls. The one model call, the
+briefing writer's, is answered by a recording fake."""
 
+import asyncio
 import hashlib
-import re
 from datetime import datetime
 
+import pytest
+
 from src.audio import split_into_chunks
-from src.config import PodcastMetaConfig
+from src.config import PodcastMetaConfig, load_config
 from src.feed import FeedGenerator
 from src.main import generate_episode_id
 from src.html_text import clean_html, small_table_to_prose
-from src.news import NewsAggregator
+from src.monitor import FeedMonitor
+from src.news import PREVIOUS_BRIEFINGS_HEADER, NewsAggregator
+from tests.conftest import FakeApi
+from tests.test_freshness import feed_xml
 
 
 # --- split_into_chunks (src/audio.py) ---
@@ -224,23 +230,19 @@ class TestBuildBriefingDescription:
 
 
 class TestSkipPatterns:
-    """Test the ACX skip_patterns against expected titles."""
+    """config.yaml's ACX skip_patterns, run through the real feed filter."""
 
-    PATTERNS = [
-        "^(Hidden )?Open Thread",
-        "^Links [Ff]or \\w+ \\d{4}",
-        "Classifieds",
-        "^Meetups Everywhere",
-        "^Mantic Monday",
-        "^Highlights [Ff]rom [Tt]he [Cc]omments",
-        "^ACX Survey$",
-        "Contest Rules",
-        "^Apply [Ff]or [Aa]n ACX Grant",
-        "Forecasting Contest",
-    ]
+    @pytest.fixture(autouse=True, scope="class")
+    def _acx(self, request, tmp_path_factory):
+        # One database for the class: fetch_feed only reads it.
+        (request.cls.acx,) = [f for f in load_config().feeds if f.name == "Scott Alexander"]
+        request.cls.monitor = FeedMonitor(tmp_path_factory.mktemp("acx") / "posts.db")
 
     def _should_skip(self, title: str) -> bool:
-        return any(re.search(p, title, re.IGNORECASE) for p in self.PATTERNS)
+        # An undated item and no age window: only the skip patterns are under test.
+        kept = self.monitor.fetch_feed(feed_xml((title, None)), self.acx.name,
+                                       self.acx.skip_patterns, max_age_hours=None)
+        return not kept
 
     def test_skips_open_threads(self):
         assert self._should_skip("Open Thread 350")
@@ -287,18 +289,22 @@ class TestNewsBriefingDedup:
             recent_briefings=recent_briefings,
         )
 
+    def _writer_input(self, agg, articles: str) -> str:
+        """Run the real synthesize_briefing; return the user message the writer got.
+
+        The writer is a paid model, so a pinned fake client answers and records.
+        """
+        agg.client = FakeApi(["Briefing."])
+        asyncio.run(agg.synthesize_briefing(articles))
+        (call,) = agg.client.calls
+        return call["messages"][-1]["content"]
+
     def test_no_dedup_context_when_empty(self):
         agg = self._make_aggregator(recent_briefings=[])
         articles = "## AI NEWS\n- [Source] Some headline\n  Summary text"
-        # Build the user message the same way synthesize_briefing does
-        parts = []
-        if agg.recent_briefings:
-            parts.append("## Previous briefings")
-        parts.append("## Today's articles:")
-        parts.append(articles)
-        msg = "\n".join(parts)
-        assert "Previous briefings" not in msg
-        assert "## Today's articles:" in msg
+        msg = self._writer_input(agg, articles)
+        assert PREVIOUS_BRIEFINGS_HEADER not in msg and "Previous briefings" not in msg
+        assert f"## Today's articles:\n{articles}" in msg
 
     def test_dedup_context_included_with_recent_briefings(self):
         briefings = [
@@ -306,29 +312,14 @@ class TestNewsBriefingDedup:
             {"date": "2026-02-17", "briefing_text": "OpenAI released GPT-5 two days ago."},
         ]
         agg = self._make_aggregator(recent_briefings=briefings)
+        msg = self._writer_input(agg, "## AI NEWS\n- [Source] Some headline")
 
-        # Reconstruct the user message logic from synthesize_briefing
-        parts = []
-        if agg.recent_briefings:
-            parts.append(
-                "## Previous briefings (do NOT repeat stories unless there is genuinely new information):"
-            )
-            for b in agg.recent_briefings:
-                parts.append(f"### {b['date']}")
-                parts.append(b["briefing_text"])
-            parts.append("---")
-            parts.append("")
-        parts.append("## Today's articles:")
-        parts.append("## AI NEWS\n- [Source] Some headline")
-        msg = "\n".join(parts)
-
-        assert "Previous briefings" in msg
+        assert PREVIOUS_BRIEFINGS_HEADER in msg
         assert "do NOT repeat stories" in msg
-        assert "### 2026-02-18" in msg
-        assert "Yesterday EU announced new AI rules." in msg
-        assert "### 2026-02-17" in msg
-        assert "OpenAI released GPT-5 two days ago." in msg
-        assert "## Today's articles:" in msg
+        assert "### 2026-02-18\nYesterday EU announced new AI rules." in msg
+        assert "### 2026-02-17\nOpenAI released GPT-5 two days ago." in msg
+        assert "## Today's articles:\n## AI NEWS" in msg
+        assert msg.index(PREVIOUS_BRIEFINGS_HEADER) < msg.index("## Today's articles:")
 
     def test_format_articles_groups_by_category(self):
         agg = self._make_aggregator()
