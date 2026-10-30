@@ -2,8 +2,9 @@
 
 Any module that switches to a backup or leaves something out records one line
 here: llm.py its model and account switches, audio.py a busy TTS model,
-markets.py a skipped market scan or cause lookup. A backup that quietly serves
-for weeks is a primary that has quietly died, so each one is worth a line.
+markets.py a skipped market scan or cause lookup, digest.py a failed digest. A
+backup that quietly serves for weeks is a primary that has quietly died, so
+each one is worth a line.
 
 One process is one run (each CI pass is a process of its own), so the log
 lives at module level; `reset()` starts a new one, as tests do before each test.
