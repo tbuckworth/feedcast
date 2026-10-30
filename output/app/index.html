@@ -66,7 +66,17 @@
     const urlEl = document.getElementById("url");
     const modeEl = document.getElementById("mode");
     const sendBtn = document.getElementById("send");
+    const sendLabel = sendBtn.textContent;
     const statusEl = document.getElementById("status");
+
+    // Show the outcome of a send and make the button ready for the next one.
+    function showStatus(kind, text) {
+      statusEl.className = `status ${kind}`;
+      statusEl.textContent = text;
+      statusEl.style.display = "block";
+      sendBtn.disabled = false;
+      sendBtn.textContent = sendLabel;
+    }
 
     // Read shared URL from query params (Android share target)
     const params = new URLSearchParams(location.search);
@@ -99,16 +109,12 @@
       const token = localStorage.getItem("feedcast_token");
 
       if (!workerUrl || !token) {
-        statusEl.className = "status error";
-        statusEl.textContent = "Configure Worker URL and token in Settings first.";
-        statusEl.style.display = "block";
+        showStatus("error", "Configure Worker URL and token in Settings first.");
         return;
       }
 
       if (!urlEl.value.trim()) {
-        statusEl.className = "status error";
-        statusEl.textContent = "Enter a URL.";
-        statusEl.style.display = "block";
+        showStatus("error", "Enter a URL.");
         return;
       }
 
@@ -129,20 +135,13 @@
         const data = await resp.json();
 
         if (resp.ok) {
-          statusEl.className = "status success";
-          statusEl.textContent = "Queued! You'll get a notification when it's ready.";
+          showStatus("success", "Queued! You'll get a notification when it's ready.");
         } else {
-          statusEl.className = "status error";
-          statusEl.textContent = data.error || `Error: ${resp.status}`;
+          showStatus("error", data.error || `Error: ${resp.status}`);
         }
       } catch (err) {
-        statusEl.className = "status error";
-        statusEl.textContent = `Network error: ${err.message}`;
+        showStatus("error", `Network error: ${err.message}`);
       }
-
-      statusEl.style.display = "block";
-      sendBtn.disabled = false;
-      sendBtn.textContent = "Send to Podcast";
     });
   </script>
 </body>

@@ -2,9 +2,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   const urlEl = document.getElementById("url");
   const modeEl = document.getElementById("mode");
   const sendBtn = document.getElementById("send");
+  const sendLabel = sendBtn.textContent;
   const statusEl = document.getElementById("status");
   const contentEl = document.getElementById("content");
   const setupEl = document.getElementById("setup");
+
+  // Show the outcome of a send and make the button ready for the next one.
+  function showStatus(kind, text) {
+    statusEl.className = `status ${kind}`;
+    statusEl.textContent = text;
+    statusEl.style.display = "block";
+    sendBtn.disabled = false;
+    sendBtn.textContent = sendLabel;
+  }
 
   // Load settings
   const settings = await chrome.storage.sync.get(["workerUrl", "token"]);
@@ -44,19 +54,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       const data = await resp.json();
 
       if (resp.ok) {
-        statusEl.className = "status success";
-        statusEl.textContent = "Queued! You'll get a notification when it's ready.";
+        showStatus("success", "Queued! You'll get a notification when it's ready.");
       } else {
-        statusEl.className = "status error";
-        statusEl.textContent = data.error || `Error: ${resp.status}`;
+        showStatus("error", data.error || `Error: ${resp.status}`);
       }
     } catch (err) {
-      statusEl.className = "status error";
-      statusEl.textContent = `Network error: ${err.message}`;
+      showStatus("error", `Network error: ${err.message}`);
     }
-
-    statusEl.style.display = "block";
-    sendBtn.disabled = false;
-    sendBtn.textContent = "Send to Podcast";
   });
 });
