@@ -19,7 +19,8 @@ from src.normalizer import (
 def _normalizer(poison: str, finish="stop"):
     """A normaliser whose model returns no choices for any batch containing `poison`.
 
-    The model API is the boundary faked here: a pinned client.
+    The model is a paid API, so a pinned client answers for it: the batch
+    upper-cased, or OpenRouter's 200 with no choices.
     """
     n = TextNormalizer()
     calls: list[str] = []

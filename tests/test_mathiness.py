@@ -6,7 +6,7 @@ import pytest
 from src.config import load_config
 from src.email_report import LinkedPost, RunReport, build_html, build_text
 from src.lesswrong import lesswrong_post_id
-from src.mathiness import MathsVerdict, assess, maths_score
+from src.mathiness import assess, maths_score
 from datetime import datetime
 
 # The production threshold: these tests check that it and _PATTERNS agree.
