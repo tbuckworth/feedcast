@@ -205,8 +205,8 @@ def test_model_names_read_as_people_say_them(model, name):
     assert model_name(model) == name
 
 
-def _done(target):
-    return Completion(text="x", finish_reason="stop", target=target)
+def _done(target, role="writer"):
+    return Completion(text="x", finish_reason="stop", target=target, role=role)
 
 
 def test_credit_flags_a_different_model_not_a_different_account():
@@ -215,6 +215,14 @@ def test_credit_flags_a_different_model_not_a_different_account():
     sol = _done(Target("openai", "gpt-6.1-sol")).credit()
     assert sol == {"model": "gpt-6.1-sol", "route": "openai",
                    "primary": "claude-opus-5-5", "backup": True}
+
+
+def test_a_completion_is_credited_against_the_role_it_was_made_for(routes):
+    """credit() used to assume the writer, whatever role made the call."""
+    routes["openai"] = FakeApi(["Checked."])   # the checker's last target
+    done = asyncio.run(complete("checker", [{"role": "user", "content": "x"}], max_tokens=10))
+    assert done.role == "checker"
+    assert done.credit()["primary"] == ROLES["checker"][0].model != ROLES["writer"][0].model
 
 
 def _ep(**kw):
@@ -270,9 +278,11 @@ def test_summary_and_briefing_record_their_writer(routes):
     routes["openai"] = FakeApi(["A summary.", "A briefing."])  # Claude accounts unset
     entry = FeedEntry(id="p", title="Post", link="https://e.com/p", content="<p>Body text.</p>",
                       published=datetime(2026, 10, 10), author="Zvi", feed_name="Zvi")
-    asyncio.run(ContentProcessor("Summarise.", verify=False).summarize(entry))
+    asyncio.run(ContentProcessor("Summarise.", verify=False,
+                                 auto_verbatim_limit=24000).summarize(entry))
     assert entry.writer["model"] == "gpt-6.1-sol" and entry.writer["backup"] is True
 
-    agg = NewsAggregator(sources=[], prompt="Brief.", verify=False)
+    agg = NewsAggregator(sources=[], prompt="Brief.", lookback_hours=24, full_text_stories=12,
+                         max_article_chars=6000, author="Feedcast Bot", verify=False)
     asyncio.run(agg.synthesize_briefing("articles"))
     assert agg.last_writer["model"] == "gpt-6.1-sol"

@@ -13,11 +13,11 @@ import httpx
 
 from .audio import AudioGenerator
 from .bundle import write_bundle
-from .config import Config, FeedConfig, load_config
+from .config import CONFIG_PATH, ROOT, Config, FeedConfig, load_config
 from .digest import safe_bullets
 from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
 from .extractor import ExtractionError, url_to_feed_entry
-from .feed import Episode, FeedGenerator, PodcastConfig, episode_page_url
+from .feed import Episode, FeedGenerator, episode_page_url
 from .fulltext import enrich_entry
 from .html_text import clean_html
 from .lesswrong import posted_at
@@ -25,7 +25,7 @@ from . import llm
 from .market_charts import charts_for_report
 from .markets import MarketRules, MarketScout
 from .mathiness import MathsVerdict, assess
-from .monitor import DEFAULT_MAX_AGE_HOURS, FeedEntry, FeedMonitor, episode_id
+from .monitor import FeedEntry, FeedMonitor, episode_id
 from .news import NewsAggregator
 from .normalizer import TextNormalizer
 from .processor import ContentProcessor
@@ -312,8 +312,8 @@ async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
 async def async_main(config_path: Path | None = None) -> None:
     """Run the feedcast pipeline with parallel processing."""
     # Determine paths
-    project_root = Path(__file__).parent.parent
-    config_path = config_path or project_root / "config.yaml"
+    project_root = ROOT
+    config_path = config_path or CONFIG_PATH
     db_path = project_root / "data" / "posts.db"
     audio_dir = project_root / "data" / "audio"
     sources_dir = project_root / "data" / "sources"
@@ -353,17 +353,7 @@ async def async_main(config_path: Path | None = None) -> None:
         else:
             print(f"  Entry not found in database (may be new)")
 
-    podcast_config = PodcastConfig(
-        title=config.podcast.title,
-        description=config.podcast.description,
-        author=config.podcast.author,
-        email=config.podcast.email,
-        language=config.podcast.language,
-        base_url=config.podcast.base_url,
-        image_url=config.podcast.image_url,
-        hub_url=config.podcast.hub_url,
-    )
-    feed_gen = FeedGenerator(podcast_config)
+    feed_gen = FeedGenerator(config.podcast, retention_days=config.retention_days)
 
     # Before the TTS setup: constructing AudioGenerator demands a DeepInfra key
     # and uploads the voice sample, and a resend makes no audio at all.
@@ -377,9 +367,9 @@ async def async_main(config_path: Path | None = None) -> None:
         await _preview_briefing(monitor, config)
         return
 
-    processor = ContentProcessor(config.default_prompt, verify=config.fidelity_check)
+    processor = _processor(config)
     normalizer = TextNormalizer(respellings=config.pronunciations)
-    audio_gen = AudioGenerator()
+    audio_gen = _narrator(config)
 
     entries_to_process: list[tuple[FeedEntry, str, str]] = []
     # Bound here, before Phase 1: the news-briefing block appends to it, and
@@ -412,14 +402,14 @@ async def async_main(config_path: Path | None = None) -> None:
         # NORMAL MODE: Phase 1 — Parallel feed fetching
         print(f"\nPhase 1: Fetching {len(config.feeds)} feeds in parallel...")
 
-        max_age = _max_age_hours()
+        max_age = config.max_age_hours
         print(f"  Only entries published in the last {max_age:g}h are eligible"
-              if max_age else "  Age cutoff disabled — every unseen entry is eligible")
+              if max_age is not None else "  Age cutoff disabled — every unseen entry is eligible")
 
         async def fetch_one(fc: FeedConfig) -> tuple[FeedConfig, list[FeedEntry]]:
             print(f"  Fetching: {fc.name} ({fc.url})")
             entries = await asyncio.to_thread(
-                monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns, max_age)
+                monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns, max_age_hours=max_age)
             print(f"  {fc.name}: {len(entries)} new entries")
             return (fc, entries)
 
@@ -683,14 +673,14 @@ async def async_main(config_path: Path | None = None) -> None:
     # references audio/transcripts that cleanup deletes in this same run
     # (otherwise the deployed feed.xml advertises 404 enclosures).
     transcript_dir = output_dir / "transcripts"
-    removed = monitor.cleanup_old_entries(days=30, audio_dir=audio_dir,
+    removed = monitor.cleanup_old_entries(days=config.retention_days, audio_dir=audio_dir,
                                           transcript_dir=transcript_dir, sources_dir=sources_dir)
     if removed:
         print(f"  Cleaned up {removed} old entries")
     removed_briefings = monitor.cleanup_old_briefings(days=7)
     if removed_briefings:
         print(f"  Cleaned up {removed_briefings} old news briefings")
-    pruned = monitor.prune_failures(days=30)
+    pruned = monitor.prune_failures(days=config.retention_days)
     if pruned:
         print(f"  Forgot {pruned} old failure records")
 
@@ -748,6 +738,17 @@ async def _correct_publication_dates(entries: list[FeedEntry]) -> None:
         entry.published = real
 
 
+def _processor(config: Config) -> ContentProcessor:
+    """The writer and cleaner of episode scripts, as configured."""
+    return ContentProcessor(config.default_prompt, verify=config.fidelity_check,
+                            auto_verbatim_limit=config.auto_verbatim_limit)
+
+
+def _narrator(config: Config) -> AudioGenerator:
+    """The TTS narrator, with the voice config.yaml names."""
+    return AudioGenerator(voice_sample=config.tts.voice_path)
+
+
 def _make_aggregator(config: Config, monitor: FeedMonitor,
                      recent_briefings: list[dict]) -> NewsAggregator:
     """The briefing writer as configured, with the prediction-market scout if enabled."""
@@ -764,6 +765,7 @@ def _make_aggregator(config: Config, monitor: FeedMonitor,
         recent_briefings=recent_briefings,
         full_text_stories=nb.full_text_stories,
         max_article_chars=nb.max_article_chars,
+        author=config.podcast.author,
         verify=config.fidelity_check,
         markets=scout,
     )
@@ -815,9 +817,16 @@ def _run_pass() -> str:
     "first" fetches, writes and narrates everything except posts read out in
     full, publishes, and sends the email; "narrate" narrates those posts and
     publishes again. Unset (local runs, tests) does everything in one pass.
+    Any other value is refused rather than read as one pass: a typo in the
+    workflow would otherwise narrate every post in the first job.
     """
     value = os.environ.get("FEEDCAST_PASS", "").strip().lower()
-    return value if value in ("first", "narrate") else "all"
+    if not value:
+        return "all"
+    if value not in ("first", "narrate"):
+        raise ValueError(f"FEEDCAST_PASS={value!r}: expected 'first' or 'narrate', "
+                         f"or unset for one pass")
+    return value
 
 
 def _gh_output(**values) -> None:
@@ -879,9 +888,9 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
             for row, entry in todo
         }
         items = [(entry, row["mode"], config.default_prompt) for row, entry in todo]
-        processor = ContentProcessor(config.default_prompt, verify=config.fidelity_check)
+        processor = _processor(config)
         normalizer = TextNormalizer(respellings=config.pronunciations)
-        audio_gen = AudioGenerator()
+        audio_gen = _narrator(config)
         results = await _run_entries(items, attempts, processor, audio_gen, normalizer, audio_dir)
         for (entry, _mode, _prompt), result in zip(items, results):
             attempt = attempts[entry.id]
@@ -919,26 +928,6 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
             total_in_feed=len(episodes)), operator_only=True)
 
 
-def _max_age_hours() -> float | None:
-    """How recent a post must be to be narrated at all.
-
-    Without this the pipeline treats "unseen" as "new", so a feed that rotates
-    its guids or joins config.yaml offers up its entire archive, one old post
-    per run. FEEDCAST_MAX_AGE_HOURS overrides it; 0 disables the cutoff, which
-    only a deliberate backfill should ever ask for.
-    """
-    raw = os.environ.get("FEEDCAST_MAX_AGE_HOURS", "").strip()
-    if not raw:
-        return DEFAULT_MAX_AGE_HOURS
-    try:
-        hours = float(raw)
-    except ValueError:
-        print(f"  FEEDCAST_MAX_AGE_HOURS={raw!r} is not a number, "
-              f"using {DEFAULT_MAX_AGE_HOURS:g}")
-        return DEFAULT_MAX_AGE_HOURS
-    return hours if hours > 0 else None
-
-
 async def _find_in_feeds(
     config: Config, monitor: FeedMonitor, *keys: str, only_feed: str | None = None,
 ) -> tuple[FeedConfig, FeedEntry] | None:
@@ -952,7 +941,7 @@ async def _find_in_feeds(
 
     async def fetch_all(fc: FeedConfig) -> list[FeedEntry]:
         return await asyncio.to_thread(
-            monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns, None)
+            monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns, max_age_hours=None)
 
     fetched = await asyncio.gather(*[fetch_all(fc) for fc in feeds], return_exceptions=True)
     for fc, result in zip(feeds, fetched):

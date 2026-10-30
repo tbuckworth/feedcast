@@ -14,12 +14,12 @@ from pathlib import Path
 import pytest
 
 import src.main as main
-from src.config import load_config
+from src.config import PodcastMetaConfig, load_config
 from src.email_report import ReportEpisode, RunReport, build_html, build_text, send_report
-from src.feed import Episode, FeedGenerator, PodcastConfig, episode_page_url
+from src.feed import Episode, FeedGenerator, episode_page_url
 from src.main import Attempt, _build_run_report, _prepare_deferred, process_entry
 from src.monitor import FeedEntry, FeedMonitor, episode_id
-from src.processor import AUTO_VERBATIM_LIMIT, ContentProcessor
+from src.processor import ContentProcessor
 
 BASE = "https://tbuckworth.github.io/feedcast"
 
@@ -32,8 +32,10 @@ def _entry(i="acx-1", title="Does Georgism Work?", content="<p>Land.</p>", link=
 
 
 def _gen():
-    return FeedGenerator(PodcastConfig(title="Feedcast", description="d", author="T",
-                                       email="t@x", language="en-us", base_url=BASE))
+    return FeedGenerator(PodcastMetaConfig(title="Feedcast", description="d", author="T",
+                                           email="t@x", language="en-us", base_url=BASE,
+                                           category="Technology"),
+                         retention_days=30)
 
 
 @pytest.fixture
@@ -44,16 +46,16 @@ def monitor(tmp_path):
 class TestWhichPostsWait:
 
     def test_full_readings_wait_and_written_scripts_do_not(self):
-        p = ContentProcessor("prompt")
+        p = ContentProcessor("prompt", verify=False, auto_verbatim_limit=24000)
         assert p.reads_verbatim(_entry(), "verbatim")
         assert not p.reads_verbatim(_entry(), "summarize")
         briefing = _entry("news-briefing-2026-10-08", "Daily News Briefing - 2026-10-08")
         assert not p.reads_verbatim(briefing, "verbatim")
 
-    def test_auto_follows_the_same_length_rule_as_process(self):
-        p = ContentProcessor("prompt")
+    def test_auto_reads_in_full_up_to_the_configured_limit(self):
+        p = ContentProcessor("prompt", verify=False, auto_verbatim_limit=1000)
         short = _entry(content=f"<p>{'word ' * 100}</p>")
-        long = _entry(content=f"<p>{'x' * (AUTO_VERBATIM_LIMIT + 10)}</p>")
+        long = _entry(content=f"<p>{'x' * 1010}</p>")
         assert p.reads_verbatim(short, "auto")
         assert not p.reads_verbatim(long, "auto")
 
@@ -92,9 +94,10 @@ class TestDeferredTable:
                "<item><title>Waiting</title><link>https://acx/acx-1</link>"
                f"<guid>acx-1</guid><pubDate>{(now - timedelta(hours=2)):%a, %d %b %Y %H:%M:%S} GMT"
                "</pubDate><description>b</description></item></channel></rss>")
-        assert [e.id for e in monitor.fetch_feed(xml, "Scott Alexander")] == ["acx-1"]
+        assert [e.id for e in monitor.fetch_feed(xml, "Scott Alexander", max_age_hours=48)] \
+            == ["acx-1"]
         monitor.defer_entry(_entry(), "verbatim", "t", None, [])
-        assert monitor.fetch_feed(xml, "Scott Alexander") == []
+        assert monitor.fetch_feed(xml, "Scott Alexander", max_age_hours=48) == []
 
 
 class TestEpisodePages:
@@ -184,7 +187,7 @@ class TestNarrationPass:
                             lambda report, operator_only=False: sent.append((report, operator_only)))
         monkeypatch.delenv("GITHUB_OUTPUT", raising=False)
         _Audio.fail = False
-        config = load_config(Path(__file__).resolve().parent.parent / "config.yaml")
+        config = load_config()
         monitor = FeedMonitor(tmp_path / "posts.db")
         audio_dir, out = tmp_path / "audio", tmp_path / "output"
         audio_dir.mkdir()

@@ -11,6 +11,7 @@ from datetime import datetime
 import httpx
 import yaml
 
+from src.config import CONFIG_PATH
 from src.email_report import ReportEpisode, RunReport, build_html, build_text
 from src.lesswrong import _parse, lesswrong_post_id, posted_at
 from src.main import _correct_publication_dates, _curated_date
@@ -20,7 +21,7 @@ from src.monitor import FeedEntry
 class TestFeedChoice:
 
     def test_config_subscribes_to_curated_not_the_firehose(self):
-        cfg = yaml.safe_load(open("config.yaml"))
+        cfg = yaml.safe_load(CONFIG_PATH.read_text())
         lw = [f for f in cfg["feeds"] if "lesswrong.com/feed.xml" in f["url"]
               and "userId" not in f["url"]]
         assert len(lw) == 1, "expected exactly one aggregate LessWrong feed"
@@ -29,7 +30,7 @@ class TestFeedChoice:
 
     def test_the_aggregate_feed_still_comes_last(self):
         """Author feeds must precede it or dedup drops the attribution."""
-        cfg = yaml.safe_load(open("config.yaml"))
+        cfg = yaml.safe_load(CONFIG_PATH.read_text())
         names = [f["name"] for f in cfg["feeds"]]
         assert names[-1] == "LessWrong Curated"
 
@@ -151,10 +152,11 @@ class TestCrossFeedDuplicates:
         now = datetime.now(timezone.utc).replace(tzinfo=None)
         m = FeedMonitor(tmp_path / "posts.db")
 
-        first = m.fetch_feed(self._xml("f1c130ea", now - timedelta(hours=5)), "Zvi")
+        first = m.fetch_feed(self._xml("f1c130ea", now - timedelta(hours=5)), "Zvi",
+                             max_age_hours=48)
         assert len(first) == 1
         m.mark_processed(first[0], audio_file="a.mp3")
 
         again = m.fetch_feed(self._xml("rA6pqn6kz8NvHyznT", now - timedelta(hours=1)),
-                             "LessWrong Curated")
+                             "LessWrong Curated", max_age_hours=48)
         assert again == []

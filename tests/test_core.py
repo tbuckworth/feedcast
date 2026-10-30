@@ -5,7 +5,8 @@ import re
 from datetime import datetime
 
 from src.audio import split_into_chunks
-from src.feed import FeedGenerator, PodcastConfig
+from src.config import PodcastMetaConfig
+from src.feed import FeedGenerator
 from src.main import generate_episode_id
 from src.html_text import clean_html, small_table_to_prose
 from src.news import NewsAggregator
@@ -131,11 +132,11 @@ class TestTableToProseSimple:
 
 class TestFormatDuration:
     def setup_method(self):
-        config = PodcastConfig(
+        config = PodcastMetaConfig(
             title="T", description="D", author="A",
-            email="e@e.com", language="en", base_url="http://x",
+            email="e@e.com", language="en", base_url="http://x", category="Technology",
         )
-        self.gen = FeedGenerator(config)
+        self.gen = FeedGenerator(config, retention_days=30)
 
     def test_zero(self):
         assert self.gen._format_duration(0) == "00:00:00"
@@ -152,11 +153,11 @@ class TestFormatDuration:
 
 class TestFormatRfc822:
     def setup_method(self):
-        config = PodcastConfig(
+        config = PodcastMetaConfig(
             title="T", description="D", author="A",
-            email="e@e.com", language="en", base_url="http://x",
+            email="e@e.com", language="en", base_url="http://x", category="Technology",
         )
-        self.gen = FeedGenerator(config)
+        self.gen = FeedGenerator(config, retention_days=30)
 
     def test_known_datetime(self):
         dt = datetime(2025, 1, 15, 14, 30, 0)
@@ -279,6 +280,10 @@ class TestNewsBriefingDedup:
             sources=[],
             prompt="Test prompt",
             lookback_hours=24,
+            full_text_stories=12,
+            max_article_chars=6000,
+            author="Feedcast Bot",
+            verify=False,
             recent_briefings=recent_briefings,
         )
 
@@ -356,10 +361,11 @@ class TestGenerateFeedForCrawlers:
 
     def _feed(self, tmp_path, **cfg):
         import xml.etree.ElementTree as ET
-        config = PodcastConfig(
-            title="T", description="D", author="A", email="e@e.com", language="en",
-            base_url="https://x.test/pod", **cfg,
-        )
+        config = PodcastMetaConfig(**{
+            "title": "T", "description": "D", "author": "A", "email": "e@e.com",
+            "language": "en", "base_url": "https://x.test/pod", "category": "Technology",
+            "hub_url": "https://pubsubhubbub.appspot.com/", **cfg,
+        })
         from src.feed import Episode
         eps = [
             Episode(id="news-briefing-2026-09-15", title="Briefing", description="",
@@ -370,7 +376,7 @@ class TestGenerateFeedForCrawlers:
                     duration_seconds=1216, link="https://www.astralcodexten.com/p/king-ludd"),
         ]
         out = tmp_path / "feed.xml"
-        FeedGenerator(config).generate(eps, out)
+        FeedGenerator(config, retention_days=30).generate(eps, out)
         return ET.parse(out).getroot().find("channel"), out.read_text()
 
     ATOM = "{http://www.w3.org/2005/Atom}link"
@@ -382,6 +388,11 @@ class TestGenerateFeedForCrawlers:
         assert links["hub"] == "https://pubsubhubbub.appspot.com/"
         # The CI ping step extracts the hub from the serialised XML with grep.
         assert '<atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />' in text
+
+    def test_the_itunes_category_is_the_configured_one(self, tmp_path):
+        channel, _ = self._feed(tmp_path, category="News")
+        (category,) = channel.findall("{http://www.itunes.com/dtds/podcast-1.0.dtd}category")
+        assert category.get("text") == "News"
 
     def test_hub_is_configurable_and_omittable(self, tmp_path):
         channel, _ = self._feed(tmp_path, hub_url="https://hub.example/")
@@ -409,10 +420,11 @@ class TestGenerateFeedForCrawlers:
         assert lengths == {"Briefing": "2927229", "King Ludd": "0"}
 
     def test_load_episodes_reads_the_audio_size(self, tmp_path):
-        config = PodcastConfig(title="T", description="D", author="A", email="e@e.com",
-                               language="en", base_url="https://x.test/pod")
+        config = PodcastMetaConfig(title="T", description="D", author="A", email="e@e.com",
+                                   language="en", base_url="https://x.test/pod",
+                                   category="Technology")
         (tmp_path / "a.mp3").write_bytes(b"\0" * 1234)
-        eps = FeedGenerator(config).load_episodes_from_db(
+        eps = FeedGenerator(config, retention_days=30).load_episodes_from_db(
             [{"id": "a", "title": "A", "audio_file": "a.mp3", "published": "2026-09-15T04:00:00",
               "feed_name": "Zvi", "author": "Zvi", "link": None, "content": ""}], tmp_path)
         assert eps[0].audio_bytes == 1234

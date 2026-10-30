@@ -320,10 +320,15 @@ def _thin(points: list, limit: int) -> list:
 
 @dataclass
 class MarketRules:
-    """What counts as a move worth a closing line. Defaults from the backtest."""
+    """What counts as a move worth a closing line.
 
-    move: float = 0.15
-    major_move: float = 0.20
+    The move sizes and the cap come from config.yaml `prediction_markets`; the
+    rest are tuned constants, with defaults from the backtest.
+    """
+
+    move: float
+    major_move: float
+    max_moves: int
     polymarket_volume_30d: float = 50_000
     polymarket_volume: float = 200_000
     kalshi_volume: float = 20_000
@@ -336,7 +341,6 @@ class MarketRules:
     # early. The backtest used 3%; 2% keeps the Anthropic IPO fall to 3%
     # (19 Sep), which was news, not a settlement.
     edge: float = 0.02
-    max_moves: int = 3
     # Leaderboards, benchmark debuts, market share, token prices: they move
     # every time one benchmark updates and say nothing about the world.
     exclude: str = (
@@ -649,8 +653,8 @@ class MarketContext:
 class MarketScout:
     """Builds a MarketContext for one briefing. Never raises."""
 
-    rules: MarketRules = field(default_factory=MarketRules)
-    polymarket_tags: list[str] = field(default_factory=lambda: ["ai", "openai", "anthropic"])
+    rules: MarketRules
+    polymarket_tags: list[str]
     kalshi_series: list[str] = field(default_factory=list)
     recently_reported: dict[str, float] = field(default_factory=dict)
     timeout_seconds: float = 240

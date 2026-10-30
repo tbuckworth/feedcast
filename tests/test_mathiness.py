@@ -3,10 +3,14 @@
 import httpx
 import pytest
 
+from src.config import load_config
 from src.email_report import LinkedPost, RunReport, build_html, build_text
 from src.lesswrong import lesswrong_post_id
-from src.mathiness import DEFAULT_THRESHOLD, MathsVerdict, assess, maths_score
+from src.mathiness import MathsVerdict, assess, maths_score
 from datetime import datetime
+
+# The production threshold: these tests check that it and _PATTERNS agree.
+THRESHOLD = load_config().maths_filter.threshold_per_1k
 
 PROSE = " ".join(["the model was trained on a large corpus of text"] * 40)
 MATHS = " ".join([r"we define $f(x) = \lim_{t\to\infty} \phi(x,t)$ where $\phi$ is"] * 40)
@@ -19,7 +23,7 @@ class TestMathsScore:
 
     def test_latex_is_counted(self):
         hits, score = maths_score(MATHS)
-        assert hits > 0 and score > DEFAULT_THRESHOLD
+        assert hits > 0 and score > THRESHOLD
 
     def test_empty_text(self):
         assert maths_score("") == (0, 0.0)
@@ -52,28 +56,28 @@ class TestPostId:
 class TestAssess:
     def test_falls_back_to_supplied_text_off_lesswrong(self, monkeypatch):
         monkeypatch.setattr("src.mathiness.fetch_lesswrong_markdown", lambda *a, **k: None)
-        v = assess("https://example.com/post", MATHS)
+        v = assess("https://example.com/post", MATHS, THRESHOLD)
         assert v.is_heavy and v.source == "rss"
 
     def test_prose_is_not_flagged(self, monkeypatch):
         monkeypatch.setattr("src.mathiness.fetch_lesswrong_markdown", lambda *a, **k: None)
-        assert assess("https://example.com/post", PROSE).is_heavy is False
+        assert assess("https://example.com/post", PROSE, THRESHOLD).is_heavy is False
 
     def test_markdown_wins_over_stripped_rss(self, monkeypatch):
         """The whole point: RSS has the maths stripped, markdown does not."""
         monkeypatch.setattr("src.mathiness.fetch_lesswrong_markdown", lambda *a, **k: MATHS)
-        v = assess("https://www.lesswrong.com/posts/abcdefghijklmnopq/x", PROSE)
+        v = assess("https://www.lesswrong.com/posts/abcdefghijklmnopq/x", PROSE, THRESHOLD)
         assert v.is_heavy and v.source == "markdown"
 
     def test_threshold_is_respected(self, monkeypatch):
         monkeypatch.setattr("src.mathiness.fetch_lesswrong_markdown", lambda *a, **k: None)
-        assert assess("https://x.com/p", MATHS, threshold=10_000.0).is_heavy is False
+        assert assess("https://x.com/p", MATHS, 10_000.0).is_heavy is False
 
     def test_network_failure_does_not_raise(self, monkeypatch):
         def boom(*a, **k):
             raise OSError("down")
         monkeypatch.setattr("httpx.post", boom)
-        v = assess("https://www.lesswrong.com/posts/abcdefghijklmnopq/x", PROSE)
+        v = assess("https://www.lesswrong.com/posts/abcdefghijklmnopq/x", PROSE, THRESHOLD)
         assert v.source == "rss" and v.is_heavy is False
 
 
@@ -131,12 +135,12 @@ class TestFalsePositiveGuards:
                  "It later raised $25M at a $3B valuation. ") * 3
         hits, _ = maths_score(money)
         assert hits == 0
-        assert assess("https://example.com/p", money).is_heavy is False
+        assert assess("https://example.com/p", money, THRESHOLD).is_heavy is False
 
     def test_real_latex_still_counted_alongside_currency(self):
         mixed = (r"They raised $10M. We define $f(x) = \lim_{t\to\infty}\phi(x,t)$ "
                  r"where $\phi$ is bounded and $\sum_i p_i = 1$. ") * 8
-        assert assess("https://example.com/p", mixed).is_heavy is True
+        assert assess("https://example.com/p", mixed, THRESHOLD).is_heavy is True
 
     def test_short_post_needs_real_volume_not_just_density(self):
         """Two matches in a short post clears the density bar but must not fire."""
@@ -144,13 +148,13 @@ class TestFalsePositiveGuards:
         short = r"We set $a = b$ and $c = d$. " + "filler words here " * 20
         hits, score = maths_score(short)
         assert hits < MIN_HITS
-        assert score >= DEFAULT_THRESHOLD, "density alone would have flagged it"
-        assert assess("https://example.com/p", short).is_heavy is False
+        assert score >= THRESHOLD, "density alone would have flagged it"
+        assert assess("https://example.com/p", short, THRESHOLD).is_heavy is False
 
     def test_threshold_and_min_hits_both_required(self):
         from src.mathiness import MIN_HITS
         dense_enough = r"$a = b$ " * (MIN_HITS + 2) + "word " * 50
-        assert assess("https://example.com/p", dense_enough).is_heavy is True
+        assert assess("https://example.com/p", dense_enough, THRESHOLD).is_heavy is True
 
 
 class TestLinkedRowEscaping:

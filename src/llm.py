@@ -361,16 +361,17 @@ class Completion:
     text: str
     finish_reason: str | None
     target: Target
+    role: str   # the role the call was made for; credit() compares with its primary
     usage: object = None
 
-    def credit(self, role: str = "writer") -> dict:
+    def credit(self) -> dict:
         """Who wrote this, for the email and the database.
 
         `backup` means a different model from the role's primary. The same
         model on another account reads the same, so it is not flagged here
         (the fallback section of the email still lists the switch).
         """
-        primary = ROLES[role][0].model
+        primary = ROLES[self.role][0].model
         return {"model": self.target.model, "route": self.target.route, "primary": primary,
                 "backup": model_name(self.target.model) != model_name(primary)}
 
@@ -405,7 +406,7 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
         target = pinned_target(role)
         response = await client.chat.completions.create(
             **_kwargs(ROUTES["openrouter"], target, messages, max_tokens, temperature, reasoning))
-        return _checked(_completion(response, target, where), check, where)
+        return _checked(_completion(response, target, role, where), check, where)
 
     last: Exception | None = None
     tried: list[str] = []
@@ -429,7 +430,7 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
             else:
                 response = await api.chat.completions.create(
                     **_kwargs(route, target, messages, max_tokens, temperature, reasoning))
-            done = _checked(_completion(response, target, where), check, where)
+            done = _checked(_completion(response, target, role, where), check, where)
         except EmptyCompletion as e:
             if not fallback_on_empty and not isinstance(e, NoChoices):
                 # The caller will retry from the top; record any switch that
@@ -473,7 +474,7 @@ def _checked(done: Completion, check, where: str) -> Completion:
     return done
 
 
-def _completion(response, target: Target, where: str) -> Completion:
+def _completion(response, target: Target, role: str, where: str) -> Completion:
     text = completion_text(response, where)
     choice = response.choices[0]
     finish = getattr(choice, "finish_reason", None)
@@ -482,5 +483,5 @@ def _completion(response, target: Target, where: str) -> Completion:
         # fragment. Gemini returned 88% of a 17,859-char batch this way
         # (2026-10-10), and only "length" was ever checked.
         raise NoChoices(f"{where}: reply cut off by a provider error after {len(text):,} chars")
-    return Completion(text=text, finish_reason=finish,
-                      target=target, usage=getattr(response, "usage", None))
+    return Completion(text=text, finish_reason=finish, target=target, role=role,
+                      usage=getattr(response, "usage", None))

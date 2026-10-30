@@ -192,7 +192,6 @@ jobs:
           FEEDCAST_EMAIL_TO: ${{ secrets.FEEDCAST_EMAIL_TO }}
           FEEDCAST_EMAIL_BCC: ${{ secrets.FEEDCAST_EMAIL_BCC }}
           FEEDCAST_EMAIL_ALWAYS: ${{ vars.FEEDCAST_EMAIL_ALWAYS }}
-          FEEDCAST_MAX_AGE_HOURS: ${{ vars.FEEDCAST_MAX_AGE_HOURS }}
           # Dev mode: every run an operator asked for by hand (ON_DEMAND, the
           # set the guard waves through) emails only FEEDCAST_EMAIL_TO, unless
           # they ticked notify_list. The daily run (GitHub's schedule, or the

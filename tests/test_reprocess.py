@@ -3,7 +3,8 @@
 from datetime import datetime, timedelta
 from pathlib import Path
 
-from src.feed import Episode, FeedGenerator, PodcastConfig
+from src.config import PodcastMetaConfig
+from src.feed import Episode, FeedGenerator
 from src.monitor import FeedEntry, FeedMonitor
 
 
@@ -28,9 +29,11 @@ def test_get_and_restore_round_trip(tmp_path):
 
 
 def test_index_page_lists_episodes_and_links_the_feed(tmp_path):
-    gen = FeedGenerator(PodcastConfig(title="Feedcast", description="AI safety, read aloud.",
-                                      author="T", email="t@x", language="en-us",
-                                      base_url="https://tbuckworth.github.io/feedcast"))
+    gen = FeedGenerator(PodcastMetaConfig(title="Feedcast", description="AI safety, read aloud.",
+                                          author="T", email="t@x", language="en-us",
+                                          base_url="https://tbuckworth.github.io/feedcast",
+                                          category="Technology"),
+                        retention_days=14)
     eps = [Episode(id="a", title="On Writing #3", description="", audio_file="a.mp3",
                    published=datetime(2026, 8, 26), duration_seconds=1500,
                    link="https://lw/x", author="Zvi"),
@@ -43,3 +46,4 @@ def test_index_page_lists_episodes_and_links_the_feed(tmp_path):
     assert 'href="feed.xml"' in html and 'href="audio/a.mp3"' in html
     assert "25 min" in html and "Zvi" in html and 'href="https://lw/x"' in html
     assert "<script" not in html
+    assert "Episodes are kept for 14 days." in html   # the configured retention

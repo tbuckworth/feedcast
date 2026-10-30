@@ -10,8 +10,6 @@ from .verify import fidelity_markdown, verify_script
 from .llm import complete
 from .monitor import FeedEntry
 
-AUTO_VERBATIM_LIMIT = 24000  # ~25 min of audio at ~0.063 sec/char
-
 
 def spoken_title(title: str, author: str) -> str:
     """The title as the intro and outro say it, without a "by <author>" tail.
@@ -34,7 +32,7 @@ MAX_PROMPT_CHARS = 400000    # ~100k tokens; a cost ceiling, not a context limit
 class ContentProcessor:
     """Processes feed content - either summarizing via the LLM or cleaning for verbatim."""
 
-    def __init__(self, default_prompt: str, verify: bool = True):
+    def __init__(self, default_prompt: str, *, verify: bool, auto_verbatim_limit: int):
         # None routes each call through llm.complete() with fallbacks; tests
         # pin a fake client here instead.
         self.client = None
@@ -42,6 +40,8 @@ class ContentProcessor:
         # Check summaries against their source with a second model and fix
         # them once (src/verify.py). Off in tests and when config says so.
         self.verify = verify
+        # Auto mode reads a post out in full up to this many characters.
+        self.auto_verbatim_limit = auto_verbatim_limit
 
     def reads_verbatim(self, entry: FeedEntry, mode: str) -> bool:
         """Whether `process` will read this entry out in full rather than summarise it.
@@ -52,7 +52,7 @@ class ContentProcessor:
         if entry.id.startswith("news-briefing-"):
             return False
         if mode == "auto":
-            return len(clean_html(entry.content)) <= AUTO_VERBATIM_LIMIT
+            return len(clean_html(entry.content)) <= self.auto_verbatim_limit
         return mode == "verbatim"
 
     async def process_tables(self, html_content: str) -> str:
@@ -181,10 +181,10 @@ Content:
         elif mode == "auto":
             clean_text = clean_html(entry.content)
             if self.reads_verbatim(entry, mode):
-                print(f"    Auto mode: {len(clean_text)} chars ≤ {AUTO_VERBATIM_LIMIT} → verbatim")
+                print(f"    Auto mode: {len(clean_text)} chars ≤ {self.auto_verbatim_limit} → verbatim")
                 text = await self.process_verbatim(entry)
             else:
-                print(f"    Auto mode: {len(clean_text)} chars > {AUTO_VERBATIM_LIMIT} → summarize")
+                print(f"    Auto mode: {len(clean_text)} chars > {self.auto_verbatim_limit} → summarize")
                 summary = await self.summarize(entry, prompt)
                 intro = f"Summary of {spoken_title(entry.title, entry.author)} by {entry.author}."
                 text = f"{intro}\n\n{summary}"

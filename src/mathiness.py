@@ -18,20 +18,13 @@ from dataclasses import dataclass
 
 from .lesswrong import fetch_lesswrong_markdown
 
-# Per 1000 words, re-measured after the inline-LaTeX pattern was tightened to
-# exclude currency (which lowered every score). Across 20 recent LessWrong and
-# Alignment Forum posts the mathematical ones now score 99.0, 23.1 and 9.8, and
-# every prose post scores 6.6 or below. 8 sits in that gap.
-#
-# Recalibrate this whenever _PATTERNS changes — the two numbers are coupled, and
-# a pattern change silently moves every score.
-DEFAULT_THRESHOLD = 8.0
-
 # A density alone is not enough. On a short post two matches can clear 10/1000
 # words, and being wrong here is expensive and silent: the post gets no audio
 # and is marked processed, so it never comes back. Require real volume too.
 MIN_HITS = 8
 
+# Changing these moves every score: recalibrate config.yaml
+# `maths_filter.threshold_per_1k` along with them.
 _PATTERNS = [
     # Inline LaTeX. The lookahead demands a genuinely mathematical character
     # inside the delimiters, so prose about money — "raised $10M at a $1B
@@ -66,9 +59,11 @@ def maths_score(text: str) -> tuple[int, float]:
     return hits, hits / words * 1000
 
 
-def assess(link: str, fallback_text: str,
-           threshold: float = DEFAULT_THRESHOLD) -> MathsVerdict:
-    """Judge a post, preferring the markdown source when one is reachable."""
+def assess(link: str, fallback_text: str, threshold: float) -> MathsVerdict:
+    """Judge a post, preferring the markdown source when one is reachable.
+
+    `threshold` is matches per 1000 words (config.yaml `maths_filter`).
+    """
     md = fetch_lesswrong_markdown(link)
     text, source = (md, "markdown") if md else (fallback_text, "rss")
     hits, score = maths_score(text)

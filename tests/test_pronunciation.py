@@ -28,7 +28,8 @@ def test_intro_and_outro_say_the_name_once():
     entry = FeedEntry(id="z", title="“The Curve Bends You” by Zvi", link="", content="<p>Body.</p>",
                       published=datetime(2026, 10, 8), author="Zvi Mowshowitz",
                       feed_name="Zvi Mowshowitz")
-    text = asyncio.run(ContentProcessor("p").process(entry, "verbatim"))
+    processor = ContentProcessor("p", verify=False, auto_verbatim_limit=24000)
+    text = asyncio.run(processor.process(entry, "verbatim"))
     assert text.startswith("“The Curve Bends You”. By Zvi Mowshowitz.")
     assert text.endswith("End of “The Curve Bends You”.") and text.count("Zvi") == 1
 
@@ -60,7 +61,6 @@ def test_normaliser_respells_its_output_even_when_the_model_returns_nothing(monk
 
 
 def test_configured_respellings_load():
-    from pathlib import Path
     from src.config import load_config
-    cfg = load_config(Path(__file__).resolve().parent.parent / "config.yaml")
+    cfg = load_config()
     assert cfg.pronunciations["METR"] == "Meter" and "OpenAI" not in cfg.pronunciations

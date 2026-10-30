@@ -12,7 +12,6 @@ import httpx
 
 from . import llm
 
-DEFAULT_VOICE_SAMPLE = "voice_samples/derek_perkins.wav"
 MAX_CHUNK_CHARS = 500  # Tested: 650 works but 500 has better pacing
 
 # Delay after voice upload before inference (for replication)
@@ -130,8 +129,7 @@ def split_into_chunks(text: str, max_chars: int = MAX_CHUNK_CHARS) -> list[str]:
 
 async def generate_with_deepinfra_async(
     text: str, voice_id: str, api_key: str, http_client: httpx.AsyncClient,
-    save_debug_wav: Path | None = None, tag: str = "",
-    model: tuple[str, dict] = TTS_MODELS[0],
+    *, model: tuple[str, dict], save_debug_wav: Path | None = None, tag: str = "",
 ) -> bytes:
     """Generate audio using DeepInfra inference endpoint with voice cloning."""
     headers = {
@@ -210,17 +208,13 @@ async def generate_with_deepinfra_async(
 class AudioGenerator:
     """Generates audio from text using DeepInfra Chatterbox API with voice cloning."""
 
-    def __init__(self, voice_sample: str = None):
+    def __init__(self, voice_sample: Path):
         self._api_key = os.environ.get("DEEPINFRA_API_KEY")
         if not self._api_key:
             raise ValueError("DEEPINFRA_API_KEY environment variable not set")
 
-        if voice_sample is None:
-            project_root = Path(__file__).parent.parent
-            self._voice_sample = project_root / DEFAULT_VOICE_SAMPLE
-        else:
-            self._voice_sample = Path(voice_sample)
-
+        # The recording the voice is cloned from (config.yaml `tts.voice_sample`).
+        self._voice_sample = Path(voice_sample)
         if not self._voice_sample.exists():
             raise FileNotFoundError(f"Voice sample not found: {self._voice_sample}")
 
