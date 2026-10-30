@@ -16,9 +16,9 @@ from src import lesswrong, notices
 from src.config import CONFIG_PATH
 from src.email_report import ReportEpisode, RunReport, build_html, build_text
 from src.lesswrong import _parse, lesswrong_post_id, posted_at
-from src.main import (_build_run_report, _correct_publication_dates, _stored_feed_date,
-                      _surfaced_date)
+from src.main import _correct_publication_dates
 from src.monitor import FeedEntry
+from src.run_report import build_run_report, stored_feed_date, surfaced_date
 
 
 def _lesswrong_answers(monkeypatch, answer) -> None:
@@ -136,25 +136,25 @@ class TestDateCorrection:
 class TestReportShowsBothDates:
 
     def test_the_feed_date_is_shown_when_it_trails_publication(self):
-        assert _surfaced_date(datetime(2026, 8, 21, 18, 30), datetime(2026, 7, 30, 19, 10)) \
+        assert surfaced_date(datetime(2026, 8, 21, 18, 30), datetime(2026, 7, 30, 19, 10)) \
             == datetime(2026, 8, 21, 18, 30)
 
     def test_the_feed_date_is_hidden_when_it_matches_publication(self):
-        assert _surfaced_date(datetime(2026, 8, 26, 0, 23), datetime(2026, 8, 25, 17, 50)) is None
+        assert surfaced_date(datetime(2026, 8, 26, 0, 23), datetime(2026, 8, 25, 17, 50)) is None
 
     def test_rows_without_the_column_say_nothing(self):
-        assert _stored_feed_date({"feed_date": "2026-08-21T18:30:00"}) == \
+        assert stored_feed_date({"feed_date": "2026-08-21T18:30:00"}) == \
             datetime(2026, 8, 21, 18, 30)
-        assert _stored_feed_date({}) is None
+        assert stored_feed_date({}) is None
         with pytest.raises(ValueError):
-            _stored_feed_date({"feed_date": "nonsense"})       # a corrupt row is loud
-        assert _surfaced_date(None, datetime(2026, 8, 26)) is None
+            stored_feed_date({"feed_date": "nonsense"})       # a corrupt row is loud
+        assert surfaced_date(None, datetime(2026, 8, 26)) is None
 
     def test_a_post_waiting_for_narration_shows_both_dates_too(self):
         e = FeedEntry(id="1", title="Big-World Intuitions", link="https://example.com/p",
                       content="", published=datetime(2026, 7, 30), author="Joe Carlsmith",
                       feed_name="LessWrong Curated", feed_date=datetime(2026, 8, 21))
-        report = _build_run_report([], [], set(), [], "https://x", pending=[{"entry": e}])
+        report = build_run_report([], [], set(), [], "https://x", pending=[{"entry": e}])
         assert report.episodes[0].surfaced == datetime(2026, 8, 21)
 
     def test_the_email_explains_why_an_old_post_is_here(self):

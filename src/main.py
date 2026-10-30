@@ -5,7 +5,7 @@ import os
 import socket
 import traceback
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 import httpx
@@ -14,10 +14,10 @@ from .audio import AudioGenerator
 from .bundle import write_bundle
 from .config import CONFIG_PATH, ROOT, Config, FeedConfig, load_config
 from .digest import safe_bullets
-from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
+from .email_report import RunReport, send_report
 from .env import env_flag
 from .extractor import ExtractionError, url_to_feed_entry
-from .feed import Episode, FeedGenerator, audio_url, episode_page_url, feed_url
+from .feed import Episode, FeedGenerator
 from .fulltext import enrich_entry
 from .html_text import clean_html
 from .lesswrong import posted_at
@@ -26,10 +26,12 @@ from .market_charts import charts_for_report
 from .markets import MarketRules, MarketScout
 from .mathiness import MathsVerdict, assess
 from .monitor import (FeedEntry, FeedMonitor, briefing_id, entry_from_row, episode_id,
-                      is_briefing, stored_author, stored_json)
+                      is_briefing)
 from .news import NewsAggregator
 from .normalizer import TextNormalizer
 from .processor import ContentProcessor
+from .run_report import (build_run_report, failure_report, preview_report, stored_verdict,
+                         surfaced_date)
 
 # feedparser.parse(url) fetches through urllib, which blocks forever on a
 # stalled server, so a single unresponsive feed would hang the whole run until
@@ -277,22 +279,6 @@ async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> list[tupl
     return failures
 
 
-def _stored_verdict(row: dict) -> MathsVerdict:
-    """The maths verdict recorded when the post was linked.
-
-    Rows written before the column existed have nothing stored. Those report a
-    zero score, which the email renders as "linked, not narrated" with no
-    number rather than an invented figure.
-    Corrupt JSON raises, naming the row (monitor.stored_json).
-    """
-    data = stored_json(row, "maths", dict)
-    if data is None:
-        return MathsVerdict(is_heavy=True, score=0.0, hits=0, source="unrecorded")
-    return MathsVerdict(is_heavy=True, score=float(data.get("score") or 0.0),
-                        hits=int(data.get("hits") or 0),
-                        source=str(data.get("source") or "unrecorded"))
-
-
 async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
                          audio_dir: Path) -> None:
     """Rebuild and re-send the most recent run's email. Publishes nothing.
@@ -321,12 +307,12 @@ async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
     for row in todays:
         if row["audio_file"]:
             continue
-        linked.append((entry_from_row(row), _stored_verdict(row)))
+        linked.append((entry_from_row(row), stored_verdict(row)))
 
     episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir)
     new_ids = {d["id"] for d in todays if d["audio_file"]}
-    report = _build_run_report(episodes, db_entries, new_ids, failures,
-                               config.podcast.base_url, linked)
+    report = build_run_report(episodes, db_entries, new_ids, failures,
+                              config.podcast.base_url, linked)
     _email(report)
 
 
@@ -916,7 +902,7 @@ def _email_run(run: Run, episodes: list[Episode], db_entries: list[dict],
     briefing = run.briefing
     charts, images = (charts_for_report(briefing)
                       if briefing and briefing.id in run.new_ids else ([], {}))
-    report = _build_run_report(
+    report = build_run_report(
         episodes, db_entries, run.new_ids, run.failures, run.config.podcast.base_url,
         run.maths_skipped, run.dead_sources, pending=waiting,
     )
@@ -959,12 +945,12 @@ async def _correct_publication_dates(entries: list[FeedEntry]) -> None:
     "is this new to us" date (`feed_date`), and LessWrong is asked when the
     post was actually written, so the email states a release date rather than
     a promotion date. Only LessWrong links can be resolved, and only a
-    difference worth showing is applied (FEED_DATE_LAG): a silent no-op for
-    every other feed.
+    difference worth showing is applied (run_report.FEED_DATE_LAG): a silent
+    no-op for every other feed.
     """
     for entry in entries:
         real = await posted_at(entry.link)
-        if real is None or _surfaced_date(entry.feed_date, real) is None:
+        if real is None or surfaced_date(entry.feed_date, real) is None:
             continue
         print(f"    {entry.title[:48]}: posted {real:%Y-%m-%d}, "
               f"in feed {entry.feed_date:%Y-%m-%d}")
@@ -1013,24 +999,11 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
         return
     entry.bullets = await safe_bullets(entry.content, is_briefing=True, label=entry.title,
                                        sources=entry.sources)
-    base = config.podcast.base_url
-
-    def item(**kw) -> ReportEpisode:
-        return ReportEpisode(author="", feed_name=entry.feed_name, link="", audio_url="",
-                             duration_seconds=0, is_briefing=True, published=entry.published,
-                             **kw)
-
-    # The digest as the daily email shows it, then the whole script, which is
-    # where the market lines actually are.
+    # Charts first: a chart that fails is a notice, and the report takes
+    # the notices as they stand when it is built.
     charts, images = charts_for_report(entry)
-    report = RunReport(
-        episodes=[item(title=f"Preview: {entry.title}", bullets=entry.bullets,
-                       fidelity=entry.fidelity, writer=entry.writer),
-                  item(title="Full script", briefing_text=entry.content)],
-        notices=notices.report(), feed_url=feed_url(base), site_url=base,
-        charts=charts,
-    )
-    _email(report, subject_tag="[Preview]", images=images)
+    _email(preview_report(entry, config.podcast.base_url, charts),
+           subject_tag="[Preview]", images=images)
 
 
 def _run_pass() -> str:
@@ -1136,10 +1109,8 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
 
     episodes, _rows, _waiting = _publish(monitor, feed_gen, audio_dir, output_dir)
     if failures:
-        _email(RunReport(
-            failures=failures, notices=notices.report(),
-            feed_url=feed_url(config.podcast.base_url), site_url=config.podcast.base_url,
-            total_in_feed=len(episodes)), operator_only=True)
+        _email(failure_report(failures, config.podcast.base_url, len(episodes)),
+               operator_only=True)
 
 
 @dataclass
@@ -1266,119 +1237,6 @@ def _report_unnormalized(normalizer: TextNormalizer) -> None:
         print(f"  WARNING: {msg}")
         notices.add(msg)
         _gh_warning("Feedcast normaliser", msg)
-
-
-def _json_dict(row: dict, column: str) -> dict | None:
-    """A JSON object stored in `column`; None when the row has none. Corrupt JSON raises."""
-    return stored_json(row, column, dict)
-
-
-def _bullets_of(row: dict) -> list:
-    """Read a stored digest. Rows written before the column existed have ''.
-
-    Bullets are strings, or {"text", "url"} once they cite a source; rows
-    written before that keep the old shape and render without a link.
-    Corrupt JSON raises, naming the row.
-    """
-    parsed = stored_json(row, "bullets", list) or []
-    return [b for b in parsed
-            if isinstance(b, str) or (isinstance(b, dict) and b.get("text"))]
-
-
-# How far a post's feed date must be from its posting date before the email
-# gives both: an hour's lag between posting and curation is noise.
-FEED_DATE_LAG = timedelta(days=1)
-
-
-def _surfaced_date(feed_date: datetime | None, published: datetime | None) -> datetime | None:
-    """When the feed surfaced a post, if that is not when it was written.
-
-    None without a feed date, or with one within FEED_DATE_LAG of `published`.
-    """
-    if feed_date is None:
-        return None
-    if published and abs(feed_date - published) < FEED_DATE_LAG:
-        return None
-    return feed_date
-
-
-def _stored_feed_date(row: dict) -> datetime | None:
-    """The feed date a row stores; None for rows from before the column.
-
-    The pipeline writes a full date or nothing, so anything else is a corrupt
-    row and raises.
-    """
-    raw = (row.get("feed_date") or "").strip()
-    if not raw:
-        return None
-    return datetime.fromisoformat(raw)
-
-
-def _build_run_report(
-    episodes: list[Episode], db_entries: list[dict], new_entry_ids: set[str],
-    failures: list[tuple[str, str]], base_url: str,
-    maths_skipped: list[tuple[FeedEntry, MathsVerdict]] | None = None,
-    dead_sources: list[str] | None = None,
-    pending: list[dict] | None = None,
-) -> RunReport:
-    """Assemble the emailed report from this run's episodes and the feed.
-
-    `pending` is FeedMonitor.deferred_entries(): posts read out in full that
-    the narration pass has yet to publish. They are listed with their bullets
-    and a link to the episode's page, which plays the audio once it exists.
-    """
-    db_by_id = {d["id"]: d for d in db_entries}
-    cutoff = datetime.now() - timedelta(days=7)
-
-    def to_report(ep: Episode) -> ReportEpisode:
-        row = db_by_id[ep.id]     # the episodes were read from these rows
-        briefing = is_briefing(ep.id)
-        return ReportEpisode(
-            title=ep.title,
-            author="" if briefing else stored_author(row),
-            feed_name=row["feed_name"],
-            link=ep.link or "",
-            audio_url=audio_url(base_url, ep.audio_file),
-            duration_seconds=ep.duration_seconds,
-            is_briefing=briefing,
-            briefing_text=(row.get("content") or "") if briefing else "",
-            bullets=_bullets_of(row),
-            published=ep.published,
-            surfaced=_surfaced_date(_stored_feed_date(row), ep.published),
-            fidelity=_json_dict(row, "fidelity"),
-            writer=_json_dict(row, "writer"),
-        )
-
-    def waiting(row: dict) -> ReportEpisode:
-        e: FeedEntry = row["entry"]
-        return ReportEpisode(
-            title=e.title, author=e.author or e.feed_name, feed_name=e.feed_name,
-            link=e.link or "", audio_url=episode_page_url(base_url, e.id),
-            duration_seconds=0, bullets=row.get("bullets") or [], published=e.published,
-            surfaced=_surfaced_date(e.feed_date, e.published), pending=True,
-        )
-
-    ordered = sorted(episodes, key=lambda e: e.published, reverse=True)
-    pending_rows = sorted(pending or [], key=lambda r: r["entry"].published, reverse=True)
-    return RunReport(
-        episodes=[to_report(e) for e in ordered if e.id in new_entry_ids]
-                 + [waiting(r) for r in pending_rows],
-        recent=[
-            to_report(e) for e in ordered
-            if e.id not in new_entry_ids and e.published >= cutoff
-        ][:12],
-        failures=failures,
-        linked=[
-            LinkedPost(title=e.title, author=e.author, feed_name=e.feed_name,
-                       link=e.link, maths_score=v.score, source=v.source)
-            for e, v in (maths_skipped or [])
-        ],
-        dead_sources=sorted(set(dead_sources or [])),
-        notices=notices.report(),
-        feed_url=feed_url(base_url),
-        site_url=base_url,
-        total_in_feed=len(episodes),
-    )
 
 
 async def _send_ntfy(topic: str, message: str, tags: str) -> None:
