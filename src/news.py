@@ -10,7 +10,7 @@ import feedparser
 from .extractor import extract_article
 from .llm import complete
 from .markets import MarketContext, MarketScout
-from .monitor import FeedEntry, report_skipped, warn_if_dead
+from .monitor import FeedEntry, entry_body, entry_published, report_skipped, warn_if_dead
 from .verify import write_checked
 
 # The previous briefings are there for dedup, but the writer also reads them
@@ -112,32 +112,23 @@ class NewsAggregator:
             articles = []
             stale = undated = 0
             for entry in feed.entries:
-                published = None
-                if hasattr(entry, "published_parsed") and entry.published_parsed:
-                    published = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc)
-                elif hasattr(entry, "updated_parsed") and entry.updated_parsed:
-                    published = datetime(*entry.updated_parsed[:6], tzinfo=timezone.utc)
+                published = entry_published(entry)
 
                 # Counted for report_skipped: a source that stops dating its
                 # items would otherwise just look quiet.
                 if published is None:
                     undated += 1
                     continue
+                published = published.replace(tzinfo=timezone.utc)
                 if published < cutoff:
                     stale += 1
                     continue
-
-                summary = ""
-                if hasattr(entry, "summary"):
-                    summary = entry.summary
-                elif hasattr(entry, "description"):
-                    summary = entry.description
 
                 articles.append({
                     "title": entry.get("title", "Untitled"),
                     "source": source["name"],
                     "category": source["category"],
-                    "summary": summary[:500],
+                    "summary": entry_body(entry)[:500],
                     "published": published,
                     "url": entry.get("link", ""),
                 })
