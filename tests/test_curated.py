@@ -11,6 +11,7 @@ from datetime import datetime
 import httpx
 import yaml
 
+from src import notices
 from src.config import CONFIG_PATH
 from src.email_report import ReportEpisode, RunReport, build_html, build_text
 from src.lesswrong import _parse, lesswrong_post_id, posted_at
@@ -68,6 +69,31 @@ class TestPostIdExtraction:
 
         assert asyncio.run(run()) == datetime(2026, 7, 30, 19, 10, 28, 71000)
         assert asked == ["www.alignmentforum.org"]
+
+    @staticmethod
+    def _ask(answer):
+        async def run():
+            async with httpx.AsyncClient(transport=httpx.MockTransport(answer)) as client:
+                return await posted_at(
+                    "https://www.lesswrong.com/posts/MhssYd2EN2HGfo7Jc/v-and-v", client)
+        return asyncio.run(run())
+
+    def test_a_graphql_error_payload_is_named_with_the_post_and_the_errors(self, capsys):
+        """It used to return None in silence: the email then called the
+        curation date the release date and nobody knew."""
+        errors = [{"message": "Post not found"}]
+        assert self._ask(lambda request: httpx.Response(
+            200, json={"errors": errors, "data": {"post": None}})) is None
+        (note,) = notices.report()
+        assert note.startswith("LessWrong date lookup for MhssYd2EN2HGfo7Jc failed")
+        assert "Post not found" in note and note.endswith("the feed's date stands")
+        assert note in capsys.readouterr().out
+
+    def test_a_failed_request_is_named_too(self):
+        assert self._ask(lambda request: httpx.Response(502)) is None
+        (note,) = notices.report()
+        assert note.startswith(
+            "LessWrong date lookup for MhssYd2EN2HGfo7Jc failed (HTTPStatusError")
 
 
 class TestDateCorrection:

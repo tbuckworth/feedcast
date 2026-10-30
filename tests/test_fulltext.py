@@ -3,6 +3,7 @@
 import re
 from datetime import datetime
 
+import httpx
 import pytest
 
 from src import fulltext
@@ -71,15 +72,31 @@ def test_non_lesswrong_entry_is_untouched(fake_markdown):
     assert entry.content == "<p>short</p>"
 
 
-def test_unreachable_markdown_is_distinguishable_from_a_complete_feed(fake_markdown):
-    # The case that ships a blurb as an episode. It must not look like the
-    # feed-complete case, which is the normal, fine outcome.
+def test_a_post_with_no_markdown_is_distinguishable_from_a_complete_feed(fake_markdown):
+    # GraphQL answered, but has no markdown for the post (deleted, a draft).
+    # That ships the feed body, so it must not look like the feed-complete
+    # case, which is the normal, fine outcome.
     fake_markdown(None)
     entry = make_entry("<p>Chapters: (01:16:32) The Incentives</p>")
 
     gain = enrich_entry(entry)
 
-    assert gain.reason == "unreachable" and gain.is_failure
+    assert gain.reason == "no-markdown" and gain.is_failure
+    assert entry.content == "<p>Chapters: (01:16:32) The Incentives</p>"
+
+
+def test_an_unreachable_post_raises_instead_of_narrating_the_excerpt(monkeypatch):
+    """It used to read as "no markdown", and Zvi's 3% blurb was narrated."""
+    from src import lesswrong
+    lesswrong._graphql_markdown.cache_clear()
+
+    def down(*a, **k):
+        raise httpx.ConnectError("LessWrong is down")
+    monkeypatch.setattr(lesswrong.httpx, "post", down)
+    entry = make_entry("<p>Chapters: (01:16:32) The Incentives</p>")
+
+    with pytest.raises(httpx.ConnectError):
+        enrich_entry(entry)
     assert entry.content == "<p>Chapters: (01:16:32) The Incentives</p>"
 
 

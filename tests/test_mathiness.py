@@ -73,12 +73,17 @@ class TestAssess:
         monkeypatch.setattr("src.mathiness.fetch_lesswrong_markdown", lambda *a, **k: None)
         assert assess("https://x.com/p", MATHS, 10_000.0).is_heavy is False
 
-    def test_network_failure_does_not_raise(self, monkeypatch):
+    def test_network_failure_raises_instead_of_scoring_the_stripped_rss(self, monkeypatch):
+        """The RSS body has its maths stripped, so scoring it reads every post as
+        prose. The entry fails instead, and the retry queue tries it again."""
+        from src import lesswrong
+        lesswrong._graphql_markdown.cache_clear()
+
         def boom(*a, **k):
-            raise OSError("down")
+            raise httpx.ConnectError("down")
         monkeypatch.setattr("httpx.post", boom)
-        v = assess("https://www.lesswrong.com/posts/abcdefghijklmnopq/x", PROSE, THRESHOLD)
-        assert v.source == "rss" and v.is_heavy is False
+        with pytest.raises(httpx.ConnectError):
+            assess("https://www.lesswrong.com/posts/abcdefghijklmnopq/x", PROSE, THRESHOLD)
 
 
 class TestLinkedInEmail:
@@ -172,8 +177,8 @@ class TestLinkedRowEscaping:
         assert "A &amp; &lt;b&gt;B&lt;/b&gt;" in html
 
 
-def test_transient_fetch_failure_is_not_cached(monkeypatch):
-    """A flaky GraphQL call must not poison the post for the next caller.
+def test_transient_fetch_failure_raises_and_is_not_cached(monkeypatch):
+    """A flaky GraphQL call raises, and must not poison the post for the next caller.
 
     The maths filter fetches first and fulltext.py fetches second. If a timeout
     were cached, the second call would get None, the episode would be built
@@ -201,7 +206,8 @@ def test_transient_fetch_failure_is_not_cached(monkeypatch):
 
     monkeypatch.setattr(lesswrong.httpx, "post", flaky)
 
-    assert lesswrong.fetch_lesswrong_markdown(link) is None
+    with pytest.raises(httpx.ReadTimeout):
+        lesswrong.fetch_lesswrong_markdown(link)
     assert lesswrong.fetch_lesswrong_markdown(link) == "$x = 1$"
     assert len(calls) == 2
 
@@ -238,8 +244,8 @@ def test_graphql_nulls_are_a_permanent_answer_not_a_crash(monkeypatch, payload):
     """A deleted or draft post answers with null, not a missing key.
 
     .get("result", {}) returns that null and the chained .get() raises, which
-    the caller swallows as None. The post then looks unreachable — refetched
-    every run, and reported to the user as a transient failure.
+    reads as a failed fetch. The post then looks unreachable — refetched every
+    run, and reported to the user as a transient failure.
     """
     from src import lesswrong
 

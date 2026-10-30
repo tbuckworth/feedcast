@@ -21,6 +21,8 @@ from typing import Optional
 
 import httpx
 
+from . import notices
+
 TIMEOUT = 15.0
 
 _LW_HOSTS = ("lesswrong.com", "alignmentforum.org")
@@ -57,12 +59,19 @@ async def posted_at(link: str, client: httpx.AsyncClient | None = None) -> datet
     """When the post behind this link was published, or None if unknown.
 
     Never raises: a date that cannot be improved simply stays as the feed
-    reported it. This runs on an unattended job with no one to see a stack
-    trace, and a missing date is not worth losing an episode over.
+    reported it, and a missing date is not worth losing an episode over. A
+    lookup that fails is printed with the post id and added to the run's
+    notices, because the email then gives the curation date as the release
+    date.
     """
     pid = lesswrong_post_id(link)
     if not pid:
         return None
+
+    def failed(reason: str) -> None:
+        note = f"LessWrong date lookup for {pid} failed ({reason}); the feed's date stands"
+        print(f"    {note}")
+        notices.add(note)
     query = ('{post(input:{selector:{_id:"%s"}}){result{postedAt}}}' % pid)
     try:
         owned = client is None
@@ -77,13 +86,16 @@ async def posted_at(link: str, client: httpx.AsyncClient | None = None) -> datet
             if owned:
                 await client.aclose()
     except Exception as exc:
-        print(f"    LessWrong date lookup failed for {pid}: {exc!r}")
-        return None
+        return failed(f"{type(exc).__name__}: {str(exc)[:160]}")
 
+    # A GraphQL error comes back as a 200 with `errors` and a null where the
+    # post should be.
     try:
-        return _parse(data["data"]["post"]["result"]["postedAt"])
+        stamp = data["data"]["post"]["result"]["postedAt"]
     except (KeyError, TypeError):
-        return None
+        errors = data.get("errors") if isinstance(data, dict) else None
+        return failed(f"no postedAt in the reply; errors: {str(errors)[:300]}")
+    return _parse(stamp)
 
 
 @lru_cache(maxsize=128)
@@ -106,7 +118,7 @@ def _graphql_markdown(post_id: str, url: str, timeout: float) -> Optional[str]:
     # `or {}` at every level, not `.get(k, {})`. GraphQL answers a deleted,
     # draft or unknown post with an explicit null rather than a missing key, and
     # .get("result", {}) hands back that null. The AttributeError that follows
-    # is swallowed as None by the caller, which inverts this function's whole
+    # would read as a failed fetch, which inverts this function's whole
     # contract: a permanent "no markdown here" gets refetched every run and is
     # reported to the user as a transient failure.
     return ((((data.get("data") or {}).get("post") or {})
@@ -116,15 +128,14 @@ def _graphql_markdown(post_id: str, url: str, timeout: float) -> Optional[str]:
 def fetch_lesswrong_markdown(link: str, timeout: float = 30.0) -> Optional[str]:
     """Fetch a post's markdown source, where the LaTeX survives.
 
-    Returns None on any failure. The maths filter then scores, and full-text
-    recovery then keeps, whatever text the feed already gave.
-    Callers that need to tell "no markdown" from "fetch broke" should check
-    lesswrong_post_id() first and treat a None on a real post id as a failure.
+    None means there is no markdown to have: the link is not a LessWrong or
+    Alignment Forum post, or the site answered that the post has none. A
+    request that fails raises. It used to return None too, and then the maths
+    filter scored the RSS body, whose maths is stripped, and full-text
+    recovery narrated Zvi's three-percent blurb; now the entry fails and the
+    retry queue tries it again.
     """
     post_id = lesswrong_post_id(link)
     if not post_id:
         return None
-    try:
-        return _graphql_markdown(post_id, _graphql_url(link), timeout)
-    except Exception:
-        return None
+    return _graphql_markdown(post_id, _graphql_url(link), timeout)

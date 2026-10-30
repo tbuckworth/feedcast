@@ -405,6 +405,8 @@ class TestChartsInTheEmail:
         briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
                              content="Polymarket", markets=_ctx_with_story_and_move(None).to_dict())
         assert charts_for_report(briefing) == ([], {})
+        assert notices.report() == [
+            "prediction-market charts left out of this email: ValueError: bad history"]
 
 
 def test_market_record_round_trips_through_json():
