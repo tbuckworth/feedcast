@@ -1,6 +1,7 @@
 """Tests for TTS normalization batching and truncation handling."""
 
 import asyncio
+from types import SimpleNamespace as NS
 
 import pytest
 
@@ -87,14 +88,16 @@ class TestTruncationIsLoud:
 
     def test_batching_splits_an_oversized_paragraph(self):
         """End to end: one huge paragraph must arrive as several bounded calls."""
-        n, _ = self._stub("stop")
+        n = TextNormalizer()
         calls = []
 
-        async def fake_chunk(text):
+        # The model is a paid API; this client echoes each batch it is sent.
+        async def echo(**kw):
+            text = kw["messages"][1]["content"]
             calls.append(len(text))
-            return text
+            return NS(choices=[NS(message=NS(content=text, refusal=None), finish_reason="stop")])
 
-        n._normalize_chunk = fake_chunk
+        n.client = NS(chat=NS(completions=NS(create=echo)))
         asyncio.run(n.normalize_for_tts("word " * 12000, label="ep"))
         assert len(calls) > 1
         assert all(c <= MAX_BATCH_CHARS for c in calls)

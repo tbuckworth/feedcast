@@ -35,6 +35,7 @@ def test_intro_and_outro_say_the_name_once():
 
 
 from src.normalizer import TextNormalizer, respell
+from tests.conftest import FakeApi
 
 TABLE = {"METR": "Meter", "Amodei": "Amo-day", "xAI": "X-A-I", "GitHub": "Git Hub"}
 
@@ -50,14 +51,14 @@ def test_respell_whole_words_only(text, spoken):
     assert respell(text, TABLE) == spoken
 
 
-def test_normaliser_respells_its_output_even_when_the_model_returns_nothing(monkeypatch):
-    norm = TextNormalizer.__new__(TextNormalizer)
-    norm.respellings, norm.unnormalized = TABLE, {}
-
-    async def refuse(paragraphs, label):
-        return "\n\n".join(paragraphs)            # the narrate-as-written fallback
-    norm._normalize_resilient = refuse
+def test_normaliser_respells_its_output_even_when_the_model_returns_nothing(routes):
+    # Every normaliser model is a paid API; each fake returns nothing, so the
+    # real narrate-as-written fallback runs.
+    for route in ("openrouter", "anthropic", "openai"):
+        routes[route] = FakeApi(["<empty>"])
+    norm = TextNormalizer(respellings=TABLE)
     assert asyncio.run(norm.normalize_for_tts("METR and Amodei.", label="ep")) == "Meter and Amo-day."
+    assert norm.unnormalized == {"ep": len("METR and Amodei.")}
 
 
 def test_configured_respellings_load():
