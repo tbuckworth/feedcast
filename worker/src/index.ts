@@ -24,7 +24,10 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
 
+// Every refusal (4xx) is logged here, so Workers Logs shows why a request
+// was turned away, not just its status.
 function reply(status: number, body: object): Response {
+  if (status >= 400 && status < 500) console.warn(`${status} ${JSON.stringify(body)}`);
   return Response.json(body, { status, headers: CORS_HEADERS });
 }
 
@@ -48,9 +51,9 @@ export default {
 
     // Rate limit
     if (isRateLimited()) {
-      const error = `Rate limit exceeded (${RATE_LIMIT} per ${RATE_WINDOW_MS / 60_000} minutes)`;
-      console.warn(error);
-      return reply(429, { error });
+      return reply(429, {
+        error: `Rate limit exceeded (${RATE_LIMIT} per ${RATE_WINDOW_MS / 60_000} minutes)`,
+      });
     }
 
     // Parse body
