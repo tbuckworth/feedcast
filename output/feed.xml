@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Thu, 29 Oct 2026 05:43:11 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 30 Oct 2026 05:38:50 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-10-30</title>
+      <description>Daily News Briefing - 2026-10-30
+
+Topics covered:
+- OpenAI has published an updated Model Spec built around five core values, among them sound judgment, human agency and faithfulness to human intent
+- The Verge has gone through Anthropic's IPO filing and found a company that cannot afford to slow down
+- Open weights are moving into cyber defense
+- The pressure on defenders was on display at Binance
+- On the economy, America grew at a three point four percent annualized rate last quarter, beating forecasts as AI-driven investment and consumer spending outweighed war-driven oil prices
+- In Israel, final results give Netanyahu's bloc fifty-three seats and Gadi Eisenkot's forty-eight, leaving Arab parties with a record nineteen</description>
+      <pubDate>Fri, 30 Oct 2026 05:35:23 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-10-30</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9ec67cb49fea_daily_news_briefing_-_2026-10-30.mp3" type="audio/mpeg" length="2907285" />
+      <itunes:duration>00:05:07</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-30.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“AI #192: Anthropic Is Going Public” by Zvi</title>
+      <description>Audio version of “AI #192: Anthropic Is Going Public” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 29 Oct 2026 13:53:39 +0000</pubDate>
+      <guid isPermaLink="false">eeb72c0e-3942-4af3-a759-4ed8aa34ac38</guid>
+      <link>https://www.lesswrong.com/posts/mBDkupZa3NagfLW86/ai-192-anthropic-is-going-public</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/31a7ca77a0aa_ai_192_anthropic_is_going_public_by_zvi.mp3" type="audio/mpeg" length="2451189" />
+      <itunes:duration>00:04:20</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-10-29</title>
       <description>Daily News Briefing - 2026-10-29
@@ -1050,37 +1081,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/b0b66e51dab3_a_morally_binding_white_house_accord_on_ai_safe.mp3" type="audio/mpeg" length="2687277" />
       <itunes:duration>00:04:37</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-09-30</title>
-      <description>Daily News Briefing - 2026-09-30
-
-Topics covered:
-- President Trump hosted top technology leaders at the White House on Tuesday
-- Representative Ro Khanna, the top Democrat on the House China committee, had in advance called a planned Tuesday meeting between the White House, House Speaker Mike Johnson and tech executives a branding exercise
-- Moonshot is also under separate scrutiny
-- At DevDay, OpenAI filled the slot left by the cancelled GPT-6.1 Astra with GPT-6.1 Sol
-- In Europe, Estonian Prime Minister Kristen Michal said Russian special services ordered the August arson attack on the drone maker Milrem Robotics, which supplies Ukraine
-- The open question now is whether Trump's promised safety board gives the White House accord any teeth before next Tuesday's Canberra hearing tests OpenAI's contrition</description>
-      <pubDate>Wed, 30 Sep 2026 04:34:50 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-09-30</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cf1ee4081948_daily_news_briefing_-_2026-09-30.mp3" type="audio/mpeg" length="2934885" />
-      <itunes:duration>00:05:11</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-09-30.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“Astra 6.1 Pulled As Insufficiently Aligned” by Zvi</title>
-      <description>Audio version of “Astra 6.1 Pulled As Insufficiently Aligned” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 29 Sep 2026 16:51:35 +0000</pubDate>
-      <guid isPermaLink="false">bb6df991-1665-4626-9a0d-53725a6b1b19</guid>
-      <link>https://www.lesswrong.com/posts/gEDNSiCY2GGQrFS65/astra-6-1-pulled-as-insufficiently-aligned</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/51968e3248c7_astra_61_pulled_as_insufficiently_aligned_by_zv.mp3" type="audio/mpeg" length="2393805" />
-      <itunes:duration>00:04:13</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
