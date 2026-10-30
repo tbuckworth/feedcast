@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from .html_text import clean_html, small_table_to_prose
 from .verify import write_checked
 from .llm import complete
-from .monitor import FeedEntry
+from .monitor import FeedEntry, is_briefing
 
 
 def spoken_title(title: str, author: str) -> str:
@@ -57,7 +57,7 @@ class ContentProcessor:
         so the publish an episode goes out in always matches how it is read.
         """
         chars = len(clean_html(entry.content)) if mode == "auto" else 0
-        if entry.id.startswith("news-briefing-"):
+        if is_briefing(entry.id):
             return False, chars
         if mode == "auto":
             return chars <= self.auto_verbatim_limit, chars
@@ -163,7 +163,7 @@ Content:
             mode: Processing mode - "summarize", "verbatim", or "auto"
             prompt: Optional custom prompt for summarization
         """
-        is_news_briefing = entry.id.startswith("news-briefing-")
+        is_news_briefing = is_briefing(entry.id)
         if mode == "auto":
             verbatim, chars = self._reads_verbatim(entry, mode)
             mode = "verbatim" if verbatim else "summarize"

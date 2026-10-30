@@ -8,7 +8,8 @@ import feedparser
 from .extractor import extract_article
 from .llm import complete, extract_json
 from .markets import MarketContext, MarketScout
-from .monitor import FeedEntry, entry_body, entry_published, report_skipped, warn_if_dead
+from .monitor import (FeedEntry, briefing_id, entry_body, entry_published, report_skipped,
+                      warn_if_dead)
 from .verify import Written, write_checked
 
 # The previous briefings are there for dedup, but the writer also reads them
@@ -293,7 +294,7 @@ class NewsAggregator:
             bundle=briefing.bundle,
             fidelity=briefing.fidelity,
             writer=briefing.writer,
-            id=f"news-briefing-{today}",
+            id=briefing_id(today),
             title=f"Daily News Briefing - {today}",
             link="",
             content=briefing.text,

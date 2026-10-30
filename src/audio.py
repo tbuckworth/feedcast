@@ -11,6 +11,7 @@ from pathlib import Path
 import httpx
 
 from . import notices
+from .env import env_flag
 from .chunking import split_sentences
 
 MAX_CHUNK_CHARS = 500  # Tested: 650 works but 500 has better pacing
@@ -236,7 +237,7 @@ class AudioGenerator:
         chunks = split_into_chunks(text)
         print(f"    {tag}Generating audio in {len(chunks)} chunks via DeepInfra API...")
 
-        save_debug = os.environ.get("SAVE_DEBUG_WAVS", "").lower() in ("1", "true", "yes")
+        save_debug = env_flag("SAVE_DEBUG_WAVS")
         debug_dir = output_path.parent / "debug_wavs" if save_debug else None
 
         # Finished chunk WAVs stay beside the output until the MP3 exists, so a
