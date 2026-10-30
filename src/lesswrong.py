@@ -20,8 +20,6 @@ from typing import Optional
 
 import httpx
 
-GRAPHQL_URL = "https://www.lesswrong.com/graphql"
-POST_ID = re.compile(r"lesswrong\.com/posts/([A-Za-z0-9]+)")
 TIMEOUT = 15.0
 
 _LW_HOSTS = ("lesswrong.com", "alignmentforum.org")
@@ -29,10 +27,18 @@ _POST_ID = re.compile(r"/posts/([A-Za-z0-9]{17})")
 _UA = {"User-Agent": "Mozilla/5.0 (feedcast)"}
 
 
-def post_id(link: str) -> str:
-    """The post id embedded in a LessWrong URL, or '' for anything else."""
-    match = POST_ID.search(link or "")
-    return match.group(1) if match else ""
+def lesswrong_post_id(link: str) -> Optional[str]:
+    """Extract the 17-character post id from a LessWrong/Alignment Forum URL."""
+    if not link or not any(h in link for h in _LW_HOSTS):
+        return None
+    m = _POST_ID.search(link)
+    return m.group(1) if m else None
+
+
+def _graphql_url(link: str) -> str:
+    """The GraphQL endpoint of the site the link points at; both serve the same API."""
+    host = "alignmentforum.org" if "alignmentforum" in link else "lesswrong.com"
+    return f"https://www.{host}/graphql"
 
 
 def _parse(stamp: str | None) -> datetime | None:
@@ -53,7 +59,7 @@ async def posted_at(link: str, client: httpx.AsyncClient | None = None) -> datet
     reported it. This runs on an unattended job with no one to see a stack
     trace, and a missing date is not worth losing an episode over.
     """
-    pid = post_id(link)
+    pid = lesswrong_post_id(link)
     if not pid:
         return None
     query = ('{post(input:{selector:{_id:"%s"}}){result{postedAt}}}' % pid)
@@ -62,8 +68,7 @@ async def posted_at(link: str, client: httpx.AsyncClient | None = None) -> datet
         client = client or httpx.AsyncClient(timeout=TIMEOUT)
         try:
             response = await client.post(
-                GRAPHQL_URL, json={"query": query},
-                headers={"user-agent": "feedcast/1.0"},
+                _graphql_url(link), json={"query": query}, headers=_UA,
             )
             response.raise_for_status()
             data = response.json()
@@ -80,16 +85,8 @@ async def posted_at(link: str, client: httpx.AsyncClient | None = None) -> datet
         return None
 
 
-def lesswrong_post_id(link: str) -> Optional[str]:
-    """Extract the 17-character post id from a LessWrong/Alignment Forum URL."""
-    if not link or not any(h in link for h in _LW_HOSTS):
-        return None
-    m = _POST_ID.search(link)
-    return m.group(1) if m else None
-
-
 @lru_cache(maxsize=128)
-def _graphql_markdown(post_id: str, host: str, timeout: float) -> Optional[str]:
+def _graphql_markdown(post_id: str, url: str, timeout: float) -> Optional[str]:
     """Fetch one post's markdown, raising on transport failure.
 
     Raising rather than returning None is what makes the cache safe. lru_cache
@@ -102,8 +99,7 @@ def _graphql_markdown(post_id: str, host: str, timeout: float) -> Optional[str]:
     """
     query = ('{post(input:{selector:{_id:"%s"}}){result{contents{markdown}}}}'
              % post_id)
-    r = httpx.post(f"https://www.{host}/graphql", json={"query": query},
-                   timeout=timeout, headers=_UA)
+    r = httpx.post(url, json={"query": query}, timeout=timeout, headers=_UA)
     r.raise_for_status()
     data = r.json()
     # `or {}` at every level, not `.get(k, {})`. GraphQL answers a deleted,
@@ -119,16 +115,15 @@ def _graphql_markdown(post_id: str, host: str, timeout: float) -> Optional[str]:
 def fetch_lesswrong_markdown(link: str, timeout: float = 30.0) -> Optional[str]:
     """Fetch a post's markdown source, where the LaTeX survives.
 
-    Returns None on any failure — a maths check is never worth failing a run
-    over, and the caller falls back to scoring whatever text it already had.
+    Returns None on any failure. The maths filter then scores, and full-text
+    recovery then keeps, whatever text the feed already gave.
     Callers that need to tell "no markdown" from "fetch broke" should check
     lesswrong_post_id() first and treat a None on a real post id as a failure.
     """
     post_id = lesswrong_post_id(link)
     if not post_id:
         return None
-    host = "alignmentforum.org" if "alignmentforum" in link else "lesswrong.com"
     try:
-        return _graphql_markdown(post_id, host, timeout)
+        return _graphql_markdown(post_id, _graphql_url(link), timeout)
     except Exception:
         return None

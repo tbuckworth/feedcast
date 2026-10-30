@@ -134,8 +134,7 @@ def charts_for_report(briefing: FeedEntry) -> tuple[list[ChartNote], dict[str, b
     digest cites, and sits under the bullet that links it. Every chart shows
     the market's whole life; one whose history goes back more than three
     months also gets a 7-day zoom (wants_zoom). Nothing on days the
-    briefing used no market. Ran as a separate trial email to Titus and Jason
-    from 8 to 14 Oct 2026. Never raises: a missing chart must not cost the
+    briefing used no market. Never raises: a missing chart must not cost the
     day's email.
     """
     charts: list[ChartNote] = []

@@ -9,7 +9,7 @@ Zvi episode so far summarised a summary of a contents page. That is why the
 narration sounded like it had not read the article: it had not.
 
 The repair uses the same GraphQL markdown the maths filter already fetches
-(``lesswrong.fetch_lesswrong_markdown`` — see ``mathiness`` for why markdown
+(``lesswrong.fetch_lesswrong_markdown``; see ``mathiness`` for why markdown
 and not the rendered page), rendered to HTML so the rest of the pipeline runs
 unchanged: tables still become prose, ``clean_html`` still strips the tags.
 
