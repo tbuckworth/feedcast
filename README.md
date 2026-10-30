@@ -64,8 +64,8 @@ bwsrun uv run python -m src.main
 
 | Variable | Required | Purpose |
 |----------|----------|---------|
-| `OPENROUTER_API_KEY` | Yes | OpenRouter: Claude Opus 4.6 (writer), Claude Sonnet 5 (checker), Gemini 3 Flash (TTS normaliser) |
-| `OPENAI_API_KEY` | No | OpenAI direct: GPT-5.6 Sol writes email bullets; GPT-6.1 Sol backs up the writer, checker and normaliser. Sol via OpenRouter is also a writer backup |
+| `OPENROUTER_API_KEY` | Yes | OpenRouter: Claude Opus 4.6 (writer), Claude Sonnet 5.5 (checker), Gemini 3 Flash (TTS normaliser) |
+| `OPENAI_API_KEY` | No | OpenAI direct: GPT-6.1 Sol writes email bullets and backs up the writer, checker and normaliser. Sol via OpenRouter is also a writer backup |
 | `ANTHROPIC_API_KEY` | No | Anthropic direct: backup route for the writer and checker roles |
 | `DEEPINFRA_API_KEY` | Yes | DeepInfra Chatterbox TTS API |
 | `REPROCESS_ENTRY` | No | Entry ID/URL to reprocess from RSS feeds |
@@ -252,7 +252,7 @@ permanent: the run counted as published, the guard stopped the same-day retry,
 and the window had closed by morning (Zvi 2026-09-08, an ACX review 2026-09-06).
 
 **Fidelity check.** Every script a writer model produces (summaries and the
-briefing) is read against its source by a second model, Claude Sonnet 5, which
+briefing) is read against its source by a second model, Claude Sonnet 5.5, which
 lists claims that are contradicted, distorted (misattributed, hedge dropped,
 number changed) or unsupported. Omissions and paraphrase are not flagged. If
 anything material comes back, the writer gets one pass to fix exactly those

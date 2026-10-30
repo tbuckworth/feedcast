@@ -20,7 +20,7 @@ the source side is the briefing's list of selected articles, so bullets can
 carry links. This is the only part of the pipeline written to be *read*, which
 inverts most of the rules elsewhere: keep the digits, keep the percent signs.
 
-Written by the "bullets" role (GPT-5.6 Sol, reasoning off). One call per
+Written by the "bullets" role (GPT-6.1 Sol, effort low). One call per
 episode, whatever mode the episode was processed in.
 """
 

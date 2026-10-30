@@ -28,7 +28,7 @@ def test_openai_route_uses_its_own_parameter_names(routes):
     # GPT-5.x rejects max_tokens and any non-default temperature.
     assert call["max_completion_tokens"] == 50 and "max_tokens" not in call
     assert "temperature" not in call
-    assert call["reasoning_effort"] == "none"          # the target's default: reasoning off
+    assert call["reasoning_effort"] == "low"           # the target's default: Sol's lowest
 
 
 def test_openrouter_route_translates_reasoning_into_extra_body(routes):
@@ -56,9 +56,10 @@ def test_failure_falls_through_to_the_next_target_and_is_logged(routes):
     routes["openrouter"] = FakeApi(["from openrouter"])
     done = asyncio.run(complete("bullets", MSGS, max_tokens=50, label="digest"))
     assert done.text == "from openrouter"
-    assert done.target == Target("openrouter", "openai/gpt-5.6-sol", {"off": True})
+    assert done.target == Target("openrouter", "openai/gpt-6.1-sol", {"effort": "low"},
+                                 min_effort="low")
     assert len(llm.fallback_log) == 1
-    assert "digest: served by openai/gpt-5.6-sol via openrouter" in llm.fallback_log[0]
+    assert "digest: served by openai/gpt-6.1-sol via openrouter" in llm.fallback_log[0]
     assert "RuntimeError: openai down" in llm.fallback_log[0]
 
 
@@ -88,8 +89,8 @@ def test_a_missing_primary_key_is_reported_not_swallowed(routes):
     done = asyncio.run(complete("bullets", MSGS, max_tokens=50, label="digest"))
     assert done.target.route == "openrouter"
     assert llm.fallback_log == [
-        "digest: served by openai/gpt-5.6-sol via openrouter after "
-        "gpt-5.6-sol via openai: skipped, OPENAI_API_KEY not set"]
+        "digest: served by openai/gpt-6.1-sol via openrouter after "
+        "gpt-6.1-sol via openai: skipped, OPENAI_API_KEY not set"]
 
 
 def test_every_target_failing_raises_the_last_error(routes):
@@ -133,8 +134,8 @@ def test_a_pinned_client_gets_the_openrouter_spelling_of_the_model(routes):
     pinned = FakeApi(["ok"])
     asyncio.run(complete("bullets", MSGS, max_tokens=50, client=pinned))
     call = pinned.calls[0]
-    assert call["model"] == "openai/gpt-5.6-sol" and call["max_tokens"] == 50
-    assert call["extra_body"] == {"reasoning": {"enabled": False}}
+    assert call["model"] == "openai/gpt-6.1-sol" and call["max_tokens"] == 50
+    assert call["extra_body"] == {"reasoning": {"effort": "low"}}
 
 
 def test_a_switch_before_a_non_fallback_empty_reply_is_still_logged(routes):
@@ -238,5 +239,5 @@ def test_claude_roles_try_anthropic_direct_first(routes):
     routes["anthropic"] = FakeApi(["script", "checked"])
     asyncio.run(complete("writer", MSGS, max_tokens=50))
     asyncio.run(complete("checker", MSGS, max_tokens=50))
-    assert [c["model"] for c in routes["anthropic"].calls] == ["claude-opus-5-5", "claude-sonnet-5"]
+    assert [c["model"] for c in routes["anthropic"].calls] == ["claude-opus-5-5", "claude-sonnet-5-5"]
     assert llm.fallback_log == []

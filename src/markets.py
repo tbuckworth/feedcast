@@ -44,7 +44,7 @@ HEADERS = {"User-Agent": "feedcast (https://github.com/tbuckworth/feedcast)"}
 
 # The model that looks up why a market moved. Server-side web search runs on
 # Anthropic's API only, and Sonnet is plenty for "find the news story".
-CAUSE_MODEL = "claude-sonnet-5"
+CAUSE_MODEL = "claude-sonnet-5-5"
 WEB_SEARCH_TOOL = {"type": "web_search_20250305", "name": "web_search", "max_uses": 3}
 
 

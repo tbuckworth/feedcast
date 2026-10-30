@@ -181,10 +181,12 @@ def test_reasoning_off_is_sent_as_sols_lowest_effort(routes):
     assert routes["openai"].calls[0]["reasoning_effort"] == "low"
 
 
-def test_bullets_still_switch_reasoning_off_on_5_6_sol(routes):
+def test_bullets_run_sol_at_its_lowest_effort(routes):
+    # GPT-6.1 Sol 400s on "none", so the bullets ask for low.
     routes["openai"] = FakeApi(["- a"])
     asyncio.run(complete("bullets", MSGS, max_tokens=50))
-    assert routes["openai"].calls[0]["reasoning_effort"] == "none"
+    assert routes["openai"].calls[0]["model"] == "gpt-6.1-sol"
+    assert routes["openai"].calls[0]["reasoning_effort"] == "low"
 
 
 # --- who wrote it -----------------------------------------------------------------
@@ -193,6 +195,7 @@ def test_bullets_still_switch_reasoning_off_on_5_6_sol(routes):
     ("claude-opus-5-5", "Claude Opus 5.5"),
     ("anthropic/claude-opus-5.5", "Claude Opus 5.5"),
     ("claude-sonnet-5", "Claude Sonnet 5"),
+    ("claude-sonnet-5-5", "Claude Sonnet 5.5"),
     ("claude-haiku-5-5", "Claude Haiku 5.5"),
     ("gpt-6.1-sol", "GPT-6.1 Sol"),
     ("openai/gpt-6.1-sol", "GPT-6.1 Sol"),
