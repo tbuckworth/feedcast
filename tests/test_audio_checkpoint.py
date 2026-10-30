@@ -1,36 +1,27 @@
 """A retry narrates only the chunks that failed; the good ones stay on disk.
 
-The real AudioGenerator runs, ffmpeg included. Each test's `fake_tts` stands in
-for DeepInfra's TTS endpoint, a paid network API, and `narrator` fakes the
-voice upload the constructor makes.
+The real AudioGenerator runs, ffmpeg included. DeepInfra's TTS endpoint, a paid
+network API, is faked: by `tts`, or by a test's own `fake_tts` where DeepInfra
+misbehaves in a way `tts` does not cover. `narrator` fakes the voice upload the
+constructor makes.
 """
 
 import asyncio
-import shutil
 
 import pytest
 
 import src.audio as audio
 from src import notices
-from tests.conftest import silent_wav
+from tests.conftest import needs_ffmpeg, silent_wav
 
-pytestmark = pytest.mark.skipif(shutil.which("ffmpeg") is None, reason="ffmpeg not installed")
+pytestmark = needs_ffmpeg
 
 # Three sentences, each long enough to be its own <=500-char chunk.
 TEXT = " ".join(f"Sentence {i} " + "word " * 80 + "ends here." for i in range(3))
 
 
-def test_failed_chunk_keeps_the_others_and_the_retry_only_redoes_it(tmp_path, monkeypatch, narrator):
-    calls: list[str] = []
-    fail_on = {"Sentence 1"}
-
-    async def fake_tts(text, voice_id, api_key, http_client, *, model, save_debug_wav=None, tag=""):
-        calls.append(text[:10])
-        if any(text.startswith(f) for f in fail_on):
-            raise audio.httpx.ReadError("")
-        return silent_wav()
-
-    monkeypatch.setattr(audio, "generate_with_deepinfra_async", fake_tts)
+def test_failed_chunk_keeps_the_others_and_the_retry_only_redoes_it(tmp_path, narrator, tts):
+    tts.fail_on.add("Sentence 1")
     g = narrator()
     out = tmp_path / "abc123def456_title.mp3"
 
@@ -38,12 +29,13 @@ def test_failed_chunk_keeps_the_others_and_the_retry_only_redoes_it(tmp_path, mo
         asyncio.run(g.generate(TEXT, out, http_client=None))
     work = tmp_path / ".partial" / "abc123def456_title"
     assert sorted(p.name for p in work.glob("*.wav")) == ["chunk_000.wav", "chunk_002.wav"]
-    assert len(calls) == 3
+    assert len(tts.texts) == 3
 
-    fail_on.clear()
+    tts.fail_on.clear()
     result = asyncio.run(g.generate(TEXT, out, http_client=None))
     assert result == out and out.stat().st_size > 0
-    assert calls[3:] == ["Sentence 1"]          # only the missing chunk was synthesised
+    (retried,) = tts.texts[3:]                  # only the missing chunk was synthesised
+    assert retried.startswith("Sentence 1")
     assert not work.exists()                    # checkpoints cleared once the MP3 exists
 
 

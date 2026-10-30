@@ -14,28 +14,10 @@ from src.email_report import (ReportEpisode, RunReport, build_html, build_text,
                               bullet_parts, format_published)
 from src.config import load_config
 from src.monitor import FeedMonitor
+from tests.conftest import feed_xml
 
 # The production window, from config.yaml.
 MAX_AGE = load_config().max_age_hours
-
-
-def rfc822(when: datetime) -> str:
-    return when.strftime("%a, %d %b %Y %H:%M:%S GMT")
-
-
-def feed_xml(*items: tuple[str, datetime | None]) -> str:
-    """A minimal RSS document; a None date means the item publishes no date."""
-    entries = []
-    for title, when in items:
-        date = f"<pubDate>{rfc822(when)}</pubDate>" if when else ""
-        entries.append(
-            f"<item><title>{title}</title>"
-            f"<link>https://example.com/{title.replace(' ', '-')}</link>"
-            f"<guid>https://example.com/{title.replace(' ', '-')}</guid>"
-            f"<description>Body of {title}</description>{date}</item>"
-        )
-    return ("<?xml version='1.0'?><rss version='2.0'><channel>"
-            "<title>Test feed</title>" + "".join(entries) + "</channel></rss>")
 
 
 @pytest.fixture

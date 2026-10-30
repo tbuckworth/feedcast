@@ -5,6 +5,7 @@ TTS, and the SMTP server."""
 import io
 import shutil
 import wave
+from datetime import datetime
 from types import SimpleNamespace
 
 import httpx
@@ -52,6 +53,10 @@ class FakeApi:
             choices=[SimpleNamespace(message=SimpleNamespace(content=content), finish_reason=finish)],
             usage=SimpleNamespace(completion_tokens=3))
 
+    def asked(self) -> list[str]:
+        """The text each recorded request asked the model to work on: its last message."""
+        return [call["messages"][-1]["content"] for call in self.calls]
+
 
 @pytest.fixture
 def routes(monkeypatch):
@@ -90,11 +95,33 @@ def narrator(monkeypatch):
 
     Its constructor uploads the sample to DeepInfra, a paid network call, so
     the upload (which also waits for the voice to replicate) answers with a
-    fixed voice id instead.
+    fixed voice id instead. The fixture sets DEEPINFRA_API_KEY and replaces the
+    upload for the whole test, so every AudioGenerator the test builds works,
+    including one the code under test builds itself (main's narration pass);
+    such tests request the fixture without calling it.
     """
     monkeypatch.setenv("DEEPINFRA_API_KEY", "test-key")
     monkeypatch.setattr(audio, "upload_voice_to_deepinfra", lambda voice_path, api_key: "voice-1")
     return lambda: AudioGenerator(voice_sample=load_config().tts.voice_path)
+
+
+def rfc822(when: datetime) -> str:
+    return when.strftime("%a, %d %b %Y %H:%M:%S GMT")
+
+
+def feed_xml(*items: tuple[str, datetime | None]) -> str:
+    """A minimal RSS document; a None date means the item publishes no date."""
+    entries = []
+    for title, when in items:
+        date = f"<pubDate>{rfc822(when)}</pubDate>" if when else ""
+        entries.append(
+            f"<item><title>{title}</title>"
+            f"<link>https://example.com/{title.replace(' ', '-')}</link>"
+            f"<guid>https://example.com/{title.replace(' ', '-')}</guid>"
+            f"<description>Body of {title}</description>{date}</item>"
+        )
+    return ("<?xml version='1.0'?><rss version='2.0'><channel>"
+            "<title>Test feed</title>" + "".join(entries) + "</channel></rss>")
 
 
 class FakeTts:

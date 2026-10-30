@@ -1,5 +1,5 @@
-"""Unit tests for pure functions — no API calls. The one model call, the
-briefing writer's, is answered by a recording fake."""
+"""Unit tests that make no network calls: the one model call, the briefing
+writer's, is answered by a recording fake."""
 
 import asyncio
 import hashlib
@@ -14,8 +14,7 @@ from src.main import generate_episode_id
 from src.html_text import clean_html, small_table_to_prose
 from src.monitor import FeedMonitor
 from src.news import PREVIOUS_BRIEFINGS_HEADER, NewsAggregator
-from tests.conftest import FakeApi
-from tests.test_freshness import feed_xml
+from tests.conftest import FakeApi, feed_xml
 
 
 # --- split_into_chunks (src/audio.py) ---
@@ -296,8 +295,8 @@ class TestNewsBriefingDedup:
         """
         agg.client = FakeApi(["Briefing."])
         asyncio.run(agg.synthesize_briefing(articles))
-        (call,) = agg.client.calls
-        return call["messages"][-1]["content"]
+        (msg,) = agg.client.asked()
+        return msg
 
     def test_no_dedup_context_when_empty(self):
         agg = self._make_aggregator(recent_briefings=[])

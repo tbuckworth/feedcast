@@ -32,11 +32,6 @@ def _processor():
     return ContentProcessor("p", verify=False, auto_verbatim_limit=24000)
 
 
-def _asked(api: FakeApi) -> list[str]:
-    """The text each request asked the model to work on."""
-    return [call["messages"][-1]["content"] for call in api.calls]
-
-
 def test_second_attempt_skips_the_stages_that_already_produced_text(tmp_path, routes, narrator, tts):
     routes["anthropic"] = FakeApi(["Script with 45%."])          # the writer
     routes["openrouter"] = FakeApi([SPOKEN])                      # the normaliser
@@ -60,7 +55,7 @@ def test_second_attempt_skips_the_stages_that_already_produced_text(tmp_path, ro
     assert len(tts.texts) == 2 and all("forty-five percent" in t for t in tts.texts)
     # The first attempt's digest is cancelled with the failure; the retry's
     # bullets still come from the unspoken script, not the normalised one.
-    assert _asked(routes["openai"])[-1] == attempt.processed_text
+    assert routes["openai"].asked()[-1] == attempt.processed_text
 
 
 def test_resume_from_a_stored_script_goes_straight_to_narration(tmp_path, routes, narrator, tts):
@@ -74,5 +69,5 @@ def test_resume_from_a_stored_script_goes_straight_to_narration(tmp_path, routes
     assert attempt.processed_text is None             # the post was not cleaned again
     assert routes["anthropic"].calls == [] and routes["openrouter"].calls == []
     assert tts.texts == ["kept script"]
-    assert _asked(routes["openai"]) == ["kept script"]
+    assert routes["openai"].asked() == ["kept script"]
     assert attempt.stage == "digest"

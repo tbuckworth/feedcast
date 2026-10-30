@@ -170,6 +170,7 @@ class TestNarrationPass:
 
     @pytest.fixture
     def setup(self, tmp_path, monkeypatch, routes, narrator, tts, smtp):
+        # `narrator` is not called: it sets the key and fake upload for main's own AudioGenerator.
         routes["openrouter"] = FakeApi([SPOKEN])     # the normaliser
         routes["openai"] = FakeApi([])               # the digest: the first pass wrote the bullets
         monkeypatch.delenv("GITHUB_OUTPUT", raising=False)
@@ -282,5 +283,5 @@ def test_prepare_cleans_and_digests_but_does_not_narrate(routes):
     assert "Land." in cleaned and "<p>" not in cleaned and fresh.bullets == [bullet]
     assert out[0].normalized_text is None                      # cleaned, not narrated
     assert out[1].processed_text is None and out[1].normalized_text == "kept script"
-    digested = [call["messages"][-1]["content"] for call in routes["openai"].calls]
+    digested = routes["openai"].asked()
     assert sorted(digested) == sorted([out[0].processed_text, "kept script"])
