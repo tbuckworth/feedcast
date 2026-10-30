@@ -1,11 +1,13 @@
-"""Shared test setup: a fresh run's state, and fakes for the paid and networked
-services the real classes call: the LLM routes, DeepInfra's voice upload and
-TTS, and the SMTP server."""
+"""Shared test setup: a fresh run's state, fakes for the paid and networked
+services the real classes call (the LLM routes, DeepInfra's voice upload and
+TTS, and the SMTP server), and a real MP3."""
 
 import io
 import shutil
+import subprocess
 import wave
 from datetime import datetime
+from functools import lru_cache
 from types import SimpleNamespace
 
 import httpx
@@ -17,6 +19,20 @@ from src.config import load_config
 
 # The real AudioGenerator joins its chunks with ffmpeg.
 needs_ffmpeg = pytest.mark.skipif(shutil.which("ffmpeg") is None, reason="ffmpeg not installed")
+
+
+@lru_cache(maxsize=1)
+def silent_mp3() -> bytes:
+    """Two seconds of silence as a real MP3, made with the ffmpeg the pipeline needs.
+
+    For tests that write an episode's MP3 themselves rather than narrate it
+    (narration goes through the real AudioGenerator and `tts`): the feed reads
+    each episode's duration with ffprobe, which fails on a fake.
+    """
+    return subprocess.run(
+        ["ffmpeg", "-v", "error", "-f", "lavfi", "-i", "anullsrc=r=24000:cl=mono", "-t", "2",
+         "-c:a", "libmp3lame", "-q:a", "9", "-f", "mp3", "pipe:1"],
+        capture_output=True, check=True).stdout
 
 
 @pytest.fixture(autouse=True)

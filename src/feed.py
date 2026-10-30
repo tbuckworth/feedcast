@@ -71,32 +71,27 @@ class FeedGenerator:
         return f"{title}\n\nTopics covered:\n" + "\n".join(bullets)
 
     def _get_audio_duration(self, audio_path: Path) -> int:
-        """Get duration of audio file in seconds, or 0 if it cannot be read.
+        """Get duration of audio file in seconds. Raises if ffprobe cannot read it.
 
         Uses ffprobe, which ships with the ffmpeg the pipeline already requires.
         The previous soundfile import was never satisfied (soundfile is not a
-        dependency), so every episode silently published a 00:00:00 duration.
+        dependency), so every episode silently published a 00:00:00 duration;
+        returning 0 on an ffprobe failure did the same for a broken MP3.
         """
-        try:
-            out = subprocess.run(
-                [
-                    "ffprobe", "-v", "error",
-                    "-show_entries", "format=duration",
-                    "-of", "default=noprint_wrappers=1:nokey=1",
-                    str(audio_path),
-                ],
-                capture_output=True, text=True, timeout=30, check=True,
-            )
-            return int(float(out.stdout.strip()))
-        except Exception:
-            return 0
+        out = subprocess.run(
+            [
+                "ffprobe", "-v", "error",
+                "-show_entries", "format=duration",
+                "-of", "default=noprint_wrappers=1:nokey=1",
+                str(audio_path),
+            ],
+            capture_output=True, text=True, timeout=30, check=True,
+        )
+        return int(float(out.stdout.strip()))
 
     def _get_file_size(self, audio_path: Path) -> int:
         """Get file size in bytes."""
-        try:
-            return audio_path.stat().st_size
-        except Exception:
-            return 0
+        return audio_path.stat().st_size
 
     def _format_duration(self, seconds: int) -> str:
         """Format duration as HH:MM:SS."""
@@ -352,6 +347,8 @@ main{{max-width:680px;margin:0 auto}} h1{{font-size:24px;line-height:1.3;margin:
 
             audio_path = audio_dir / audio_file
             if not audio_path.exists():
+                print(f"  WARNING: {entry['id']} ({entry['title']}): {audio_file} is missing; "
+                      f"left out of the feed")
                 continue
 
             duration = self._get_audio_duration(audio_path)
