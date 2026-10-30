@@ -1,4 +1,4 @@
-"""Content processing with LLM API for summarization."""
+"""An entry's script: a summary by the writer role, or the cleaned post to be read in full."""
 
 from typing import Optional
 
@@ -128,10 +128,9 @@ Content:
 
         # A ceiling, not a working limit. The writer model holds a million tokens
         # and the longest post we see is a Zvi weekly at ~100,000 characters
-        # (~25,000 tokens), so this should never bind — but an unbounded prompt
-        # is an unbounded bill. Say so when it does bind: a truncated summary is
-        # exactly the failure this module was just fixed for, and it must not be
-        # able to happen again in silence.
+        # (~25,000 tokens), so this should never bind, but an unbounded prompt
+        # is an unbounded bill. When it does bind, say so: a summary of part of
+        # a post must not pass for a summary of all of it.
         if len(user_message) > MAX_PROMPT_CHARS:
             print(f"    WARNING: content truncated for the summariser "
                   f"({len(user_message):,} > {MAX_PROMPT_CHARS:,} chars) — "

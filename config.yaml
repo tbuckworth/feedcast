@@ -29,11 +29,11 @@ default_prompt: |
   - Spell out abbreviations (e.g., "for example" not "e.g.")
 
 # How recent, in hours, a post must be to be narrated. Dedup by id alone is
-# not enough: a feed that changes its guids, moves host, or is added
-# here presents its whole archive as unseen, and the pipeline happily worked
-# through it one post per run (250 Zvi items back to Sep 2025, 2026-08-29). A
-# date cutoff makes that structurally impossible rather than merely unlikely.
-# null disables the cutoff, which only a deliberate backfill should ask for.
+# not enough: a feed that changes its guids, moves host, or is added here
+# presents its whole archive as unseen, and without a cutoff the pipeline
+# would work through it one post per run. A post not picked up within the
+# window is never narrated. null disables the cutoff, which only a deliberate
+# backfill should ask for.
 max_age_hours: 48
 
 # Days an episode stays in the feed (with its audio, transcript and source
@@ -107,10 +107,9 @@ feeds:
     mode: "summarize"
     prompt: null
 
-  # The community's own highlights, not the firehose. frontpage-rss carried
-  # every post promoted off Personal Blog — 10 to 14 a day, no quality bar —
-  # of which the pipeline narrated whichever happened to be newest. Curation
-  # is a few posts a week, chosen by the moderators.
+  # The community's own highlights: curation is a few posts a week, chosen by
+  # the moderators, where frontpage-rss carries every post promoted off
+  # Personal Blog (10 to 14 a day, with no quality bar).
   #
   # Note this feed's pubDate is the CURATION date, and curation trails
   # publication by up to several weeks. That is deliberate here: an item is
@@ -186,7 +185,7 @@ news_briefing:
   enabled: true
   lookback_hours: 24
   # The writer picks this many stories from the blurbs, then writes from
-  # their full text (capped per article). 0 = old behaviour, blurbs only.
+  # their full text (capped per article). 0 = blurbs only.
   full_text_stories: 12
   max_article_chars: 6000
   prompt: |

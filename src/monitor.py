@@ -316,11 +316,11 @@ class FeedMonitor:
             ):
                 _add_column(conn, "processed_posts", column)
             # Entries that failed mid-pipeline, so the next run tries them
-            # again whatever their age. Without this a transient blip was
-            # permanent: the run counted as published, the guard stopped the
-            # same-day retry, and the age window had closed by the next
-            # morning (Zvi 2026-09-08, an ACX review 2026-09-06). The
-            # normalised script is kept so a retry can go straight to TTS.
+            # again whatever their age. Without this a transient failure would
+            # be permanent: the run counts as published, the guard stops a
+            # same-day retry, and the age window has closed by the next
+            # morning. The normalised script is kept so a retry can go
+            # straight to TTS.
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS failed_entries (
                     id TEXT PRIMARY KEY,
@@ -335,8 +335,8 @@ class FeedMonitor:
                 )
             """)
             # Posts read out in full, held back from the first publish so a
-            # long one cannot delay the briefing and the summaries (on
-            # 2026-09-26 a 113-chunk book review timed the whole run out).
+            # long one cannot delay the briefing and the summaries, or time
+            # the whole run out.
             # The first pass cleans and digests them and parks them here; a
             # second pass narrates them and publishes again. The row is the
             # hand-over between the two, and it outlives a pass that was

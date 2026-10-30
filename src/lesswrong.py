@@ -5,10 +5,9 @@ maths filter (mathiness.py) and full-text recovery (fulltext.py).
 
 ``posted_at`` says when a LessWrong post was actually written, as opposed to
 curated. The curated feed carries the curation date as its pubDate, and
-curation lags publication by anything from hours to weeks (Big-World
-Intuitions: posted 2026-07-30, curated 2026-08-21). Both dates are wanted, for
-different jobs: curation decides whether an item is new to us, publication is
-what the email should call the release date.
+curation lags publication by anything from hours to weeks. Both dates are
+wanted, for different jobs: curation decides whether an item is new to us,
+publication is what the email should call the release date.
 
 Only the second needs asking the site, and only for LessWrong and Alignment
 Forum links.

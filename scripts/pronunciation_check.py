@@ -4,8 +4,8 @@ Generates each spelling N times with the cloned voice in a fixed carrier
 sentence ("Today, X said yes, and X said no."), then reads the audio back with
 a phoneme recogniser and prints the distinct pronunciations with counts. Use it
 to test a candidate for config.yaml `pronunciations`: about half of the
-plausible respellings tried on 2026-10-08 did not help or made things worse
-("Tsvee" for Zvi, "Open Ay-Eye" for OpenAI), so measure, do not guess.
+plausible respellings tried did not help or made things worse ("Tsvee" for
+Zvi, "Open Ay-Eye" for OpenAI), so measure, do not guess.
 
 The audio comes from the pipeline's own code in src/audio.py: the voice
 sample config.yaml names, uploaded with the same wait for it to replicate

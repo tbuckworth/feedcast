@@ -1,16 +1,16 @@
 """Keep exactly what the writer model was shown and what it wrote, per episode.
 
-Nothing else in the pipeline preserves this. The database keeps a post's
-source text, and transcripts keep the briefing as spoken, but the prompt the
-writer actually saw — for a briefing, the article blurbs; for a summary, the
-cleaned post — and its unnormalised reply were gone the moment the run ended.
-Auditing a summary against its source then meant rebuilding the source from
-live feeds and Wayback snapshots, which on 2026-09-02 recovered 16 of a day's
-articles and made a faithful briefing look fabricated.
+Nothing else in the pipeline keeps this. The database keeps a post's source
+text, and transcripts keep the briefing as spoken, but neither keeps the
+prompt the writer saw (for a briefing, the selected articles and the other
+headlines; for a summary, the cleaned post) or its unnormalised reply.
+Without them, auditing a summary against its source means rebuilding the
+source from live feeds and archived snapshots, which recovers only part of a
+day's articles and can make a faithful briefing look fabricated.
 
 One Markdown file per episode under data/sources/, named by episode id like
-the audio, written when the episode is marked processed and deleted by the
-same 30-day cleanup. Plain text, tens of kilobytes a day.
+the audio, written when the episode is marked processed and deleted with the
+episode after `retention_days`. Plain text, tens of kilobytes a day.
 """
 
 import re

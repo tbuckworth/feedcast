@@ -32,7 +32,7 @@ from .normalizer import TextNormalizer
 from .processor import ContentProcessor
 
 # feedparser.parse(url) fetches through urllib, which blocks forever on a
-# stalled server — a single unresponsive feed would hang the whole run until
+# stalled server, so a single unresponsive feed would hang the whole run until
 # CI killed it. feedparser 6.x exposes no timeout argument, so bound it at the
 # socket layer. Only affects blocking sockets; asyncio/httpx are unaffected.
 socket.setdefaulttimeout(30)
@@ -46,8 +46,8 @@ class Attempt:
     (`normalize`), narration (`tts`) and the bullet digest (`digest`). A failure
     names its stage in the log and the email. A later attempt skips any stage
     that already produced text, and the normalised script is kept in the
-    database so a retry on another day goes straight to narration — the
-    summary, its fidelity check and the normalisation are the expensive part.
+    database so a retry on another day goes straight to narration (the
+    summary, its fidelity check and the normalisation are the expensive part).
     """
     stage: str = "process"
     processed_text: str | None = None
@@ -87,9 +87,9 @@ async def process_entry(
         print(f"    Resuming with the script from an earlier attempt "
               f"({len(attempt.processed_text)} chars)")
 
-    # Digest the script BEFORE normalisation — bullets are read, so they want
-    # "45%", not the "forty-five percent" a voice needs — and run it alongside
-    # the audio, which takes minutes to the digest's seconds. Free wall-clock.
+    # Digest the script before normalisation, because bullets are read and
+    # want "45%", not the "forty-five percent" a voice needs. It runs alongside
+    # the audio, which takes minutes to the digest's seconds.
     # A retry that only has the normalised script digests that instead: spoken
     # numbers in the bullets beat no episode. A post the first pass deferred
     # arrives with its bullets already written (and already emailed).
@@ -144,8 +144,8 @@ async def _run_entries(
     Returns one result per item, in order: (entry, audio_path) or the
     exception. The second pass resumes each failure at the stage that failed
     and reuses the TTS chunks already on disk, on a fresh connection pool, so
-    a transient blip costs minutes here rather than a day (2026-09-08: three
-    dropped DeepInfra connections cost the episode).
+    a transient failure, such as a few dropped DeepInfra connections, costs
+    minutes here rather than a day.
     """
     # Configure connection limits to avoid ReadError issues with concurrent TTS requests
     limits = httpx.Limits(max_keepalive_connections=5, max_connections=10)
@@ -215,7 +215,7 @@ async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> list[tupl
     Digests the post's own text rather than the spoken script, because scripts
     are not kept for anything but the briefing. For a summarised post that
     means bullets drawn from the whole article instead of from its 450-word
-    summary, which is if anything the better source — but it does mean running
+    summary, which is if anything the better source. It does mean running
     the full-text recovery first, or a Zvi post would be digested from the
     three-percent podcast blurb.
     """
@@ -245,8 +245,8 @@ async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> list[tupl
     failures = []
     for row, result in zip(todo, results):
         # safe_bullets catches its own API failures; anything arriving here is
-        # something else — a malformed published date, or LessWrong down for
-        # the full-text recovery — and would otherwise ship a bulletless
+        # something else (a malformed published date, or LessWrong down for
+        # the full-text recovery) and would otherwise ship a bulletless
         # episode on a run reporting success.
         if isinstance(result, BaseException):
             why = f"digest backfill: {type(result).__name__}: {result}"
@@ -260,7 +260,7 @@ def _stored_verdict(row: dict) -> MathsVerdict:
 
     Rows written before the column existed have nothing stored. Those report a
     zero score, which the email renders as "linked, not narrated" with no
-    number — honest about not knowing, rather than inventing a figure.
+    number rather than an invented figure.
     Corrupt JSON raises, naming the row (monitor.stored_json).
     """
     data = stored_json(row, "maths", dict)
@@ -449,10 +449,10 @@ async def async_main(config_path: Path | None = None) -> None:
             prompt = feed_config.prompt or config.default_prompt
             entries_to_process.append((entry, mode, prompt))
 
-        # The requested entry is usually older than the freshness window — that
-        # is why someone is asking for it again — so the normal fetch above never
-        # sees it. Look for it once more with the cutoff off, and take only it.
-        # On 2026-09-02 the window silently turned a reprocess into a deletion.
+        # The requested entry is usually older than the freshness window (that
+        # is why someone is asking for it again), so the normal fetch above never
+        # sees it. Look for it once more with the cutoff off, and take only it;
+        # otherwise the window would turn a reprocess into a deletion.
         if reprocess_entry:
             found = await _find_in_feeds(config, monitor, reprocess_entry)
             if isinstance(found, tuple):
@@ -524,7 +524,7 @@ async def async_main(config_path: Path | None = None) -> None:
             dead_sources += aggregator.dead_sources
 
     # Maths filter: posts built on real mathematics are linked, not narrated.
-    # Bypassed for inject and reprocess — both are explicit "I want this one"
+    # Bypassed for inject and reprocess, both explicit "I want this one"
     # requests. Reprocess especially: it deletes the row first, so filtering a
     # reprocessed post would re-insert it with a NULL audio_file and silently
     # drop an already-published episode out of feed.xml, unrecoverably.
@@ -565,8 +565,8 @@ async def async_main(config_path: Path | None = None) -> None:
             ]
 
     # Some feeds ship an excerpt rather than the post. Zvi's is a podcast feed
-    # whose body is a blurb plus a chapter list — three percent of the article —
-    # so the summariser was working from a table of contents. Pull the real text
+    # whose body is a blurb plus a chapter list, three percent of the article,
+    # so the summariser would work from a table of contents. Pull the real text
     # before anything reads it. Runs after the maths filter so posts about to be
     # dropped are not fetched twice, and in reprocess mode too, which is usually
     # someone asking for a bad episode to be done again.
@@ -638,7 +638,7 @@ async def async_main(config_path: Path | None = None) -> None:
         print(f"\nPhase 3: Finalizing...")
         new_episodes = 0
         # gather() preserves input order, so zipping recovers which entry each
-        # exception came from — the report needs to name what failed.
+        # exception came from: the report needs to name what failed.
         for (submitted, _mode, _prompt), result in zip(entries_to_process, results):
             if isinstance(result, BaseException):
                 # Only feed entries can be found again tomorrow. A briefing is
@@ -1020,9 +1020,9 @@ def _report_entry_failure(
 ) -> None:
     """Log a failed entry with its stage and traceback, queue it, tell the email.
 
-    The bare `TypeError: 'NoneType' object is not subscriptable` this replaces
-    took a log archaeology session to place (2026-09-08); the stage and the
-    traceback go in the log, and the stage and the attempt count in the email.
+    The stage and the traceback go in the log, and the stage and the attempt
+    count in the email, so a bare exception such as `TypeError: 'NoneType'
+    object is not subscriptable` can be placed.
     `note` carries the attempt count for a caller that keeps its own (the
     narration pass, whose posts wait in deferred_entries rather than here).
     """
