@@ -1,7 +1,5 @@
 """Tests for the maths filter that keeps equation-heavy posts out of the audio."""
 
-from pathlib import Path
-
 import httpx
 import pytest
 
@@ -12,8 +10,7 @@ from src.mathiness import MathsVerdict, assess, maths_score
 from datetime import datetime
 
 # The production threshold: these tests check that it and _PATTERNS agree.
-THRESHOLD = load_config(
-    Path(__file__).resolve().parent.parent / "config.yaml").maths_filter.threshold_per_1k
+THRESHOLD = load_config().maths_filter.threshold_per_1k
 
 PROSE = " ".join(["the model was trained on a large corpus of text"] * 40)
 MATHS = " ".join([r"we define $f(x) = \lim_{t\to\infty} \phi(x,t)$ where $\phi$ is"] * 40)

@@ -1,8 +1,9 @@
 """The schema of config.yaml, and loading it.
 
-config.yaml holds every setting. A field here has a default only where leaving
-the setting out means "none" or "off". Unknown keys are refused, so a misspelt
-setting fails loading instead of quietly being ignored.
+config.yaml holds the pipeline settings that vary by deployment, and each is
+defined only there. A field here has a default only where leaving the setting
+out means "none" or "off". Unknown keys are refused, so a misspelt setting
+fails loading instead of quietly being ignored.
 """
 
 from pathlib import Path
@@ -10,6 +11,10 @@ from typing import Literal
 
 import yaml
 from pydantic import BaseModel, ConfigDict, PositiveFloat, PositiveInt
+
+# The repository root. config.yaml lives here, and its paths are relative to it.
+ROOT = Path(__file__).resolve().parent.parent
+CONFIG_PATH = ROOT / "config.yaml"
 
 
 class _Strict(BaseModel):
@@ -40,7 +45,7 @@ class PodcastMetaConfig(_Strict):
     image_url: str | None = None
     # WebSub hub (the W3C standard, formerly PubSubHubbub). Declared in the
     # channel so apps can subscribe; CI pings it after each deploy. Pocket Casts
-    # polls a small private feed on its own schedule — hours, on a bad day — but
+    # polls a small private feed on its own schedule (hours, on a bad day) but
     # acts on a hub notification within a minute or two. None or "" omits it.
     hub_url: str | None = None
 
@@ -96,6 +101,11 @@ class TTSConfig(_Strict):
     # The recording the voice is cloned from, relative to the repository root.
     voice_sample: str
 
+    @property
+    def voice_path(self) -> Path:
+        """Where voice_sample is on disk."""
+        return ROOT / self.voice_sample
+
 
 class Config(_Strict):
     """Full application configuration."""
@@ -119,7 +129,7 @@ class Config(_Strict):
     pronunciations: dict[str, str] = {}
 
 
-def load_config(config_path: Path) -> Config:
+def load_config(config_path: Path = CONFIG_PATH) -> Config:
     """Load configuration from YAML file."""
     with open(config_path) as f:
         data = yaml.safe_load(f)

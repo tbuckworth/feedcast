@@ -127,16 +127,15 @@ feeds:
 # a second model and corrected once if it misattributes, distorts or invents.
 fidelity_check: true
 
-# Posts built on real mathematics are linked in the email rather than narrated —
+# Posts built on real mathematics are linked in the email rather than narrated:
 # even a good spoken explanation is hard to follow without seeing the notation.
-# Threshold is LaTeX matches per 1000 words, measured on the markdown source,
-# re-measured after the inline-LaTeX pattern was tightened to exclude currency
-# (which lowered every score). Across 20 recent LessWrong and Alignment Forum
-# posts the mathematical ones now score 99.0, 23.1 and 9.8, and every prose
-# post scores 6.6 or below. 8 sits in that gap.
+# Threshold is LaTeX matches per 1000 words, measured on the markdown source
+# with the current _PATTERNS. Across 20 recent LessWrong and Alignment Forum
+# posts the mathematical ones score 99.0, 23.1 and 9.8, and every prose post
+# 6.6 or below. 8 sits in that gap.
 #
-# Recalibrate the threshold whenever _PATTERNS in src/mathiness.py changes —
-# the two numbers are coupled, and a pattern change silently moves every score.
+# Recalibrate the threshold whenever _PATTERNS in src/mathiness.py changes: the
+# two numbers are coupled, and a pattern change silently moves every score.
 maths_filter:
   enabled: true
   threshold_per_1k: 8.0

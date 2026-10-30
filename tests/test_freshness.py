@@ -6,7 +6,6 @@ narrated its way through the archive one post per run.
 """
 
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
 
 import pytest
 
@@ -17,7 +16,7 @@ from src.config import load_config
 from src.monitor import FeedMonitor
 
 # The production window, from config.yaml.
-MAX_AGE = load_config(Path(__file__).resolve().parent.parent / "config.yaml").max_age_hours
+MAX_AGE = load_config().max_age_hours
 
 
 def rfc822(when: datetime) -> str:

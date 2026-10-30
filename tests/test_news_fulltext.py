@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from types import SimpleNamespace
 
 from src import news
-from src.markets import MarketContext
+from src.markets import MarketContext, MarketRules, MarketScout
 from src.news import NewsAggregator
 
 
@@ -100,30 +100,38 @@ def test_generate_briefing_wires_select_fetch_write(monkeypatch):
     assert [x["url"] for x in entry.sources] == ["https://example.com/2"]
 
 
-class _Scout:
-    def __init__(self):
-        self.given = None
+def _scout(monkeypatch) -> tuple[MarketScout, list]:
+    """The real MarketScout, and a list of the stories each build was given.
 
-    async def build(self, stories):
-        self.given = stories
+    Its _build is patched out because it calls Polymarket, Kalshi and the
+    checker model over the network.
+    """
+    given = []
+
+    async def record(self, selected):
+        given.append(selected)
         return MarketContext()
+    monkeypatch.setattr(MarketScout, "_build", record)
+    rules = MarketRules(move=0.15, major_move=0.20, max_moves=3)
+    return MarketScout(rules=rules, polymarket_tags=["ai"]), given
 
 
 def test_market_odds_are_looked_up_for_the_stories_read_in_full(monkeypatch):
     arts = _articles(5)
-    scout = _Scout()
+    scout, given = _scout(monkeypatch)
     agg = _agg(FakeClient(['["https://example.com/3", "https://example.com/1"]', "Briefing."]),
                full_text_stories=2, markets=scout)
     monkeypatch.setattr(agg, "fetch_all_sources", lambda: asyncio.sleep(0, arts))
     monkeypatch.setattr(news, "extract_article", lambda url: {"text": "FULL"})
     asyncio.run(agg.generate_briefing())
-    assert [a["url"] for a in scout.given] == ["https://example.com/3", "https://example.com/1"]
+    assert [[a["url"] for a in stories] for stories in given] == \
+        [["https://example.com/3", "https://example.com/1"]]
 
 
 def test_with_no_stories_read_in_full_the_scout_gets_none(monkeypatch):
     """It used to get the first 12 articles in fetch order: a silent `or 12`."""
-    scout = _Scout()
+    scout, given = _scout(monkeypatch)
     agg = _agg(FakeClient(["Briefing."]), full_text_stories=0, markets=scout)
     monkeypatch.setattr(agg, "fetch_all_sources", lambda: asyncio.sleep(0, _articles(20)))
     asyncio.run(agg.generate_briefing())
-    assert scout.given == []
+    assert given == [[]]

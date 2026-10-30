@@ -8,7 +8,6 @@ code's value without a word.
 
 import copy
 import json
-from pathlib import Path
 from urllib.parse import urljoin
 
 import pytest
@@ -16,10 +15,9 @@ import yaml
 from pydantic import ValidationError
 
 from src import main
-from src.config import load_config
+from src.config import CONFIG_PATH, ROOT, load_config
 
-ROOT = Path(__file__).resolve().parent.parent
-REAL = yaml.safe_load((ROOT / "config.yaml").read_text())
+REAL = yaml.safe_load(CONFIG_PATH.read_text())
 
 
 def _load(tmp_path, data) -> object:
@@ -35,18 +33,8 @@ def _section(data: dict, path: tuple) -> dict:
 
 
 def test_the_real_config_loads():
-    config = load_config(ROOT / "config.yaml")
-    assert (ROOT / config.tts.voice_sample).is_file()
-
-
-def test_settings_moved_out_of_code_keep_their_values():
-    """The daily run behaves as before: these were code constants until 30 Oct 2026."""
-    config = load_config(ROOT / "config.yaml")
-    assert config.max_age_hours == 48
-    assert config.retention_days == 30
-    assert config.auto_verbatim_limit == 24000
-    assert config.podcast.category == "Technology"
-    assert config.tts.voice_sample == "voice_samples/derek_perkins.wav"
+    config = load_config()
+    assert config.tts.voice_path.is_file()
 
 
 @pytest.mark.parametrize("path", [
@@ -102,7 +90,7 @@ def test_the_share_app_works_wherever_the_site_is_served():
     """start_url and the share target resolve against the manifest's own URL,
     so the app no longer names the /feedcast/ path the site happens to sit on."""
     manifest = json.loads((ROOT / "output" / "app" / "manifest.json").read_text())
-    for base in (load_config(ROOT / "config.yaml").podcast.base_url, "https://elsewhere.test"):
+    for base in (load_config().podcast.base_url, "https://elsewhere.test"):
         at = f"{base}/app/manifest.json"
         assert urljoin(at, manifest["start_url"]) == f"{base}/app/"
         assert urljoin(at, manifest["share_target"]["action"]) == f"{base}/app/"

@@ -13,7 +13,7 @@ import httpx
 
 from .audio import AudioGenerator
 from .bundle import write_bundle
-from .config import Config, FeedConfig, load_config
+from .config import CONFIG_PATH, ROOT, Config, FeedConfig, load_config
 from .digest import safe_bullets
 from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
 from .extractor import ExtractionError, url_to_feed_entry
@@ -312,8 +312,8 @@ async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
 async def async_main(config_path: Path | None = None) -> None:
     """Run the feedcast pipeline with parallel processing."""
     # Determine paths
-    project_root = Path(__file__).parent.parent
-    config_path = config_path or project_root / "config.yaml"
+    project_root = ROOT
+    config_path = config_path or CONFIG_PATH
     db_path = project_root / "data" / "posts.db"
     audio_dir = project_root / "data" / "audio"
     sources_dir = project_root / "data" / "sources"
@@ -745,8 +745,8 @@ def _processor(config: Config) -> ContentProcessor:
 
 
 def _narrator(config: Config) -> AudioGenerator:
-    """The TTS narrator, with the voice config.yaml names (relative to the repository root)."""
-    return AudioGenerator(voice_sample=Path(__file__).parent.parent / config.tts.voice_sample)
+    """The TTS narrator, with the voice config.yaml names."""
+    return AudioGenerator(voice_sample=config.tts.voice_path)
 
 
 def _make_aggregator(config: Config, monitor: FeedMonitor,

@@ -187,7 +187,7 @@ class TestNarrationPass:
                             lambda report, operator_only=False: sent.append((report, operator_only)))
         monkeypatch.delenv("GITHUB_OUTPUT", raising=False)
         _Audio.fail = False
-        config = load_config(Path(__file__).resolve().parent.parent / "config.yaml")
+        config = load_config()
         monitor = FeedMonitor(tmp_path / "posts.db")
         audio_dir, out = tmp_path / "audio", tmp_path / "output"
         audio_dir.mkdir()

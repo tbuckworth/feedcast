@@ -31,7 +31,7 @@ An automated podcast generator that monitors RSS feeds, summarizes or reads post
 
 2. **Phase 2 — Content + audio**: For each entry, the content is summarized (Gemini 3 Flash) or cleaned for verbatim reading, normalized for TTS (numbers/dates/symbols to spoken form via Gemini 2.5 Flash), chunked (max 500 chars at sentence boundaries), converted to speech via DeepInfra Chatterbox TTS with voice cloning, and concatenated to MP3 with ffmpeg.
 
-3. **Phase 3 — Finalization**: Entries marked as processed in SQLite, `feed.xml` generated, old entries cleaned up (after `retention_days` in `config.yaml`, 30). For injected URLs, a push notification is sent via ntfy.sh.
+3. **Phase 3 — Finalization**: Entries marked as processed in SQLite, `feed.xml` generated, old entries cleaned up (after `retention_days` in `config.yaml`). For injected URLs, a push notification is sent via ntfy.sh.
 
 The briefing also carries prediction-market odds where a market is about one of its stories, and on some days it ends with a short segment on big AI-market moves that no story explains, each with a cause found by web search (`src/markets.py`, `prediction_markets` in `config.yaml`). Public Polymarket, Kalshi and Manifold APIs; no keys. The daily email shows a price chart of each market under the bullet that cites it (`src/market_charts.py`).
 
@@ -117,6 +117,8 @@ feeds:
 news_briefing:
   enabled: true
   lookback_hours: 24
+  full_text_stories: 12    # stories the writer reads in full; 0 = blurbs only
+  max_article_chars: 6000  # cap on each of those articles
   prompt: "..."
   sources:
     - { name: "BBC World", url: "https://feeds.bbci.co.uk/news/world/rss.xml", category: "geopolitics" }
@@ -125,7 +127,7 @@ news_briefing:
 **Mode behavior:**
 - `summarize` — LLM summary (~300-450 words, 2-3 min audio)
 - `verbatim` — Full text cleaned for TTS
-- `auto` — Verbatim up to `auto_verbatim_limit` (24,000 chars), summarize above it
+- `auto` — Verbatim up to `auto_verbatim_limit` in `config.yaml`, summarize above it
 
 ## Usage
 
@@ -345,7 +347,7 @@ guids, entries are also deduped by link.
 
 ## Freshness Window
 
-Only posts published within `max_age_hours` (48, in `config.yaml`) are narrated.
+Only posts published within `max_age_hours` (in `config.yaml`) are narrated.
 Dedup by feed id alone is not enough: a feed that rotates its guids, changes
 host, or is newly added to `config.yaml` presents its entire archive as unseen.
 On 2026-08-29 the Zvi feed offered 250 items going back to September 2025 and

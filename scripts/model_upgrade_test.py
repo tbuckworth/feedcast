@@ -211,7 +211,7 @@ async def main() -> None:
         from src.config import load_config
         from src.news import PREVIOUS_BRIEFINGS_HEADER
         if not args.system_file:
-            system = load_config(Path("config.yaml")).news_briefing.prompt
+            system = load_config().news_briefing.prompt
         user = re.sub(r"^## Previous briefings.*$", lambda _: PREVIOUS_BRIEFINGS_HEADER, user,
                       count=1, flags=re.M)
     sources = selected_sources(user) if is_briefing else []
