@@ -327,10 +327,10 @@ class RunOptions:
     reprocess_entry: str   # REPROCESS_ENTRY: a post's id or URL, to narrate again
     force_verbatim: bool   # FORCE_VERBATIM: read that post out in full
     inject_url: str        # INJECT_URL: a web page to narrate instead of the feeds
-    inject_mode: str       # INJECT_MODE: auto, summarize or verbatim
+    inject_mode: str       # INJECT_MODE: one of config.FeedConfig.mode
     resend: bool           # RESEND_REPORT
     preview: bool          # PREVIEW_BRIEFING
-    run_pass: str          # FEEDCAST_PASS: "all", "first" or "narrate" (_run_pass)
+    run_pass: str          # FEEDCAST_PASS, as _run_pass reads it
     email_always: bool     # FEEDCAST_EMAIL_ALWAYS
     ntfy_topic: str        # NTFY_TOPIC
 

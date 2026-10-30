@@ -403,3 +403,14 @@ def test_a_run_with_nothing_new_emails_only_when_told_to(pipeline, outputs, caps
         assert skipped not in log.splitlines()
     else:
         assert report is None and skipped in log.splitlines()
+
+
+@pytest.mark.parametrize("mode", [{"REPROCESS_ENTRY": LW}, {"RESEND_REPORT": "true"}])
+def test_an_unknown_pass_stops_the_run_before_it_changes_anything(pipeline, mode):
+    """A mistyped FEEDCAST_PASS is refused before a reprocess sets its post aside."""
+    pipeline.monitor.mark_processed(
+        FeedEntry(id=LW, title="On Land", link=LW, content="<p>Old.</p>",
+                  published=datetime(2026, 10, 1), author="Zvi", feed_name="Zvi"), "old.mp3")
+    with pytest.raises(ValueError):
+        pipeline.run(FEEDCAST_PASS="narration", **mode)
+    assert LW in _posts(pipeline)
