@@ -129,7 +129,7 @@ def test_empty_reply_can_be_told_not_to_fall_back(routes):
 
 
 def test_a_pinned_client_gets_the_openrouter_spelling_of_the_model(routes):
-    # get_client() is OpenRouter's client; the bullets role's primary is the
+    # A pinned client is OpenRouter's; the bullets role's primary is the
     # OpenAI-direct spelling, which OpenRouter does not know.
     pinned = FakeApi(["ok"])
     asyncio.run(complete("bullets", MSGS, max_tokens=50, client=pinned))

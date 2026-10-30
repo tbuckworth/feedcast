@@ -1,6 +1,5 @@
 """Podcast RSS feed generation."""
 
-import os
 import subprocess
 import xml.etree.ElementTree as ET
 from html import escape

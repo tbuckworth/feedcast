@@ -13,7 +13,7 @@ import httpx
 from . import llm
 
 DEFAULT_VOICE_SAMPLE = "voice_samples/derek_perkins.wav"
-MAX_CHUNK_CHARS = 500  # Tested: 650 works but 500 has better pacing (see tests/test_chunk_sizes.py)
+MAX_CHUNK_CHARS = 500  # Tested: 650 works but 500 has better pacing
 
 # Delay after voice upload before inference (for replication)
 # Set via VOICE_UPLOAD_DELAY_SECONDS environment variable
@@ -32,7 +32,6 @@ TTS_MODELS: tuple[tuple[str, dict], ...] = (
     ("ResembleAI/chatterbox-turbo", {}),
     ("ResembleAI/chatterbox-multilingual", {"language_id": "en"}),
 )
-DEEPINFRA_API_URL = DEEPINFRA_INFERENCE_URL + TTS_MODELS[0][0]
 
 
 class ModelBusy(RuntimeError):
@@ -70,10 +69,6 @@ def upload_voice_to_deepinfra(voice_path: Path, api_key: str, max_retries: int =
                 continue
             raise
 
-        # Diagnostic logging for debugging voice cloning issues
-        print(f"    [DIAG] Upload response status: {response.status_code}")
-        print(f"    [DIAG] Upload response headers: {dict(response.headers)}")
-
         if response.status_code == 200:
             break
 
@@ -88,7 +83,6 @@ def upload_voice_to_deepinfra(voice_path: Path, api_key: str, max_retries: int =
         raise RuntimeError(f"Failed to upload voice: {response.status_code} - {response.text}")
 
     result = response.json()
-    print(f"    [DIAG] Upload response body: {result}")
     voice_id = result.get("voice_id")
 
     if not voice_id:
@@ -140,10 +134,6 @@ async def generate_with_deepinfra_async(
     model: tuple[str, dict] = TTS_MODELS[0],
 ) -> bytes:
     """Generate audio using DeepInfra inference endpoint with voice cloning."""
-    # Diagnostic logging
-    print(f"      {tag}[DIAG] Generating with voice_id: {voice_id}")
-    print(f"      {tag}[DIAG] Text length: {len(text)} chars, preview: {text[:80]!r}...")
-
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
@@ -213,7 +203,6 @@ async def generate_with_deepinfra_async(
         save_debug_wav.parent.mkdir(parents=True, exist_ok=True)
         with open(save_debug_wav, 'wb') as f:
             f.write(audio_data)
-        print(f"      [DIAG] Saved debug WAV to: {save_debug_wav}")
 
     return audio_data
 
@@ -221,7 +210,7 @@ async def generate_with_deepinfra_async(
 class AudioGenerator:
     """Generates audio from text using DeepInfra Chatterbox API with voice cloning."""
 
-    def __init__(self, voice: str = None, speed: float = None, voice_sample: str = None):
+    def __init__(self, voice_sample: str = None):
         self._api_key = os.environ.get("DEEPINFRA_API_KEY")
         if not self._api_key:
             raise ValueError("DEEPINFRA_API_KEY environment variable not set")
@@ -248,9 +237,8 @@ class AudioGenerator:
         # Optional delay for voice replication across DeepInfra servers
         if VOICE_UPLOAD_DELAY_SECONDS > 0:
             import time
-            print(f"    [DIAG] Waiting {VOICE_UPLOAD_DELAY_SECONDS}s for voice replication...")
+            print(f"    Waiting {VOICE_UPLOAD_DELAY_SECONDS}s for voice replication...")
             time.sleep(VOICE_UPLOAD_DELAY_SECONDS)
-            print(f"    [DIAG] Done waiting, proceeding with inference")
 
     def _switch_model(self, failed: int, error: Exception) -> None:
         """Move past a busy model, once, however many chunks saw it fail."""
@@ -268,8 +256,7 @@ class AudioGenerator:
         return safe.lower() or "audio"
 
     async def generate(
-        self, text: str, output_path: Path, title: str,
-        http_client: httpx.AsyncClient,
+        self, text: str, output_path: Path, http_client: httpx.AsyncClient,
     ) -> Path:
         import subprocess
         import tempfile
@@ -282,9 +269,6 @@ class AudioGenerator:
 
         chunks = split_into_chunks(text)
         print(f"    {tag}Generating audio in {len(chunks)} chunks via DeepInfra API...")
-        print(f"    {tag}[DIAG] Total text length: {len(text)} chars")
-        for i, chunk in enumerate(chunks):
-            print(f"    {tag}[DIAG] Chunk {i}: {len(chunk)} chars, preview: {chunk[:60]!r}...")
 
         save_debug = os.environ.get("SAVE_DEBUG_WAVS", "").lower() in ("1", "true", "yes")
         debug_dir = output_path.parent / "debug_wavs" if save_debug else None
@@ -409,4 +393,4 @@ class AudioGenerator:
         safe_title = self._sanitize_filename(title)
         filename = f"{episode_id}_{safe_title}"
         output_path = output_dir / f"{filename}.mp3"
-        return await self.generate(text, output_path, title, http_client)
+        return await self.generate(text, output_path, http_client)

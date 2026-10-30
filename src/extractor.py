@@ -14,7 +14,7 @@ class ExtractionError(Exception):
     """Raised when content extraction fails or produces insufficient content."""
 
 
-def _extract_title_from_html(html: str, sitename: str | None = None) -> str | None:
+def _extract_title_from_html(html: str) -> str | None:
     """Extract title from og:title or <title> tag, stripping site name suffixes."""
     # Try og:title first (cleanest)
     og_match = re.search(
@@ -52,7 +52,7 @@ def _extract_title_from_html(html: str, sitename: str | None = None) -> str | No
 def extract_article(url: str) -> dict:
     """Fetch a URL and extract article content + metadata.
 
-    Returns dict with keys: text, title, author, date, sitename.
+    Returns dict with keys: text, title, author.
     Raises ExtractionError if extraction fails or content is too short.
     """
     downloaded = trafilatura.fetch_url(url)
@@ -72,27 +72,17 @@ def extract_article(url: str) -> dict:
         )
 
     metadata = trafilatura.extract_metadata(downloaded)
-    sitename = (metadata.sitename if metadata and metadata.sitename else None) or urlparse(url).netloc
     author = (metadata.author if metadata and metadata.author else None) or urlparse(url).netloc
 
     # Title: prefer og:title / <title> tag over trafilatura metadata (which is unreliable for some sites)
-    html_title = _extract_title_from_html(downloaded, sitename)
+    html_title = _extract_title_from_html(downloaded)
     traf_title = metadata.title if metadata and metadata.title else None
     title = html_title or traf_title or urlparse(url).path.split("/")[-1] or "Untitled"
-
-    date = None
-    if metadata and metadata.date:
-        try:
-            date = datetime.fromisoformat(metadata.date)
-        except (ValueError, TypeError):
-            pass
 
     return {
         "text": text,
         "title": title,
         "author": author,
-        "date": date,
-        "sitename": sitename,
     }
 
 

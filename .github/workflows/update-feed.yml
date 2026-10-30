@@ -205,19 +205,10 @@ jobs:
           # each emailed everyone, one of them about nothing but a failure.
           FEEDCAST_TEST_RUN: ${{ (inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true || inputs.preview_briefing == true) && inputs.notify_list != true }}
           VOICE_UPLOAD_DELAY_SECONDS: "5"
-          SAVE_DEBUG_WAVS: "false"
           # Briefing and summaries now; posts read out in full are cleaned,
           # digested and emailed, then narrated by the narrate job below.
           FEEDCAST_PASS: first
         run: uv run python -m src.main
-
-      - name: Upload debug WAVs
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: debug-wavs
-          path: data/audio/debug_wavs/
-          if-no-files-found: ignore
 
       - name: Commit and push
         timeout-minutes: 10
@@ -285,7 +276,6 @@ jobs:
           FEEDCAST_EMAIL_TO: ${{ secrets.FEEDCAST_EMAIL_TO }}
           FEEDCAST_TEST_RUN: ${{ (inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true || inputs.preview_briefing == true) && inputs.notify_list != true }}
           VOICE_UPLOAD_DELAY_SECONDS: "5"
-          SAVE_DEBUG_WAVS: "false"
           FEEDCAST_PASS: narrate
         run: uv run python -m src.main
 
