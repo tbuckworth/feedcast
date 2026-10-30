@@ -136,6 +136,38 @@ def warn_if_dead(feed, name: str, url: str) -> bool:
     return True
 
 
+def _add_column(conn: sqlite3.Connection, table: str, column: str) -> None:
+    """Add a TEXT column defaulting to '', unless the table has it already."""
+    try:
+        conn.execute(f"ALTER TABLE {table} ADD COLUMN {column} TEXT DEFAULT ''")
+    except sqlite3.OperationalError as e:
+        # The one expected refusal: the file was migrated by an earlier run.
+        # Anything else (a locked or read-only file) is a migration that failed.
+        if "duplicate column name" not in str(e):
+            raise
+
+
+def stored_json(row: dict, column: str, kind: type):
+    """The JSON value a row stores in `column`, or None if it stores nothing.
+
+    Rows written before the column existed hold ''. Anything else that is not
+    JSON of the expected `kind` is corrupt, and raises naming the row: read as
+    "nothing stored", it showed an episode without its digest or fidelity
+    check and no one could tell why.
+    """
+    raw = row.get(column)
+    if not raw:
+        return None
+    try:
+        value = json.loads(raw)
+    except ValueError as e:
+        raise ValueError(f"row {row.get('id')!r}: {column} is not valid JSON ({e})") from e
+    if not isinstance(value, kind):
+        raise ValueError(f"row {row.get('id')!r}: {column} holds a {type(value).__name__}, "
+                         f"not a {kind.__name__}")
+    return value
+
+
 class FeedMonitor:
     """Monitors RSS feeds and tracks processed posts in SQLite."""
 
@@ -168,48 +200,29 @@ class FeedMonitor:
                     created_at TEXT NOT NULL
                 )
             """)
-            # Migration: add content column if missing
-            try:
-                conn.execute("ALTER TABLE processed_posts ADD COLUMN content TEXT DEFAULT ''")
-            except sqlite3.OperationalError:
-                pass  # Column already exists
-            # Migration: add author column if missing. Rows written before this
-            # column existed keep '', and readers fall back to the feed name.
-            try:
-                conn.execute("ALTER TABLE processed_posts ADD COLUMN author TEXT DEFAULT ''")
-            except sqlite3.OperationalError:
-                pass  # Column already exists
-            # Migration: bullet digest for the email, stored as a JSON array.
-            # Older rows keep '' and simply render without bullets.
-            try:
-                conn.execute("ALTER TABLE processed_posts ADD COLUMN bullets TEXT DEFAULT ''")
-            except sqlite3.OperationalError:
-                pass  # Column already exists
-            # Migration: the maths verdict that caused a post to be linked
-            # rather than narrated, as JSON. Recorded at the moment of the
-            # decision so a later report states what was decided, rather than
-            # re-deriving a score that can disagree with it.
-            try:
-                conn.execute("ALTER TABLE processed_posts ADD COLUMN maths TEXT DEFAULT ''")
-            except sqlite3.OperationalError:
-                pass  # Column already exists
-            # Migration: the date the feed gave the item, kept apart from the
-            # publication date so a curated post can be new to us in August
-            # and still say it was written in July.
-            try:
-                conn.execute("ALTER TABLE processed_posts ADD COLUMN feed_date TEXT DEFAULT ''")
-            except sqlite3.OperationalError:
-                pass  # Column already exists
-            try:
-                conn.execute("ALTER TABLE processed_posts ADD COLUMN fidelity TEXT DEFAULT ''")
-            except sqlite3.OperationalError:
-                pass  # Column already exists
-            # Which model wrote the script, as JSON. Older rows keep '' and the
-            # email simply has no "Written by" line for them.
-            try:
-                conn.execute("ALTER TABLE processed_posts ADD COLUMN writer TEXT DEFAULT ''")
-            except sqlite3.OperationalError:
-                pass  # Column already exists
+            # Columns added since the table was created. Rows written before
+            # each existed keep '', which every reader takes as nothing stored.
+            for column in (
+                "content",
+                # Readers fall back to the feed name.
+                "author",
+                # The bullet digest for the email, as a JSON array.
+                "bullets",
+                # The maths verdict that caused a post to be linked rather than
+                # narrated, as JSON. Recorded at the moment of the decision so
+                # a later report states what was decided, rather than
+                # re-deriving a score that can disagree with it.
+                "maths",
+                # The date the feed gave the item, kept apart from the
+                # publication date so a curated post can be new to us in August
+                # and still say it was written in July.
+                "feed_date",
+                "fidelity",
+                # Which model wrote the script, as JSON. The email has no
+                # "Written by" line for older rows.
+                "writer",
+            ):
+                _add_column(conn, "processed_posts", column)
             # Entries that failed mid-pipeline, so the next run tries them
             # again whatever their age. Without this a transient blip was
             # permanent: the run counted as published, the guard stopped the
@@ -413,10 +426,7 @@ class FeedMonitor:
         for r in rows:
             row = dict(r)
             row["entry"] = entry_from_dict(json.loads(row["entry"]))
-            try:
-                row["bullets"] = json.loads(row["bullets"] or "[]")
-            except ValueError:
-                row["bullets"] = []
+            row["bullets"] = stored_json(row, "bullets", list) or []
             out.append(row)
         return out
 

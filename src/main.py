@@ -1,7 +1,6 @@
 """Main entry point for feedcast pipeline."""
 
 import asyncio
-import json
 import os
 import socket
 import traceback
@@ -25,7 +24,7 @@ from . import notices
 from .market_charts import charts_for_report
 from .markets import MarketRules, MarketScout
 from .mathiness import MathsVerdict, assess
-from .monitor import FeedEntry, FeedMonitor, episode_id
+from .monitor import FeedEntry, FeedMonitor, episode_id, stored_json
 from .news import NewsAggregator
 from .normalizer import TextNormalizer
 from .processor import ContentProcessor
@@ -251,12 +250,10 @@ def _stored_verdict(row: dict) -> MathsVerdict:
     Rows written before the column existed have nothing stored. Those report a
     zero score, which the email renders as "linked, not narrated" with no
     number — honest about not knowing, rather than inventing a figure.
+    Corrupt JSON raises, naming the row (monitor.stored_json).
     """
-    try:
-        data = json.loads(row.get("maths") or "null")
-    except (ValueError, TypeError):
-        data = None
-    if not isinstance(data, dict):
+    data = stored_json(row, "maths", dict)
+    if data is None:
         return MathsVerdict(is_heavy=True, score=0.0, hits=0, source="unrecorded")
     return MathsVerdict(is_heavy=True, score=float(data.get("score") or 0.0),
                         hits=int(data.get("hits") or 0),
@@ -1006,12 +1003,8 @@ def _fidelity_of(row: dict) -> dict | None:
 
 
 def _json_dict(row: dict, column: str) -> dict | None:
-    """A JSON object stored in `column`; None when absent or malformed."""
-    try:
-        parsed = json.loads(row.get(column) or "null")
-    except (ValueError, TypeError):
-        return None
-    return parsed if isinstance(parsed, dict) else None
+    """A JSON object stored in `column`; None when the row has none. Corrupt JSON raises."""
+    return stored_json(row, column, dict)
 
 
 def _bullets_of(row: dict) -> list:
@@ -1019,13 +1012,9 @@ def _bullets_of(row: dict) -> list:
 
     Bullets are strings, or {"text", "url"} once they cite a source; rows
     written before that keep the old shape and render without a link.
+    Corrupt JSON raises, naming the row.
     """
-    try:
-        parsed = json.loads(row.get("bullets") or "[]")
-    except (ValueError, TypeError):
-        return []
-    if not isinstance(parsed, list):
-        return []
+    parsed = stored_json(row, "bullets", list) or []
     return [b for b in parsed
             if isinstance(b, str) or (isinstance(b, dict) and b.get("text"))]
 
