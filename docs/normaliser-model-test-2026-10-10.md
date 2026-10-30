@@ -14,7 +14,8 @@ Twelve real normaliser inputs, each one batch (at most 18,000 chars):
 - the most number-heavy batch of five posts read in full: ACX "We Present Television",
   "This Is Going To Hurt" and "Does Georgism Work?", and LessWrong "An
   operationalization of opaque serial depth" and "What's the date?";
-- the synthetic cases from `scripts/test_normalization.py`.
+- the synthetic cases from `scripts/test_normalization.py` (now
+  `NORMALIZER_CASES` in `scripts/check_llm.py`).
 
 Each case ran twice per model, with the production request. Gemini ran on the
 `OPENROUTER_API_KEY__FEEDCAST` account, since the Arrow one is out of credit.
