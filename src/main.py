@@ -306,7 +306,7 @@ async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
     new_ids = {d["id"] for d in todays if d["audio_file"]}
     report = _build_run_report(episodes, db_entries, new_ids, [],
                                config.podcast.base_url, linked)
-    send_report(report)
+    _email(report)
 
 
 async def async_main(config_path: Path | None = None) -> None:
@@ -707,7 +707,8 @@ async def async_main(config_path: Path | None = None) -> None:
     # Tells the workflow whether the narration job has anything to do.
     _gh_output(deferred=len(waiting))
 
-    # Email the run report. Skipped silently when the SMTP vars are unset.
+    # Email the run report. Off when FEEDCAST_EMAIL_TO is unset; a send that
+    # fails is recorded, and the workflow fails the run after publishing.
     if (new_entry_ids or failures or maths_skipped or dead_sources or deferring
             or _email_always()):
         report = _build_run_report(
@@ -717,7 +718,7 @@ async def async_main(config_path: Path | None = None) -> None:
         images: dict[str, bytes] = {}
         if briefing_entry and briefing_entry.id in new_entry_ids:
             report.charts, images = charts_for_report(briefing_entry)
-        send_report(report, images=images)
+        _email(report, images=images)
     else:
         print("  Nothing new — email report skipped (set FEEDCAST_EMAIL_ALWAYS=true to send anyway)")
 
@@ -805,7 +806,7 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
         notices=llm.fallback_notices(), feed_url=f"{base}/feed.xml", site_url=base,
         charts=charts,
     )
-    send_report(report, subject_tag="[Preview]", images=images)
+    _email(report, subject_tag="[Preview]", images=images)
 
 
 def _run_pass() -> str:
@@ -826,6 +827,17 @@ def _gh_output(**values) -> None:
         return
     with open(path, "a", encoding="utf-8") as f:
         f.writelines(f"{key}={value}\n" for key, value in values.items())
+
+
+def _email(report: RunReport, **kwargs) -> None:
+    """Send the report, and record a send that failed for the workflow.
+
+    Most failures are only reported in this email, so one that does not go
+    out must not leave the run green. The run still publishes: the workflow's
+    last step reads `report_failed` and fails the job after the commit.
+    """
+    if send_report(report, **kwargs) is False:
+        _gh_output(report_failed="true")
 
 
 async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: FeedGenerator,
@@ -901,7 +913,7 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
     feed_gen.write_episode_pages(episodes, monitor.deferred_entries(), output_dir / "episodes")
     print(f"  Feed now has {len(episodes)} episodes")
     if failures:
-        send_report(RunReport(
+        _email(RunReport(
             failures=failures, notices=llm.fallback_notices(),
             feed_url=f"{config.podcast.base_url}/feed.xml", site_url=config.podcast.base_url,
             total_in_feed=len(episodes)), operator_only=True)

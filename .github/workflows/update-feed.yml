@@ -64,6 +64,12 @@ permissions:
   pages: write
   id-token: write
 
+env:
+  # A run the operator asked for by hand: a reprocess, an injection, a resend,
+  # a forced run or a preview. The guard never stops one, and it is a dev run
+  # (FEEDCAST_TEST_RUN) unless notify_list is ticked. "true" or "false".
+  ON_DEMAND: ${{ inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true || inputs.preview_briefing == true }}
+
 jobs:
   check-llm:
     if: inputs.llm_smoke_test == true
@@ -73,9 +79,9 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v4
-      - name: Install dependencies
-        run: uv sync
+      - uses: ./.github/actions/setup-pipeline
+        with:
+          pipeline: false
       - name: Check live LLM routes
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
@@ -105,7 +111,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
           RUN_ID: ${{ github.run_id }}
-          ON_DEMAND: ${{ inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true || inputs.preview_briefing == true }}
         run: |
           set -euo pipefail
           if [[ "$ON_DEMAND" == "true" ]]; then
@@ -143,30 +148,17 @@ jobs:
     outputs:
       # Posts read out in full that wait for the narrate job (0 skips it).
       deferred: ${{ steps.pipeline.outputs.deferred }}
+      # The run's files reached main and the state branch. The job can still
+      # fail after this (its report email was not sent), and the publish and
+      # the narration go ahead regardless.
+      pushed: ${{ steps.commit.outcome == 'success' }}
     # Backstop: normal runs take 12-30 min. Without this the job inherits the
     # 6h GitHub default, so any network stall burns 6h of minutes (2026-08-19).
     timeout-minutes: 115
     steps:
       - uses: actions/checkout@v4
 
-      - name: Pull latest (queued runs may have stale checkout)
-        timeout-minutes: 5
-        run: git pull origin main
-
-      - name: Restore database and audio from the state branch
-        timeout-minutes: 10
-        run: scripts/state.sh pull
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v4
-
-      - name: Install ffmpeg
-        timeout-minutes: 12
-        run: scripts/ci-install-ffmpeg.sh
-
-      - name: Install dependencies
-        timeout-minutes: 10
-        run: uv sync
+      - uses: ./.github/actions/setup-pipeline
 
       - name: Run pipeline
         id: pipeline
@@ -188,7 +180,9 @@ jobs:
           RESEND_REPORT: ${{ inputs.resend_report }}
           PREVIEW_BRIEFING: ${{ inputs.preview_briefing }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          # Completion email. Absent secrets simply skip the report.
+          # Completion email. An unset FEEDCAST_EMAIL_TO turns it off; with it
+          # set, a missing SMTP_USER or GMAIL_APP_PASSWORD is a failed send,
+          # which fails the job once the run has published.
           SMTP_HOST: ${{ vars.SMTP_HOST }}
           SMTP_PORT: ${{ vars.SMTP_PORT }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
@@ -197,13 +191,13 @@ jobs:
           FEEDCAST_EMAIL_BCC: ${{ secrets.FEEDCAST_EMAIL_BCC }}
           FEEDCAST_EMAIL_ALWAYS: ${{ vars.FEEDCAST_EMAIL_ALWAYS }}
           FEEDCAST_MAX_AGE_HOURS: ${{ vars.FEEDCAST_MAX_AGE_HOURS }}
-          # Dev mode: every run an operator asked for by hand (the same set the
-          # guard waves through) emails only FEEDCAST_EMAIL_TO, unless they
-          # ticked notify_list. The daily run — GitHub's schedule, or the bare
-          # dispatch from scripts/cron-backstop.sh — is the only one that
+          # Dev mode: every run an operator asked for by hand (ON_DEMAND, the
+          # set the guard waves through) emails only FEEDCAST_EMAIL_TO, unless
+          # they ticked notify_list. The daily run — GitHub's schedule, or the
+          # bare dispatch from scripts/cron-backstop.sh — is the only one that
           # reaches the list on its own. Two debugging re-runs on 2026-09-08
           # each emailed everyone, one of them about nothing but a failure.
-          FEEDCAST_TEST_RUN: ${{ (inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true || inputs.preview_briefing == true) && inputs.notify_list != true }}
+          FEEDCAST_TEST_RUN: ${{ env.ON_DEMAND == 'true' && inputs.notify_list != true }}
           VOICE_UPLOAD_DELAY_SECONDS: "5"
           # Briefing and summaries now; posts read out in full are cleaned,
           # digested and emailed, then narrated by the narrate job below.
@@ -211,13 +205,23 @@ jobs:
         run: uv run python -m src.main
 
       - name: Commit and push
+        id: commit
         timeout-minutes: 10
         run: scripts/ci-commit-and-push.sh
 
+      # Most failures are reported only in that email, so a run whose email
+      # did not go out must not stay green. It has published by now.
+      - name: Fail the job if the report email was not sent
+        if: steps.pipeline.outputs.report_failed == 'true'
+        run: |
+          echo "::error::The report email was not sent (see the Run pipeline step); the run published as normal"
+          exit 1
+
   deploy:
     needs: update
+    # Whenever the update job pushed, even if it then failed on its email.
     # A preview publishes nothing, so there is nothing to deploy.
-    if: inputs.preview_briefing != true
+    if: ${{ !cancelled() && needs.update.outputs.pushed == 'true' && inputs.preview_briefing != true }}
     uses: ./.github/workflows/publish-pages.yml
     with:
       artifact_name: github-pages
@@ -232,35 +236,19 @@ jobs:
   # summary down with it; here it can only take itself. Runs alongside the
   # first deploy. A failed or timed-out narration still commits, so the
   # attempt count and the episode pages are published, and the post is
-  # retried by the next run's narrate job.
+  # retried by the next run's narrate job; then the job fails.
   narrate:
     needs: update
-    if: needs.update.outputs.deferred != '0' && needs.update.outputs.deferred != ''
+    if: ${{ !cancelled() && needs.update.outputs.pushed == 'true' && needs.update.outputs.deferred != '0' && needs.update.outputs.deferred != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 115
     steps:
       - uses: actions/checkout@v4
 
-      - name: Pull the first pass's commit
-        timeout-minutes: 5
-        run: git pull origin main
-
-      - name: Restore database and audio from the state branch
-        timeout-minutes: 10
-        run: scripts/state.sh pull
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v4
-
-      - name: Install ffmpeg
-        timeout-minutes: 12
-        run: scripts/ci-install-ffmpeg.sh
-
-      - name: Install dependencies
-        timeout-minutes: 10
-        run: uv sync
+      - uses: ./.github/actions/setup-pipeline
 
       - name: Narrate deferred posts
+        id: narration
         timeout-minutes: 80
         continue-on-error: true
         env:
@@ -274,7 +262,7 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           FEEDCAST_EMAIL_TO: ${{ secrets.FEEDCAST_EMAIL_TO }}
-          FEEDCAST_TEST_RUN: ${{ (inputs.entry_url != '' || inputs.inject_url != '' || inputs.resend_report == true || inputs.force == true || inputs.preview_briefing == true) && inputs.notify_list != true }}
+          FEEDCAST_TEST_RUN: ${{ env.ON_DEMAND == 'true' && inputs.notify_list != true }}
           VOICE_UPLOAD_DELAY_SECONDS: "5"
           FEEDCAST_PASS: narrate
         run: uv run python -m src.main
@@ -283,8 +271,25 @@ jobs:
         timeout-minutes: 10
         run: scripts/ci-commit-and-push.sh "Add narrated episodes"
 
+      # continue-on-error let the commit above publish the attempt; without
+      # this a crashed or timed-out narration would leave the run green.
+      - name: Fail the job if the narration failed
+        if: steps.narration.outcome != 'success'
+        run: |
+          echo "::error::Narrating the deferred posts failed or timed out (see Narrate deferred posts); the attempt is committed and the next run retries them"
+          exit 1
+
+      - name: Fail the job if the report email was not sent
+        if: steps.narration.outputs.report_failed == 'true'
+        run: |
+          echo "::error::The narration's failure email was not sent (see Narrate deferred posts)"
+          exit 1
+
   deploy-narrated:
     needs: [deploy, narrate]
+    # Also after a failed narrate job: it commits its attempt count and episode
+    # pages before failing. Skipped when narrate was (nothing was deferred).
+    if: ${{ !cancelled() && needs.deploy.result == 'success' && (needs.narrate.result == 'success' || needs.narrate.result == 'failure') }}
     uses: ./.github/workflows/publish-pages.yml
     with:
       artifact_name: github-pages-narrated

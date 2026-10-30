@@ -1,9 +1,12 @@
 """Tests for author extraction and the emailed run report."""
 
+import ast
 from datetime import datetime
+from pathlib import Path
 
 import pytest
 
+from src import main
 from src.email_report import (
     ReportEpisode, RunReport, _meta_bits, build_html, build_text, format_duration,
 )
@@ -116,11 +119,48 @@ class TestEmailReport:
         assert "https://example.com/post" in txt
         assert "https://example.com/a.mp3" in txt
 
-    def test_send_skipped_without_config(self, monkeypatch):
+    def test_email_is_off_without_a_recipient(self, monkeypatch):
+        """FEEDCAST_EMAIL_TO is the off switch: unset, nothing is sent and
+        nothing failed, whatever the SMTP credentials say."""
         from src import email_report
-        for var in ("FEEDCAST_EMAIL_TO", "SMTP_USER", "SMTP_PASSWORD", "GMAIL_APP_PASSWORD"):
-            monkeypatch.delenv(var, raising=False)
+        monkeypatch.delenv("FEEDCAST_EMAIL_TO", raising=False)
+        monkeypatch.setenv("SMTP_USER", "sender@example.com")
+        monkeypatch.setenv("GMAIL_APP_PASSWORD", "app-password")
+        assert email_report.send_report(RunReport()) is None
+
+    @pytest.mark.parametrize("missing", ["SMTP_USER", "GMAIL_APP_PASSWORD"])
+    def test_a_recipient_without_credentials_is_a_failed_send(self, monkeypatch, capsys, missing):
+        """A missing or rotated CI secret must not quietly stop all reporting."""
+        from src import email_report
+        monkeypatch.setenv("FEEDCAST_EMAIL_TO", "reader@example.com")
+        monkeypatch.setenv("SMTP_USER", "sender@example.com")
+        monkeypatch.setenv("GMAIL_APP_PASSWORD", "app-password")
+        monkeypatch.delenv("SMTP_PASSWORD", raising=False)
+        monkeypatch.setenv(missing, "")
         assert email_report.send_report(RunReport()) is False
+        assert "Email report failed" in capsys.readouterr().out
+
+
+class TestFailedSendFailsTheRun:
+    """src.main publishes as normal, then the workflow fails the job."""
+
+    @pytest.mark.parametrize("result,recorded", [(True, ""), (None, ""),
+                                                 (False, "report_failed=true\n")])
+    def test_only_a_failed_send_is_recorded(self, monkeypatch, tmp_path, result, recorded):
+        monkeypatch.setattr(main, "send_report", lambda report, **kw: result)
+        outputs = tmp_path / "github_output"
+        outputs.touch()
+        monkeypatch.setenv("GITHUB_OUTPUT", str(outputs))
+        main._email(RunReport(), operator_only=True)
+        assert outputs.read_text() == recorded
+
+    def test_main_sends_every_report_through_the_recording_helper(self):
+        tree = ast.parse(Path(main.__file__).read_text())
+        callers = [fn.name for fn in ast.walk(tree)
+                   if isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef))
+                   for node in ast.walk(fn)
+                   if isinstance(node, ast.Call) and getattr(node.func, "id", None) == "send_report"]
+        assert callers == ["_email"]
 
 
 class TestSendPath:

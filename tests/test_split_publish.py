@@ -219,6 +219,16 @@ class TestNarrationPass:
         assert "failed on the last attempt" in \
                (out / "episodes" / f"{episode_id('acx-1')}.html").read_text()
 
+    def test_a_failure_email_that_was_not_sent_fails_the_job(self, setup, tmp_path, monkeypatch):
+        _, monitor, *_ = setup
+        monitor.defer_entry(_entry(), "verbatim", "Clean text.", None, ["b1"])
+        _Audio.fail = True
+        monkeypatch.setattr(main, "send_report", lambda report, **kw: False)
+        outputs = tmp_path / "github_output"
+        monkeypatch.setenv("GITHUB_OUTPUT", str(outputs))
+        self._narrate(setup)
+        assert outputs.read_text() == "report_failed=true\n"
+
     def test_a_post_whose_passes_keep_being_cut_off_is_given_up(self, setup):
         config, monitor, audio_dir, out, sent = setup
         monitor.defer_entry(_entry(), "verbatim", "Clean text.", None, [])

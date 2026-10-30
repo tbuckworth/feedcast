@@ -1,6 +1,8 @@
-"""Source bundles: what the writer saw is kept, and the state branch round-trips."""
+"""Source bundles: what the writer saw is kept, the state branch round-trips,
+and the CI scripts that commit and publish a run's files."""
 
 import os
+import shutil
 import sqlite3
 import subprocess
 from datetime import datetime, timedelta
@@ -12,6 +14,9 @@ from src.monitor import FeedEntry, FeedMonitor, episode_id
 REPO = Path(__file__).resolve().parent.parent
 STATE_SH = REPO / "scripts" / "state.sh"
 PUBLISH_AUDIO_SH = REPO / "scripts" / "publish-audio.sh"
+COMMIT_SH = REPO / "scripts" / "ci-commit-and-push.sh"
+IDENTITY = {"GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@x",
+            "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@x"}
 
 
 def test_bundle_keeps_prompt_input_and_output_verbatim():
@@ -72,8 +77,7 @@ def test_state_branch_round_trips_db_and_audio_without_history(tmp_path):
     """push replaces the branch with one parentless commit; pull restores the files."""
     work = _clone_without_state(tmp_path)
     remote = tmp_path / "remote.git"
-    env = {**os.environ, "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@x",
-           "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@x"}
+    env = {**os.environ, **IDENTITY}
     (work / "README").write_text("main\n")
     (work / ".gitignore").write_text("data/posts.db\ndata/audio/\n")
     _git("add", ".", cwd=work); _git("commit", "-qm", "init", cwd=work, env=env)
@@ -150,3 +154,76 @@ def test_publish_audio_fails_when_the_feed_lists_audio_the_state_lacks(tmp_path)
     run = _site(tmp_path, ["a.mp3", "b.mp3"], ["a.mp3"])
     assert run.returncode == 1
     assert "::error::feed.xml lists audio/b.mp3" in run.stdout
+
+
+def _two_runs(tmp_path):
+    """main on a local remote, and two checkouts of it: another run's and this run's.
+
+    The checkouts carry the commit script and state.sh at their CI paths, and
+    this run's has a database for `state.sh push` to publish.
+    """
+    env = {**os.environ, **IDENTITY}
+    remote = tmp_path / "remote.git"
+    _git("init", "--bare", "-q", "-b", "main", str(remote), cwd=tmp_path)
+    seed = tmp_path / "seed"
+    _git("clone", "-q", str(remote), str(seed), cwd=tmp_path)
+    for path, text in {"output/feed.xml": "feed v0\n", "output/index.html": "index v0\n",
+                       "data/sources/abc.md": "bundle\n",
+                       ".gitignore": "data/posts.db\ndata/audio/\n"}.items():
+        (seed / path).parent.mkdir(parents=True, exist_ok=True)
+        (seed / path).write_text(text)
+    (seed / "scripts").mkdir()
+    for script in (COMMIT_SH, STATE_SH):
+        shutil.copy2(script, seed / "scripts" / script.name)
+    _git("add", ".", cwd=seed)
+    _git("commit", "-qm", "init", cwd=seed, env=env)
+    _git("push", "-q", "origin", "HEAD:main", cwd=seed)
+    other, this = tmp_path / "other", tmp_path / "this"
+    for clone in (other, this):
+        _git("clone", "-q", str(remote), str(clone), cwd=tmp_path)
+    (this / "data" / "audio").mkdir()
+    (this / "data" / "audio" / "a.mp3").write_bytes(b"mp3")
+    (this / "data" / "posts.db").write_bytes(b"db")
+    return remote, other, this
+
+
+def _other_run_pushes(other, path, text):
+    (other / path).write_text(text)
+    env = {**os.environ, **IDENTITY}
+    _git("commit", "-qam", "the other run", cwd=other, env=env)
+    _git("push", "-q", cwd=other)
+
+
+def _commit_and_push(this):
+    return subprocess.run([str(this / "scripts" / COMMIT_SH.name)], cwd=this,
+                          capture_output=True, text=True, timeout=60)
+
+
+def test_commit_step_names_the_files_a_conflicting_rebase_settled_for_this_run(tmp_path):
+    """The merge fallback resolves every conflict in this run's favour; the run
+    must say which files that overrode."""
+    remote, other, this = _two_runs(tmp_path)
+    _other_run_pushes(other, "output/feed.xml", "feed from the other run\n")
+    (this / "output" / "feed.xml").write_text("feed from this run\n")
+
+    run = _commit_and_push(this)
+
+    assert run.returncode == 0, run.stdout + run.stderr
+    (warning,) = [line for line in run.stdout.splitlines() if line.startswith("::warning")]
+    assert "output/feed.xml" in warning and "output/index.html" not in warning
+    assert _git("show", "main:output/feed.xml", cwd=remote) == "feed from this run\n"
+    assert "the other run" in _git("log", "--format=%s", "main", cwd=remote)
+
+
+def test_commit_step_rebases_quietly_when_nothing_conflicts(tmp_path):
+    remote, other, this = _two_runs(tmp_path)
+    _other_run_pushes(other, "output/index.html", "index from the other run\n")
+    (this / "output" / "feed.xml").write_text("feed from this run\n")
+
+    run = _commit_and_push(this)
+
+    assert run.returncode == 0, run.stdout + run.stderr
+    assert "::warning" not in run.stdout + run.stderr
+    assert _git("show", "main:output/feed.xml", cwd=remote) == "feed from this run\n"
+    assert _git("show", "main:output/index.html", cwd=remote) == "index from the other run\n"
+    assert _git("rev-list", "--merges", "--count", "main", cwd=remote).strip() == "0"

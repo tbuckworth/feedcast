@@ -1,0 +1,47 @@
+name: Set up the pipeline
+description: >-
+  Everything a job needs before it runs src.main or a script: main's latest
+  commit, the database and MP3s from the state branch, uv, ffmpeg and the
+  Python dependencies. Used by the update, narrate and check-llm jobs in
+  update-feed.yml, after actions/checkout (a local action is read from the
+  checkout).
+
+# Composite steps take no timeout-minutes, so each command is bounded by
+# `timeout` with the limit its workflow step used to carry. A hang fails the
+# step (exit 124, and -v names the command it stopped) instead of running on
+# to the job's timeout.
+
+inputs:
+  pipeline:
+    description: >-
+      Also pull main, restore the state branch and install ffmpeg. The LLM
+      smoke test (check-llm) needs only the Python dependencies.
+    required: false
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    # A queued run's checkout may be stale, and the narrate job needs the
+    # commit the first pass pushed.
+    - name: Pull latest main
+      if: inputs.pipeline == 'true'
+      shell: bash
+      run: timeout -v 5m git pull origin main
+
+    - name: Restore database and audio from the state branch
+      if: inputs.pipeline == 'true'
+      shell: bash
+      run: timeout -v 10m scripts/state.sh pull
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v4
+
+    - name: Install ffmpeg
+      if: inputs.pipeline == 'true'
+      shell: bash
+      run: timeout -v 12m scripts/ci-install-ffmpeg.sh
+
+    - name: Install dependencies
+      shell: bash
+      run: timeout -v 10m uv sync
