@@ -1,7 +1,36 @@
 """Feedcast: RSS feeds and a daily news briefing, narrated as a podcast.
 
-`python -m src.main` runs the pipeline; AGENTS.md describes a run's phases and
-passes. The modules, roughly in the order a run uses them:
+`python -m src.main` runs the pipeline in three phases:
+
+1. Collect. Fetch every feed in config.yaml in parallel and take each feed's
+   newest unseen entry within `max_age_hours`, deduplicating by id and by link
+   in config order. Add the entries that failed on earlier runs (table
+   `failed_entries`, found again with the age cutoff off, up to
+   `FeedMonitor.MAX_ATTEMPTS` attempts) and write the day's news briefing.
+   Then link rather than narrate posts too mathematical to follow by ear, and
+   replace excerpt-only feed bodies with the full post. An injected URL
+   (`INJECT_URL`) replaces this phase with one page extracted from the web.
+2. Make episodes, concurrently. The writer role summarises a post and the
+   checker role reads the summary against its source, or the post is cleaned
+   to be read in full. The normalizer role rewrites the script for speech,
+   and text-to-speech (TTS) narrates it in chunks that ffmpeg joins into an
+   MP3. Meanwhile the bullets role digests the script for the email. An entry
+   that fails is retried once, serially, from the stage that failed; if it
+   fails again, a feed entry is queued in `failed_entries`.
+3. Publish. Record the episodes in data/posts.db, delete episodes older than
+   `retention_days` with their audio, transcripts and source records, write
+   output/, push an injection's outcome to ntfy.sh, and email the run report.
+
+`FEEDCAST_PASS` splits a run into two publishes, so that a long reading cannot
+delay the briefing and the summaries. `first` publishes the briefing and the
+summaries and sends the email; posts read out in full
+(`ContentProcessor.reads_verbatim`) are only cleaned and digested, listed in
+the email with a link to their episode page, and parked in table
+`deferred_entries`. `narrate` narrates the parked posts and publishes again,
+emailing only `FEEDCAST_EMAIL_TO` and only on failure. Inject and reprocess
+runs are always one pass.
+
+The modules, roughly in the order a run uses them:
 
 - config: the schema of config.yaml, and loading it.
 - env: on/off switches read from the environment.

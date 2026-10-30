@@ -96,8 +96,8 @@ jobs:
   # GitHub delivers `schedule:` hours late under load (11h on 2026-08-27,
   # 12h on 2026-08-28, 7h on 2026-08-29), so "the late one arrives after the
   # early one finished" is the normal case, not the exception — on 2026-08-29
-  # both ran and two emails went out. Anything the operator asked for by hand
-  # (a reprocess, an injection, a resend, force) is never guarded.
+  # both ran and two emails went out. A run asked for by hand (ON_DEMAND) is
+  # never guarded.
   guard:
     if: inputs.llm_smoke_test != true
     runs-on: ubuntu-latest

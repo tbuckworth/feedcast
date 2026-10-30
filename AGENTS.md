@@ -2,7 +2,7 @@
 
 The instructions every coding agent in this repository follows. Codex reads this file directly; Claude Code reads it through the `@AGENTS.md` line in `CLAUDE.md`. Write rules that apply to both here, and keep Claude-only material in `CLAUDE.md`.
 
-Feedcast turns RSS feeds and a daily news briefing into a narrated podcast, published on GitHub Pages, and emails a report of each run. GitHub Actions runs it daily from `main`. [README.md](README.md) is the usage guide: setup, commands, environment variables, configuration and CI dispatch inputs.
+[README.md](README.md) says what Feedcast does and how to use it: setup, commands, environment variables, configuration and CI.
 
 ## Rules
 
@@ -46,15 +46,7 @@ Entry points:
 
 ## How a run works
 
-`src/main.py` runs the pipeline in three phases:
-
-1. **Collect.** Fetch every feed in `config.yaml` in parallel and take each feed's newest unseen entry within `max_age_hours`, deduplicating by id and by link in config order. Add the entries that failed on earlier runs (table `failed_entries`, found again with the age cutoff off, up to `FeedMonitor.MAX_ATTEMPTS` attempts) and write the day's news briefing (`src/news.py`). Then link rather than narrate posts too mathematical to follow by ear (`src/mathiness.py`), and replace excerpt-only feed bodies with the full post (`src/fulltext.py`). An injected URL (`INJECT_URL`) replaces this phase with one page extracted from the web.
-2. **Make episodes,** concurrently. The writer role summarises a post and the checker role reads the summary against its source (`src/verify.py`), or the post is cleaned to be read in full. The normalizer role then rewrites the script for speech, and DeepInfra's Chatterbox text-to-speech model narrates it in chunks that ffmpeg joins into an MP3. Meanwhile the bullets role digests the script for the email. An entry that fails is retried once, serially, from the stage that failed; if it fails again, a feed entry is queued in `failed_entries`.
-3. **Publish.** Record the episodes in `data/posts.db`, delete episodes older than `retention_days` with their audio, transcripts and source records, write `output/`, push an injection's outcome to ntfy.sh, and email the run report.
-
-`FEEDCAST_PASS` splits a run into two publishes, so that a long reading cannot delay the briefing and the summaries. `first` publishes the briefing and the summaries and sends the email; posts read out in full (`ContentProcessor.reads_verbatim`) are only cleaned and digested, listed in the email with a link to their episode page, and parked in table `deferred_entries`. `narrate` narrates the parked posts and publishes again, emailing only `FEEDCAST_EMAIL_TO` and only on failure. Unset, everything runs in one pass; inject and reprocess runs always do.
-
-In CI, `update-feed.yml` runs daily at 03:43 UTC. `guard` stops the run if another run that UTC day has already published, unless the workflow's `ON_DEMAND` expression marks it as requested by hand. `update` runs the first pass and commits (`scripts/ci-commit-and-push.sh`), `deploy` publishes `output/` to GitHub Pages, `narrate` runs the narration pass when the first pass parked anything, and `deploy-narrated` publishes again. Both deploys call `publish-pages.yml`, which waits for the live feed to match the commit and then pings the feed's WebSub hub. The jobs that run Python (`update`, `narrate`, `check-llm`) set up through `.github/actions/setup-pipeline`. A report email that was not sent, or a failed narration, fails its job after the commit, so the run publishes but does not end green.
+The `src/__init__.py` docstring describes a run's phases and its two publishes. README's CI section describes the schedule and the guard, and the comments in `.github/workflows/update-feed.yml` describe its jobs.
 
 <!-- claude-tooling: codex checklist review -->
 ## Checklist review (Codex)

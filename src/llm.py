@@ -3,7 +3,7 @@
 Every model call in the pipeline goes through `complete()`, except a web search
 (`complete_with_web_search()`), which runs on one route with no fallback.
 
-Four roles, each an ordered list of (route, model) targets in `ROLES`. A call
+Each role is an ordered list of (route, model) targets in `ROLES`. A call
 tries the first target; if the provider fails or the reply comes back empty it
 moves to the next, logs the switch, and the run report says which one served. A
 request the provider rejects as malformed, or an error in our own code, raises
@@ -343,6 +343,10 @@ def native_anthropic() -> AsyncAnthropic:
     The OpenAI-compatible endpoint ignores `reasoning_effort` (Opus 5.5 writes
     as many output tokens with it set to low as with it unset) and rejects
     adaptive thinking outright, so effort takes hold only here.
+
+    Reads ANTHROPIC_API_KEY once and keeps one client for the whole process
+    (LLM_TIMEOUT_SECONDS, 3 retries). It does not check the key: with it
+    unset, every call on the client raises TypeError, so callers check first.
     """
     global _native
     if _native is None:
@@ -462,6 +466,11 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
                    reasoning: dict | None = None, fallback_on_empty: bool = True,
                    check: Callable[[str], str | None] | None = None) -> Completion:
     """Run one chat completion for `role`, falling back along its target list.
+
+    Calls the targets' providers over the network, in order until one serves,
+    with the API key each route names in the environment. A fallback is
+    recorded in `notices`, and an account failure adds the route to
+    `dead_routes` for the rest of the run.
 
     `client` pins the call to one client with no fallback: tests use it. Such
     a client is assumed to be OpenRouter's, so the role's first OpenRouter

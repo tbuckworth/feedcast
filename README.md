@@ -18,9 +18,9 @@ Feedcast turns RSS feeds into a podcast. Each day it picks up new posts from the
    ──▶ feed.xml on GitHub Pages, the daily email, and an ntfy push for an injected URL
 ```
 
-Language models do four jobs, called roles: the **writer** writes the summaries and the briefing, the **checker** reads each written script against its source and the writer corrects what it flags, the **bullets** role writes the email's digest, and the **normalizer** rewrites a script for speech ("45%" becomes "forty-five percent"). Each role tries an ordered list of models across three API accounts and moves to the next when one fails; `src/llm.py` lists them and says why each was chosen. The email names the model that wrote each summary and briefing, and lists every fallback.
+Language models do the work in roles, which `ROLES` in `src/llm.py` defines: the **writer** writes the summaries and the briefing, the **checker** reads each written script against its source and the writer corrects what it flags, the **bullets** role writes the email's digest, and the **normalizer** rewrites a script for speech ("45%" becomes "forty-five percent"). Each role tries an ordered list of models across the API accounts and moves to the next when one fails; the module's docstring says why each model was chosen. The email names the model that wrote each summary and briefing, and lists every fallback.
 
-GitHub Actions publishes up to twice a day: first the briefing and the summaries, with the email, then any posts read out in full, which take longest to narrate. The email lists those posts with a link to their episode page, which plays the audio once it exists. [AGENTS.md](AGENTS.md) describes a run in detail.
+The `src/__init__.py` docstring describes a run in detail, including its two publishes.
 
 ## Setup
 
@@ -66,7 +66,7 @@ An injected URL skips the feeds: the page is fetched and its article extracted w
 | `INJECT_URL` | Any URL, to extract and narrate as an episode instead of reading the feeds. Injecting a URL again replaces its episode |
 | `INJECT_MODE` | Mode for `INJECT_URL`: `auto` (default), `summarize` or `verbatim` |
 | `NTFY_TOPIC` | ntfy.sh topic that gets a push when an injected URL is published or fails |
-| `FEEDCAST_PASS` | `first` or `narrate`: one half of a two-publish run (see How it works). Unset runs everything in one pass; any other value stops the run |
+| `FEEDCAST_PASS` | `first` or `narrate`: one of a run's two publishes (`src/__init__.py`). Unset runs everything in one pass; any other value stops the run |
 | `RESEND_REPORT` | Re-send the last run's email, digesting any episode that has no bullets. Reads no feeds, and narrates and publishes nothing |
 | `PREVIEW_BRIEFING` | Write a fresh briefing, prediction markets and fidelity check included, and email it with its charts. Publishes and records nothing |
 | `FEEDCAST_EMAIL_TO` | Recipient of the email. Unset turns the email off; set, the SMTP credentials must be too, or the send fails, and in CI so does the job (after it publishes) |
@@ -108,7 +108,7 @@ On/off variables count as on when set to `true`, `1` or `yes`. In CI, the `env:`
 
 `.github/workflows/update-feed.yml` runs the pipeline daily at 03:43 UTC. GitHub's schedule can fire hours late or not at all, so `scripts/cron-backstop.sh`, run by the desktop crontab at 05:30 Europe/London, dispatches the workflow when no run exists for the UTC day.
 
-One run publishes per UTC day: the `guard` job stops a run when another run that day has already published, so the backstop and a late scheduled run do not both email. A hand run, one dispatched with `entry_url`, `inject_url`, `resend_report`, `preview_briefing` or `force` (the workflow's `ON_DEMAND`), is not guarded, and is a dev run (`FEEDCAST_TEST_RUN`) unless `notify_list` is ticked. Runs queue behind one another in the `feedcast-pipeline` concurrency group.
+One run publishes per UTC day: the `guard` job stops a run when another run that day has already published, so the backstop and a late scheduled run do not both email. A hand run, one dispatched with any input the workflow's `ON_DEMAND` expression names, is not guarded, and is a dev run (`FEEDCAST_TEST_RUN`) unless `notify_list` is ticked. Runs queue behind one another in the `feedcast-pipeline` concurrency group.
 
 | Dispatch input | Effect |
 |----------------|--------|
