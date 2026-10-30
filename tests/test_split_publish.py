@@ -225,15 +225,22 @@ class TestNarrationPass:
         self._narrate(setup)
         assert outputs.read_text() == "report_failed=true\n"
 
-    def test_a_post_whose_passes_keep_being_cut_off_is_given_up(self, setup):
+    def test_a_post_whose_passes_keep_being_cut_off_is_given_up(self, setup, monkeypatch,
+                                                                 capsys):
         config, monitor, audio_dir, out, sent = setup
+        monkeypatch.setenv("GITHUB_ACTIONS", "true")
         monitor.defer_entry(_entry(), "verbatim", "Clean text.", None, [])
         for _ in range(3):            # three passes killed before they could record anything
             monitor.start_narration()
         self._narrate(setup)
         assert monitor.deferred_entries() == []
         (msg,) = sent
-        assert "gave up after 3 attempts (the run was cut off)" in _email_text(msg)
+        why = "narration: gave up after 3 attempts (the run was cut off)"
+        assert f"Failed:\n  - Does Georgism Work?: {why}\n\n" in _email_text(msg)
+        # In the log and on the run's summary page, like every other give-up.
+        log = capsys.readouterr().out
+        assert f"Giving up on Does Georgism Work?: {why}" in log
+        assert f"::warning title=Feedcast entry failed::Does Georgism Work? — {why}" in log
 
     def test_a_passage_narrated_as_written_is_reported_with_its_episode(
             self, setup, routes, monkeypatch, capsys):

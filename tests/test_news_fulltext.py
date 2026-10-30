@@ -77,6 +77,24 @@ def test_when_no_writer_gives_a_usable_selection_the_briefing_fails(monkeypatch)
         asyncio.run(agg.generate_briefing())
 
 
+def test_a_news_source_whose_fetch_raises_is_a_dead_source(monkeypatch):
+    """It was printed, but not listed with the sources that returned nothing."""
+    import feedparser
+    real = feedparser.parse
+
+    def parse(url, *a, **kw):   # feedparser raises on a socket timeout
+        if url == "https://bbc.example/rss":
+            raise TimeoutError("timed out")
+        return real(url, *a, **kw)
+    monkeypatch.setattr(feedparser, "parse", parse)
+    agg = NewsAggregator(sources=[{"name": "BBC World", "url": "https://bbc.example/rss",
+                                   "category": "world"}],
+                         prompt="Write.", lookback_hours=24, full_text_stories=0,
+                         max_article_chars=6000, author="Feedcast Bot", verify=False)
+    assert asyncio.run(agg.fetch_all_sources()) == []
+    assert agg.dead_sources == ["BBC World (TimeoutError: timed out)"]
+
+
 def test_full_text_fetch_caps_length_and_keeps_blurb_on_failure(monkeypatch):
     def fake_extract(url):
         if url.endswith("/1"):

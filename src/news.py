@@ -111,6 +111,7 @@ class NewsAggregator:
                     self.dead_sources.append(source["name"])
                 return []
             articles = []
+            stale = undated = 0
             for entry in feed.entries:
                 published = None
                 if hasattr(entry, "published_parsed") and entry.published_parsed:
@@ -118,7 +119,13 @@ class NewsAggregator:
                 elif hasattr(entry, "updated_parsed") and entry.updated_parsed:
                     published = datetime(*entry.updated_parsed[:6], tzinfo=timezone.utc)
 
-                if published is None or published < cutoff:
+                # Counted, as monitor.fetch_feed does: a source that stops
+                # dating its items would otherwise just look quiet.
+                if published is None:
+                    undated += 1
+                    continue
+                if published < cutoff:
+                    stale += 1
                     continue
 
                 summary = ""
@@ -135,6 +142,12 @@ class NewsAggregator:
                     "published": published,
                     "url": entry.get("link", ""),
                 })
+            if stale or undated:
+                detail = ", ".join(filter(None, [
+                    f"{stale} older than {self.lookback_hours:g}h" if stale else "",
+                    f"{undated} with no date" if undated else "",
+                ]))
+                print(f"  {source['name']}: skipped {detail}")
             return articles
 
         results = await asyncio.gather(
@@ -143,9 +156,12 @@ class NewsAggregator:
         )
 
         all_articles = []
-        for i, result in enumerate(results):
+        for source, result in zip(self.sources, results):
             if isinstance(result, Exception):
-                print(f"  Warning: failed to fetch {self.sources[i]['name']}: {result}")
+                # feedparser raises on a socket timeout; the source returned
+                # nothing as surely as an empty feed does, so the email lists it.
+                print(f"  Warning: failed to fetch {source['name']}: {result!r}")
+                self.dead_sources.append(f"{source['name']} ({type(result).__name__}: {result})")
                 continue
             all_articles.extend(result)
 

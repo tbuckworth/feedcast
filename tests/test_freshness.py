@@ -5,6 +5,7 @@ presented 250 items back to September 2025 as unseen, and the pipeline
 narrated its way through the archive one post per run.
 """
 
+import asyncio
 from datetime import datetime, timedelta, timezone
 
 import pytest
@@ -14,6 +15,7 @@ from src.email_report import (ReportEpisode, RunReport, build_html, build_text,
                               bullet_parts, format_published)
 from src.config import load_config
 from src.monitor import FeedMonitor
+from src.news import NewsAggregator
 from tests.conftest import feed_xml
 
 # The production window, from config.yaml.
@@ -60,6 +62,25 @@ class TestFreshnessWindow:
         xml = feed_xml(("Ancient", self._now() - timedelta(days=400)))
         entries = monitor.fetch_feed(xml, "Test", max_age_hours=None)
         assert [e.title for e in entries] == ["Ancient"]
+
+    def test_what_skip_patterns_drop_is_counted_with_the_rest(self, monitor, capsys):
+        xml = feed_xml(("Open Thread 350", self._now() - timedelta(hours=1)),
+                       ("Fresh", self._now() - timedelta(hours=1)),
+                       ("Old", self._now() - timedelta(hours=MAX_AGE + 5)))
+        entries = monitor.fetch_feed(xml, "ACX", ["^Open Thread"], max_age_hours=MAX_AGE)
+        assert [e.title for e in entries] == ["Fresh"]
+        assert (f"ACX: skipped 1 older than {MAX_AGE:g}h, 1 matching skip_patterns"
+                in capsys.readouterr().out)
+
+    def test_news_items_too_old_or_undated_are_counted_per_source(self, capsys):
+        xml = feed_xml(("Fresh", self._now() - timedelta(hours=1)), ("Undated", None),
+                       ("Old", self._now() - timedelta(hours=30)))
+        agg = NewsAggregator(sources=[{"name": "BBC World", "url": xml, "category": "world"}],
+                             prompt="Write.", lookback_hours=24, full_text_stories=0,
+                             max_article_chars=6000, author="Feedcast Bot", verify=False)
+        articles = asyncio.run(agg.fetch_all_sources())
+        assert [a["title"] for a in articles] == ["Fresh"]
+        assert "BBC World: skipped 1 older than 24h, 1 with no date" in capsys.readouterr().out
 
     def test_a_custom_window_is_honoured(self, monitor):
         xml = feed_xml(("SixHoursOld", self._now() - timedelta(hours=6)))

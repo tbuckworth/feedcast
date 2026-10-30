@@ -333,15 +333,15 @@ class FeedMonitor:
             )
             conn.commit()
 
-    def delete_entry(self, entry_id: str) -> bool:
-        """Delete an entry from the database. Returns True if deleted."""
+    def delete_entry(self, key: str) -> list[tuple[str, str]]:
+        """Delete the entries whose id or link is `key`. Returns each one's (id, title)."""
         with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.execute(
-                "DELETE FROM processed_posts WHERE id = ? OR link = ?",
-                (entry_id, entry_id),
-            )
+            deleted = conn.execute(
+                "SELECT id, title FROM processed_posts WHERE id = ? OR link = ?", (key, key),
+            ).fetchall()
+            conn.execute("DELETE FROM processed_posts WHERE id = ? OR link = ?", (key, key))
             conn.commit()
-            return cursor.rowcount > 0
+            return deleted
 
     # Retries of a failed entry, counting the first attempt. Three mornings is
     # long enough for a provider blip and short enough that a post the
@@ -546,7 +546,7 @@ class FeedMonitor:
         now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
         cutoff = (now_utc - timedelta(hours=max_age_hours)
                   if max_age_hours is not None else None)
-        stale = undated = already = 0
+        stale = undated = already = skipped = 0
 
         for entry in feed.entries:
             entry_id = entry.get("id") or entry.get("link", "")
@@ -554,6 +554,7 @@ class FeedMonitor:
             # Skip entries matching title patterns (e.g. ACX open threads)
             title = entry.get("title", "Untitled")
             if skip_patterns and any(re.search(p, title, re.IGNORECASE) for p in skip_patterns):
+                skipped += 1
                 continue
 
             # A post waiting for the narration pass is not in processed_posts
@@ -617,11 +618,12 @@ class FeedMonitor:
                 )
             )
 
-        if stale or undated or already:
+        if stale or undated or already or skipped:
             detail = ", ".join(filter(None, [
                 f"{stale} older than {max_age_hours:g}h" if stale else "",
                 f"{undated} with no date" if undated else "",
                 f"{already} already narrated under another feed" if already else "",
+                f"{skipped} matching skip_patterns" if skipped else "",
             ]))
             print(f"  {feed_name}: skipped {detail}")
 
