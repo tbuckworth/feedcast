@@ -20,6 +20,8 @@ def test_upload_waits_the_configured_replication_delay(tmp_path, monkeypatch, de
     sample = tmp_path / "voice.wav"
     sample.write_bytes(b"RIFF")
     slept: list[float] = []
+    # httpx.post is DeepInfra's voice-upload endpoint (network); time.sleep is
+    # recorded instead of waited.
     monkeypatch.setattr(audio.httpx, "post", lambda *a, **kw: _Uploaded())
     monkeypatch.setattr(audio, "VOICE_UPLOAD_DELAY_SECONDS", delay)
     monkeypatch.setattr(time, "sleep", slept.append)

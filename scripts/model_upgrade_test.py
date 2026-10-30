@@ -48,6 +48,8 @@ PRICES = {
     "gpt-5.6-sol": (4.0, 20.0),
     "gpt-6.1-sol": (2.0, 10.0),
     "claude-sonnet-5-5": (2.0, 10.0),
+    "anthropic/claude-sonnet-5.5": (2.0, 10.0),
+    "openai/gpt-6.1-sol": (2.0, 10.0),
     "google/gemini-3-flash-preview": (0.5, 3.0),
 }
 
@@ -73,22 +75,29 @@ calls: list[dict] = []
 
 
 async def metered(role: str, messages: list[dict], **kw) -> llm.Completion:
-    """`llm.complete`, recording the tokens and cost of the reply that served it."""
+    """`llm.complete`, recording the tokens and cost of the reply that served it.
+
+    Raises KeyError for a reply with no billed cost from a model missing from
+    PRICES: costing it at $0 would understate the setup it ran in."""
     done = await llm.complete(role, messages, **kw)
     where, target, u = kw.get("label") or role, done.target, done.usage
     extra = getattr(u, "model_extra", None) or {}
     details = getattr(u, "completion_tokens_details", None)
-    pin, pout = PRICES.get(target.model, (0, 0))
-    listed = u.prompt_tokens * pin / 1e6 + u.completion_tokens * pout / 1e6
+    billed, price = extra.get("cost"), PRICES.get(target.model)
+    if billed is None and price is None:
+        raise KeyError(f"{where}: {target.label} billed no cost and {target.model} "
+                       "has no list price; add it to PRICES")
+    listed = (round(u.prompt_tokens * price[0] / 1e6 + u.completion_tokens * price[1] / 1e6, 5)
+              if price else None)
     calls.append({
         "call": where, "model": target.label,
         "prompt_tokens": u.prompt_tokens, "completion_tokens": u.completion_tokens,
         "reasoning_tokens": getattr(details, "reasoning_tokens", None) if details else None,
-        "billed_usd": extra.get("cost"), "list_usd": round(listed, 5),
+        "billed_usd": billed, "list_usd": listed,
         "chars_out": len(done.text or ""),
     })
     print(f"    [{where}] {target.label}: in={u.prompt_tokens} out={u.completion_tokens} "
-          f"cost={extra.get('cost', round(listed, 5))}")
+          f"cost={billed if billed is not None else listed}")
     return done
 
 
