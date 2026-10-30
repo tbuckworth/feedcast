@@ -37,24 +37,9 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Copy audio from the state branch to output
-        # Every enclosure the feed lists must ship with the site. The commit
-        # script pushes the state branch before main, so the audio for any
-        # feed.xml on main is already there; a missing file is a real fault.
         run: |
           scripts/state.sh pull
-          mkdir -p output/audio
-          shopt -s nullglob
-          mp3s=(data/audio/*.mp3)
-          if (( ${#mp3s[@]} )); then cp "${mp3s[@]}" output/audio/; fi
-          echo "Copied ${#mp3s[@]} MP3s"
-          missing=0
-          for f in $(grep -o '/audio/[^"]*\.mp3"' output/feed.xml | sed 's|^/audio/||; s|"$||'); do
-            if [[ ! -f "output/audio/$f" ]]; then
-              echo "::error::feed.xml lists audio/$f, which is not on the state branch"
-              missing=$((missing + 1))
-            fi
-          done
-          if (( missing )); then exit 1; fi
+          scripts/publish-audio.sh
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
