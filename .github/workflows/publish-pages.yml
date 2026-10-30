@@ -60,15 +60,23 @@ jobs:
       # hub fetch the feed and push it to every subscribed app within a minute.
       # The Pages CDN caches for 10 minutes, so wait until the live feed is
       # byte-identical to the one this run committed before pinging, or the
-      # hub would fetch and cache the previous day's feed.
+      # hub would fetch and cache the previous day's feed. The feed's address
+      # and its hub are both read from the feed (src/feed.py writes them).
       - name: Notify the WebSub hub
         timeout-minutes: 12
-        env:
-          FEED_URL: https://tbuckworth.github.io/feedcast/feed.xml
         run: |
           set -uo pipefail
-          hub="$(grep -o '<atom:link[^>]*rel="hub"[^>]*>' output/feed.xml \
-                 | grep -o 'href="[^"]*"' | head -1 | cut -d'"' -f2)"
+          # The href of feed.xml's <atom:link rel="$1">; nothing if it has none.
+          atom_link() {
+            grep -o "<atom:link[^>]*rel=\"$1\"[^>]*>" output/feed.xml \
+              | grep -o 'href="[^"]*"' | head -1 | cut -d'"' -f2 || true
+          }
+          FEED_URL="$(atom_link self)"
+          if [[ -z "$FEED_URL" ]]; then
+            echo "::error::output/feed.xml has no <atom:link rel=\"self\">, so there is no feed URL to give the hub"
+            exit 1
+          fi
+          hub="$(atom_link hub)"
           if [[ -z "$hub" ]]; then
             echo "feed.xml declares no WebSub hub; nothing to notify"
             exit 0

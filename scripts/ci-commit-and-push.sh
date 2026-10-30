@@ -11,10 +11,13 @@ git config user.name "github-actions[bot]"
 git config user.email "github-actions[bot]@users.noreply.github.com"
 git add output/ data/sources/
 git diff --staged --quiet || git commit -m "$message"
-# Pull latest — if rebase fails (e.g. binary conflicts), fall back to merge
+# Pull latest. If the rebase conflicts (e.g. binary files), merge instead with
+# -X ours, which settles every conflict in this run's favour; the warning names
+# the files that overrode, read before --abort forgets them.
 if ! git pull --rebase origin main; then
-  echo "Rebase failed, falling back to merge..."
+  conflicted="$(git diff --name-only --diff-filter=U | paste -sd ' ' -)"
   git rebase --abort
+  echo "::warning title=Feedcast commit::Rebase onto main conflicted in: ${conflicted}. Merged with -X ours instead, so this run's side of each conflict replaced main's"
   git pull --no-rebase origin main -X ours
   git add output/ data/sources/
   git diff --staged --quiet || git commit -m "$message (merge)"

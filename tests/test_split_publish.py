@@ -15,7 +15,7 @@ import pytest
 
 import src.main as main
 from src.config import load_config
-from src.email_report import ReportEpisode, RunReport, build_html, build_text
+from src.email_report import ReportEpisode, RunReport, build_html, build_text, send_report
 from src.feed import Episode, FeedGenerator, PodcastConfig, episode_page_url
 from src.main import Attempt, _build_run_report, _prepare_deferred, process_entry
 from src.monitor import FeedEntry, FeedMonitor, episode_id
@@ -218,6 +218,19 @@ class TestNarrationPass:
         assert operator_only and "attempt 1 of 3, will retry next run" in report.failures[0][1]
         assert "failed on the last attempt" in \
                (out / "episodes" / f"{episode_id('acx-1')}.html").read_text()
+
+    def test_a_failure_email_that_was_not_sent_fails_the_job(self, setup, tmp_path, monkeypatch):
+        _, monitor, *_ = setup
+        monitor.defer_entry(_entry(), "verbatim", "Clean text.", None, ["b1"])
+        _Audio.fail = True
+        # The real send_report, with a recipient but no login: a failed send.
+        monkeypatch.setattr(main, "send_report", send_report)
+        monkeypatch.setenv("FEEDCAST_EMAIL_TO", "operator@example.com")
+        monkeypatch.setenv("SMTP_USER", "")
+        outputs = tmp_path / "github_output"
+        monkeypatch.setenv("GITHUB_OUTPUT", str(outputs))
+        self._narrate(setup)
+        assert outputs.read_text() == "report_failed=true\n"
 
     def test_a_post_whose_passes_keep_being_cut_off_is_given_up(self, setup):
         config, monitor, audio_dir, out, sent = setup

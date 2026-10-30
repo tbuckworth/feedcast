@@ -76,7 +76,7 @@ bwsrun uv run python -m src.main
 | `VOICE_UPLOAD_DELAY_SECONDS` | No | Delay after voice upload for cross-region replication (CI uses 5) |
 | `SAVE_DEBUG_WAVS` | No | Save intermediate WAV chunks for debugging |
 | `LLM_TIMEOUT_SECONDS` | No | Per-request timeout for OpenRouter calls (default 180, 3 retries) |
-| `FEEDCAST_EMAIL_TO` | No | Recipient of the HTML run report. Unset disables the email entirely |
+| `FEEDCAST_EMAIL_TO` | No | Recipient of the HTML run report. Unset disables the email entirely; set, the SMTP credentials must be too, or the send fails and so does the CI run (after it publishes) |
 | `FEEDCAST_MAX_AGE_HOURS` | No | How recent a post must be to be narrated (default 48; `0` disables the cutoff) |
 | `FEEDCAST_EMAIL_BCC` | No | Extra recipients, comma-separated, blind-copied so they stay hidden from each other |
 | `SMTP_USER` | No | SMTP username (the sending Gmail address) |
@@ -219,7 +219,8 @@ A concurrency group prevents race conditions between scheduled and on-demand run
 **One publish per day.** A `guard` job asks whether today's daily run already
 published and stops the second one before it fetches anything, so the desktop
 trigger and GitHub's own schedule cannot both email you (they both did on
-2026-08-29). Anything asked for by hand — `entry_url`, `inject_url`,
+2026-08-29). A run counts as published once its commit is pushed, even if it
+then fails on its email or its narration. Anything asked for by hand — `entry_url`, `inject_url`,
 `resend_report`, or `force` — is never guarded.
 
 **Scheduled runs are best-effort.** GitHub delivers `schedule:` late under load —

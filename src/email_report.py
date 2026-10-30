@@ -625,17 +625,24 @@ def _addresses(raw: str) -> list[str]:
 
 def send_report(report: RunReport, when: datetime | None = None,
                 operator_only: bool = False, subject_tag: str = "",
-                images: dict[str, bytes] | None = None) -> bool:
-    """Email the run report. Returns True if sent, False if skipped or failed.
+                images: dict[str, bytes] | None = None) -> bool | None:
+    """Email the run report.
 
+    Returns True if sent, None if the email is off (FEEDCAST_EMAIL_TO unset),
+    and False if it is on but was not sent, missing SMTP credentials included:
+    a missing or rotated CI secret is a failure, not a reason to stop reporting.
     `operator_only` leaves out the BCC list, as a dev run does: the narration
     pass uses it to say a verbatim post failed after the day's email went out.
     `subject_tag` prefixes the subject; `images` are inline PNGs (the market
     charts) keyed by the Content-ID the HTML cites.
-    Never raises: a broken mailbox must not fail an otherwise-good run.
+    Never raises, because it runs before the run commits what it published;
+    src.main records a False so the workflow fails the run afterwards.
     """
     when = when or datetime.now()
     to_addrs = _addresses(os.environ.get("FEEDCAST_EMAIL_TO", ""))
+    if not to_addrs:
+        print("  Email report off (FEEDCAST_EMAIL_TO not set)")
+        return None
     bcc_addrs = _addresses(os.environ.get("FEEDCAST_EMAIL_BCC", ""))
     test_run = is_test_run()
     if test_run or operator_only:
@@ -646,8 +653,9 @@ def send_report(report: RunReport, when: datetime | None = None,
         or os.environ.get("GMAIL_APP_PASSWORD", "")
     ).strip()
 
-    if not (to_addrs and user and password):
-        print("  Email report skipped (FEEDCAST_EMAIL_TO / SMTP_USER / SMTP_PASSWORD not set)")
+    if not (user and password):
+        print("  Email report failed: FEEDCAST_EMAIL_TO is set, but SMTP_USER or "
+              "GMAIL_APP_PASSWORD (alias SMTP_PASSWORD) is not")
         return False
 
     # An unset GitHub Actions `vars.X` interpolates to an empty string rather
