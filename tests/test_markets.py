@@ -288,6 +288,106 @@ class TestFailuresReachTheEmail:
         assert matched.startswith("prediction markets: the market matching reply was not JSON")
 
 
+def _secs(when: datetime) -> int:
+    return int(when.timestamp())
+
+
+class TestPriceHistories:
+    """Each platform's price history, as read from its own API's reply."""
+
+    @pytest.fixture
+    def api(self, monkeypatch):
+        """Every history request answered from fixtures, and the requests made.
+
+        The clock is fixed at NOW so the requests' time windows can be pinned.
+        """
+        monkeypatch.setattr(markets, "_utcnow", lambda: NOW)
+        requests = []
+
+        def handler(request):
+            requests.append(request)
+            if request.url.path.endswith("/prices-history"):
+                return httpx.Response(200, json={"history": [
+                    {"t": _secs(NOW - timedelta(days=400)), "p": 0.2},
+                    {"t": _secs(NOW - timedelta(days=2)), "p": 0.4},
+                    {"t": _secs(NOW - timedelta(hours=1)), "p": 0.45}]})
+            if request.url.path.endswith("/candlesticks"):
+                return httpx.Response(200, json={"candlesticks": [
+                    {"end_period_ts": _secs(NOW - timedelta(days=2)),
+                     "price": {"close_dollars": "0.30"}},
+                    # No trade in the period: the previous price stands.
+                    {"end_period_ts": _secs(NOW - timedelta(days=1)),
+                     "price": {"close_dollars": None, "previous_dollars": "0.31"}},
+                    {"end_period_ts": _secs(NOW - timedelta(hours=2)), "price": {}}]})
+            # Manifold's bets, newest first; one without a price after it.
+            return httpx.Response(200, json=[
+                {"id": f"b{i}", "createdTime": _secs(NOW - back) * 1000, "probAfter": p}
+                for i, (back, p) in enumerate([(timedelta(hours=1), 0.5),
+                                               (timedelta(days=40), 0.35),
+                                               (timedelta(days=50), 0.3),
+                                               (timedelta(days=400), 0.1)])]
+                + [{"id": "bx", "createdTime": _secs(NOW - timedelta(days=3)) * 1000}])
+
+        async def fetch(fetcher, market_list, *args):
+            async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+                for m in market_list:
+                    await fetcher(client, m, *args)
+        return SimpleNamespace(fetch=fetch, requests=requests)
+
+    @staticmethod
+    def _markets():
+        pm, ks, mf = _m(), _m(platform="Kalshi"), _m(platform="Manifold")
+        pm.history_ref, ks.history_ref, mf.history_ref = "tok", "KXAI|KXAI-1", "abc"
+        return pm, ks, mf
+
+    def test_thirty_day_history_hourly_from_each_platform(self, api):
+        since = NOW - timedelta(days=30)
+        pm, ks, mf = self._markets()
+        asyncio.run(api.fetch(markets.fetch_history, [pm, ks, mf], since))
+
+        assert pm.history == [(NOW - timedelta(days=400), 0.2), (NOW - timedelta(days=2), 0.4),
+                              (NOW - timedelta(hours=1), 0.45)]
+        assert ks.history == [(NOW - timedelta(days=2), 0.30), (NOW - timedelta(days=1), 0.31)]
+        # Manifold keeps the last bet before the window as its starting price.
+        assert mf.history == [(NOW - timedelta(days=40), 0.35), (NOW - timedelta(hours=1), 0.5)]
+        assert [(r.url.path, dict(r.url.params)) for r in api.requests] == [
+            ("/prices-history", {"market": "tok", "startTs": str(_secs(since)), "fidelity": "60"}),
+            ("/trade-api/v2/series/KXAI/markets/KXAI-1/candlesticks",
+             {"start_ts": str(_secs(since)), "end_ts": str(_secs(NOW)), "period_interval": "60"}),
+            ("/v0/bets", {"contractId": "abc", "limit": "1000"})]
+
+    def test_long_history_from_each_platform_reaches_back_a_year(self, api):
+        pm, ks, mf = self._markets()
+        asyncio.run(api.fetch(markets.fetch_long_history, [pm, ks, mf]))
+
+        assert pm.long_history == [(NOW - timedelta(days=2), 0.4), (NOW - timedelta(hours=1), 0.45)]
+        assert ks.long_history == [(NOW - timedelta(days=2), 0.30), (NOW - timedelta(days=1), 0.31)]
+        assert mf.long_history == [(NOW - timedelta(days=50), 0.3), (NOW - timedelta(days=40), 0.35),
+                                   (NOW - timedelta(hours=1), 0.5)]
+        year_ago = NOW - timedelta(days=365)
+        assert [(r.url.path, dict(r.url.params)) for r in api.requests] == [
+            ("/prices-history", {"market": "tok", "interval": "max", "fidelity": "720"}),
+            ("/trade-api/v2/series/KXAI/markets/KXAI-1/candlesticks",
+             {"start_ts": str(_secs(year_ago)), "end_ts": str(_secs(NOW)),
+              "period_interval": "1440"}),
+            ("/v0/bets", {"contractId": "abc", "limit": "1000"})]
+
+    def test_an_unknown_platform_raises_instead_of_passing_for_manifold(self, api):
+        """Every platform branch used to end in an `else` that read any other
+        platform as Manifold: play money, never liquid, priced from its bets."""
+        odd = _m(platform="Metaculus")
+        unknown = "unknown market platform 'Metaculus'"
+        with pytest.raises(ValueError, match=unknown):
+            odd.traded()
+        with pytest.raises(ValueError, match=unknown):
+            markets.is_liquid(odd, RULES, context=True)
+        with pytest.raises(ValueError, match=unknown):
+            asyncio.run(api.fetch(markets.fetch_history, [odd], NOW - timedelta(days=30)))
+        with pytest.raises(ValueError, match=unknown):
+            asyncio.run(api.fetch(markets.fetch_long_history, [odd]))
+        assert api.requests == []
+
+
 class TestModelRepliesAreRead:
     """The checker's and the web search's replies carry their JSON in a code
     fence, between sentences, or not at all."""

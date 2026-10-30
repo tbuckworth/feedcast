@@ -76,6 +76,11 @@ def _when(raw) -> datetime | None:
     return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
 
 
+def _unknown_platform(platform: str) -> ValueError:
+    """What every per-platform branch raises for a platform it was not written for."""
+    return ValueError(f"unknown market platform {platform!r}")
+
+
 @dataclass
 class Market:
     """One yes/no question on one platform, with its odds now and a day ago."""
@@ -111,7 +116,9 @@ class Market:
             return f"{amount} traded"
         if self.platform == "Kalshi":
             return f"{self.volume:,.0f} contracts traded"
-        return f"{self.traders or 0} traders, play money"
+        if self.platform == "Manifold":
+            return f"{self.traders or 0} traders, play money"
+        raise _unknown_platform(self.platform)
 
     def prob_at(self, when: datetime) -> float | None:
         """The last price at or before `when`, from the fetched history."""
@@ -239,32 +246,71 @@ async def manifold_search(client: httpx.AsyncClient, term: str) -> list[Market]:
     return [m for m in (manifold_market(x) for x in data or []) if m]
 
 
-async def fetch_history(client: httpx.AsyncClient, market: Market, since: datetime) -> None:
-    """Fill market.history from `since` to now. Raises on failure, leaving it empty."""
+@dataclass(frozen=True)
+class Resolution:
+    """How finely a price history is fetched, and from when, in each platform's terms."""
+
+    polymarket_minutes: int       # Polymarket's `fidelity`: minutes between points
+    polymarket_whole_life: bool   # Polymarket's whole life (interval=max), not from `since`
+    kalshi_minutes: int           # Kalshi's candlestick period
+    manifold_pages: int           # pages of 1,000 Manifold bets, newest first
+
+
+# The 30-day history the writer's odds are read from.
+HOURLY = Resolution(polymarket_minutes=60, polymarket_whole_life=False, kalshi_minutes=60,
+                    manifold_pages=1)
+# The charts' line over a market's whole life: about two points a day. Three
+# pages of Manifold bets reach back far enough for all but the busiest markets.
+WHOLE_LIFE = Resolution(polymarket_minutes=720, polymarket_whole_life=True, kalshi_minutes=1440,
+                        manifold_pages=3)
+
+
+async def _fetch_points(client: httpx.AsyncClient, market: Market, since: datetime,
+                        resolution: Resolution) -> list:
+    """The market's prices from `since` to now, oldest first, as [(datetime, prob)].
+
+    Polymarket's whole-life history may start before `since`, and Manifold's
+    keeps the last bet before `since` as the window's starting price. Raises on
+    a failed request and on a platform it does not know.
+    """
     if market.platform == "Polymarket":
+        window = ({"interval": "max"} if resolution.polymarket_whole_life
+                  else {"startTs": int(since.timestamp())})
         data = await _get(client, f"{POLY_CLOB}/prices-history", market=market.history_ref,
-                          startTs=int(since.timestamp()), fidelity=60)
+                          **window, fidelity=resolution.polymarket_minutes)
         points = [(datetime.fromtimestamp(h["t"], tz=timezone.utc), float(h["p"]))
                   for h in data.get("history") or []]
     elif market.platform == "Kalshi":
         series, ticker = market.history_ref.split("|", 1)
         data = await _get(client, f"{KALSHI}/series/{series}/markets/{ticker}/candlesticks",
-                          start_ts=int(since.timestamp()),
-                          end_ts=int(_utcnow().timestamp()), period_interval=60)
+                          start_ts=int(since.timestamp()), end_ts=int(_utcnow().timestamp()),
+                          period_interval=resolution.kalshi_minutes)
         points = []
         for c in data.get("candlesticks") or []:
             price = c.get("price") or {}
             p = _float(price.get("close_dollars")) or _float(price.get("previous_dollars"))
             if p is not None:
                 points.append((datetime.fromtimestamp(c["end_period_ts"], tz=timezone.utc), p))
-    else:
-        bets = await _get(client, f"{MANIFOLD}/bets", contractId=market.history_ref, limit=1000)
+    elif market.platform == "Manifold":
+        bets: list[dict] = []
+        for _ in range(resolution.manifold_pages):
+            page = await _get(client, f"{MANIFOLD}/bets", contractId=market.history_ref,
+                              limit=1000, **({"before": bets[-1]["id"]} if bets else {}))
+            bets += page or []
+            if len(page or []) < 1000:
+                break
         points = sorted((_when(b["createdTime"]), float(b["probAfter"]))
-                        for b in bets or [] if b.get("probAfter") is not None)
-        # Keep the last bet before the window as its starting price.
+                        for b in bets if b.get("probAfter") is not None)
         early = [pt for pt in points if pt[0] < since]
         points = early[-1:] + [pt for pt in points if pt[0] >= since]
-    market.history = sorted(points)
+    else:
+        raise _unknown_platform(market.platform)
+    return sorted(points)
+
+
+async def fetch_history(client: httpx.AsyncClient, market: Market, since: datetime) -> None:
+    """Fill market.history, hourly, from `since` to now. Raises on failure, leaving it empty."""
+    market.history = await _fetch_points(client, market, since, HOURLY)
 
 
 async def fetch_long_history(client: httpx.AsyncClient, market: Market,
@@ -273,36 +319,8 @@ async def fetch_long_history(client: httpx.AsyncClient, market: Market,
     at most `max_days` back. Raises on failure, leaving it empty; the chart then
     falls back to the 30-day history."""
     since = _utcnow() - timedelta(days=max_days)
-    if market.platform == "Polymarket":
-        data = await _get(client, f"{POLY_CLOB}/prices-history", market=market.history_ref,
-                          interval="max", fidelity=720)
-        points = [(datetime.fromtimestamp(h["t"], tz=timezone.utc), float(h["p"]))
-                  for h in data.get("history") or []]
-    elif market.platform == "Kalshi":
-        series, ticker = market.history_ref.split("|", 1)
-        data = await _get(client, f"{KALSHI}/series/{series}/markets/{ticker}/candlesticks",
-                          start_ts=int(since.timestamp()),
-                          end_ts=int(_utcnow().timestamp()), period_interval=1440)
-        points = []
-        for c in data.get("candlesticks") or []:
-            price = c.get("price") or {}
-            p = _float(price.get("close_dollars")) or _float(price.get("previous_dollars"))
-            if p is not None:
-                points.append((datetime.fromtimestamp(c["end_period_ts"], tz=timezone.utc), p))
-    else:
-        # Newest first, 1,000 a page; three pages reach back far enough
-        # for all but the busiest markets.
-        bets, before = [], None
-        for _ in range(3):
-            page = await _get(client, f"{MANIFOLD}/bets", contractId=market.history_ref,
-                              limit=1000, **({"before": before} if before else {}))
-            bets += page or []
-            if len(page or []) < 1000:
-                break
-            before = page[-1]["id"]
-        points = sorted((_when(b["createdTime"]), float(b["probAfter"]))
-                        for b in bets if b.get("probAfter") is not None)
-    market.long_history = _thin([pt for pt in sorted(points) if pt[0] >= since], 800)
+    points = await _fetch_points(client, market, since, WHOLE_LIFE)
+    market.long_history = _thin([pt for pt in points if pt[0] >= since], 800)
 
 
 def _thin(points: list, limit: int) -> list:
@@ -368,8 +386,10 @@ def is_liquid(m: Market, rules: MarketRules, *, context: bool = False) -> bool:
         if context:
             return m.volume >= rules.context_kalshi_volume
         return m.volume >= rules.kalshi_volume and (m.volume_24h or 0) >= rules.kalshi_volume_24h
-    # Play money: context only, never a move.
-    return context and (m.traders or 0) >= rules.context_manifold_traders
+    if m.platform == "Manifold":
+        # Play money: context only, never a move.
+        return context and (m.traders or 0) >= rules.context_manifold_traders
+    raise _unknown_platform(m.platform)
 
 
 def is_move(m: Market, rules: MarketRules, now: datetime) -> bool:
