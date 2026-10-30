@@ -20,12 +20,10 @@ failed first check is reported as such, and a failed revision or re-check
 keeps the flags the first check found.
 """
 
-import json
-import re
 from dataclasses import asdict, dataclass, field
 
 from .bundle import writer_bundle
-from .llm import EmptyCompletion, complete
+from .llm import EmptyCompletion, complete, extract_json
 
 MATERIAL = ("high", "medium")
 
@@ -86,10 +84,7 @@ class Fidelity:
 
 def parse_flags(raw: str) -> tuple[int, list[dict]]:
     """Pull (claims_total, flags) out of a reply, tolerating fences and prose."""
-    m = re.search(r"\{.*\}", raw, re.S)
-    if not m:
-        raise ValueError("no JSON object in checker reply")
-    data = json.loads(m.group(0))
+    data = extract_json(raw, dict)
     flags = []
     for f in data.get("flags", []) or []:
         if not isinstance(f, dict):

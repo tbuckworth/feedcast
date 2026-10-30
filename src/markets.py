@@ -38,7 +38,7 @@ from datetime import datetime, timedelta, timezone
 import httpx
 
 from . import notices
-from .llm import ROUTES, complete, native_anthropic
+from .llm import ROUTES, complete, extract_json, native_anthropic
 
 POLYMARKET = "https://gamma-api.polymarket.com"
 POLY_CLOB = "https://clob.polymarket.com"
@@ -445,18 +445,6 @@ MATCH_PROMPT = """Below are news stories, each followed by candidate prediction 
 Return ONLY JSON: {"<story number>": ["<market key>", ...], ...} listing only stories with a match."""
 
 
-def _json_object(text: str) -> dict | None:
-    """The JSON object in a model's reply, or None when it holds none."""
-    m = re.search(r"\{.*\}", text or "", re.S)
-    if not m:
-        return None
-    try:
-        data = json.loads(m.group(0))
-    except ValueError:
-        return None
-    return data if isinstance(data, dict) else None
-
-
 def _report_failures(what: str, outcomes: list[tuple[str, object]]) -> None:
     """Print each failed call of one kind and add one notice counting them.
 
@@ -492,8 +480,9 @@ async def link_stories(client: httpx.AsyncClient, stories: list[dict], rules: Ma
                         for i, s in enumerate(stories))
     done = await complete("checker", max_tokens=2000, label="market queries", messages=[
         {"role": "system", "content": QUERY_PROMPT}, {"role": "user", "content": listing}])
-    asked = _json_object(done.text)
-    if asked is None:
+    try:
+        asked = extract_json(done.text, dict)
+    except ValueError:
         _unreadable("market queries", done.text)
         return {}
     queries = {int(k): [q for q in v if isinstance(q, str)][:2]
@@ -543,8 +532,9 @@ async def link_stories(client: httpx.AsyncClient, stories: list[dict], rules: Ma
     done = await complete("checker", max_tokens=2000, label="market matching", messages=[
         {"role": "system", "content": MATCH_PROMPT},
         {"role": "user", "content": "\n\n".join(blocks)}])
-    matched = _json_object(done.text)
-    if matched is None:
+    try:
+        matched = extract_json(done.text, dict)
+    except ValueError:
         _unreadable("market matching", done.text)
         return {}
     linked: dict[int, list[Market]] = {}
@@ -603,8 +593,9 @@ async def find_cause(m: Market, now: datetime) -> dict | None:
         text = "".join(b.text for b in msg.content if b.type == "text")
     except Exception as e:  # noqa: BLE001 — a failed lookup drops the move, not the briefing
         return failed(f"{type(e).__name__}: {str(e)[:160]}")
-    found = _json_object(text)
-    if found is None:
+    try:
+        found = extract_json(text, dict)
+    except ValueError:
         return failed(f"the reply was not JSON: {text[:80]!r}")
     if not found.get("found") or not found.get("summary"):
         return {"found": False}

@@ -288,6 +288,54 @@ class TestFailuresReachTheEmail:
         assert matched.startswith("prediction markets: the market matching reply was not JSON")
 
 
+class TestModelRepliesAreRead:
+    """The checker's and the web search's replies carry their JSON in a code
+    fence, between sentences, or not at all."""
+
+    @pytest.mark.parametrize("reply, found", [
+        ('```json\n{"found": true, "summary": "The Journal reported a delay.", "source": "WSJ",'
+         ' "url": "https://wsj/x"}\n```',
+         {"found": True, "summary": "The Journal reported a delay.", "source": "WSJ",
+          "url": "https://wsj/x"}),
+        ('I searched. {"found": false, "summary": ""} Nothing explains it.', {"found": False}),
+    ])
+    def test_a_cause_is_read_from_a_fenced_or_wrapped_reply(self, monkeypatch, reply, found):
+        monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
+        monkeypatch.setattr(markets, "native_anthropic", lambda: _Anthropic(reply))
+        assert asyncio.run(markets.find_cause(_m(), NOW)) == found
+        assert notices.report() == []
+
+    @pytest.mark.parametrize("reply", ["No JSON at all.", '{"found": true, "summary": "x",}'])
+    def test_a_cause_reply_without_valid_json_is_a_failed_lookup(self, monkeypatch, reply):
+        monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
+        monkeypatch.setattr(markets, "native_anthropic", lambda: _Anthropic(reply))
+        assert asyncio.run(markets.find_cause(_m(), NOW)) is None
+        (note,) = notices.report()
+        assert f"failed (the reply was not JSON: {reply!r})" in note
+
+    def test_story_links_are_read_from_fenced_and_wrapped_replies(self, routes):
+        close = int((datetime.now(timezone.utc) + timedelta(days=60)).timestamp() * 1000)
+
+        def handler(request):
+            if request.url.host == "gamma-api.polymarket.com":
+                return httpx.Response(200, json={"events": []})
+            return httpx.Response(200, json=[{
+                "id": "m1", "question": "Will the Senate pass an AI bill in 2026?",
+                "probability": 0.4, "volume": 1000, "uniqueBettorCount": 120,
+                "closeTime": close, "url": "https://manifold.markets/m1"}])
+        routes["anthropic"] = FakeApi(['```json\n{"0": ["AI bill"]}\n```',
+                                       'My pick: {"0": ["manifold:m1"]} and no other.'])
+
+        async def run():
+            async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+                return await markets.link_stories(
+                    client, [{"title": "Senate debates an AI bill", "summary": "s"}], RULES, [])
+
+        linked = asyncio.run(run())
+        assert {i: [m.key for m in ms] for i, ms in linked.items()} == {0: ["manifold:m1"]}
+        assert notices.report() == []
+
+
 class TestReportedMoves:
 
     def test_recorded_moves_are_remembered_for_a_week(self, tmp_path):

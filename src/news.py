@@ -1,14 +1,12 @@
 """Daily news briefing via RSS aggregation and LLM synthesis."""
 
 import asyncio
-import json
-import re
 from datetime import datetime, timedelta, timezone
 
 import feedparser
 
 from .extractor import extract_article
-from .llm import complete
+from .llm import complete, extract_json
 from .markets import MarketContext, MarketScout
 from .monitor import FeedEntry, entry_body, entry_published, report_skipped, warn_if_dead
 from .verify import write_checked
@@ -43,13 +41,10 @@ def _selection(raw: str, by_url: dict[str, dict]) -> tuple[list[dict], str]:
     The problem is "" for a usable reply: a JSON array naming at least one
     article from the list. Unknown and repeated URLs are dropped.
     """
-    m = re.search(r"\[.*\]", raw or "", re.S)
-    if not m:
-        return [], "no JSON array in the reply"
     try:
-        urls = json.loads(m.group(0))
+        urls = extract_json(raw, list)
     except ValueError as e:
-        return [], f"the array is not valid JSON ({e})"
+        return [], str(e)
     chosen, seen = [], set()
     for u in urls:
         if isinstance(u, str) and u in by_url and u not in seen:

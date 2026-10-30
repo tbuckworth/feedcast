@@ -319,3 +319,28 @@ def test_provider_and_transport_failures_fall_through(routes, error):
 ])
 def test_rejected_request_is_our_malformed_request_only(error, ours):
     assert llm.rejected_request(error) is ours
+
+
+@pytest.mark.parametrize("reply, kind, value", [
+    ('{"a": 1}', dict, {"a": 1}),
+    ('```json\n{"a": [1, 2]}\n```', dict, {"a": [1, 2]}),
+    ('Here it is: {"a": {"b": 2}} and that is all.', dict, {"a": {"b": 2}}),
+    ('```json\n["x", "y"]\n```', list, ["x", "y"]),
+    ('Chosen: ["x"]. Done.', list, ["x"]),
+])
+def test_extract_json_reads_the_value_out_of_fences_and_prose(reply, kind, value):
+    assert llm.extract_json(reply, kind) == value
+
+
+@pytest.mark.parametrize("reply, kind, error", [
+    ("No JSON here.", dict, r"^no JSON object in the reply$"),
+    (None, list, r"^no JSON array in the reply$"),
+    ('{"a": 1,}', dict, r"^the object is not valid JSON \(Expecting property name"),
+    ('["x",]', list, r"^the array is not valid JSON \(Expecting value"),
+    # An array is not an object, and an object is not an array.
+    ('["x"]', dict, r"^no JSON object in the reply$"),
+    ('{"a": 1}', list, r"^no JSON array in the reply$"),
+])
+def test_extract_json_raises_saying_why_there_is_none(reply, kind, error):
+    with pytest.raises(ValueError, match=error):
+        llm.extract_json(reply, kind)

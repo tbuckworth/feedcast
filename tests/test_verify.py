@@ -59,6 +59,22 @@ def test_parse_flags_tolerates_fences_and_drops_malformed():
         parse_flags("no json here")
 
 
+def test_parse_flags_reads_the_object_out_of_prose():
+    reply = f"Here is my audit.\n{FLAGGED.strip('`').removeprefix('json')}\nThat is all."
+    total, flags = parse_flags(reply)
+    assert total == 12 and [f["verdict"] for f in flags] == ["distorted", "unsupported"]
+
+
+@pytest.mark.parametrize("reply, error", [
+    ("no json here", "no JSON object in the reply"),
+    ('{"claims_total": 2, "flags": [}',
+     r"the object is not valid JSON \(Expecting value: line 1 column 31 \(char 30\)\)"),
+])
+def test_parse_flags_raises_saying_why_a_reply_has_no_flags(reply, error):
+    with pytest.raises(ValueError, match=error):
+        parse_flags(reply)
+
+
 def test_clean_script_is_returned_untouched():
     client = FakeClient([CLEAN])
     script, fid = asyncio.run(verify_script("The script.", "The source.", writer_system_prompt="sys", client=client))

@@ -47,6 +47,7 @@ skipped for the rest of the run, so each later call goes straight to a
 working one instead of failing first (`account_failure`).
 """
 
+import json
 import os
 import re
 from collections.abc import Callable
@@ -299,6 +300,29 @@ def completion_text(response, label: str = "") -> str:
         raise EmptyCompletion(
             f"{where}empty content (finish_reason={choice.finish_reason!r}, refusal={refusal!r})")
     return content
+
+
+# Each kind of JSON value a reply is asked for: its name, and the span from its
+# first opening bracket to its last closing one.
+_JSON_SPANS = {dict: ("object", re.compile(r"\{.*\}", re.S)),
+               list: ("array", re.compile(r"\[.*\]", re.S))}
+
+
+def extract_json(text: str | None, kind: type[dict] | type[list]) -> dict | list:
+    """The JSON object (`kind=dict`) or array (`kind=list`) in a model's reply.
+
+    Models wrap the JSON they are asked for in code fences and prose, so this
+    reads from the first opening bracket to the last closing one. Raises
+    ValueError saying why when the reply holds none or it does not parse.
+    """
+    name, span = _JSON_SPANS[kind]
+    m = span.search(text or "")
+    if not m:
+        raise ValueError(f"no JSON {name} in the reply")
+    try:
+        return json.loads(m.group(0))
+    except ValueError as e:
+        raise ValueError(f"the {name} is not valid JSON ({e})") from e
 
 
 _clients: dict[str, AsyncOpenAI] = {}
