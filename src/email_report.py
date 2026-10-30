@@ -103,7 +103,7 @@ class RunReport:
     feed_url: str = ""
     site_url: str = ""
     total_in_feed: int = 0
-    # The briefing's prediction-market charts (main._market_charts).
+    # The briefing's prediction-market charts (market_charts.charts_for_report).
     charts: list[ChartNote] = field(default_factory=list)
 
 

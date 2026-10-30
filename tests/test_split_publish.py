@@ -14,6 +14,7 @@ from pathlib import Path
 import pytest
 
 import src.main as main
+from src.config import load_config
 from src.email_report import ReportEpisode, RunReport, build_html, build_text
 from src.feed import Episode, FeedGenerator, PodcastConfig, episode_page_url
 from src.main import Attempt, _build_run_report, _prepare_deferred, process_entry
@@ -183,7 +184,7 @@ class TestNarrationPass:
                             lambda report, operator_only=False: sent.append((report, operator_only)))
         monkeypatch.delenv("GITHUB_OUTPUT", raising=False)
         _Audio.fail = False
-        config = main.load_config(Path(__file__).resolve().parent.parent / "config.yaml")
+        config = load_config(Path(__file__).resolve().parent.parent / "config.yaml")
         monitor = FeedMonitor(tmp_path / "posts.db")
         audio_dir, out = tmp_path / "audio", tmp_path / "output"
         audio_dir.mkdir()

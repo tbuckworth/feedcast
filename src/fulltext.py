@@ -9,8 +9,8 @@ Zvi episode so far summarised a summary of a contents page. That is why the
 narration sounded like it had not read the article: it had not.
 
 The repair uses the same GraphQL markdown the maths filter already fetches
-(``mathiness.fetch_lesswrong_markdown`` — see that module for why markdown and
-not the rendered page), rendered to HTML so the rest of the pipeline runs
+(``lesswrong.fetch_lesswrong_markdown``; see ``mathiness`` for why markdown
+and not the rendered page), rendered to HTML so the rest of the pipeline runs
 unchanged: tables still become prose, ``clean_html`` still strips the tags.
 
 This is deliberately not Zvi-specific. Any LessWrong or Alignment Forum feed
@@ -24,7 +24,7 @@ from dataclasses import dataclass
 
 import markdown as _markdown
 
-from .mathiness import fetch_lesswrong_markdown, lesswrong_post_id
+from .lesswrong import fetch_lesswrong_markdown, lesswrong_post_id
 from .monitor import FeedEntry
 
 # Replace the feed's body only when the real post is materially longer. Markdown

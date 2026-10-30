@@ -8,22 +8,21 @@ import traceback
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Literal
 
 import httpx
-import yaml
-from pydantic import BaseModel
 
 from .audio import AudioGenerator
 from .bundle import write_bundle
+from .config import Config, FeedConfig, load_config
 from .digest import safe_bullets
-from .email_report import (ChartNote, LinkedPost, ReportEpisode, RunReport, bullet_urls,
-                           send_report)
+from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
 from .extractor import ExtractionError, url_to_feed_entry
 from .feed import Episode, FeedGenerator, PodcastConfig, episode_page_url
 from .fulltext import enrich_entry
+from .html_text import clean_html
 from .lesswrong import posted_at
 from . import llm
+from .market_charts import charts_for_report
 from .markets import MarketRules, MarketScout
 from .mathiness import MathsVerdict, assess
 from .monitor import DEFAULT_MAX_AGE_HOURS, FeedEntry, FeedMonitor, episode_id
@@ -36,97 +35,6 @@ from .processor import ContentProcessor
 # CI killed it. feedparser 6.x exposes no timeout argument, so bound it at the
 # socket layer. Only affects blocking sockets; asyncio/httpx are unaffected.
 socket.setdefaulttimeout(30)
-
-
-class FeedConfig(BaseModel):
-    """Configuration for a single feed."""
-
-    name: str
-    url: str
-    mode: Literal["summarize", "verbatim", "auto"] = "auto"
-    prompt: str | None = None
-    skip_patterns: list[str] | None = None
-
-
-class PodcastMetaConfig(BaseModel):
-    """Podcast metadata configuration."""
-
-    title: str
-    description: str
-    author: str
-    email: str
-    language: str = "en-us"
-    base_url: str
-    image_url: str | None = None
-    # WebSub hub declared in feed.xml and pinged by CI after deploy. "" disables.
-    hub_url: str | None = "https://pubsubhubbub.appspot.com/"
-
-
-class NewsSource(BaseModel):
-    """A single news RSS source for the daily briefing."""
-
-    name: str
-    url: str
-    category: str
-
-
-class MathsFilterConfig(BaseModel):
-    """Skip audio for posts that are too mathematical to follow by ear."""
-
-    enabled: bool = True
-    threshold_per_1k: float = 8.0
-
-
-class NewsBriefingConfig(BaseModel):
-    """Configuration for the daily news briefing."""
-
-    enabled: bool = True
-    lookback_hours: int = 48
-    prompt: str
-    sources: list[NewsSource]
-    # Stories fetched in full for the writer; 0 = blurbs only, the old behaviour.
-    full_text_stories: int = 12
-    max_article_chars: int = 6000
-
-
-class PredictionMarketsConfig(BaseModel):
-    """Prediction-market odds on the briefing's stories, and big unexplained moves.
-
-    See src/markets.py. The rest of the rules (volume floors, exclusions,
-    topics) live in MarketRules, with defaults from a 30-day backtest.
-    """
-
-    enabled: bool = False
-    polymarket_tags: list[str] = ["ai", "openai", "anthropic"]
-    # Kalshi has no search; these are the AI series scanned for moves and
-    # matched against stories. Its own tag listing caps out before the AGI
-    # and OpenAI IPO series, so they are named here.
-    kalshi_series: list[str] = []
-    move: float = 0.15
-    major_move: float = 0.20
-    max_moves: int = 3
-
-
-class Config(BaseModel):
-    """Full application configuration."""
-
-    podcast: PodcastMetaConfig
-    default_prompt: str
-    feeds: list[FeedConfig]
-    news_briefing: NewsBriefingConfig | None = None
-    maths_filter: MathsFilterConfig = MathsFilterConfig()
-    # Second-model check of every written script against its source.
-    fidelity_check: bool = True
-    prediction_markets: PredictionMarketsConfig = PredictionMarketsConfig()
-    # Word -> spelling the voice says right, applied to the spoken text only.
-    pronunciations: dict[str, str] = {}
-
-
-def load_config(config_path: Path) -> Config:
-    """Load configuration from YAML file."""
-    with open(config_path) as f:
-        data = yaml.safe_load(f)
-    return Config(**data)
 
 
 def generate_episode_id(entry_id: str) -> str:
@@ -299,15 +207,12 @@ async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> None:
     the full-text recovery first, or a Zvi post would be digested from the
     three-percent podcast blurb.
     """
-    from .processor import ContentProcessor as _CP
-
     # Skip rows with no audio: those are the maths-linked posts, and the email
     # renders them as a link and a score, with nowhere to put bullets.
     todo = [r for r in rows if r["audio_file"] and not (r.get("bullets") or "")]
     if not todo:
         return
     print(f"  Backfilling digests for {len(todo)} entries...")
-    cleaner = _CP("")
 
     async def one(row: dict) -> None:
         is_briefing = row["id"].startswith("news-briefing-")
@@ -324,7 +229,7 @@ async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> None:
             if gain.replaced:
                 print(f"    Recovered full text for {entry.title} "
                       f"({gain.before:,} -> {gain.after:,})")
-            text = cleaner.clean_html(entry.content)
+            text = clean_html(entry.content)
         bullets = await safe_bullets(text, is_briefing=is_briefing, label=row["title"])
         monitor.set_bullets(row["id"], bullets)
         print(f"    {len(bullets)} bullets: {row['title'][:56]}")
@@ -811,7 +716,7 @@ async def async_main(config_path: Path | None = None) -> None:
         )
         images: dict[str, bytes] = {}
         if briefing_entry and briefing_entry.id in new_entry_ids:
-            report.charts, images = _market_charts(briefing_entry)
+            report.charts, images = charts_for_report(briefing_entry)
         send_report(report, images=images)
     else:
         print("  Nothing new — email report skipped (set FEEDCAST_EMAIL_ALWAYS=true to send anyway)")
@@ -892,7 +797,7 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
 
     # The digest as the daily email shows it, then the whole script, which is
     # where the market lines actually are.
-    charts, images = _market_charts(entry)
+    charts, images = charts_for_report(entry)
     report = RunReport(
         episodes=[item(title=f"Preview: {entry.title}", bullets=entry.bullets,
                        fidelity=entry.fidelity, writer=entry.writer),
@@ -901,77 +806,6 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
         charts=charts,
     )
     send_report(report, subject_tag="[Preview]", images=images)
-
-
-def _market_charts(briefing: FeedEntry) -> tuple[list[ChartNote], dict[str, bytes]]:
-    """Price charts for the daily email: the notes, and the PNGs by Content-ID.
-
-    A chart is drawn for each unexplained move and for each story market the
-    digest cites, and sits under the bullet that links it. Every chart shows
-    the market's whole life; one whose history goes back more than three
-    months also gets a 7-day zoom (market_charts). Nothing on days the
-    briefing used no market. Ran as a separate trial email to Titus and Jason
-    from 8 to 14 Oct 2026. Never raises: a missing chart must not cost the
-    day's email.
-    """
-    charts: list[ChartNote] = []
-    images: dict[str, bytes] = {}
-    try:
-        from .market_charts import (ZOOM_DAYS, history_days, render_chart, wants_zoom,
-                                    zoom_window)
-
-        data = briefing.markets
-        if not data:
-            return [], {}
-        cited = {u for b in briefing.bullets for u in bullet_urls(b)}
-        drawn: set[str] = set()
-
-        def points(m: dict, key: str) -> list:
-            return [(datetime.fromisoformat(when), p) for when, p in m.get(key) or []]
-
-        def add(m: dict, anchor: str, story_time: datetime | None, caption: str) -> None:
-            if m["key"] in drawn:   # one market linked to two stories
-                return
-            drawn.add(m["key"])
-            # The whole life for context, with the hourly last 30 days spliced
-            # onto the end for detail.
-            recent, life = points(m, "history"), points(m, "long_history")
-            line = [pt for pt in life if not recent or pt[0] < recent[0][0]] + recent
-            # Past three months the last week is a sliver at the end of the
-            # line, so it gets a panel of its own.
-            zoom = zoom_window(line, line[-1][0]) if wants_zoom(line) else []
-            png = render_chart(line, story_time, zoom)
-            panels = ("not drawn, too little history" if not png else
-                      f"whole life plus a {ZOOM_DAYS}-day zoom" if len(zoom) >= 2 else
-                      "whole life only")
-            print(f"    chart: {m['title'][:70]}: {history_days(line):.0f} days of history, {panels}")
-            if png:
-                cid = f"market-{len(images)}@feedcast"
-                images[cid] = png
-                charts.append(ChartNote(cid=cid, title=m["title"], platform=m["platform"],
-                                        url=m["url"], caption=caption, anchor=anchor))
-
-        for m in data.get("moves") or []:
-            add(m, m["url"] if m["url"] in cited else "", None,
-                f"{m['prob_24h']:.0%} to {m['prob']:.0%} in the last 24 hours · {m['traded']}")
-        for story_url, markets in (data.get("stories") or {}).items():
-            raw_time = (data.get("story_times") or {}).get(story_url)
-            story_time = datetime.fromisoformat(raw_time) if raw_time else None
-            for m in markets:
-                # Only markets the digest cites, which it does when the script
-                # quotes them. "The platform is named somewhere and the story
-                # has a bullet" charted, on 14 Oct, a Gemini benchmark market
-                # the script never mentioned under the Gemini bullet, and
-                # skipped the Houthi market it did quote: that one was linked
-                # only from a sub-bullet.
-                if m["url"] not in cited:
-                    continue
-                add(m, m["url"], story_time,
-                    f"Now {m['prob']:.0%} · {m['traded']} · dashed line: the story")
-    except Exception as e:  # noqa: BLE001 — the email goes out without charts
-        print(f"  Prediction-market charts failed: {type(e).__name__}: {e}")
-        return [], {}
-    return charts, images
 
 
 def _run_pass() -> str:

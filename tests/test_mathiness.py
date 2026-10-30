@@ -4,9 +4,8 @@ import httpx
 import pytest
 
 from src.email_report import LinkedPost, RunReport, build_html, build_text
-from src.mathiness import (
-    DEFAULT_THRESHOLD, MathsVerdict, assess, lesswrong_post_id, maths_score,
-)
+from src.lesswrong import lesswrong_post_id
+from src.mathiness import DEFAULT_THRESHOLD, MathsVerdict, assess, maths_score
 from datetime import datetime
 
 PROSE = " ".join(["the model was trained on a large corpus of text"] * 40)
@@ -176,12 +175,12 @@ def test_transient_fetch_failure_is_not_cached(monkeypatch):
     were cached, the second call would get None, the episode would be built
     from the feed's excerpt, and marking it processed means no retry ever.
     """
-    from src import mathiness
+    from src import lesswrong
 
     # Patch the transport, not _graphql_markdown itself — replacing the cached
     # function is exactly the mistake that would let this test pass with the
     # cache back on the failure path.
-    mathiness._graphql_markdown.cache_clear()
+    lesswrong._graphql_markdown.cache_clear()
     link = "https://www.lesswrong.com/posts/AAAAAAAAAAAAAAAAA/x"
     calls = []
 
@@ -196,17 +195,17 @@ def test_transient_fetch_failure_is_not_cached(monkeypatch):
 
         return R()
 
-    monkeypatch.setattr(mathiness.httpx, "post", flaky)
+    monkeypatch.setattr(lesswrong.httpx, "post", flaky)
 
-    assert mathiness.fetch_lesswrong_markdown(link) is None
-    assert mathiness.fetch_lesswrong_markdown(link) == "$x = 1$"
+    assert lesswrong.fetch_lesswrong_markdown(link) is None
+    assert lesswrong.fetch_lesswrong_markdown(link) == "$x = 1$"
     assert len(calls) == 2
 
 
 def test_successful_fetch_is_cached(monkeypatch):
-    from src import mathiness
+    from src import lesswrong
 
-    mathiness._graphql_markdown.cache_clear()
+    lesswrong._graphql_markdown.cache_clear()
     link = "https://www.lesswrong.com/posts/BBBBBBBBBBBBBBBBB/y"
     calls = []
 
@@ -219,10 +218,10 @@ def test_successful_fetch_is_cached(monkeypatch):
 
         return R()
 
-    monkeypatch.setattr(mathiness.httpx, "post", counting)
+    monkeypatch.setattr(lesswrong.httpx, "post", counting)
 
-    assert mathiness.fetch_lesswrong_markdown(link) == "hi"
-    assert mathiness.fetch_lesswrong_markdown(link) == "hi"
+    assert lesswrong.fetch_lesswrong_markdown(link) == "hi"
+    assert lesswrong.fetch_lesswrong_markdown(link) == "hi"
     assert len(calls) == 1
 
 
@@ -238,9 +237,9 @@ def test_graphql_nulls_are_a_permanent_answer_not_a_crash(monkeypatch, payload):
     the caller swallows as None. The post then looks unreachable — refetched
     every run, and reported to the user as a transient failure.
     """
-    from src import mathiness
+    from src import lesswrong
 
-    mathiness._graphql_markdown.cache_clear()
+    lesswrong._graphql_markdown.cache_clear()
     calls = []
 
     def fake_post(url, json, timeout, headers):
@@ -252,9 +251,9 @@ def test_graphql_nulls_are_a_permanent_answer_not_a_crash(monkeypatch, payload):
 
         return R()
 
-    monkeypatch.setattr(mathiness.httpx, "post", fake_post)
+    monkeypatch.setattr(lesswrong.httpx, "post", fake_post)
     link = "https://www.lesswrong.com/posts/CCCCCCCCCCCCCCCCC/gone"
 
-    assert mathiness.fetch_lesswrong_markdown(link) is None
-    assert mathiness.fetch_lesswrong_markdown(link) is None
+    assert lesswrong.fetch_lesswrong_markdown(link) is None
+    assert lesswrong.fetch_lesswrong_markdown(link) is None
     assert len(calls) == 1, "a permanent null must be cached, not retried"

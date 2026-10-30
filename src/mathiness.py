@@ -15,10 +15,8 @@ The GraphQL `contents{markdown}` field preserves the LaTeX.
 
 import re
 from dataclasses import dataclass
-from functools import lru_cache
-from typing import Optional
 
-import httpx
+from .lesswrong import fetch_lesswrong_markdown
 
 # Per 1000 words, re-measured after the inline-LaTeX pattern was tightened to
 # exclude currency (which lowered every score). Across 20 recent LessWrong and
@@ -33,10 +31,6 @@ DEFAULT_THRESHOLD = 8.0
 # words, and being wrong here is expensive and silent: the post gets no audio
 # and is marked processed, so it never comes back. Require real volume too.
 MIN_HITS = 8
-
-_LW_HOSTS = ("lesswrong.com", "alignmentforum.org")
-_POST_ID = re.compile(r"/posts/([A-Za-z0-9]{17})")
-_UA = {"User-Agent": "Mozilla/5.0 (feedcast)"}
 
 _PATTERNS = [
     # Inline LaTeX. The lookahead demands a genuinely mathematical character
@@ -70,60 +64,6 @@ def maths_score(text: str) -> tuple[int, float]:
     hits = sum(len(re.findall(p, text)) for p in _PATTERNS)
     words = max(1, len(text.split()))
     return hits, hits / words * 1000
-
-
-def lesswrong_post_id(link: str) -> Optional[str]:
-    """Extract the 17-character post id from a LessWrong/Alignment Forum URL."""
-    if not link or not any(h in link for h in _LW_HOSTS):
-        return None
-    m = _POST_ID.search(link)
-    return m.group(1) if m else None
-
-
-@lru_cache(maxsize=128)
-def _graphql_markdown(post_id: str, host: str, timeout: float) -> Optional[str]:
-    """Fetch one post's markdown, raising on transport failure.
-
-    Raising rather than returning None is what makes the cache safe. lru_cache
-    stores return values and not exceptions, so a timeout or a 502 is retried
-    by the next caller, while a real "this post has no markdown" answer is
-    remembered. Caching the failure instead would be quietly destructive: the
-    maths filter runs first, so one flaky GraphQL call would poison the entry
-    for fulltext.py, the episode would be built from the 3% podcast blurb, and
-    marking it processed means it never gets another chance.
-    """
-    query = ('{post(input:{selector:{_id:"%s"}}){result{contents{markdown}}}}'
-             % post_id)
-    r = httpx.post(f"https://www.{host}/graphql", json={"query": query},
-                   timeout=timeout, headers=_UA)
-    r.raise_for_status()
-    data = r.json()
-    # `or {}` at every level, not `.get(k, {})`. GraphQL answers a deleted,
-    # draft or unknown post with an explicit null rather than a missing key, and
-    # .get("result", {}) hands back that null. The AttributeError that follows
-    # is swallowed as None by the caller, which inverts this function's whole
-    # contract: a permanent "no markdown here" gets refetched every run and is
-    # reported to the user as a transient failure.
-    return ((((data.get("data") or {}).get("post") or {})
-             .get("result") or {}).get("contents") or {}).get("markdown")
-
-
-def fetch_lesswrong_markdown(link: str, timeout: float = 30.0) -> Optional[str]:
-    """Fetch a post's markdown source, where the LaTeX survives.
-
-    Returns None on any failure — a maths check is never worth failing a run
-    over, and the caller falls back to scoring whatever text it already had.
-    Callers that need to tell "no markdown" from "fetch broke" should check
-    lesswrong_post_id() first and treat a None on a real post id as a failure.
-    """
-    post_id = lesswrong_post_id(link)
-    if not post_id:
-        return None
-    host = "alignmentforum.org" if "alignmentforum" in link else "lesswrong.com"
-    try:
-        return _graphql_markdown(post_id, host, timeout)
-    except Exception:
-        return None
 
 
 def assess(link: str, fallback_text: str,

@@ -60,6 +60,7 @@ def test_normaliser_respells_its_output_even_when_the_model_returns_nothing(monk
 
 
 def test_configured_respellings_load():
-    import src.main as main
-    cfg = main.load_config(main.Path(__file__).resolve().parent.parent / "config.yaml")
+    from pathlib import Path
+    from src.config import load_config
+    cfg = load_config(Path(__file__).resolve().parent.parent / "config.yaml")
     assert cfg.pronunciations["METR"] == "Meter" and "OpenAI" not in cfg.pronunciations

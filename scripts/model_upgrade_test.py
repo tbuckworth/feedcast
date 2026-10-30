@@ -208,7 +208,7 @@ async def main() -> None:
     user = secs["What the writer was given"]
     is_briefing = "## Today's articles:" in user
     if args.current_prompts and is_briefing:
-        from src.main import load_config
+        from src.config import load_config
         from src.news import PREVIOUS_BRIEFINGS_HEADER
         if not args.system_file:
             system = load_config(Path("config.yaml")).news_briefing.prompt

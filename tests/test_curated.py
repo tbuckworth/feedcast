@@ -8,11 +8,11 @@ freshness window has to key on the first, the email on the second.
 import asyncio
 from datetime import datetime
 
-import pytest
+import httpx
 import yaml
 
 from src.email_report import ReportEpisode, RunReport, build_html, build_text
-from src.lesswrong import post_id, _parse
+from src.lesswrong import _parse, lesswrong_post_id, posted_at
 from src.main import _correct_publication_dates, _curated_date
 from src.monitor import FeedEntry
 
@@ -37,17 +37,36 @@ class TestFeedChoice:
 class TestPostIdExtraction:
 
     def test_reads_the_id_out_of_a_post_url(self):
-        assert post_id("https://www.lesswrong.com/posts/MhssYd2EN2HGfo7Jc/v-and-v") \
+        assert lesswrong_post_id("https://www.lesswrong.com/posts/MhssYd2EN2HGfo7Jc/v-and-v") \
             == "MhssYd2EN2HGfo7Jc"
 
     def test_ignores_anything_that_is_not_a_lesswrong_post(self):
-        assert post_id("https://www.astralcodexten.com/p/some-post") == ""
-        assert post_id("") == ""
+        assert lesswrong_post_id("https://www.astralcodexten.com/p/some-post") is None
+        assert lesswrong_post_id("") is None
 
     def test_parses_lesswrongs_utc_stamps_to_naive_utc(self):
         assert _parse("2026-07-30T19:10:28.071Z") == datetime(2026, 7, 30, 19, 10, 28, 71000)
         assert _parse(None) is None
         assert _parse("not a date") is None
+
+
+    def test_an_alignment_forum_post_is_dated_by_its_own_site(self):
+        """The date lookup once knew only lesswrong.com URLs, so Alignment
+        Forum posts kept their curation date as their release date."""
+        asked = []
+
+        def answer(request):
+            asked.append(request.url.host)
+            return httpx.Response(200, json={"data": {"post": {"result": {
+                "postedAt": "2026-07-30T19:10:28.071Z"}}}})
+
+        async def run():
+            async with httpx.AsyncClient(transport=httpx.MockTransport(answer)) as client:
+                return await posted_at(
+                    "https://www.alignmentforum.org/posts/MhssYd2EN2HGfo7Jc/v-and-v", client)
+
+        assert asyncio.run(run()) == datetime(2026, 7, 30, 19, 10, 28, 71000)
+        assert asked == ["www.alignmentforum.org"]
 
 
 class TestDateCorrection:

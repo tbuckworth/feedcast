@@ -1,11 +1,11 @@
 """Content processing with LLM API for summarization."""
 
-import re
 from typing import Optional
 
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup
 
 from .bundle import writer_bundle
+from .html_text import clean_html, small_table_to_prose
 from .verify import fidelity_markdown, verify_script
 from .llm import complete
 from .monitor import FeedEntry
@@ -52,51 +52,8 @@ class ContentProcessor:
         if entry.id.startswith("news-briefing-"):
             return False
         if mode == "auto":
-            return len(self.clean_html(entry.content)) <= AUTO_VERBATIM_LIMIT
+            return len(clean_html(entry.content)) <= AUTO_VERBATIM_LIMIT
         return mode == "verbatim"
-
-    def clean_html(self, html_content: str) -> str:
-        """Extract clean text from HTML content."""
-        soup = BeautifulSoup(html_content, "html.parser")
-
-        # Remove script and style elements
-        for element in soup(["script", "style", "nav", "footer", "header"]):
-            element.decompose()
-
-        # Get text
-        text = soup.get_text(separator="\n")
-
-        # Clean up whitespace
-        lines = (line.strip() for line in text.splitlines())
-        chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-        text = "\n".join(chunk for chunk in chunks if chunk)
-
-        # Remove excessive newlines
-        text = re.sub(r"\n{3,}", "\n\n", text)
-
-        return text.strip()
-
-    def _table_to_prose_simple(self, table: Tag) -> str:
-        """Convert a small HTML table to inline prose (Header: value pairs)."""
-        rows = table.find_all("tr")
-        if not rows:
-            return ""
-
-        # Extract headers from first row
-        headers = [th.get_text(strip=True) for th in rows[0].find_all(["th", "td"])]
-
-        prose_parts = []
-        for row in rows[1:]:
-            cells = [td.get_text(strip=True) for td in row.find_all(["td", "th"])]
-            pairs = []
-            for i, cell in enumerate(cells):
-                if i < len(headers) and headers[i]:
-                    pairs.append(f"{headers[i]}: {cell}")
-                else:
-                    pairs.append(cell)
-            prose_parts.append(", ".join(pairs))
-
-        return ". ".join(prose_parts) + "."
 
     async def process_tables(self, html_content: str) -> str:
         """Convert HTML tables to prose before clean_html strips them."""
@@ -111,7 +68,7 @@ class ContentProcessor:
             data_rows = max(0, len(rows) - 1)
 
             if data_rows <= 3:
-                prose = self._table_to_prose_simple(table)
+                prose = small_table_to_prose(table)
             else:
                 # Larger tables: summarize with the cheap model
                 table_html = str(table)
@@ -134,7 +91,7 @@ class ContentProcessor:
     ) -> str:
         """Summarize content with the writer role."""
         content_with_tables = await self.process_tables(entry.content)
-        clean_content = self.clean_html(content_with_tables)
+        clean_content = clean_html(content_with_tables)
 
         if not clean_content:
             return f"No content available for: {entry.title}"
@@ -187,7 +144,7 @@ Content:
     async def process_verbatim(self, entry: FeedEntry) -> str:
         """Process content for verbatim reading - clean and format for TTS."""
         content_with_tables = await self.process_tables(entry.content)
-        clean_content = self.clean_html(content_with_tables)
+        clean_content = clean_html(content_with_tables)
 
         # Add intro
         intro = (f"{spoken_title(entry.title, entry.author)}. By {entry.author}. "
@@ -213,7 +170,7 @@ Content:
         if is_news_briefing and mode == "verbatim":
             # News briefings: the synthesis already opens with the date, skip redundant intro
             content_with_tables = await self.process_tables(entry.content)
-            text = self.clean_html(content_with_tables)
+            text = clean_html(content_with_tables)
         elif mode == "summarize":
             summary = await self.summarize(entry, prompt)
             # Add intro for context
@@ -222,7 +179,7 @@ Content:
         elif mode == "verbatim":
             text = await self.process_verbatim(entry)
         elif mode == "auto":
-            clean_text = self.clean_html(entry.content)
+            clean_text = clean_html(entry.content)
             if self.reads_verbatim(entry, mode):
                 print(f"    Auto mode: {len(clean_text)} chars ≤ {AUTO_VERBATIM_LIMIT} → verbatim")
                 text = await self.process_verbatim(entry)
