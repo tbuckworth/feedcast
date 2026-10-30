@@ -10,7 +10,8 @@ Intuitions: posted 2026-07-30, curated 2026-08-21). Both dates are wanted, for
 different jobs: curation decides whether an item is new to us, publication is
 what the email should call the release date.
 
-Only the second needs asking LessWrong, and only for LessWrong links.
+Only the second needs asking the site, and only for LessWrong and Alignment
+Forum links.
 """
 
 import re

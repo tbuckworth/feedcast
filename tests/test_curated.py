@@ -8,12 +8,10 @@ freshness window has to key on the first, the email on the second.
 import asyncio
 from datetime import datetime
 
-import pytest
+import httpx
 import yaml
 
 from src.email_report import ReportEpisode, RunReport, build_html, build_text
-import httpx
-
 from src.lesswrong import _parse, lesswrong_post_id, posted_at
 from src.main import _correct_publication_dates, _curated_date
 from src.monitor import FeedEntry
