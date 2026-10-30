@@ -71,8 +71,11 @@ DRAFT = "Zvi agrees with the plan, and says so at length."
 REVISED = "Zvi disagrees with the plan, and says so at length."
 CHECKED = [DRAFT, json.dumps({"claims_total": 3, "flags": [FLAG]}), REVISED,
            json.dumps({"claims_total": 3, "flags": []})]
+# The re-check's model reads the revision, so its credit is the checker's.
+SONNET = {"model": "claude-sonnet-5-5", "route": "anthropic", "primary": "claude-sonnet-5-5",
+          "backup": False}
 FIDELITY = {"status": "revised", "claims_total": 3, "flags": [FLAG], "remaining": [],
-            "revised": True, "note": ""}
+            "revised": True, "note": "", "checker": SONNET}
 FIDELITY_NOTES = (
     "Status: revised\nClaims: 3; flags: 1; material: 1\n\n"
     "Flags on the draft:\n"
