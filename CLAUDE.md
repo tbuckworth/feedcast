@@ -138,3 +138,5 @@ Injected URL (via Chrome extension / Android PWA / CLI)
     → same audio pipeline above (skips Phase 1 RSS fetching)
     → ntfy.sh push notification on completion
 ```
+
+@AGENTS.md
