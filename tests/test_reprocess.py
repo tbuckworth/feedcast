@@ -1,7 +1,6 @@
 """Reprocessing an old entry must not delete it, and the site root must exist."""
 
 from datetime import datetime, timedelta
-from pathlib import Path
 
 from src.config import PodcastMetaConfig
 from src.feed import Episode, FeedGenerator
