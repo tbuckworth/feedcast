@@ -15,9 +15,9 @@ from src import llm, notices
 from src.email_report import ReportEpisode, RunReport, build_html, build_text, writer_line
 from src.feed import Episode
 from src.llm import ROLES, Completion, Target, account_failure, complete, model_name
-from src.main import _build_run_report
 from src.monitor import FeedEntry, FeedMonitor
 from src.normalizer import MAX_OUTPUT_TOKENS, NORMALIZE_PROMPT, TextNormalizer
+from src.run_report import build_run_report
 from tests.conftest import FakeApi, provider_error
 
 MSGS = [{"role": "user", "content": "hi"}]
@@ -270,8 +270,8 @@ def test_the_writer_survives_the_database_into_the_report(tmp_path):
     monitor.mark_processed(entry, "b.mp3", content="Today.")
     episode = Episode(id=entry.id, title=entry.title, description="", audio_file="b.mp3",
                       published=entry.published, duration_seconds=300)
-    report = _build_run_report([episode], monitor.get_processed_entries(), {entry.id}, [],
-                               "https://f")
+    report = build_run_report([episode], monitor.get_processed_entries(), {entry.id}, [],
+                              "https://f")
     assert report.episodes[0].writer == writer
 
 

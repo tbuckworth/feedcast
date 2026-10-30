@@ -12,8 +12,8 @@ from datetime import datetime
 
 import pytest
 
-from src.main import _bullets_of, _json_dict, _stored_verdict
 from src.monitor import FeedEntry, FeedMonitor, entry_from_row
+from src.run_report import bullets_of, json_dict, stored_verdict
 
 # processed_posts as it was before any migration, with every other table
 # already in place, so opening the file needs only the ALTER TABLEs.
@@ -75,15 +75,15 @@ class TestJsonColumns:
 
     def test_old_rows_read_as_nothing_stored(self):
         row = {**self.ROW, "bullets": "", "fidelity": "", "writer": "", "maths": ""}
-        assert _bullets_of(row) == [] and _json_dict(row, "fidelity") is None
-        assert _json_dict(row, "writer") is None
-        assert _stored_verdict(row).source == "unrecorded"
+        assert bullets_of(row) == [] and json_dict(row, "fidelity") is None
+        assert json_dict(row, "writer") is None
+        assert stored_verdict(row).source == "unrecorded"
 
     @pytest.mark.parametrize("read, column", [
-        (_bullets_of, "bullets"),
-        (lambda row: _json_dict(row, "fidelity"), "fidelity"),
-        (lambda row: _json_dict(row, "writer"), "writer"),
-        (_stored_verdict, "maths"),
+        (bullets_of, "bullets"),
+        (lambda row: json_dict(row, "fidelity"), "fidelity"),
+        (lambda row: json_dict(row, "writer"), "writer"),
+        (stored_verdict, "maths"),
     ])
     @pytest.mark.parametrize("stored", ['{"text": "cut off', '"a string"'])
     def test_corrupt_json_raises_naming_the_row(self, read, column, stored):

@@ -14,7 +14,6 @@ import pytest
 
 from src.config import load_config
 from src.feed import episode_page_url
-from src.markets import MarketContext, MarketScout
 from src.monitor import episode_id
 from tests.conftest import Model, item, needs_ffmpeg
 
@@ -30,17 +29,10 @@ TRANSCRIPT = f"transcripts/{BRIEFING}.txt"
 
 
 @pytest.fixture
-def day(pipeline, monkeypatch, routes):
+def day(pipeline, routes):
     """A day with a news briefing and one post that is read out in full."""
-    news = pipeline.root / "news.xml"
-    news.write_text("<?xml version='1.0'?><rss version='2.0'><channel><title>BBC</title>"
-                    + item("Land tax passes", "https://bbc.example/land") + "</channel></rss>")
-    pipeline.briefing_sources = [{"name": "BBC", "url": str(news), "category": "politics"}]
+    pipeline.news(item("Land tax passes", "https://bbc.example/land"))
     routes["anthropic"] = Model(lambda m: SCRIPT)      # the writer
-
-    async def no_markets(self, selected):   # Polymarket and Kalshi, over the network
-        return MarketContext()
-    monkeypatch.setattr(MarketScout, "_build", no_markets)
     pipeline.feed("Scott", item("Does Georgism Work?", POST))
     return pipeline
 

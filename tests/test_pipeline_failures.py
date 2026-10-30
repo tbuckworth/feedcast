@@ -205,10 +205,7 @@ class TestInjection:
 
 def test_a_chart_failure_reaches_the_email_it_was_left_out_of(pipeline, monkeypatch, routes):
     """The charts are drawn for the email, so their notice must be in it."""
-    news = pipeline.root / "news.xml"
-    news.write_text("<?xml version='1.0'?><rss version='2.0'><channel><title>BBC</title>"
-                    + item("Land tax passes", "https://bbc.example/land") + "</channel></rss>")
-    pipeline.briefing_sources = [{"name": "BBC", "url": str(news), "category": "politics"}]
+    pipeline.news(item("Land tax passes", "https://bbc.example/land"))
     routes["anthropic"] = Model(lambda m: "Friday's briefing. Parliament passed a land tax.")
     now = datetime.now(timezone.utc)
     move = Market(platform="Polymarket", key="pm:1", title="Land tax by 2027?",

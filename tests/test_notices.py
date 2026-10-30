@@ -4,7 +4,7 @@ from datetime import datetime
 
 from src import notices
 from src.email_report import RunReport, build_html, build_text
-from src.main import _build_run_report
+from src.run_report import build_run_report
 
 
 def test_notices_keep_their_order_and_collapse_repeats():
@@ -32,7 +32,7 @@ def test_reset_starts_a_new_run():
 
 def test_the_run_report_carries_every_modules_notices():
     notices.add("prediction markets skipped: ReadTimeout")
-    report = _build_run_report([], [], set(), [], "https://example.com")
+    report = build_run_report([], [], set(), [], "https://example.com")
     assert report.notices == ["prediction markets skipped: ReadTimeout"]
 
 

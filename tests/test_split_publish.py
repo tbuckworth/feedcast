@@ -16,11 +16,12 @@ import src.main as main
 from src.config import PodcastMetaConfig, load_config
 from src.email_report import ReportEpisode, RunReport, build_html, build_text
 from src.feed import Episode, FeedGenerator, episode_page_url
-from src.main import Attempt, _build_run_report, _prepare_deferred, process_entry
+from src.main import Attempt, _prepare_deferred, process_entry
 from src import notices
 from src.monitor import FeedEntry, FeedMonitor, episode_id
 from src.normalizer import TextNormalizer
 from src.processor import ContentProcessor
+from src.run_report import build_run_report
 from tests.conftest import FakeApi, needs_ffmpeg
 
 BASE = "https://tbuckworth.github.io/feedcast"
@@ -153,7 +154,7 @@ class TestEmail:
 
     def test_waiting_post_is_listed_with_its_bullets_and_page(self, monitor):
         monitor.defer_entry(_entry(), "verbatim", "t", None, ["Land value tax works"])
-        report = _build_run_report([], [], set(), [], BASE, pending=monitor.deferred_entries())
+        report = build_run_report([], [], set(), [], BASE, pending=monitor.deferred_entries())
         (ep,) = report.episodes
         assert ep.pending and ep.bullets == ["Land value tax works"]
         assert ep.audio_url == episode_page_url(BASE, "acx-1")

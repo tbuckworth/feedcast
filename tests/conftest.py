@@ -23,6 +23,7 @@ import src.main as main
 from src import audio, lesswrong, llm, notices
 from src.audio import AudioGenerator
 from src.config import CONFIG_PATH, load_config
+from src.markets import MarketContext, MarketScout
 from src.monitor import FeedMonitor
 
 # The real AudioGenerator joins its chunks with ffmpeg.
@@ -240,6 +241,8 @@ def smtp(monkeypatch):
 # and the mail server (`smtp`): paid APIs, the network and SMTP.
 
 BROKEN = "https://feeds.example/broken.xml"
+# The one bullet of every digest: long enough to count as one (digest.MIN_BULLET_CHARS).
+BULLET = "Land value taxes work, the post argues."
 ARTICLE = ("<html><head><title>Land</title></head><body><article><p>"
            + "Land value taxes work, and here is why. " * 20 + "</p></article></body></html>")
 
@@ -256,10 +259,12 @@ class Model(FakeApi):
         return await super()._create(**kw)
 
 
-def item(title: str, link: str, hours_ago: float = 1.0) -> str:
+def item(title: str, link: str, hours_ago: float = 1.0, body: str = "") -> str:
+    """One RSS item; its body is a sentence about land value taxes unless `body` is given."""
     when = datetime.now(timezone.utc) - timedelta(hours=hours_ago)
+    body = body or f"{title}: land value taxes work, and here is why."
     return (f"<item><title>{title}</title><link>{link}</link><guid>{link}</guid>"
-            f"<description>&lt;p&gt;{title}: land value taxes work, and here is why.&lt;/p&gt;"
+            f"<description>&lt;p&gt;{body}&lt;/p&gt;"
             f"</description><pubDate>{when:%a, %d %b %Y %H:%M:%S} GMT</pubDate></item>")
 
 
@@ -271,16 +276,36 @@ class Pipeline:
         self.feeds: list[dict] = []
         self.briefing_sources: list[dict] = []
         self.maths = True
+        # The RunReport main handed to send_report each time, and the keyword
+        # arguments it sent it with, in step with each other.
+        self.reports: list = []
+        self.sent_with: list[dict] = []
         self.requests: list[httpx.Request] = []
         self.answer = lambda request: httpx.Response(404)
         self.monitor = FeedMonitor(root / "data" / "posts.db")
 
-    def feed(self, name: str, *items: str) -> None:
+    def feed(self, name: str, *items: str, mode: str = "verbatim") -> None:
         path = self.root / "feeds" / f"{name}.xml"
         path.parent.mkdir(exist_ok=True)
         path.write_text("<?xml version='1.0'?><rss version='2.0'><channel>"
                         f"<title>{name}</title>{''.join(items)}</channel></rss>")
-        self.feeds.append({"name": name, "url": str(path), "mode": "verbatim"})
+        self.feeds.append({"name": name, "url": str(path), "mode": mode})
+
+    def news(self, *items: str) -> None:
+        """The news briefing's one source, a local feed of `items`.
+
+        The briefing's prediction-market scout asks Polymarket and Kalshi over
+        the network, so it finds no markets here; a test that wants some
+        patches MarketScout._build after this.
+        """
+        path = self.root / "news.xml"
+        path.write_text("<?xml version='1.0'?><rss version='2.0'><channel><title>BBC</title>"
+                        + "".join(items) + "</channel></rss>")
+        self.briefing_sources = [{"name": "BBC", "url": str(path), "category": "politics"}]
+
+        async def no_markets(scout, selected):
+            return MarketContext()
+        self.mp.setattr(MarketScout, "_build", no_markets)
 
     def broken_feed(self, name: str) -> None:
         """A feed whose fetch raises, as feedparser does on a socket timeout."""
@@ -319,8 +344,16 @@ def pipeline(tmp_path, monkeypatch, routes, narrator, tts, smtp):
                 "GITHUB_OUTPUT", "GITHUB_ACTIONS"):
         monkeypatch.delenv(var, raising=False)
     routes["openrouter"] = Model(lambda m: m[-1]["content"])     # the normaliser repeats it
-    routes["openai"] = Model(lambda m: "- Land value taxes work.")  # the digest
+    routes["openai"] = Model(lambda m: f"- {BULLET}")            # the digest
     p = Pipeline(tmp_path, monkeypatch, smtp)
+    real_send = main.send_report
+
+    def send_report(report, **kw):
+        # Kept on the way through to the real send_report and the `smtp` recorder.
+        p.reports.append(report)
+        p.sent_with.append(kw)
+        return real_send(report, **kw)
+    monkeypatch.setattr(main, "send_report", send_report)
 
     # Every HTTP request goes to the test: LessWrong's GraphQL and ntfy.
     lesswrong._graphql_markdown.cache_clear()
