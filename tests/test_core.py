@@ -7,7 +7,7 @@ from datetime import datetime
 from src.audio import split_into_chunks
 from src.feed import FeedGenerator, PodcastConfig
 from src.main import generate_episode_id
-from src.html_text import _table_to_prose_simple, clean_html
+from src.html_text import clean_html, small_table_to_prose
 from src.news import NewsAggregator
 
 
@@ -94,7 +94,7 @@ class TestCleanHtml:
         assert "Second paragraph." in result
 
 
-# --- _table_to_prose_simple (src/html_text.py) ---
+# --- small_table_to_prose (src/html_text.py) ---
 
 
 class TestTableToProseSimple:
@@ -104,7 +104,7 @@ class TestTableToProseSimple:
 
     def test_header_value_pairs(self):
         html = "<table><tr><th>Name</th><th>Score</th></tr><tr><td>Alice</td><td>95</td></tr></table>"
-        result = _table_to_prose_simple(self._make_table(html))
+        result = small_table_to_prose(self._make_table(html))
         assert "Name: Alice" in result
         assert "Score: 95" in result
 
@@ -114,7 +114,7 @@ class TestTableToProseSimple:
             <tr><td>NYC</td><td>8M</td></tr>
             <tr><td>LA</td><td>4M</td></tr>
         </table>"""
-        result = _table_to_prose_simple(self._make_table(html))
+        result = small_table_to_prose(self._make_table(html))
         assert "City: NYC" in result
         assert "City: LA" in result
         # Rows are joined by ". "
@@ -122,7 +122,7 @@ class TestTableToProseSimple:
 
     def test_empty_table(self):
         html = "<table></table>"
-        result = _table_to_prose_simple(self._make_table(html))
+        result = small_table_to_prose(self._make_table(html))
         assert result == ""
 
 

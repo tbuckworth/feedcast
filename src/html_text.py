@@ -27,7 +27,7 @@ def clean_html(html_content: str) -> str:
     return text.strip()
 
 
-def _table_to_prose_simple(table: Tag) -> str:
+def small_table_to_prose(table: Tag) -> str:
     """Convert a small HTML table to inline prose (Header: value pairs)."""
     rows = table.find_all("tr")
     if not rows:

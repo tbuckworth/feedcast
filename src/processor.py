@@ -5,7 +5,7 @@ from typing import Optional
 from bs4 import BeautifulSoup
 
 from .bundle import writer_bundle
-from .html_text import _table_to_prose_simple, clean_html
+from .html_text import clean_html, small_table_to_prose
 from .verify import fidelity_markdown, verify_script
 from .llm import complete
 from .monitor import FeedEntry
@@ -68,7 +68,7 @@ class ContentProcessor:
             data_rows = max(0, len(rows) - 1)
 
             if data_rows <= 3:
-                prose = _table_to_prose_simple(table)
+                prose = small_table_to_prose(table)
             else:
                 # Larger tables: summarize with the cheap model
                 table_html = str(table)
