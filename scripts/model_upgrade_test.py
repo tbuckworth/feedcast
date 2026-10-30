@@ -40,6 +40,8 @@ PRICES = {
     "anthropic/claude-opus-5.5": (4.0, 20.0),
     "anthropic/claude-sonnet-5": (2.0, 10.0),
     "gpt-5.6-sol": (4.0, 20.0),
+    "gpt-6.1-sol": (2.0, 10.0),
+    "claude-sonnet-5-5": (2.0, 10.0),
     "google/gemini-3-flash-preview": (0.5, 3.0),
 }
 

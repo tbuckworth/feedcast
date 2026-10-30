@@ -20,15 +20,19 @@ Roles, and why each model:
   attribution, no longer, ~7% dearer a month because its tokenizer counts
   ~1.46x the tokens for the same text. Its thinking cannot be switched off,
   and low effort is plenty for writing.
-- checker (Claude Sonnet 5): reads a finished script against its source and
+- checker (Claude Sonnet 5.5): reads a finished script against its source and
   lists what is contradicted, distorted or unsupported (src/verify.py). A
   different model from the writer, so its blind spots are not the same ones.
-- bullets (GPT-5.6 Sol, OpenAI direct, reasoning off): turns the checked
-  script into the email's bullets. Chosen on 2026-09-16 after a side-by-side:
-  Sol's bullets were as faithful as Opus's at about three-quarters of the
-  price, and the email is meant to restate the audio, so it works from the
-  script and never the source. OpenRouter lists Sol at half OpenAI's price but
-  billed ~3x that in testing, so direct is primary and OpenRouter the backup.
+  Replaced Sonnet 5 on 2026-10-30 at the same list price, after a side-by-side
+  on six episodes; Sonnet 5 stays as a backup on the same account.
+- bullets (GPT-6.1 Sol, OpenAI direct, effort low): turns the checked script
+  into the email's bullets. Sol was chosen on 2026-09-16 after a side-by-side:
+  its bullets were as faithful as Opus's at about three-quarters of the price,
+  and the email is meant to restate the audio, so it works from the script and
+  never the source. GPT-6.1 Sol replaced GPT-5.6 Sol on 2026-10-30 at half the
+  price per token; it cannot switch reasoning off, so it runs at low. OpenRouter
+  once billed Sol at ~3x its list price in testing, so direct is primary and
+  OpenRouter the backup.
 - normalizer (Gemini 3 Flash): only transforms, "45%" -> "forty-five percent".
   ~47% of all tokens; a stronger model is not better at "preserve everything
   else exactly", and Flash did it for 168 episodes without incident. Its
@@ -68,7 +72,7 @@ class Route:
 ROUTES = {
     "openrouter": Route("openrouter", "OPENROUTER_API_KEY", "https://openrouter.ai/api/v1"),
     "openai": Route("openai", "OPENAI_API_KEY", None, "max_completion_tokens", False),
-    # Sonnet 5 and Opus 5.5 reject any sampling parameter ("`temperature` is
+    # Sonnet 5, Sonnet 5.5 and Opus 5.5 reject any sampling parameter ("`temperature` is
     # deprecated for this model"), so the checker's temperature=0 400'd here
     # and, with OpenRouter refusing Claude since 2026-09-22, every check fell
     # through to Gemini 3 Flash.
@@ -122,8 +126,9 @@ ROLES: dict[str, tuple[Target, ...]] = {
         Target("openrouter", "openai/gpt-6.1-sol", **SOL_WRITER),
     ),
     "checker": (
+        Target("anthropic", "claude-sonnet-5-5"),
+        Target("openrouter", "anthropic/claude-sonnet-5.5"),
         Target("anthropic", "claude-sonnet-5"),
-        Target("openrouter", "anthropic/claude-sonnet-5"),
         Target("openrouter", "anthropic/claude-sonnet-4.6"),
         Target("openrouter", "google/gemini-3-flash-preview"),
         # Last: the same family as the writer's backup, but a check by a
@@ -131,8 +136,8 @@ ROLES: dict[str, tuple[Target, ...]] = {
         Target("openai", "gpt-6.1-sol", min_effort="low"),
     ),
     "bullets": (
-        Target("openai", "gpt-5.6-sol", {"off": True}),
-        Target("openrouter", "openai/gpt-5.6-sol", {"off": True}),
+        Target("openai", "gpt-6.1-sol", {"effort": "low"}, min_effort="low"),
+        Target("openrouter", "openai/gpt-6.1-sol", {"effort": "low"}, min_effort="low"),
         Target("anthropic", "claude-opus-5-5", {"effort": "low"}),
     ),
     # Gemini stays first after a head-to-head with Haiku 5.5 (2026-10-10,
@@ -395,7 +400,7 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
     `client` pins the call to one client with no fallback: tests use it, and
     so does anything that manages its own client. Such a client is assumed to
     be OpenRouter's (`get_client()`), so the role's first OpenRouter target is
-    used — for the bullets role that is `openai/gpt-5.6-sol`, not the OpenAI
+    used — for the bullets role that is `openai/gpt-6.1-sol`, not the OpenAI
     direct spelling. `reasoning` overrides the target's default for this call.
 
     `fallback_on_empty=False` lets an empty reply (choices present, no text)

@@ -28,7 +28,7 @@ BACKUP = "#9a5b00"
 
 DEFAULT_PORT = 587
 
-from .llm import model_name
+from .llm import MODEL_CHECKER, model_name
 from .verify import fidelity_summary
 
 
@@ -472,7 +472,7 @@ def build_html(report: RunReport, when: datetime) -> str:
         parts.append(section(
             "Checked against source",
             f'<tr><td style="padding:12px 0 0 0;font-size:12px;line-height:1.5;color:{INK};">'
-            f'<div style="color:{MUTED};margin-bottom:8px;">Sonnet 5 read each script against its '
+            f'<div style="color:{MUTED};margin-bottom:8px;">{model_name(MODEL_CHECKER)} read each script against its '
             f'source; the writer fixed what it could once. These are the complaints that remain. '
             f'Numbers match the highlighted bullets above.</div>'
             f'<ol style="margin:0;padding-left:18px;">{rows}</ol></td></tr>',
