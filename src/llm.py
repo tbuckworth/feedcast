@@ -387,7 +387,8 @@ async def complete_with_web_search(prompt: str, *, max_tokens: int) -> str:
     only on Anthropic's API, and the checker's model is plenty for "find the
     news story". So there is no fallback chain. A turn the API pauses mid-search
     (`pause_turn`) is resumed, not restarted, up to three requests in all.
-    Raises when ANTHROPIC_API_KEY is not set and when the call fails.
+    Raises when ANTHROPIC_API_KEY is not set, when the call fails, and when
+    the turn is still paused after the third request: its text is unfinished.
     """
     route = ROUTES["anthropic"]
     if not os.environ.get(route.key_env):
@@ -398,9 +399,9 @@ async def complete_with_web_search(prompt: str, *, max_tokens: int) -> str:
         msg = await native_anthropic().messages.create(
             model=model, max_tokens=max_tokens, messages=messages, tools=[WEB_SEARCH_TOOL])
         if msg.stop_reason != "pause_turn":
-            break
+            return "".join(b.text for b in msg.content if b.type == "text")
         messages = [*messages, {"role": "assistant", "content": msg.content}]
-    return "".join(b.text for b in msg.content if b.type == "text")
+    raise RuntimeError("web search still paused (pause_turn) after 3 requests")
 
 
 def _native_effort(route: Route, reasoning: dict | None) -> str | None:

@@ -15,9 +15,10 @@ reads the result again so the email can say honestly what remains. Omissions
 and paraphrase are never flagged: the point is fidelity, not completeness,
 and a nitpicking checker would push the writer into hedged mush.
 
-Never raises. A check that fails leaves the script as written and says so: a
-failed first check is reported as such, and a failed revision or re-check
-keeps the flags the first check found.
+The check (`verify_script`) never raises. A check that fails leaves the
+script as written and says so: a failed first check is reported as such, and
+a failed revision or re-check keeps the flags the first check found.
+`write_checked`, which also writes the script, raises when the writer fails.
 """
 
 from dataclasses import asdict, dataclass, field
@@ -280,6 +281,9 @@ async def write_checked(system_prompt: str, user_message: str, *, title: str, la
     `title` heads the bundle; `label` names the writer call in the logs and the
     fallback notices, `check_label` the fidelity check in the logs. With
     `verify` off the draft is the script and no check runs.
+
+    Raises what `llm.complete` raises when the writer fails on every target,
+    so the caller can fail the entry; the check itself never raises.
     """
     done = await complete(
         "writer", max_tokens=16000, client=client, label=label,

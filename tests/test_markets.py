@@ -19,7 +19,7 @@ from src.markets import (Market, MarketContext, MarketRules, MarketScout, is_mov
                          kalshi_markets, pick_moves, polymarket_markets)
 from src.monitor import FeedEntry, FeedMonitor
 from src.news import NewsAggregator
-from tests.conftest import FakeApi
+from tests.conftest import FakeApi, FakeMessagesApi
 
 NOW = datetime(2026, 9, 19, 4, 0, tzinfo=timezone.utc)
 # The backtest's move sizes, which config.yaml `prediction_markets` sets.
@@ -177,22 +177,6 @@ class TestWriterInput:
         assert not ctx and "prediction markets skipped" in notices.report()[0]
 
 
-class _Anthropic:
-    """Anthropic's Messages API with web search, for find_cause: a paid API, so
-    each call returns the next of `replies` (a text block's text) or raises it."""
-
-    def __init__(self, *replies):
-        self.replies = list(replies)
-        self.messages = SimpleNamespace(create=self._create)
-
-    async def _create(self, **kw):
-        reply = self.replies.pop(0)
-        if isinstance(reply, Exception):
-            raise reply
-        return SimpleNamespace(stop_reason="end_turn",
-                               content=[SimpleNamespace(type="text", text=reply)])
-
-
 def _market_api(monkeypatch, handler) -> None:
     """Send every market request to `handler` instead of the network."""
     real = httpx.AsyncClient
@@ -217,7 +201,7 @@ class TestFailuresReachTheEmail:
             self, monkeypatch):
         monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
         monkeypatch.setattr(llm, "native_anthropic",
-                            lambda: _Anthropic("I looked, but here is prose, not JSON."))
+                            lambda: FakeMessagesApi("I looked, but here is prose, not JSON."))
         assert asyncio.run(markets.find_cause(_m(), NOW)) is None
         (note,) = notices.report()
         assert note.startswith(f"market cause lookup for {BILL!r} failed (the reply was not JSON")
@@ -231,7 +215,7 @@ class TestFailuresReachTheEmail:
     def test_a_search_that_finds_nothing_is_a_finding(self, monkeypatch):
         monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
         monkeypatch.setattr(llm, "native_anthropic",
-                            lambda: _Anthropic('{"found": false, "summary": ""}'))
+                            lambda: FakeMessagesApi('{"found": false, "summary": ""}'))
         assert asyncio.run(markets.find_cause(_m(), NOW)) == {"found": False}
         assert notices.report() == []
 
@@ -248,7 +232,7 @@ class TestFailuresReachTheEmail:
         _market_api(monkeypatch, handler)
         routes["anthropic"] = FakeApi(["Sorry, I can only answer in prose."])   # the checker
         monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
-        monkeypatch.setattr(llm, "native_anthropic", lambda: _Anthropic(RuntimeError("down")))
+        monkeypatch.setattr(llm, "native_anthropic", lambda: FakeMessagesApi(RuntimeError("down")))
         scout = MarketScout(rules=RULES, polymarket_tags=["ai"], kalshi_series=["KXBAD", "KXOK"])
         story = {"title": "Senate debates an AI bill", "url": "https://news/bill",
                  "summary": "The bill would require safety tests.", "published": NOW}
@@ -401,14 +385,14 @@ class TestModelRepliesAreRead:
     ])
     def test_a_cause_is_read_from_a_fenced_or_wrapped_reply(self, monkeypatch, reply, found):
         monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
-        monkeypatch.setattr(llm, "native_anthropic", lambda: _Anthropic(reply))
+        monkeypatch.setattr(llm, "native_anthropic", lambda: FakeMessagesApi(reply))
         assert asyncio.run(markets.find_cause(_m(), NOW)) == found
         assert notices.report() == []
 
     @pytest.mark.parametrize("reply", ["No JSON at all.", '{"found": true, "summary": "x",}'])
     def test_a_cause_reply_without_valid_json_is_a_failed_lookup(self, monkeypatch, reply):
         monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
-        monkeypatch.setattr(llm, "native_anthropic", lambda: _Anthropic(reply))
+        monkeypatch.setattr(llm, "native_anthropic", lambda: FakeMessagesApi(reply))
         assert asyncio.run(markets.find_cause(_m(), NOW)) is None
         (note,) = notices.report()
         assert f"failed (the reply was not JSON: {reply!r})" in note

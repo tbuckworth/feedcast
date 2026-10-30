@@ -1,7 +1,6 @@
 """Role routing: per-route parameter translation, fallback order, and the log."""
 
 import asyncio
-from types import SimpleNamespace
 
 import anthropic
 import pytest
@@ -11,7 +10,7 @@ from openai import (APIConnectionError, APITimeoutError, BadRequestError, Intern
 
 from src import llm, notices
 from src.llm import ROLES, ROUTES, Target, complete
-from tests.conftest import FakeApi, provider_error
+from tests.conftest import FakeApi, FakeMessagesApi, block, provider_error
 
 
 MSGS = [{"role": "user", "content": "hi"}]
@@ -347,33 +346,15 @@ def test_extract_json_raises_saying_why_there_is_none(reply, kind, error):
         llm.extract_json(reply, kind)
 
 
-class _WebSearch:
-    """Anthropic's Messages API with server-side web search, a paid API: each call
-    records its request and answers with the next (stop_reason, content blocks)."""
-
-    def __init__(self, *turns):
-        self.turns, self.requests = list(turns), []
-        self.messages = SimpleNamespace(create=self._create)
-
-    async def _create(self, **kw):
-        self.requests.append({**kw, "messages": list(kw["messages"])})
-        stop_reason, content = self.turns.pop(0)
-        return SimpleNamespace(stop_reason=stop_reason, content=content)
-
-
-def _block(kind, text=""):
-    return SimpleNamespace(type=kind, text=text)
-
-
 def test_web_search_resumes_a_paused_turn_with_the_checkers_anthropic_model(monkeypatch):
     monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
     # The model follows the checker role, so an upgrade there reaches the search.
     monkeypatch.setitem(ROLES, "checker", (Target("openrouter", "anthropic/claude-x"),
                                            Target("anthropic", "claude-sonnet-9")))
-    paused = [_block("server_tool_use"), _block("text", "Searching")]
-    api = _WebSearch(("pause_turn", paused),
-                     ("end_turn", [_block("web_search_tool_result"), _block("text", '{"found": '),
-                                   _block("text", "false}")]))
+    paused = [block("server_tool_use"), block("text", "Searching")]
+    api = FakeMessagesApi(("pause_turn", paused),
+                          ("end_turn", [block("web_search_tool_result"), block("text", '{"found": '),
+                                        block("text", "false}")]))
     monkeypatch.setattr(llm, "native_anthropic", lambda: api)
 
     reply = asyncio.run(llm.complete_with_web_search("Why did it move?", max_tokens=2000))
@@ -387,17 +368,19 @@ def test_web_search_resumes_a_paused_turn_with_the_checkers_anthropic_model(monk
                                   {"role": "assistant", "content": paused}]
 
 
-def test_web_search_stops_resuming_after_three_requests(monkeypatch):
+def test_web_search_still_paused_after_three_requests_raises(monkeypatch):
     monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
-    api = _WebSearch(*[("pause_turn", [_block("text", f"part {i}")]) for i in range(4)])
+    api = FakeMessagesApi(*[("pause_turn", [block("text", f"part {i}")]) for i in range(4)])
     monkeypatch.setattr(llm, "native_anthropic", lambda: api)
-    assert asyncio.run(llm.complete_with_web_search("q", max_tokens=10)) == "part 2"
+    # The paused turn's text is unfinished, so it is not returned as the reply.
+    with pytest.raises(RuntimeError, match=r"^web search still paused \(pause_turn\) after 3 requests$"):
+        asyncio.run(llm.complete_with_web_search("q", max_tokens=10))
     assert len(api.requests) == 3
 
 
 def test_web_search_without_an_anthropic_key_raises_before_any_request(monkeypatch):
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
-    api = _WebSearch()
+    api = FakeMessagesApi()
     monkeypatch.setattr(llm, "native_anthropic", lambda: api)
     with pytest.raises(RuntimeError, match="^ANTHROPIC_API_KEY not set$"):
         asyncio.run(llm.complete_with_web_search("q", max_tokens=10))
