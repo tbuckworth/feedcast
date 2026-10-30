@@ -1,4 +1,5 @@
-"""LLM roles, routes and fallbacks. Every model call in the pipeline goes through `complete()`.
+"""LLM roles, routes and fallbacks. Every model call in the pipeline goes through `complete()`,
+except a web search (`complete_with_web_search()`), which runs on one route with no fallback.
 
 Four roles, each an ordered list of (route, model) targets. A call tries the
 first target; if the provider fails or the reply comes back empty it moves to
@@ -373,6 +374,33 @@ async def _anthropic_native(model: str, messages: list[dict], max_tokens: int, e
                                  finish_reason=finish)],
         usage=SimpleNamespace(prompt_tokens=msg.usage.input_tokens,
                               completion_tokens=msg.usage.output_tokens))
+
+
+# Anthropic's server-side web search. It runs on Anthropic's own API only.
+WEB_SEARCH_TOOL = {"type": "web_search_20250305", "name": "web_search", "max_uses": 3}
+
+
+async def complete_with_web_search(prompt: str, *, max_tokens: int) -> str:
+    """The reply to `prompt` from a model that may search the web before answering.
+
+    The model is the checker role's first Anthropic target: web search works
+    only on Anthropic's API, and the checker's model is plenty for "find the
+    news story". So there is no fallback chain. A turn the API pauses mid-search
+    (`pause_turn`) is resumed, not restarted, up to three requests in all.
+    Raises when ANTHROPIC_API_KEY is not set and when the call fails.
+    """
+    route = ROUTES["anthropic"]
+    if not os.environ.get(route.key_env):
+        raise RuntimeError(f"{route.key_env} not set")
+    model = next(t.model for t in ROLES["checker"] if t.route == route.name)
+    messages = [{"role": "user", "content": prompt}]
+    for _ in range(3):
+        msg = await native_anthropic().messages.create(
+            model=model, max_tokens=max_tokens, messages=messages, tools=[WEB_SEARCH_TOOL])
+        if msg.stop_reason != "pause_turn":
+            break
+        messages = [*messages, {"role": "assistant", "content": msg.content}]
+    return "".join(b.text for b in msg.content if b.type == "text")
 
 
 def _native_effort(route: Route, reasoning: dict | None) -> str | None:

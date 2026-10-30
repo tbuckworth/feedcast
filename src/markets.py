@@ -30,7 +30,6 @@ left out.
 
 import asyncio
 import json
-import os
 import re
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
@@ -38,18 +37,13 @@ from datetime import datetime, timedelta, timezone
 import httpx
 
 from . import notices
-from .llm import ROUTES, complete, extract_json, native_anthropic
+from .llm import complete, complete_with_web_search, extract_json
 
 POLYMARKET = "https://gamma-api.polymarket.com"
 POLY_CLOB = "https://clob.polymarket.com"
 KALSHI = "https://api.elections.kalshi.com/trade-api/v2"
 MANIFOLD = "https://api.manifold.markets/v0"
 HEADERS = {"User-Agent": "feedcast (https://github.com/tbuckworth/feedcast)"}
-
-# The model that looks up why a market moved. Server-side web search runs on
-# Anthropic's API only, and Sonnet is plenty for "find the news story".
-CAUSE_MODEL = "claude-sonnet-5-5"
-WEB_SEARCH_TOOL = {"type": "web_search_20250305", "name": "web_search", "max_uses": 3}
 
 
 def _utcnow() -> datetime:
@@ -596,21 +590,11 @@ async def find_cause(m: Market, now: datetime) -> dict | None:
         print(f"    {note}")
         notices.add(note)
 
-    key_env = ROUTES["anthropic"].key_env
-    if not os.environ.get(key_env):
-        return failed(f"{key_env} not set")
     prompt = CAUSE_PROMPT.format(platform=m.platform, title=m.title, before=m.prob_24h,
                                  after=m.prob, start=f"{now - timedelta(days=1):%d %b %H:%M}",
                                  end=f"{now:%d %b %H:%M}")
-    messages = [{"role": "user", "content": prompt}]
     try:
-        for _ in range(3):   # pause_turn: a long search turn is resumed, not restarted
-            msg = await native_anthropic().messages.create(
-                model=CAUSE_MODEL, max_tokens=2000, messages=messages, tools=[WEB_SEARCH_TOOL])
-            if msg.stop_reason != "pause_turn":
-                break
-            messages = [*messages, {"role": "assistant", "content": msg.content}]
-        text = "".join(b.text for b in msg.content if b.type == "text")
+        text = await complete_with_web_search(prompt, max_tokens=2000)
     except Exception as e:  # noqa: BLE001 — a failed lookup drops the move, not the briefing
         return failed(f"{type(e).__name__}: {str(e)[:160]}")
     try:

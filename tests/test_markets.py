@@ -11,7 +11,7 @@ import pytest
 
 import src.main as main
 import src.markets as markets
-from src import notices
+from src import llm, notices
 from src.config import load_config
 from src.email_report import (ChartNote, ReportEpisode, RunReport, build_html, send_report)
 from src.market_charts import charts_for_report
@@ -216,7 +216,7 @@ class TestFailuresReachTheEmail:
     def test_a_failed_cause_lookup_drops_the_move_instead_of_reading_as_no_cause(
             self, monkeypatch):
         monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
-        monkeypatch.setattr(markets, "native_anthropic",
+        monkeypatch.setattr(llm, "native_anthropic",
                             lambda: _Anthropic("I looked, but here is prose, not JSON."))
         assert asyncio.run(markets.find_cause(_m(), NOW)) is None
         (note,) = notices.report()
@@ -226,11 +226,11 @@ class TestFailuresReachTheEmail:
     def test_no_anthropic_key_is_a_failed_lookup_too(self, monkeypatch):
         monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
         assert asyncio.run(markets.find_cause(_m(), NOW)) is None
-        assert "(ANTHROPIC_API_KEY not set)" in notices.report()[0]
+        assert "(RuntimeError: ANTHROPIC_API_KEY not set)" in notices.report()[0]
 
     def test_a_search_that_finds_nothing_is_a_finding(self, monkeypatch):
         monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
-        monkeypatch.setattr(markets, "native_anthropic",
+        monkeypatch.setattr(llm, "native_anthropic",
                             lambda: _Anthropic('{"found": false, "summary": ""}'))
         assert asyncio.run(markets.find_cause(_m(), NOW)) == {"found": False}
         assert notices.report() == []
@@ -248,7 +248,7 @@ class TestFailuresReachTheEmail:
         _market_api(monkeypatch, handler)
         routes["anthropic"] = FakeApi(["Sorry, I can only answer in prose."])   # the checker
         monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
-        monkeypatch.setattr(markets, "native_anthropic", lambda: _Anthropic(RuntimeError("down")))
+        monkeypatch.setattr(llm, "native_anthropic", lambda: _Anthropic(RuntimeError("down")))
         scout = MarketScout(rules=RULES, polymarket_tags=["ai"], kalshi_series=["KXBAD", "KXOK"])
         story = {"title": "Senate debates an AI bill", "url": "https://news/bill",
                  "summary": "The bill would require safety tests.", "published": NOW}
@@ -401,14 +401,14 @@ class TestModelRepliesAreRead:
     ])
     def test_a_cause_is_read_from_a_fenced_or_wrapped_reply(self, monkeypatch, reply, found):
         monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
-        monkeypatch.setattr(markets, "native_anthropic", lambda: _Anthropic(reply))
+        monkeypatch.setattr(llm, "native_anthropic", lambda: _Anthropic(reply))
         assert asyncio.run(markets.find_cause(_m(), NOW)) == found
         assert notices.report() == []
 
     @pytest.mark.parametrize("reply", ["No JSON at all.", '{"found": true, "summary": "x",}'])
     def test_a_cause_reply_without_valid_json_is_a_failed_lookup(self, monkeypatch, reply):
         monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
-        monkeypatch.setattr(markets, "native_anthropic", lambda: _Anthropic(reply))
+        monkeypatch.setattr(llm, "native_anthropic", lambda: _Anthropic(reply))
         assert asyncio.run(markets.find_cause(_m(), NOW)) is None
         (note,) = notices.report()
         assert f"failed (the reply was not JSON: {reply!r})" in note

@@ -1,6 +1,7 @@
 """Role routing: per-route parameter translation, fallback order, and the log."""
 
 import asyncio
+from types import SimpleNamespace
 
 import anthropic
 import pytest
@@ -344,3 +345,60 @@ def test_extract_json_reads_the_value_out_of_fences_and_prose(reply, kind, value
 def test_extract_json_raises_saying_why_there_is_none(reply, kind, error):
     with pytest.raises(ValueError, match=error):
         llm.extract_json(reply, kind)
+
+
+class _WebSearch:
+    """Anthropic's Messages API with server-side web search, a paid API: each call
+    records its request and answers with the next (stop_reason, content blocks)."""
+
+    def __init__(self, *turns):
+        self.turns, self.requests = list(turns), []
+        self.messages = SimpleNamespace(create=self._create)
+
+    async def _create(self, **kw):
+        self.requests.append({**kw, "messages": list(kw["messages"])})
+        stop_reason, content = self.turns.pop(0)
+        return SimpleNamespace(stop_reason=stop_reason, content=content)
+
+
+def _block(kind, text=""):
+    return SimpleNamespace(type=kind, text=text)
+
+
+def test_web_search_resumes_a_paused_turn_with_the_checkers_anthropic_model(monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
+    # The model follows the checker role, so an upgrade there reaches the search.
+    monkeypatch.setitem(ROLES, "checker", (Target("openrouter", "anthropic/claude-x"),
+                                           Target("anthropic", "claude-sonnet-9")))
+    paused = [_block("server_tool_use"), _block("text", "Searching")]
+    api = _WebSearch(("pause_turn", paused),
+                     ("end_turn", [_block("web_search_tool_result"), _block("text", '{"found": '),
+                                   _block("text", "false}")]))
+    monkeypatch.setattr(llm, "native_anthropic", lambda: api)
+
+    reply = asyncio.run(llm.complete_with_web_search("Why did it move?", max_tokens=2000))
+
+    assert reply == '{"found": false}'
+    first, second = api.requests
+    assert first["model"] == second["model"] == "claude-sonnet-9"
+    assert first["tools"] == [llm.WEB_SEARCH_TOOL] and first["max_tokens"] == 2000
+    assert first["messages"] == [{"role": "user", "content": "Why did it move?"}]
+    assert second["messages"] == [{"role": "user", "content": "Why did it move?"},
+                                  {"role": "assistant", "content": paused}]
+
+
+def test_web_search_stops_resuming_after_three_requests(monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
+    api = _WebSearch(*[("pause_turn", [_block("text", f"part {i}")]) for i in range(4)])
+    monkeypatch.setattr(llm, "native_anthropic", lambda: api)
+    assert asyncio.run(llm.complete_with_web_search("q", max_tokens=10)) == "part 2"
+    assert len(api.requests) == 3
+
+
+def test_web_search_without_an_anthropic_key_raises_before_any_request(monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    api = _WebSearch()
+    monkeypatch.setattr(llm, "native_anthropic", lambda: api)
+    with pytest.raises(RuntimeError, match="^ANTHROPIC_API_KEY not set$"):
+        asyncio.run(llm.complete_with_web_search("q", max_tokens=10))
+    assert api.requests == []
