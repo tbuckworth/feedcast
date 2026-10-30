@@ -4,7 +4,7 @@ import asyncio
 import os
 import socket
 import traceback
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -134,10 +134,32 @@ async def _same(value):
     return value
 
 
+@dataclass
+class Workers:
+    """What Phase 2 runs each entry through: the writer, the normaliser and the narrator."""
+
+    processor: ContentProcessor
+    normalizer: TextNormalizer
+    audio_gen: AudioGenerator
+
+    @classmethod
+    def from_config(cls, config: Config) -> "Workers":
+        """As config.yaml sets them up, the narrator with the voice it names.
+
+        Constructing the narrator demands a DeepInfra key and uploads the
+        voice sample, so a run that makes no audio builds none of these.
+        """
+        return cls(
+            processor=ContentProcessor(config.default_prompt, verify=config.fidelity_check,
+                                       auto_verbatim_limit=config.auto_verbatim_limit),
+            normalizer=TextNormalizer(respellings=config.pronunciations),
+            audio_gen=AudioGenerator(voice_sample=config.tts.voice_path),
+        )
+
+
 async def _run_entries(
     items: list[tuple[FeedEntry, str, str]], attempts: dict[str, Attempt],
-    processor: ContentProcessor, audio_gen: AudioGenerator,
-    normalizer: TextNormalizer, audio_dir: Path,
+    workers: Workers, audio_dir: Path,
 ) -> list:
     """Run process_entry over `items` concurrently, then retry failures serially.
 
@@ -153,8 +175,8 @@ async def _run_entries(
     async def run_all(batch, concurrently: bool) -> list:
         async with httpx.AsyncClient(timeout=httpx.Timeout(300.0), limits=limits) as http_client:
             coros = [
-                process_entry(e, m, p, processor, audio_gen, normalizer, audio_dir,
-                              http_client, attempts[e.id])
+                process_entry(e, m, p, workers.processor, workers.audio_gen,
+                              workers.normalizer, audio_dir, http_client, attempts[e.id])
                 for e, m, p in batch
             ]
             if concurrently:
@@ -308,388 +330,556 @@ async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
     _email(report)
 
 
+@dataclass(frozen=True)
+class RunOptions:
+    """What this run was asked to do, read from the environment once.
+
+    The workflow sets these from its inputs; unset, a run is the daily one
+    in a single pass. The properties are the gates the stages go by.
+    """
+
+    reprocess_entry: str   # REPROCESS_ENTRY: a post's id or URL, to narrate again
+    force_verbatim: bool   # FORCE_VERBATIM: read that post out in full
+    inject_url: str        # INJECT_URL: a web page to narrate instead of the feeds
+    inject_mode: str       # INJECT_MODE: auto, summarize or verbatim
+    resend: bool           # RESEND_REPORT
+    preview: bool          # PREVIEW_BRIEFING
+    run_pass: str          # FEEDCAST_PASS: "all", "first" or "narrate" (_run_pass)
+    email_always: bool     # FEEDCAST_EMAIL_ALWAYS
+    ntfy_topic: str        # NTFY_TOPIC
+
+    @classmethod
+    def from_env(cls) -> "RunOptions":
+        """Read the options. An unknown FEEDCAST_PASS raises (_run_pass)."""
+        return cls(
+            reprocess_entry=os.environ.get("REPROCESS_ENTRY", "").strip(),
+            force_verbatim=env_flag("FORCE_VERBATIM"),
+            inject_url=os.environ.get("INJECT_URL", "").strip(),
+            inject_mode=os.environ.get("INJECT_MODE", "auto").strip().lower(),
+            resend=env_flag("RESEND_REPORT"),
+            preview=env_flag("PREVIEW_BRIEFING"),
+            run_pass=_run_pass(),
+            email_always=env_flag("FEEDCAST_EMAIL_ALWAYS"),
+            ntfy_topic=os.environ.get("NTFY_TOPIC", "").strip(),
+        )
+
+    @property
+    def asks_for_one_post(self) -> bool:
+        """An inject or a reprocess: one episode, asked for by name."""
+        return bool(self.inject_url or self.reprocess_entry)
+
+    @property
+    def filters_maths(self) -> bool:
+        """Whether posts built on real mathematics are linked rather than narrated.
+
+        Not for inject and reprocess, both explicit "I want this one"
+        requests. Reprocess especially: it deletes the row first, so filtering
+        a reprocessed post would re-insert it with a NULL audio_file and
+        silently drop an already-published episode out of feed.xml,
+        unrecoverably.
+        """
+        return not self.asks_for_one_post
+
+    @property
+    def recovers_full_text(self) -> bool:
+        """Whether a feed's excerpt is swapped for the whole post (fulltext.py).
+
+        Not for an injected URL, whose text was extracted from the page itself.
+        A reprocess does, as it is usually someone asking for a bad episode to
+        be done again.
+        """
+        return not self.inject_url
+
+    @property
+    def defers_full_readings(self) -> bool:
+        """Whether posts read out in full wait for the narration pass.
+
+        Only in the first pass of a split run. Inject and reprocess runs are
+        one episode each and stay in a single pass.
+        """
+        return self.run_pass == "first" and not self.asks_for_one_post
+
+    @property
+    def pushes(self) -> bool:
+        """Whether an injection's outcome is pushed to ntfy.sh."""
+        return bool(self.inject_url and self.ntfy_topic)
+
+    def forces_verbatim(self, entry: FeedEntry) -> bool:
+        """Whether `entry` is the post a reprocess asked to have read out in full."""
+        return (self.force_verbatim and bool(self.reprocess_entry)
+                and self.reprocess_entry in (entry.id, entry.link))
+
+
+@dataclass
+class Run:
+    """What the stages of one run share: what it was asked, its database, what it has so far."""
+
+    options: RunOptions
+    config: Config
+    root: Path
+    monitor: FeedMonitor
+    # (entry, mode, prompt) for each entry this run narrates, in order.
+    entries: list[tuple[FeedEntry, str, str]] = field(default_factory=list)
+    # The same for the posts read out in full that wait for the narration pass.
+    deferring: list[tuple[FeedEntry, str, str]] = field(default_factory=list)
+    # How far each entry has got. One that failed on an earlier run resumes
+    # part-way through.
+    attempts: dict[str, Attempt] = field(default_factory=dict)
+    briefing: FeedEntry | None = None
+    # For the email.
+    failures: list[tuple[str, str]] = field(default_factory=list)   # (title, why)
+    dead_sources: list[str] = field(default_factory=list)
+    maths_skipped: list[tuple[FeedEntry, MathsVerdict]] = field(default_factory=list)
+    new_ids: set[str] = field(default_factory=set)
+
+    @property
+    def audio_dir(self) -> Path:
+        return self.root / "data" / "audio"
+
+    @property
+    def sources_dir(self) -> Path:
+        return self.root / "data" / "sources"
+
+    @property
+    def output_dir(self) -> Path:
+        return self.root / "output"
+
+    @property
+    def feed_gen(self) -> FeedGenerator:
+        return FeedGenerator(self.config.podcast, retention_days=self.config.retention_days)
+
+    def has(self, entry_id: str) -> bool:
+        """Whether this run already narrates the entry with this id."""
+        return any(e.id == entry_id for e, _m, _p in self.entries)
+
+    def add(self, entry: FeedEntry, feed: FeedConfig, mode: str) -> None:
+        """Narrate a feed's entry this run, in `mode`, with the feed's prompt."""
+        self.entries.append((entry, mode, feed.prompt or self.config.default_prompt))
+
+    def can_retry(self, entry: FeedEntry) -> bool:
+        """Whether a failed entry is queued for the next run.
+
+        Only feed entries can be found again tomorrow. A briefing is
+        regenerated daily anyway, and an injected URL has ntfy.
+        """
+        return (entry.feed_name in {fc.name for fc in self.config.feeds}
+                and not is_briefing(entry.id))
+
+
 async def async_main(config_path: Path | None = None) -> None:
-    """Run the feedcast pipeline with parallel processing."""
-    # Determine paths
-    project_root = ROOT
-    config_path = config_path or CONFIG_PATH
-    db_path = project_root / "data" / "posts.db"
-    audio_dir = project_root / "data" / "audio"
-    sources_dir = project_root / "data" / "sources"
-    output_dir = project_root / "output"
-
-    # Check for reprocess request
-    reprocess_entry = os.environ.get("REPROCESS_ENTRY", "").strip()
-    if reprocess_entry:
-        print(f"Reprocess requested for: {reprocess_entry}")
-
-    # Check for force-verbatim override
-    force_verbatim = env_flag("FORCE_VERBATIM")
-    if force_verbatim:
-        if not reprocess_entry:
-            print("Warning: FORCE_VERBATIM is set but no REPROCESS_ENTRY specified — flag will have no effect")
-        else:
-            print(f"Force verbatim enabled for: {reprocess_entry}")
-
-    # Check for URL injection (arbitrary URL processing)
-    inject_url = os.environ.get("INJECT_URL", "").strip()
-    inject_mode = os.environ.get("INJECT_MODE", "auto").strip().lower()
-    if inject_url:
-        print(f"URL injection requested: {inject_url} (mode: {inject_mode})")
-
-    # Load configuration
-    print(f"Loading configuration from {config_path}")
-    config = load_config(config_path)
-
-    # Initialize components
-    monitor = FeedMonitor(db_path)
-
-    # Handle reprocess request - delete entry so it gets picked up again.
-    # REPROCESS_ENTRY names the post by its id or by its URL.
-    reprocess_row = (monitor.get_entry(entry_id=reprocess_entry, link=reprocess_entry)
-                     if reprocess_entry else None)
-    if reprocess_entry:
-        if monitor.delete_entry(entry_id=reprocess_entry, link=reprocess_entry):
-            print(f"  Deleted entry from database, will reprocess")
-        else:
-            print(f"  Entry not found in database (may be new)")
-
-    feed_gen = FeedGenerator(config.podcast, retention_days=config.retention_days)
+    """Run the feedcast pipeline: one stage after another, sharing a Run."""
+    options = RunOptions.from_env()
+    _announce(options)
+    run = _open_run(options, config_path or CONFIG_PATH)
+    replaced = _set_aside_reprocessed(run) if options.reprocess_entry else None
 
     # Before the TTS setup: constructing AudioGenerator demands a DeepInfra key
     # and uploads the voice sample, and a resend makes no audio at all.
-    if env_flag("RESEND_REPORT"):
-        await _resend_report(monitor, config, feed_gen, audio_dir)
+    if options.resend:
+        await _resend_report(run.monitor, run.config, run.feed_gen, run.audio_dir)
         return
-    if _run_pass() == "narrate":
-        await _narrate_deferred(monitor, config, feed_gen, audio_dir, output_dir)
+    if options.run_pass == "narrate":
+        await _narrate_deferred(run.monitor, run.config, run.feed_gen, run.audio_dir,
+                                run.output_dir)
         return
-    if env_flag("PREVIEW_BRIEFING"):
-        await _preview_briefing(monitor, config)
+    if options.preview:
+        await _preview_briefing(run.monitor, run.config)
         return
+    workers = Workers.from_config(run.config)
 
-    processor = _processor(config)
-    normalizer = TextNormalizer(respellings=config.pronunciations)
-    audio_gen = _narrator(config)
-
-    entries_to_process: list[tuple[FeedEntry, str, str]] = []
-    # Bound here, before Phase 1: the news-briefing block appends to it, and
-    # assigning it later in this function would make it a local everywhere.
-    dead_sources: list[str] = []
-    # (title, why) for the email; Phase 1, the maths check and the full-text
-    # recovery fail entries too, before Phase 2.
-    failures: list[tuple[str, str]] = []
-    feed_names = {fc.name for fc in config.feeds}
-    # Entries picked up from an earlier run's failure resume part-way through.
-    resumed: dict[str, Attempt] = {}
-    briefing_entry = None
-
-    if inject_url:
-        # INJECT MODE: Skip Phase 1, extract content from arbitrary URL
-        print(f"\nInjecting URL (skipping RSS feeds)...")
-        try:
-            entry = await asyncio.to_thread(url_to_feed_entry, inject_url)
-        except ExtractionError as e:
-            print(f"  Extraction failed: {e}")
-            ntfy_topic = os.environ.get("NTFY_TOPIC", "").strip()
-            if ntfy_topic:
-                await _send_ntfy(ntfy_topic, f"Failed to process: {inject_url}\n{e}", "x")
-            raise
-        print(f"  Extracted: {entry.title} ({len(entry.content)} chars)")
-
-        # Re-injecting replaces the earlier episode. One stored from a feed
-        # has the feed's id and this URL as its link, so delete by both.
-        for row_id, title in monitor.delete_entry(entry_id=entry.id, link=inject_url):
-            print(f"  Deleted {row_id} ({title}) for re-injection")
-
-        entries_to_process = [(entry, inject_mode, config.default_prompt)]
+    if options.inject_url:
+        await _inject(run)
     else:
-        # NORMAL MODE: Phase 1 — Parallel feed fetching
-        print(f"\nPhase 1: Fetching {len(config.feeds)} feeds in parallel...")
+        fetched = await _fetch_new_entries(run)
+        _take_newest(run, fetched)
+        if options.reprocess_entry:
+            await _find_reprocessed(run, replaced)
+        await _requeue_failures(run)
+        await _correct_publication_dates([e for e, _m, _p in run.entries])
+        await _add_briefing(run)
+        # The feeds that returned nothing, to whichever fetch above.
+        run.dead_sources += run.monitor.dead_feeds
+    if options.filters_maths:
+        await _filter_maths(run)
+    if options.recovers_full_text:
+        await _recover_full_text(run)
+    if options.defers_full_readings:
+        _defer_full_readings(run, workers.processor)
 
-        max_age = config.max_age_hours
-        print(f"  Only entries published in the last {max_age:g}h are eligible"
-              if max_age is not None else "  Age cutoff disabled — every unseen entry is eligible")
-
-        for fc in config.feeds:
-            print(f"  Fetching: {fc.name} ({fc.url})")
-        feed_results = []
-        for fc, result in zip(config.feeds, await _fetch_feeds(config.feeds, monitor, max_age)):
-            if isinstance(result, BaseException):
-                # It returned nothing as surely as an empty feed, which the
-                # email lists, so it is listed too, with the error.
-                print(f"  Warning: failed to fetch {fc.name}: {result!r}")
-                dead_sources.append(f"{fc.name} ({type(result).__name__}: {result})")
-                continue
-            print(f"  {fc.name}: {len(result)} new entries")
-            feed_results.append((fc, result))
-
-        # Deduplicate — gather preserves config order, so author feeds win
-        seen_ids: set[str] = set()
-        seen_links: set[str] = set()
-        for feed_config, entries in feed_results:
-            if not entries:
-                continue
-            entry = entries[-1]  # most recent only
-            if len(entries) > 1:
-                print(f"  {feed_config.name}: taking only the newest, {entry.title}; held back "
-                      f"for a later run: " + "; ".join(e.title for e in entries[:-1]))
-            if entry.id in seen_ids or (entry.link and entry.link in seen_links):
-                print(f"  Skipping duplicate: {entry.title}")
-                continue
-            seen_ids.add(entry.id)
-            if entry.link:
-                seen_links.add(entry.link)
-            mode = feed_config.mode
-            if force_verbatim and reprocess_entry and (
-                entry.id == reprocess_entry or entry.link == reprocess_entry
-            ):
-                print(f"    Overriding mode to verbatim (force_verbatim)")
-                mode = "verbatim"
-            prompt = feed_config.prompt or config.default_prompt
-            entries_to_process.append((entry, mode, prompt))
-
-        # The requested entry is usually older than the freshness window (that
-        # is why someone is asking for it again), so the normal fetch above never
-        # sees it. Look for it once more with the cutoff off, and take only it;
-        # otherwise the window would turn a reprocess into a deletion.
-        if reprocess_entry:
-            found = await _find_in_feeds(config, monitor, reprocess_entry)
-            if isinstance(found, tuple):
-                fc, e = found
-                if e.id not in seen_ids:
-                    mode = "verbatim" if force_verbatim else fc.mode
-                    entries_to_process.append((e, mode, fc.prompt or config.default_prompt))
-                    seen_ids.add(e.id)
-                    print(f"  Reprocessing: {e.title} ({fc.name}, mode {mode})")
-            else:
-                missing = (f"a feed could not be read ({found}), so the post was not looked "
-                           f"for there" if isinstance(found, FetchFailed)
-                           else "not found in any feed")
-                if reprocess_row:
-                    monitor.restore_entry(reprocess_row)
-                    print(f"  Requested entry {missing}; previous episode kept")
-                else:
-                    print(f"  Requested entry {missing}")
-                failures.append((reprocess_entry, f"{missing}; the existing episode was kept"))
-
-        # Entries that failed on an earlier run. Their feed is fetched with the
-        # age cutoff off: a post that failed yesterday is outside the window by
-        # now, and that is exactly why it needs this path rather than the one
-        # above. Each gets MAX_ATTEMPTS mornings, then the email says so.
-        for row in monitor.pending_failures():
-            if row["id"] in seen_ids:
-                continue
-            found = await _find_in_feeds(config, monitor, row["id"], row["link"],
-                                         only_feed=row["feed_name"])
-            if isinstance(found, FetchFailed):
-                # Not knowing is not "gone": it stays queued for the next run.
-                print(f"  Could not look for an earlier failure, keeping it queued: "
-                      f"{row['title']} ({found})")
-                continue
-            if found is None:
-                print(f"  Earlier failure is no longer in its feed, dropping: {row['title']}")
-                monitor.clear_failure(row["id"])
-                continue
-            fc, e = found
-            seen_ids.add(e.id)
-            entries_to_process.append((e, fc.mode, fc.prompt or config.default_prompt))
-            attempt = resumed[e.id] = Attempt.from_row(row, number=row["attempts"] + 1)
-            print(f"  Retrying from an earlier run: {e.title} "
-                  f"(attempt {attempt.number} of {monitor.MAX_ATTEMPTS}"
-                  + (", script kept — straight to narration)" if attempt.normalized_text
-                     else ")"))
-
-        # LessWrong Curated dates an item by when it was curated. Keep that as
-        # the "is this new to us" date and ask LessWrong when the post was
-        # actually written, so the email states a release date rather than a
-        # promotion date. Silent no-op for every other feed.
-        await _correct_publication_dates([e for e, _m, _p in entries_to_process])
-
-        # Generate daily news briefing if configured
-        if config.news_briefing and config.news_briefing.enabled:
-            recent_briefings = monitor.get_recent_briefings(5)
-            aggregator = _make_aggregator(config, monitor, recent_briefings)
-            # Idempotent per day: the briefing id is date-keyed, so once it is in
-            # the database a second run today (a reprocess, a test run, the late
-            # GitHub fire) must not pay for selection, fetches, writing and
-            # checking again only to throw the result away.
-            today_id = briefing_id(f"{datetime.now():%Y-%m-%d}")
-            if monitor.is_processed(today_id):
-                print(f"  {today_id} already exists; skipping briefing generation")
-            else:
-                briefing_entry = await aggregator.generate_briefing()
-                if briefing_entry:
-                    entries_to_process.insert(0, (briefing_entry, "verbatim", config.default_prompt))
-            dead_sources += aggregator.dead_sources
-
-    # Maths filter: posts built on real mathematics are linked, not narrated.
-    # Bypassed for inject and reprocess, both explicit "I want this one"
-    # requests. Reprocess especially: it deletes the row first, so filtering a
-    # reprocessed post would re-insert it with a NULL audio_file and silently
-    # drop an already-published episode out of feed.xml, unrecoverably.
-    maths_skipped: list[tuple[FeedEntry, MathsVerdict]] = []
-    dead_sources += monitor.dead_feeds
-    if (config.maths_filter.enabled and not inject_url and not reprocess_entry
-            and entries_to_process):
-        print(f"\nChecking {len(entries_to_process)} entries for maths density...")
-        candidates = [
-            (i, e) for i, (e, _m, _p) in enumerate(entries_to_process)
-            if not is_briefing(e.id)
-        ]
-        verdicts = await asyncio.gather(
-            *[asyncio.to_thread(assess, e.link, e.content,
-                                config.maths_filter.threshold_per_1k)
-              for _i, e in candidates],
-            return_exceptions=True,
-        )
-        drop: set[int] = set()
-        for (idx, entry), verdict in zip(candidates, verdicts):
-            if isinstance(verdict, BaseException):
-                # Keeping the post would score it on its RSS body, which has
-                # its maths stripped. It fails, and the retry queue has it.
-                attempt = resumed.get(entry.id) or Attempt()
-                attempt.stage = "maths check"
-                _report_entry_failure(entry, attempt, verdict, monitor, failures,
-                                      queue=entry.feed_name in feed_names)
-                drop.add(idx)
-                continue
-            if verdict.is_heavy:
-                print(f"  Too mathematical for audio ({verdict.score}/1k via "
-                      f"{verdict.source}): {entry.title}")
-                drop.add(idx)
-                maths_skipped.append((entry, verdict))
-        if drop:
-            entries_to_process = [
-                t for i, t in enumerate(entries_to_process) if i not in drop
-            ]
-
-    # Some feeds ship an excerpt rather than the post. Zvi's is a podcast feed
-    # whose body is a blurb plus a chapter list, three percent of the article,
-    # so the summariser would work from a table of contents. Pull the real text
-    # before anything reads it. Runs after the maths filter so posts about to be
-    # dropped are not fetched twice, and in reprocess mode too, which is usually
-    # someone asking for a bad episode to be done again.
-    if entries_to_process and not inject_url:
-        enrichable = [e for e, _m, _p in entries_to_process if not is_briefing(e.id)]
-        gains = await asyncio.gather(
-            *[asyncio.to_thread(enrich_entry, e) for e in enrichable],
-            return_exceptions=True,
-        )
-        unrecovered: set[str] = set()
-        for entry, gain in zip(enrichable, gains):
-            if isinstance(gain, BaseException):
-                # The feed body may be an excerpt (Zvi's is three percent of
-                # the post), so it is not narrated: the entry fails, and the
-                # retry queue has it.
-                attempt = resumed.get(entry.id) or Attempt()
-                attempt.stage = "full text"
-                _report_entry_failure(entry, attempt, gain, monitor, failures,
-                                      queue=entry.feed_name in feed_names)
-                unrecovered.add(entry.id)
-            elif gain.replaced:
-                print(f"  Recovered full text: {entry.title} "
-                      f"({gain.before:,} -> {gain.after:,} chars)")
-            elif gain.is_failure:
-                # LessWrong answered, and the post has no markdown (deleted, a
-                # draft, or not a post): a permanent answer that a retry
-                # cannot change, so the feed body is narrated. It may be an
-                # excerpt, and silence is how a three-percent blurb ships as an
-                # episode, so the email names it.
-                note = (f"{entry.title}: LessWrong has no markdown for it, so it was "
-                        f"narrated from the feed body ({gain.before:,} chars), which "
-                        f"may be an excerpt")
-                print(f"  WARNING: {note}")
-                notices.add(note)
-        entries_to_process = [t for t in entries_to_process if t[0].id not in unrecovered]
-
-    # The briefing and the summaries are narrated and published first; posts
-    # read out in full wait for the narration pass (FEEDCAST_PASS=narrate) and
-    # a second publish, so a long one cannot hold the rest back. Inject and
-    # reprocess runs are one episode each and stay in a single pass.
-    deferring: list[tuple[FeedEntry, str, str]] = []
-    if _run_pass() == "first" and not inject_url and not reprocess_entry:
-        deferring = [t for t in entries_to_process if processor.reads_verbatim(t[0], t[1])]
-        deferred_ids = {e.id for e, _m, _p in deferring}
-        entries_to_process = [t for t in entries_to_process if t[0].id not in deferred_ids]
-        if deferring:
-            print("\nNarrating after the first publish: "
-                  + "; ".join(e.title for e, _m, _p in deferring))
-
-    print(f"\n{len(entries_to_process)} entries to process")
-
-    new_entry_ids: set[str] = set()
-
-    attempts = {e.id: resumed.get(e.id, Attempt())
-                for e, _m, _p in entries_to_process + deferring}
+    print(f"\n{len(run.entries)} entries to process")
+    for e, _m, _p in run.entries + run.deferring:   # a fresh start, unless resumed
+        run.attempts.setdefault(e.id, Attempt())
     # Cleaning and digesting the deferred posts takes seconds; it runs
     # alongside Phase 2 so they can be in the email with their bullets.
-    prepare = asyncio.create_task(_prepare_deferred(deferring, attempts, processor))
+    preparing = asyncio.create_task(
+        _prepare_deferred(run.deferring, run.attempts, workers.processor))
+    await _narrate_entries(run, workers)
+    _park_deferred(run, await preparing)
 
-    if not entries_to_process:
-        print("No new entries to process.")
+    _record_maths_skipped(run)
+    _clean_up(run)
+    episodes, rows, waiting = _publish_run(run)
+    if options.pushes:
+        await _push_outcome(run)
+    _email_run(run, episodes, rows, waiting)
+    print(f"\nPipeline complete.")
+
+
+def _announce(options: RunOptions) -> None:
+    """Start the log with what the run was asked to do."""
+    if options.reprocess_entry:
+        print(f"Reprocess requested for: {options.reprocess_entry}")
+    if options.force_verbatim:
+        if not options.reprocess_entry:
+            print("Warning: FORCE_VERBATIM is set but no REPROCESS_ENTRY specified — flag will have no effect")
+        else:
+            print(f"Force verbatim enabled for: {options.reprocess_entry}")
+    if options.inject_url:
+        print(f"URL injection requested: {options.inject_url} (mode: {options.inject_mode})")
+
+
+def _open_run(options: RunOptions, config_path: Path) -> Run:
+    """Load the configuration and open the database."""
+    print(f"Loading configuration from {config_path}")
+    config = load_config(config_path)
+    return Run(options=options, config=config, root=ROOT,
+               monitor=FeedMonitor(ROOT / "data" / "posts.db"))
+
+
+def _set_aside_reprocessed(run: Run) -> dict | None:
+    """Delete the episode a reprocess names, by its id or its URL, so it is picked up again.
+
+    Returns the row deleted, for _find_reprocessed to put back if the post
+    cannot be found.
+    """
+    wanted = run.options.reprocess_entry
+    row = run.monitor.get_entry(entry_id=wanted, link=wanted)
+    if run.monitor.delete_entry(entry_id=wanted, link=wanted):
+        print(f"  Deleted entry from database, will reprocess")
     else:
-        # PHASE 2: Parallel processing (content + audio)
-        print(f"\nPhase 2: Processing {len(entries_to_process)} entries in parallel...")
-        results = await _run_entries(entries_to_process, attempts, processor,
-                                     audio_gen, normalizer, audio_dir)
+        print(f"  Entry not found in database (may be new)")
+    return row
 
-        # PHASE 3: Sequential finalization
-        print(f"\nPhase 3: Finalizing...")
-        new_episodes = 0
-        # gather() preserves input order, so zipping recovers which entry each
-        # exception came from: the report needs to name what failed.
-        for (submitted, _mode, _prompt), result in zip(entries_to_process, results):
-            if isinstance(result, BaseException):
-                # Only feed entries can be found again tomorrow. A briefing is
-                # regenerated daily anyway, and an injected URL has ntfy.
-                queue = submitted.feed_name in feed_names and not is_briefing(submitted.id)
-                _report_entry_failure(submitted, attempts[submitted.id], result,
-                                      monitor, failures, queue=queue)
-                continue
-            entry, audio_path = result
-            monitor.mark_processed(entry, audio_path.name, content=entry.content)
-            monitor.clear_failure(entry.id)
-            if entry.bundle:
-                write_bundle(sources_dir, episode_id(entry.id), entry.bundle)
-            new_entry_ids.add(entry.id)
-            # Store news briefing text for future dedup context
-            if is_briefing(entry.id) and briefing_entry:
-                today = datetime.now().strftime("%Y-%m-%d")
-                monitor.store_news_briefing(today, briefing_entry.content)
-                if briefing_entry.markets:
-                    monitor.record_market_reports(briefing_entry.markets["moves"])
-            new_episodes += 1
 
-        print(f"  {new_episodes} new episodes created")
-        _report_unnormalized(normalizer)
+async def _inject(run: Run) -> None:
+    """INJECT_URL: narrate one web page instead of the feeds.
 
-    # Park the deferred posts for the narration pass. One that could not even
-    # be cleaned failed like any other entry and is queued the same way.
-    for (submitted, mode, _prompt), prepared in zip(deferring, await prepare):
-        if isinstance(prepared, BaseException):
-            _report_entry_failure(submitted, attempts[submitted.id], prepared, monitor,
-                                  failures, queue=submitted.feed_name in feed_names)
+    Re-injecting replaces the earlier episode. One stored from a feed has the
+    feed's id and this URL as its link, so it is deleted by both.
+    """
+    url = run.options.inject_url
+    print(f"\nInjecting URL (skipping RSS feeds)...")
+    try:
+        entry = await asyncio.to_thread(url_to_feed_entry, url)
+    except ExtractionError as e:
+        print(f"  Extraction failed: {e}")
+        if run.options.pushes:
+            await _send_ntfy(run.options.ntfy_topic, f"Failed to process: {url}\n{e}", "x")
+        raise
+    print(f"  Extracted: {entry.title} ({len(entry.content)} chars)")
+    for row_id, title in run.monitor.delete_entry(entry_id=entry.id, link=url):
+        print(f"  Deleted {row_id} ({title}) for re-injection")
+    run.entries = [(entry, run.options.inject_mode, run.config.default_prompt)]
+
+
+async def _fetch_new_entries(run: Run) -> list[tuple[FeedConfig, list[FeedEntry]]]:
+    """Phase 1: every feed's new entries, fetched in parallel, in config order.
+
+    A feed whose fetch raised returned nothing as surely as an empty feed,
+    which the email lists, so it is listed too, with the error.
+    """
+    config = run.config
+    print(f"\nPhase 1: Fetching {len(config.feeds)} feeds in parallel...")
+
+    max_age = config.max_age_hours
+    print(f"  Only entries published in the last {max_age:g}h are eligible"
+          if max_age is not None else "  Age cutoff disabled — every unseen entry is eligible")
+
+    for fc in config.feeds:
+        print(f"  Fetching: {fc.name} ({fc.url})")
+    fetched = []
+    for fc, result in zip(config.feeds, await _fetch_feeds(config.feeds, run.monitor, max_age)):
+        if isinstance(result, BaseException):
+            print(f"  Warning: failed to fetch {fc.name}: {result!r}")
+            run.dead_sources.append(f"{fc.name} ({type(result).__name__}: {result})")
             continue
-        monitor.defer_entry(submitted, mode, prepared.processed_text,
-                            prepared.normalized_text, submitted.bullets)
-        monitor.clear_failure(submitted.id)
+        print(f"  {fc.name}: {len(result)} new entries")
+        fetched.append((fc, result))
+    return fetched
 
-    # Record the maths-skipped posts with no audio file. This dedups them so they
-    # are not re-detected daily, and the feed generator already skips any entry
-    # without audio, so they never appear as a broken episode.
-    for entry, verdict in maths_skipped:
-        monitor.mark_processed(
+
+def _take_newest(run: Run, fetched: list[tuple[FeedConfig, list[FeedEntry]]]) -> None:
+    """Narrate each feed's newest new entry, once however many feeds carry it.
+
+    The others wait for a later run. `fetched` is in config order, where
+    author feeds come before the aggregate ones, so a post two feeds carry
+    keeps its author's attribution.
+    """
+    seen_ids: set[str] = set()
+    seen_links: set[str] = set()
+    for feed_config, entries in fetched:
+        if not entries:
+            continue
+        entry = entries[-1]  # most recent only
+        if len(entries) > 1:
+            print(f"  {feed_config.name}: taking only the newest, {entry.title}; held back "
+                  f"for a later run: " + "; ".join(e.title for e in entries[:-1]))
+        if entry.id in seen_ids or (entry.link and entry.link in seen_links):
+            print(f"  Skipping duplicate: {entry.title}")
+            continue
+        seen_ids.add(entry.id)
+        if entry.link:
+            seen_links.add(entry.link)
+        mode = feed_config.mode
+        if run.options.forces_verbatim(entry):
+            print(f"    Overriding mode to verbatim (force_verbatim)")
+            mode = "verbatim"
+        run.add(entry, feed_config, mode)
+
+
+async def _find_reprocessed(run: Run, replaced: dict | None) -> None:
+    """Find the post a reprocess asked for, with the age cutoff off.
+
+    The requested entry is usually older than the freshness window (that is
+    why someone is asking for it again), so Phase 1 never sees it. Look for it
+    once more and take only it; otherwise the window would turn a reprocess
+    into a deletion. Not found, `replaced` (the episode _set_aside_reprocessed
+    deleted) is put back.
+    """
+    wanted = run.options.reprocess_entry
+    found = await _find_in_feeds(run.config, run.monitor, wanted)
+    if isinstance(found, tuple):
+        fc, e = found
+        if not run.has(e.id):
+            mode = "verbatim" if run.options.forces_verbatim(e) else fc.mode
+            run.add(e, fc, mode)
+            print(f"  Reprocessing: {e.title} ({fc.name}, mode {mode})")
+        return
+    missing = (f"a feed could not be read ({found}), so the post was not looked "
+               f"for there" if isinstance(found, FetchFailed)
+               else "not found in any feed")
+    if replaced:
+        run.monitor.restore_entry(replaced)
+        print(f"  Requested entry {missing}; previous episode kept")
+    else:
+        print(f"  Requested entry {missing}")
+    run.failures.append((wanted, f"{missing}; the existing episode was kept"))
+
+
+async def _requeue_failures(run: Run) -> None:
+    """Take back the entries that failed on an earlier run, to resume where they stopped.
+
+    Their feed is fetched with the age cutoff off: a post that failed
+    yesterday is outside the window by now, and that is exactly why it needs
+    this path rather than Phase 1. Each gets MAX_ATTEMPTS mornings, then the
+    email says so.
+    """
+    for row in run.monitor.pending_failures():
+        if run.has(row["id"]):
+            continue
+        found = await _find_in_feeds(run.config, run.monitor, row["id"], row["link"],
+                                     only_feed=row["feed_name"])
+        if isinstance(found, FetchFailed):
+            # Not knowing is not "gone": it stays queued for the next run.
+            print(f"  Could not look for an earlier failure, keeping it queued: "
+                  f"{row['title']} ({found})")
+            continue
+        if found is None:
+            print(f"  Earlier failure is no longer in its feed, dropping: {row['title']}")
+            run.monitor.clear_failure(row["id"])
+            continue
+        fc, e = found
+        run.add(e, fc, fc.mode)
+        attempt = run.attempts[e.id] = Attempt.from_row(row, number=row["attempts"] + 1)
+        print(f"  Retrying from an earlier run: {e.title} "
+              f"(attempt {attempt.number} of {run.monitor.MAX_ATTEMPTS}"
+              + (", script kept — straight to narration)" if attempt.normalized_text
+                 else ")"))
+
+
+async def _add_briefing(run: Run) -> None:
+    """Write today's news briefing, if configured, and narrate it first."""
+    config = run.config
+    if not (config.news_briefing and config.news_briefing.enabled):
+        return
+    recent_briefings = run.monitor.get_recent_briefings(5)
+    aggregator = _make_aggregator(config, run.monitor, recent_briefings)
+    # Idempotent per day: the briefing id is date-keyed, so once it is in
+    # the database a second run today (a reprocess, a test run, the late
+    # GitHub fire) must not pay for selection, fetches, writing and
+    # checking again only to throw the result away.
+    today_id = briefing_id(f"{datetime.now():%Y-%m-%d}")
+    if run.monitor.is_processed(today_id):
+        print(f"  {today_id} already exists; skipping briefing generation")
+    else:
+        run.briefing = await aggregator.generate_briefing()
+        if run.briefing:
+            run.entries.insert(0, (run.briefing, "verbatim", config.default_prompt))
+    run.dead_sources += aggregator.dead_sources
+
+
+async def _filter_maths(run: Run) -> None:
+    """Set aside the posts built on real mathematics, to be linked rather than narrated."""
+    if not (run.config.maths_filter.enabled and run.entries):
+        return
+    print(f"\nChecking {len(run.entries)} entries for maths density...")
+    candidates = [
+        (i, e) for i, (e, _m, _p) in enumerate(run.entries)
+        if not is_briefing(e.id)
+    ]
+    verdicts = await asyncio.gather(
+        *[asyncio.to_thread(assess, e.link, e.content,
+                            run.config.maths_filter.threshold_per_1k)
+          for _i, e in candidates],
+        return_exceptions=True,
+    )
+    drop: set[int] = set()
+    for (idx, entry), verdict in zip(candidates, verdicts):
+        if isinstance(verdict, BaseException):
+            # Keeping the post would score it on its RSS body, which has
+            # its maths stripped. It fails, and the retry queue has it.
+            _fail_before_narration(run, entry, "maths check", verdict)
+            drop.add(idx)
+            continue
+        if verdict.is_heavy:
+            print(f"  Too mathematical for audio ({verdict.score}/1k via "
+                  f"{verdict.source}): {entry.title}")
+            drop.add(idx)
+            run.maths_skipped.append((entry, verdict))
+    if drop:
+        run.entries = [t for i, t in enumerate(run.entries) if i not in drop]
+
+
+async def _recover_full_text(run: Run) -> None:
+    """Swap each feed excerpt for the whole post, before anything reads it.
+
+    Zvi's feed is a podcast feed whose body is a blurb plus a chapter list,
+    three percent of the article, so the summariser would work from a table
+    of contents. Runs after the maths filter so posts about to be dropped are
+    not fetched twice.
+    """
+    enrichable = [e for e, _m, _p in run.entries if not is_briefing(e.id)]
+    gains = await asyncio.gather(
+        *[asyncio.to_thread(enrich_entry, e) for e in enrichable],
+        return_exceptions=True,
+    )
+    unrecovered: set[str] = set()
+    for entry, gain in zip(enrichable, gains):
+        if isinstance(gain, BaseException):
+            # The feed body may be an excerpt (Zvi's is three percent of
+            # the post), so it is not narrated: the entry fails, and the
+            # retry queue has it.
+            _fail_before_narration(run, entry, "full text", gain)
+            unrecovered.add(entry.id)
+        elif gain.replaced:
+            print(f"  Recovered full text: {entry.title} "
+                  f"({gain.before:,} -> {gain.after:,} chars)")
+        elif gain.is_failure:
+            # LessWrong answered, and the post has no markdown (deleted, a
+            # draft, or not a post): a permanent answer that a retry
+            # cannot change, so the feed body is narrated. It may be an
+            # excerpt, and silence is how a three-percent blurb ships as an
+            # episode, so the email names it.
+            note = (f"{entry.title}: LessWrong has no markdown for it, so it was "
+                    f"narrated from the feed body ({gain.before:,} chars), which "
+                    f"may be an excerpt")
+            print(f"  WARNING: {note}")
+            notices.add(note)
+    run.entries = [t for t in run.entries if t[0].id not in unrecovered]
+
+
+def _defer_full_readings(run: Run, processor: ContentProcessor) -> None:
+    """Hold the posts read out in full back for the narration pass.
+
+    The briefing and the summaries are narrated and published first; posts
+    read out in full wait for the narration pass (FEEDCAST_PASS=narrate) and
+    a second publish, so a long one cannot hold the rest back.
+    """
+    run.deferring = [t for t in run.entries if processor.reads_verbatim(t[0], t[1])]
+    deferred_ids = {e.id for e, _m, _p in run.deferring}
+    run.entries = [t for t in run.entries if t[0].id not in deferred_ids]
+    if run.deferring:
+        print("\nNarrating after the first publish: "
+              + "; ".join(e.title for e, _m, _p in run.deferring))
+
+
+async def _narrate_entries(run: Run, workers: Workers) -> None:
+    """Phase 2 and 3: make this run's episodes in parallel, then record each outcome."""
+    if not run.entries:
+        print("No new entries to process.")
+        return
+    print(f"\nPhase 2: Processing {len(run.entries)} entries in parallel...")
+    results = await _run_entries(run.entries, run.attempts, workers, run.audio_dir)
+
+    print(f"\nPhase 3: Finalizing...")
+    new_episodes = 0
+    # gather() preserves input order, so zipping recovers which entry each
+    # exception came from: the report needs to name what failed.
+    for (submitted, _mode, _prompt), result in zip(run.entries, results):
+        if isinstance(result, BaseException):
+            _fail(run, submitted, run.attempts[submitted.id], result)
+            continue
+        _record_episode(run, *result)
+        new_episodes += 1
+    print(f"  {new_episodes} new episodes created")
+    _report_unnormalized(workers.normalizer)
+
+
+def _record_episode(run: Run, entry: FeedEntry, audio_path: Path) -> None:
+    """Store a finished episode: its row, its writer's bundle, and the briefing's memory."""
+    run.monitor.mark_processed(entry, audio_path.name, content=entry.content)
+    run.monitor.clear_failure(entry.id)
+    if entry.bundle:
+        write_bundle(run.sources_dir, episode_id(entry.id), entry.bundle)
+    run.new_ids.add(entry.id)
+    # Store news briefing text for future dedup context
+    if is_briefing(entry.id) and run.briefing:
+        today = datetime.now().strftime("%Y-%m-%d")
+        run.monitor.store_news_briefing(today, run.briefing.content)
+        if run.briefing.markets:
+            run.monitor.record_market_reports(run.briefing.markets["moves"])
+
+
+def _park_deferred(run: Run, prepared: list) -> None:
+    """Park the deferred posts for the narration pass, with what _prepare_deferred made.
+
+    One that could not even be cleaned failed like any other entry and is
+    queued the same way.
+    """
+    for (submitted, mode, _prompt), ready in zip(run.deferring, prepared):
+        if isinstance(ready, BaseException):
+            _fail(run, submitted, run.attempts[submitted.id], ready)
+            continue
+        run.monitor.defer_entry(submitted, mode, ready.processed_text,
+                                ready.normalized_text, submitted.bullets)
+        run.monitor.clear_failure(submitted.id)
+
+
+def _record_maths_skipped(run: Run) -> None:
+    """Record the maths-skipped posts with no audio file.
+
+    This dedups them so they are not re-detected daily, and the feed
+    generator already skips any entry without audio, so they never appear as
+    a broken episode.
+    """
+    for entry, verdict in run.maths_skipped:
+        run.monitor.mark_processed(
             entry, None, content=entry.content,
             maths={"score": verdict.score, "hits": verdict.hits,
                    "source": verdict.source})
 
-    # Cleanup old entries BEFORE generating the feed, so the feed never
-    # references audio/transcripts that cleanup deletes in this same run
-    # (otherwise the deployed feed.xml advertises 404 enclosures).
-    removed = monitor.cleanup_old_entries(days=config.retention_days, audio_dir=audio_dir,
-                                          transcript_dir=_transcript_dir(output_dir),
-                                          sources_dir=sources_dir)
+
+def _clean_up(run: Run) -> None:
+    """Forget old episodes with their files, old briefings and old failure records.
+
+    Runs BEFORE the feed is generated, so the feed never references
+    audio/transcripts that cleanup deletes in this same run (otherwise the
+    deployed feed.xml advertises 404 enclosures).
+    """
+    config, monitor = run.config, run.monitor
+    removed = monitor.cleanup_old_entries(days=config.retention_days, audio_dir=run.audio_dir,
+                                          transcript_dir=_transcript_dir(run.output_dir),
+                                          sources_dir=run.sources_dir)
     if removed:
         print(f"  Cleaned up {removed} old entries")
     removed_briefings = monitor.cleanup_old_briefings(days=7)
@@ -699,50 +889,78 @@ async def async_main(config_path: Path | None = None) -> None:
     if pruned:
         print(f"  Forgot {pruned} old failure records")
 
-    # Generate podcast feed
+
+def _publish_run(run: Run) -> tuple[list[Episode], list[dict], list[dict]]:
+    """Publish the site (_publish), and tell the workflow if the narration job has work."""
     print(f"\nGenerating podcast feed...")
-    episodes, db_entries, waiting = _publish(monitor, feed_gen, audio_dir, output_dir)
-    # Tells the workflow whether the narration job has anything to do.
+    episodes, db_entries, waiting = _publish(run.monitor, run.feed_gen, run.audio_dir,
+                                             run.output_dir)
     _gh_output(deferred=len(waiting))
+    return episodes, db_entries, waiting
 
-    # Send ntfy notification for injected URLs: what was published, or why not.
-    # Before the email, so a push that fails is among the email's notices.
-    if inject_url:
-        ntfy_topic = os.environ.get("NTFY_TOPIC", "").strip()
-        if ntfy_topic:
-            made = [e for e, _m, _p in entries_to_process if e.id in new_entry_ids]
-            if made:
-                await _send_ntfy(ntfy_topic, f"New episode: {made[0].title}", "white_check_mark")
-            else:
-                await _send_ntfy(ntfy_topic, f"Failed to process: {inject_url}\n"
-                                 + "\n".join(why for _title, why in failures), "x")
 
-    # Email the run report. Off when FEEDCAST_EMAIL_TO is unset; a send that
-    # fails is recorded, and the workflow fails the run after publishing.
-    # FEEDCAST_EMAIL_ALWAYS sends it even on a run that produced nothing.
-    if (new_entry_ids or failures or maths_skipped or dead_sources or deferring
-            or env_flag("FEEDCAST_EMAIL_ALWAYS")):
-        # Charts first: a chart that fails is a notice, and the report takes
-        # the notices as they stand when it is built.
-        charts, images = (charts_for_report(briefing_entry)
-                          if briefing_entry and briefing_entry.id in new_entry_ids else ([], {}))
-        report = _build_run_report(
-            episodes, db_entries, new_entry_ids, failures, config.podcast.base_url,
-            maths_skipped, dead_sources, pending=waiting,
-        )
-        report.charts = charts
-        _email(report, images=images)
-    else:
+def _email_run(run: Run, episodes: list[Episode], db_entries: list[dict],
+               waiting: list[dict]) -> None:
+    """Email the run report, unless the run has nothing to tell.
+
+    Off when FEEDCAST_EMAIL_TO is unset; a send that fails is recorded, and
+    the workflow fails the run after publishing. FEEDCAST_EMAIL_ALWAYS sends
+    it even on a run that produced nothing.
+    """
+    if not (run.new_ids or run.failures or run.maths_skipped or run.dead_sources
+            or run.deferring or run.options.email_always):
         print("  Nothing new — email report skipped (set FEEDCAST_EMAIL_ALWAYS=true to send anyway)")
+        return
+    # Charts first: a chart that fails is a notice, and the report takes
+    # the notices as they stand when it is built.
+    briefing = run.briefing
+    charts, images = (charts_for_report(briefing)
+                      if briefing and briefing.id in run.new_ids else ([], {}))
+    report = _build_run_report(
+        episodes, db_entries, run.new_ids, run.failures, run.config.podcast.base_url,
+        run.maths_skipped, run.dead_sources, pending=waiting,
+    )
+    report.charts = charts
+    _email(report, images=images)
 
-    print(f"\nPipeline complete.")
+
+async def _push_outcome(run: Run) -> None:
+    """Push an injection's outcome to ntfy.sh: what was published, or why not.
+
+    Before the email, so a push that fails is among the email's notices.
+    """
+    topic, url = run.options.ntfy_topic, run.options.inject_url
+    made = [e for e, _m, _p in run.entries if e.id in run.new_ids]
+    if made:
+        await _send_ntfy(topic, f"New episode: {made[0].title}", "white_check_mark")
+    else:
+        await _send_ntfy(topic, f"Failed to process: {url}\n"
+                         + "\n".join(why for _title, why in run.failures), "x")
+
+
+def _fail(run: Run, entry: FeedEntry, attempt: Attempt, exc: BaseException) -> None:
+    """Report an entry that failed this run, queued for the next if one can find it."""
+    _report_entry_failure(entry, attempt, exc, run.monitor, run.failures,
+                          queue=run.can_retry(entry))
+
+
+def _fail_before_narration(run: Run, entry: FeedEntry, stage: str,
+                           exc: BaseException) -> None:
+    """Report an entry that failed at `stage`, before Phase 2 could start on it."""
+    attempt = run.attempts.get(entry.id) or Attempt()
+    attempt.stage = stage
+    _fail(run, entry, attempt, exc)
 
 
 async def _correct_publication_dates(entries: list[FeedEntry]) -> None:
     """Replace the feed's date with the real posting date, where they differ.
 
-    Only LessWrong links can be resolved, and only a difference worth showing
-    is applied (FEED_DATE_LAG).
+    LessWrong Curated dates an item by when it was curated. That stays the
+    "is this new to us" date (`feed_date`), and LessWrong is asked when the
+    post was actually written, so the email states a release date rather than
+    a promotion date. Only LessWrong links can be resolved, and only a
+    difference worth showing is applied (FEED_DATE_LAG): a silent no-op for
+    every other feed.
     """
     for entry in entries:
         real = await posted_at(entry.link)
@@ -751,17 +969,6 @@ async def _correct_publication_dates(entries: list[FeedEntry]) -> None:
         print(f"    {entry.title[:48]}: posted {real:%Y-%m-%d}, "
               f"in feed {entry.feed_date:%Y-%m-%d}")
         entry.published = real
-
-
-def _processor(config: Config) -> ContentProcessor:
-    """The writer and cleaner of episode scripts, as configured."""
-    return ContentProcessor(config.default_prompt, verify=config.fidelity_check,
-                            auto_verbatim_limit=config.auto_verbatim_limit)
-
-
-def _narrator(config: Config) -> AudioGenerator:
-    """The TTS narrator, with the voice config.yaml names."""
-    return AudioGenerator(voice_sample=config.tts.voice_path)
 
 
 def _make_aggregator(config: Config, monitor: FeedMonitor,
@@ -853,6 +1060,12 @@ def _gh_output(**values) -> None:
         f.writelines(f"{key}={value}\n" for key, value in values.items())
 
 
+def _gh_warning(title: str, message: str) -> None:
+    """Annotate the run's summary page with a warning. A no-op outside GitHub Actions."""
+    if os.environ.get("GITHUB_ACTIONS"):
+        print(f"::warning title={title}::{message}")
+
+
 def _email(report: RunReport, **kwargs) -> None:
     """Send the report, and record a send that failed for the workflow.
 
@@ -888,8 +1101,7 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
             why = f"narration: gave up after {monitor.MAX_ATTEMPTS} attempts ({reason})"
             print(f"  Giving up on {entry.title}: {why}")
             failures.append((entry.title, why))
-            if os.environ.get("GITHUB_ACTIONS"):
-                print(f"::warning title=Feedcast entry failed::{entry.title} — {why}")
+            _gh_warning("Feedcast entry failed", f"{entry.title} — {why}")
             continue
         entry.bullets = row["bullets"]
         todo.append((row, entry))
@@ -901,10 +1113,8 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
         attempts = {entry.id: Attempt.from_row(row, number=row["attempts"])
                     for row, entry in todo}
         items = [(entry, row["mode"], config.default_prompt) for row, entry in todo]
-        processor = _processor(config)
-        normalizer = TextNormalizer(respellings=config.pronunciations)
-        audio_gen = _narrator(config)
-        results = await _run_entries(items, attempts, processor, audio_gen, normalizer, audio_dir)
+        workers = Workers.from_config(config)
+        results = await _run_entries(items, attempts, workers, audio_dir)
         for (entry, _mode, _prompt), result in zip(items, results):
             attempt = attempts[entry.id]
             if isinstance(result, BaseException):
@@ -922,7 +1132,7 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
             monitor.clear_failure(entry.id)
             narrated += 1
         print(f"  {narrated} narrated")
-        _report_unnormalized(normalizer)
+        _report_unnormalized(workers.normalizer)
 
     episodes, _rows, _waiting = _publish(monitor, feed_gen, audio_dir, output_dir)
     if failures:
@@ -1032,10 +1242,9 @@ def _report_entry_failure(
     if queue:
         note = _attempt_note(monitor.record_failure(entry, summary, attempt.normalized_text))
     failures.append((entry.title, summary + note))
-    if os.environ.get("GITHUB_ACTIONS"):
-        # Surfaces on the run's summary page, so a green run that lost an
-        # episode is not green at a glance.
-        print(f"::warning title=Feedcast entry failed::{entry.title} — {summary}{note}")
+    # Surfaces on the run's summary page, so a green run that lost an
+    # episode is not green at a glance.
+    _gh_warning("Feedcast entry failed", f"{entry.title} — {summary}{note}")
 
 
 def _attempt_note(n: int) -> str:
@@ -1056,8 +1265,7 @@ def _report_unnormalized(normalizer: TextNormalizer) -> None:
                f"normaliser model refused them")
         print(f"  WARNING: {msg}")
         notices.add(msg)
-        if os.environ.get("GITHUB_ACTIONS"):
-            print(f"::warning title=Feedcast normaliser::{msg}")
+        _gh_warning("Feedcast normaliser", msg)
 
 
 def _json_dict(row: dict, column: str) -> dict | None:
