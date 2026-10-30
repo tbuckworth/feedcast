@@ -7,6 +7,7 @@ constructor makes.
 """
 
 import asyncio
+import subprocess
 
 import pytest
 
@@ -83,3 +84,18 @@ def test_an_empty_audio_chunk_fails_the_episode(tmp_path, monkeypatch, narrator)
                                            r".*chunk 2 of 3: no audio"):
         asyncio.run(narrator().generate(TEXT, out, http_client=None))
     assert not out.exists()
+
+
+@pytest.mark.parametrize("text, seconds", [
+    ("Just the one sentence.", 2.0 + 0.1),            # the lead-in, then the chunk
+    (TEXT, 2.0 + 3 * 0.1 + 2 * 0.35),                 # a pause between chunks, none after
+])
+def test_the_mp3_is_the_lead_in_then_the_chunks_with_pauses_between(tmp_path, narrator, tts, text, seconds):
+    # `tts` answers each chunk with 0.1 s of silence.
+    out = tmp_path / "abc123def456_title.mp3"
+    assert asyncio.run(narrator().generate(text, out, http_client=None)) == out
+    probe = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                            "-of", "default=noprint_wrappers=1:nokey=1", str(out)],
+                           capture_output=True, text=True, check=True)
+    # MP3 frames pad the end by up to a tenth of a second, well short of a pause.
+    assert float(probe.stdout) == pytest.approx(seconds, abs=0.1)

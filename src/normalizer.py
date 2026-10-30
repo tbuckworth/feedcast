@@ -2,6 +2,7 @@
 
 import re
 
+from .chunking import SENTENCE_BREAK, pack, split_sentences
 from .llm import EmptyCompletion, complete
 
 # One request's worth of input. Normalisation EXPANDS text — "1,234" becomes
@@ -29,8 +30,6 @@ MIN_KEPT = 0.85
 # single-newline prose that batching sees as one paragraph — and a third of the
 # post went out un-normalised when a few sentences were the problem.
 MIN_FALLBACK_CHARS = 1500
-
-_SENTENCE_BREAK = re.compile(r"(?<=[.!?])\s+")
 
 
 def respell(text: str, table: dict[str, str]) -> str:
@@ -108,11 +107,7 @@ class TextNormalizer:
         if not text.strip():
             return text
 
-        # For long texts, split into paragraph batches to stay within token limits
-        if len(text) > MAX_BATCH_CHARS:
-            spoken = await self._normalize_in_batches(text, label)
-        else:
-            spoken = await self._normalize_resilient(text.split("\n\n"), label)
+        spoken = await self._normalize_in_batches(text, label)
         # In code, not in the prompt: certain, free, and still applied to a
         # passage the model refused and that is narrated as written.
         return respell(spoken, self.respellings)
@@ -138,7 +133,7 @@ class TextNormalizer:
                 left = await self._normalize_resilient(paragraphs[:mid], label)
                 right = await self._normalize_resilient(paragraphs[mid:], label)
                 return f"{left}\n\n{right}"
-            sentences = _SENTENCE_BREAK.split(text)
+            sentences = SENTENCE_BREAK.split(text)
             if len(sentences) > 1 and len(text) > MIN_FALLBACK_CHARS:
                 mid = len(sentences) // 2
                 print(f"    Normaliser returned nothing for a {len(text):,}-char passage "
@@ -190,57 +185,24 @@ class TextNormalizer:
     def _split_oversized(paragraph: str) -> list[str]:
         """Break a paragraph that is itself larger than a batch, at sentences.
 
-        Batching alone cannot bound this: appending an over-long paragraph to an
-        empty batch flushes the *previous* batch, never the paragraph, so a
-        single huge one would be sent whole.
+        Batching would only cut such a paragraph every MAX_BATCH_CHARS
+        characters, mid-sentence; this cuts it where a sentence ends.
         """
         if len(paragraph) <= MAX_BATCH_CHARS:
             return [paragraph]
-        pieces, current = [], ""
-        for sentence in re.split(r"(?<=[.!?])\s+", paragraph):
-            if current and len(current) + len(sentence) + 1 > MAX_BATCH_CHARS:
-                pieces.append(current)
-                current = sentence
-            else:
-                current = f"{current} {sentence}".strip()
-        if current:
-            pieces.append(current)
-        # A single sentence longer than the cap still has to be cut somewhere.
-        out = []
-        for piece in pieces:
-            while len(piece) > MAX_BATCH_CHARS:
-                out.append(piece[:MAX_BATCH_CHARS])
-                piece = piece[MAX_BATCH_CHARS:]
-            if piece:
-                out.append(piece)
-        return out
+        return split_sentences(paragraph, MAX_BATCH_CHARS)
 
     async def _normalize_in_batches(self, text: str, label: str) -> str:
-        """Split long text into paragraph batches and normalize each."""
+        """Split text into paragraph batches within MAX_BATCH_CHARS and normalize each."""
         paragraphs = [
             piece
             for para in text.split("\n\n")
             for piece in self._split_oversized(para)
         ]
-        batches: list[list[str]] = []
-        current_batch: list[str] = []
-        current_len = 0
-
-        for para in paragraphs:
-            # Count the "\n\n" the join will add, or a post made of many short
-            # list items overshoots the cap by two characters per paragraph —
-            # enough to blow past it entirely and defeat the bound.
-            extra = len(para) + (2 if current_batch else 0)
-            if current_batch and current_len + extra > MAX_BATCH_CHARS:
-                batches.append(current_batch)
-                current_batch = []
-                current_len = 0
-                extra = len(para)
-            current_batch.append(para)
-            current_len += extra
-
-        if current_batch:
-            batches.append(current_batch)
+        # Paragraphs are joined with "\n\n", and the cap counts it: a post made
+        # of many short list items otherwise overshoots by two characters a
+        # paragraph, enough to blow past it entirely and defeat the bound.
+        batches = pack(paragraphs, MAX_BATCH_CHARS, sep="\n\n")
 
         normalized_parts = []
         for batch in batches:
