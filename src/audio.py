@@ -45,6 +45,7 @@ def upload_voice_to_deepinfra(voice_path: Path, api_key: str, max_retries: int =
 
     DeepInfra's upload endpoint returns intermittent 5xx errors, so retry
     with backoff on transient server/connection failures before giving up.
+    Then waits VOICE_UPLOAD_DELAY_SECONDS for the voice to replicate.
     """
     print(f"    Uploading voice sample: {voice_path.name}")
 
@@ -88,6 +89,12 @@ def upload_voice_to_deepinfra(voice_path: Path, api_key: str, max_retries: int =
         raise RuntimeError(f"No voice_id in response: {result}")
 
     print(f"    Voice uploaded. voice_id: {voice_id}")
+
+    # Optional delay for voice replication across DeepInfra servers
+    if VOICE_UPLOAD_DELAY_SECONDS > 0:
+        import time
+        print(f"    Waiting {VOICE_UPLOAD_DELAY_SECONDS}s for voice replication...")
+        time.sleep(VOICE_UPLOAD_DELAY_SECONDS)
     return voice_id
 
 
@@ -218,7 +225,8 @@ class AudioGenerator:
         if not self._voice_sample.exists():
             raise FileNotFoundError(f"Voice sample not found: {self._voice_sample}")
 
-        # Upload voice fresh each session (no caching - avoids cross-region issues)
+        # Upload voice fresh each session (no caching - avoids cross-region
+        # issues); this also waits for it to replicate.
         self._voice_id = upload_voice_to_deepinfra(self._voice_sample, self._api_key)
 
         # Concurrency limit for TTS API calls (shared across all entries)
@@ -227,12 +235,6 @@ class AudioGenerator:
         # Index into TTS_MODELS. Moves forward when a model stays busy and
         # never back within a run, so an episode does not alternate voices.
         self._model = 0
-
-        # Optional delay for voice replication across DeepInfra servers
-        if VOICE_UPLOAD_DELAY_SECONDS > 0:
-            import time
-            print(f"    Waiting {VOICE_UPLOAD_DELAY_SECONDS}s for voice replication...")
-            time.sleep(VOICE_UPLOAD_DELAY_SECONDS)
 
     def _switch_model(self, failed: int, error: Exception) -> None:
         """Move past a busy model, once, however many chunks saw it fail."""

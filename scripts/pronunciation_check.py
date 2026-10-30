@@ -7,6 +7,12 @@ to test a candidate for config.yaml `pronunciations`: about half of the
 plausible respellings tried on 2026-10-08 did not help or made things worse
 ("Tsvee" for Zvi, "Open Ay-Eye" for OpenAI), so measure, do not guess.
 
+The audio comes from the pipeline's own code in src/audio.py: the voice
+sample config.yaml names, uploaded with the same wait for it to replicate
+(VOICE_UPLOAD_DELAY_SECONDS, which CI sets; unset, there is none), and the
+same TTS request, settings and retries, on the primary model. A change to the
+production voice therefore reaches the measurement.
+
 Whisper is no use for this: its language model writes "OpenAI" however the
 word was said. The phoneme model (wav2vec2, espeak phonemes) reports sounds.
 
@@ -20,7 +26,6 @@ second a clip) and downloads ~1.3 GB on first use.
 
 import argparse
 import asyncio
-import base64
 import collections
 import os
 import re
@@ -30,7 +35,7 @@ from pathlib import Path
 
 import httpx
 
-from src.audio import DEEPINFRA_INFERENCE_URL, TTS_MODELS, upload_voice_to_deepinfra
+from src.audio import TTS_MODELS, generate_with_deepinfra_async, upload_voice_to_deepinfra
 from src.config import load_config
 
 CARRIER = "Today, {x} said yes, and {x} said no."
@@ -40,21 +45,19 @@ PHONEME_MODEL = "facebook/wav2vec2-lv-60-espeak-cv-ft"
 async def synthesise(spellings: list[str], n: int, out: Path) -> None:
     key = os.environ["DEEPINFRA_API_KEY"]
     # The production voice, as config.yaml names it.
-    voice = upload_voice_to_deepinfra(load_config().tts.voice_path, key)
-    await asyncio.sleep(5)   # the uploaded voice takes a moment to reach every server
+    sample = load_config().tts.voice_path
+    # The model a run narrates with; it moves to the next only while this one is busy.
+    model = TTS_MODELS[0]
+    print(f"{model[0]}, voice {sample.name}, {n} clips per spelling")
+    voice = upload_voice_to_deepinfra(sample, key)
     sem = asyncio.Semaphore(6)
-    model, extra = TTS_MODELS[0]
     async with httpx.AsyncClient(timeout=180) as client:
         async def one(i: int, spelling: str, rep: int) -> None:
             async with sem:
-                r = await client.post(DEEPINFRA_INFERENCE_URL + model,
-                                      headers={"Authorization": f"Bearer {key}"},
-                                      json={"text": CARRIER.format(x=spelling), "voice_id": voice,
-                                            "cfg_weight": 0.5, "exaggeration": 0.3, **extra})
-            r.raise_for_status()
-            audio = r.json()["audio"]
-            audio = audio.split(",", 1)[1] if audio.startswith("data:") else audio
-            (out / f"{i}_{rep}.wav").write_bytes(base64.b64decode(audio))
+                wav = await generate_with_deepinfra_async(
+                    CARRIER.format(x=spelling), voice, key, client, model=model,
+                    tag=f"[{spelling} {rep + 1}/{n}] ")
+            (out / f"{i}_{rep}.wav").write_bytes(wav)
         await asyncio.gather(*[one(i, s, r) for i, s in enumerate(spellings) for r in range(n)])
 
 
