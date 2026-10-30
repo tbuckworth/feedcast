@@ -1,10 +1,7 @@
 """Cutting text into pieces no longer than a limit, at the most natural break that fits.
 
-Two requests take bounded text: a TTS call (audio.split_into_chunks, 500
-characters) and a normaliser call (TextNormalizer, 18,000). Both pack greedily:
-as many sentences, or paragraphs, as fit, then the next piece. A sentence
-longer than the limit starts a piece of its own; TTS breaks it at its commas
-first, and whatever is still too long is cut every `limit` characters.
+Used where a request takes bounded text: TTS chunks (audio.MAX_CHUNK_CHARS)
+and normaliser batches (normalizer.MAX_BATCH_CHARS).
 """
 
 import re

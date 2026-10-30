@@ -393,9 +393,7 @@ def _sections(report: RunReport, episodes: list, notes: list) -> list[tuple[str,
     """The email's sections in order, as (key, title, items), leaving out the empty ones.
 
     build_html and build_text both walk this, so the two versions say the same
-    things in the same order. Written out separately they had drifted by
-    2026-10-30: the text had no episode headings, put the source check before
-    the failures, and titled two sections differently.
+    things in the same order; written out twice, they drift apart.
     """
     briefings = [e for e in episodes if e.is_briefing]
     others = [e for e in episodes if not e.is_briefing]

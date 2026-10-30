@@ -12,7 +12,7 @@ from src.digest import safe_bullets
 from src.llm import model_name
 from src.news import NewsAggregator
 from src.normalizer import TextNormalizer
-from src.verify import check
+from src.verify import check, material_flags
 
 # Text for the normaliser, and what must be gone once it is spoken. Every case
 # has digits, so none may come back with any.
@@ -81,7 +81,7 @@ async def main():
     # Availability alone is not enough: the backup must parse and catch an
     # obvious factual error using the real checker's prompt and token settings.
     _, flags = await check("The lab evaluated 999 systems.", "The lab evaluated 100 systems.")
-    if not any(f["severity"] in ("medium", "high") for f in flags):
+    if not material_flags(flags):
         raise RuntimeError("Checker missed the deliberate numeric contradiction")
     print("PASS: checker catches a deliberate contradiction")
 
