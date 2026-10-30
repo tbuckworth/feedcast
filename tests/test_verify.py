@@ -5,11 +5,13 @@ from datetime import datetime
 from types import SimpleNamespace
 
 import pytest
+from openai import InternalServerError
 
 from src.email_report import ReportEpisode, RunReport, build_html, build_text
 from src.llm import MODEL_CHECKER, pinned_target
 from src.verify import (Fidelity, fidelity_markdown,
                         fidelity_summary, parse_flags, verify_script)
+from tests.conftest import FakeApi, provider_error
 
 # A pinned client is OpenRouter's, so it is sent each role's OpenRouter spelling.
 PINNED_CHECKER = pinned_target("checker").model
@@ -62,6 +64,7 @@ def test_clean_script_is_returned_untouched():
     script, fid = asyncio.run(verify_script("The script.", "The source.", writer_system_prompt="sys", client=client))
     assert script == "The script." and fid.status == "clean" and fid.claims_total == 12
     assert len(client.calls) == 1 and client.calls[0]["model"] == PINNED_CHECKER
+    assert fid.checker["model"] == PINNED_CHECKER
     assert "SOURCE:\nThe source." in client.calls[0]["messages"][1]["content"]
 
 
@@ -196,3 +199,28 @@ def test_a_failed_check_is_in_the_email():
         report, datetime(2026, 10, 30))
     assert "(Fidelity check failed: RuntimeError('openrouter down'))" in build_text(
         report, datetime(2026, 10, 30))
+
+
+def test_the_email_names_the_checker_that_read_the_script(routes):
+    # Sonnet 5.5 was down for the re-check, so Sonnet 5 read the revision. The
+    # email named the role's primary all the same until 2026-10-30.
+    original = "Zvi argues the agents were not capable. " * 3
+    revised = "Zvi quotes Dwarkesh saying the agents had the access but did not use it. " * 3
+    routes["anthropic"] = FakeApi([FLAGGED, revised,
+                                   provider_error(InternalServerError, 500, "overloaded"), FLAGGED])
+    _, fid = asyncio.run(verify_script(original, "src", writer_system_prompt="s"))
+    assert fid.status == "revised" and fid.remaining
+    assert fid.checker["model"] == "claude-sonnet-5" and fid.checker["backup"]
+    ep = ReportEpisode(title="AI #182", author="Zvi", feed_name="Zvi", link="", audio_url="a.mp3",
+                       duration_seconds=60, fidelity=fid.to_dict())
+    report, when = RunReport(episodes=[ep]), datetime(2026, 10, 30)
+    assert "Claude Sonnet 5 read each script against its source" in build_html(report, when)
+    assert "Claude Sonnet 5 read each script against its source" in build_text(report, when)
+
+
+def test_a_row_from_before_the_checker_was_recorded_says_the_checker():
+    _, flags = parse_flags(FLAGGED)
+    ep = ReportEpisode(title="AI #182", author="Zvi", feed_name="Zvi", link="", audio_url="a.mp3",
+                       duration_seconds=60, fidelity={"status": "flagged", "flags": flags})
+    html = build_html(RunReport(episodes=[ep]), datetime(2026, 10, 30))
+    assert "The checker read each script against its source" in html

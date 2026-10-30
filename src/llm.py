@@ -172,7 +172,7 @@ ROLES: dict[str, tuple[Target, ...]] = {
     ),
 }
 
-# The checker role's primary model, for the email and tests.
+# The checker role's primary model, for tests.
 MODEL_CHECKER = ROLES["checker"][0].model
 
 # The SDK default is 600s x 2 retries, so one wedged request can stall a run

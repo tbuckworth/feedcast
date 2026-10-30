@@ -28,8 +28,8 @@ BACKUP = "#9a5b00"
 
 DEFAULT_PORT = 587
 
-from .llm import MODEL_CHECKER, model_name
-from .verify import fidelity_summary
+from .llm import model_name
+from .verify import fidelity_summary, material_flags
 
 
 @dataclass
@@ -153,15 +153,18 @@ def writer_line(writer: dict | None) -> tuple[str, bool]:
                    else " (backup model)"), True
 
 
-def _meta_bits(ep: "ReportEpisode") -> list[str]:
-    """Author / feed / duration, minus the duplicate when they are the same.
+def byline(author: str, feed_name: str) -> list[str]:
+    """Who wrote it, then the feed, unless the feed is named after them.
 
     The per-author feeds are named after the author, so without this every one
     of those episodes reads "Scott Alexander / Scott Alexander".
     """
-    bits = [ep.author]
-    if ep.feed_name and ep.feed_name != ep.author:
-        bits.append(ep.feed_name)
+    return [b for b in (author, feed_name if feed_name != author else "") if b]
+
+
+def _meta_bits(ep: "ReportEpisode") -> list[str]:
+    """The line under an episode's title: byline, publication date, duration."""
+    bits = byline(ep.author, ep.feed_name)
     # Before the duration: this answers "is this actually new?", which is the
     # first thing you want to know about an item in a daily email.
     bits.append(format_published(ep.published))
@@ -209,8 +212,17 @@ def checker_notes(fid: dict | None) -> list[dict]:
     if fid.get("status") == "revised":
         return list(fid.get("remaining") or [])
     if fid.get("status") == "flagged":
-        return [f for f in fid.get("flags", []) if f.get("severity") in ("high", "medium")]
+        return material_flags(fid.get("flags", []))
     return []
+
+
+def checker_name(fid: dict | None) -> str:
+    """The model that read an episode's script against its source, as people say it.
+
+    'the checker' on rows from before the model was recorded (2026-10-30).
+    """
+    model = ((fid or {}).get("checker") or {}).get("model")
+    return model_name(model) if model else "the checker"
 
 
 def flag_marks(bullets: list, notes: list[dict]) -> dict[str, int]:
@@ -240,17 +252,15 @@ def flag_marks(bullets: list, notes: list[dict]) -> dict[str, int]:
 FLAG_BG = "#fff3c4"
 
 
-def _bullet_html(b, marks: dict[str, int] | None = None) -> str:
+def _bullet_html(b, marks: dict[str, int]) -> str:
     """One bullet, with a 'Source' link when it names the article it used.
 
-    A bullet may carry a short `label` (set in bold as a run-in heading) and
-    `sub`, a list of detail bullets rendered as a nested list. A bullet that
-    matches one of the checker's complaints is tinted and numbered to it.
+    A bullet may carry `sub`, a list of detail bullets rendered as a nested
+    list. A bullet that matches one of the checker's complaints is tinted and
+    numbered to it.
     """
-    marks = marks or {}
     text, url = bullet_parts(b)
-    label = str(b.get("label", "")) if isinstance(b, dict) else ""
-    html = f"<strong>{escape(label)}:</strong> {escape(text)}" if label else escape(text)
+    html = escape(text)
     if url:
         html += (f' <a href="{escape(url, quote=True)}" style="color:{ACCENT};'
                  f'text-decoration:none;white-space:nowrap;">Source&nbsp;&rarr;</a>')
@@ -267,21 +277,15 @@ def _bullet_html(b, marks: dict[str, int] | None = None) -> str:
     return html
 
 
-def _notes_html(notes: list[dict], heading: str) -> str:
-    if not notes:
-        return ""
-    items = "".join(
-        f'<li style="margin:0 0 8px 0;">'
-        f'<span style="color:#a33;">[{escape(str(n.get("severity", "")))}, '
-        f'{escape(str(n.get("verdict", "")))}]</span> '
-        f'{escape(str(n.get("explanation", "")))}<br>'
-        f'<span style="color:{MUTED};">Script:</span> &ldquo;{escape(str(n.get("script_quote", "")))}&rdquo;<br>'
-        f'<span style="color:{MUTED};">Source:</span> &ldquo;{escape(str(n.get("source_quote", "")))}&rdquo;</li>'
-        for n in notes)
-    return (f'<div style="margin-top:12px;padding:10px 12px;background:#fbf7ec;'
-            f'border-left:3px solid #d9a441;font-size:12px;line-height:1.5;color:{INK};">'
-            f'<div style="font-weight:600;margin-bottom:6px;">{escape(heading)}</div>'
-            f'<ol style="margin:0;padding-left:18px;">{items}</ol></div>')
+def _note_li(title: str, n: dict) -> str:
+    """One of the checker's complaints, in the numbered list at the foot of the email."""
+    return (f'<li style="margin:0 0 9px 0;">'
+            f'<span style="color:{MUTED};">{escape(title)}</span> &middot; '
+            f'<span style="color:#a33;">[{escape(str(n.get("severity", "")))}, '
+            f'{escape(str(n.get("verdict", "")))}]</span> '
+            f'{escape(str(n.get("explanation", "")))}<br>'
+            f'<span style="color:{MUTED};">Script:</span> &ldquo;{escape(str(n.get("script_quote", "")))}&rdquo;<br>'
+            f'<span style="color:{MUTED};">Source:</span> &ldquo;{escape(str(n.get("source_quote", "")))}&rdquo;</li>')
 
 
 def number_notes(episodes: list) -> tuple[dict[int, dict[str, int]], list[tuple[str, dict]]]:
@@ -315,8 +319,7 @@ def _chart_html(c: ChartNote) -> str:
             f'<div style="font-size:11px;color:{MUTED};margin-top:3px;">{escape(c.caption)}</div></div>')
 
 
-def _episode_html(ep: ReportEpisode, marks: dict[str, int] | None = None,
-                  notes_inline: bool = True,
+def _episode_html(ep: ReportEpisode, marks: dict[str, int],
                   charts: dict[str, list[ChartNote]] | None = None) -> str:
     title = escape(ep.title)
     title_html = (
@@ -325,9 +328,6 @@ def _episode_html(ep: ReportEpisode, marks: dict[str, int] | None = None,
     )
     meta = " &middot; ".join(escape(bit) for bit in _meta_bits(ep))
     body = ""
-    notes = checker_notes(ep.fidelity)
-    if marks is None:
-        marks = flag_marks(ep.bullets, notes) if ep.bullets else {}
     if ep.bullets:
         # A market chart sits under the first bullet, or the parent of the
         # first sub-bullet, that links its anchor.
@@ -351,12 +351,8 @@ def _episode_html(ep: ReportEpisode, marks: dict[str, int] | None = None,
         )
         body = f'<div style="margin:12px 0 4px 0;">{paras}</div>'
     check = fidelity_summary(ep.fidelity)
-    if notes and notes_inline:
-        body += _notes_html(notes, check)
-    elif check:
-        # With the complaints deferred to the foot of the email the one-line
-        # verdict still belongs here, so an episode with issues is not the
-        # only one left without a "checked" line.
+    if check:
+        # The complaints themselves are numbered at the foot of the email.
         body += (f'<div style="font-size:12px;color:{MUTED};margin-top:8px;">'
                  f'{escape(check)}</div>')
     written, backup = writer_line(ep.writer)
@@ -373,71 +369,107 @@ def _episode_html(ep: ReportEpisode, marks: dict[str, int] | None = None,
       </td></tr>"""
 
 
+def _headline(n: int) -> str:
+    """'No new episodes', '1 new episode', '3 new episodes'."""
+    return f"{n} new episode{'s' if n != 1 else ''}" if n else "No new episodes"
+
+
+# Under "Linked, not narrated", in both versions of the email.
+LINKED_NOTE = ("These are built on real mathematics. Even a good spoken explanation is hard "
+               "to follow without seeing the notation, so they are linked rather than read aloud.")
+
+
+def _in_email_order(episodes: list) -> list:
+    """Briefings first, then the rest, as both versions of the email list them.
+
+    number_notes numbers the checker's complaints in this order, so the [n]
+    on a bullet matches the list at the foot only if the episodes are shown
+    in it too.
+    """
+    return [e for e in episodes if e.is_briefing] + [e for e in episodes if not e.is_briefing]
+
+
+def _sections(report: RunReport, episodes: list, notes: list) -> list[tuple[str, str, list]]:
+    """The email's sections in order, as (key, title, items), leaving out the empty ones.
+
+    build_html and build_text both walk this, so the two versions say the same
+    things in the same order. Written out separately they had drifted by
+    2026-10-30: the text had no episode headings, put the source check before
+    the failures, and titled two sections differently.
+    """
+    briefings = [e for e in episodes if e.is_briefing]
+    others = [e for e in episodes if not e.is_briefing]
+    # A chart sits under the briefing bullet that cites it; the rest get a section.
+    cited = {u for e in briefings for b in e.bullets for u in bullet_urls(b)}
+    sections = [
+        ("briefing", "Daily news briefing", briefings),
+        ("markets", "Prediction markets", [c for c in report.charts if c.anchor not in cited]),
+        ("episodes", "New episode" if len(others) == 1 else "New episodes", others),
+        ("failed", "Failed", report.failures),
+        # Worth the space even though nothing broke visibly: a source that 404s
+        # produces an empty feed, not an error, so the only symptom is a
+        # briefing that quietly gets narrower.
+        ("dead", "Sources that returned nothing", report.dead_sources),
+        ("linked", "Linked, not narrated", report.linked),
+        ("checked", "Checked against source", notes),
+        ("notices", "Fallbacks and skips this run", report.notices),
+        ("recent", "Also published this week", report.recent),
+    ]
+    return [section for section in sections if section[2]]
+
+
+def _checked_intro(episodes: list) -> str:
+    """The sentence above the checker's complaints, naming the model that made them."""
+    names = list(dict.fromkeys(checker_name(e.fidelity) for e in episodes
+                               if checker_notes(e.fidelity)))
+    who = " and ".join(names)
+    return (f"{who[:1].upper()}{who[1:]} read each script against its source; the writer "
+            f"fixed what it could once. These are the complaints that remain. Numbers match "
+            f"the marked bullets above.")
+
+
 def build_html(report: RunReport, when: datetime) -> str:
     """Render the full HTML body."""
-    briefings = [e for e in report.episodes if e.is_briefing]
-    others = [e for e in report.episodes if not e.is_briefing]
-    n = len(report.episodes)
+    episodes = _in_email_order(report.episodes)
+    marks_by_idx, notes = number_notes(episodes)
+    by_anchor: dict[str, list[ChartNote]] = {}
+    for c in report.charts:
+        by_anchor.setdefault(c.anchor, []).append(c)
 
     def section(label: str, rows: str) -> str:
-        if not rows:
-            return ""
         return (
             f'<tr><td style="padding:26px 0 2px 0;font-size:11px;font-weight:700;'
             f'letter-spacing:.09em;text-transform:uppercase;color:{MUTED};">{escape(label)}</td></tr>'
             + rows
         )
 
-    ordered_eps = briefings + others
-    marks_by_idx, all_notes = number_notes(ordered_eps)
+    def episode_rows(eps: list[ReportEpisode]) -> str:
+        return "".join(_episode_html(e, marks_by_idx.get(episodes.index(e), {}),
+                                     charts=by_anchor if e.is_briefing else None) for e in eps)
 
-    by_anchor: dict[str, list[ChartNote]] = {}
-    for c in report.charts:
-        by_anchor.setdefault(c.anchor, []).append(c)
-    placed = {u for e in briefings for b in e.bullets for u in bullet_urls(b) if u in by_anchor}
+    def market_rows(charts: list[ChartNote]) -> str:
+        return "".join(f'<tr><td style="padding:8px 0;">{_chart_html(c)}</td></tr>' for c in charts)
 
-    def ep_html(e: ReportEpisode) -> str:
-        return _episode_html(e, marks_by_idx.get(ordered_eps.index(e), {}), notes_inline=False,
-                             charts=by_anchor if e.is_briefing else None)
-
-    parts = [section("Daily news briefing", "".join(ep_html(e) for e in briefings))]
-    loose = [c for c in report.charts if c.anchor not in placed]
-    if loose:
-        parts.append(section("Prediction markets", "".join(
-            f'<tr><td style="padding:8px 0;">{_chart_html(c)}</td></tr>' for c in loose)))
-    parts.append(section(
-        "New episodes" if len(others) != 1 else "New episode",
-        "".join(ep_html(e) for e in others),
-    ))
-
-    if report.failures:
-        rows = "".join(
+    def failed_rows(failures: list[tuple[str, str]]) -> str:
+        return "".join(
             f'<tr><td style="padding:10px 0;border-bottom:1px solid {RULE};font-size:13px;color:{INK};">'
             f"<strong>{escape(t)}</strong><br>"
             f'<span style="color:#a33;font-size:12px;">{escape(err)}</span></td></tr>'
-            for t, err in report.failures
-        )
-        parts.append(section("Failed", rows))
+            for t, err in failures)
 
-    if report.dead_sources:
-        # Worth the space even though nothing broke visibly: a source that 404s
-        # produces an empty feed, not an error, so the only symptom is a
-        # briefing that quietly gets narrower.
-        rows = "".join(
+    def dead_rows(names: list[str]) -> str:
+        return "".join(
             f'<tr><td style="padding:8px 0;border-bottom:1px solid {RULE};'
-            f'font-size:13px;color:#a33;">{escape(name)}</td></tr>'
-            for name in report.dead_sources
-        )
-        parts.append(section("Sources that returned nothing", rows))
+            f'font-size:13px;color:#a33;">{escape(name)}</td></tr>' for name in names)
 
-    if report.linked:
-        def _linked_row(post: LinkedPost) -> str:
+    def linked_rows(posts: list[LinkedPost]) -> str:
+        def row(post: LinkedPost) -> str:
             title = (f'<a href="{escape(post.link, quote=True)}" '
                      f'style="color:{INK};text-decoration:none;">{escape(post.title)}</a>'
                      if post.link else escape(post.title))
             # The separator stays outside escape(); escaping it yields "&amp;middot;",
             # which renders as literal text in the mail client.
-            who = " &middot; ".join(escape(b) for b in (post.author, post.feed_name) if b)
+            who = " &middot; ".join(escape(b) for b in byline(post.author, post.feed_name))
             # No score means the verdict predates it being recorded. Say
             # nothing rather than print a zero that reads as "no maths at all".
             score = (f' &middot; {post.maths_score:g} maths matches per 1000 words'
@@ -451,61 +483,42 @@ def build_html(report: RunReport, when: datetime) -> str:
                 "</td></tr>"
             )
 
-        rows = "".join(_linked_row(p) for p in report.linked)
-        parts.append(section("Linked, not narrated", rows))
-        parts.append(
+        return "".join(row(p) for p in posts) + (
             f'<tr><td style="padding:2px 0 0 0;font-size:12px;color:{MUTED};'
-            f'line-height:1.55;">These are built on real mathematics. Even a good '
-            f'spoken explanation is hard to follow without seeing the notation, so '
-            f'they are linked rather than read aloud.</td></tr>'
-        )
+            f'line-height:1.55;">{escape(LINKED_NOTE)}</td></tr>')
 
-    if all_notes:
-        rows = "".join(
-            f'<li style="margin:0 0 9px 0;">'
-            f'<span style="color:{MUTED};">{escape(title)}</span> &middot; '
-            f'<span style="color:#a33;">[{escape(str(n.get("severity", "")))}, '
-            f'{escape(str(n.get("verdict", "")))}]</span> '
-            f'{escape(str(n.get("explanation", "")))}<br>'
-            f'<span style="color:{MUTED};">Script:</span> &ldquo;{escape(str(n.get("script_quote", "")))}&rdquo;<br>'
-            f'<span style="color:{MUTED};">Source:</span> &ldquo;{escape(str(n.get("source_quote", "")))}&rdquo;</li>'
-            for title, n in all_notes)
-        parts.append(section(
-            "Checked against source",
-            f'<tr><td style="padding:12px 0 0 0;font-size:12px;line-height:1.5;color:{INK};">'
-            f'<div style="color:{MUTED};margin-bottom:8px;">{model_name(MODEL_CHECKER)} read each script against its '
-            f'source; the writer fixed what it could once. These are the complaints that remain. '
-            f'Numbers match the highlighted bullets above.</div>'
-            f'<ol style="margin:0;padding-left:18px;">{rows}</ol></td></tr>',
-        ))
+    def checked_rows(notes: list[tuple[str, dict]]) -> str:
+        return (f'<tr><td style="padding:12px 0 0 0;font-size:12px;line-height:1.5;color:{INK};">'
+                f'<div style="color:{MUTED};margin-bottom:8px;">{escape(_checked_intro(episodes))}</div>'
+                f'<ol style="margin:0;padding-left:18px;">'
+                f'{"".join(_note_li(title, n) for title, n in notes)}</ol></td></tr>')
 
-    if report.notices:
-        rows = "".join(
+    def notice_rows(notices: list[str]) -> str:
+        return "".join(
             f'<tr><td style="padding:6px 0;border-bottom:1px solid {RULE};'
-            f'font-size:12px;color:{MUTED};">{escape(n)}</td></tr>'
-            for n in report.notices
-        )
-        parts.append(section("Fallbacks and skips this run", rows))
+            f'font-size:12px;color:{MUTED};">{escape(n)}</td></tr>' for n in notices)
 
-    if report.recent:
+    def recent_rows(eps: list[ReportEpisode]) -> str:
         items = "".join(
             f'<li style="margin:0 0 6px 0;font-size:13px;line-height:1.45;">'
             + (f'<a href="{escape(e.link, quote=True)}" style="color:{ACCENT};text-decoration:none;">{escape(e.title)}</a>'
                if e.link else escape(e.title))
             + f'<span style="color:{MUTED};"> &middot; '
             + " &middot; ".join(escape(bit) for bit in
-                                (e.author or e.feed_name, format_published(e.published)) if bit)
+                                [*byline(e.author, e.feed_name), format_published(e.published)] if bit)
             + '</span></li>'
-            for e in report.recent
+            for e in eps
         )
-        parts.append(section(
-            "Also published this week",
-            f'<tr><td style="padding:14px 0;"><ul style="margin:0;padding-left:18px;color:{INK};">{items}</ul></td></tr>',
-        ))
+        return (f'<tr><td style="padding:14px 0;"><ul style="margin:0;padding-left:18px;'
+                f'color:{INK};">{items}</ul></td></tr>')
 
-    headline = f"{n} new episode{'s' if n != 1 else ''}"
-    if not n:
-        headline = "No new episodes"
+    rows = {"briefing": episode_rows, "markets": market_rows, "episodes": episode_rows,
+            "failed": failed_rows, "dead": dead_rows, "linked": linked_rows,
+            "checked": checked_rows, "notices": notice_rows, "recent": recent_rows}
+    parts = [section(title, rows[key](items))
+             for key, title, items in _sections(report, episodes, notes)]
+
+    headline = _headline(len(report.episodes))
     pending_note = (
         " Posts read out in full are narrated after this email: their Listen link"
         " opens a page that plays the episode once it is ready, usually within half"
@@ -535,75 +548,89 @@ def build_html(report: RunReport, when: datetime) -> str:
 </div>"""
 
 
+def _episode_text(ep: ReportEpisode, marks: dict[str, int]) -> list[str]:
+    """One episode in the plain-text email."""
+    lines = [f"* {ep.title}"]
+    meta = " / ".join(_meta_bits(ep))
+    if meta:
+        lines.append(f"  {meta}")
+    if ep.link:
+        lines.append(f"  Source: {ep.link}")
+    if ep.audio_url:
+        lines.append(f"  Audio:  {ep.audio_url}"
+                     + (" (still narrating; this page plays it once ready)" if ep.pending else ""))
+    if ep.bullets:
+        def line_for(b, indent: str) -> list[str]:
+            t, u = bullet_parts(b)
+            mark = f" [{marks[t]}]" if t in marks else ""
+            out = [f"{indent}- {t}{mark}" + (f" ({u})" if u else "")]
+            for sb in (b.get("sub", []) if isinstance(b, dict) else []):
+                out += line_for(sb, indent + "    ")
+            return out
+
+        lines.append("")
+        for b in ep.bullets:
+            lines += line_for(b, "  ")
+    elif ep.is_briefing and ep.briefing_text:
+        lines += ["", *(f"  {p.strip()}" for p in ep.briefing_text.split("\n\n") if p.strip())]
+    check = fidelity_summary(ep.fidelity)
+    if check:
+        lines.append(f"  ({check})")
+    written = writer_line(ep.writer)[0]
+    if written:
+        lines.append(f"  ({written})")
+    return lines
+
+
 def build_text(report: RunReport, when: datetime) -> str:
     """Plain-text alternative for clients that refuse HTML."""
-    lines = [f"Feedcast — {when.strftime('%A, %d %B %Y')}",
-             f"{len(report.episodes)} new episode(s); {report.total_in_feed} in feed", ""]
-    ordered_eps = [e for e in report.episodes if e.is_briefing] + \
-                  [e for e in report.episodes if not e.is_briefing]
-    marks_by_idx, all_notes = number_notes(ordered_eps)
-    for idx, ep in enumerate(ordered_eps):
-        lines.append(f"* {ep.title}")
-        meta = " / ".join(_meta_bits(ep))
-        if meta:
-            lines.append(f"  {meta}")
-        if ep.link:
-            lines.append(f"  Source: {ep.link}")
-        if ep.audio_url:
-            lines.append(f"  Audio:  {ep.audio_url}"
-                         + (" (still narrating; this page plays it once ready)" if ep.pending else ""))
-        if ep.bullets:
-            marks = marks_by_idx.get(idx, {})
+    episodes = _in_email_order(report.episodes)
+    marks_by_idx, notes = number_notes(episodes)
 
-            def line_for(b, indent: str) -> list[str]:
-                t, u = bullet_parts(b)
-                label = f"{b['label']}: " if isinstance(b, dict) and b.get("label") else ""
-                mark = f" [{marks[t]}]" if t in marks else ""
-                out = [f"{indent}- {label}{t}{mark}" + (f" ({u})" if u else "")]
-                for sb in (b.get("sub", []) if isinstance(b, dict) else []):
-                    out += line_for(sb, indent + "    ")
-                return out
+    def episode_lines(eps: list[ReportEpisode]) -> list[str]:
+        lines: list[str] = []
+        for ep in eps:
+            if lines:
+                lines.append("")
+            lines += _episode_text(ep, marks_by_idx.get(episodes.index(ep), {}))
+        return lines
 
-            lines.append("")
-            for b in ep.bullets:
-                lines += line_for(b, "  ")
-        elif ep.is_briefing and ep.briefing_text:
-            lines += ["", *(f"  {p.strip()}" for p in ep.briefing_text.split("\n\n") if p.strip())]
-        if fidelity_summary(ep.fidelity):
-            lines.append(f"  ({fidelity_summary(ep.fidelity)})")
-        if writer_line(ep.writer)[0]:
-            lines.append(f"  ({writer_line(ep.writer)[0]})")
-        lines.append("")
-    if all_notes:
-        lines.append("Checked against source (numbers match the marked bullets):")
-        for i, (title, n) in enumerate(all_notes, 1):
+    def market_lines(charts: list[ChartNote]) -> list[str]:
+        return [line for c in charts
+                for line in (f"  - {c.platform}: {c.title}", f"    {c.url}", f"    {c.caption}")]
+
+    def linked_lines(posts: list[LinkedPost]) -> list[str]:
+        lines = []
+        for p in posts:
+            score = f" [{p.maths_score:g}/1k]" if p.maths_score > 0 else ""
+            lines.append(f"  - {p.title} ({' / '.join(byline(p.author, p.feed_name))}){score}")
+            if p.link:
+                lines.append(f"    {p.link}")
+        return lines + [f"  {LINKED_NOTE}"]
+
+    def checked_lines(notes: list[tuple[str, dict]]) -> list[str]:
+        lines = [f"  {_checked_intro(episodes)}"]
+        for i, (title, n) in enumerate(notes, 1):
             lines.append(f"  [{i}] {title} — {n.get('severity')}, {n.get('verdict')}: {n.get('explanation')}")
             lines.append(f"      script: \"{n.get('script_quote')}\"")
             lines.append(f"      source: \"{n.get('source_quote')}\"")
-        lines.append("")
-    if report.failures:
-        lines.append("Failed:")
-        lines += [f"  - {t}: {err}" for t, err in report.failures] + [""]
-    if report.dead_sources:
-        lines.append("Sources that returned nothing:")
-        lines += [f"  - {n}" for n in report.dead_sources] + [""]
-    if report.linked:
-        lines.append("Linked, not narrated (too mathematical for audio):")
-        for p in report.linked:
-            score = f" [{p.maths_score:g}/1k]" if p.maths_score > 0 else ""
-            lines.append(f"  - {p.title} ({p.author or p.feed_name}){score}")
-            if p.link:
-                lines.append(f"    {p.link}")
-        lines.append("")
+        return lines
 
-    if report.notices:
-        lines.append("Fallbacks and skips this run:")
-        lines += [f"  - {n}" for n in report.notices] + [""]
-    if report.recent:
-        lines.append("Also published this week:")
-        lines += [f"  - {e.title} ({e.author or e.feed_name}"
-                  + (f", {format_published(e.published)}" if e.published else "") + ")"
-                  for e in report.recent] + [""]
+    def recent_lines(eps: list[ReportEpisode]) -> list[str]:
+        return [f"  - {e.title} ({' / '.join(byline(e.author, e.feed_name))}"
+                + (f", {format_published(e.published)}" if e.published else "") + ")"
+                for e in eps]
+
+    rows = {"briefing": episode_lines, "markets": market_lines, "episodes": episode_lines,
+            "failed": lambda failures: [f"  - {t}: {err}" for t, err in failures],
+            "dead": lambda names: [f"  - {n}" for n in names],
+            "linked": linked_lines, "checked": checked_lines,
+            "notices": lambda notices: [f"  - {n}" for n in notices],
+            "recent": recent_lines}
+    lines = [f"Feedcast — {when.strftime('%A, %d %B %Y')}",
+             f"{_headline(len(report.episodes))}; {report.total_in_feed} in feed", ""]
+    for key, title, items in _sections(report, episodes, notes):
+        lines += [f"{title}:", *rows[key](items), ""]
     lines.append(report.feed_url)
     return "\n".join(lines)
 

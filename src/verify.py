@@ -27,6 +27,13 @@ from dataclasses import asdict, dataclass, field
 from .llm import EmptyCompletion, complete
 
 MATERIAL = ("high", "medium")
+
+
+def material_flags(flags: list[dict]) -> list[dict]:
+    """The flags worth a revision and a line in the email: high and medium severity."""
+    return [f for f in flags if f.get("severity") in MATERIAL]
+
+
 VERDICTS = ("contradicted", "distorted", "unsupported")
 
 CHECK_PROMPT = """You audit a script written for audio against the source material it was written from.
@@ -63,13 +70,17 @@ class Fidelity:
     remaining: list[dict] = field(default_factory=list)  # material flags after revision
     revised: bool = False
     note: str = ""
+    # Which model read the script for the flags the email shows, as
+    # llm.Completion.credit() records it: the re-check's once the script was
+    # revised. None when no check succeeded, and on rows from before 2026-10-30.
+    checker: dict | None = None
 
     def to_dict(self) -> dict:
         return asdict(self)
 
     @property
     def material(self) -> list[dict]:
-        return [f for f in self.flags if f.get("severity") in MATERIAL]
+        return material_flags(self.flags)
 
 
 def parse_flags(raw: str) -> tuple[int, list[dict]]:
@@ -115,6 +126,13 @@ CHECK_ATTEMPTS = (
 
 
 async def check(script: str, source: str, client=None) -> tuple[int, list[dict]]:
+    """(claims_total, flags) for `script` read against `source`."""
+    total, flags, _ = await _check(script, source, client)
+    return total, flags
+
+
+async def _check(script: str, source: str, client=None) -> tuple[int, list[dict], dict]:
+    """check(), plus the credit of the model that read the script."""
     user = f"SOURCE:\n{source}\n\nSCRIPT:\n{script}"
     last = ""
     for i, reasoning in enumerate(CHECK_ATTEMPTS):
@@ -138,7 +156,7 @@ async def check(script: str, source: str, client=None) -> tuple[int, list[dict]]
         print(f"    checker: finish={finish} "
               f"out={getattr(usage, 'completion_tokens', '?')} chars={len(content)} {reasoning}")
         try:
-            return parse_flags(content)
+            return (*parse_flags(content), done.credit())
         except ValueError as e:
             last = (f"{e} (finish_reason={finish}, "
                     f"{len(content)} chars: {content[:160]!r})")
@@ -176,11 +194,11 @@ async def verify_script(script: str, source: str, *, writer_system_prompt: str,
     """
     where = f" ({label})" if label else ""
     try:
-        total, flags = await check(script, source, client)
+        total, flags, checker = await _check(script, source, client)
     except Exception as e:  # noqa: BLE001 — a failed check must never fail the episode
         print(f"    Fidelity check failed{where}: {e!r}")
         return script, Fidelity(status="skipped", note=repr(e))
-    fid = Fidelity(status="clean", claims_total=total, flags=flags)
+    fid = Fidelity(status="clean", claims_total=total, flags=flags, checker=checker)
     material = fid.material
     print(f"    Fidelity check{where}: {total} claims, {len(flags)} flags, {len(material)} material")
     if not material:
@@ -197,14 +215,15 @@ async def verify_script(script: str, source: str, *, writer_system_prompt: str,
         print(f"    Fidelity{where}: {fid.note}")
         return script, fid
     try:
-        _, after = await check(revised, source, client)
+        _, after, checker = await _check(revised, source, client)
     except Exception as e:  # noqa: BLE001 — an unchecked revision does not ship
         fid.note = f"re-check of the revision failed, draft kept: {e!r}"
         print(f"    Fidelity{where}: {fid.note}")
         return script, fid
     fid.status = "revised"
     fid.revised = True
-    fid.remaining = [f for f in after if f.get("severity") in MATERIAL]
+    fid.remaining = material_flags(after)
+    fid.checker = checker
     print(f"    Revised; {len(fid.remaining)} material flags remain")
     return revised, fid
 
@@ -216,8 +235,7 @@ def fidelity_summary(fid: dict | None) -> str:
     if fid["status"] == "skipped":
         note = str(fid.get("note") or "")[:200]
         return f"Fidelity check failed: {note}" if note else "Fidelity check failed"
-    material = [f for f in fid.get("flags", []) if f.get("severity") in MATERIAL]
-    n, rem = len(material), len(fid.get("remaining", []))
+    n, rem = len(material_flags(fid.get("flags", []))), len(fid.get("remaining", []))
     plural = lambda k: "issue" if k == 1 else "issues"  # noqa: E731
     if fid["status"] == "clean":
         return "Checked against source: no issues"
