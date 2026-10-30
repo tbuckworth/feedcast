@@ -78,7 +78,7 @@ class ContentProcessor:
             if data_rows <= 3:
                 prose = small_table_to_prose(table)
             else:
-                # Larger tables: summarize with the cheap model
+                # Larger tables: the writer role turns them into prose
                 table_html = str(table)
                 done = await complete(
                     "writer", max_tokens=4000, client=self.client, label="table-to-prose",

@@ -168,9 +168,8 @@ jobs:
         # overran 50 min mid-TTS and threw the whole run away (2026-08-27).
         timeout-minutes: 90
         env:
-          # OpenRouter carries Claude and Gemini; OpenAI direct writes bullets
-          # and backs up the writer; Anthropic direct backs up Claude.
-          # An unset account is skipped (src/llm.py).
+          # The three LLM accounts. Each role falls back across them, and an
+          # unset one is skipped (ROLES in src/llm.py).
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

@@ -1,4 +1,9 @@
-"""Audio generation using DeepInfra Chatterbox-Turbo API with voice cloning."""
+"""Narration with DeepInfra's Chatterbox TTS models in a cloned voice, joined into an MP3.
+
+The script is cut into chunks at sentence boundaries, each chunk is narrated
+by the first model in `TTS_MODELS` (a model that stays busy is skipped for the
+rest of the run), and ffmpeg joins the chunks into the episode's MP3.
+"""
 
 import asyncio
 import base64
@@ -241,10 +246,10 @@ class AudioGenerator:
         debug_dir = output_path.parent / "debug_wavs" if save_debug else None
 
         # Finished chunk WAVs stay beside the output until the MP3 exists, so a
-        # retry — the in-run second pass, or tomorrow's — synthesises only the
-        # chunks that failed. On 2026-09-08 seven good chunks were discarded
-        # with the three bad ones. data/audio/ is gitignored and state.sh
-        # pushes only top-level MP3s, so this directory never leaves the runner.
+        # retry on the same machine (in CI, the run's serial second pass)
+        # synthesises only the chunks that failed. data/audio/ is gitignored
+        # and state.sh pushes only top-level MP3s, so this directory never
+        # leaves the runner.
         work_dir = output_path.parent / ".partial" / output_path.stem
         work_dir.mkdir(parents=True, exist_ok=True)
         cached = {p.name for p in work_dir.glob("chunk_*.wav") if p.stat().st_size > 0}

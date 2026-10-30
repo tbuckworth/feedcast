@@ -1,9 +1,10 @@
 """HTML run report emailed when the pipeline finishes.
 
-Configured entirely through environment variables so the recipient address and
-credentials live in GitHub secrets rather than in the repo. If the required
-ones are absent the report is skipped with a log line — a missing mailbox must
-never fail a pipeline run that otherwise succeeded.
+Configured entirely through environment variables, so the recipient addresses
+and credentials live in GitHub secrets rather than in the repo. With
+FEEDCAST_EMAIL_TO unset the email is off. With it set, a send that fails,
+missing credentials included, is logged and returned as False rather than
+raised, so the run still publishes; the workflow then fails the job.
 """
 
 import os
