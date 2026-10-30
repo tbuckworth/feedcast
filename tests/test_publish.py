@@ -30,7 +30,7 @@ TRANSCRIPT = f"transcripts/{BRIEFING}.txt"
 
 
 @pytest.fixture
-def day(pipeline, monkeypatch, routes, tmp_path):
+def day(pipeline, monkeypatch, routes):
     """A day with a news briefing and one post that is read out in full."""
     news = pipeline.root / "news.xml"
     news.write_text("<?xml version='1.0'?><rss version='2.0'><channel><title>BBC</title>"

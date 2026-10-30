@@ -15,9 +15,10 @@ def _entry(i="old-post"):
 def test_get_and_restore_round_trip(tmp_path):
     monitor = FeedMonitor(tmp_path / "posts.db")
     monitor.mark_processed(_entry(), "old.mp3", content="<p>x</p>")
-    row = monitor.get_entry("https://e.com/old")           # by link
+    row = monitor.get_entry(link="https://e.com/old")
     assert row and row["id"] == "old-post" and row["audio_file"] == "old.mp3"
     assert monitor.get_entry("nope") is None
+    assert monitor.get_entry("https://e.com/old") is None    # a link is not an id
 
     assert monitor.delete_entry("old-post")
     assert monitor.get_entry("old-post") is None
@@ -25,6 +26,23 @@ def test_get_and_restore_round_trip(tmp_path):
     back = monitor.get_entry("old-post")
     assert back == row                                       # processed_at untouched too
     assert monitor.is_processed("old-post")
+
+
+def test_a_post_is_found_by_its_id_or_its_link_and_never_by_an_empty_one(tmp_path):
+    """One signature for every lookup: processed_posts as deferred_entries."""
+    monitor = FeedMonitor(tmp_path / "posts.db")
+    monitor.mark_processed(_entry(), "old.mp3")
+    briefing = FeedEntry(id="news-briefing-2026-10-30", title="Briefing", link="",
+                         content="", published=datetime.now(), author="", feed_name="News")
+    monitor.mark_processed(briefing, "b.mp3")
+    assert monitor.is_processed("old-post") and monitor.is_processed(link="https://e.com/old")
+    assert monitor.is_processed("nope", link="https://e.com/old")
+    assert not monitor.is_processed(link="") and not monitor.is_processed()
+    # Re-injecting a URL: the earlier copy is deleted by id, or by link under a feed's id.
+    assert monitor.delete_entry(entry_id="injected-1", link="https://e.com/old") == [
+        ("old-post", "Old post")]
+    assert monitor.delete_entry(link="") == []
+    assert monitor.is_processed("news-briefing-2026-10-30")
 
 
 def test_index_page_lists_episodes_and_links_the_feed(tmp_path):

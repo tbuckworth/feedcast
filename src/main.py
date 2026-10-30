@@ -344,10 +344,12 @@ async def async_main(config_path: Path | None = None) -> None:
     # Initialize components
     monitor = FeedMonitor(db_path)
 
-    # Handle reprocess request - delete entry so it gets picked up again
-    reprocess_row = monitor.get_entry(reprocess_entry) if reprocess_entry else None
+    # Handle reprocess request - delete entry so it gets picked up again.
+    # REPROCESS_ENTRY names the post by its id or by its URL.
+    reprocess_row = (monitor.get_entry(entry_id=reprocess_entry, link=reprocess_entry)
+                     if reprocess_entry else None)
     if reprocess_entry:
-        if monitor.delete_entry(reprocess_entry):
+        if monitor.delete_entry(entry_id=reprocess_entry, link=reprocess_entry):
             print(f"  Deleted entry from database, will reprocess")
         else:
             print(f"  Entry not found in database (may be new)")
@@ -397,7 +399,7 @@ async def async_main(config_path: Path | None = None) -> None:
 
         # Re-injecting replaces the earlier episode. One stored from a feed
         # has the feed's id and this URL as its link, so delete by both.
-        for row_id, title in monitor.delete_entry(entry.id) + monitor.delete_entry(inject_url):
+        for row_id, title in monitor.delete_entry(entry_id=entry.id, link=inject_url):
             print(f"  Deleted {row_id} ({title}) for re-injection")
 
         entries_to_process = [(entry, inject_mode, config.default_prompt)]
