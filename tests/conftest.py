@@ -1,22 +1,29 @@
 """Shared test setup: a fresh run's state, fakes for the paid and networked
 services the real classes call (the LLM routes, Anthropic's Messages API for
-the web search, DeepInfra's voice upload and TTS, and the SMTP server), and a
-real MP3."""
+the web search, DeepInfra's voice upload and TTS, and the SMTP server), a real
+MP3, and a scratch repository to run the whole pipeline on (the `pipeline`
+fixture)."""
 
+import asyncio
 import io
 import shutil
 import subprocess
 import wave
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from functools import lru_cache
+from pathlib import Path
 from types import SimpleNamespace
 
+import feedparser
 import httpx
 import pytest
+import yaml
 
-from src import audio, llm, notices
+import src.main as main
+from src import audio, lesswrong, llm, notices
 from src.audio import AudioGenerator
-from src.config import load_config
+from src.config import CONFIG_PATH, load_config
+from src.monitor import FeedMonitor
 
 # The real AudioGenerator joins its chunks with ffmpeg.
 needs_ffmpeg = pytest.mark.skipif(shutil.which("ffmpeg") is None, reason="ffmpeg not installed")
@@ -221,3 +228,121 @@ def smtp(monkeypatch):
     for key in ("FEEDCAST_TEST_RUN", "SMTP_PORT"):
         monkeypatch.delenv(key, raising=False)
     return sent
+
+
+# --- The whole pipeline on a scratch repository ---------------------------------
+#
+# async_main end to end: the real config.yaml with local feed files, a real
+# database, and the real cleaning, normaliser, digest, narrator, retry queue,
+# feed generation and email. Stood in for, at the edges only: DeepInfra's voice
+# upload and TTS (`narrator`, `tts`), the LLM accounts (`routes`), every other
+# HTTP request (`Pipeline.answer`), the article download for an injected URL,
+# and the mail server (`smtp`): paid APIs, the network and SMTP.
+
+BROKEN = "https://feeds.example/broken.xml"
+ARTICLE = ("<html><head><title>Land</title></head><body><article><p>"
+           + "Land value taxes work, and here is why. " * 20 + "</p></article></body></html>")
+
+
+class Model(FakeApi):
+    """An LLM account, a paid API, answering every call with `answer(messages)`."""
+
+    def __init__(self, answer):
+        super().__init__([])
+        self.answer = answer
+
+    async def _create(self, **kw):
+        self.replies = [self.answer(kw["messages"])]
+        return await super()._create(**kw)
+
+
+def item(title: str, link: str, hours_ago: float = 1.0) -> str:
+    when = datetime.now(timezone.utc) - timedelta(hours=hours_ago)
+    return (f"<item><title>{title}</title><link>{link}</link><guid>{link}</guid>"
+            f"<description>&lt;p&gt;{title}: land value taxes work, and here is why.&lt;/p&gt;"
+            f"</description><pubDate>{when:%a, %d %b %Y %H:%M:%S} GMT</pubDate></item>")
+
+
+class Pipeline:
+    """One scratch repository: its feeds, its database, and what each run emailed."""
+
+    def __init__(self, root: Path, monkeypatch, sent: list):
+        self.root, self.mp, self.sent = root, monkeypatch, sent
+        self.feeds: list[dict] = []
+        self.briefing_sources: list[dict] = []
+        self.maths = True
+        self.requests: list[httpx.Request] = []
+        self.answer = lambda request: httpx.Response(404)
+        self.monitor = FeedMonitor(root / "data" / "posts.db")
+
+    def feed(self, name: str, *items: str) -> None:
+        path = self.root / "feeds" / f"{name}.xml"
+        path.parent.mkdir(exist_ok=True)
+        path.write_text("<?xml version='1.0'?><rss version='2.0'><channel>"
+                        f"<title>{name}</title>{''.join(items)}</channel></rss>")
+        self.feeds.append({"name": name, "url": str(path), "mode": "verbatim"})
+
+    def broken_feed(self, name: str) -> None:
+        """A feed whose fetch raises, as feedparser does on a socket timeout."""
+        self.feeds.append({"name": name, "url": BROKEN, "mode": "verbatim"})
+
+    def run(self, **env) -> str | None:
+        """Run the pipeline once; the plain text of the email it sent, or None."""
+        data = yaml.safe_load(CONFIG_PATH.read_text())
+        data["feeds"] = self.feeds
+        data["fidelity_check"] = False
+        data["maths_filter"]["enabled"] = self.maths
+        data["news_briefing"].update(enabled=bool(self.briefing_sources),
+                                     sources=self.briefing_sources, full_text_stories=0)
+        data["prediction_markets"]["enabled"] = bool(self.briefing_sources)
+        config = self.root / "config.yaml"
+        config.write_text(yaml.safe_dump(data))
+        for key, value in env.items():
+            self.mp.setenv(key, value)
+        before = len(self.sent)
+        asyncio.run(main.async_main(config))
+        if len(self.sent) == before:
+            return None
+        (msg,) = self.sent[before:]
+        return msg.get_body(("plain",)).get_content()
+
+    def ntfy(self) -> list[httpx.Request]:
+        return [r for r in self.requests if r.url.host == "ntfy.sh"]
+
+
+@pytest.fixture
+def pipeline(tmp_path, monkeypatch, routes, narrator, tts, smtp):
+    # `narrator` is not called: it sets the key and fake upload for main's own AudioGenerator.
+    monkeypatch.setattr(main, "ROOT", tmp_path)
+    for var in ("REPROCESS_ENTRY", "FORCE_VERBATIM", "INJECT_URL", "INJECT_MODE", "NTFY_TOPIC",
+                "FEEDCAST_PASS", "RESEND_REPORT", "PREVIEW_BRIEFING", "FEEDCAST_EMAIL_ALWAYS",
+                "GITHUB_OUTPUT", "GITHUB_ACTIONS"):
+        monkeypatch.delenv(var, raising=False)
+    routes["openrouter"] = Model(lambda m: m[-1]["content"])     # the normaliser repeats it
+    routes["openai"] = Model(lambda m: "- Land value taxes work.")  # the digest
+    p = Pipeline(tmp_path, monkeypatch, smtp)
+
+    # Every HTTP request goes to the test: LessWrong's GraphQL and ntfy.
+    lesswrong._graphql_markdown.cache_clear()
+    real_client = httpx.AsyncClient
+
+    def handle(request):
+        p.requests.append(request)
+        return p.answer(request)
+
+    def post(url, **kw):
+        with httpx.Client(transport=httpx.MockTransport(handle)) as client:
+            return client.post(url, **kw)
+    monkeypatch.setattr(httpx, "AsyncClient", lambda *a, **kw: real_client(
+        *a, transport=httpx.MockTransport(handle), **kw))
+    monkeypatch.setattr(httpx, "post", post)
+    real_parse = feedparser.parse
+
+    def parse(url, *a, **kw):
+        if url == BROKEN:
+            raise TimeoutError("timed out")
+        return real_parse(url, *a, **kw)
+    monkeypatch.setattr(feedparser, "parse", parse)
+    monkeypatch.setattr("src.extractor.trafilatura.fetch_url", lambda url: ARTICLE)
+    yield p
+    lesswrong._graphql_markdown.cache_clear()
