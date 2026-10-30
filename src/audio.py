@@ -10,7 +10,7 @@ from pathlib import Path
 
 import httpx
 
-from . import llm
+from . import notices
 
 MAX_CHUNK_CHARS = 500  # Tested: 650 works but 500 has better pacing
 
@@ -244,7 +244,7 @@ class AudioGenerator:
         note = (f"TTS: {TTS_MODELS[failed][0]} busy ({error}); "
                 f"rest of run on {TTS_MODELS[self._model][0]}")
         print(f"    {note}")
-        llm.fallback_log.append(note)
+        notices.add(note)
 
     def _sanitize_filename(self, text: str) -> str:
         safe = re.sub(r"[^a-zA-Z0-9\s-]", "", text[:50])

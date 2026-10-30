@@ -47,13 +47,14 @@ working one instead of failing first (`account_failure`).
 
 import os
 import re
-from collections import Counter
 from collections.abc import Callable
 from dataclasses import dataclass
 from types import SimpleNamespace
 
 from anthropic import AsyncAnthropic
 from openai import AsyncOpenAI
+
+from . import notices
 
 
 @dataclass(frozen=True)
@@ -163,12 +164,9 @@ MODEL_CHECKER = ROLES["checker"][0].model
 # for ~30 min. Flash calls finish in well under a minute; bound them.
 LLM_TIMEOUT_SECONDS = float(os.environ.get("LLM_TIMEOUT_SECONDS", "180"))
 
-# Every switch to a backup target this run, in order, for the run report.
-# Mutated in place, never rebound: other modules import the list itself.
-fallback_log: list[str] = []
-
 # Routes whose account failed in a way that lasts the run (out of credit, bad
-# key), with the error. Later calls skip every target on them.
+# key), with the error. Later calls skip every target on them. Each switch to a
+# backup target goes to `notices`, and a dead account heads that list.
 dead_routes: dict[str, Exception] = {}
 
 # What an account-level refusal says, as opposed to a model-level one (OpenRouter's
@@ -188,18 +186,12 @@ def account_failure(e: BaseException) -> bool:
     return status in (400, 403, 429) and bool(_ACCOUNT_WORDING.search(str(e)))
 
 
-def fallback_notices() -> list[str]:
-    """The run's fallback log for the email: dead accounts first, repeats collapsed.
-
-    One dead account touches every call on it, so without collapsing, a long
-    post's normalisation alone would print a dozen identical lines.
-    """
-    heads = [f"{ROUTES[name].name} account unavailable for the rest of the run "
-             f"after: {type(e).__name__}: {str(e)[:200]}"
-             for name, e in dead_routes.items()]
-    counts = Counter(fallback_log)
-    return heads + [note if counts[note] == 1 else f"{note} ({counts[note]} calls)"
-                    for note in dict.fromkeys(fallback_log)]
+def _mark_dead(route: Route, e: Exception) -> None:
+    """Skip `route` for the rest of the run; the first call to find out heads the notices."""
+    if route.name not in dead_routes:
+        dead_routes[route.name] = e
+        notices.add(f"{route.name} account unavailable for the rest of the run "
+                    f"after: {type(e).__name__}: {str(e)[:200]}", headline=True)
 
 
 def model_name(model: str) -> str:
@@ -436,7 +428,7 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
                 # The caller will retry from the top; record any switch that
                 # happened on the way here so it still reaches the report.
                 if tried:
-                    fallback_log.append(f"{where}: reached {target.label} (empty) after " + "; ".join(tried))
+                    notices.add(f"{where}: reached {target.label} (empty) after " + "; ".join(tried))
                 raise
             last = e
             tried.append(f"{target.label}: {type(e).__name__}: {str(e)[:160]}")
@@ -447,12 +439,12 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
             tried.append(f"{target.label}: {type(e).__name__}: {str(e)[:160]}")
             print(f"    {where}: {tried[-1]}")
             if account_failure(e):
-                dead_routes.setdefault(route.name, e)
+                _mark_dead(route, e)
                 print(f"    {where}: {route.name} account unusable; skipping it for the rest of the run")
             continue
         if tried:
             note = f"{where}: served by {target.label} after " + "; ".join(tried)
-            fallback_log.append(note)
+            notices.add(note)
             print(f"    {note}")
         return done
     if last is None:

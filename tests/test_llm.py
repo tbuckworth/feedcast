@@ -6,7 +6,7 @@ import pytest
 import httpx
 from openai import BadRequestError, PermissionDeniedError
 
-from src import llm
+from src import llm, notices
 from src.llm import ROLES, ROUTES, Target, complete
 from tests.conftest import FakeApi
 
@@ -18,7 +18,7 @@ def test_primary_serves_and_nothing_is_logged(routes):
     routes["openai"] = FakeApi(["- bullets"])
     done = asyncio.run(complete("bullets", MSGS, max_tokens=50))
     assert done.text == "- bullets" and done.target == ROLES["bullets"][0]
-    assert llm.fallback_log == []
+    assert notices.report() == []
 
 
 def test_openai_route_uses_its_own_parameter_names(routes):
@@ -58,16 +58,16 @@ def test_failure_falls_through_to_the_next_target_and_is_logged(routes):
     assert done.text == "from openrouter"
     assert done.target == Target("openrouter", "openai/gpt-6.1-sol", {"effort": "low"},
                                  min_effort="low")
-    assert len(llm.fallback_log) == 1
-    assert "digest: served by openai/gpt-6.1-sol via openrouter" in llm.fallback_log[0]
-    assert "RuntimeError: openai down" in llm.fallback_log[0]
+    assert len(notices.report()) == 1
+    assert "digest: served by openai/gpt-6.1-sol via openrouter" in notices.report()[0]
+    assert "RuntimeError: openai down" in notices.report()[0]
 
 
 def test_empty_reply_counts_as_a_failure(routes):
     routes["openai"] = FakeApi(["<empty>"])
     routes["openrouter"] = FakeApi(["real text"])
     done = asyncio.run(complete("bullets", MSGS, max_tokens=50))
-    assert done.text == "real text" and len(llm.fallback_log) == 1
+    assert done.text == "real text" and len(notices.report()) == 1
 
 
 def test_routes_without_a_key_are_skipped_and_the_skip_is_logged(routes):
@@ -79,7 +79,7 @@ def test_routes_without_a_key_are_skipped_and_the_skip_is_logged(routes):
     assert done.target.model == "openai/gpt-6.1-sol"
     assert [c["model"] for c in routes["openrouter"].calls] == [
         "anthropic/claude-opus-5.5", "openai/gpt-6.1-sol"]
-    assert "ANTHROPIC_API_KEY not set" in llm.fallback_log[0]
+    assert "ANTHROPIC_API_KEY not set" in notices.report()[0]
 
 
 def test_a_missing_primary_key_is_reported_not_swallowed(routes):
@@ -88,7 +88,7 @@ def test_a_missing_primary_key_is_reported_not_swallowed(routes):
     routes["openrouter"] = FakeApi(["from openrouter"])
     done = asyncio.run(complete("bullets", MSGS, max_tokens=50, label="digest"))
     assert done.target.route == "openrouter"
-    assert llm.fallback_log == [
+    assert notices.report() == [
         "digest: served by openai/gpt-6.1-sol via openrouter after "
         "gpt-6.1-sol via openai: skipped, OPENAI_API_KEY not set"]
 
@@ -125,7 +125,7 @@ def test_empty_reply_can_be_told_not_to_fall_back(routes):
     routes["anthropic"] = FakeApi(["<empty>"])
     with pytest.raises(llm.EmptyCompletion):
         asyncio.run(complete("checker", MSGS, max_tokens=50, fallback_on_empty=False))
-    assert llm.fallback_log == [] and len(routes["anthropic"].calls) == 1
+    assert notices.report() == [] and len(routes["anthropic"].calls) == 1
 
 
 def test_a_pinned_client_gets_the_openrouter_spelling_of_the_model(routes):
@@ -145,8 +145,8 @@ def test_a_switch_before_a_non_fallback_empty_reply_is_still_logged(routes):
     routes["openrouter"] = FakeApi(["<empty>"])
     with pytest.raises(llm.EmptyCompletion):
         asyncio.run(complete("bullets", MSGS, max_tokens=50, label="digest", fallback_on_empty=False))
-    assert len(llm.fallback_log) == 1
-    assert "openai down" in llm.fallback_log[0] and "(empty)" in llm.fallback_log[0]
+    assert len(notices.report()) == 1
+    assert "openai down" in notices.report()[0] and "(empty)" in notices.report()[0]
 
 
 def test_a_provider_failure_falls_back_even_when_empty_replies_are_held(routes):
@@ -155,7 +155,7 @@ def test_a_provider_failure_falls_back_even_when_empty_replies_are_held(routes):
     routes["openrouter"] = FakeApi(["<no-choices>", "sibling answered"])
     done = asyncio.run(complete("checker", MSGS, max_tokens=50, fallback_on_empty=False))
     assert done.text == "sibling answered"
-    assert len(llm.fallback_log) == 1 and "NoChoices" in llm.fallback_log[0]
+    assert len(notices.report()) == 1 and "NoChoices" in notices.report()[0]
 
 
 def _provider_error(error_class, status, message):
@@ -178,9 +178,10 @@ def test_writer_recovers_when_claude_is_blocked_and_anthropic_has_no_credit(rout
     assert done.text == '["https://example.com/story"]'
     assert done.target.route == ("openai" if direct_openai else "openrouter")
     assert done.target.model.endswith("gpt-6.1-sol")
-    assert len(llm.fallback_log) == 1
-    assert "PermissionDeniedError" in llm.fallback_log[0]
-    assert "credit balance" in llm.fallback_log[0]
+    # The dead account is the headline; the switch that served follows it.
+    head, served = notices.report()
+    assert head.startswith("anthropic account unavailable for the rest of the run")
+    assert "PermissionDeniedError" in served and "credit balance" in served
     # Out of credit is the whole account: Opus 4.6 on it is not even tried.
     assert len(routes["anthropic"].calls) == 1
     call = routes[done.target.route].calls[-1]
@@ -204,7 +205,7 @@ def test_checker_recovers_on_a_different_model_family_from_the_backup_writer(rou
 
     assert done.target == Target("openrouter", "google/gemini-3-flash-preview")
     assert routes["openrouter"].calls[-1]["extra_body"] == {"reasoning": {"max_tokens": 4000}}
-    assert "served by google/gemini-3-flash-preview" in llm.fallback_log[0]
+    assert "served by google/gemini-3-flash-preview" in notices.report()[1]
 
 
 def test_writer_raises_when_the_non_claude_backups_also_fail(routes):
@@ -240,4 +241,4 @@ def test_claude_roles_try_anthropic_direct_first(routes):
     asyncio.run(complete("writer", MSGS, max_tokens=50))
     asyncio.run(complete("checker", MSGS, max_tokens=50))
     assert [c["model"] for c in routes["anthropic"].calls] == ["claude-opus-5-5", "claude-sonnet-5-5"]
-    assert llm.fallback_log == []
+    assert notices.report() == []

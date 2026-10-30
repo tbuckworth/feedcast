@@ -7,8 +7,9 @@ with llm_smoke_test=true to check the actual GitHub Actions secrets.
 import asyncio
 
 from src.config import load_config
+from src import notices
 from src.digest import safe_bullets
-from src.llm import fallback_notices, model_name
+from src.llm import model_name
 from src.news import NewsAggregator
 from src.normalizer import TextNormalizer
 from src.verify import check
@@ -97,9 +98,9 @@ async def main():
     if not bullets:
         raise RuntimeError("Bullet digest returned no bullets")
     print("PASS: bullet digest")
-    notices = fallback_notices()
-    print(f"All live LLM checks passed; {len(notices)} fallback notices.")
-    for note in notices:
+    notes = notices.report()
+    print(f"All live LLM checks passed; {len(notes)} fallback notices.")
+    for note in notes:
         print(f"  - {note}")
 
 

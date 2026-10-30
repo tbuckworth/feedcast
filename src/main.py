@@ -21,7 +21,7 @@ from .feed import Episode, FeedGenerator, episode_page_url
 from .fulltext import enrich_entry
 from .html_text import clean_html
 from .lesswrong import posted_at
-from . import llm
+from . import notices
 from .market_charts import charts_for_report
 from .markets import MarketRules, MarketScout
 from .mathiness import MathsVerdict, assess
@@ -805,7 +805,7 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
         episodes=[item(title=f"Preview: {entry.title}", bullets=entry.bullets,
                        fidelity=entry.fidelity, writer=entry.writer),
                   item(title="Full script", briefing_text=entry.content)],
-        notices=llm.fallback_notices(), feed_url=f"{base}/feed.xml", site_url=base,
+        notices=notices.report(), feed_url=f"{base}/feed.xml", site_url=base,
         charts=charts,
     )
     _email(report, subject_tag="[Preview]", images=images)
@@ -923,7 +923,7 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
     print(f"  Feed now has {len(episodes)} episodes")
     if failures:
         _email(RunReport(
-            failures=failures, notices=llm.fallback_notices(),
+            failures=failures, notices=notices.report(),
             feed_url=f"{config.podcast.base_url}/feed.xml", site_url=config.podcast.base_url,
             total_in_feed=len(episodes)), operator_only=True)
 
@@ -1095,7 +1095,7 @@ def _build_run_report(
             for e, v in (maths_skipped or [])
         ],
         dead_sources=sorted(set(dead_sources or [])),
-        notices=llm.fallback_notices(),
+        notices=notices.report(),
         feed_url=f"{base_url}/feed.xml",
         site_url=base_url,
         total_in_feed=len(episodes),

@@ -101,7 +101,7 @@ def test_checker_failure_never_raises():
 def test_an_empty_first_check_retries_with_reasoning_off_not_a_sibling_model(monkeypatch):
     # Route-level: the first attempt's empty reply must not fall through to
     # Sonnet 4.6 and be reported as a model fallback.
-    from src import llm
+    from src import llm, notices
     from types import SimpleNamespace as NS
 
     class Api:
@@ -117,13 +117,12 @@ def test_an_empty_first_check_retries_with_reasoning_off_not_a_sibling_model(mon
 
     api = Api([None, CLEAN])
     monkeypatch.setattr(llm, "client_for", lambda route: api if route.name == "anthropic" else None)
-    monkeypatch.setattr(llm, "fallback_log", [])
     script, fid = asyncio.run(verify_script("s", "src", writer_system_prompt="p"))
     assert fid.status == "clean"
     # The same primary twice (the compat endpoint takes no reasoning setting,
     # so "off" sends nothing extra), never a sibling model.
     assert [c["model"] for c in api.calls] == [MODEL_CHECKER, MODEL_CHECKER]
-    assert llm.fallback_log == []
+    assert notices.report() == []
 
 
 def test_email_line():

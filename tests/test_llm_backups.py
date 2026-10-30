@@ -12,7 +12,7 @@ import httpx
 import pytest
 from openai import APIStatusError, BadRequestError, PermissionDeniedError, RateLimitError
 
-from src import llm
+from src import llm, notices
 from src.email_report import ReportEpisode, RunReport, build_html, build_text, writer_line
 from src.feed import Episode
 from src.llm import ROLES, Completion, Target, account_failure, complete, model_name
@@ -103,7 +103,7 @@ def test_a_reply_that_lost_text_goes_to_the_next_model(routes):
     routes["anthropic"] = FakeApi([COT])
     n = TextNormalizer()
     assert asyncio.run(n.normalize_for_tts(COT)) == COT
-    assert "text was lost" in llm.fallback_log[0]
+    assert "text was lost" in notices.report()[0]
     assert llm.dead_routes == {}                       # the passage, not the account
 
 
@@ -113,7 +113,7 @@ def test_a_reply_cut_off_by_a_provider_error_goes_to_the_next_model(routes):
     routes["openrouter"] = FakeApi([(COT[:int(len(COT) * 0.88)], "error")])
     routes["anthropic"] = FakeApi([COT])
     assert asyncio.run(TextNormalizer().normalize_for_tts(COT)) == COT
-    assert "cut off by a provider error" in llm.fallback_log[0]
+    assert "cut off by a provider error" in notices.report()[0]
 
 
 def test_when_every_model_loses_text_the_passage_is_read_as_written(routes):
@@ -128,7 +128,7 @@ def test_normalising_lengthens_text_and_that_is_not_lost_text(routes):
     routes["openrouter"] = FakeApi(["forty-five percent of one point five million dollars"])
     assert asyncio.run(TextNormalizer().normalize_for_tts("45% of $1.5M")) \
         == "forty-five percent of one point five million dollars"
-    assert llm.fallback_log == []
+    assert notices.report() == []
 
 
 def test_the_prompt_says_the_text_is_not_addressed_to_the_model():
@@ -142,12 +142,12 @@ def test_a_dead_account_is_one_headline_and_repeats_collapse(routes):
     for text in ("one", "two", "three"):
         asyncio.run(complete("normalizer", MSGS + [{"role": "user", "content": text}],
                              max_tokens=50, label="normaliser"))
-    notices = llm.fallback_notices()
-    assert notices[0].startswith("openrouter account unavailable for the rest of the run")
-    assert "Insufficient credits" in notices[0]
-    assert "402" in notices[1]                      # the call that found out
-    assert notices[2].endswith("skipped, openrouter account unavailable this run (2 calls)")
-    assert len(notices) == 3
+    report = notices.report()
+    assert report[0].startswith("openrouter account unavailable for the rest of the run")
+    assert "Insufficient credits" in report[0]
+    assert "402" in report[1]                       # the call that found out
+    assert report[2].endswith("skipped, openrouter account unavailable this run (2 calls)")
+    assert len(report) == 3
 
 
 def test_every_account_dead_raises_the_original_error(routes):
