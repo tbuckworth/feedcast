@@ -1186,10 +1186,11 @@ async def _send_ntfy(topic: str, message: str, tags: str) -> None:
         return
     except httpx.HTTPStatusError as e:
         # Only the status: the error's text holds the URL, and the URL the
-        # topic, which is a secret and must not reach the email.
+        # topic, which is a secret and must not reach the email or the log.
         why = f"HTTPStatusError: HTTP {e.response.status_code}"
     except Exception as e:
-        why = f"{type(e).__name__}: {e}"
+        # A transport error's text can hold the URL too.
+        why = f"{type(e).__name__}: {str(e).replace(topic, '<topic>')}"
     # A lost push does not fail the run. The push only repeats an outcome the
     # run has already reached (an episode made, or a failure the email or the
     # failed job reports), and failing over it would read as the episode

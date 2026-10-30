@@ -294,6 +294,18 @@ class TestInjection:
             "ntfy notification failed: HTTPStatusError: HTTP 403"]
         assert "feedcast-test" not in email     # the topic is a secret
 
+    def test_a_push_that_cannot_connect_keeps_the_topic_out_of_the_email(self, pipeline, capsys):
+        """A transport error's text can carry the URL, and the URL the secret topic."""
+        def unreachable(request):
+            raise httpx.ConnectError(f"cannot reach {request.url}", request=request)
+
+        pipeline.answer = unreachable
+        email = pipeline.run(INJECT_URL=INJECTED, NTFY_TOPIC="feedcast-test")
+        (note,) = listed(email, "Fallbacks and skips this run:")
+        assert note.startswith("ntfy notification failed: ConnectError")
+        assert "feedcast-test" not in email
+        assert "feedcast-test" not in capsys.readouterr().out   # CI logs are public too
+
     def test_reinjecting_deletes_the_earlier_episode_however_it_was_stored(self, pipeline,
                                                                             capsys):
         """An earlier copy matched by link, under a feed's guid, used to survive."""
