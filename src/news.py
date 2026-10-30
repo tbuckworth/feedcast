@@ -38,6 +38,26 @@ Pick the {n} most worth covering for a technically sophisticated audience, in pr
 Return ONLY a JSON array of the chosen URLs, copied exactly from the list."""
 
 
+def _selection(raw: str, by_url: dict[str, dict]) -> tuple[list[dict], str]:
+    """The articles a story-selection reply chose, in its order, and what is wrong with it.
+
+    The problem is "" for a usable reply: a JSON array naming at least one
+    article from the list. Unknown and repeated URLs are dropped.
+    """
+    m = re.search(r"\[.*\]", raw or "", re.S)
+    if not m:
+        return [], "no JSON array in the reply"
+    try:
+        urls = json.loads(m.group(0))
+    except ValueError as e:
+        return [], f"the array is not valid JSON ({e})"
+    chosen, seen = [], set()
+    for u in urls:
+        if isinstance(u, str) and u in by_url and u not in seen:
+            seen.add(u); chosen.append(by_url[u])
+    return chosen, "" if chosen else "none of the URLs is in the list"
+
+
 class NewsAggregator:
     """Aggregates news from multiple RSS sources and synthesizes a daily briefing."""
 
@@ -159,7 +179,12 @@ class NewsAggregator:
         return "\n\n".join(sections)
 
     async def select_stories(self, articles: list[dict]) -> list[dict]:
-        """Ask the writer which stories deserve full text. [] means: use blurbs only."""
+        """Ask the writer which stories deserve full text. [] means: use blurbs only.
+
+        A reply with no usable selection goes to the next writer, like an empty
+        one; when none gives one, this raises and the briefing fails, to be
+        retried, rather than being written from blurbs without a word.
+        """
         n = self.full_text_stories
         if n <= 0 or not articles:
             return []
@@ -168,19 +193,10 @@ class NewsAggregator:
         by_url = {a["url"]: a for a in articles if a.get("url")}
         done = await complete(
             "writer", max_tokens=2000, client=self.client, label="story selection",
+            check=lambda raw: _selection(raw, by_url)[1] or None,
             messages=[{"role": "system", "content": SELECT_PROMPT.format(n=n)},
                       {"role": "user", "content": self._format_articles_for_prompt(articles)}])
-        raw = done.text or ""
-        m = re.search(r"\[.*\]", raw, re.S)
-        try:
-            urls = json.loads(m.group(0)) if m else []
-        except ValueError:
-            urls = []
-        chosen, seen = [], set()
-        for u in urls:
-            if isinstance(u, str) and u in by_url and u not in seen:
-                seen.add(u); chosen.append(by_url[u])
-        return chosen[:n]
+        return _selection(done.text, by_url)[0][:n]
 
     async def fetch_full_text(self, articles: list[dict]) -> int:
         """Fill in article["text"] from the page. Keeps the blurb where fetching fails."""

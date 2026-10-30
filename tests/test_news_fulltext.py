@@ -4,9 +4,13 @@ import asyncio
 from datetime import datetime, timezone
 from types import SimpleNamespace
 
-from src import news
+import pytest
+
+from src import news, notices
+from src.llm import EmptyCompletion
 from src.markets import MarketContext, MarketRules, MarketScout
 from src.news import NewsAggregator
+from tests.conftest import FakeApi
 
 
 class FakeClient:
@@ -49,9 +53,28 @@ def test_few_articles_skip_the_selection_call():
     assert asyncio.run(_agg(client, full_text_stories=0).select_stories(_articles(4))) == []
 
 
-def test_unparseable_selection_falls_back_to_blurbs():
+@pytest.mark.parametrize("unusable", [
+    "I cannot decide.",                                   # no JSON array
+    '["https://example.com/3",]',                         # not JSON
+    '["https://elsewhere.example/a"]',                    # no URL from the list
+])
+def test_an_unusable_selection_goes_to_the_next_writer(routes, unusable):
+    """It used to become [] in silence, and the briefing was written from blurbs."""
+    routes["anthropic"] = FakeApi([unusable])
+    routes["openrouter"] = FakeApi(['["https://example.com/3", "https://example.com/1"]'])
+    agg = _agg(None, full_text_stories=2)
+    chosen = asyncio.run(agg.select_stories(_articles(5)))
+    assert [a["url"] for a in chosen] == ["https://example.com/3", "https://example.com/1"]
+    (note,) = notices.report()
+    assert note.startswith("story selection: served by anthropic/claude-opus-5.5 via openrouter")
+
+
+def test_when_no_writer_gives_a_usable_selection_the_briefing_fails(monkeypatch):
+    """Not written from blurbs: the briefing is retried by the next run."""
     agg = _agg(FakeClient(["I cannot decide."]), full_text_stories=2)
-    assert asyncio.run(agg.select_stories(_articles(5))) == []
+    monkeypatch.setattr(agg, "fetch_all_sources", lambda: asyncio.sleep(0, _articles(5)))
+    with pytest.raises(EmptyCompletion, match="story selection: no JSON array"):
+        asyncio.run(agg.generate_briefing())
 
 
 def test_full_text_fetch_caps_length_and_keeps_blurb_on_failure(monkeypatch):
