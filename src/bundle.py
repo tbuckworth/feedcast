@@ -51,8 +51,13 @@ def read_bundle(text: str) -> dict[str, str]:
             for m, end in zip(marks, ends)}
 
 
+def bundle_path(sources_dir: Path, episode_id: str) -> Path:
+    """Where an episode's bundle is kept: written with the episode, deleted by cleanup."""
+    return sources_dir / f"{episode_id}.md"
+
+
 def write_bundle(sources_dir: Path, episode_id: str, text: str) -> Path:
     sources_dir.mkdir(parents=True, exist_ok=True)
-    path = sources_dir / f"{episode_id}.md"
+    path = bundle_path(sources_dir, episode_id)
     path.write_text(text, encoding="utf-8")
     return path

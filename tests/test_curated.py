@@ -9,13 +9,15 @@ import asyncio
 from datetime import datetime
 
 import httpx
+import pytest
 import yaml
 
 from src import lesswrong, notices
 from src.config import CONFIG_PATH
 from src.email_report import ReportEpisode, RunReport, build_html, build_text
 from src.lesswrong import _parse, lesswrong_post_id, posted_at
-from src.main import _correct_publication_dates, _curated_date
+from src.main import (_build_run_report, _correct_publication_dates, _stored_feed_date,
+                      _surfaced_date)
 from src.monitor import FeedEntry
 
 
@@ -133,28 +135,42 @@ class TestDateCorrection:
 
 class TestReportShowsBothDates:
 
-    def test_curation_is_shown_when_it_trails_publication(self):
-        row = {"feed_date": datetime(2026, 8, 21, 18, 30).isoformat()}
-        assert _curated_date(row, datetime(2026, 7, 30, 19, 10)) == datetime(2026, 8, 21, 18, 30)
+    def test_the_feed_date_is_shown_when_it_trails_publication(self):
+        assert _surfaced_date(datetime(2026, 8, 21, 18, 30), datetime(2026, 7, 30, 19, 10)) \
+            == datetime(2026, 8, 21, 18, 30)
 
-    def test_curation_is_hidden_when_it_matches_publication(self):
-        row = {"feed_date": datetime(2026, 8, 26, 0, 23).isoformat()}
-        assert _curated_date(row, datetime(2026, 8, 25, 17, 50)) is None
+    def test_the_feed_date_is_hidden_when_it_matches_publication(self):
+        assert _surfaced_date(datetime(2026, 8, 26, 0, 23), datetime(2026, 8, 25, 17, 50)) is None
 
     def test_rows_without_the_column_say_nothing(self):
-        assert _curated_date({}, datetime(2026, 8, 26)) is None
-        assert _curated_date({"feed_date": "nonsense"}, datetime(2026, 8, 26)) is None
+        assert _stored_feed_date({"feed_date": "2026-08-21T18:30:00"}) == \
+            datetime(2026, 8, 21, 18, 30)
+        assert _stored_feed_date({}) is None
+        with pytest.raises(ValueError):
+            _stored_feed_date({"feed_date": "nonsense"})       # a corrupt row is loud
+        assert _surfaced_date(None, datetime(2026, 8, 26)) is None
+
+    def test_a_post_waiting_for_narration_shows_both_dates_too(self):
+        e = FeedEntry(id="1", title="Big-World Intuitions", link="https://example.com/p",
+                      content="", published=datetime(2026, 7, 30), author="Joe Carlsmith",
+                      feed_name="LessWrong Curated", feed_date=datetime(2026, 8, 21))
+        report = _build_run_report([], [], set(), [], "https://x", pending=[{"entry": e}])
+        assert report.episodes[0].surfaced == datetime(2026, 8, 21)
 
     def test_the_email_explains_why_an_old_post_is_here(self):
+        """Any LessWrong post can carry a feed date, not only a curated one: the
+        label says "in feed" (it said "curated" until 2026-10-30)."""
         ep = ReportEpisode(
             title="Big-World Intuitions", author="Joe Carlsmith",
             feed_name="LessWrong Curated", link="https://example.com/p",
             audio_url="https://example.com/a.mp3", duration_seconds=600,
-            published=datetime(2026, 7, 30), curated=datetime(2026, 8, 21))
+            published=datetime(2026, 7, 30), surfaced=datetime(2026, 8, 21))
         report = RunReport(episodes=[ep])
         html = build_html(report, datetime(2026, 8, 29))
-        assert "30 Jul 2026" in html and "curated 21 Aug 2026" in html
-        assert "30 Jul 2026" in build_text(report, datetime(2026, 8, 29))
+        text = build_text(report, datetime(2026, 8, 29))
+        assert "30 Jul 2026" in html and "in feed 21 Aug 2026" in html
+        assert "30 Jul 2026" in text and "in feed 21 Aug 2026" in text
+        assert "curated 21 Aug" not in html + text
 
 
 class TestCrossFeedDuplicates:

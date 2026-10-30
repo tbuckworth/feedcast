@@ -28,6 +28,7 @@ BACKUP = "#9a5b00"
 
 DEFAULT_PORT = 587
 
+from .env import env_flag
 from .llm import model_name
 from .verify import fidelity_summary, material_flags
 
@@ -49,10 +50,10 @@ class ReportEpisode:
     # When the source material was published — not when we narrated it. The
     # two diverge whenever a run is late or a post is picked up a day on.
     published: datetime | None = None
-    # When the feed surfaced it, if that is materially later than publication:
-    # a LessWrong curation can trail the post by weeks, and without this the
-    # email looks like it dug up something from July for no reason.
-    curated: datetime | None = None
+    # When the feed surfaced it, if that is a day or more away from publication
+    # either way: a LessWrong curation can trail the post by weeks, and without
+    # this the email looks like it dug up something from July for no reason.
+    surfaced: datetime | None = None
     # Result of the second-model source check, when one ran.
     fidelity: dict | None = None
     # Read out in full and still being narrated when the email went out:
@@ -168,8 +169,8 @@ def _meta_bits(ep: "ReportEpisode") -> list[str]:
     # Before the duration: this answers "is this actually new?", which is the
     # first thing you want to know about an item in a daily email.
     bits.append(format_published(ep.published))
-    if ep.curated:
-        bits.append(f"curated {format_published(ep.curated)}")
+    if ep.surfaced:
+        bits.append(f"in feed {format_published(ep.surfaced)}")
     bits.append("narrating now, in your feed shortly" if ep.pending
                 else format_duration(ep.duration_seconds))
     return [b for b in bits if b]
@@ -641,12 +642,116 @@ def is_test_run() -> bool:
     On 2026-09-08 two debugging re-runs each emailed the whole BCC list, one of
     them announcing nothing but a failure.
     """
-    return os.environ.get("FEEDCAST_TEST_RUN", "").strip().lower() in ("1", "true", "yes")
+    return env_flag("FEEDCAST_TEST_RUN")
 
 
 def _addresses(raw: str) -> list[str]:
     """Split a comma- or semicolon-separated address list, dropping blanks."""
     return [a.strip() for a in raw.replace(";", ",").split(",") if a.strip()]
+
+
+@dataclass
+class EmailSettings:
+    """Who the report goes to and how it is sent, as the environment configures it."""
+
+    to: list[str]
+    bcc: list[str]
+    sender: str
+    user: str
+    password: str
+    host: str
+    port: int
+    test_run: bool
+
+    @classmethod
+    def from_env(cls) -> "EmailSettings | None":
+        """The settings, or None when the email is off (FEEDCAST_EMAIL_TO unset).
+
+        Raises ValueError, saying what is wrong, when the email is on but cannot
+        be sent: SMTP_USER or the password missing (a missing or rotated CI
+        secret is a failure, not a reason to stop reporting), or an SMTP_PORT
+        that is not a number (a misconfiguration, not unset). An unset GitHub
+        Actions `vars.X` interpolates to an empty string rather than being
+        absent, so an empty host or port falls back as an unset one does.
+        """
+        to = _addresses(os.environ.get("FEEDCAST_EMAIL_TO", ""))
+        if not to:
+            return None
+        user = os.environ.get("SMTP_USER", "").strip()
+        password = (
+            os.environ.get("SMTP_PASSWORD", "")
+            or os.environ.get("GMAIL_APP_PASSWORD", "")
+        ).strip()
+        if not (user and password):
+            raise ValueError("FEEDCAST_EMAIL_TO is set, but SMTP_USER or "
+                             "GMAIL_APP_PASSWORD (alias SMTP_PASSWORD) is not")
+        raw_port = os.environ.get("SMTP_PORT", "").strip()
+        if raw_port and not raw_port.isdigit():
+            raise ValueError(f"SMTP_PORT={raw_port!r} is not a number")
+        return cls(
+            to=to,
+            bcc=_addresses(os.environ.get("FEEDCAST_EMAIL_BCC", "")),
+            sender=os.environ.get("FEEDCAST_EMAIL_FROM", "").strip() or user,
+            user=user,
+            password=password,
+            host=os.environ.get("SMTP_HOST", "").strip() or "smtp.gmail.com",
+            port=int(raw_port) if raw_port else DEFAULT_PORT,
+            test_run=is_test_run(),
+        )
+
+
+def compose_message(report: RunReport, when: datetime, settings: EmailSettings, *,
+                    operator_only: bool = False, subject_tag: str = "",
+                    images: dict[str, bytes] | None = None) -> EmailMessage:
+    """The report as an email: plain text with an HTML alternative.
+
+    A test run (FEEDCAST_TEST_RUN) is tagged [DEV] and, like an `operator_only`
+    report, leaves out the BCC list. `subject_tag` prefixes the subject;
+    `images` are inline PNGs (the market charts) keyed by the Content-ID the
+    HTML cites.
+    """
+    n = len(report.episodes)
+    subject = f"Feedcast — {when.strftime('%d %b')} — {n} new episode{'s' if n != 1 else ''}"
+    if report.linked and not n:
+        subject = (f"Feedcast — {when.strftime('%d %b')} — "
+                   f"{len(report.linked)} linked, no audio")
+    if report.failures and not n:
+        subject = f"Feedcast — {when.strftime('%d %b')} — {len(report.failures)} failed"
+    if subject_tag:
+        subject = f"{subject_tag} {subject}"
+    if settings.test_run:
+        subject = f"[DEV] {subject}"
+
+    msg = EmailMessage()
+    msg["Subject"] = subject
+    msg["From"] = settings.sender
+    msg["To"] = ", ".join(settings.to)
+    # send_message delivers to the Bcc addresses but strips the header from
+    # the transmitted copy, so those recipients stay hidden from each other.
+    if settings.bcc and not (settings.test_run or operator_only):
+        msg["Bcc"] = ", ".join(settings.bcc)
+    msg.set_content(build_text(report, when))
+    msg.add_alternative(build_html(report, when), subtype="html")
+    if images:
+        html_part = msg.get_payload()[1]
+        for cid, png in images.items():
+            html_part.add_related(png, maintype="image", subtype="png", cid=f"<{cid}>")
+    return msg
+
+
+def _send(msg: EmailMessage, settings: EmailSettings) -> None:
+    """Hand the message to the SMTP server, to the addresses its headers name."""
+    # Port 465 is implicit TLS; 587 is STARTTLS. Gmail accepts both.
+    if settings.port == 465:
+        with smtplib.SMTP_SSL(settings.host, settings.port, timeout=60,
+                              context=ssl.create_default_context()) as srv:
+            srv.login(settings.user, settings.password)
+            srv.send_message(msg)
+    else:
+        with smtplib.SMTP(settings.host, settings.port, timeout=60) as srv:
+            srv.starttls(context=ssl.create_default_context())
+            srv.login(settings.user, settings.password)
+            srv.send_message(msg)
 
 
 def send_report(report: RunReport, when: datetime | None = None,
@@ -655,91 +760,33 @@ def send_report(report: RunReport, when: datetime | None = None,
     """Email the run report.
 
     Returns True if sent, None if the email is off (FEEDCAST_EMAIL_TO unset),
-    and False if it is on but was not sent, missing SMTP credentials included:
-    a missing or rotated CI secret is a failure, not a reason to stop reporting.
-    `operator_only` leaves out the BCC list, as a dev run does: the narration
-    pass uses it to say a verbatim post failed after the day's email went out.
-    `subject_tag` prefixes the subject; `images` are inline PNGs (the market
-    charts) keyed by the Content-ID the HTML cites.
+    and False if it is on but was not sent, missing SMTP credentials included
+    (EmailSettings.from_env). `operator_only` leaves out the BCC list, as a
+    dev run does: the narration pass uses it to say a verbatim post failed
+    after the day's email went out. `subject_tag` and `images` are as
+    compose_message takes them.
     Never raises, because it runs before the run commits what it published;
     src.main records a False so the workflow fails the run afterwards.
     """
-    when = when or datetime.now()
-    to_addrs = _addresses(os.environ.get("FEEDCAST_EMAIL_TO", ""))
-    if not to_addrs:
+    try:
+        settings = EmailSettings.from_env()
+    except ValueError as e:
+        print(f"  Email report failed: {e}")
+        return False
+    if settings is None:
         print("  Email report off (FEEDCAST_EMAIL_TO not set)")
         return None
-    bcc_addrs = _addresses(os.environ.get("FEEDCAST_EMAIL_BCC", ""))
-    test_run = is_test_run()
-    if test_run or operator_only:
-        bcc_addrs = []
-    user = os.environ.get("SMTP_USER", "").strip()
-    password = (
-        os.environ.get("SMTP_PASSWORD", "")
-        or os.environ.get("GMAIL_APP_PASSWORD", "")
-    ).strip()
-
-    if not (user and password):
-        print("  Email report failed: FEEDCAST_EMAIL_TO is set, but SMTP_USER or "
-              "GMAIL_APP_PASSWORD (alias SMTP_PASSWORD) is not")
-        return False
-
-    # An unset GitHub Actions `vars.X` interpolates to an empty string rather
-    # than being absent, so fall back on emptiness, not just on the key missing.
-    # A port that is set but not a number is a misconfiguration, not unset.
-    host = os.environ.get("SMTP_HOST", "").strip() or "smtp.gmail.com"
-    raw_port = os.environ.get("SMTP_PORT", "").strip()
-    if raw_port and not raw_port.isdigit():
-        print(f"  Email report failed: SMTP_PORT={raw_port!r} is not a number")
-        return False
-    port = int(raw_port) if raw_port else DEFAULT_PORT
-
     try:
-        from_addr = os.environ.get("FEEDCAST_EMAIL_FROM", "").strip() or user
-
-        n = len(report.episodes)
-        subject = f"Feedcast — {when.strftime('%d %b')} — {n} new episode{'s' if n != 1 else ''}"
-        if report.linked and not n:
-            subject = (f"Feedcast — {when.strftime('%d %b')} — "
-                       f"{len(report.linked)} linked, no audio")
-        if report.failures and not n:
-            subject = f"Feedcast — {when.strftime('%d %b')} — {len(report.failures)} failed"
-
-        msg = EmailMessage()
-        if subject_tag:
-            subject = f"{subject_tag} {subject}"
-        if test_run:
-            subject = f"[DEV] {subject}"
-        msg["Subject"] = subject
-        msg["From"] = from_addr
-        msg["To"] = ", ".join(to_addrs)
-        # send_message delivers to the Bcc addresses but strips the header from
-        # the transmitted copy, so those recipients stay hidden from each other.
-        if bcc_addrs:
-            msg["Bcc"] = ", ".join(bcc_addrs)
-        msg.set_content(build_text(report, when))
-        msg.add_alternative(build_html(report, when), subtype="html")
-        if images:
-            html_part = msg.get_payload()[1]
-            for cid, png in images.items():
-                html_part.add_related(png, maintype="image", subtype="png", cid=f"<{cid}>")
-
-        # Port 465 is implicit TLS; 587 is STARTTLS. Gmail accepts both.
-        if port == 465:
-            with smtplib.SMTP_SSL(host, port, timeout=60,
-                                  context=ssl.create_default_context()) as srv:
-                srv.login(user, password)
-                srv.send_message(msg)
-        else:
-            with smtplib.SMTP(host, port, timeout=60) as srv:
-                srv.starttls(context=ssl.create_default_context())
-                srv.login(user, password)
-                srv.send_message(msg)
-        # The Actions log is public: name only the To address (a secret,
-        # masked there) and count the blind-copied readers.
-        bcc_note = f" and {len(bcc_addrs)} bcc" if bcc_addrs else ""
-        print(f"  Email report sent to {', '.join(to_addrs)}{bcc_note}")
-        return True
+        msg = compose_message(report, when or datetime.now(), settings,
+                              operator_only=operator_only, subject_tag=subject_tag,
+                              images=images)
+        _send(msg, settings)
     except Exception as e:
         print(f"  Email report failed: {type(e).__name__}: {e}")
         return False
+    # The Actions log is public: name only the To address (a secret, masked
+    # there) and count the blind-copied readers.
+    bcc = _addresses(msg["Bcc"] or "")
+    bcc_note = f" and {len(bcc)} bcc" if bcc else ""
+    print(f"  Email report sent to {', '.join(settings.to)}{bcc_note}")
+    return True

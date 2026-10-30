@@ -11,6 +11,8 @@ from typing import Optional
 
 import feedparser
 
+from .bundle import bundle_path
+
 
 MAX_AUTHORS = 5
 
@@ -54,6 +56,28 @@ def extract_authors(entry, feed_name: str) -> list[str]:
 def episode_id(entry_id: str) -> str:
     """Short stable id shared by an episode's audio, transcript and bundle files."""
     return hashlib.sha256(entry_id.encode()).hexdigest()[:12]
+
+
+def transcript_path(transcript_dir: Path, entry_id: str) -> Path:
+    """Where a briefing's script is published for the feed's transcript link.
+
+    feed.py writes it and cleanup deletes it. It lives here, beside episode_id,
+    because feed.py imports this module, so cleanup cannot import from feed.py.
+    """
+    return transcript_dir / f"{entry_id}.txt"
+
+
+_BRIEFING_PREFIX = "news-briefing-"
+
+
+def briefing_id(date: str) -> str:
+    """The entry id of the daily news briefing for `date` (YYYY-MM-DD)."""
+    return f"{_BRIEFING_PREFIX}{date}"
+
+
+def is_briefing(entry_id: str) -> bool:
+    """Whether `entry_id` is a daily news briefing's (briefing_id)."""
+    return entry_id.startswith(_BRIEFING_PREFIX)
 
 
 @dataclass
@@ -118,6 +142,28 @@ def entry_from_dict(data: dict) -> FeedEntry:
     )
 
 
+def stored_author(row: dict) -> str:
+    """The author a processed_posts row names.
+
+    Rows predating the author column store '': they fall back to the feed
+    name, which for the per-author feeds is already the person's name.
+    """
+    return (row.get("author") or "").strip() or row["feed_name"]
+
+
+def entry_from_row(row: dict) -> FeedEntry:
+    """The post a processed_posts row stores, to work on it again after its run.
+
+    The post only: what the pipeline made of it (bullets, fidelity check,
+    writer) stays in the row, where callers read it.
+    """
+    return FeedEntry(
+        id=row["id"], title=row["title"], link=row["link"], content=row["content"] or "",
+        published=datetime.fromisoformat(row["published"]), author=stored_author(row),
+        feed_name=row["feed_name"],
+    )
+
+
 def warn_if_dead(feed, name: str, url: str) -> bool:
     """Say so when a feed returns nothing, and report True if it did.
 
@@ -170,6 +216,16 @@ def report_skipped(name: str, max_age_hours: float | None, *, stale: int, undate
     ]))
     if detail:
         print(f"  {name}: skipped {detail}")
+
+
+# A post is known by its id or by its link, and each lookup takes either or
+# both. An empty one matches nothing: a briefing's link is ''.
+_BY_ID_OR_LINK = "((? != '' AND id = ?) OR (? != '' AND link = ?))"
+
+
+def _id_or_link(entry_id: str, link: str) -> tuple[str, str, str, str]:
+    """The parameters _BY_ID_OR_LINK takes."""
+    return (entry_id, entry_id, link, link)
 
 
 def _add_column(conn: sqlite3.Connection, table: str, column: str) -> None:
@@ -329,28 +385,22 @@ class FeedMonitor:
             conn.commit()
         return dict(rows)
 
-    def is_processed(self, entry_id: str) -> bool:
-        """Check if a post has already been processed."""
+    def is_processed(self, entry_id: str = "", link: str = "") -> bool:
+        """Whether a post has already been processed, by id or link."""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.execute(
-                "SELECT 1 FROM processed_posts WHERE id = ?", (entry_id,)
+                f"SELECT 1 FROM processed_posts WHERE {_BY_ID_OR_LINK}",
+                _id_or_link(entry_id, link),
             )
             return cursor.fetchone() is not None
 
-    def is_processed_by_link(self, link: str) -> bool:
-        """Check if any entry with this link has been processed."""
-        with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.execute(
-                "SELECT 1 FROM processed_posts WHERE link = ?", (link,)
-            )
-            return cursor.fetchone() is not None
-
-    def get_entry(self, key: str) -> Optional[dict]:
-        """The stored row for an entry id or link, or None."""
+    def get_entry(self, entry_id: str = "", link: str = "") -> Optional[dict]:
+        """The stored row for a post, by id or link, or None."""
         with sqlite3.connect(self.db_path) as conn:
             conn.row_factory = sqlite3.Row
             row = conn.execute(
-                "SELECT * FROM processed_posts WHERE id = ? OR link = ?", (key, key)
+                f"SELECT * FROM processed_posts WHERE {_BY_ID_OR_LINK}",
+                _id_or_link(entry_id, link),
             ).fetchone()
             return dict(row) if row else None
 
@@ -369,13 +419,14 @@ class FeedMonitor:
             )
             conn.commit()
 
-    def delete_entry(self, key: str) -> list[tuple[str, str]]:
-        """Delete the entries whose id or link is `key`. Returns each one's (id, title)."""
+    def delete_entry(self, entry_id: str = "", link: str = "") -> list[tuple[str, str]]:
+        """Delete the posts with this id or this link. Returns each one's (id, title)."""
+        params = _id_or_link(entry_id, link)
         with sqlite3.connect(self.db_path) as conn:
             deleted = conn.execute(
-                "SELECT id, title FROM processed_posts WHERE id = ? OR link = ?", (key, key),
+                f"SELECT id, title FROM processed_posts WHERE {_BY_ID_OR_LINK}", params,
             ).fetchall()
-            conn.execute("DELETE FROM processed_posts WHERE id = ? OR link = ?", (key, key))
+            conn.execute(f"DELETE FROM processed_posts WHERE {_BY_ID_OR_LINK}", params)
             conn.commit()
             return deleted
 
@@ -470,8 +521,8 @@ class FeedMonitor:
         """Whether a post is already waiting for narration, by id or link."""
         with sqlite3.connect(self.db_path) as conn:
             row = conn.execute(
-                "SELECT 1 FROM deferred_entries WHERE id = ? OR (? != '' AND link = ?)",
-                (entry_id, link, link)).fetchone()
+                f"SELECT 1 FROM deferred_entries WHERE {_BY_ID_OR_LINK}",
+                _id_or_link(entry_id, link)).fetchone()
         return row is not None
 
     def start_narration(self) -> None:
@@ -625,7 +676,7 @@ class FeedMonitor:
             # "On Writing #3" — guid f1c130ea… there, rA6pqn6kz8NvHyznT here).
             # Without this the curated copy is narrated a second time.
             link = entry.get("link", "")
-            if link and (self.is_processed_by_link(link) or self.is_deferred(link=link)):
+            if self.is_processed(link=link) or self.is_deferred(link=link):
                 already += 1
                 continue
 
@@ -715,11 +766,11 @@ class FeedMonitor:
                         if path.exists():
                             path.unlink()
                     if transcript_dir:
-                        txt_path = transcript_dir / f"{entry_id}.txt"
+                        txt_path = transcript_path(transcript_dir, entry_id)
                         if txt_path.exists():
                             txt_path.unlink()
                     if sources_dir:
-                        md_path = sources_dir / f"{episode_id(entry_id)}.md"
+                        md_path = bundle_path(sources_dir, episode_id(entry_id))
                         if md_path.exists():
                             md_path.unlink()
 

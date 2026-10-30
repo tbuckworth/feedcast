@@ -2,7 +2,8 @@
 
 from datetime import datetime
 
-from src.email_report import ReportEpisode, RunReport, is_test_run, send_report
+from src.email_report import (EmailSettings, ReportEpisode, RunReport, compose_message,
+                              is_test_run, send_report)
 
 
 def _report():
@@ -54,3 +55,16 @@ def test_test_run_drops_bcc_and_tags_subject(monkeypatch):
 def test_false_string_is_not_a_test_run(monkeypatch):
     _env(monkeypatch, FEEDCAST_TEST_RUN="false")
     assert not is_test_run()
+
+
+def test_an_operator_only_report_leaves_out_the_bcc_list(monkeypatch):
+    """The narration pass's failure email: composed from the settings, sent to no one here."""
+    _env(monkeypatch, SMTP_PORT="465", FEEDCAST_EMAIL_FROM="")
+    monkeypatch.delenv("FEEDCAST_TEST_RUN", raising=False)
+    settings = EmailSettings.from_env()
+    assert (settings.to, settings.bcc, settings.sender, settings.port) == (
+        ["titus@example.com"], ["friend@example.com"], "s@example.com", 465)
+    msg = compose_message(_report(), datetime(2026, 9, 3), settings, operator_only=True,
+                          subject_tag="[Preview]")
+    assert msg["Bcc"] is None and msg["To"] == "titus@example.com"
+    assert msg["Subject"] == "[Preview] Feedcast — 03 Sep — 1 new episode"

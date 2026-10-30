@@ -15,8 +15,9 @@ from .bundle import write_bundle
 from .config import CONFIG_PATH, ROOT, Config, FeedConfig, load_config
 from .digest import safe_bullets
 from .email_report import LinkedPost, ReportEpisode, RunReport, send_report
+from .env import env_flag
 from .extractor import ExtractionError, url_to_feed_entry
-from .feed import Episode, FeedGenerator, episode_page_url
+from .feed import Episode, FeedGenerator, audio_url, episode_page_url, feed_url
 from .fulltext import enrich_entry
 from .html_text import clean_html
 from .lesswrong import posted_at
@@ -24,7 +25,8 @@ from . import notices
 from .market_charts import charts_for_report
 from .markets import MarketRules, MarketScout
 from .mathiness import MathsVerdict, assess
-from .monitor import FeedEntry, FeedMonitor, episode_id, stored_json
+from .monitor import (FeedEntry, FeedMonitor, briefing_id, entry_from_row, episode_id,
+                      is_briefing, stored_author, stored_json)
 from .news import NewsAggregator
 from .normalizer import TextNormalizer
 from .processor import ContentProcessor
@@ -34,11 +36,6 @@ from .processor import ContentProcessor
 # CI killed it. feedparser 6.x exposes no timeout argument, so bound it at the
 # socket layer. Only affects blocking sockets; asyncio/httpx are unaffected.
 socket.setdefaulttimeout(30)
-
-
-def generate_episode_id(entry_id: str) -> str:
-    """Generate a short, unique episode ID from entry ID."""
-    return episode_id(entry_id)
 
 
 @dataclass
@@ -56,6 +53,19 @@ class Attempt:
     processed_text: str | None = None
     normalized_text: str | None = None
     number: int = 1  # attempt count across runs, for the report
+
+    @classmethod
+    def from_row(cls, row: dict, number: int) -> "Attempt":
+        """Resume from the scripts a stored row kept, at the first stage with none.
+
+        A failed_entries row keeps the normalised script; a deferred_entries
+        row the written one too. Rows store '' for a script they do not have.
+        """
+        processed = row.get("processed_text") or None
+        normalized = row.get("normalized_text") or None
+        stage = "tts" if normalized else "normalize" if processed else "process"
+        return cls(stage=stage, processed_text=processed, normalized_text=normalized,
+                   number=number)
 
 
 async def process_entry(
@@ -86,7 +96,7 @@ async def process_entry(
     digest_task = asyncio.create_task(
         _same(entry.bullets) if entry.bullets else
         safe_bullets(attempt.processed_text or attempt.normalized_text or "",
-                     is_briefing=entry.id.startswith("news-briefing-"),
+                     is_briefing=is_briefing(entry.id),
                      label=entry.title,
                      sources=entry.sources)
     )
@@ -106,9 +116,8 @@ async def process_entry(
                   f"({len(attempt.normalized_text)} chars)")
 
         attempt.stage = "tts"
-        episode_id = generate_episode_id(entry.id)
         audio_path = await audio_gen.generate_episode(
-            attempt.normalized_text, audio_dir, episode_id, entry.title, http_client,
+            attempt.normalized_text, audio_dir, episode_id(entry.id), entry.title, http_client,
         )
     except BaseException:
         digest_task.cancel()
@@ -218,22 +227,17 @@ async def _backfill_bullets(monitor: FeedMonitor, rows: list[dict]) -> list[tupl
     print(f"  Backfilling digests for {len(todo)} entries...")
 
     async def one(row: dict) -> None:
-        is_briefing = row["id"].startswith("news-briefing-")
-        if is_briefing:
+        briefing = is_briefing(row["id"])
+        if briefing:
             text = row["content"] or ""
         else:
-            entry = FeedEntry(
-                id=row["id"], feed_name=row["feed_name"], title=row["title"],
-                link=row["link"], content=row["content"] or "",
-                published=datetime.fromisoformat(row["published"]),
-                author=row["author"] or row["feed_name"],
-            )
+            entry = entry_from_row(row)
             gain = await asyncio.to_thread(enrich_entry, entry)
             if gain.replaced:
                 print(f"    Recovered full text for {entry.title} "
                       f"({gain.before:,} -> {gain.after:,})")
             text = clean_html(entry.content)
-        bullets = await safe_bullets(text, is_briefing=is_briefing, label=row["title"])
+        bullets = await safe_bullets(text, is_briefing=briefing, label=row["title"])
         monitor.set_bullets(row["id"], bullets)
         print(f"    {len(bullets)} bullets: {row['title'][:56]}")
 
@@ -268,12 +272,12 @@ def _stored_verdict(row: dict) -> MathsVerdict:
 
 
 async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
-                         audio_dir: Path, output_dir: Path) -> None:
+                         audio_dir: Path) -> None:
     """Rebuild and re-send the most recent run's email. Publishes nothing.
 
     Exists because the mail credentials only live in CI, so re-sending after a
     template change means asking the pipeline to do it. Deliberately does not
-    fetch, process, generate audio, rewrite feed.xml or run cleanup.
+    fetch, process, generate audio, write anything under output/ or run cleanup.
     """
     db_entries = monitor.get_processed_entries()
     if not db_entries:
@@ -295,16 +299,9 @@ async def _resend_report(monitor: FeedMonitor, config, feed_gen: FeedGenerator,
     for row in todays:
         if row["audio_file"]:
             continue
-        entry = FeedEntry(
-            id=row["id"], feed_name=row["feed_name"], title=row["title"],
-            link=row["link"], content=row["content"] or "",
-            published=datetime.fromisoformat(row["published"]),
-            author=row["author"] or row["feed_name"],
-        )
-        linked.append((entry, _stored_verdict(row)))
+        linked.append((entry_from_row(row), _stored_verdict(row)))
 
-    transcript_dir = output_dir / "transcripts"
-    episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir, transcript_dir)
+    episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir)
     new_ids = {d["id"] for d in todays if d["audio_file"]}
     report = _build_run_report(episodes, db_entries, new_ids, failures,
                                config.podcast.base_url, linked)
@@ -327,7 +324,7 @@ async def async_main(config_path: Path | None = None) -> None:
         print(f"Reprocess requested for: {reprocess_entry}")
 
     # Check for force-verbatim override
-    force_verbatim = os.environ.get("FORCE_VERBATIM", "").strip().lower() in ("true", "1", "yes")
+    force_verbatim = env_flag("FORCE_VERBATIM")
     if force_verbatim:
         if not reprocess_entry:
             print("Warning: FORCE_VERBATIM is set but no REPROCESS_ENTRY specified — flag will have no effect")
@@ -347,10 +344,12 @@ async def async_main(config_path: Path | None = None) -> None:
     # Initialize components
     monitor = FeedMonitor(db_path)
 
-    # Handle reprocess request - delete entry so it gets picked up again
-    reprocess_row = monitor.get_entry(reprocess_entry) if reprocess_entry else None
+    # Handle reprocess request - delete entry so it gets picked up again.
+    # REPROCESS_ENTRY names the post by its id or by its URL.
+    reprocess_row = (monitor.get_entry(entry_id=reprocess_entry, link=reprocess_entry)
+                     if reprocess_entry else None)
     if reprocess_entry:
-        if monitor.delete_entry(reprocess_entry):
+        if monitor.delete_entry(entry_id=reprocess_entry, link=reprocess_entry):
             print(f"  Deleted entry from database, will reprocess")
         else:
             print(f"  Entry not found in database (may be new)")
@@ -359,13 +358,13 @@ async def async_main(config_path: Path | None = None) -> None:
 
     # Before the TTS setup: constructing AudioGenerator demands a DeepInfra key
     # and uploads the voice sample, and a resend makes no audio at all.
-    if os.environ.get("RESEND_REPORT", "").strip().lower() in ("true", "1", "yes"):
-        await _resend_report(monitor, config, feed_gen, audio_dir, output_dir)
+    if env_flag("RESEND_REPORT"):
+        await _resend_report(monitor, config, feed_gen, audio_dir)
         return
     if _run_pass() == "narrate":
         await _narrate_deferred(monitor, config, feed_gen, audio_dir, output_dir)
         return
-    if os.environ.get("PREVIEW_BRIEFING", "").strip().lower() in ("true", "1", "yes"):
+    if env_flag("PREVIEW_BRIEFING"):
         await _preview_briefing(monitor, config)
         return
 
@@ -400,7 +399,7 @@ async def async_main(config_path: Path | None = None) -> None:
 
         # Re-injecting replaces the earlier episode. One stored from a feed
         # has the feed's id and this URL as its link, so delete by both.
-        for row_id, title in monitor.delete_entry(entry.id) + monitor.delete_entry(inject_url):
+        for row_id, title in monitor.delete_entry(entry_id=entry.id, link=inject_url):
             print(f"  Deleted {row_id} ({title}) for re-injection")
 
         entries_to_process = [(entry, inject_mode, config.default_prompt)]
@@ -412,28 +411,18 @@ async def async_main(config_path: Path | None = None) -> None:
         print(f"  Only entries published in the last {max_age:g}h are eligible"
               if max_age is not None else "  Age cutoff disabled — every unseen entry is eligible")
 
-        async def fetch_one(fc: FeedConfig) -> tuple[FeedConfig, list[FeedEntry]]:
+        for fc in config.feeds:
             print(f"  Fetching: {fc.name} ({fc.url})")
-            entries = await asyncio.to_thread(
-                monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns, max_age_hours=max_age)
-            print(f"  {fc.name}: {len(entries)} new entries")
-            return (fc, entries)
-
-        # return_exceptions: one unreachable or slow feed must not abort the run.
-        # feedparser raises (rather than setting bozo) on a socket timeout.
-        raw_results = await asyncio.gather(
-            *[fetch_one(fc) for fc in config.feeds],
-            return_exceptions=True,
-        )
         feed_results = []
-        for fc, result in zip(config.feeds, raw_results):
+        for fc, result in zip(config.feeds, await _fetch_feeds(config.feeds, monitor, max_age)):
             if isinstance(result, BaseException):
                 # It returned nothing as surely as an empty feed, which the
                 # email lists, so it is listed too, with the error.
                 print(f"  Warning: failed to fetch {fc.name}: {result!r}")
                 dead_sources.append(f"{fc.name} ({type(result).__name__}: {result})")
                 continue
-            feed_results.append(result)
+            print(f"  {fc.name}: {len(result)} new entries")
+            feed_results.append((fc, result))
 
         # Deduplicate — gather preserves config order, so author feeds win
         seen_ids: set[str] = set()
@@ -505,12 +494,11 @@ async def async_main(config_path: Path | None = None) -> None:
             fc, e = found
             seen_ids.add(e.id)
             entries_to_process.append((e, fc.mode, fc.prompt or config.default_prompt))
-            script = row["normalized_text"] or None
-            resumed[e.id] = Attempt(stage="tts" if script else "process",
-                                    normalized_text=script, number=row["attempts"] + 1)
+            attempt = resumed[e.id] = Attempt.from_row(row, number=row["attempts"] + 1)
             print(f"  Retrying from an earlier run: {e.title} "
-                  f"(attempt {row['attempts'] + 1} of {monitor.MAX_ATTEMPTS}"
-                  + (", script kept — straight to narration)" if script else ")"))
+                  f"(attempt {attempt.number} of {monitor.MAX_ATTEMPTS}"
+                  + (", script kept — straight to narration)" if attempt.normalized_text
+                     else ")"))
 
         # LessWrong Curated dates an item by when it was curated. Keep that as
         # the "is this new to us" date and ask LessWrong when the post was
@@ -526,17 +514,14 @@ async def async_main(config_path: Path | None = None) -> None:
             # the database a second run today (a reprocess, a test run, the late
             # GitHub fire) must not pay for selection, fetches, writing and
             # checking again only to throw the result away.
-            today_id = f"news-briefing-{datetime.now():%Y-%m-%d}"
+            today_id = briefing_id(f"{datetime.now():%Y-%m-%d}")
             if monitor.is_processed(today_id):
                 print(f"  {today_id} already exists; skipping briefing generation")
-                briefing_entry = None
             else:
                 briefing_entry = await aggregator.generate_briefing()
+                if briefing_entry:
+                    entries_to_process.insert(0, (briefing_entry, "verbatim", config.default_prompt))
             dead_sources += aggregator.dead_sources
-            if briefing_entry and not monitor.is_processed(briefing_entry.id):
-                entries_to_process.insert(0, (briefing_entry, "verbatim", config.default_prompt))
-            elif briefing_entry:
-                print(f"  News briefing already processed today")
 
     # Maths filter: posts built on real mathematics are linked, not narrated.
     # Bypassed for inject and reprocess — both are explicit "I want this one"
@@ -550,7 +535,7 @@ async def async_main(config_path: Path | None = None) -> None:
         print(f"\nChecking {len(entries_to_process)} entries for maths density...")
         candidates = [
             (i, e) for i, (e, _m, _p) in enumerate(entries_to_process)
-            if not e.id.startswith("news-briefing-")
+            if not is_briefing(e.id)
         ]
         verdicts = await asyncio.gather(
             *[asyncio.to_thread(assess, e.link, e.content,
@@ -586,8 +571,7 @@ async def async_main(config_path: Path | None = None) -> None:
     # dropped are not fetched twice, and in reprocess mode too, which is usually
     # someone asking for a bad episode to be done again.
     if entries_to_process and not inject_url:
-        enrichable = [e for e, _m, _p in entries_to_process
-                      if not e.id.startswith("news-briefing-")]
+        enrichable = [e for e, _m, _p in entries_to_process if not is_briefing(e.id)]
         gains = await asyncio.gather(
             *[asyncio.to_thread(enrich_entry, e) for e in enrichable],
             return_exceptions=True,
@@ -659,8 +643,7 @@ async def async_main(config_path: Path | None = None) -> None:
             if isinstance(result, BaseException):
                 # Only feed entries can be found again tomorrow. A briefing is
                 # regenerated daily anyway, and an injected URL has ntfy.
-                queue = (submitted.feed_name in feed_names
-                         and not submitted.id.startswith("news-briefing-"))
+                queue = submitted.feed_name in feed_names and not is_briefing(submitted.id)
                 _report_entry_failure(submitted, attempts[submitted.id], result,
                                       monitor, failures, queue=queue)
                 continue
@@ -668,10 +651,10 @@ async def async_main(config_path: Path | None = None) -> None:
             monitor.mark_processed(entry, audio_path.name, content=entry.content)
             monitor.clear_failure(entry.id)
             if entry.bundle:
-                write_bundle(sources_dir, generate_episode_id(entry.id), entry.bundle)
+                write_bundle(sources_dir, episode_id(entry.id), entry.bundle)
             new_entry_ids.add(entry.id)
             # Store news briefing text for future dedup context
-            if entry.id.startswith("news-briefing-") and briefing_entry:
+            if is_briefing(entry.id) and briefing_entry:
                 today = datetime.now().strftime("%Y-%m-%d")
                 monitor.store_news_briefing(today, briefing_entry.content)
                 if briefing_entry.markets:
@@ -704,9 +687,9 @@ async def async_main(config_path: Path | None = None) -> None:
     # Cleanup old entries BEFORE generating the feed, so the feed never
     # references audio/transcripts that cleanup deletes in this same run
     # (otherwise the deployed feed.xml advertises 404 enclosures).
-    transcript_dir = output_dir / "transcripts"
     removed = monitor.cleanup_old_entries(days=config.retention_days, audio_dir=audio_dir,
-                                          transcript_dir=transcript_dir, sources_dir=sources_dir)
+                                          transcript_dir=_transcript_dir(output_dir),
+                                          sources_dir=sources_dir)
     if removed:
         print(f"  Cleaned up {removed} old entries")
     removed_briefings = monitor.cleanup_old_briefings(days=7)
@@ -718,14 +701,7 @@ async def async_main(config_path: Path | None = None) -> None:
 
     # Generate podcast feed
     print(f"\nGenerating podcast feed...")
-    db_entries = monitor.get_processed_entries()
-    episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir, transcript_dir)
-    feed_path = output_dir / "feed.xml"
-    feed_gen.generate(episodes, feed_path)
-    print(f"  Generated feed with {len(episodes)} episodes: {feed_path}")
-    feed_gen.write_index(episodes, output_dir / "index.html")
-    waiting = monitor.deferred_entries()
-    feed_gen.write_episode_pages(episodes, waiting, output_dir / "episodes")
+    episodes, db_entries, waiting = _publish(monitor, feed_gen, audio_dir, output_dir)
     # Tells the workflow whether the narration job has anything to do.
     _gh_output(deferred=len(waiting))
 
@@ -743,8 +719,9 @@ async def async_main(config_path: Path | None = None) -> None:
 
     # Email the run report. Off when FEEDCAST_EMAIL_TO is unset; a send that
     # fails is recorded, and the workflow fails the run after publishing.
+    # FEEDCAST_EMAIL_ALWAYS sends it even on a run that produced nothing.
     if (new_entry_ids or failures or maths_skipped or dead_sources or deferring
-            or _email_always()):
+            or env_flag("FEEDCAST_EMAIL_ALWAYS")):
         # Charts first: a chart that fails is a notice, and the report takes
         # the notices as they stand when it is built.
         charts, images = (charts_for_report(briefing_entry)
@@ -762,19 +739,17 @@ async def async_main(config_path: Path | None = None) -> None:
 
 
 async def _correct_publication_dates(entries: list[FeedEntry]) -> None:
-    """Replace a curation date with the real posting date, where they differ.
+    """Replace the feed's date with the real posting date, where they differ.
 
     Only LessWrong links can be resolved, and only a difference worth showing
-    is applied — an hour's lag between posting and curation is noise.
+    is applied (FEED_DATE_LAG).
     """
     for entry in entries:
         real = await posted_at(entry.link)
-        if real is None or entry.feed_date is None:
-            continue
-        if abs((entry.feed_date - real).total_seconds()) < 86400:
+        if real is None or _surfaced_date(entry.feed_date, real) is None:
             continue
         print(f"    {entry.title[:48]}: posted {real:%Y-%m-%d}, "
-              f"curated {entry.feed_date:%Y-%m-%d}")
+              f"in feed {entry.feed_date:%Y-%m-%d}")
         entry.published = real
 
 
@@ -845,7 +820,7 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
         episodes=[item(title=f"Preview: {entry.title}", bullets=entry.bullets,
                        fidelity=entry.fidelity, writer=entry.writer),
                   item(title="Full script", briefing_text=entry.content)],
-        notices=notices.report(), feed_url=f"{base}/feed.xml", site_url=base,
+        notices=notices.report(), feed_url=feed_url(base), site_url=base,
         charts=charts,
     )
     _email(report, subject_tag="[Preview]", images=images)
@@ -923,13 +898,8 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
     if todo:
         print(f"\nNarration pass: {len(todo)} "
               f"{'post' if len(todo) == 1 else 'posts'} read out in full")
-        attempts = {
-            entry.id: Attempt(stage="tts" if row["normalized_text"] else "normalize",
-                              processed_text=row["processed_text"] or None,
-                              normalized_text=row["normalized_text"] or None,
-                              number=row["attempts"])
-            for row, entry in todo
-        }
+        attempts = {entry.id: Attempt.from_row(row, number=row["attempts"])
+                    for row, entry in todo}
         items = [(entry, row["mode"], config.default_prompt) for row, entry in todo]
         processor = _processor(config)
         normalizer = TextNormalizer(respellings=config.pronunciations)
@@ -943,12 +913,8 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
                     attempt.normalized_text)
                 if attempt.number >= monitor.MAX_ATTEMPTS:
                     monitor.drop_deferred(entry.id)
-                    note = f" — attempt {attempt.number} of {monitor.MAX_ATTEMPTS}, giving up"
-                else:
-                    note = (f" — attempt {attempt.number} of {monitor.MAX_ATTEMPTS}, "
-                            f"will retry next run")
                 _report_entry_failure(entry, attempt, result, monitor, failures,
-                                      queue=False, note=note)
+                                      queue=False, note=_attempt_note(attempt.number))
                 continue
             entry, audio_path = result
             monitor.mark_processed(entry, audio_path.name, content=entry.content)
@@ -958,17 +924,11 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
         print(f"  {narrated} narrated")
         _report_unnormalized(normalizer)
 
-    transcript_dir = output_dir / "transcripts"
-    episodes = feed_gen.load_episodes_from_db(monitor.get_processed_entries(),
-                                              audio_dir, transcript_dir)
-    feed_gen.generate(episodes, output_dir / "feed.xml")
-    feed_gen.write_index(episodes, output_dir / "index.html")
-    feed_gen.write_episode_pages(episodes, monitor.deferred_entries(), output_dir / "episodes")
-    print(f"  Feed now has {len(episodes)} episodes")
+    episodes, _rows, _waiting = _publish(monitor, feed_gen, audio_dir, output_dir)
     if failures:
         _email(RunReport(
             failures=failures, notices=notices.report(),
-            feed_url=f"{config.podcast.base_url}/feed.xml", site_url=config.podcast.base_url,
+            feed_url=feed_url(config.podcast.base_url), site_url=config.podcast.base_url,
             total_in_feed=len(episodes)), operator_only=True)
 
 
@@ -997,11 +957,7 @@ async def _find_in_feeds(
     feeds = [fc for fc in config.feeds if only_feed is None or fc.name == only_feed]
     feeds = feeds or config.feeds
 
-    async def fetch_all(fc: FeedConfig) -> list[FeedEntry]:
-        return await asyncio.to_thread(
-            monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns, max_age_hours=None)
-
-    fetched = await asyncio.gather(*[fetch_all(fc) for fc in feeds], return_exceptions=True)
+    fetched = await _fetch_feeds(feeds, monitor, max_age_hours=None)
     unread: list[str] = []
     for fc, result in zip(feeds, fetched):
         if isinstance(result, BaseException):
@@ -1014,6 +970,47 @@ async def _find_in_feeds(
         if fc.name in monitor.dead_feeds:   # warn_if_dead has said so in the log
             unread.append(f"{fc.name}: returned no entries")
     return FetchFailed(unread) if unread else None
+
+
+async def _fetch_feeds(feeds: list[FeedConfig], monitor: FeedMonitor,
+                       max_age_hours: float | None) -> list[list[FeedEntry] | BaseException]:
+    """Fetch the feeds in parallel: per feed, in order, its new entries or what its fetch raised.
+
+    The exception is returned, not raised: one unreachable or slow feed must
+    not abort the run, and feedparser raises (rather than setting bozo) on a
+    socket timeout. `max_age_hours` is FeedMonitor.fetch_feed's window.
+    """
+    return await asyncio.gather(
+        *[asyncio.to_thread(monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns,
+                            max_age_hours=max_age_hours) for fc in feeds],
+        return_exceptions=True,
+    )
+
+
+def _transcript_dir(output_dir: Path) -> Path:
+    """Where the briefings' transcripts are published, and deleted from by cleanup."""
+    return output_dir / "transcripts"
+
+
+def _publish(monitor: FeedMonitor, feed_gen: FeedGenerator, audio_dir: Path,
+             output_dir: Path) -> tuple[list[Episode], list[dict], list[dict]]:
+    """Write the site from the database, as both passes of a split run do.
+
+    feed.xml, the index, a page per episode and per post still waiting to be
+    narrated, and the briefings' transcripts. Returns the episodes, the
+    processed_posts rows they were read from, and the waiting posts
+    (FeedMonitor.deferred_entries()), for the email.
+    """
+    db_entries = monitor.get_processed_entries()
+    episodes = feed_gen.load_episodes_from_db(db_entries, audio_dir)
+    waiting = monitor.deferred_entries()
+    feed_path = output_dir / "feed.xml"
+    feed_gen.generate(episodes, feed_path)
+    feed_gen.write_index(episodes, output_dir / "index.html")
+    feed_gen.write_episode_pages(episodes, waiting, output_dir / "episodes")
+    feed_gen.write_transcripts(episodes, db_entries, _transcript_dir(output_dir))
+    print(f"  Generated feed with {len(episodes)} episodes: {feed_path}")
+    return episodes, db_entries, waiting
 
 
 def _report_entry_failure(
@@ -1033,16 +1030,18 @@ def _report_entry_failure(
     print(f"  Error processing {entry.title} at {summary}")
     print("".join(traceback.format_exception(type(exc), exc, exc.__traceback__)).rstrip())
     if queue:
-        n = monitor.record_failure(entry, summary, attempt.normalized_text)
-        if n < monitor.MAX_ATTEMPTS:
-            note = f" — attempt {n} of {monitor.MAX_ATTEMPTS}, will retry next run"
-        else:
-            note = f" — attempt {n} of {monitor.MAX_ATTEMPTS}, giving up"
+        note = _attempt_note(monitor.record_failure(entry, summary, attempt.normalized_text))
     failures.append((entry.title, summary + note))
     if os.environ.get("GITHUB_ACTIONS"):
         # Surfaces on the run's summary page, so a green run that lost an
         # episode is not green at a glance.
         print(f"::warning title=Feedcast entry failed::{entry.title} — {summary}{note}")
+
+
+def _attempt_note(n: int) -> str:
+    """How the email and the log end the failure of attempt `n`: retried, or given up."""
+    outcome = "will retry next run" if n < FeedMonitor.MAX_ATTEMPTS else "giving up"
+    return f" — attempt {n} of {FeedMonitor.MAX_ATTEMPTS}, {outcome}"
 
 
 def _report_unnormalized(normalizer: TextNormalizer) -> None:
@@ -1059,16 +1058,6 @@ def _report_unnormalized(normalizer: TextNormalizer) -> None:
         notices.add(msg)
         if os.environ.get("GITHUB_ACTIONS"):
             print(f"::warning title=Feedcast normaliser::{msg}")
-
-
-def _email_always() -> bool:
-    """Whether to email even on a run that produced nothing."""
-    return os.environ.get("FEEDCAST_EMAIL_ALWAYS", "").strip().lower() in ("true", "1", "yes")
-
-
-def _fidelity_of(row: dict) -> dict | None:
-    """Read a stored fidelity check; None for rows without one."""
-    return _json_dict(row, "fidelity")
 
 
 def _json_dict(row: dict, column: str) -> dict | None:
@@ -1088,18 +1077,33 @@ def _bullets_of(row: dict) -> list:
             if isinstance(b, str) or (isinstance(b, dict) and b.get("text"))]
 
 
-def _curated_date(row: dict, published: datetime | None) -> datetime | None:
-    """When the feed surfaced a post, if that is not when it was written."""
+# How far a post's feed date must be from its posting date before the email
+# gives both: an hour's lag between posting and curation is noise.
+FEED_DATE_LAG = timedelta(days=1)
+
+
+def _surfaced_date(feed_date: datetime | None, published: datetime | None) -> datetime | None:
+    """When the feed surfaced a post, if that is not when it was written.
+
+    None without a feed date, or with one within FEED_DATE_LAG of `published`.
+    """
+    if feed_date is None:
+        return None
+    if published and abs(feed_date - published) < FEED_DATE_LAG:
+        return None
+    return feed_date
+
+
+def _stored_feed_date(row: dict) -> datetime | None:
+    """The feed date a row stores; None for rows from before the column.
+
+    The pipeline writes a full date or nothing, so anything else is a corrupt
+    row and raises.
+    """
     raw = (row.get("feed_date") or "").strip()
     if not raw:
         return None
-    try:
-        surfaced = datetime.fromisoformat(raw)
-    except ValueError:
-        return None
-    if published and abs((surfaced - published).total_seconds()) < 86400:
-        return None
-    return surfaced
+    return datetime.fromisoformat(raw)
 
 
 def _build_run_report(
@@ -1119,35 +1123,31 @@ def _build_run_report(
     cutoff = datetime.now() - timedelta(days=7)
 
     def to_report(ep: Episode) -> ReportEpisode:
-        row = db_by_id.get(ep.id, {})
-        is_briefing = ep.id.startswith("news-briefing-")
-        feed_name = row.get("feed_name", "")
-        author = (row.get("author") or "").strip() or feed_name
+        row = db_by_id[ep.id]     # the episodes were read from these rows
+        briefing = is_briefing(ep.id)
         return ReportEpisode(
             title=ep.title,
-            author="" if is_briefing else author,
-            feed_name=feed_name,
+            author="" if briefing else stored_author(row),
+            feed_name=row["feed_name"],
             link=ep.link or "",
-            audio_url=f"{base_url}/audio/{ep.audio_file}",
+            audio_url=audio_url(base_url, ep.audio_file),
             duration_seconds=ep.duration_seconds,
-            is_briefing=is_briefing,
-            briefing_text=(row.get("content") or "") if is_briefing else "",
+            is_briefing=briefing,
+            briefing_text=(row.get("content") or "") if briefing else "",
             bullets=_bullets_of(row),
             published=ep.published,
-            curated=_curated_date(row, ep.published),
-            fidelity=_fidelity_of(row),
+            surfaced=_surfaced_date(_stored_feed_date(row), ep.published),
+            fidelity=_json_dict(row, "fidelity"),
             writer=_json_dict(row, "writer"),
         )
 
     def waiting(row: dict) -> ReportEpisode:
         e: FeedEntry = row["entry"]
-        curated = (e.feed_date if e.feed_date
-                   and abs((e.feed_date - e.published).total_seconds()) >= 86400 else None)
         return ReportEpisode(
             title=e.title, author=e.author or e.feed_name, feed_name=e.feed_name,
             link=e.link or "", audio_url=episode_page_url(base_url, e.id),
             duration_seconds=0, bullets=row.get("bullets") or [], published=e.published,
-            curated=curated, pending=True,
+            surfaced=_surfaced_date(e.feed_date, e.published), pending=True,
         )
 
     ordered = sorted(episodes, key=lambda e: e.published, reverse=True)
@@ -1167,7 +1167,7 @@ def _build_run_report(
         ],
         dead_sources=sorted(set(dead_sources or [])),
         notices=notices.report(),
-        feed_url=f"{base_url}/feed.xml",
+        feed_url=feed_url(base_url),
         site_url=base_url,
         total_in_feed=len(episodes),
     )

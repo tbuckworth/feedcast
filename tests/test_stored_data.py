@@ -12,8 +12,8 @@ from datetime import datetime
 
 import pytest
 
-from src.main import _bullets_of, _fidelity_of, _json_dict, _stored_verdict
-from src.monitor import FeedEntry, FeedMonitor
+from src.main import _bullets_of, _json_dict, _stored_verdict
+from src.monitor import FeedEntry, FeedMonitor, entry_from_row
 
 # processed_posts as it was before any migration, with every other table
 # already in place, so opening the file needs only the ALTER TABLEs.
@@ -75,13 +75,13 @@ class TestJsonColumns:
 
     def test_old_rows_read_as_nothing_stored(self):
         row = {**self.ROW, "bullets": "", "fidelity": "", "writer": "", "maths": ""}
-        assert _bullets_of(row) == [] and _fidelity_of(row) is None
+        assert _bullets_of(row) == [] and _json_dict(row, "fidelity") is None
         assert _json_dict(row, "writer") is None
         assert _stored_verdict(row).source == "unrecorded"
 
     @pytest.mark.parametrize("read, column", [
         (_bullets_of, "bullets"),
-        (_fidelity_of, "fidelity"),
+        (lambda row: _json_dict(row, "fidelity"), "fidelity"),
         (lambda row: _json_dict(row, "writer"), "writer"),
         (_stored_verdict, "maths"),
     ])
@@ -101,3 +101,14 @@ class TestJsonColumns:
             conn.execute("UPDATE deferred_entries SET bullets = '[\"b1\"'")
         with pytest.raises(ValueError, match="'acx-1'.*bullets"):
             monitor.deferred_entries()
+
+
+def test_a_stored_post_reads_back_as_the_post(tmp_path):
+    monitor = FeedMonitor(tmp_path / "posts.db")
+    entry = FeedEntry(id="acx-1", title="Does Georgism Work?", link="https://acx/1",
+                      content="<p>Land.</p>", published=datetime(2026, 9, 24),
+                      author="Scott Alexander", feed_name="ACX")
+    monitor.mark_processed(entry, "a.mp3", content=entry.content)
+    assert entry_from_row(monitor.get_entry("acx-1")) == entry
+    # Rows written before the author column name the feed instead.
+    assert entry_from_row({**monitor.get_entry("acx-1"), "author": ""}).author == "ACX"

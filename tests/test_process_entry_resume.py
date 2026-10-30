@@ -71,3 +71,16 @@ def test_resume_from_a_stored_script_goes_straight_to_narration(tmp_path, routes
     assert tts.texts == ["kept script"]
     assert routes["openai"].asked() == ["kept script"]
     assert attempt.stage == "digest"
+
+
+@pytest.mark.parametrize("row, stage", [
+    ({"normalized_text": ""}, "process"),                                # failed_entries, no script
+    ({"normalized_text": "spoken"}, "tts"),                              # failed_entries, script kept
+    ({"processed_text": "written", "normalized_text": ""}, "normalize"),  # deferred, cleaned
+    ({"processed_text": "written", "normalized_text": "spoken"}, "tts"),  # deferred, normalised
+])
+def test_a_stored_row_resumes_at_the_first_stage_without_a_script(row, stage):
+    attempt = Attempt.from_row(row, number=2)
+    assert (attempt.stage, attempt.number) == (stage, 2)
+    assert attempt.processed_text == (row.get("processed_text") or None)
+    assert attempt.normalized_text == (row["normalized_text"] or None)

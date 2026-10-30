@@ -11,9 +11,9 @@ import pytest
 from src.audio import split_into_chunks
 from src.config import PodcastMetaConfig, load_config
 from src.feed import FeedGenerator
-from src.main import generate_episode_id
+from src.env import env_flag
 from src.html_text import clean_html, small_table_to_prose
-from src.monitor import FeedMonitor
+from src.monitor import FeedMonitor, briefing_id, episode_id, is_briefing
 from src.news import PREVIOUS_BRIEFINGS_HEADER, NewsAggregator
 from tests.conftest import FakeApi, feed_xml, needs_ffmpeg, silent_mp3
 
@@ -171,22 +171,48 @@ class TestFormatRfc822:
         assert result == "Wed, 15 Jan 2025 14:30:00 +0000"
 
 
-# --- generate_episode_id (src/main.py) ---
+# --- episode_id (src/monitor.py) ---
 
 
-class TestGenerateEpisodeId:
+class TestEpisodeId:
     def test_deterministic(self):
-        assert generate_episode_id("foo") == generate_episode_id("foo")
+        assert episode_id("foo") == episode_id("foo")
 
     def test_12_char_hex(self):
-        result = generate_episode_id("test-entry-id")
+        result = episode_id("test-entry-id")
         assert len(result) == 12
         assert all(c in "0123456789abcdef" for c in result)
 
     def test_matches_sha256_prefix(self):
         entry_id = "https://example.com/post/123"
         expected = hashlib.sha256(entry_id.encode()).hexdigest()[:12]
-        assert generate_episode_id(entry_id) == expected
+        assert episode_id(entry_id) == expected
+
+
+# --- briefing_id, is_briefing (src/monitor.py) ---
+
+
+def test_a_briefing_is_known_by_the_id_it_was_given():
+    assert briefing_id("2026-10-30") == "news-briefing-2026-10-30"
+    assert is_briefing(briefing_id("2026-10-30"))
+    assert not is_briefing("https://www.astralcodexten.com/p/news-briefing-2026-10-30")
+
+
+# --- env_flag (src/env.py) ---
+
+
+@pytest.mark.parametrize("value, on", [
+    ("true", True), (" TRUE ", True), ("1", True), ("Yes", True),
+    ("false", False), ("0", False), ("", False), ("on", False),
+])
+def test_env_flag_reads_true_1_and_yes_as_on(monkeypatch, value, on):
+    monkeypatch.setenv("FEEDCAST_FLAG", value)
+    assert env_flag("FEEDCAST_FLAG") is on
+
+
+def test_an_unset_env_flag_is_off(monkeypatch):
+    monkeypatch.delenv("FEEDCAST_FLAG", raising=False)
+    assert env_flag("FEEDCAST_FLAG") is False
 
 
 # --- _build_briefing_description (src/feed.py) ---

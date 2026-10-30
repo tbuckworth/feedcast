@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Optional
 
 from .config import PodcastMetaConfig
-from .monitor import episode_id
+from .monitor import episode_id, is_briefing, stored_author, transcript_path
 
 ITUNES_NS = "http://www.itunes.com/dtds/podcast-1.0.dtd"
 ATOM_NS = "http://www.w3.org/2005/Atom"
@@ -63,6 +63,21 @@ def _minutes(seconds: int) -> int:
 def _meta_line(*parts: str) -> str:
     """The grey line under an episode's title: the parts it has, between middle dots."""
     return " &middot; ".join(p for p in parts if p)
+
+
+def feed_url(base_url: str) -> str:
+    """Where the podcast feed is published."""
+    return f"{base_url}/feed.xml"
+
+
+def audio_url(base_url: str, audio_file: str) -> str:
+    """Where an episode's MP3 is published."""
+    return f"{base_url}/audio/{audio_file}"
+
+
+def transcript_url(base_url: str, entry_id: str) -> str:
+    """Where an episode's transcript is published (write_transcripts writes it)."""
+    return f"{base_url}/transcripts/{entry_id}.txt"
 
 
 def episode_page_url(base_url: str, entry_id: str) -> str:
@@ -258,7 +273,7 @@ class FeedGenerator:
 
         # Atom self-link
         atom_link = ET.SubElement(channel, f"{{{ATOM_NS}}}link")
-        atom_link.set("href", f"{self.config.base_url}/feed.xml")
+        atom_link.set("href", feed_url(self.config.base_url))
         atom_link.set("rel", "self")
         atom_link.set("type", "application/rss+xml")
 
@@ -320,9 +335,8 @@ class FeedGenerator:
                 ).text = episode.author
 
             # Enclosure (audio file)
-            audio_url = f"{self.config.base_url}/audio/{episode.audio_file}"
             enclosure = ET.SubElement(item, "enclosure")
-            enclosure.set("url", audio_url)
+            enclosure.set("url", audio_url(self.config.base_url, episode.audio_file))
             # Detect MIME type from file extension
             if episode.audio_file.endswith(".mp3"):
                 enclosure.set("type", "audio/mpeg")
@@ -351,11 +365,8 @@ class FeedGenerator:
         tree = ET.ElementTree(rss)
         tree.write(output_path, encoding="utf-8", xml_declaration=True)
 
-    def load_episodes_from_db(
-        self, db_entries: list[dict], audio_dir: Path,
-        transcript_dir: Optional[Path] = None,
-    ) -> list[Episode]:
-        """Load episodes from database entries."""
+    def load_episodes_from_db(self, db_entries: list[dict], audio_dir: Path) -> list[Episode]:
+        """Load episodes from database entries. Writes nothing (see write_transcripts)."""
         episodes = []
 
         for entry in db_entries:
@@ -373,13 +384,11 @@ class FeedGenerator:
             audio_bytes = self._get_file_size(audio_path)
             published = datetime.fromisoformat(entry["published"])
             content = entry.get("content", "")
-            is_briefing = entry["id"].startswith("news-briefing-")
-            # Rows predating the author column store '' — fall back to the feed
-            # name, which for the per-author feeds is already the person's name.
-            author = (entry.get("author") or "").strip() or entry["feed_name"]
+            briefing = is_briefing(entry["id"])
+            author = stored_author(entry)
 
             # Build description
-            if is_briefing and content:
+            if briefing and content:
                 description = self._build_briefing_description(entry["title"], content)
             elif author != entry["feed_name"]:
                 description = (
@@ -389,13 +398,9 @@ class FeedGenerator:
             else:
                 description = f"Audio version of {entry['title']} from {entry['feed_name']}"
 
-            # Write transcript and build URL for news briefings
-            transcript_url = None
-            if is_briefing and content and transcript_dir:
-                transcript_dir.mkdir(parents=True, exist_ok=True)
-                transcript_path = transcript_dir / f"{entry['id']}.txt"
-                transcript_path.write_text(content, encoding="utf-8")
-                transcript_url = f"{self.config.base_url}/transcripts/{entry['id']}.txt"
+            # A briefing's script is its transcript, published by write_transcripts.
+            transcript = (transcript_url(self.config.base_url, entry["id"])
+                          if briefing and content else None)
 
             episodes.append(
                 Episode(
@@ -406,10 +411,21 @@ class FeedGenerator:
                     published=published,
                     duration_seconds=duration,
                     link=entry.get("link"),
-                    transcript_url=transcript_url,
-                    author="" if is_briefing else author,
+                    transcript_url=transcript,
+                    author="" if briefing else author,
                     audio_bytes=audio_bytes,
                 )
             )
 
         return episodes
+
+    @staticmethod
+    def write_transcripts(episodes: list[Episode], db_entries: list[dict],
+                          transcript_dir: Path) -> None:
+        """Write the script behind each episode's transcript link: the briefings'."""
+        scripts = {row["id"]: row["content"] for row in db_entries}
+        for ep in episodes:
+            if ep.transcript_url:
+                transcript_dir.mkdir(parents=True, exist_ok=True)
+                transcript_path(transcript_dir, ep.id).write_text(scripts[ep.id],
+                                                                  encoding="utf-8")
