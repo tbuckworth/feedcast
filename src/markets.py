@@ -34,7 +34,8 @@ from datetime import datetime, timedelta, timezone
 
 import httpx
 
-from .llm import ROUTES, complete, fallback_log, native_anthropic
+from . import notices
+from .llm import ROUTES, complete, native_anthropic
 
 POLYMARKET = "https://gamma-api.polymarket.com"
 POLY_CLOB = "https://clob.polymarket.com"
@@ -553,7 +554,7 @@ async def find_cause(m: Market, now: datetime) -> dict | None:
     except Exception as e:  # noqa: BLE001 — no cause is a sentence, not a failure
         note = f"market cause lookup: {type(e).__name__}: {str(e)[:160]}"
         print(f"    {note}")
-        fallback_log.append(note)
+        notices.add(note)
         return None
     found = _json_object(text)
     if not found.get("found") or not found.get("summary"):
@@ -665,7 +666,7 @@ class MarketScout:
         except Exception as e:  # noqa: BLE001 — the briefing goes ahead without markets
             note = f"prediction markets skipped: {type(e).__name__}: {str(e)[:160]}"
             print(f"  {note}")
-            fallback_log.append(note)
+            notices.add(note)
             return MarketContext()
 
     async def _build(self, selected: list[dict]) -> MarketContext:

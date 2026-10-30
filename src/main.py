@@ -21,7 +21,7 @@ from .feed import Episode, FeedGenerator, episode_page_url
 from .fulltext import enrich_entry
 from .html_text import clean_html
 from .lesswrong import posted_at
-from . import llm
+from . import notices
 from .market_charts import charts_for_report
 from .markets import MarketRules, MarketScout
 from .mathiness import MathsVerdict, assess
@@ -99,7 +99,8 @@ async def process_entry(
     try:
         if attempt.normalized_text is None:
             attempt.stage = "normalize"
-            attempt.normalized_text = await normalizer.normalize_for_tts(attempt.processed_text)
+            attempt.normalized_text = await normalizer.normalize_for_tts(
+                attempt.processed_text, label=entry.title)
             print(f"    Normalized text: {len(attempt.normalized_text)} chars")
         else:
             print(f"    Resuming with the normalised script from an earlier attempt "
@@ -642,12 +643,7 @@ async def async_main(config_path: Path | None = None) -> None:
             new_episodes += 1
 
         print(f"  {new_episodes} new episodes created")
-        if normalizer.unnormalized_chars:
-            msg = (f"{normalizer.unnormalized_chars:,} chars were narrated as written "
-                   f"because the normaliser returned nothing for them")
-            print(f"  WARNING: {msg}")
-            if os.environ.get("GITHUB_ACTIONS"):
-                print(f"::warning title=Feedcast normaliser::{msg}")
+        _report_unnormalized(normalizer)
 
     # Park the deferred posts for the narration pass. One that could not even
     # be cleaned failed like any other entry and is queued the same way.
@@ -805,7 +801,7 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
         episodes=[item(title=f"Preview: {entry.title}", bullets=entry.bullets,
                        fidelity=entry.fidelity, writer=entry.writer),
                   item(title="Full script", briefing_text=entry.content)],
-        notices=llm.fallback_notices(), feed_url=f"{base}/feed.xml", site_url=base,
+        notices=notices.report(), feed_url=f"{base}/feed.xml", site_url=base,
         charts=charts,
     )
     _email(report, subject_tag="[Preview]", images=images)
@@ -913,6 +909,7 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
             monitor.clear_failure(entry.id)
             narrated += 1
         print(f"  {narrated} narrated")
+        _report_unnormalized(normalizer)
 
     transcript_dir = output_dir / "transcripts"
     episodes = feed_gen.load_episodes_from_db(monitor.get_processed_entries(),
@@ -923,7 +920,7 @@ async def _narrate_deferred(monitor: FeedMonitor, config: Config, feed_gen: Feed
     print(f"  Feed now has {len(episodes)} episodes")
     if failures:
         _email(RunReport(
-            failures=failures, notices=llm.fallback_notices(),
+            failures=failures, notices=notices.report(),
             feed_url=f"{config.podcast.base_url}/feed.xml", site_url=config.podcast.base_url,
             total_in_feed=len(episodes)), operator_only=True)
 
@@ -980,6 +977,22 @@ def _report_entry_failure(
         # Surfaces on the run's summary page, so a green run that lost an
         # episode is not green at a glance.
         print(f"::warning title=Feedcast entry failed::{entry.title} — {summary}{note}")
+
+
+def _report_unnormalized(normalizer: TextNormalizer) -> None:
+    """Name each episode with passages narrated as written, in both passes.
+
+    The log, the run's summary page and the email's notices each get a line:
+    a passage every model refused is read with "45%" as "forty-five percent
+    sign" at best, so someone should know which episode to listen to.
+    """
+    for title, chars in normalizer.unnormalized.items():
+        msg = (f"{title}: {chars:,} chars narrated as written because every "
+               f"normaliser model refused them")
+        print(f"  WARNING: {msg}")
+        notices.add(msg)
+        if os.environ.get("GITHUB_ACTIONS"):
+            print(f"::warning title=Feedcast normaliser::{msg}")
 
 
 def _email_always() -> bool:
@@ -1095,7 +1108,7 @@ def _build_run_report(
             for e, v in (maths_skipped or [])
         ],
         dead_sources=sorted(set(dead_sources or [])),
-        notices=llm.fallback_notices(),
+        notices=notices.report(),
         feed_url=f"{base_url}/feed.xml",
         site_url=base_url,
         total_in_feed=len(episodes),

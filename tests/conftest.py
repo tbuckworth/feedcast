@@ -1,20 +1,23 @@
-"""Shared test setup: fresh account state, and fake LLM routes."""
+"""Shared test setup: a fresh run's state, and fake LLM routes."""
 
 from types import SimpleNamespace
 
+import httpx
 import pytest
 
-from src import llm
+from src import llm, notices
 
 
 @pytest.fixture(autouse=True)
-def _fresh_accounts(monkeypatch):
-    """Each test starts with every account usable.
+def _fresh_run(monkeypatch):
+    """Each test starts as a new run: every account usable, no notices yet.
 
     `llm.dead_routes` remembers, for the rest of a run, an account that is out
-    of credit; across tests that memory would leak one test's failure into the next.
+    of credit, and `notices` every fallback and skip; across tests either would
+    leak one test's run into the next.
     """
     monkeypatch.setattr(llm, "dead_routes", {})
+    notices.reset()
 
 
 class FakeApi:
@@ -52,5 +55,11 @@ def routes(monkeypatch):
         return await fakes["anthropic"]._create(model=model, messages=messages,
                                                 max_tokens=max_tokens, effort=effort)
     monkeypatch.setattr(llm, "_anthropic_native", native)
-    monkeypatch.setattr(llm, "fallback_log", [])
     return fakes
+
+
+def provider_error(error_class, status: int, message: str):
+    """What an SDK raises for a provider's HTTP error: `error_class` is the
+    openai or anthropic exception for `status` (InternalServerError for 500...)."""
+    response = httpx.Response(status, request=httpx.Request("POST", "https://example.com"))
+    return error_class(message, response=response, body={"error": {"message": message}})

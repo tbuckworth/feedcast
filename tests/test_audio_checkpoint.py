@@ -8,6 +8,7 @@ import wave
 import pytest
 
 import src.audio as audio
+from src import notices
 from src.audio import AudioGenerator
 
 pytestmark = pytest.mark.skipif(shutil.which("ffmpeg") is None, reason="ffmpeg not installed")
@@ -70,12 +71,12 @@ def test_a_busy_model_moves_the_rest_of_the_run_to_the_next_one(tmp_path, monkey
         return _wav_bytes()
 
     monkeypatch.setattr(audio, "generate_with_deepinfra_async", fake_tts)
-    monkeypatch.setattr(audio.llm, "fallback_log", [])
     g = _generator()
     out = tmp_path / "abc123def456_title.mp3"
     assert asyncio.run(g.generate(TEXT, out, http_client=None)) == out
     assert models.count("ResembleAI/chatterbox-multilingual") == 3
-    assert len(audio.llm.fallback_log) == 1 and "multilingual" in audio.llm.fallback_log[0]
+    (note,) = notices.report()
+    assert "multilingual" in note
     # The next episode starts on multilingual and never tries turbo again.
     models.clear()
     asyncio.run(g.generate(TEXT, tmp_path / "fedcba654321_next.mp3", http_client=None))
@@ -87,6 +88,19 @@ def test_when_every_model_is_busy_the_chunk_fails(tmp_path, monkeypatch):
         raise audio.ModelBusy("busy")
 
     monkeypatch.setattr(audio, "generate_with_deepinfra_async", fake_tts)
-    monkeypatch.setattr(audio.llm, "fallback_log", [])
     with pytest.raises(RuntimeError, match="3 of 3 TTS chunks failed"):
         asyncio.run(_generator().generate(TEXT, tmp_path / "abc123def456_t.mp3", http_client=None))
+
+
+def test_an_empty_audio_chunk_fails_the_episode(tmp_path, monkeypatch):
+    # One chunk comes back as zero bytes. It used to be left out of the MP3
+    # without a word; now it fails like any other chunk, the rest kept for retry.
+    async def fake_tts(text, voice_id, api_key, http_client, *, model, save_debug_wav=None, tag=""):
+        return b"" if text.startswith("Sentence 1") else _wav_bytes()
+
+    monkeypatch.setattr(audio, "generate_with_deepinfra_async", fake_tts)
+    out = tmp_path / "abc123def456_title.mp3"
+    with pytest.raises(RuntimeError, match=r"1 of 3 TTS chunks failed \(2 kept for retry\)"
+                                           r".*chunk 2 of 3: no audio"):
+        asyncio.run(_generator().generate(TEXT, out, http_client=None))
+    assert not out.exists()

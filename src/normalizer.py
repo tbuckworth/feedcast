@@ -94,25 +94,32 @@ class TextNormalizer:
         # Words the voice says wrong, mapped to spellings it says right
         # (config.yaml `pronunciations`, each one measured).
         self.respellings = respellings or {}
-        # Characters passed through as written because the model returned
-        # nothing for them; the run log reports it so it does not go unnoticed.
-        self.unnormalized_chars = 0
+        # Characters passed through as written because every model refused
+        # them, per episode (the `label` of normalize_for_tts). One normaliser
+        # serves a run's entries concurrently, so a single count could not say
+        # which episode; main reports each in the log, the run summary and the email.
+        self.unnormalized: dict[str, int] = {}
 
-    async def normalize_for_tts(self, text: str) -> str:
-        """Normalize text for TTS: convert numbers, dates, symbols to spoken form."""
+    async def normalize_for_tts(self, text: str, *, label: str) -> str:
+        """Normalize text for TTS: convert numbers, dates, symbols to spoken form.
+
+        `label` names the episode, for counting what is narrated as written.
+        Normalising the same episode again (a retry) starts its count afresh.
+        """
+        self.unnormalized.pop(label, None)
         if not text.strip():
             return text
 
         # For long texts, split into paragraph batches to stay within token limits
         if len(text) > MAX_BATCH_CHARS:
-            spoken = await self._normalize_in_batches(text)
+            spoken = await self._normalize_in_batches(text, label)
         else:
-            spoken = await self._normalize_resilient(text.split("\n\n"))
+            spoken = await self._normalize_resilient(text.split("\n\n"), label)
         # In code, not in the prompt: certain, free, and still applied to a
         # passage the model refused and that is narrated as written.
         return respell(spoken, self.respellings)
 
-    async def _normalize_resilient(self, paragraphs: list[str]) -> str:
+    async def _normalize_resilient(self, paragraphs: list[str], label: str) -> str:
         """Normalise a batch, narrowing down to the paragraph the model won't take.
 
         An empty completion is almost always about one passage — a provider
@@ -130,20 +137,20 @@ class TextNormalizer:
                 mid = len(paragraphs) // 2
                 print(f"    Normaliser returned nothing for a {len(text):,}-char batch "
                       f"({e}); retrying as two halves")
-                left = await self._normalize_resilient(paragraphs[:mid])
-                right = await self._normalize_resilient(paragraphs[mid:])
+                left = await self._normalize_resilient(paragraphs[:mid], label)
+                right = await self._normalize_resilient(paragraphs[mid:], label)
                 return f"{left}\n\n{right}"
             sentences = _SENTENCE_BREAK.split(text)
             if len(sentences) > 1 and len(text) > MIN_FALLBACK_CHARS:
                 mid = len(sentences) // 2
                 print(f"    Normaliser returned nothing for a {len(text):,}-char passage "
                       f"({e}); retrying as two halves at a sentence boundary")
-                left = await self._normalize_resilient([" ".join(sentences[:mid])])
-                right = await self._normalize_resilient([" ".join(sentences[mid:])])
+                left = await self._normalize_resilient([" ".join(sentences[:mid])], label)
+                right = await self._normalize_resilient([" ".join(sentences[mid:])], label)
                 return f"{left} {right}"
             print(f"    WARNING: normaliser returned nothing for a {len(text):,}-char "
-                  f"passage ({e}); narrating it un-normalised: {text[:80]!r}")
-            self.unnormalized_chars += len(text)
+                  f"passage of {label} ({e}); narrating it un-normalised: {text[:80]!r}")
+            self.unnormalized[label] = self.unnormalized.get(label, 0) + len(text)
             return text
 
     async def _normalize_chunk(self, text: str) -> str:
@@ -210,7 +217,7 @@ class TextNormalizer:
                 out.append(piece)
         return out
 
-    async def _normalize_in_batches(self, text: str) -> str:
+    async def _normalize_in_batches(self, text: str, label: str) -> str:
         """Split long text into paragraph batches and normalize each."""
         paragraphs = [
             piece
@@ -239,6 +246,6 @@ class TextNormalizer:
 
         normalized_parts = []
         for batch in batches:
-            normalized_parts.append(await self._normalize_resilient(batch))
+            normalized_parts.append(await self._normalize_resilient(batch, label))
 
         return "\n\n".join(normalized_parts)

@@ -1,8 +1,10 @@
 """LLM roles, routes and fallbacks. Every model call in the pipeline goes through `complete()`.
 
 Four roles, each an ordered list of (route, model) targets. A call tries the
-first target; if the request fails or comes back empty it moves to the next,
-logs the switch, and the run report says which one served. The routes are the
+first target; if the provider fails or the reply comes back empty it moves to
+the next, logs the switch, and the run report says which one served. A request
+the provider rejects as malformed, or an error in our own code, raises instead
+(`rejected_request`): the next target would fail the same way. The routes are the
 three API accounts the pipeline can bill: OpenRouter (the default for the
 Anthropic models), OpenAI direct, and Anthropic direct. All three speak the
 OpenAI chat-completions shape, so one SDK covers them; the per-route quirks
@@ -47,13 +49,17 @@ working one instead of failing first (`account_failure`).
 
 import os
 import re
-from collections import Counter
 from collections.abc import Callable
 from dataclasses import dataclass
 from types import SimpleNamespace
 
+import anthropic
+import httpx
+import openai
 from anthropic import AsyncAnthropic
 from openai import AsyncOpenAI
+
+from . import notices
 
 
 @dataclass(frozen=True)
@@ -163,12 +169,9 @@ MODEL_CHECKER = ROLES["checker"][0].model
 # for ~30 min. Flash calls finish in well under a minute; bound them.
 LLM_TIMEOUT_SECONDS = float(os.environ.get("LLM_TIMEOUT_SECONDS", "180"))
 
-# Every switch to a backup target this run, in order, for the run report.
-# Mutated in place, never rebound: other modules import the list itself.
-fallback_log: list[str] = []
-
 # Routes whose account failed in a way that lasts the run (out of credit, bad
-# key), with the error. Later calls skip every target on them.
+# key), with the error. Later calls skip every target on them. Each switch to a
+# backup target goes to `notices`, and a dead account heads that list.
 dead_routes: dict[str, Exception] = {}
 
 # What an account-level refusal says, as opposed to a model-level one (OpenRouter's
@@ -188,18 +191,43 @@ def account_failure(e: BaseException) -> bool:
     return status in (400, 403, 429) and bool(_ACCOUNT_WORDING.search(str(e)))
 
 
-def fallback_notices() -> list[str]:
-    """The run's fallback log for the email: dead accounts first, repeats collapsed.
+# Failures that are the provider's, so worth trying on the next target. Both
+# SDKs raise an APIError subclass for every HTTP status and for connection
+# failures and timeouts; httpx's transport errors are what escapes when one
+# slips past them. Anything else (a TypeError, a KeyError) is our own code.
+PROVIDER_ERRORS = (openai.APIError, anthropic.APIError, httpx.TransportError)
 
-    One dead account touches every call on it, so without collapsing, a long
-    post's normalisation alone would print a dozen identical lines.
+# What a provider says when its content policy refuses the prompt, rather than
+# its shape: OpenAI answers with a 400 "invalid_prompt ... flagged as potentially
+# violating our usage policy". Another model may well take the passage.
+_REFUSAL_WORDING = re.compile(
+    r"invalid.?prompt|usage polic|content.?(polic|filter|management)", re.I)
+
+
+def rejected_request(e: BaseException) -> bool:
+    """Whether `e` is the provider rejecting the request we built: our bug, not their outage.
+
+    A 400, 413 or 422 means the request itself is wrong: a parameter the model
+    does not take, a value out of range, a prompt too long. The next target
+    would get the same request, and falling through hides the bug behind a
+    fallback notice: Sonnet 5's 400 on the checker's `temperature=0` sent every
+    check to Gemini 3 Flash from 2026-09-22 to -27. Two kinds of 400 are the
+    provider's after all, and still fall through: an account out of credit
+    (`account_failure`; Anthropic says so with a 400) and a prompt the
+    provider's content policy refuses. Every other status (401-404, 408, 429,
+    5xx) is the provider's state, OpenRouter's Claude-only 403 included.
     """
-    heads = [f"{ROUTES[name].name} account unavailable for the rest of the run "
-             f"after: {type(e).__name__}: {str(e)[:200]}"
-             for name, e in dead_routes.items()]
-    counts = Counter(fallback_log)
-    return heads + [note if counts[note] == 1 else f"{note} ({counts[note]} calls)"
-                    for note in dict.fromkeys(fallback_log)]
+    if getattr(e, "status_code", None) not in (400, 413, 422):
+        return False
+    return not (account_failure(e) or _REFUSAL_WORDING.search(str(e)))
+
+
+def _mark_dead(route: Route, e: Exception) -> None:
+    """Skip `route` for the rest of the run; the first call to find out heads the notices."""
+    if route.name not in dead_routes:
+        dead_routes[route.name] = e
+        notices.add(f"{route.name} account unavailable for the rest of the run "
+                    f"after: {type(e).__name__}: {str(e)[:200]}", headline=True)
 
 
 def model_name(model: str) -> str:
@@ -398,7 +426,10 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
     unusable reply is treated like an empty one: the next target is tried.
 
     Raises the last error when every target fails, and EmptyCompletion when
-    the text is missing, so callers keep their existing handling.
+    the text is missing, so callers keep their existing handling. Only a
+    provider's failure moves on to the next target (`PROVIDER_ERRORS`); a
+    request it rejects as malformed (`rejected_request`) and any other
+    exception, a bug in our own code, raise at once.
     """
     targets = ROLES[role]
     where = label or role
@@ -436,23 +467,29 @@ async def complete(role: str, messages: list[dict], *, max_tokens: int, label: s
                 # The caller will retry from the top; record any switch that
                 # happened on the way here so it still reaches the report.
                 if tried:
-                    fallback_log.append(f"{where}: reached {target.label} (empty) after " + "; ".join(tried))
+                    notices.add(f"{where}: reached {target.label} (empty) after " + "; ".join(tried))
                 raise
             last = e
             tried.append(f"{target.label}: {type(e).__name__}: {str(e)[:160]}")
             print(f"    {where}: {tried[-1]}")
             continue
-        except Exception as e:  # noqa: BLE001 — any failure means try the next target
+        except PROVIDER_ERRORS as e:
+            if rejected_request(e):
+                print(f"    {where}: {target.label} rejected the request, not trying a backup: "
+                      f"{type(e).__name__}: {str(e)[:160]}")
+                if tried:
+                    notices.add(f"{where}: reached {target.label} (rejected) after " + "; ".join(tried))
+                raise
             last = e
             tried.append(f"{target.label}: {type(e).__name__}: {str(e)[:160]}")
             print(f"    {where}: {tried[-1]}")
             if account_failure(e):
-                dead_routes.setdefault(route.name, e)
+                _mark_dead(route, e)
                 print(f"    {where}: {route.name} account unusable; skipping it for the rest of the run")
             continue
         if tried:
             note = f"{where}: served by {target.label} after " + "; ".join(tried)
-            fallback_log.append(note)
+            notices.add(note)
             print(f"    {note}")
         return done
     if last is None:

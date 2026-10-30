@@ -26,6 +26,7 @@ episode, whatever mode the episode was processed in.
 
 import re
 
+from . import notices
 from .llm import complete
 
 # ~30k tokens. Nothing observed comes close (the largest episode in a fortnight
@@ -171,8 +172,17 @@ def parse_bullets(raw: str, allowed_urls: set[str] | None = None) -> list:
 
 
 def build_messages(text: str, is_briefing: bool = False,
-                   sources: list[dict] | None = None) -> tuple[list[dict], set[str]]:
-    """The exact request, so a test harness can measure it."""
+                   sources: list[dict] | None = None,
+                   label: str = "") -> tuple[list[dict], set[str]]:
+    """The exact request, so a test harness can measure it.
+
+    A script over MAX_DIGEST_CHARS is cut, and the log says so: bullets from
+    part of an episode must not pass for a digest of all of it.
+    """
+    if len(text) > MAX_DIGEST_CHARS:
+        print(f"    WARNING: script truncated for the digest of {label or 'episode'} "
+              f"({len(text):,} > {MAX_DIGEST_CHARS:,} chars) — the bullets will not "
+              f"cover the whole episode")
     system = PROMPT.format(n="4 to 6" if is_briefing else "3 to 5")
     allowed = {s["url"] for s in (sources or []) if s.get("url")}
     if allowed:
@@ -192,7 +202,7 @@ async def to_bullets(text: str, is_briefing: bool = False, client=None,
     """Digest one episode's script into two-level bullets, linked where possible."""
     if not text or not text.strip():
         return []
-    messages, allowed = build_messages(text, is_briefing, sources)
+    messages, allowed = build_messages(text, is_briefing, sources, label)
     done = await complete("bullets", messages, max_tokens=6000, client=client,
                           label=f"digest ({label})" if label else "digest")
     return parse_bullets(done.text, allowed)
@@ -200,13 +210,17 @@ async def to_bullets(text: str, is_briefing: bool = False, client=None,
 
 async def safe_bullets(text: str, is_briefing: bool = False, client=None,
                        label: str = "", sources: list[dict] | None = None) -> list:
-    """to_bullets with the failure swallowed and logged.
+    """to_bullets with the failure logged and reported, not raised.
 
     A digest is a nicety on top of an episode that already exists. It must
-    never be the reason a run fails or a finished MP3 is thrown away.
+    never be the reason a run fails or a finished MP3 is thrown away, but the
+    email says it failed (in its notices), so an episode with no bullets, or a
+    briefing shown as its full text, does not pass for a digest that worked.
     """
     try:
         return await to_bullets(text, is_briefing, client, sources, label)
-    except Exception as exc:
-        print(f"    Digest failed for {label or 'episode'}: {exc!r}")
+    except Exception as exc:  # noqa: BLE001 — reported in the email, never fails the episode
+        note = f"Digest failed for {label or 'episode'}: {type(exc).__name__}: {str(exc)[:160]}"
+        print(f"    {note}")
+        notices.add(note)
         return []

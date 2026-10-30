@@ -11,6 +11,7 @@ import pytest
 
 import src.main as main
 import src.markets as markets
+from src import notices
 from src.config import load_config
 from src.email_report import (ChartNote, ReportEpisode, RunReport, build_html, send_report)
 from src.market_charts import charts_for_report
@@ -171,10 +172,8 @@ class TestWriterInput:
         async def boom(self, selected):
             raise RuntimeError("Polymarket is down")
         monkeypatch.setattr(MarketScout, "_build", boom)
-        log = []
-        monkeypatch.setattr(markets, "fallback_log", log)
         ctx = asyncio.run(MarketScout(rules=RULES, polymarket_tags=["ai"]).build([]))
-        assert not ctx and "prediction markets skipped" in log[0]
+        assert not ctx and "prediction markets skipped" in notices.report()[0]
 
 
 class TestReportedMoves:

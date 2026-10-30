@@ -8,28 +8,22 @@ and an ACX review all failed at normalisation and the day had no episodes.
 
 import asyncio
 from datetime import datetime
-import httpx
 import pytest
 from openai import APIStatusError, BadRequestError, PermissionDeniedError, RateLimitError
 
-from src import llm
+from src import llm, notices
 from src.email_report import ReportEpisode, RunReport, build_html, build_text, writer_line
 from src.feed import Episode
 from src.llm import ROLES, Completion, Target, account_failure, complete, model_name
 from src.main import _build_run_report
 from src.monitor import FeedEntry, FeedMonitor
 from src.normalizer import MAX_OUTPUT_TOKENS, NORMALIZE_PROMPT, TextNormalizer
-from tests.conftest import FakeApi
+from tests.conftest import FakeApi, provider_error
 
 MSGS = [{"role": "user", "content": "hi"}]
 
 
-def _error(cls, status, message):
-    response = httpx.Response(status, request=httpx.Request("POST", "https://example.com"))
-    return cls(message, response=response, body={"error": {"message": message}})
-
-
-OUT_OF_CREDIT = _error(APIStatusError, 402,
+OUT_OF_CREDIT = provider_error(APIStatusError, 402,
                        "Error code: 402 - {'error': {'message': 'Insufficient credits. Add more "
                        "using https://openrouter.ai/settings/credits', 'code': 402}}")
 
@@ -38,16 +32,16 @@ OUT_OF_CREDIT = _error(APIStatusError, 402,
 
 @pytest.mark.parametrize("error, dead", [
     (OUT_OF_CREDIT, True),                                                      # OpenRouter, 10 Oct
-    (_error(BadRequestError, 400, "Your credit balance is too low to access the "
+    (provider_error(BadRequestError, 400, "Your credit balance is too low to access the "
                                   "Anthropic API"), True),                      # Anthropic, 19 Sep
-    (_error(RateLimitError, 429, "You exceeded your current quota, please check "
+    (provider_error(RateLimitError, 429, "You exceeded your current quota, please check "
                                  "your plan and billing details"), True),       # OpenAI
-    (_error(APIStatusError, 401, "invalid x-api-key"), True),
-    (_error(PermissionDeniedError, 403, "Key limit exceeded (monthly limit)"), True),
+    (provider_error(APIStatusError, 401, "invalid x-api-key"), True),
+    (provider_error(PermissionDeniedError, 403, "Key limit exceeded (monthly limit)"), True),
     # Model-level: OpenRouter refused Claude only, and Gemini on the same key worked.
-    (_error(PermissionDeniedError, 403, "violation of provider Terms Of Service"), False),
-    (_error(RateLimitError, 429, "Rate limit exceeded, retry in 2s"), False),   # passes
-    (_error(BadRequestError, 400, "max_tokens is too large"), False),
+    (provider_error(PermissionDeniedError, 403, "violation of provider Terms Of Service"), False),
+    (provider_error(RateLimitError, 429, "Rate limit exceeded, retry in 2s"), False),   # passes
+    (provider_error(BadRequestError, 400, "max_tokens is too large"), False),
     (RuntimeError("connection reset"), False),
 ])
 def test_account_failure_tells_a_dead_account_from_a_bad_moment(error, dead):
@@ -60,19 +54,19 @@ def test_normaliser_survives_openrouter_running_out_of_credit(routes):
     routes["openrouter"] = FakeApi([OUT_OF_CREDIT])
     routes["anthropic"] = FakeApi(["forty-five percent", "twenty twenty-six"])
     n = TextNormalizer()
-    assert asyncio.run(n.normalize_for_tts("45%")) == "forty-five percent"
-    assert asyncio.run(n.normalize_for_tts("2026")) == "twenty twenty-six"
+    assert asyncio.run(n.normalize_for_tts("45%", label="ep")) == "forty-five percent"
+    assert asyncio.run(n.normalize_for_tts("2026", label="ep")) == "twenty twenty-six"
     # Asked once; after a 402 the account is not asked again this run.
     assert len(routes["openrouter"].calls) == 1
     assert [c["model"] for c in routes["anthropic"].calls] == ["claude-haiku-5-5"] * 2
-    assert n.unnormalized_chars == 0
+    assert n.unnormalized == {}
 
 
 def test_normaliser_reaches_gpt_when_anthropic_is_out_too(routes):
     routes["openrouter"] = FakeApi([OUT_OF_CREDIT])
-    routes["anthropic"] = FakeApi([_error(BadRequestError, 400, "Your credit balance is too low")])
+    routes["anthropic"] = FakeApi([provider_error(BadRequestError, 400, "Your credit balance is too low")])
     routes["openai"] = FakeApi(["forty-five percent"])
-    assert asyncio.run(TextNormalizer().normalize_for_tts("45%")) == "forty-five percent"
+    assert asyncio.run(TextNormalizer().normalize_for_tts("45%", label="ep")) == "forty-five percent"
     call = routes["openai"].calls[0]
     assert call["model"] == "gpt-6.1-sol"
     assert call["reasoning_effort"] == "low" and call["max_completion_tokens"] == MAX_OUTPUT_TOKENS
@@ -83,9 +77,9 @@ def test_a_passage_gemini_will_not_take_goes_to_the_next_model(routes):
     routes["openrouter"] = FakeApi(["<no-choices>"])
     routes["anthropic"] = FakeApi(["Prohibited-sounding forty-five percent."])
     n = TextNormalizer()
-    assert asyncio.run(n.normalize_for_tts("Prohibited-sounding 45%.")) \
+    assert asyncio.run(n.normalize_for_tts("Prohibited-sounding 45%.", label="ep")) \
         == "Prohibited-sounding forty-five percent."
-    assert n.unnormalized_chars == 0
+    assert n.unnormalized == {}
     # A refusal is about the passage, not the account.
     assert llm.dead_routes == {}
 
@@ -102,8 +96,8 @@ def test_a_reply_that_lost_text_goes_to_the_next_model(routes):
     routes["openrouter"] = FakeApi(["January first, ten duotrigintillion"])
     routes["anthropic"] = FakeApi([COT])
     n = TextNormalizer()
-    assert asyncio.run(n.normalize_for_tts(COT)) == COT
-    assert "text was lost" in llm.fallback_log[0]
+    assert asyncio.run(n.normalize_for_tts(COT, label="ep")) == COT
+    assert "text was lost" in notices.report()[0]
     assert llm.dead_routes == {}                       # the passage, not the account
 
 
@@ -112,23 +106,23 @@ def test_a_reply_cut_off_by_a_provider_error_goes_to_the_next_model(routes):
     # "error"; only "length" was checked, so the fragment would have been read.
     routes["openrouter"] = FakeApi([(COT[:int(len(COT) * 0.88)], "error")])
     routes["anthropic"] = FakeApi([COT])
-    assert asyncio.run(TextNormalizer().normalize_for_tts(COT)) == COT
-    assert "cut off by a provider error" in llm.fallback_log[0]
+    assert asyncio.run(TextNormalizer().normalize_for_tts(COT, label="ep")) == COT
+    assert "cut off by a provider error" in notices.report()[0]
 
 
 def test_when_every_model_loses_text_the_passage_is_read_as_written(routes):
     for route in ("openrouter", "anthropic", "openai"):
         routes[route] = FakeApi(["I'm not able to normalise that."])
     n = TextNormalizer()
-    assert asyncio.run(n.normalize_for_tts(COT)) == COT
-    assert n.unnormalized_chars == len(COT)
+    assert asyncio.run(n.normalize_for_tts(COT, label="ep")) == COT
+    assert n.unnormalized == {"ep": len(COT)}
 
 
 def test_normalising_lengthens_text_and_that_is_not_lost_text(routes):
     routes["openrouter"] = FakeApi(["forty-five percent of one point five million dollars"])
-    assert asyncio.run(TextNormalizer().normalize_for_tts("45% of $1.5M")) \
+    assert asyncio.run(TextNormalizer().normalize_for_tts("45% of $1.5M", label="ep")) \
         == "forty-five percent of one point five million dollars"
-    assert llm.fallback_log == []
+    assert notices.report() == []
 
 
 def test_the_prompt_says_the_text_is_not_addressed_to_the_model():
@@ -142,19 +136,19 @@ def test_a_dead_account_is_one_headline_and_repeats_collapse(routes):
     for text in ("one", "two", "three"):
         asyncio.run(complete("normalizer", MSGS + [{"role": "user", "content": text}],
                              max_tokens=50, label="normaliser"))
-    notices = llm.fallback_notices()
-    assert notices[0].startswith("openrouter account unavailable for the rest of the run")
-    assert "Insufficient credits" in notices[0]
-    assert "402" in notices[1]                      # the call that found out
-    assert notices[2].endswith("skipped, openrouter account unavailable this run (2 calls)")
-    assert len(notices) == 3
+    report = notices.report()
+    assert report[0].startswith("openrouter account unavailable for the rest of the run")
+    assert "Insufficient credits" in report[0]
+    assert "402" in report[1]                       # the call that found out
+    assert report[2].endswith("skipped, openrouter account unavailable this run (2 calls)")
+    assert len(report) == 3
 
 
 def test_every_account_dead_raises_the_original_error(routes):
     routes["openrouter"] = FakeApi([OUT_OF_CREDIT])
-    no_credit = _error(BadRequestError, 400, "Your credit balance is too low")
+    no_credit = provider_error(BadRequestError, 400, "Your credit balance is too low")
     routes["anthropic"] = FakeApi([no_credit])
-    quota = _error(RateLimitError, 429, "You exceeded your current quota")
+    quota = provider_error(RateLimitError, 429, "You exceeded your current quota")
     routes["openai"] = FakeApi([quota])
     with pytest.raises(RateLimitError):
         asyncio.run(complete("normalizer", MSGS, max_tokens=50))

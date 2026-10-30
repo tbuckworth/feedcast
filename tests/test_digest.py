@@ -3,8 +3,10 @@
 import asyncio
 from datetime import datetime
 
-from src.digest import MAX_BULLETS, parse_bullets, safe_bullets
+from src import notices
+from src.digest import MAX_BULLETS, MAX_DIGEST_CHARS, parse_bullets, safe_bullets, to_bullets
 from src.email_report import ReportEpisode, RunReport, build_html, build_text
+from tests.conftest import FakeApi
 
 
 def test_strips_bullet_furniture_the_model_adds_anyway():
@@ -45,24 +47,39 @@ def test_overlong_line_is_dropped_not_truncated():
     assert parse_bullets("x " * 400) == []
 
 
-def test_a_failed_digest_never_propagates():
-    class Boom:
-        class chat:
-            class completions:
-                @staticmethod
-                async def create(**kw):
-                    raise RuntimeError("upstream 500")
-
-    assert asyncio.run(safe_bullets("some text", client=Boom(), label="ep")) == []
+def test_a_failed_digest_never_propagates_and_the_email_says_so():
+    # The model API is the boundary faked here.
+    boom = FakeApi([RuntimeError("upstream 500")])
+    assert asyncio.run(safe_bullets("some text", client=boom, label="AI #182")) == []
+    assert notices.report() == ["Digest failed for AI #182: RuntimeError: upstream 500"]
+    html = build_html(_report(notes=notices.report()), datetime(2026, 10, 30))
+    assert "Digest failed for AI #182: RuntimeError: upstream 500" in html
 
 
-def _report(**kw):
+def test_a_script_cut_for_the_digest_says_so(capsys):
+    reply = FakeApi(["- A headline claim long enough to be kept as a bullet."])
+    long_script = "word " * (MAX_DIGEST_CHARS // 5 + 100)
+    bullets = asyncio.run(to_bullets(long_script, client=reply, label="Big post"))
+    assert len(bullets) == 1
+    assert len(reply.calls[0]["messages"][1]["content"]) == MAX_DIGEST_CHARS
+    out = capsys.readouterr().out
+    assert "WARNING" in out and "Big post" in out and f"{MAX_DIGEST_CHARS:,}" in out
+
+
+def test_a_script_within_the_ceiling_is_sent_whole_without_a_warning(capsys):
+    reply = FakeApi(["- A headline claim long enough to be kept as a bullet."])
+    asyncio.run(to_bullets("A short script.", client=reply, label="Small post"))
+    assert reply.calls[0]["messages"][1]["content"] == "A short script."
+    assert "WARNING" not in capsys.readouterr().out
+
+
+def _report(notes=(), **kw):
     ep = ReportEpisode(
         title="AI #182", author="Zvi", feed_name="Zvi Mowshowitz",
         link="https://example.com/x", audio_url="https://example.com/a.mp3",
         duration_seconds=600, **kw,
     )
-    return RunReport(episodes=[ep], feed_url="f", site_url="s")
+    return RunReport(episodes=[ep], feed_url="f", site_url="s", notices=list(notes))
 
 
 def test_briefing_bullets_replace_the_full_text():

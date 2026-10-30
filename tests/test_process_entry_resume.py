@@ -23,8 +23,8 @@ class Processor:
 
 class Normalizer:
     calls = 0
-    unnormalized_chars = 0
-    async def normalize_for_tts(self, text):
+    unnormalized: dict[str, int] = {}
+    async def normalize_for_tts(self, text, *, label):
         Normalizer.calls += 1
         return "Script with forty-five percent."
 

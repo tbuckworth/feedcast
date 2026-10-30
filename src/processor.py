@@ -86,15 +86,27 @@ class ContentProcessor:
 
         return str(soup)
 
+    async def clean_text(self, entry: FeedEntry) -> str:
+        """The post as plain text, its tables turned to prose. Raises on an empty post.
+
+        A table of more than three data rows is turned to prose by the writer
+        model (process_tables), so this can make a model call.
+
+        Narrating nothing would publish an episode that is only its intro and
+        outro, so an empty post fails like any other entry: the run reports
+        it, and a feed entry is queued for a retry.
+        """
+        text = clean_html(await self.process_tables(entry.content))
+        if not text.strip():
+            raise ValueError(f"no content to narrate in {entry.title!r}: "
+                             f"the post is empty once cleaned")
+        return text
+
     async def summarize(
         self, entry: FeedEntry, prompt: Optional[str] = None
     ) -> str:
         """Summarize content with the writer role."""
-        content_with_tables = await self.process_tables(entry.content)
-        clean_content = clean_html(content_with_tables)
-
-        if not clean_content:
-            return f"No content available for: {entry.title}"
+        clean_content = await self.clean_text(entry)
 
         system_prompt = prompt or self.default_prompt
 
@@ -143,8 +155,7 @@ Content:
 
     async def process_verbatim(self, entry: FeedEntry) -> str:
         """Process content for verbatim reading - clean and format for TTS."""
-        content_with_tables = await self.process_tables(entry.content)
-        clean_content = clean_html(content_with_tables)
+        clean_content = await self.clean_text(entry)
 
         # Add intro
         intro = (f"{spoken_title(entry.title, entry.author)}. By {entry.author}. "
@@ -169,8 +180,7 @@ Content:
 
         if is_news_briefing and mode == "verbatim":
             # News briefings: the synthesis already opens with the date, skip redundant intro
-            content_with_tables = await self.process_tables(entry.content)
-            text = clean_html(content_with_tables)
+            text = await self.clean_text(entry)
         elif mode == "summarize":
             summary = await self.summarize(entry, prompt)
             # Add intro for context

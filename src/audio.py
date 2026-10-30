@@ -10,7 +10,7 @@ from pathlib import Path
 
 import httpx
 
-from . import llm
+from . import notices
 
 MAX_CHUNK_CHARS = 500  # Tested: 650 works but 500 has better pacing
 
@@ -244,7 +244,7 @@ class AudioGenerator:
         note = (f"TTS: {TTS_MODELS[failed][0]} busy ({error}); "
                 f"rest of run on {TTS_MODELS[self._model][0]}")
         print(f"    {note}")
-        llm.fallback_log.append(note)
+        notices.add(note)
 
     def _sanitize_filename(self, text: str) -> str:
         safe = re.sub(r"[^a-zA-Z0-9\s-]", "", text[:50])
@@ -281,7 +281,7 @@ class AudioGenerator:
             print(f"    {tag}Reusing {len(cached)} chunk(s) synthesised by an earlier attempt")
 
         with tempfile.TemporaryDirectory() as tmpdir:
-            async def gen_chunk(i: int, chunk: str) -> Path | None:
+            async def gen_chunk(i: int, chunk: str) -> Path:
                 chunk_path = work_dir / f"chunk_{i:03d}.wav"
                 if chunk_path.name in cached:
                     return chunk_path
@@ -301,7 +301,9 @@ class AudioGenerator:
                                 raise
                             self._switch_model(used, e)
                     if not audio_bytes:
-                        return None
+                        # Leaving it out would publish an episode with a gap.
+                        raise RuntimeError(f"chunk {i+1} of {len(chunks)}: no audio "
+                                           f"in DeepInfra's reply")
                     chunk_path.write_bytes(audio_bytes)
                     return chunk_path
 

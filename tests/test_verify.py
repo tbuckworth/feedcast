@@ -1,10 +1,12 @@
 """The second-model source check: parsing, the single revision pass, and the email line."""
 
 import asyncio
+from datetime import datetime
 from types import SimpleNamespace
 
 import pytest
 
+from src.email_report import ReportEpisode, RunReport, build_html, build_text
 from src.llm import MODEL_CHECKER, pinned_target
 from src.verify import (Fidelity, fidelity_markdown,
                         fidelity_summary, parse_flags, verify_script)
@@ -85,11 +87,33 @@ def test_low_severity_only_does_not_revise():
     assert script == "orig" and fid.status == "clean" and len(fid.flags) == 1 and len(client.calls) == 1
 
 
-def test_suspiciously_short_revision_is_rejected():
+def test_suspiciously_short_revision_is_rejected(capsys):
     client = FakeClient([FLAGGED, "Sorry.", CLEAN])
     script, fid = asyncio.run(verify_script("A long original script " * 20, "src", writer_system_prompt="s", client=client))
     assert script.startswith("A long original") and fid.status == "flagged" and "rejected" in fid.note
     assert len(client.calls) == 2  # no recheck of a rejected revision
+    assert fid.note in capsys.readouterr().out
+
+
+def test_a_failed_revision_keeps_the_flags_already_found():
+    # The draft ships as written, so the email must still say what is wrong with it.
+    client = FakeClient([FLAGGED, RuntimeError("writer down")])
+    original = "Zvi argues the agents were not capable. " * 3
+    script, fid = asyncio.run(verify_script(original, "src", writer_system_prompt="s", client=client))
+    assert script == original and fid.status == "flagged" and not fid.revised
+    assert [f["verdict"] for f in fid.material] == ["distorted"]
+    assert "revision failed" in fid.note and "writer down" in fid.note
+    assert fidelity_summary(fid.to_dict()) == "Checked against source: 1 issue flagged, not corrected"
+
+
+def test_a_failed_recheck_keeps_the_flags_and_ships_the_draft():
+    revised_text = "Zvi quotes Dwarkesh saying the agents had the access but did not use it. " * 3
+    client = FakeClient([FLAGGED, revised_text, RuntimeError("checker down")])
+    original = "Zvi argues the agents were not capable. " * 3
+    script, fid = asyncio.run(verify_script(original, "src", writer_system_prompt="s", client=client))
+    assert script == original and fid.status == "flagged" and not fid.revised
+    assert len(fid.material) == 1
+    assert "re-check of the revision failed" in fid.note and "checker down" in fid.note
 
 
 def test_checker_failure_never_raises():
@@ -101,7 +125,7 @@ def test_checker_failure_never_raises():
 def test_an_empty_first_check_retries_with_reasoning_off_not_a_sibling_model(monkeypatch):
     # Route-level: the first attempt's empty reply must not fall through to
     # Sonnet 4.6 and be reported as a model fallback.
-    from src import llm
+    from src import llm, notices
     from types import SimpleNamespace as NS
 
     class Api:
@@ -117,18 +141,18 @@ def test_an_empty_first_check_retries_with_reasoning_off_not_a_sibling_model(mon
 
     api = Api([None, CLEAN])
     monkeypatch.setattr(llm, "client_for", lambda route: api if route.name == "anthropic" else None)
-    monkeypatch.setattr(llm, "fallback_log", [])
     script, fid = asyncio.run(verify_script("s", "src", writer_system_prompt="p"))
     assert fid.status == "clean"
     # The same primary twice (the compat endpoint takes no reasoning setting,
     # so "off" sends nothing extra), never a sibling model.
     assert [c["model"] for c in api.calls] == [MODEL_CHECKER, MODEL_CHECKER]
-    assert llm.fallback_log == []
+    assert notices.report() == []
 
 
 def test_email_line():
     assert fidelity_summary(None) == ""
-    assert fidelity_summary({"status": "skipped"}) == ""
+    assert fidelity_summary({"status": "skipped", "note": "RuntimeError('openrouter down')"}) == (
+        "Fidelity check failed: RuntimeError('openrouter down')")
     assert fidelity_summary({"status": "clean", "flags": []}) == "Checked against source: no issues"
     two = [{"severity": "high"}, {"severity": "medium"}, {"severity": "low"}]
     assert fidelity_summary({"status": "revised", "flags": two, "remaining": []}) == "Checked against source: 2 issues corrected"
@@ -160,3 +184,15 @@ def test_unparseable_but_nonempty_reply_is_not_retried():
     client = FakeClient(["I refuse to answer in JSON."])
     _, fid = asyncio.run(verify_script("s", "src", writer_system_prompt="p", client=client))
     assert fid.status == "skipped" and "no JSON object" in fid.note and len(client.calls) == 1
+
+
+def test_a_failed_check_is_in_the_email():
+    client = FakeClient([RuntimeError("openrouter down")])
+    _, fid = asyncio.run(verify_script("orig", "src", writer_system_prompt="s", client=client))
+    ep = ReportEpisode(title="AI #182", author="Zvi", feed_name="Zvi", link="", audio_url="a.mp3",
+                       duration_seconds=60, fidelity=fid.to_dict())
+    report = RunReport(episodes=[ep])
+    assert "Fidelity check failed: RuntimeError(&#x27;openrouter down&#x27;)" in build_html(
+        report, datetime(2026, 10, 30))
+    assert "(Fidelity check failed: RuntimeError('openrouter down'))" in build_text(
+        report, datetime(2026, 10, 30))
