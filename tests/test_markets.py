@@ -5,12 +5,14 @@ import asyncio
 import json
 from datetime import datetime, timedelta, timezone
 from email import message_from_string
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 
 import src.main as main
 import src.markets as markets
+from src.config import load_config
 from src.email_report import (ChartNote, ReportEpisode, RunReport, build_html, send_report)
 from src.markets import (Market, MarketContext, MarketRules, MarketScout, is_move,
                          kalshi_markets, pick_moves, polymarket_markets)
@@ -315,7 +317,7 @@ def test_preview_writes_a_briefing_and_emails_it_without_publishing(tmp_path, mo
                              feed_name="Daily News Briefing", content="On Polymarket, odds rose.",
                              markets={"moves": [], "stories": {}})
     monkeypatch.setattr(main, "_make_aggregator", lambda *a: Aggregator())
-    config = main.load_config(main.Path(__file__).resolve().parent.parent / "config.yaml")
+    config = load_config(Path(__file__).resolve().parent.parent / "config.yaml")
     monitor = FeedMonitor(tmp_path / "posts.db")
     asyncio.run(main._preview_briefing(monitor, config))
     ((report, kw),) = sent   # one email, charts in it
