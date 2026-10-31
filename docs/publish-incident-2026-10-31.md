@@ -30,8 +30,9 @@ A forced dev run, `gh workflow run update-feed.yml --ref main -f force=true`
 ([run 41187202717](https://github.com/tbuckworth/feedcast/actions/runs/41187202717),
 09:05 UTC). It restored `state` (92d2131), skipped the briefing because
 today's already existed, found no new posts, regenerated `feed.xml` from the
-database, pushed main and deployed. A dev run emails only FEEDCAST_EMAIL_TO,
-so the list was not emailed again. Its successful push also makes the
+database, pushed main and deployed. The feed went from 74 items to 73:
+today's two were added, and three had passed the 30-day retention limit. A
+dev run emails only FEEDCAST_EMAIL_TO, so the list was not emailed again. Its successful push also makes the
 `guard` stop GitHub's late scheduled run for the day, which would otherwise
 have run as a normal run and emailed the list a second time.
 
@@ -41,8 +42,9 @@ enclosures return 200. The WebSub hub accepted the publish ping (HTTP 204).
 
 ## Fix
 
-`scripts/ci-commit-and-push.sh` retries each push up to 5 times, waiting 10s,
-20s, 40s and 80s between attempts. Before each retry of the main push it
+`scripts/ci-commit-and-push.sh` retries each push up to 5 times, waiting
+10s, 20s, 40s and 80s between attempts. It uses the `retry` helper in
+`scripts/retry.sh`, which `scripts/ci-install-ffmpeg.sh` now shares. Before each retry of the main push it
 re-syncs with main. This covers the case where another push landed in between.
 If all five attempts fail, the step still fails as before. The state branch is
 already published by then, so the next run regenerates the feed.

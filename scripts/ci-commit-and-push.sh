@@ -6,12 +6,12 @@
 # Main gets the feed, the site pages, transcripts and the per-episode source
 # bundles.
 set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/retry.sh"
 message="${1:-Update podcast feed}"
-# GitHub sometimes refuses a push for reasons of its own: on 2026-10-31 it
-# answered the main push with "remote: fatal error in commit_refs". Nothing
-# retried it, so the deploy was skipped and the day's email went out linking
-# to audio that was never published. Each push now gets this many attempts,
-# with a pause that doubles after each failure (10s, 20s, 40s, 80s).
+# GitHub sometimes refuses a push with a server error, such as "remote: fatal
+# error in commit_refs" on 2026-10-31 (docs/publish-incident-2026-10-31.md).
+# Each push gets this many attempts, with a pause that doubles after each
+# failure (10s, 20s, 40s, 80s).
 attempts="${PUSH_ATTEMPTS:-5}"
 delay="${PUSH_RETRY_DELAY_SECONDS:-10}"
 git config user.name "github-actions[bot]"
@@ -33,29 +33,11 @@ sync_with_main() {
   fi
 }
 
-# Run "$@" until it succeeds or the attempts run out; before each retry, pause
-# and run the command named by $between (if any).
-with_retries() {
-  local what="$1" between="$2"; shift 2
-  local n=1 pause="$delay"
-  until "$@"; do
-    if (( n >= attempts )); then
-      echo "::error title=Feedcast push::Pushing ${what} failed ${attempts} times; giving up"
-      return 1
-    fi
-    echo "::warning title=Feedcast push::Pushing ${what} failed (attempt ${n} of ${attempts}); retrying in ${pause}s"
-    sleep "$pause"
-    pause=$(( pause * 2 ))
-    n=$(( n + 1 ))
-    if [[ -n "$between" ]]; then "$between"; fi
-  done
-}
-
 sync_with_main
 # State first: if this push lands and the main push fails, the next run
 # regenerates feed.xml from the database anyway. The other order can
 # advertise audio that was never published.
-with_retries "the state branch" "" scripts/state.sh push
+retry "Pushing the state branch" "$attempts" "$delay" "" scripts/state.sh push
 # Re-sync before each retry, in case the failure was another push landing on
 # main first.
-with_retries "main" sync_with_main git push
+retry "Pushing main" "$attempts" "$delay" sync_with_main git push
