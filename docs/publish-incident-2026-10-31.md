@@ -51,5 +51,6 @@ already published by then, so the next run regenerates the feed.
 Tests in `tests/test_bundle.py` use a pre-receive hook to make a local remote
 refuse pushes.
 
-The email still goes out before the publish, so a deploy that fails for any
-other reason would again leave the email's links dead until a re-run.
+The email still goes out before the publish, and that is deliberate. Sending
+it only once the site is live was proposed and turned down: the email comes
+first, and links that 404 until the publish lands are accepted (AGENTS.md).
