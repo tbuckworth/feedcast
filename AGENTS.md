@@ -13,6 +13,7 @@ The instructions every coding agent in this repository follows. Codex reads this
 - List author feeds before aggregate feeds in `config.yaml`: deduplication keeps the copy from the first feed, and with it the author.
 - When `_PATTERNS` in `src/mathiness.py` changes, recalibrate `maths_filter.threshold_per_1k` in `config.yaml`; the two are coupled.
 - Measure a new `pronunciations` entry with `scripts/pronunciation_check.py` before adding it to `config.yaml`.
+- The daily email goes out before the audio is published, and must stay that way: getting the email out is the priority, and narration and publishing take longer. Until the publish lands, the email's audio links may 404; that is accepted. When a publish fails, recover it, but do not propose holding the email until the site is live (Titus decided this on 2026-10-31).
 
 ## Repo map
 

@@ -10,6 +10,8 @@ import subprocess
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+import pytest
+
 from src.bundle import (FIDELITY_CHECK, SYSTEM_PROMPT, WRITER_INPUT, WRITER_OUTPUT,
                         read_bundle, write_bundle, writer_bundle)
 from src.monitor import FeedEntry, FeedMonitor, episode_id
@@ -21,6 +23,7 @@ REPO = Path(__file__).resolve().parent.parent
 STATE_SH = REPO / "scripts" / "state.sh"
 PUBLISH_AUDIO_SH = REPO / "scripts" / "publish-audio.sh"
 COMMIT_SH = REPO / "scripts" / "ci-commit-and-push.sh"
+RETRY_SH = REPO / "scripts" / "retry.sh"
 IDENTITY = {"GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@x",
             "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@x"}
 
@@ -270,7 +273,7 @@ def test_publish_audio_fails_when_the_feed_lists_audio_the_state_lacks(tmp_path)
 def _two_runs(tmp_path):
     """main on a local remote, and two checkouts of it: another run's and this run's.
 
-    The checkouts carry the commit script and state.sh at their CI paths, and
+    The checkouts carry the commit script, retry.sh and state.sh at their CI paths, and
     this run's has a database for `state.sh push` to publish.
     """
     env = {**os.environ, **IDENTITY}
@@ -284,7 +287,7 @@ def _two_runs(tmp_path):
         (seed / path).parent.mkdir(parents=True, exist_ok=True)
         (seed / path).write_text(text)
     (seed / "scripts").mkdir()
-    for script in (COMMIT_SH, STATE_SH):
+    for script in (COMMIT_SH, RETRY_SH, STATE_SH):
         shutil.copy2(script, seed / "scripts" / script.name)
     _git("add", ".", cwd=seed)
     _git("commit", "-qm", "init", cwd=seed, env=env)
@@ -305,8 +308,9 @@ def _other_run_pushes(other, path, text):
     _git("push", "-q", cwd=other)
 
 
-def _commit_and_push(this):
-    return subprocess.run([str(this / "scripts" / COMMIT_SH.name)], cwd=this,
+def _commit_and_push(this, **env):
+    env = {**os.environ, "PUSH_RETRY_DELAY_SECONDS": "0", **env}
+    return subprocess.run([str(this / "scripts" / COMMIT_SH.name)], cwd=this, env=env,
                           capture_output=True, text=True, timeout=60)
 
 
@@ -338,3 +342,71 @@ def test_commit_step_rebases_quietly_when_nothing_conflicts(tmp_path):
     assert _git("show", "main:output/feed.xml", cwd=remote) == "feed from this run\n"
     assert _git("show", "main:output/index.html", cwd=remote) == "index from the other run\n"
     assert _git("rev-list", "--merges", "--count", "main", cwd=remote).strip() == "0"
+
+
+def _remote_refuses(remote, branch, times):
+    """Make the remote refuse the first `times` pushes to `branch`, as GitHub
+    refused main on 2026-10-31 ("remote: fatal error in commit_refs")."""
+    count = remote / f"refused-{branch}"
+    count.write_text("0")
+    hook = remote / "hooks" / "pre-receive"
+    hook.write_text(f"""#!/bin/sh
+while read old new ref; do
+  if [ "$ref" = refs/heads/{branch} ]; then
+    n=$(cat {count})
+    if [ "$n" -lt {times} ]; then
+      echo $((n + 1)) > {count}
+      echo "fatal error in commit_refs" >&2
+      exit 1
+    fi
+  fi
+done
+""")
+    hook.chmod(0o755)
+    # Local config beats a global core.hooksPath that would skip this hook.
+    _git("config", "core.hooksPath", str(hook.parent), cwd=remote)
+    return count
+
+
+@pytest.mark.parametrize("branch", ["main", "state"])
+def test_commit_step_retries_a_push_the_remote_refuses(tmp_path, branch):
+    remote, _other, this = _two_runs(tmp_path)
+    refused = _remote_refuses(remote, branch, times=2)
+    (this / "output" / "feed.xml").write_text("feed from this run\n")
+
+    run = _commit_and_push(this)
+
+    assert run.returncode == 0, run.stdout + run.stderr
+    assert refused.read_text().strip() == "2"
+    warnings = [line for line in run.stdout.splitlines() if line.startswith("::warning")]
+    assert len(warnings) == 2 and all("retrying" in w for w in warnings)
+    assert _git("show", "main:output/feed.xml", cwd=remote) == "feed from this run\n"
+    assert _git("show", "state:data/posts.db", cwd=remote) == "db"
+
+
+def test_commit_step_fails_once_the_push_attempts_run_out(tmp_path):
+    """A main that never accepts the push fails the step, so the deploy is
+    skipped and the next trigger runs; the state branch has the run already."""
+    remote, _other, this = _two_runs(tmp_path)
+    refused = _remote_refuses(remote, "main", times=99)
+    (this / "output" / "feed.xml").write_text("feed from this run\n")
+
+    run = _commit_and_push(this, PUSH_ATTEMPTS="3")
+
+    assert run.returncode != 0
+    assert refused.read_text().strip() == "3"
+    assert "::error::Pushing main failed 3 times" in run.stdout
+    assert _git("show", "main:output/feed.xml", cwd=remote) == "feed v0\n"
+    assert _git("show", "state:data/posts.db", cwd=remote) == "db"
+
+
+def test_retry_runs_between_before_each_retry_and_leaves_the_callers_variables(tmp_path):
+    """The helper's locals are visible to the command it runs, so they must not
+    take a caller's names: here `n` is the command's own attempt counter."""
+    script = ('n=0; step() { n=$((n + 1)); [ "$n" -ge 3 ]; }; between() { echo between; }; '
+              'retry "The step" 5 0 between step; echo "status=$? n=$n"')
+    run = subprocess.run(["bash", "-c", f'source "{RETRY_SH}"; {script}'], cwd=tmp_path,
+                         capture_output=True, text=True, timeout=30)
+    assert run.stdout.count("between") == 2
+    assert "status=0 n=3" in run.stdout
+    assert "::warning::The step failed (attempt 2 of 5); retrying in 0s" in run.stdout

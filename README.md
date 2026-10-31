@@ -81,6 +81,7 @@ An injected URL skips the feeds: the page is fetched and its article extracted w
 | `VOICE_UPLOAD_DELAY_SECONDS` | Seconds to wait after uploading the voice sample, for DeepInfra to replicate it (default 0; CI uses 5) |
 | `SAVE_DEBUG_WAVS` | Keep every TTS chunk's WAV under `data/audio/debug_wavs/` |
 | `STATE_REMOTE`, `STATE_BRANCH` | Remote and branch `scripts/state.sh` uses (default `origin`, `state`) |
+| `PUSH_ATTEMPTS`, `PUSH_RETRY_DELAY_SECONDS` | Attempts at each push in `scripts/ci-commit-and-push.sh`, and the first pause between them, which doubles after each failure (default 5, 10) |
 | `FEEDCAST_REPO`, `FEEDCAST_WORKFLOW` | Repository and workflow `scripts/cron-backstop.sh` dispatches (default `tbuckworth/feedcast`, `update-feed.yml`) |
 
 On/off variables count as on when set to `true`, `1` or `yes`. In CI, the `env:` blocks in `.github/workflows/update-feed.yml` set the pipeline's variables from the repository's secrets and variables.
