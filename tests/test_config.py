@@ -71,7 +71,8 @@ def test_no_feed_is_read_from_a_substack_com_address():
     (astralcodexten.com) is served, so only the substack.com hosts are refused.
     """
     urls = [f["url"] for f in REAL["feeds"]] + [s["url"] for s in REAL["news_briefing"]["sources"]]
-    assert [u for u in urls if urlparse(u).hostname.endswith("substack.com")] == []
+    hosts = [(urlparse(u).hostname or "").split(".") for u in urls]
+    assert [u for u, h in zip(urls, hosts) if h[-2:] == ["substack", "com"]] == []
 
 
 def test_the_age_cutoff_is_disabled_by_null_and_never_by_zero(tmp_path):
