@@ -64,15 +64,16 @@ def test_a_missing_setting_fails_loading_rather_than_taking_a_code_default(tmp_p
 
 
 def test_no_feed_is_read_from_a_substack_com_address():
-    """Substack answers GitHub's runners with HTTP 403 on *.substack.com.
+    """Substack answers GitHub's runners with HTTP 403 on its *.substack.com hosts.
 
-    Import AI was read from importai.substack.com from 26 Oct 2026 and every
-    run got a 403, so no issue was ever narrated. A Substack on its own domain
-    (astralcodexten.com) is served, so only the substack.com hosts are refused.
+    A Substack on its own domain (astralcodexten.com) is served, so a feed
+    with a custom domain may stay; one on substack.com would never arrive.
+    Import AI is read from jack-clark.net, which carries the same issues.
     """
     urls = [f["url"] for f in REAL["feeds"]] + [s["url"] for s in REAL["news_briefing"]["sources"]]
-    hosts = [(urlparse(u).hostname or "").split(".") for u in urls]
-    assert [u for u, h in zip(urls, hosts) if h[-2:] == ["substack", "com"]] == []
+    hosts = {u: urlparse(u).hostname for u in urls}
+    assert all(hosts.values()), f"a URL with no host: {hosts}"
+    assert [u for u, h in hosts.items() if h.split(".")[-2:] == ["substack", "com"]] == []
 
 
 def test_the_age_cutoff_is_disabled_by_null_and_never_by_zero(tmp_path):
