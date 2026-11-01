@@ -8,7 +8,7 @@ code's value without a word.
 
 import copy
 import json
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import pytest
 import yaml
@@ -61,6 +61,17 @@ def test_a_missing_setting_fails_loading_rather_than_taking_a_code_default(tmp_p
     del _section(data, path[:-1])[path[-1]]
     with pytest.raises(ValidationError, match=str(path[-1])):
         _load(tmp_path, data)
+
+
+def test_no_feed_is_read_from_a_substack_com_address():
+    """Substack answers GitHub's runners with HTTP 403 on *.substack.com.
+
+    Import AI was read from importai.substack.com from 26 Oct 2026 and every
+    run got a 403, so no issue was ever narrated. A Substack on its own domain
+    (astralcodexten.com) is served, so only the substack.com hosts are refused.
+    """
+    urls = [f["url"] for f in REAL["feeds"]] + [s["url"] for s in REAL["news_briefing"]["sources"]]
+    assert [u for u in urls if urlparse(u).hostname.endswith("substack.com")] == []
 
 
 def test_the_age_cutoff_is_disabled_by_null_and_never_by_zero(tmp_path):

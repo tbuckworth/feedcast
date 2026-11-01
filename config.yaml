@@ -104,8 +104,12 @@ feeds:
   # limit, which would read ~18 minutes of benchmark scores and "Read more:"
   # paper titles aloud. The default prompt gave a ~5-minute script covering
   # every item with Clark's take; a custom one ran longer and more numeric.
+  # Read from Clark's own site, which carries the same issues at the same
+  # minute: Substack answers GitHub's runners with HTTP 403 on its
+  # *.substack.com addresses (every run from 26 Oct to 1 Nov 2026), though not
+  # on a custom domain such as astralcodexten.com.
   - name: "Import AI"
-    url: "https://importai.substack.com/feed"
+    url: "https://jack-clark.net/feed/"
     mode: "summarize"
     prompt: null
 
