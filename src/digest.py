@@ -50,6 +50,9 @@ repeat the headline sentence, and do not add anything the script does not say.
 Rules:
 - Say what the piece actually claims, not that it discusses a topic.
 - Keep attributions ("Zvi argues", "the CBO found").
+- Keep every person's name the script gives, with the role it gives them \
+("AI safety researcher [their name] says"); never shorten a named person to a \
+role ("a researcher"). Never add a name the script does not give.
 - This is read, not spoken. Keep numerals, percent signs, currency and symbols, \
 and convert anything spelled out for speech back into figures: "forty-five \
 percent" becomes 45%, "two thousand twenty-six" becomes 2026. Leave words \

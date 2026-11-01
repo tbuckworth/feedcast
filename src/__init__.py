@@ -35,7 +35,7 @@ The modules, roughly in the order a run uses them:
 - config: the schema of config.yaml, and loading it.
 - env: on/off switches read from the environment.
 - monitor: feed fetching, and the SQLite database (data/posts.db) that holds the run state.
-- lesswrong: a LessWrong or Alignment Forum post's markdown and posting date, over GraphQL.
+- lesswrong: a LessWrong or Alignment Forum post's markdown, posting date and authors' full names, over GraphQL.
 - extractor: an article's text and metadata from any URL, for injected URLs.
 - news: the daily news briefing, from the configured news sources.
 - markets: prediction-market odds and big moves for the briefing.

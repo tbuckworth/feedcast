@@ -6,10 +6,11 @@ from datetime import datetime, timedelta, timezone
 import feedparser
 
 from .extractor import extract_article
+from .lesswrong import author_names
 from .llm import complete, extract_json
 from .markets import MarketContext, MarketScout
-from .monitor import (FeedEntry, briefing_id, entry_body, entry_published, report_skipped,
-                      warn_if_dead)
+from .monitor import (FeedEntry, briefing_id, entry_body, entry_published, extract_authors,
+                      format_authors, report_skipped, warn_if_dead)
 from .verify import Written, write_checked
 
 # The previous briefings are there for dedup, but the writer also reads them
@@ -122,6 +123,9 @@ class NewsAggregator:
                     "summary": entry_body(entry)[:500],
                     "published": published,
                     "url": entry.get("link", ""),
+                    # The byline, so the writer can name the person behind a
+                    # first-person post. [] when the feed gives none (BBC).
+                    "authors": [a for a in extract_authors(entry, "") if a],
                 })
             report_skipped(source["name"], self.lookback_hours, stale=stale, undated=undated,
                            already=0, skipped=0)
@@ -161,10 +165,12 @@ class NewsAggregator:
                 # The URL rides along so the digest can attribute each bullet
                 # back to the article it came from.
                 url = f"\n  URL: {item['url']}" if item.get("url") else ""
+                by = (f"\n  By: {format_authors(item['authors'])}"
+                      if item.get("authors") else "")
                 body = item.get("text") or item["summary"]
                 odds = notes.story_block(item.get("url", "")) if notes else ""
                 section_lines.append(
-                    f"- [{item['source']}] {item['title']}{url}\n  {body}"
+                    f"- [{item['source']}] {item['title']}{url}{by}\n  {body}"
                     + (f"\n{odds}" if odds else "")
                 )
             sections.append("\n".join(section_lines))
@@ -209,6 +215,19 @@ class NewsAggregator:
 
         results = await asyncio.gather(*[one(a) for a in articles])
         return sum(results)
+
+    async def resolve_bylines(self, articles: list[dict]) -> None:
+        """Replace a LessWrong or Alignment Forum username byline with the full name.
+
+        Their feeds credit a post to a username ("TurnTrout"); the profile has
+        the name ("Alex Turner"). Asks the site once per LessWrong or Alignment
+        Forum article (lesswrong.author_names) and overwrites that article's
+        "authors" in place; other sources' bylines are left as they are.
+        """
+        found = await asyncio.gather(*[author_names(a.get("url", "")) for a in articles])
+        for a, names in zip(articles, found):
+            if names:
+                a["authors"] = names
 
     def _format_briefing_input(self, articles: list[dict], selected: list[dict],
                                markets: MarketContext | None = None) -> str:
@@ -276,6 +295,7 @@ class NewsAggregator:
         selected = await self.select_stories(articles)
         if selected:
             got = await self.fetch_full_text(selected)
+            await self.resolve_bylines(selected)
             print(f"  Selected {len(selected)} stories; full text for {got}")
         # The scout attaches odds to the stories the writer reads in full. With
         # full_text_stories at 0 the writer reads none in full, so the scout
