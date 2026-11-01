@@ -5,9 +5,10 @@ from typing import Optional
 from bs4 import BeautifulSoup
 
 from .html_text import clean_html, small_table_to_prose
+from .lesswrong import author_names
 from .verify import write_checked
 from .llm import complete
-from .monitor import FeedEntry, is_briefing
+from .monitor import FeedEntry, format_authors, is_briefing
 
 
 def spoken_title(title: str, author: str) -> str:
@@ -118,9 +119,15 @@ class ContentProcessor:
 
         system_prompt = prompt or self.default_prompt
 
+        # The writer is told to name the people it mentions from what the
+        # source says, the Author line included, and LessWrong's feeds give a
+        # username there ("TurnTrout") where the profile has the full name.
+        names = await author_names(entry.link)
+        author = format_authors(names) if names else entry.author
+
         # Build the message with context
         user_message = f"""Title: {entry.title}
-Author: {entry.author}
+Author: {author}
 Published: {entry.published.strftime("%Y-%m-%d")}
 
 Content:

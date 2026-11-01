@@ -44,6 +44,7 @@ Split the SCRIPT into its factual claims and decide whether the SOURCE supports 
 Rules:
 - Omission is not an error. Paraphrase is not an error. Condensing is the job.
 - Background a listener would take as common knowledge is low severity. Anything a listener would repeat as "the author said" is high.
+- A person's name the source does not give (in its text or its Author or By line) is unsupported and high severity, however well known the person: a name the writer supplied from memory may be the wrong person.
 - Numbers may be spelled out in the script ("forty-five percent" for 45%). That is never a discrepancy.
 - Keep every quote under 200 characters and verbatim from the text it comes from.
 - Report at most 12 flags, the most material first.

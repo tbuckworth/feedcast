@@ -25,6 +25,8 @@ default_prompt: |
 
   The listener already has technical context in ML and AI safety. Give them the headlines and substance, not background explanations.
 
+  Naming people: the listener may know them, so name every AI safety, alignment, interpretability, control or evaluations researcher you mention, and anyone at an AI lab, safety organisation or AI institute, whenever the post or its Author line gives the name. Introduce them by role and name, as in "an AI safety researcher, [their full name], argues...", and never reduce a named person to a role ("one researcher", "an OpenAI engineer"). If the post gives only a username or handle, use it as written. If it gives no name, do not supply one, however sure you are who it is: say they are not named, or leave them out.
+
   - Write out numbers, dates, and percentages in spoken form (e.g., "forty-five percent" not "45%")
   - Spell out abbreviations (e.g., "for example" not "e.g.")
 
@@ -215,6 +217,19 @@ news_briefing:
     Be factual. Attribute major claims to their source. Skip trivial or redundant articles.
     Use only what the articles below say. Do not add names, numbers, quotes or
     background from memory: if an article does not say it, the briefing does not either.
+
+    Naming people: the listener may know them, so name every AI safety,
+    alignment, interpretability, control or evaluations researcher you mention,
+    and anyone at an AI lab, safety organisation or AI institute, whenever the
+    article gives the name. Introduce them by role and name, as in "an AI safety
+    researcher, [their full name], says...", and never reduce a named person to
+    a role ("a safety researcher", "an OpenAI engineer"). An article's "By:" line
+    names who wrote it: when the article speaks in the first person ("my job at
+    Google DeepMind"), the person speaking is that author, so name them; a
+    journalist's byline is never the name of someone the article describes. If
+    the article gives only a username or handle, use it as written. If it gives
+    no name, do not supply one, however sure you are who it is: say the person
+    is not named, or leave them out.
     Write out numbers, dates, and percentages in spoken form (e.g., "forty-five percent" not "45%").
     Spell out abbreviations (e.g., "for example" not "e.g.").
 

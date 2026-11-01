@@ -1,4 +1,4 @@
-"""LessWrong and Alignment Forum over GraphQL: a post's markdown, and its date.
+"""LessWrong and Alignment Forum over GraphQL: a post's markdown, date and authors' names.
 
 ``fetch_lesswrong_markdown`` returns a post's markdown source, used by the
 maths filter (mathiness.py) and full-text recovery (fulltext.py).
@@ -11,6 +11,12 @@ publication is what the email should call the release date.
 
 Only the second needs asking the site, and only for LessWrong and Alignment
 Forum links.
+
+``author_names`` gives the people behind a post by the names a listener knows
+them by. The feeds credit a post to its author's username ("TurnTrout"), and
+the writer is told to add no name the source does not give, so on 1 Nov 2026
+the briefing called Alex Turner "a former Google DeepMind safety researcher".
+The site's profile carries the full name.
 """
 
 import re
@@ -90,6 +96,49 @@ async def posted_at(link: str) -> datetime | None:
         errors = data.get("errors") if isinstance(data, dict) else None
         return failed(f"no postedAt in the reply; errors: {str(errors)[:300]}")
     return _parse(stamp)
+
+
+def _byline(user: dict | None) -> str:
+    """One author as "Full Name (username)", or the username when that is all there is."""
+    user = user or {}
+    shown = (user.get("displayName") or "").strip()
+    full = (user.get("fullName") or "").strip()
+    if not full or full.lower() == shown.lower():
+        return shown
+    return f"{full} ({shown})" if shown else full
+
+
+async def author_names(link: str) -> list[str] | None:
+    """The authors of the post behind this link, each as "Full Name (username)".
+
+    None when the link is not a LessWrong or Alignment Forum post, when no
+    author's profile gives a full name, or when the lookup fails: the caller
+    keeps the names the feed gave. Never raises, and a failure is printed but
+    not put in the email's notices: the writer then sees the username, as it
+    did before this lookup existed.
+    """
+    pid = lesswrong_post_id(link)
+    if not pid:
+        return None
+    query = ('{post(input:{selector:{_id:"%s"}}){result{'
+             'user{displayName fullName} coauthors{displayName fullName}}}}' % pid)
+    try:
+        async with httpx.AsyncClient(timeout=TIMEOUT) as client:
+            response = await client.post(_graphql_url(link), json={"query": query}, headers=_UA)
+            response.raise_for_status()
+            result = (((response.json().get("data") or {}).get("post") or {})
+                      .get("result") or {})
+    except Exception as exc:  # noqa: BLE001 — the feed's names stand
+        print(f"    LessWrong author lookup for {pid} failed "
+              f"({type(exc).__name__}: {str(exc)[:160]}); the feed's names stand")
+        return None
+    users = [u for u in [result.get("user"), *(result.get("coauthors") or [])] if u]
+    bylines = [(_byline(u), (u.get("displayName") or "").strip()) for u in users]
+    # A profile with no full name adds nothing, and the feed may say more than
+    # the site does: Zvi's feed credits "Zvi Mowshowitz", his profile "Zvi".
+    if not any(line != shown for line, shown in bylines):
+        return None
+    return [n for n in dict.fromkeys(line for line, _ in bylines) if n]
 
 
 @lru_cache(maxsize=128)
