@@ -104,8 +104,9 @@ feeds:
   # limit, which would read ~18 minutes of benchmark scores and "Read more:"
   # paper titles aloud. The default prompt gave a ~5-minute script covering
   # every item with Clark's take; a custom one ran longer and more numeric.
+  # Read from Clark's own site, not Substack: see tests/test_config.py.
   - name: "Import AI"
-    url: "https://importai.substack.com/feed"
+    url: "https://jack-clark.net/feed/"
     mode: "summarize"
     prompt: null
 
