@@ -60,6 +60,35 @@ def _parse(stamp: str | None) -> datetime | None:
     return parsed.astimezone(timezone.utc).replace(tzinfo=None)
 
 
+async def _post_fields(link: str, pid: str, fields: str) -> tuple[dict | None, str]:
+    """(the post's `fields`, "") from the site's GraphQL, or (None, what went wrong).
+
+    A GraphQL error comes back as a 200 with `errors` and a null where the
+    post should be, and is reported like a failed request.
+    """
+    query = '{post(input:{selector:{_id:"%s"}}){result{%s}}}' % (pid, fields)
+    try:
+        async with httpx.AsyncClient(timeout=TIMEOUT) as client:
+            response = await client.post(_graphql_url(link), json={"query": query}, headers=_UA)
+            response.raise_for_status()
+            data = response.json()
+    except Exception as exc:
+        return None, f"{type(exc).__name__}: {str(exc)[:160]}"
+    result = (((data.get("data") or {}).get("post") or {}).get("result")
+              if isinstance(data, dict) else None)
+    if not isinstance(result, dict):
+        errors = data.get("errors") if isinstance(data, dict) else None
+        return None, f"no post in the reply; errors: {str(errors)[:300]}"
+    return result, ""
+
+
+def _failed(what: str, pid: str, reason: str, stands: str) -> None:
+    """Print a failed lookup with the post id and add it to the run's notices."""
+    note = f"LessWrong {what} lookup for {pid} failed ({reason}); {stands}"
+    print(f"    {note}")
+    notices.add(note)
+
+
 async def posted_at(link: str) -> datetime | None:
     """When the post behind this link was published, or None if unknown.
 
@@ -72,35 +101,16 @@ async def posted_at(link: str) -> datetime | None:
     pid = lesswrong_post_id(link)
     if not pid:
         return None
-
-    def failed(reason: str) -> None:
-        note = f"LessWrong date lookup for {pid} failed ({reason}); the feed's date stands"
-        print(f"    {note}")
-        notices.add(note)
-    query = ('{post(input:{selector:{_id:"%s"}}){result{postedAt}}}' % pid)
-    try:
-        async with httpx.AsyncClient(timeout=TIMEOUT) as client:
-            response = await client.post(
-                _graphql_url(link), json={"query": query}, headers=_UA,
-            )
-            response.raise_for_status()
-            data = response.json()
-    except Exception as exc:
-        return failed(f"{type(exc).__name__}: {str(exc)[:160]}")
-
-    # A GraphQL error comes back as a 200 with `errors` and a null where the
-    # post should be.
-    try:
-        stamp = data["data"]["post"]["result"]["postedAt"]
-    except (KeyError, TypeError):
-        errors = data.get("errors") if isinstance(data, dict) else None
-        return failed(f"no postedAt in the reply; errors: {str(errors)[:300]}")
-    return _parse(stamp)
+    result, problem = await _post_fields(link, pid, "postedAt")
+    if result is not None and not result.get("postedAt"):
+        problem = "no postedAt in the reply"
+    if problem:
+        return _failed("date", pid, problem, "the feed's date stands")
+    return _parse(result["postedAt"])
 
 
-def _byline(user: dict | None) -> str:
+def _byline(user: dict) -> str:
     """One author as "Full Name (username)", or the username when that is all there is."""
-    user = user or {}
     shown = (user.get("displayName") or "").strip()
     full = (user.get("fullName") or "").strip()
     if not full or full.lower() == shown.lower():
@@ -112,26 +122,18 @@ async def author_names(link: str) -> list[str] | None:
     """The authors of the post behind this link, each as "Full Name (username)".
 
     None when the link is not a LessWrong or Alignment Forum post, when no
-    author's profile gives a full name, or when the lookup fails: the caller
-    keeps the names the feed gave. Never raises, and a failure is printed but
-    not put in the email's notices: the writer then sees the username, as it
-    did before this lookup existed.
+    author's profile gives a full name, or when the lookup fails; the caller
+    then keeps the names the feed gave. Never raises. A failed lookup is
+    printed with the post id and added to the run's notices, because the
+    writer then sees a username and may describe its author by role alone.
     """
     pid = lesswrong_post_id(link)
     if not pid:
         return None
-    query = ('{post(input:{selector:{_id:"%s"}}){result{'
-             'user{displayName fullName} coauthors{displayName fullName}}}}' % pid)
-    try:
-        async with httpx.AsyncClient(timeout=TIMEOUT) as client:
-            response = await client.post(_graphql_url(link), json={"query": query}, headers=_UA)
-            response.raise_for_status()
-            result = (((response.json().get("data") or {}).get("post") or {})
-                      .get("result") or {})
-    except Exception as exc:  # noqa: BLE001 — the feed's names stand
-        print(f"    LessWrong author lookup for {pid} failed "
-              f"({type(exc).__name__}: {str(exc)[:160]}); the feed's names stand")
-        return None
+    result, problem = await _post_fields(
+        link, pid, "user{displayName fullName} coauthors{displayName fullName}")
+    if problem:
+        return _failed("author", pid, problem, "the feed's names stand")
     users = [u for u in [result.get("user"), *(result.get("coauthors") or [])] if u]
     bylines = [(_byline(u), (u.get("displayName") or "").strip()) for u in users]
     # A profile with no full name adds nothing, and the feed may say more than

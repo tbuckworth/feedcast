@@ -220,7 +220,9 @@ class NewsAggregator:
         """Replace a LessWrong or Alignment Forum username byline with the full name.
 
         Their feeds credit a post to a username ("TurnTrout"); the profile has
-        the name ("Alex Turner"). Other sources' bylines are left as they are.
+        the name ("Alex Turner"). Asks the site once per LessWrong or Alignment
+        Forum article (lesswrong.author_names) and overwrites that article's
+        "authors" in place; other sources' bylines are left as they are.
         """
         found = await asyncio.gather(*[author_names(a.get("url", "")) for a in articles])
         for a, names in zip(articles, found):

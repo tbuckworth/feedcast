@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 import httpx
 import yaml
 
-from src import digest, lesswrong, news, processor, verify
+from src import digest, lesswrong, news, notices, verify
 from src.config import CONFIG_PATH
 from src.monitor import FeedEntry
 from src.news import NewsAggregator
@@ -64,10 +64,21 @@ class TestAuthorNames:
         _answers(monkeypatch, lambda r: _users({"displayName": "Zvi", "fullName": None}))
         assert asyncio.run(lesswrong.author_names(AF)) is None
 
-    def test_a_failed_lookup_leaves_the_feeds_name(self, monkeypatch, capsys):
+    def test_a_failed_lookup_leaves_the_feeds_name_and_says_so(self, monkeypatch, capsys):
         _answers(monkeypatch, lambda r: httpx.Response(502))
         assert asyncio.run(lesswrong.author_names(AF)) is None
-        assert "author lookup for RHxaRkarGp9snWoKY failed" in capsys.readouterr().out
+        (note,) = notices.report()
+        assert note.startswith("LessWrong author lookup for RHxaRkarGp9snWoKY failed "
+                               "(HTTPStatusError")
+        assert note.endswith("the feed's names stand") and note in capsys.readouterr().out
+
+    def test_a_graphql_error_reply_is_reported_too(self, monkeypatch):
+        """LessWrong answers an unknown post with a 200, `errors` and a null post."""
+        _answers(monkeypatch, lambda r: httpx.Response(200, json={
+            "errors": [{"message": "Post not found"}], "data": {"post": None}}))
+        assert asyncio.run(lesswrong.author_names(AF)) is None
+        (note,) = notices.report()
+        assert "author lookup for RHxaRkarGp9snWoKY failed" in note and "Post not found" in note
 
     def test_other_sites_are_not_asked(self, monkeypatch):
         asked = _answers(monkeypatch, lambda r: httpx.Response(500))
@@ -115,15 +126,12 @@ class TestBriefingBylines:
         assert "- [Alignment Forum] Explaining\n  URL: https://bbc.example/1\n  Until" in text
 
     def test_generate_briefing_resolves_the_selected_stories_bylines(self, monkeypatch):
-        asked = []
-
-        async def names(link):
-            asked.append(link)
-            return ["Alex Turner (TurnTrout)"] if link == AF else None
-        monkeypatch.setattr(news, "author_names", names)
+        asked = _answers(monkeypatch, lambda r: _users(
+            {"displayName": "TurnTrout", "fullName": "Alex Turner"}))
         monkeypatch.setattr(news, "extract_article", lambda url: {"text": "FULL"})
+        other = "https://www.lesswrong.com/posts/AAAAAAAAAAAAAAAAA/unselected"
         arts = [{"title": f"S{i}", "source": "AF", "category": "ai_safety", "summary": "b",
-                 "url": AF if i == 0 else f"https://e.example/{i}", "authors": ["TurnTrout"],
+                 "url": [AF, "https://e.example/1", other][i], "authors": ["TurnTrout"],
                  "published": datetime.now(timezone.utc)} for i in range(3)]
         agg = _agg()
         agg.full_text_stories = 2
@@ -131,26 +139,21 @@ class TestBriefingBylines:
                                        "Here is your daily news briefing."])
         monkeypatch.setattr(agg, "fetch_all_sources", lambda: asyncio.sleep(0, arts))
         asyncio.run(agg.generate_briefing())
-        assert asked == [AF, "https://e.example/1"]          # the selected stories only
+        # The selected Alignment Forum story only: not e.example, not the unselected post.
+        assert asked == ["www.alignmentforum.org"]
         assert "By: Alex Turner (TurnTrout)" in client.calls[1]["messages"][1]["content"]
 
 
-def test_a_summary_writer_is_given_the_full_name(monkeypatch):
-    async def names(link):
-        return ["Alex Turner (TurnTrout)"]
-    monkeypatch.setattr(processor, "author_names", names)
-    seen = []
-
-    async def write(system, user, **kw):
-        seen.append(user)
-        return verify.Written(text="Summary.", writer={}, fidelity=None, bundle="")
-    monkeypatch.setattr(processor, "write_checked", write)
+def test_a_summary_writer_is_given_the_full_name(monkeypatch, routes):
+    _answers(monkeypatch, lambda r: _users(
+        {"displayName": "TurnTrout", "fullName": "Alex Turner"}))
+    routes["anthropic"] = writer = FakeApi(["Summary."])
     entry = FeedEntry(id="x", title="Explaining", link=AF, content="<p>I gave a talk.</p>",
                       published=datetime(2026, 11, 1), author="TurnTrout",
                       feed_name="LessWrong Curated", authors=["TurnTrout"])
     p = ContentProcessor("Summarise.", verify=False, auto_verbatim_limit=24000)
     asyncio.run(p.summarize(entry))
-    assert seen[0].startswith("Title: Explaining\nAuthor: Alex Turner (TurnTrout)\n")
+    assert writer.calls[0]["messages"][1]["content"].startswith("Title: Explaining\nAuthor: Alex Turner (TurnTrout)\n")
     assert entry.author == "TurnTrout"      # the episode's credit is the feed's, as before
 
 
