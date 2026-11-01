@@ -110,6 +110,19 @@ feeds:
     mode: "summarize"
     prompt: null
 
+  # AI policy essays on their own Substack domains, which GitHub's runners can
+  # reach. Summarised, not "auto": a 1,100 to 4,700-word essay would mostly be
+  # read in full, at up to ~25 minutes.
+  - name: "Anton Leicht"
+    url: "https://writing.antonleicht.me/feed"
+    mode: "summarize"
+    prompt: null
+
+  - name: "Hyperdimensional"   # Dean W. Ball
+    url: "https://www.hyperdimensional.co/feed"
+    mode: "summarize"
+    prompt: null
+
   # The community's own highlights: curation is a few posts a week, chosen by
   # the moderators, where frontpage-rss carries every post promoted off
   # Personal Blog (10 to 14 a day, with no quality bar).
