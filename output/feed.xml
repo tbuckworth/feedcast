@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 02 Nov 2026 05:33:04 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Nov 2026 09:50:40 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,18 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Plan R: AI Safety by ASICs</title>
+      <description>Audio version of Plan R: AI Safety by ASICs by Roko from www.lesswrong.com</description>
+      <pubDate>Mon, 02 Nov 2026 09:50:10 +0000</pubDate>
+      <guid isPermaLink="false">injected-8fae36eb141a9cca</guid>
+      <link>https://www.lesswrong.com/posts/n8u3BfqFoGh4jnzpo/plan-r-ai-safety-by-asics</link>
+      <itunes:author>Roko</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c34e252e2ada_plan_r_ai_safety_by_asics.mp3" type="audio/mpeg" length="6100077" />
+      <itunes:duration>00:10:52</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-02</title>
       <description>Daily News Briefing - 2026-11-02
@@ -1045,18 +1057,6 @@ Topics covered:
       <itunes:author>N8 Programs</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d4225b856b07_whats_the_date.mp3" type="audio/mpeg" length="9275853" />
       <itunes:duration>00:17:17</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Plan R: AI Safety by ASICs</title>
-      <description>Audio version of Plan R: AI Safety by ASICs by Roko from LessWrong Curated</description>
-      <pubDate>Fri, 25 Sep 2026 23:26:13 +0000</pubDate>
-      <guid isPermaLink="false">n8u3BfqFoGh4jnzpo</guid>
-      <link>https://www.lesswrong.com/posts/n8u3BfqFoGh4jnzpo/plan-r-ai-safety-by-asics</link>
-      <itunes:author>Roko</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b32f7bd406cd_plan_r_ai_safety_by_asics.mp3" type="audio/mpeg" length="6154677" />
-      <itunes:duration>00:10:52</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
