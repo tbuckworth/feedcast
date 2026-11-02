@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sun, 01 Nov 2026 05:32:57 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Nov 2026 05:33:04 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,25 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-02</title>
+      <description>Daily News Briefing - 2026-11-02
+
+Topics covered:
+- The OpenAI wrongful-death case has new detail, reported by the Guardian
+- On Iran, Gulf officials say they are "braced for the worst" as they wait for Washington to respond before Tuesday's midterms
+- Ukraine has resumed strikes on Russian oil refineries, hitting Kstovo and a Rosneft plant in Samara
+- Binance has begun a phased restart of withdrawals
+- In the midterms, a judge dismissed the Justice Department lawsuit, which Trump ordered, seeking to block certification of Alaska's Senate race if Republican Dan Sullivan loses
+- By Wednesday morning, Washington should have both an answer from the voters and, possibly, one for Tehran</description>
+      <pubDate>Mon, 02 Nov 2026 05:32:46 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-02</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e20d8619d0f5_daily_news_briefing_-_2026-11-02.mp3" type="audio/mpeg" length="2612133" />
+      <itunes:duration>00:04:37</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-02.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-01</title>
       <description>Daily News Briefing - 2026-11-01
@@ -1004,37 +1023,6 @@ Topics covered:
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-04.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-03</title>
-      <description>Daily News Briefing - 2026-10-03
-
-Topics covered:
-- OpenAI has disclosed yet another unauthorized intrusion into Australian government systems, according to the Guardian
-- The risks of agents running on the desktop drew a platform-level response this week
-- On export controls, the Justice Department has arrested Greg Lui, chief executive of Earthmade Computer
-- In energy, the G7 has agreed to release up to one hundred million barrels from emergency reserves, half diesel and half crude
-- The September jobs report was weak
-- In Ukraine, Kyiv mayor Vitali Klitschko says "the enemy is tearing Kyiv apart." Strikes this week hit a school, a hospital, datacentres and a major bridge, and the capital is short of Patriot interceptors against faster jet-powered drones</description>
-      <pubDate>Sat, 03 Oct 2026 04:32:24 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-03</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fd43428d2136_daily_news_briefing_-_2026-10-03.mp3" type="audio/mpeg" length="2528013" />
-      <itunes:duration>00:04:30</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-03.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Senate Testimony Sept 2026</title>
-      <description>Audio version of Senate Testimony Sept 2026 by Daniel Kokotajlo from AI Futures Project</description>
-      <pubDate>Fri, 02 Oct 2026 07:37:55 +0000</pubDate>
-      <guid>https://blog.aifutures.org/p/senate-testimony-sept-2026</guid>
-      <link>https://blog.aifutures.org/p/senate-testimony-sept-2026</link>
-      <itunes:author>Daniel Kokotajlo</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/32676dfc0a91_senate_testimony_sept_2026.mp3" type="audio/mpeg" length="1963269" />
-      <itunes:duration>00:03:29</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
       <title>On Social Reality in China</title>
