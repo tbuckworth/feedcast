@@ -69,6 +69,14 @@ feeds:
       - "^Apply [Ff]or [Aa]n ACX Grant"
       - "Forecasting Contest"
 
+  # Scott also posts on LessWrong alone (as scott-alexander; "Against SURA",
+  # 31 Oct 2026, never reached the ACX feed). His older scottalexander account
+  # carries ACX crossposts under LessWrong links, which would be narrated twice.
+  - name: "Scott Alexander (LessWrong)"
+    url: "https://www.lesswrong.com/feed.xml?view=community-rss&userId=bhiuBaLXTcNB3R3xz"
+    mode: "verbatim"
+    prompt: null
+
   # LessWrong author feeds
   # URL pattern: https://www.lesswrong.com/feed.xml?view=community-rss&userId=<USER_ID>
   # Find user IDs on their LessWrong profile page source.
