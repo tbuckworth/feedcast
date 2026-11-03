@@ -690,8 +690,7 @@ class FeedMonitor:
                 already += 1
                 continue
 
-            # A repost elsewhere, such as Scott Alexander's LessWrong copy of
-            # an ACX post, has a new guid and link too; only its text matches.
+            # A repost under a new link: see src/duplicates.py.
             if stored is None:
                 stored = self.stored_texts()
             runs = word_runs(content)

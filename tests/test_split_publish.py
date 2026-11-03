@@ -8,7 +8,7 @@ deferred_entries; the narration pass narrates them and publishes again.
 
 import asyncio
 import sqlite3
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
 
 import pytest
 
@@ -22,7 +22,7 @@ from src.monitor import FeedEntry, FeedMonitor, episode_id
 from src.normalizer import TextNormalizer
 from src.processor import ContentProcessor
 from src.run_report import build_run_report
-from tests.conftest import FakeApi, needs_ffmpeg
+from tests.conftest import FakeApi, item, needs_ffmpeg, rss
 
 BASE = "https://tbuckworth.github.io/feedcast"
 
@@ -107,11 +107,7 @@ class TestDeferredTable:
         assert monitor.deferred_entries() == []
 
     def test_a_waiting_post_does_not_come_back_as_new(self, monitor):
-        now = datetime.now(timezone.utc).replace(tzinfo=None)
-        xml = ("<?xml version='1.0'?><rss version='2.0'><channel><title>t</title>"
-               "<item><title>Waiting</title><link>https://acx/acx-1</link>"
-               f"<guid>acx-1</guid><pubDate>{(now - timedelta(hours=2)):%a, %d %b %Y %H:%M:%S} GMT"
-               "</pubDate><description>b</description></item></channel></rss>")
+        xml = rss("t", item("Waiting", "https://acx/acx-1", hours_ago=2, body="b", guid="acx-1"))
         assert [e.id for e in monitor.fetch_feed(xml, "Scott Alexander", max_age_hours=48)] \
             == ["acx-1"]
         monitor.defer_entry(_entry(), "verbatim", "t", None, [])

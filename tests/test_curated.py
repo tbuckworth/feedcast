@@ -19,6 +19,7 @@ from src.lesswrong import _parse, lesswrong_post_id, posted_at
 from src.main import _correct_publication_dates
 from src.monitor import FeedEntry
 from src.run_report import build_run_report, stored_feed_date, surfaced_date
+from tests.conftest import item, rss
 
 
 def _lesswrong_answers(monkeypatch, answer) -> None:
@@ -183,24 +184,18 @@ class TestCrossFeedDuplicates:
 
     LINK = "https://www.lesswrong.com/posts/rA6pqn6kz8NvHyznT/on-writing-3"
 
-    def _xml(self, guid, when):
-        return ("<?xml version='1.0'?><rss version='2.0'><channel><title>f</title>"
-                f"<item><title>On Writing #3</title><link>{self.LINK}</link>"
-                f"<guid>{guid}</guid><description>Body</description>"
-                f"<pubDate>{when.strftime('%a, %d %b %Y %H:%M:%S GMT')}</pubDate>"
-                "</item></channel></rss>")
+    def _xml(self, guid, hours_ago):
+        return rss("f", item("On Writing #3", self.LINK, hours_ago=hours_ago, body="Body",
+                             guid=guid))
 
     def test_the_same_link_under_a_new_guid_is_skipped(self, tmp_path):
-        from datetime import timedelta, timezone
         from src.monitor import FeedMonitor
-        now = datetime.now(timezone.utc).replace(tzinfo=None)
         m = FeedMonitor(tmp_path / "posts.db")
 
-        first = m.fetch_feed(self._xml("f1c130ea", now - timedelta(hours=5)), "Zvi",
-                             max_age_hours=48)
+        first = m.fetch_feed(self._xml("f1c130ea", 5), "Zvi", max_age_hours=48)
         assert len(first) == 1
         m.mark_processed(first[0], audio_file="a.mp3")
 
-        again = m.fetch_feed(self._xml("rA6pqn6kz8NvHyznT", now - timedelta(hours=1)),
+        again = m.fetch_feed(self._xml("rA6pqn6kz8NvHyznT", 1),
                              "LessWrong Curated", max_age_hours=48)
         assert again == []

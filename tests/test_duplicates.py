@@ -5,12 +5,13 @@ its text shows it is the post already narrated from Astral Codex Ten.
 """
 
 import random
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 from src.config import load_config
 from src.duplicates import same_text, word_runs
 from src.main import Run, RunOptions, _take_newest
 from src.monitor import FeedEntry, FeedMonitor
+from tests.conftest import item, rss
 
 _WORDS = ("alignment pause labs incentives forecast treaty model safety compute evidence "
           "argument policy world probability research risk plan awareness strategy "
@@ -30,14 +31,6 @@ ACX_HTML = "".join(f"<p>{p}</p>" for p in ORIGINAL)
 LW_HTML = ("<p><i>This post originally posted on Astral Codex Ten.</i></p>"
            + "".join(f"<div><span>{p.replace(chr(39), chr(0x2019))}</span></div>"
                      for p in ORIGINAL))
-
-
-def _xml(guid: str, title: str, link: str, html: str, when: datetime) -> str:
-    return ("<?xml version='1.0'?><rss version='2.0'><channel><title>f</title>"
-            f"<item><title>{title}</title><link>{link}</link><guid>{guid}</guid>"
-            f"<description><![CDATA[{html}]]></description>"
-            f"<pubDate>{when.strftime('%a, %d %b %Y %H:%M:%S GMT')}</pubDate>"
-            "</item></channel></rss>")
 
 
 def _now() -> datetime:
@@ -72,21 +65,24 @@ class TestSameText:
         assert not same_text(frozenset(), frozenset())
 
 
+def _acx_feed() -> str:
+    return rss("ACX", item("Against Something", "https://www.astralcodexten.com/p/against-something",
+                           hours_ago=30, body=ACX_HTML, guid="acx-1"))
+
+
 class TestFetchSkipsCopies:
 
     def _narrate_acx(self, m: FeedMonitor) -> None:
-        acx = m.fetch_feed(_xml("acx-1", "Against Something",
-                                "https://www.astralcodexten.com/p/against-something",
-                                ACX_HTML, _now() - timedelta(hours=30)),
-                           "Scott Alexander", max_age_hours=48)
+        acx = m.fetch_feed(_acx_feed(), "Scott Alexander", max_age_hours=48)
         assert len(acx) == 1
         m.mark_processed(acx[0], audio_file="a.mp3", content=acx[0].content)
 
     def _fetch_lw(self, m: FeedMonitor, html: str) -> list[FeedEntry]:
-        return m.fetch_feed(_xml("Sfkv6JF2ozmAkggKu", "[Crosspost] Against Something",
-                                 "https://www.lesswrong.com/posts/Sfkv6JF2ozmAkggKu/x",
-                                 html, _now() - timedelta(hours=2)),
-                            "Scott Alexander (LessWrong)", max_age_hours=48)
+        return m.fetch_feed(
+            rss("LessWrong", item("[Crosspost] Against Something",
+                                  "https://www.lesswrong.com/posts/Sfkv6JF2ozmAkggKu/x",
+                                  hours_ago=2, body=html, guid="Sfkv6JF2ozmAkggKu")),
+            "Scott Alexander (LessWrong)", max_age_hours=48)
 
     def test_a_crosspost_of_a_narrated_post_is_skipped(self, tmp_path, capsys):
         m = FeedMonitor(tmp_path / "posts.db")
@@ -101,10 +97,7 @@ class TestFetchSkipsCopies:
 
     def test_a_crosspost_of_a_post_waiting_for_narration_is_skipped(self, tmp_path):
         m = FeedMonitor(tmp_path / "posts.db")
-        acx = m.fetch_feed(_xml("acx-1", "Against Something",
-                                "https://www.astralcodexten.com/p/against-something",
-                                ACX_HTML, _now() - timedelta(hours=30)),
-                           "Scott Alexander", max_age_hours=48)
+        acx = m.fetch_feed(_acx_feed(), "Scott Alexander", max_age_hours=48)
         m.defer_entry(acx[0], "verbatim", "script", None, [])
         assert self._fetch_lw(m, LW_HTML) == []
 
