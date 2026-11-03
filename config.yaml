@@ -70,8 +70,9 @@ feeds:
       - "Forecasting Contest"
 
   # Scott also posts on LessWrong alone (as scott-alexander; "Against SURA",
-  # 31 Oct 2026, never reached the ACX feed). His older scottalexander account
-  # carries ACX crossposts under LessWrong links, which would be narrated twice.
+  # 31 Oct 2026, never reached the ACX feed). A LessWrong copy of an ACX post
+  # is skipped by its text (src/duplicates.py). His older scottalexander
+  # account is left out: since 2022 it has carried little but such copies.
   - name: "Scott Alexander (LessWrong)"
     url: "https://www.lesswrong.com/feed.xml?view=community-rss&userId=bhiuBaLXTcNB3R3xz"
     mode: "verbatim"
