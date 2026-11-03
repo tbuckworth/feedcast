@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 02 Nov 2026 09:50:40 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 05:33:50 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,49 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-03</title>
+      <description>Daily News Briefing - 2026-11-03
+
+Topics covered:
+- Anthropic has buried a striking warning in the fine print of its revised IPO filing, TechCrunch reports
+- Britain's cyber agency expects AI to sharpen the attacks to come
+- On Iran, American media report limited strikes late Monday on Qeshm Island, at the mouth of the strait of Hormuz
+- In Ukraine, Russian bombs struck a school in Komyshuvakha, in the Zaporizhzhia region, that served as a shelter and aid distribution point
+- AI infrastructure also drew the day's largest deal
+- Americans vote today, and Abu Dhabi and Qeshm will test whether this week's talk of diplomacy holds up</description>
+      <pubDate>Tue, 03 Nov 2026 05:32:43 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-03</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/eec09d0c711c_daily_news_briefing_-_2026-11-03.mp3" type="audio/mpeg" length="2770821" />
+      <itunes:duration>00:04:51</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-03.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Scott Alexander’s Against SURA Seems Deeply Confused” by Zvi</title>
+      <description>Audio version of “Scott Alexander’s Against SURA Seems Deeply Confused” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 02 Nov 2026 21:42:08 +0000</pubDate>
+      <guid isPermaLink="false">64f84fad-e540-4de6-a91f-871997d44bbe</guid>
+      <link>https://www.lesswrong.com/posts/ziMP83D2JYWRQ5jtu/scott-alexander-s-against-sura-seems-deeply-confused</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/986676afe7d4_scott_alexanders_against_sura_seems_deeply_confu.mp3" type="audio/mpeg" length="2581197" />
+      <itunes:duration>00:04:34</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Import AI 479: Spacewar; low-latency tasks versus LLMs; Genie 4</title>
+      <description>Audio version of Import AI 479: Spacewar; low-latency tasks versus LLMs; Genie 4 by Jack Clark from Import AI</description>
+      <pubDate>Mon, 02 Nov 2026 14:30:54 +0000</pubDate>
+      <guid>https://jack-clark.net/2026/11/02/import-ai-479-spacewar-low-latency-tasks-versus-llms-genie-4/</guid>
+      <link>https://jack-clark.net/2026/11/02/import-ai-479-spacewar-low-latency-tasks-versus-llms-genie-4/</link>
+      <itunes:author>Jack Clark</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bc31bff0ac2f_import_ai_479_spacewar_low-latency_tasks_versus.mp3" type="audio/mpeg" length="2634885" />
+      <itunes:duration>00:04:43</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Plan R: AI Safety by ASICs</title>
       <description>Audio version of Plan R: AI Safety by ASICs by Roko from www.lesswrong.com</description>
@@ -1016,25 +1059,6 @@ Topics covered:
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-05.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-04</title>
-      <description>Daily News Briefing - 2026-10-04
-
-Topics covered:
-- Another OpenAI safety insider has walked out, and this one is going public
-- OpenAI's cleanup from its agents' intrusions is turning out to be enormous
-- On energy, the BBC adds detail to the G7 deal
-- Brazil votes today in what polls show is a dead heat between eighty-year-old incumbent Lula da Silva and Flávio Bolsonaro, the far-right son of the former president, who is under house arrest after a coup conviction
-- In Kyiv, Russia struck a second major bridge on Saturday, damaging the Northern Bridge and briefly halting traffic
-- Tuesday's Sydney hearing will now put four AI companies under the same spotlight, not just one</description>
-      <pubDate>Sun, 04 Oct 2026 04:33:29 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-04</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/43d98aafae4e_daily_news_briefing_-_2026-10-04.mp3" type="audio/mpeg" length="2580453" />
-      <itunes:duration>00:04:33</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-04.txt" type="text/plain" />
     </item>
     <item>
       <title>On Social Reality in China</title>
