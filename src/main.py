@@ -14,6 +14,7 @@ from .audio import AudioGenerator
 from .bundle import write_bundle
 from .config import CONFIG_PATH, ROOT, Config, FeedConfig, load_config
 from .digest import safe_bullets
+from .duplicates import same_text, word_runs
 from .email_report import RunReport, send_report
 from .env import env_flag
 from .extractor import ExtractionError, url_to_feed_entry
@@ -599,10 +600,12 @@ def _take_newest(run: Run, fetched: list[tuple[FeedConfig, list[FeedEntry]]]) ->
 
     The others wait for a later run. `fetched` is in config order, where
     author feeds come before the aggregate ones, so a post two feeds carry
-    keeps its author's attribution.
+    keeps its author's attribution. Two feeds carry the same post when the
+    entries share an id, a link or their text (duplicates.same_text).
     """
     seen_ids: set[str] = set()
     seen_links: set[str] = set()
+    seen_texts: list[frozenset[int]] = []  # duplicates.word_runs of each entry taken
     for feed_config, entries in fetched:
         if not entries:
             continue
@@ -610,10 +613,13 @@ def _take_newest(run: Run, fetched: list[tuple[FeedConfig, list[FeedEntry]]]) ->
         if len(entries) > 1:
             print(f"  {feed_config.name}: taking only the newest, {entry.title}; held back "
                   f"for a later run: " + "; ".join(e.title for e in entries[:-1]))
-        if entry.id in seen_ids or (entry.link and entry.link in seen_links):
+        runs = word_runs(entry.content)
+        if (entry.id in seen_ids or (entry.link and entry.link in seen_links)
+                or any(same_text(runs, seen) for seen in seen_texts)):
             print(f"  Skipping duplicate: {entry.title}")
             continue
         seen_ids.add(entry.id)
+        seen_texts.append(runs)
         if entry.link:
             seen_links.add(entry.link)
         mode = feed_config.mode

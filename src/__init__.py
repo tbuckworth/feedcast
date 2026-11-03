@@ -3,9 +3,9 @@
 `python -m src.main` runs the pipeline in three phases:
 
 1. Collect. Fetch every feed in config.yaml in parallel and take each feed's
-   newest unseen entry within `max_age_hours`, deduplicating by id and by link
-   in config order. Add the entries that failed on earlier runs (table
-   `failed_entries`, found again with the age cutoff off, up to
+   newest unseen entry within `max_age_hours`, deduplicating by id, by link
+   and by text in config order. Add the entries that failed on earlier runs
+   (table `failed_entries`, found again with the age cutoff off, up to
    `FeedMonitor.MAX_ATTEMPTS` attempts) and write the day's news briefing.
    Then link rather than narrate posts too mathematical to follow by ear, and
    replace excerpt-only feed bodies with the full post. An injected URL
@@ -35,6 +35,7 @@ The modules, roughly in the order a run uses them:
 - config: the schema of config.yaml, and loading it.
 - env: on/off switches read from the environment.
 - monitor: feed fetching, and the SQLite database (data/posts.db) that holds the run state.
+- duplicates: whether two posts are one text published twice.
 - lesswrong: a LessWrong or Alignment Forum post's markdown, posting date and authors' full names, over GraphQL.
 - extractor: an article's text and metadata from any URL, for injected URLs.
 - news: the daily news briefing, from the configured news sources.

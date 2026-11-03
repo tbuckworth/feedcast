@@ -173,8 +173,13 @@ def feed_xml(*items: tuple[str, datetime | None]) -> str:
             f"<guid>https://example.com/{title.replace(' ', '-')}</guid>"
             f"<description>Body of {title}</description>{date}</item>"
         )
+    return rss("Test feed", *entries)
+
+
+def rss(title: str, *items: str) -> str:
+    """An RSS document holding `items`, each one RSS <item> element."""
     return ("<?xml version='1.0'?><rss version='2.0'><channel>"
-            "<title>Test feed</title>" + "".join(entries) + "</channel></rss>")
+            f"<title>{title}</title>" + "".join(items) + "</channel></rss>")
 
 
 class FakeTts:
@@ -259,13 +264,18 @@ class Model(FakeApi):
         return await super()._create(**kw)
 
 
-def item(title: str, link: str, hours_ago: float = 1.0, body: str = "") -> str:
-    """One RSS item; its body is a sentence about land value taxes unless `body` is given."""
+def item(title: str, link: str, hours_ago: float = 1.0, body: str = "",
+         guid: str | None = None) -> str:
+    """One RSS item, its guid `link` unless `guid` is given.
+
+    Its body, an HTML paragraph, is a sentence about land value taxes unless
+    `body` (HTML) is given.
+    """
     when = datetime.now(timezone.utc) - timedelta(hours=hours_ago)
     body = body or f"{title}: land value taxes work, and here is why."
-    return (f"<item><title>{title}</title><link>{link}</link><guid>{link}</guid>"
-            f"<description>&lt;p&gt;{body}&lt;/p&gt;"
-            f"</description><pubDate>{when:%a, %d %b %Y %H:%M:%S} GMT</pubDate></item>")
+    return (f"<item><title>{title}</title><link>{link}</link><guid>{guid or link}</guid>"
+            f"<description><![CDATA[<p>{body}</p>]]></description>"
+            f"<pubDate>{rfc822(when)}</pubDate></item>")
 
 
 class Pipeline:
@@ -287,8 +297,7 @@ class Pipeline:
     def feed(self, name: str, *items: str, mode: str = "verbatim") -> None:
         path = self.root / "feeds" / f"{name}.xml"
         path.parent.mkdir(exist_ok=True)
-        path.write_text("<?xml version='1.0'?><rss version='2.0'><channel>"
-                        f"<title>{name}</title>{''.join(items)}</channel></rss>")
+        path.write_text(rss(name, *items))
         self.feeds.append({"name": name, "url": str(path), "mode": mode})
 
     def news(self, *items: str) -> None:
@@ -299,8 +308,7 @@ class Pipeline:
         patches MarketScout._build after this.
         """
         path = self.root / "news.xml"
-        path.write_text("<?xml version='1.0'?><rss version='2.0'><channel><title>BBC</title>"
-                        + "".join(items) + "</channel></rss>")
+        path.write_text(rss("BBC", *items))
         self.briefing_sources = [{"name": "BBC", "url": str(path), "category": "politics"}]
 
         async def no_markets(scout, selected):

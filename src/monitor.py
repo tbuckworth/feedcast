@@ -12,6 +12,7 @@ from typing import Optional
 import feedparser
 
 from .bundle import bundle_path
+from .duplicates import same_text, word_runs
 
 
 MAX_AUTHORS = 5
@@ -517,6 +518,14 @@ class FeedMonitor:
             out.append(row)
         return out
 
+    def stored_texts(self) -> list[tuple[str, frozenset[int]]]:
+        """(title, duplicates.word_runs of the text) of every recorded and waiting post."""
+        with sqlite3.connect(self.db_path) as conn:
+            texts = conn.execute("SELECT title, content FROM processed_posts").fetchall()
+            texts += [(e["title"], e["content"]) for (raw,) in
+                      conn.execute("SELECT entry FROM deferred_entries") for e in [json.loads(raw)]]
+        return [(title, word_runs(content)) for title, content in texts if content]
+
     def is_deferred(self, entry_id: str = "", link: str = "") -> bool:
         """Whether a post is already waiting for narration, by id or link."""
         with sqlite3.connect(self.db_path) as conn:
@@ -634,6 +643,7 @@ class FeedMonitor:
         cutoff = (now_utc - timedelta(hours=max_age_hours)
                   if max_age_hours is not None else None)
         stale = undated = already = skipped = 0
+        stored = None  # stored_texts(), read when the first entry gets that far
 
         for entry in feed.entries:
             entry_id = entry.get("id") or entry.get("link", "")
@@ -677,6 +687,16 @@ class FeedMonitor:
             # Without this the curated copy is narrated a second time.
             link = entry.get("link", "")
             if self.is_processed(link=link) or self.is_deferred(link=link):
+                already += 1
+                continue
+
+            # A repost under a new link: see src/duplicates.py.
+            if stored is None:
+                stored = self.stored_texts()
+            runs = word_runs(content)
+            copy_of = next((t for t, s in stored if same_text(runs, s)), None)
+            if copy_of is not None:
+                print(f"  {feed_name}: skipping {title}: the same text as {copy_of}")
                 already += 1
                 continue
 
