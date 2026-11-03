@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Tue, 03 Nov 2026 05:35:40 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 06:59:55 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,18 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Against SURA</title>
+      <description>Audio version of Against SURA by Scott Alexander from www.lesswrong.com</description>
+      <pubDate>Tue, 03 Nov 2026 06:57:11 +0000</pubDate>
+      <guid isPermaLink="false">injected-0494f7ae6d64afd2</guid>
+      <link>https://www.lesswrong.com/posts/xikGZ8fuhdG6DApAo/against-sura</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/cb1b2db0ab7f_against_sura.mp3" type="audio/mpeg" length="37724757" />
+      <itunes:duration>01:07:07</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-03</title>
       <description>Daily News Briefing - 2026-11-03
