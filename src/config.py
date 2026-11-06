@@ -6,6 +6,7 @@ out means "none" or "off". Unknown keys are refused, so a misspelt setting
 fails loading instead of quietly being ignored.
 """
 
+from datetime import time
 from pathlib import Path
 from typing import Literal
 
@@ -107,6 +108,26 @@ class TTSConfig(_Strict):
         return ROOT / self.voice_sample
 
 
+class WatchdogConfig(_Strict):
+    """When scripts/watchdog.py, run by the desktop crontab, launches an agent.
+
+    The times are clock times in `timezone`, the crontab's.
+    """
+
+    timezone: str
+    # No run of the daily workflow by now: the 05:30 dispatch did not happen.
+    no_run_after: time
+    # The email or the briefing's audio still not out by now is a failure, not
+    # a slow run.
+    late_after: time
+    # A run still going by now (a narration that hangs) is a failure.
+    stop_watching_at: time
+    # When Titus starts listening: the launched agent's deadline.
+    ready_by: time
+    # Seconds between looks at the run and the live feed.
+    poll_seconds: PositiveInt
+
+
 class Config(_Strict):
     """Full application configuration."""
 
@@ -127,6 +148,12 @@ class Config(_Strict):
     tts: TTSConfig
     # Word -> spelling the voice says right, applied to the spoken text only.
     pronunciations: dict[str, str] = {}
+    watchdog: WatchdogConfig
+
+    @property
+    def briefing_enabled(self) -> bool:
+        """Whether a run writes a daily news briefing."""
+        return self.news_briefing is not None and self.news_briefing.enabled
 
 
 def load_config(config_path: Path = CONFIG_PATH) -> Config:

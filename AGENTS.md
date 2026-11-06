@@ -40,6 +40,7 @@ Entry points:
 - `scripts/model_upgrade_test.py`: replays a saved writer bundle through candidate model setups and meters each call.
 - `scripts/pronunciation_check.py`: measures how the cloned voice says a word.
 - `scripts/cron-backstop.sh`: run by the desktop crontab; dispatches the daily run when no run exists for the UTC day.
+- `scripts/cron-watchdog.sh` (`scripts/watchdog.py`): run by the desktop crontab after the backstop; launches a Feedcast agent when the morning's email or episodes are not out.
 - `scripts/ci-commit-and-push.sh`: commits a pass's results to `main` and the database and MP3s to `state`.
 - `scripts/ci-install-ffmpeg.sh`: installs ffmpeg on a runner, with timeouts and retries.
 - `scripts/publish-audio.sh`: copies the MP3s into the site and fails if `feed.xml` lists one that is missing.

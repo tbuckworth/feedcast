@@ -692,7 +692,7 @@ async def _requeue_failures(run: Run) -> None:
 async def _add_briefing(run: Run) -> None:
     """Write today's news briefing, if configured, and narrate it first."""
     config = run.config
-    if not (config.news_briefing and config.news_briefing.enabled):
+    if not config.briefing_enabled:
         return
     recent_briefings = run.monitor.get_recent_briefings(5)
     aggregator = _make_aggregator(config, run.monitor, recent_briefings)
@@ -995,7 +995,7 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
     a dev run, so it goes to FEEDCAST_EMAIL_TO only. Nothing is narrated, and
     nothing is written to the database, the feed or the site.
     """
-    if not (config.news_briefing and config.news_briefing.enabled):
+    if not config.briefing_enabled:
         print("Preview: the news briefing is disabled in config.yaml")
         return
     aggregator = _make_aggregator(config, monitor, monitor.get_recent_briefings(5))
