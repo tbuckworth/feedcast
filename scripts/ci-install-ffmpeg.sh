@@ -27,6 +27,7 @@ APT_OPTS=(
   -o Acquire::https::Timeout=20
   -o Acquire::ForceIPv4=true
   -o "Dir::Cache::Archives=$cache"
+  -o APT::Keep-Downloaded-Packages=true
 )
 install_ffmpeg() {
   echo "::group::ffmpeg install"
@@ -41,4 +42,5 @@ retry "Installing ffmpeg" 3 10 "" install_ffmpeg || exit 1
 # leave out its lock and partial downloads.
 sudo chown -R "$(id -u):$(id -g)" "$cache" || exit 1
 rm -rf "$cache/partial" "$cache/lock" || exit 1
+echo "ffmpeg packages cached for the next run: $(ls "$cache" | grep -c '\.deb$')"
 ffmpeg -version | head -1
