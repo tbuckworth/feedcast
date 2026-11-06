@@ -104,10 +104,18 @@ On/off variables count as on when set to `true`, `1` or `yes`. In CI, the `env:`
 | `pronunciations` | Words the voice gets wrong, mapped to spellings it says right; applied to the audio only |
 | `prediction_markets` | Prediction-market odds on the briefing's stories and a segment on big unexplained moves (`src/markets.py`) |
 | `news_briefing` | The daily briefing: `enabled`, `lookback_hours`, how many stories the writer reads in full (`full_text_stories`, each capped at `max_article_chars`), its `prompt`, and its `sources` |
+| `watchdog` | When `scripts/watchdog.py` launches an agent: clock times in `timezone` for no run yet (`no_run_after`), a late email or briefing (`late_after`), a run still going (`stop_watching_at`), the agent's deadline (`ready_by`), and `poll_seconds` |
 
 ## CI
 
 `.github/workflows/update-feed.yml` runs the pipeline daily at 03:43 UTC. GitHub's schedule can fire hours late or not at all, so `scripts/cron-backstop.sh`, run by the desktop crontab at 05:30 Europe/London, dispatches the workflow when no run exists for the UTC day.
+
+`scripts/cron-watchdog.sh`, run by the desktop crontab at 05:33 Europe/London, runs `scripts/watchdog.py`. That script watches the day's runs and the live feed, and starts a Feedcast agent with `agent-spawn` when a job fails, or when the email or the briefing's audio is not out by `watchdog.late_after` in `config.yaml`. Its log is `logs/watchdog.log`, and the briefs it writes are in `logs/watchdog/`. The crontab lines:
+
+```
+30 5 * * * /home/titus/pyg/feedcast/scripts/cron-backstop.sh >> /home/titus/pyg/feedcast/logs/cron-backstop.log 2>&1
+33 5 * * * /home/titus/pyg/feedcast/scripts/cron-watchdog.sh >> /home/titus/pyg/feedcast/logs/watchdog.log 2>&1
+```
 
 One run publishes per UTC day: the `guard` job stops a run when another run that day has already published, so the backstop and a late scheduled run do not both email. A hand run, one dispatched with any input the workflow's `ON_DEMAND` expression names, is not guarded, and is a dev run (`FEEDCAST_TEST_RUN`) unless `notify_list` is ticked. Runs queue behind one another in the `feedcast-pipeline` concurrency group.
 

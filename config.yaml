@@ -266,3 +266,17 @@ news_briefing:
     # Import AI is a feed of its own above. Left here too, the Tuesday briefing
     # would retell a story from that morning's Import AI episode (it picked an
     # issue 3 weeks in 4 and told one of its stories on 13 and 20 Oct).
+
+# scripts/watchdog.py, run by the desktop crontab after scripts/cron-backstop.sh
+# dispatches the daily run, launches a Feedcast agent when that run fails, or
+# when the email or the briefing's audio is not out by late_after. Clock times
+# in `timezone`. Normal mornings (October-November 2026) had the email out by
+# 05:44 and every episode live by 05:47, and a recovery run takes about 10
+# minutes.
+watchdog:
+  timezone: Europe/London
+  no_run_after: "05:36"
+  late_after: "05:55"
+  stop_watching_at: "08:30"
+  ready_by: "06:35"
+  poll_seconds: 60
