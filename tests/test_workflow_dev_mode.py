@@ -193,9 +193,15 @@ def test_verbatim_posts_are_narrated_and_published_after_the_first_deploy():
     publish = yaml.safe_load(PUBLISH.read_text())
     on = publish.get("on") or publish.get(True)
     assert "workflow_call" in on
-    uses = {s.get("uses", "").split("@")[0]: s for s in publish["jobs"]["publish"]["steps"]}
-    assert uses["actions/upload-pages-artifact"]["with"]["name"] == "${{ inputs.artifact_name }}"
-    assert uses["actions/deploy-pages"]["with"]["artifact_name"] == "${{ inputs.artifact_name }}"
+    job = publish["jobs"]["publish"]
+    uses = {s.get("uses", "").split("@")[0]: s for s in job["steps"]}
+    # Nor can it across attempts: re-running a failed job adds an artifact
+    # beside the earlier attempt's, and deploy-pages refuses to choose between
+    # same-named ones (2026-11-06). So the name carries the attempt.
+    assert job["env"]["PAGES_ARTIFACT"] == \
+        "${{ inputs.artifact_name }}-attempt-${{ github.run_attempt }}"
+    assert uses["actions/upload-pages-artifact"]["with"]["name"] == "${{ env.PAGES_ARTIFACT }}"
+    assert uses["actions/deploy-pages"]["with"]["artifact_name"] == "${{ env.PAGES_ARTIFACT }}"
 
 
 def test_narrate_job_gets_the_same_secrets_the_pipeline_needs_to_narrate():
@@ -275,6 +281,79 @@ def test_every_job_that_runs_python_shares_one_setup():
     assert wf["jobs"]["check-llm"]["steps"][1]["with"] == {"pipeline": False}
     assert "with" not in wf["jobs"]["update"]["steps"][1]
     assert "with" not in wf["jobs"]["narrate"]["steps"][1]
+
+
+def test_the_ffmpeg_packages_are_cached_between_runs():
+    """The cache is restored before the install, which keeps what apt
+    fetches in that directory, and saved after it when the key was new."""
+    steps = yaml.safe_load(SETUP_ACTION.read_text())["runs"]["steps"]
+    names = [s.get("name") for s in steps]
+    restore = steps[names.index("Restore the ffmpeg packages")]
+    install = steps[names.index("Install ffmpeg")]
+    save = steps[names.index("Save the ffmpeg packages")]
+    assert names.index("Restore the ffmpeg packages") < names.index("Install ffmpeg") \
+        < names.index("Save the ffmpeg packages")
+    assert restore["uses"].startswith("actions/cache/restore@")
+    assert save["uses"].startswith("actions/cache/save@")
+    assert restore["with"]["path"] == save["with"]["path"] == install["env"]["FFMPEG_DEB_CACHE"]
+    assert save["with"]["key"] == restore["with"]["key"]
+    assert save["if"] == (f"inputs.pipeline == 'true' && "
+                          f"steps.{restore['id']}.outputs.cache-hit != 'true'")
+    for step in (restore, install, save):
+        assert step["if"].startswith("inputs.pipeline == 'true'"), step
+
+
+def test_the_ffmpeg_install_keeps_its_packages_in_the_cache_directory(tmp_path):
+    """Run scripts/ci-install-ffmpeg.sh with stand-ins for sudo and apt-get,
+    which need root and the network. The stand-in apt-get puts the package it
+    "downloads" where Dir::Cache::Archives points (apt's default is
+    /var/cache/apt/archives) and refuses, as apt does, a directory without
+    partial/."""
+    script = WORKFLOW.parent.parent.parent / "scripts" / "ci-install-ffmpeg.sh"
+    bin_dir, cache, log = tmp_path / "bin", tmp_path / "debs", tmp_path / "apt.log"
+    bin_dir.mkdir()
+    # Only the stand-ins and the plain tools they and the script use, so that an
+    # ffmpeg installed on this machine is not found.
+    for tool in ("bash", "timeout", "mkdir", "rm", "chown", "id", "sleep", "head",
+                 "dirname", "ls", "grep", "touch", "chmod"):
+        (bin_dir / tool).symlink_to(subprocess.run(["which", tool], capture_output=True,
+                                                   text=True, check=True).stdout.strip())
+    (bin_dir / "sudo").write_text('#!/bin/bash\nexec "$@"\n')
+    (bin_dir / "apt-get").write_text(
+        "#!/bin/bash\n"
+        f'echo "$@" >> {log}\n'
+        'archives=/var/cache/apt/archives\n'
+        'for arg in "$@"; do [[ "$arg" == Dir::Cache::Archives=* ]] && archives="${arg#*=}"; done\n'
+        '[[ " $* " == *" install "* ]] || exit 0\n'
+        '[[ -d "$archives/partial" ]] || { echo "E: Archives directory $archives/partial is missing"; exit 100; }\n'
+        'touch "$archives/ffmpeg_6.1.1_amd64.deb" "$archives/lock"\n'
+        f'printf \'#!/bin/bash\\necho "ffmpeg version 6.1.1"\\n\' > {bin_dir}/ffmpeg\n'
+        f'chmod +x {bin_dir}/ffmpeg\n')
+    for stand_in in ("sudo", "apt-get"):
+        (bin_dir / stand_in).chmod(0o755)
+
+    result = subprocess.run([str(script)], capture_output=True, text=True,
+                            env={"PATH": str(bin_dir), "FFMPEG_DEB_CACHE": str(cache)})
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "ffmpeg version 6.1.1" in result.stdout
+    # What actions/cache/save archives: the packages, not apt's lock or
+    # partial downloads.
+    assert sorted(p.name for p in cache.iterdir()) == ["ffmpeg_6.1.1_amd64.deb"]
+    assert all(f"Dir::Cache::Archives={cache}" in line for line in log.read_text().splitlines())
+
+
+def test_the_ffmpeg_install_needs_its_cache_directory(tmp_path):
+    script = WORKFLOW.parent.parent.parent / "scripts" / "ci-install-ffmpeg.sh"
+    bin_dir = tmp_path / "bin"
+    bin_dir.mkdir()
+    for tool in ("bash", "dirname"):
+        (bin_dir / tool).symlink_to(subprocess.run(["which", tool], capture_output=True,
+                                                   text=True, check=True).stdout.strip())
+    result = subprocess.run([str(script)], capture_output=True, text=True,
+                            env={"PATH": str(bin_dir)})
+    assert result.returncode != 0
+    assert "FFMPEG_DEB_CACHE" in result.stderr
 
 
 def _guard(tmp_path, runs: dict) -> str:
