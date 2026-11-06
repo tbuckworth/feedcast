@@ -3,7 +3,9 @@ name: Publish to GitHub Pages
 # Called by update-feed.yml twice a run: once after the first pass (briefing
 # and summaries), once after the narration pass (posts read out in full).
 # Each call needs its own artifact name, because one workflow run cannot hold
-# two artifacts with the same name.
+# two artifacts with the same name. Nor can its attempts: re-running a failed
+# publish uploads beside the earlier attempt's artifact, and deploy-pages
+# then refuses both (2026-11-06), so the name also carries the attempt.
 
 on:
   workflow_call:
@@ -25,6 +27,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      PAGES_ARTIFACT: ${{ inputs.artifact_name }}-attempt-${{ github.run_attempt }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -44,14 +48,14 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: ${{ inputs.artifact_name }}
+          name: ${{ env.PAGES_ARTIFACT }}
           path: output
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: ${{ inputs.artifact_name }}
+          artifact_name: ${{ env.PAGES_ARTIFACT }}
 
       # Podcast apps do not poll on our schedule. Pocket Casts fetches feeds
       # server-side and, for a small private feed, only every few hours — so

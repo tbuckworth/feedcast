@@ -193,9 +193,15 @@ def test_verbatim_posts_are_narrated_and_published_after_the_first_deploy():
     publish = yaml.safe_load(PUBLISH.read_text())
     on = publish.get("on") or publish.get(True)
     assert "workflow_call" in on
-    uses = {s.get("uses", "").split("@")[0]: s for s in publish["jobs"]["publish"]["steps"]}
-    assert uses["actions/upload-pages-artifact"]["with"]["name"] == "${{ inputs.artifact_name }}"
-    assert uses["actions/deploy-pages"]["with"]["artifact_name"] == "${{ inputs.artifact_name }}"
+    job = publish["jobs"]["publish"]
+    uses = {s.get("uses", "").split("@")[0]: s for s in job["steps"]}
+    # Nor can it across attempts: re-running a failed job adds an artifact
+    # beside the earlier attempt's, and deploy-pages refuses to choose between
+    # same-named ones (2026-11-06). So the name carries the attempt.
+    assert job["env"]["PAGES_ARTIFACT"] == \
+        "${{ inputs.artifact_name }}-attempt-${{ github.run_attempt }}"
+    assert uses["actions/upload-pages-artifact"]["with"]["name"] == "${{ env.PAGES_ARTIFACT }}"
+    assert uses["actions/deploy-pages"]["with"]["artifact_name"] == "${{ env.PAGES_ARTIFACT }}"
 
 
 def test_narrate_job_gets_the_same_secrets_the_pipeline_needs_to_narrate():
