@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Thu, 05 Nov 2026 05:33:40 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 08:59:51 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-06</title>
+      <description>Daily News Briefing - 2026-11-06
+
+Topics covered:
+- The outside evaluator METR now says AI is already speeding up AI research at Anthropic
+- Washington's new politics are already hitting the industry
+- Investors took it badly
+- OpenAI also launched GPT-6 Cyber, a model for finding and fixing exploitable vulnerabilities
+- Infrastructure attacks are widening
+- On Iran, BBC Verify analysis of satellite images suggests major excavation near the Karaj and Shahroud missile bases, along with repairs at a dozen other sites</description>
+      <pubDate>Fri, 06 Nov 2026 08:58:44 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-06</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/209454b9c428_daily_news_briefing_-_2026-11-06.mp3" type="audio/mpeg" length="3087741" />
+      <itunes:duration>00:05:25</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-06.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“AI #193: Progress May Dramatically Accelerate” by Zvi</title>
+      <description>Audio version of “AI #193: Progress May Dramatically Accelerate” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 05 Nov 2026 18:42:12 +0000</pubDate>
+      <guid isPermaLink="false">f710ab88-b2cc-498c-b494-03b65b7d2c3f</guid>
+      <link>https://www.lesswrong.com/posts/NrQGzNcicMThuGEEM/ai-193-progress-may-dramatically-accelerate</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/893a9b35fa8a_ai_193_progress_may_dramatically_accelerate_by.mp3" type="audio/mpeg" length="2608101" />
+      <itunes:duration>00:04:37</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-05</title>
       <description>Daily News Briefing - 2026-11-05
@@ -1062,49 +1093,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ee6ce7cf8e66_the_curve_bends_you_by_zvi.mp3" type="audio/mpeg" length="2284845" />
       <itunes:duration>00:04:04</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-07</title>
-      <description>Daily News Briefing - 2026-10-07
-
-Topics covered:
-- A human accomplice has surfaced in the Canadian school shooting that became infamous for its links to ChatGPT
-- OpenAI is also bowing to European law
-- On capabilities, OpenAI has released seven hundred twenty-two manuscripts from an unreleased frontier model
-- The Black Sea war has spilled into NATO waters
-- Ebola has crossed into a new country
-- On Wall Street, the S&amp;P five hundred topped seven thousand eight hundred for the first time, as chipmaker gains and easing Treasury yields lifted both it and the Nasdaq to records</description>
-      <pubDate>Wed, 07 Oct 2026 04:32:48 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-07</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b0a2ab3809c5_daily_news_briefing_-_2026-10-07.mp3" type="audio/mpeg" length="2738181" />
-      <itunes:duration>00:04:49</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-07.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“Childhood and Education #21: Grades and Standards” by Zvi</title>
-      <description>Audio version of “Childhood and Education #21: Grades and Standards” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 06 Oct 2026 22:02:26 +0000</pubDate>
-      <guid isPermaLink="false">d28ecf39-900c-4d20-a9b4-831330d1e983</guid>
-      <link>https://www.lesswrong.com/posts/QXmyxaQnB57reu7ie/childhood-and-education-21-grades-and-standards</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c67677c548d3_childhood_and_education_21_grades_and_standards.mp3" type="audio/mpeg" length="2218989" />
-      <itunes:duration>00:03:55</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>An Open Letter To Steven Pinker On AI</title>
-      <description>Audio version of An Open Letter To Steven Pinker On AI from Scott Alexander</description>
-      <pubDate>Tue, 06 Oct 2026 21:23:06 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/an-open-letter-to-steven-pinker-on</guid>
-      <link>https://www.astralcodexten.com/p/an-open-letter-to-steven-pinker-on</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4b6284bac42a_an_open_letter_to_steven_pinker_on_ai.mp3" type="audio/mpeg" length="40487877" />
-      <itunes:duration>01:11:59</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
