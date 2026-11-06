@@ -1,6 +1,7 @@
 """scripts/watchdog.py: when the morning watchdog launches an agent."""
 
 import os
+import subprocess
 from datetime import UTC, date, datetime, time
 from pathlib import Path
 
@@ -176,11 +177,104 @@ def test_launch_writes_the_brief_and_starts_an_agent_on_this_checkout(tmp_path, 
 
 
 def test_a_failed_launch_fails_loudly(tmp_path, monkeypatch):
+    """A stand-in agent-spawn (the real one starts an agent) that fails."""
     bin_dir = tmp_path / "bin"
     bin_dir.mkdir()
     (bin_dir / "agent-spawn").write_text("#!/bin/bash\nexit 1\n")
     (bin_dir / "agent-spawn").chmod(0o755)
     monkeypatch.setenv("PATH", f"{bin_dir}{os.pathsep}{os.environ['PATH']}")
     monkeypatch.setattr(watchdog, "BRIEF_DIR", tmp_path / "briefs")
-    with pytest.raises(Exception, match="agent-spawn"):
+    with pytest.raises(subprocess.CalledProcessError, match="agent-spawn"):
         watchdog.launch("x", [], DAY, CFG, "https://example.test/feed.xml")
+
+
+def _gh(tmp_path, monkeypatch, runs: list[dict] | None) -> None:
+    """A stand-in gh (the real one reads GitHub) that knows today's runs:
+    each {"databaseId", "status", "url", "jobs": [{"name", "conclusion"}]},
+    as the Actions API gives them. None makes every call fail, as gh does
+    when GitHub does not answer."""
+    bin_dir = tmp_path / "bin"
+    bin_dir.mkdir()
+    gh = bin_dir / "gh"
+    gh.write_text(
+        "#!/usr/bin/env python3\n"
+        "import json, sys\n"
+        f"runs = {runs!r}\n"
+        "if runs is None: sys.exit('gh: could not connect')\n"
+        "args = sys.argv[1:]\n"
+        "if args[:2] == ['run', 'list']:\n"
+        "    print(json.dumps([{k: r[k] for k in ('databaseId', 'status', 'url')} for r in runs]))\n"
+        "else:\n"
+        "    (run,) = [r for r in runs if f\"/runs/{r['databaseId']}/jobs\" in args[1]]\n"
+        "    print(json.dumps({'jobs': run['jobs']}))\n")
+    gh.chmod(0o755)
+    monkeypatch.setenv("PATH", f"{bin_dir}{os.pathsep}{os.environ['PATH']}")
+
+
+def _site(feed_xml: str, statuses: dict[str, int], heads: list[str]) -> httpx.Client:
+    """The live site, which a test cannot reach: the feed, and each audio
+    file's status. `heads` records which audio was asked for."""
+    def answer(request: httpx.Request) -> httpx.Response:
+        name = request.url.path.rsplit("/", 1)[-1]
+        if name == "feed.xml":
+            return httpx.Response(200, text=feed_xml)
+        heads.append(name)
+        return httpx.Response(statuses[name])
+    return httpx.Client(transport=httpx.MockTransport(answer))
+
+
+FEED_URL = "https://example.test/feedcast/feed.xml"
+JOBS_DONE = [{"name": "guard", "conclusion": "success"},
+             {"name": "update", "conclusion": "success"},
+             {"name": "deploy / publish", "conclusion": "success"}]
+
+
+def test_a_look_reads_the_runs_and_the_feed(tmp_path, monkeypatch):
+    _gh(tmp_path, monkeypatch, [{"databaseId": 7, "status": "completed",
+                                 "url": "https://github.com/x/runs/7", "jobs": JOBS_DONE}])
+    heads: list[str] = []
+    client = _site(_feed(tmp_path, briefing=True), {"briefing.mp3": 200, "post.mp3": 200}, heads)
+    verdict, runs = watchdog.look(client, FEED_URL, DAY, EARLY, CFG, True)
+    assert verdict.action == "healthy"
+    assert runs == [Run(url="https://github.com/x/runs/7", status="completed",
+                        jobs={"guard": "success", "update": "success",
+                              "deploy / publish": "success"})]
+    assert sorted(heads) == ["briefing.mp3", "briefing.mp3", "post.mp3"]
+
+
+def test_a_look_checks_every_episode_only_once_the_runs_have_finished(tmp_path, monkeypatch):
+    jobs = JOBS_DONE + [{"name": "narrate", "conclusion": None}]
+    _gh(tmp_path, monkeypatch, [{"databaseId": 7, "status": "in_progress",
+                                 "url": "https://github.com/x/runs/7", "jobs": jobs}])
+    heads: list[str] = []
+    client = _site(_feed(tmp_path, briefing=True), {"briefing.mp3": 200}, heads)
+    verdict, _ = watchdog.look(client, FEED_URL, DAY, EARLY, CFG, True)
+    assert verdict.action == "wait" and heads == ["briefing.mp3"]
+
+
+def test_a_look_without_a_briefing_expected_does_not_ask_for_one(tmp_path, monkeypatch):
+    _gh(tmp_path, monkeypatch, [{"databaseId": 7, "status": "completed",
+                                 "url": "https://github.com/x/runs/7", "jobs": JOBS_DONE}])
+    heads: list[str] = []
+    client = _site(_feed(tmp_path, briefing=False), {"post.mp3": 200}, heads)
+    verdict, _ = watchdog.look(client, FEED_URL, DAY, EARLY, CFG, False)
+    assert verdict.action == "healthy" and heads == ["post.mp3"]
+
+
+def test_a_look_that_cannot_reach_github_waits_then_launches(tmp_path, monkeypatch):
+    _gh(tmp_path, monkeypatch, None)
+    client = _site("", {}, [])
+    assert watchdog.look(client, FEED_URL, DAY, EARLY, CFG, True)[0].action == "wait"
+    verdict, runs = watchdog.look(client, FEED_URL, DAY, LATE, CFG, True)
+    assert verdict.action == "launch" and "could not read" in verdict.reason and runs == []
+
+
+def test_a_look_that_cannot_reach_the_site_waits_then_launches(tmp_path, monkeypatch):
+    _gh(tmp_path, monkeypatch, [])
+
+    def refuse(request: httpx.Request) -> httpx.Response:
+        raise httpx.ConnectError("connection refused", request=request)
+    client = httpx.Client(transport=httpx.MockTransport(refuse))
+    assert watchdog.look(client, FEED_URL, DAY, EARLY, CFG, True)[0].action == "wait"
+    verdict, _ = watchdog.look(client, FEED_URL, DAY, LATE, CFG, True)
+    assert verdict.action == "launch" and "connection refused" in verdict.reason

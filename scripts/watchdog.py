@@ -15,8 +15,9 @@ gh) and the live feed, and it stops at the first of these:
   an agent on this checkout with agent-spawn.
 
 A look that fails (GitHub or the site not answering) is logged and retried at
-the next poll; one that still fails at `late_after` is itself a launch.
-Settings: `watchdog` in config.yaml.
+the next poll; one that still fails at `late_after` is itself a launch, and so
+is an error the watchdog does not expect. A day whose news gave no briefing
+launches an agent too. Settings: `watchdog` in config.yaml.
 
     uv run python -m scripts.watchdog
 """
@@ -170,35 +171,47 @@ def launch(reason: str, runs: list[Run], day: date, cfg: WatchdogConfig, live_fe
     subprocess.run(command, check=True, timeout=600)
 
 
+def look(client: httpx.Client, live_feed: str, day: date, now: clock, cfg: WatchdogConfig,
+         briefing_expected: bool) -> tuple[Verdict, list[Run]]:
+    """One look at today's runs and the live feed, and what to do about them.
+
+    A look that fails (GitHub or the site not answering) waits for the next
+    poll, and from `late_after` on it is itself a launch.
+    """
+    try:
+        runs = todays_runs(day)
+        # The query string gets past the site's 10-minute cache.
+        feed = client.get(live_feed, params={"watchdog": int(time.time())})
+        feed.raise_for_status()
+        items = enclosures(feed.text)
+        problem = briefing_problem(client, items, day) if briefing_expected else ""
+        done = bool(runs) and all(run.status == "completed" for run in runs)
+        broken = broken_audio(client, items) if done else []
+    except (subprocess.SubprocessError, httpx.HTTPError, ET.ParseError,
+            json.JSONDecodeError) as error:
+        log.warning("Could not read the runs or the live feed: %s", error)
+        reason = f"the watchdog could not read the runs or the live feed: {error}"
+        return Verdict("launch" if now >= cfg.late_after else "wait", reason), []
+    return assess(runs, problem, broken, now, cfg), runs
+
+
 def main() -> int:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     config = load_config()
     cfg = config.watchdog
-    briefing_expected = config.news_briefing is not None and config.news_briefing.enabled
     url = feed_url(config.podcast.base_url)
     with httpx.Client(timeout=30) as client:
         while True:
             day = datetime.now(UTC).date()
             now = datetime.now(ZoneInfo(cfg.timezone)).time()
             try:
-                runs = todays_runs(day)
-                # The query string gets past the site's 10-minute cache.
-                feed = client.get(url, params={"watchdog": int(time.time())})
-                feed.raise_for_status()
-                items = enclosures(feed.text)
-                problem = briefing_problem(client, items, day) if briefing_expected else ""
-                done = bool(runs) and all(run.status == "completed" for run in runs)
-                broken = broken_audio(client, items) if done else []
-            except (subprocess.SubprocessError, httpx.HTTPError, ET.ParseError,
-                    json.JSONDecodeError) as error:
-                log.warning("Could not read the runs or the live feed: %s", error)
-                if now >= cfg.late_after:
-                    launch(f"the watchdog could not read the runs or the live feed: {error}",
-                           [], day, cfg, url)
-                    return 0
-                time.sleep(cfg.poll_seconds)
-                continue
-            verdict = assess(runs, problem, broken, now, cfg)
+                verdict, runs = look(client, url, day, now, cfg, config.briefing_enabled)
+            except Exception as error:
+                # A watchdog that dies unseen is the failure it exists to
+                # prevent: launch, then fail as loudly as before.
+                log.exception("The watchdog failed")
+                launch(f"the watchdog itself failed: {error!r}", [], day, cfg, url)
+                raise
             log.info("%s: %s", verdict.action, verdict.reason)
             if verdict.action == "healthy":
                 return 0

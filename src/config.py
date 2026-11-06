@@ -150,6 +150,11 @@ class Config(_Strict):
     pronunciations: dict[str, str] = {}
     watchdog: WatchdogConfig
 
+    @property
+    def briefing_enabled(self) -> bool:
+        """Whether a run writes a daily news briefing."""
+        return self.news_briefing is not None and self.news_briefing.enabled
+
 
 def load_config(config_path: Path = CONFIG_PATH) -> Config:
     """Load configuration from YAML file."""
