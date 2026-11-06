@@ -36,10 +36,39 @@ runs:
     - name: Install uv
       uses: astral-sh/setup-uv@v4
 
+    # The packages apt fetches for ffmpeg, kept between runs because the
+    # mirror can trickle them too slowly to install (scripts/ci-install-ffmpeg.sh).
+    # The key names the runner image, whose package versions it matches; on a
+    # new image the previous image's packages are restored, apt fetches only
+    # those that changed, and the result is saved under the new key.
+    - name: Name the ffmpeg package cache
+      if: inputs.pipeline == 'true'
+      id: ffmpeg-cache-key
+      shell: bash
+      run: timeout 1m bash -c 'echo "prefix=ffmpeg-debs-${ImageOS}-" >> "$GITHUB_OUTPUT"; echo "key=ffmpeg-debs-${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"'
+
+    - name: Restore the ffmpeg packages
+      if: inputs.pipeline == 'true'
+      id: ffmpeg-cache
+      uses: actions/cache/restore@v4
+      with:
+        path: ${{ runner.temp }}/ffmpeg-debs
+        key: ${{ steps.ffmpeg-cache-key.outputs.key }}
+        restore-keys: ${{ steps.ffmpeg-cache-key.outputs.prefix }}
+
     - name: Install ffmpeg
       if: inputs.pipeline == 'true'
       shell: bash
+      env:
+        FFMPEG_DEB_CACHE: ${{ runner.temp }}/ffmpeg-debs
       run: timeout -v 12m scripts/ci-install-ffmpeg.sh
+
+    - name: Save the ffmpeg packages
+      if: inputs.pipeline == 'true' && steps.ffmpeg-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        path: ${{ runner.temp }}/ffmpeg-debs
+        key: ${{ steps.ffmpeg-cache-key.outputs.key }}
 
     - name: Install dependencies
       shell: bash
