@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Fri, 06 Nov 2026 08:59:51 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 09:18:09 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -155,6 +155,18 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/986676afe7d4_scott_alexanders_against_sura_seems_deeply_confu.mp3" type="audio/mpeg" length="2581197" />
       <itunes:duration>00:04:34</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Towards understanding score-seeking in LLMs</title>
+      <description>Audio version of Towards understanding score-seeking in LLMs by Alex Mallen from LessWrong Curated</description>
+      <pubDate>Mon, 02 Nov 2026 19:51:55 +0000</pubDate>
+      <guid isPermaLink="false">CDMozTX7ShiqbFLrf</guid>
+      <link>https://www.lesswrong.com/posts/CDMozTX7ShiqbFLrf/towards-understanding-score-seeking-in-llms-1</link>
+      <itunes:author>Alex Mallen</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/41ae976a2c78_towards_understanding_score-seeking_in_llms.mp3" type="audio/mpeg" length="13180941" />
+      <itunes:duration>00:23:05</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
