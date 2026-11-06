@@ -150,15 +150,22 @@ def test_broken_audio_lists_only_what_does_not_answer(tmp_path):
     assert len(broken) == 1 and "post.mp3" in broken[0] and "404" in broken[0]
 
 
-def test_launch_writes_the_brief_and_starts_an_agent_on_this_checkout(tmp_path, monkeypatch):
-    """agent-spawn starts a real agent, so a stand-in records what it was given."""
-    bin_dir, args_log = tmp_path / "bin", tmp_path / "args"
+def _spawn(tmp_path, monkeypatch, exit_status: int) -> Path:
+    """A stand-in agent-spawn (the real one starts an agent) that records
+    its arguments in the returned file and exits with `exit_status`. Briefs
+    go to tmp_path/briefs."""
+    bin_dir, args_log = tmp_path / "spawn-bin", tmp_path / "args"
     bin_dir.mkdir()
     spawn = bin_dir / "agent-spawn"
-    spawn.write_text(f'#!/bin/bash\nprintf "%s\\n" "$@" > {args_log}\n')
+    spawn.write_text(f'#!/bin/bash\nprintf "%s\\n" "$@" > {args_log}\nexit {exit_status}\n')
     spawn.chmod(0o755)
     monkeypatch.setenv("PATH", f"{bin_dir}{os.pathsep}{os.environ['PATH']}")
     monkeypatch.setattr(watchdog, "BRIEF_DIR", tmp_path / "briefs")
+    return args_log
+
+
+def test_launch_writes_the_brief_and_starts_an_agent_on_this_checkout(tmp_path, monkeypatch):
+    args_log = _spawn(tmp_path, monkeypatch, 0)
 
     watchdog.launch("job 'update' ended failure", [_run(update="failure")], DAY, CFG,
                     "https://example.test/feed.xml")
@@ -177,13 +184,7 @@ def test_launch_writes_the_brief_and_starts_an_agent_on_this_checkout(tmp_path, 
 
 
 def test_a_failed_launch_fails_loudly(tmp_path, monkeypatch):
-    """A stand-in agent-spawn (the real one starts an agent) that fails."""
-    bin_dir = tmp_path / "bin"
-    bin_dir.mkdir()
-    (bin_dir / "agent-spawn").write_text("#!/bin/bash\nexit 1\n")
-    (bin_dir / "agent-spawn").chmod(0o755)
-    monkeypatch.setenv("PATH", f"{bin_dir}{os.pathsep}{os.environ['PATH']}")
-    monkeypatch.setattr(watchdog, "BRIEF_DIR", tmp_path / "briefs")
+    _spawn(tmp_path, monkeypatch, 1)
     with pytest.raises(subprocess.CalledProcessError, match="agent-spawn"):
         watchdog.launch("x", [], DAY, CFG, "https://example.test/feed.xml")
 
@@ -203,10 +204,10 @@ def _gh(tmp_path, monkeypatch, runs: list[dict] | None) -> None:
         "if runs is None: sys.exit('gh: could not connect')\n"
         "args = sys.argv[1:]\n"
         "if args[:2] == ['run', 'list']:\n"
-        "    print(json.dumps([{k: r[k] for k in ('databaseId', 'status', 'url')} for r in runs]))\n"
+        "    print(json.dumps([{k: r[k] for k in ('databaseId', 'status', 'url') if k in r} for r in runs]))\n"
         "else:\n"
         "    (run,) = [r for r in runs if f\"/runs/{r['databaseId']}/jobs\" in args[1]]\n"
-        "    print(json.dumps({'jobs': run['jobs']}))\n")
+        "    print(json.dumps({'jobs': run.get('jobs', [])}))\n")
     gh.chmod(0o755)
     monkeypatch.setenv("PATH", f"{bin_dir}{os.pathsep}{os.environ['PATH']}")
 
@@ -278,3 +279,15 @@ def test_a_look_that_cannot_reach_the_site_waits_then_launches(tmp_path, monkeyp
     assert watchdog.look(client, FEED_URL, DAY, EARLY, CFG, True)[0].action == "wait"
     verdict, _ = watchdog.look(client, FEED_URL, DAY, LATE, CFG, True)
     assert verdict.action == "launch" and "connection refused" in verdict.reason
+
+
+def test_a_watchdog_that_fails_unexpectedly_launches_an_agent_then_fails(tmp_path, monkeypatch):
+    """gh answering without a field the watchdog reads is an error look()
+    does not expect; it fails before any request to the site."""
+    _gh(tmp_path, monkeypatch, [{"databaseId": 7}])
+    args_log = _spawn(tmp_path, monkeypatch, 0)
+    with pytest.raises(KeyError):
+        watchdog.main()
+    assert "--brief" in args_log.read_text()
+    (brief,) = (tmp_path / "briefs").iterdir()
+    assert "What the watchdog saw: the watchdog itself failed: KeyError(" in brief.read_text()
