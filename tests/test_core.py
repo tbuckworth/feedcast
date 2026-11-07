@@ -12,10 +12,10 @@ from src.audio import split_into_chunks
 from src.config import PodcastMetaConfig, load_config
 from src.feed import FeedGenerator
 from src.env import env_flag
-from src.html_text import clean_html, small_table_to_prose
+from src.html_text import clean_html, drop_blocks, small_table_to_prose
 from src.monitor import FeedMonitor, briefing_id, episode_id, is_briefing
 from src.news import PREVIOUS_BRIEFINGS_HEADER, NewsAggregator
-from tests.conftest import FakeApi, feed_xml, needs_ffmpeg, silent_mp3
+from tests.conftest import FakeApi, feed_xml, needs_ffmpeg, rss, silent_mp3
 
 
 # --- split_into_chunks (src/audio.py) ---
@@ -99,6 +99,37 @@ class TestCleanHtml:
         result = clean_html(html)
         assert "First paragraph." in result
         assert "Second paragraph." in result
+
+    def test_drops_substack_buttons_and_subscribe_box(self):
+        """Substack's markup, as the Transformer feed carried it on 2026-11-04."""
+        html = (
+            "<p>This election may have just decided the future of AI.</p>"
+            '<div class="subscription-widget-wrap-editor"><div class="subscription-widget">'
+            '<div class="preamble"><p class="cta-caption">Understand AI – and what to do about it'
+            '</p></div><div class="fake-button"></div></div></div>'
+            '<div class="captioned-button-wrap"><div class="preamble"><p class="cta-caption">'
+            "<strong>Share this </strong><em><strong>Transformer </strong></em>"
+            "<strong>article with a friend or colleague</strong></p></div>"
+            '<p class="button-wrapper"><a class="button primary" href="#"><span>Share</span></a></p>'
+            "</div>"
+            '<p class="button-wrapper"><a class="button primary" href="#"><span>Subscribe now</span>'
+            "</a></p>"
+        )
+        assert clean_html(html) == "This election may have just decided the future of AI."
+
+
+class TestDropBlocks:
+    def test_drops_a_block_whose_whole_text_matches(self):
+        html = "<h3>MEME OF THE WEEK</h3><p>The story.</p>"
+        assert drop_blocks(html, ["meme of the week"]) == ("<p>The story.</p>", 1)
+
+    def test_keeps_a_block_that_only_contains_a_match(self):
+        html = "<p>We called it the meme of the week.</p>"
+        assert drop_blocks(html, ["meme of the week"]) == (html, 0)
+
+    def test_matches_across_inline_markup_and_line_breaks(self):
+        html = "<p><em>If you were sent this,\n<a href='#'>click here</a> to subscribe.</em></p>"
+        assert drop_blocks(html, ["If you were sent this, click here to subscribe."]) == ("", 1)
 
 
 # --- small_table_to_prose (src/html_text.py) ---
@@ -295,6 +326,44 @@ class TestSkipPatterns:
         assert not self._should_skip("Why AI Safety Matters")
         assert not self._should_skip("Book Review: The Alignment Problem")
         assert not self._should_skip("My Model Of AI Doom")
+
+
+class TestTransformerStripPatterns:
+    """config.yaml's Transformer strip_patterns, run through the real feed filter."""
+
+    # A Weekly Briefing cut down to its first and last sections, in the
+    # feed's own markup (6 Nov 2026).
+    WEEKLY = (
+        "<p><em>Welcome to Transformer, your weekly briefing of what matters in AI. If you"
+        "&#8217;ve been forwarded this email, <a href='https://www.transformernews.ai/welcome'>"
+        "click here to subscribe</a> and receive future editions.</em></p>"
+        "<p><em>Housekeeping: The Weekly Briefing is off next week for our team retreat.</em></p>"
+        "<blockquote><h3>NEED TO KNOW</h3></blockquote>"
+        "<ul><li><p>A new report from <strong>METR</strong> estimates that the pace of AI "
+        "improvements at <strong>Anthropic</strong> has doubled.</p></li></ul>"
+        "<p>Source: an internal survey, which METR says it could not verify.</p>"
+        "<blockquote><h3>MEME OF THE WEEK</h3></blockquote>"
+        "<div class='captioned-image-container'><figure><img src='meme.png'/></figure></div>"
+        "<p><em>Source: <a href='https://x.com/BoringBiz_'>@BoringBiz_ </a></em></p>"
+        "<p><em>Thanks for reading. If you&#8217;ve been forwarded this email, "
+        "<a href='https://www.transformernews.ai/welcome'>click here to subscribe</a> and "
+        "receive future editions. Have a great weekend.</em></p>"
+    )
+
+    def test_leaves_out_the_subscribe_lines_and_the_meme(self, tmp_path):
+        (transformer,) = [f for f in load_config().feeds if f.name == "Transformer"]
+        xml = rss("Transformer", "<item><title>Weekly</title><link>https://example.com/w</link>"
+                  f"<description><![CDATA[{self.WEEKLY}]]></description></item>")
+        (entry,) = FeedMonitor(tmp_path / "posts.db").fetch_feed(
+            xml, transformer.name, transformer.skip_patterns, max_age_hours=None,
+            strip_patterns=transformer.strip_patterns)
+        assert clean_html(entry.content).split("\n") == [
+            "Housekeeping: The Weekly Briefing is off next week for our team retreat.",
+            "NEED TO KNOW",
+            "A new report from", "METR", "estimates that the pace of AI improvements at",
+            "Anthropic", "has doubled.",
+            "Source: an internal survey, which METR says it could not verify.",
+        ]
 
 
 # --- News briefing dedup prompt construction (src/news.py) ---

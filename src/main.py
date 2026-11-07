@@ -1169,7 +1169,8 @@ async def _fetch_feeds(feeds: list[FeedConfig], monitor: FeedMonitor,
     """
     return await asyncio.gather(
         *[asyncio.to_thread(monitor.fetch_feed, fc.url, fc.name, fc.skip_patterns,
-                            max_age_hours=max_age_hours) for fc in feeds],
+                            max_age_hours=max_age_hours, strip_patterns=fc.strip_patterns)
+          for fc in feeds],
         return_exceptions=True,
     )
 

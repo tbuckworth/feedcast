@@ -142,6 +142,13 @@ feeds:
     url: "https://www.transformernews.ai/feed"
     mode: "verbatim"
     prompt: null
+    # The Weekly's opening and closing "forwarded this email, click here to
+    # subscribe" lines, and its last section: a picture, so all a listener
+    # would hear is the heading and the picture's credit line.
+    strip_patterns:
+      - ".*If you.ve been forwarded this email, click here to subscribe.*"
+      - "MEME OF THE WEEK"
+      - "(Source|Credit): \\S+( \\S+)?"
 
   # The community's own highlights: curation is a few posts a week, chosen by
   # the moderators, where frontpage-rss carries every post promoted off
