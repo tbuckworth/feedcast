@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Fri, 06 Nov 2026 09:18:09 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 05:33:11 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-07</title>
+      <description>Daily News Briefing - 2026-11-07
+
+Topics covered:
+- The money behind frontier AI is shrinking fast
+- New spending data from Ramp may explain the repricing
+- The selloff after the midterms spread worldwide on Friday
+- AI-enabled crime is moving into the courts and into security incidents
+- Nvidia faces scrutiny in Washington
+- On Iran, Trump says American forces carried out "minor" strikes on an air defence system on Qeshm Island on Friday, the first since the midterms</description>
+      <pubDate>Sat, 07 Nov 2026 05:32:14 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-07</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c35844f31ca5_daily_news_briefing_-_2026-11-07.mp3" type="audio/mpeg" length="2814020" />
+      <itunes:duration>00:04:59</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-07.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“GPT-6 Astra Covertly Underperforms on Safety Research Tasks” by Zvi</title>
+      <description>Audio version of “GPT-6 Astra Covertly Underperforms on Safety Research Tasks” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 06 Nov 2026 18:31:51 +0000</pubDate>
+      <guid isPermaLink="false">c273cf08-873d-4b85-af5b-4ff3246a5a05</guid>
+      <link>https://www.lesswrong.com/posts/uc9ouDHMR2aw2ozsF/gpt-6-astra-covertly-underperforms-on-safety-research-tasks</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e7392d0f111f_gpt-6_astra_covertly_underperforms_on_safety_rese.mp3" type="audio/mpeg" length="2492612" />
+      <itunes:duration>00:04:25</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-06</title>
       <description>Daily News Briefing - 2026-11-06
@@ -289,7 +320,7 @@ Topics covered:
       <pubDate>Fri, 30 Oct 2026 05:35:23 +0000</pubDate>
       <guid isPermaLink="false">news-briefing-2026-10-30</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/9ec67cb49fea_daily_news_briefing_-_2026-10-30.mp3" type="audio/mpeg" length="2907285" />
-      <itunes:duration>00:05:07</itunes:duration>
+      <itunes:duration>00:05:06</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-30.txt" type="text/plain" />
@@ -394,7 +425,7 @@ Topics covered:
       <pubDate>Tue, 27 Oct 2026 05:35:09 +0000</pubDate>
       <guid isPermaLink="false">news-briefing-2026-10-27</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0f62bc56c709_daily_news_briefing_-_2026-10-27.mp3" type="audio/mpeg" length="2999565" />
-      <itunes:duration>00:05:18</itunes:duration>
+      <itunes:duration>00:05:17</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-27.txt" type="text/plain" />
@@ -506,7 +537,7 @@ Topics covered:
       <pubDate>Fri, 23 Oct 2026 04:41:30 +0000</pubDate>
       <guid isPermaLink="false">news-briefing-2026-10-23</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/b2ef6eca24cf_daily_news_briefing_-_2026-10-23.mp3" type="audio/mpeg" length="2782893" />
-      <itunes:duration>00:04:53</itunes:duration>
+      <itunes:duration>00:04:52</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-23.txt" type="text/plain" />
@@ -697,7 +728,7 @@ Topics covered:
       <pubDate>Sun, 18 Oct 2026 04:34:27 +0000</pubDate>
       <guid isPermaLink="false">news-briefing-2026-10-18</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/bd0d4a72c7c5_daily_news_briefing_-_2026-10-18.mp3" type="audio/mpeg" length="2477037" />
-      <itunes:duration>00:04:24</itunes:duration>
+      <itunes:duration>00:04:23</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-18.txt" type="text/plain" />
@@ -796,7 +827,7 @@ Topics covered:
       <link>https://www.lesswrong.com/posts/z4guBXZeymkgvd75S/ai-190-scion-of-the-times</link>
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/86b323dea97a_ai_190_scion_of_the_times_by_zvi.mp3" type="audio/mpeg" length="2428101" />
-      <itunes:duration>00:04:19</itunes:duration>
+      <itunes:duration>00:04:18</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -900,7 +931,7 @@ Topics covered:
       <pubDate>Tue, 13 Oct 2026 04:34:45 +0000</pubDate>
       <guid isPermaLink="false">news-briefing-2026-10-13</guid>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/baaceb902981_daily_news_briefing_-_2026-10-13.mp3" type="audio/mpeg" length="2918109" />
-      <itunes:duration>00:05:10</itunes:duration>
+      <itunes:duration>00:05:09</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-13.txt" type="text/plain" />
@@ -1018,7 +1049,7 @@ Topics covered:
       <link>https://www.lesswrong.com/posts/zHhGa3iQBQcdSifFL/a-critical-look-at-lean4-1</link>
       <itunes:author>Milo Moses</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/44e73f257106_a_critical_look_at_lean4.mp3" type="audio/mpeg" length="9793269" />
-      <itunes:duration>00:17:22</itunes:duration>
+      <itunes:duration>00:17:21</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1062,61 +1093,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/1999c62e1cdc_ai_189_new_math_by_zvi.mp3" type="audio/mpeg" length="2296821" />
       <itunes:duration>00:04:01</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-08</title>
-      <description>Daily News Briefing - 2026-10-08
-
-Topics covered:
-- OpenAI used AI to help write the email telling Australia that its AI agent had hacked government websites, Guardian Australia reports
-- OpenAI is also under fire over young users
-- On the product side, OpenAI is bringing its GPT-6 Sol and Luna models to ChatGPT, along with an "Intelligent UI" that builds interactive charts, diagrams and tools directly into answers
-- In Asia, satellite images show eight light attack jets at a new Chinese facility at Ban Keun airport in Laos, about fifty kilometres north of Vientiane
-- In Brazil, first-round winner Flávio Bolsonaro has vowed to "re-democratise" the country by changing the constitution
-- Finally, the World Health Organization says it lacks the "full picture" from Russia on the suspected plague death of a laboratory worker in Irkutsk</description>
-      <pubDate>Thu, 08 Oct 2026 04:34:44 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-08</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/951f0ac3a41d_daily_news_briefing_-_2026-10-08.mp3" type="audio/mpeg" length="2770149" />
-      <itunes:duration>00:04:51</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-08.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Top Forecasters On The Plague</title>
-      <description>Audio version of Top Forecasters On The Plague from Scott Alexander</description>
-      <pubDate>Wed, 07 Oct 2026 21:13:16 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/top-forecasters-on-the-plague</guid>
-      <link>https://www.astralcodexten.com/p/top-forecasters-on-the-plague</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1dda09655049_top_forecasters_on_the_plague.mp3" type="audio/mpeg" length="3780045" />
-      <itunes:duration>00:06:44</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“The Curve Bends You” by Zvi</title>
-      <description>Audio version of “The Curve Bends You” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 07 Oct 2026 20:43:06 +0000</pubDate>
-      <guid isPermaLink="false">29c994eb-2378-46e6-8169-af6e81489dba</guid>
-      <link>https://www.lesswrong.com/posts/qFa5qpw9bJiQMpJks/the-curve-bends-you</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ee6ce7cf8e66_the_curve_bends_you_by_zvi.mp3" type="audio/mpeg" length="2284845" />
-      <itunes:duration>00:04:04</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>What's the date?</title>
-      <description>Audio version of What's the date? by N8 Programs from LessWrong Curated</description>
-      <pubDate>Thu, 01 Oct 2026 02:30:32 +0000</pubDate>
-      <guid isPermaLink="false">vzKWsEskYBEWTwpBP</guid>
-      <link>https://www.lesswrong.com/posts/vzKWsEskYBEWTwpBP/what-s-the-date</link>
-      <itunes:author>N8 Programs</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d4225b856b07_whats_the_date.mp3" type="audio/mpeg" length="9275853" />
-      <itunes:duration>00:17:17</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
