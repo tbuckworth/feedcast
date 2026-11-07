@@ -132,6 +132,24 @@ feeds:
     mode: "summarize"
     prompt: null
 
+  # Transformer (Shakeel Hashim, Veronica Irwin, Celia Ford), AI policy news:
+  # the Weekly Briefing on Friday afternoons (~3,900 words, ~30 min read in
+  # full) and two or three essays and scoops a week (3 to 17 min). Free, with
+  # the full text in the feed, on its own domain. Read in full, not "auto":
+  # auto would summarise the Weekly in the weeks it runs past
+  # auto_verbatim_limit and read it in the others.
+  - name: "Transformer"
+    url: "https://www.transformernews.ai/feed"
+    mode: "verbatim"
+    prompt: null
+    # The Weekly's opening and closing "forwarded this email, click here to
+    # subscribe" lines, and its last section: a picture, so all a listener
+    # would hear is the heading and the picture's credit line.
+    strip_patterns:
+      - ".*If you.ve been forwarded this email, click here to subscribe.*"
+      - "MEME OF THE WEEK"
+      - "(Source|Credit): \\S+( \\S+)?"
+
   # The community's own highlights: curation is a few posts a week, chosen by
   # the moderators, where frontpage-rss carries every post promoted off
   # Personal Blog (10 to 14 a day, with no quality bar).

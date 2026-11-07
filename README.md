@@ -97,7 +97,7 @@ On/off variables count as on when set to `true`, `1` or `yes`. In CI, the `env:`
 | `max_age_hours` | How recent an unseen post must be to be narrated; `null` turns the cutoff off |
 | `retention_days` | How long an episode stays in the feed, and a failure in the retry queue |
 | `auto_verbatim_limit` | Characters up to which an `auto` feed's post is read in full rather than summarised |
-| `feeds` | The feeds: `name`, `url`, `mode` (`summarize`, `verbatim` or `auto`), optional `prompt`, and optional `skip_patterns` (regular expressions; a post whose title matches one is skipped) |
+| `feeds` | The feeds: `name`, `url`, `mode` (`summarize`, `verbatim` or `auto`), optional `prompt`, optional `skip_patterns` (regular expressions; a post whose title matches one is skipped), and optional `strip_patterns` (regular expressions; a paragraph or heading whose whole text matches one, ignoring case, is left out of the post) |
 | `fidelity_check` | Whether the checker reads each written script against its source |
 | `maths_filter` | Whether posts too mathematical to follow by ear are linked in the email instead of narrated, and the threshold |
 | `tts.voice_sample` | The recording the voice is cloned from |

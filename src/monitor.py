@@ -13,6 +13,7 @@ import feedparser
 
 from .bundle import bundle_path
 from .duplicates import same_text, word_runs
+from .html_text import drop_blocks
 
 
 MAX_AUTHORS = 5
@@ -626,11 +627,13 @@ class FeedMonitor:
             return [dict(row) for row in cursor.fetchall()]
 
     def fetch_feed(self, url: str, feed_name: str, skip_patterns: list[str] | None = None,
-                   *, max_age_hours: float | None) -> list[FeedEntry]:
+                   *, max_age_hours: float | None,
+                   strip_patterns: list[str] | None = None) -> list[FeedEntry]:
         """Fetch and parse an RSS feed, returning new entries newer than the cutoff.
 
         `max_age_hours` is config.yaml's window. None disables the cutoff, which
         only reprocessing an old post on purpose should ever want.
+        `skip_patterns` and `strip_patterns` are the feed's settings of those names.
         """
         feed = feedparser.parse(url)
         if warn_if_dead(feed, feed_name, url) and feed_name not in self.dead_feeds:
@@ -689,6 +692,12 @@ class FeedMonitor:
             if self.is_processed(link=link) or self.is_deferred(link=link):
                 already += 1
                 continue
+
+            if strip_patterns:
+                content, dropped = drop_blocks(content, strip_patterns)
+                if dropped:
+                    print(f"  {feed_name}: left {dropped} paragraphs matching "
+                          f"strip_patterns out of {title}")
 
             # A repost under a new link: see src/duplicates.py.
             if stored is None:

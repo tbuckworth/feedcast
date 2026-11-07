@@ -30,6 +30,7 @@ class FeedConfig(_Strict):
     mode: Literal["summarize", "verbatim", "auto"]
     prompt: str | None = None
     skip_patterns: list[str] | None = None
+    strip_patterns: list[str] | None = None
 
 
 class PodcastMetaConfig(_Strict):
