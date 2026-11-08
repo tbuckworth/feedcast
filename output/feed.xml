@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sun, 08 Nov 2026 05:33:52 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 05:36:46 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -81,6 +81,18 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e7392d0f111f_gpt-6_astra_covertly_underperforms_on_safety_rese.mp3" type="audio/mpeg" length="2492612" />
       <itunes:duration>00:04:25</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Will Democrats splinter on AI?</title>
+      <description>Audio version of Will Democrats splinter on AI? by Veronica Irwin from Transformer</description>
+      <pubDate>Fri, 06 Nov 2026 15:39:50 +0000</pubDate>
+      <guid>https://www.transformernews.ai/p/will-democrats-splinter-on-ai</guid>
+      <link>https://www.transformernews.ai/p/will-democrats-splinter-on-ai</link>
+      <itunes:author>Veronica Irwin</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a0054a3d13e2_will_democrats_splinter_on_ai.mp3" type="audio/mpeg" length="18238124" />
+      <itunes:duration>00:31:48</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
