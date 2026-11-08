@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sat, 07 Nov 2026 05:36:30 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 05:33:52 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,25 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-08</title>
+      <description>Daily News Briefing - 2026-11-08
+
+Topics covered:
+- New detail has emerged from METR's evaluation of Anthropic, and The Verge reports it is alarming researchers
+- Nvidia's China problem has deepened
+- On cybersecurity, Alex Stamos, chief security officer at Cognition, told The Verge's Decoder that the industry has entered a "dark age." Open-weight models can now automate most of the attack chain, finding bugs and writing exploits in real time
+- On Iran, the Guardian reports that Qatar is pressing Tehran to admit United Nations inspectors to its bombed nuclear sites, including those holding its highly enriched uranium
+- In Washington, Trump named Stephen Miller as White House chief of staff, replacing Susie Wiles
+- Ahead of Ukraine talks in Abu Dhabi on Tuesday, Russia hit Kyiv's grid with one hundred seventy-two drones and thirty-six ballistic missiles, causing power, water and heating failures</description>
+      <pubDate>Sun, 08 Nov 2026 05:32:59 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-08</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f8a8b54488c9_daily_news_briefing_-_2026-11-08.mp3" type="audio/mpeg" length="2909852" />
+      <itunes:duration>00:05:07</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-08.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-07</title>
       <description>Daily News Briefing - 2026-11-07
@@ -1062,49 +1081,6 @@ Topics covered:
       <itunes:author>Milo Moses</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/44e73f257106_a_critical_look_at_lean4.mp3" type="audio/mpeg" length="9793269" />
       <itunes:duration>00:17:21</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-09</title>
-      <description>Daily News Briefing - 2026-10-09
-
-Topics covered:
-- Three fired OpenAI safety researchers say their dismissals could deter employees from raising risks or working with outside evaluators
-- A cheaper approach to policing agents is now commercially available
-- Google has launched a unified Gemini agent for businesses that can plan work, operate across internal systems and delegate to subagents
-- The Yemen war has reached Riyadh’s main airport
-- Ethiopian drones have attacked Eritrean troops after they crossed into Tigray, according to the conflict monitor Acled, pushing renewed Ethiopian fighting toward a regional war
-- Watch for Saudi confirmation of the Riyadh strike and evidence that the Ethiopia-Eritrea clash is expanding beyond Tigray</description>
-      <pubDate>Fri, 09 Oct 2026 04:33:40 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-09</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/92a7d46101e9_daily_news_briefing_-_2026-10-09.mp3" type="audio/mpeg" length="2125341" />
-      <itunes:duration>00:03:45</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-09.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Ballots Everywhere: Times &amp; Places</title>
-      <description>Audio version of Ballots Everywhere: Times &amp; Places by Skyler from Scott Alexander</description>
-      <pubDate>Thu, 08 Oct 2026 22:00:52 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/ballots-everywhere-times-and-places-673</guid>
-      <link>https://www.astralcodexten.com/p/ballots-everywhere-times-and-places-673</link>
-      <itunes:author>Skyler</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7cee4fee91bd_ballots_everywhere_times_places.mp3" type="audio/mpeg" length="1988133" />
-      <itunes:duration>00:03:41</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“AI #189: New Math” by Zvi</title>
-      <description>Audio version of “AI #189: New Math” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 08 Oct 2026 15:43:09 +0000</pubDate>
-      <guid isPermaLink="false">6b369db7-7c2d-497e-88e5-65024d884cdc</guid>
-      <link>https://www.lesswrong.com/posts/DZPodskqJJNEkMLvH/ai-189-new-math</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1999c62e1cdc_ai_189_new_math_by_zvi.mp3" type="audio/mpeg" length="2296821" />
-      <itunes:duration>00:04:01</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
