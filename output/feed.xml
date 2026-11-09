@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sun, 08 Nov 2026 05:36:46 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Nov 2026 05:34:01 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,25 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-09</title>
+      <description>Daily News Briefing - 2026-11-09
+
+Topics covered:
+- A researcher with colleagues at METR argues that Anthropic has already crossed the most consequential line in its own safety policy
+- Nvidia's board has opened an independent investigation into its chief executive, Jensen Huang
+- Chastened by the midterms, Trump struck a softer tone on CBS's 60 Minutes
+- The Iran war's spillover keeps widening
+- In Israel, Gadi Eisenkot formally took his mandate, warning of a "point of no return," and invited Likud and Bezalel Smotrich's party to join him, but only under his premiership
+- Poland, meanwhile, has opened a terrorism investigation after a gunman with far-right sympathies killed six people in Kraków's main square</description>
+      <pubDate>Mon, 09 Nov 2026 05:33:31 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-09</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9ef3292c22a7_daily_news_briefing_-_2026-11-09.mp3" type="audio/mpeg" length="2954204" />
+      <itunes:duration>00:05:11</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-09.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-08</title>
       <description>Daily News Briefing - 2026-11-08
