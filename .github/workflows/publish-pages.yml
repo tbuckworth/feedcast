@@ -6,6 +6,10 @@ name: Publish to GitHub Pages
 # two artifacts with the same name. Nor can its attempts: re-running a failed
 # publish uploads beside the earlier attempt's artifact, and deploy-pages
 # then refuses both (2026-11-06), so the name also carries the attempt.
+# A re-run still cannot recover a publish whose deployment was cancelled:
+# deploy-pages names the deployment after the run's commit, and a deployment
+# under a cancelled one's name never starts. A forced dev run can
+# (docs/publish-incident-2026-11-10.md).
 
 on:
   workflow_call:
