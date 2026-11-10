@@ -44,6 +44,7 @@ Entry points:
 - `scripts/ci-commit-and-push.sh`: commits a pass's results to `main` and the database and MP3s to `state`.
 - `scripts/ci-install-ffmpeg.sh`: installs ffmpeg on a runner, with timeouts and retries.
 - `scripts/publish-audio.sh`: copies the MP3s into the site and fails if `feed.xml` lists one that is missing.
+- `scripts/deploy-pages.sh`: deploys the publish job's Pages artifact, under a deployment name of its own for each try.
 - `worker/src/index.ts`: the Worker, deployed with `npx wrangler deploy`.
 
 ## How a run works

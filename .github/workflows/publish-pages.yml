@@ -3,9 +3,10 @@ name: Publish to GitHub Pages
 # Called by update-feed.yml twice a run: once after the first pass (briefing
 # and summaries), once after the narration pass (posts read out in full).
 # Each call needs its own artifact name, because one workflow run cannot hold
-# two artifacts with the same name. Nor can its attempts: re-running a failed
-# publish uploads beside the earlier attempt's artifact, and deploy-pages
-# then refuses both (2026-11-06), so the name also carries the attempt.
+# two artifacts with the same name. The name also carries the attempt: a
+# re-run of a failed publish uploads beside the earlier attempt's artifact
+# (2026-11-06), and scripts/deploy-pages.sh names the deployment after the
+# artifact, which must differ from the cancelled one's (2026-11-10).
 
 on:
   workflow_call:
@@ -46,16 +47,26 @@ jobs:
           scripts/publish-audio.sh
 
       - name: Upload artifact
+        id: artifact
         uses: actions/upload-pages-artifact@v3
         with:
           name: ${{ env.PAGES_ARTIFACT }}
           path: output
 
+      # In place of actions/deploy-pages, which names every deployment after
+      # the run's commit; the script says why that cannot be re-run.
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          artifact_name: ${{ env.PAGES_ARTIFACT }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ steps.artifact.outputs.artifact_id }}
+          # Two tries of five minutes: the ten minutes the action allowed one.
+          # How long deploys take: docs/publish-incident-2026-11-10.md.
+          DEPLOY_ATTEMPTS: 2
+          DEPLOY_TIMEOUT_SECONDS: 300
+          DEPLOY_POLL_SECONDS: 5
+          DEPLOY_RETRY_DELAY_SECONDS: 10
+        run: scripts/deploy-pages.sh "$ARTIFACT_ID" "$PAGES_ARTIFACT"
 
       # Podcast apps do not poll on our schedule. Pocket Casts fetches feeds
       # server-side and, for a small private feed, only every few hours — so
