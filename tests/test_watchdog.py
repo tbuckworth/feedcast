@@ -197,6 +197,7 @@ def test_the_briefs_recovery_steps_name_what_the_workflows_have():
     assert "gh run rerun" not in cancelled_deploy
 
     wf = yaml.safe_load(WORKFLOW.read_text())
+    # PyYAML reads the bare key `on` as the boolean True.
     assert "force" in wf[True]["workflow_dispatch"]["inputs"]
     assert '"Commit and push" failed' in brief
     assert "Commit and push" in [s.get("name") for s in wf["jobs"]["update"]["steps"]]
