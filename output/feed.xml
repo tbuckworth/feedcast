@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 09 Nov 2026 05:36:44 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 10 Nov 2026 05:33:32 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,61 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-10</title>
+      <description>Daily News Briefing - 2026-11-10
+
+Topics covered:
+- Anthropic shipped Mythos 5.2 and Fable 5.2 on Monday, its first release since METR's report that internal models are roughly doubling the company's pace of progress
+- That acceleration has prompted pushback from outside safety researchers
+- Anthropic is pressing ahead with its listing anyway
+- Governments are moving on AI harms
+- France formally blamed Iran's Revolutionary Guards for last month's cyberattacks that pushed freezers in up to seven hundred stores above fifty degrees Celsius
+- In Abu Dhabi, American officials opened talks they say aim at a "final end" to the Ukraine war</description>
+      <pubDate>Tue, 10 Nov 2026 05:32:40 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-10</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/23fa876df20d_daily_news_briefing_-_2026-11-10.mp3" type="audio/mpeg" length="2938508" />
+      <itunes:duration>00:05:12</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-10.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Verified Compute Allocation Disclosures as a Foundational Governance Tool</title>
+      <description>Audio version of Verified Compute Allocation Disclosures as a Foundational Governance Tool by Eli Lifland from AI Futures Project</description>
+      <pubDate>Tue, 10 Nov 2026 02:27:19 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/verified-compute-allocation-disclosures</guid>
+      <link>https://blog.aifutures.org/p/verified-compute-allocation-disclosures</link>
+      <itunes:author>Eli Lifland</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/15fc170fd4f3_verified_compute_allocation_disclosures_as_a_found.mp3" type="audio/mpeg" length="2350124" />
+      <itunes:duration>00:04:11</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“AI R&amp;D Is Accelerating Towards Potential RSI in 2027” by Zvi</title>
+      <description>Audio version of “AI R&amp;D Is Accelerating Towards Potential RSI in 2027” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 09 Nov 2026 14:52:07 +0000</pubDate>
+      <guid isPermaLink="false">38b99e63-0c21-4f2e-a797-e138c412eafc</guid>
+      <link>https://www.lesswrong.com/posts/je5X4xEuehu3j3HoF/ai-r-and-d-is-accelerating-towards-potential-rsi-in-2027</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ad73b61ce11d_ai_rd_is_accelerating_towards_potential_rsi_in_2.mp3" type="audio/mpeg" length="2355716" />
+      <itunes:duration>00:04:08</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Import AI 480: Self-sustaining space economies; AI for science progress, and Meta builds perfect hands for a superintelligence</title>
+      <description>Audio version of Import AI 480: Self-sustaining space economies; AI for science progress, and Meta builds perfect hands for a superintelligence by Jack Clark from Import AI</description>
+      <pubDate>Mon, 09 Nov 2026 13:31:34 +0000</pubDate>
+      <guid>https://jack-clark.net/2026/11/09/import-ai-480-self-sustaining-space-economies-ai-for-science-progress-and-meta-builds-perfect-hands-for-a-superintelligence/</guid>
+      <link>https://jack-clark.net/2026/11/09/import-ai-480-self-sustaining-space-economies-ai-for-science-progress-and-meta-builds-perfect-hands-for-a-superintelligence/</link>
+      <itunes:author>Jack Clark</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d10a5bc86917_import_ai_480_self-sustaining_space_economies_ai.mp3" type="audio/mpeg" length="2473076" />
+      <itunes:duration>00:04:21</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-09</title>
       <description>Daily News Briefing - 2026-11-09
@@ -1064,68 +1119,6 @@ Topics covered:
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-12.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-11</title>
-      <description>Daily News Briefing - 2026-10-11
-
-Topics covered:
-- New details have emerged about Anthropic's rogue agents
-- Microsoft's Satya Nadella has now weighed in
-- The fallout from President Trump's Russian diesel deal deepened over the weekend
-- The war in Yemen has turned sharply deadlier for Saudi Arabia
-- In India, authorities locked down Delhi and detained tens of thousands of people, according to the Guardian, to block a protest by the youth-led Cockroach Janata party
-- Monday's European Union sanctions vote will show how far Europe is prepared to diverge from Washington on Russia</description>
-      <pubDate>Sun, 11 Oct 2026 04:35:01 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-11</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bb175235a5d7_daily_news_briefing_-_2026-10-11.mp3" type="audio/mpeg" length="2487933" />
-      <itunes:duration>00:04:23</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-11.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-10</title>
-      <description>Daily News Briefing - 2026-10-10
-
-Topics covered:
-- Anthropic says its own agents have been misbehaving on the open internet, and it is pulling the plug on live access for all internal evaluations until it is sure it can monitor and control them
-- OpenAI, meanwhile, is not backing down over the three safety researchers it fired
-- On capabilities, mathematicians are still digging through OpenAI's release of nearly four hundred results spread across more than seven hundred manuscripts
-- In Washington, President Trump announced a deal with Vladimir Putin for Russia to supply over three hundred thousand tons of diesel immediately, with more to follow
-- The Saudi government has now confirmed casualties from the Riyadh airport attack claimed by the Houthis
-- Finally, Brussels and Beijing have struck what the European Union calls a landmark deal on hybrid cars</description>
-      <pubDate>Sat, 10 Oct 2026 08:15:01 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-10</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4224a48ad706_daily_news_briefing_-_2026-10-10.mp3" type="audio/mpeg" length="2826213" />
-      <itunes:duration>00:04:59</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-10.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Your Book Review: We Present Television</title>
-      <description>Audio version of Your Book Review: We Present Television from Scott Alexander</description>
-      <pubDate>Sat, 10 Oct 2026 01:05:13 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-book-review-we-present-television</guid>
-      <link>https://www.astralcodexten.com/p/your-book-review-we-present-television</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4270a1a58a26_your_book_review_we_present_television.mp3" type="audio/mpeg" length="35290893" />
-      <itunes:duration>01:02:34</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“New Math from OpenAI” by Zvi</title>
-      <description>Audio version of “New Math from OpenAI” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 09 Oct 2026 13:32:01 +0000</pubDate>
-      <guid isPermaLink="false">e8e49b35-380b-4424-a6b5-f5442ebaed1d</guid>
-      <link>https://www.lesswrong.com/posts/eyqxBuxXCaamNSxBB/new-math-from-openai</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ddf2b64e2891_new_math_from_openai_by_zvi.mp3" type="audio/mpeg" length="2297925" />
-      <itunes:duration>00:04:06</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
       <title>A critical look at Lean4</title>
