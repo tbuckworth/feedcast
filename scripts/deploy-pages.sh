@@ -41,12 +41,13 @@ deploy() {
   # Pages checks that the deployment comes from this workflow run.
   oidc_token="$(curl -sSf --max-time 30 \
                   -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
-                  "${ACTIONS_ID_TOKEN_REQUEST_URL}" | jq -r .value)" || return 1
+                  "${ACTIONS_ID_TOKEN_REQUEST_URL}" | jq -er .value)" || return 1
   echo "Creating Pages deployment ${version} from artifact ${artifact_id}"
   created="$(gh api -X POST "$api" -F artifact_id="$artifact_id" \
                -f pages_build_version="$version" -f oidc_token="$oidc_token")" || return 1
-  id="$(jq -r .id <<<"$created")" || return 1
-  page_url="$(jq -r .page_url <<<"$created")" || return 1
+  # -e: a reply without them is a failed try, not a deployment to wait for.
+  id="$(jq -er .id <<<"$created")" || return 1
+  page_url="$(jq -er .page_url <<<"$created")" || return 1
   local deadline=$(( SECONDS + DEPLOY_TIMEOUT_SECONDS ))
   while (( SECONDS < deadline )); do
     sleep "$DEPLOY_POLL_SECONDS"

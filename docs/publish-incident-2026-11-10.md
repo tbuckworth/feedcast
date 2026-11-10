@@ -9,8 +9,9 @@ pushed them too.
 The first publish ("deploy / publish") then failed. `actions/deploy-pages`
 created the Pages deployment at 05:34:56, and the deployment sat at
 `syncing_files` until the action's 10-minute limit. The action cancelled it
-at 05:44:58 and failed. GitHub's status page reported no incident, and from
-10 Oct to 10 Nov the slowest of 40 successful deploys had taken 176 seconds.
+at 05:44:58 and failed. GitHub's status page reported no incident. From
+10 Oct to 10 Nov the slowest of 39 successful deploys had taken 176 seconds,
+and 34 of the 39 had taken under 30.
 The second publish ("deploy-narrated") was skipped, because it needs the
 first. The live site kept serving the 9 Nov feed, so the email's audio links
 returned 404.

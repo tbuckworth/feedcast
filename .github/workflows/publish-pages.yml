@@ -61,8 +61,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           ARTIFACT_ID: ${{ steps.artifact.outputs.artifact_id }}
           # Two tries of five minutes: the ten minutes the action allowed one.
-          # From 10 Oct to 10 Nov 2026 the slowest of 40 deploys that
-          # succeeded took 176 seconds, and most took under 30.
+          # How long deploys take: docs/publish-incident-2026-11-10.md.
           DEPLOY_ATTEMPTS: 2
           DEPLOY_TIMEOUT_SECONDS: 300
           DEPLOY_POLL_SECONDS: 5
