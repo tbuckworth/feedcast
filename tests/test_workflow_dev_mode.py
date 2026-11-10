@@ -1,5 +1,6 @@
 """Hand-dispatched runs are dev runs unless the operator opts the list in."""
 
+import json
 import os
 import re
 import subprocess
@@ -9,7 +10,8 @@ from pathlib import Path
 import pytest
 import yaml
 
-WORKFLOW = Path(__file__).resolve().parent.parent / ".github" / "workflows" / "update-feed.yml"
+REPO = Path(__file__).resolve().parent.parent
+WORKFLOW = REPO / ".github" / "workflows" / "update-feed.yml"
 PUBLISH = WORKFLOW.parent / "publish-pages.yml"
 SETUP_ACTION = WORKFLOW.parent.parent / "actions" / "setup-pipeline" / "action.yml"
 
@@ -145,6 +147,156 @@ def test_hub_step_fails_when_the_feed_has_no_self_link(tmp_path):
     assert "POST" not in calls
 
 
+# A stand-in for gh that plays GitHub's Pages deployment API, which a test
+# cannot call: deployments are real, and only main may make them. It keeps
+# its state in pages.json beside itself: `outcomes`, what each new deployment
+# does ("stall" stays at syncing_files, as on 2026-11-10; "succeed"; "fail"),
+# and records each deployment made and each one cancelled. A deployment made
+# under the name of one that was cancelled never gets a status, as the re-run
+# of 2026-11-10 found. The real jq applies the script's --jq filters.
+_PAGES_GH = r'''#!/usr/bin/env python3
+import json, subprocess, sys
+from pathlib import Path
+
+state_file = Path(sys.argv[0]).with_name("pages.json")
+state = json.loads(state_file.read_text())
+args = sys.argv[1:]
+assert args[0] == "api", args
+method = args[args.index("-X") + 1] if "-X" in args else "GET"
+path = next(a for a in args[1:] if a.startswith("repos/"))
+fields = dict(args[i + 1].split("=", 1) for i, a in enumerate(args) if a in ("-f", "-F"))
+base = f"repos/{state['repo']}/pages/deployments"
+if method == "POST" and path == base:
+    name = fields["pages_build_version"]
+    state["made"].append(fields)
+    state["deployments"][name] = ("dead" if name in state["cancelled"]
+                                  else state["outcomes"].pop(0))
+    reply = {"id": name, "page_url": "https://example.org/site/",
+             "status_url": f"https://api.github.com/{base}/{name}"}
+elif method == "POST" and path.endswith("/cancel"):
+    name = path.split("/")[-2]
+    state["cancelled"].append(name)
+    state["deployments"][name] = "dead"
+    reply = {}
+else:
+    assert method == "GET" and path.startswith(base + "/"), args
+    outcome = state["deployments"][path.split("/")[-1]]
+    reply = {"status": {"stall": "syncing_files", "succeed": "succeed",
+                        "fail": "deployment_failed", "dead": ""}[outcome]}
+state_file.write_text(json.dumps(state))
+if "--jq" in args:
+    sys.stdout.write(subprocess.run(["jq", "-r", args[args.index("--jq") + 1]],
+                                    input=json.dumps(reply), capture_output=True,
+                                    text=True, check=True).stdout)
+else:
+    sys.stdout.write(json.dumps(reply))
+'''
+
+
+class _Pages:
+    """GitHub Pages as the publish job's deploy step sees it, through stand-in
+    gh and curl (curl answers the job's request for an OIDC token)."""
+
+    def __init__(self, tmp_path):
+        self.bin = tmp_path / "bin"
+        self.bin.mkdir()
+        self.state = self.bin / "pages.json"
+        self.state.write_text(json.dumps({"repo": "owner/feedcast", "outcomes": [],
+                                          "deployments": {}, "made": [], "cancelled": []}))
+        (self.bin / "gh").write_text(_PAGES_GH)
+        (self.bin / "curl").write_text('#!/usr/bin/env bash\necho \'{"value": "oidc-token"}\'\n')
+        for tool in ("gh", "curl"):
+            (self.bin / tool).chmod(0o755)
+        self.outputs = tmp_path / "github_output"
+
+    def deploy(self, outcomes, *, artifact="github-pages", run_attempt=1):
+        """Run the deploy step of one publish, as attempt `run_attempt` of the
+        run, against deployments that do `outcomes` in turn."""
+        state = json.loads(self.state.read_text())
+        state["outcomes"] = list(outcomes)
+        self.state.write_text(json.dumps(state))
+        job = yaml.safe_load(PUBLISH.read_text())["jobs"]["publish"]
+        step = _step(job, "Deploy to GitHub Pages")
+        env = {**os.environ, **{k: str(v) for k, v in step["env"].items()},
+               # What GitHub would put in the ${{ }} expressions.
+               "PAGES_ARTIFACT": f"{artifact}-attempt-{run_attempt}",
+               "ARTIFACT_ID": "5150", "GH_TOKEN": "token",
+               "GITHUB_REPOSITORY": "owner/feedcast", "GITHUB_SHA": "1e1315c",
+               "GITHUB_RUN_ID": "42762503733", "GITHUB_RUN_ATTEMPT": str(run_attempt),
+               "ACTIONS_ID_TOKEN_REQUEST_URL": "https://token.example/?api-version=2.0",
+               "ACTIONS_ID_TOKEN_REQUEST_TOKEN": "request-token",
+               "GITHUB_OUTPUT": str(self.outputs),
+               # A stall is called after a second here, not minutes.
+               "DEPLOY_TIMEOUT_SECONDS": "1", "DEPLOY_POLL_SECONDS": "0.1",
+               "DEPLOY_RETRY_DELAY_SECONDS": "0",
+               "PATH": f"{self.bin}:{os.environ['PATH']}"}
+        return subprocess.run(["bash", "-e", "-c", step["run"]], cwd=REPO, env=env,
+                              capture_output=True, text=True, timeout=60)
+
+    @property
+    def made(self) -> list[dict]:
+        return json.loads(self.state.read_text())["made"]
+
+    @property
+    def cancelled(self) -> list[str]:
+        return json.loads(self.state.read_text())["cancelled"]
+
+
+def test_rerunning_a_publish_whose_deployment_stalled_deploys_the_site(tmp_path):
+    """2026-11-10: the deployment stalled and was cancelled, and the re-run's
+    deployment, made under the same name, never started."""
+    pages = _Pages(tmp_path)
+    step = _step(yaml.safe_load(PUBLISH.read_text())["jobs"]["publish"], "Deploy to GitHub Pages")
+    attempts = int(step["env"]["DEPLOY_ATTEMPTS"])
+    failed = pages.deploy(["stall"] * attempts, run_attempt=1)
+    assert failed.returncode != 0
+    assert len(pages.cancelled) == attempts
+
+    rerun = pages.deploy(["succeed"], run_attempt=2)
+    assert rerun.returncode == 0, rerun.stdout + rerun.stderr
+    assert "page_url=https://example.org/site/" in pages.outputs.read_text()
+
+
+def test_a_stalled_deployment_is_cancelled_and_made_again_under_a_new_name(tmp_path):
+    pages = _Pages(tmp_path)
+    run = pages.deploy(["stall", "succeed"])
+    assert run.returncode == 0, run.stdout + run.stderr
+    stalled, deployed = (made["pages_build_version"] for made in pages.made)
+    assert stalled != deployed and pages.cancelled == [stalled]
+    assert "::warning::" in run.stdout
+    assert all(made["artifact_id"] == "5150" and made["oidc_token"] == "oidc-token"
+               for made in pages.made)
+
+
+def test_a_deployment_that_fails_is_made_again(tmp_path):
+    pages = _Pages(tmp_path)
+    run = pages.deploy(["fail", "succeed"])
+    assert run.returncode == 0, run.stdout + run.stderr
+    assert "deployment_failed" in run.stdout
+    # A deployment that ended needs no cancelling.
+    assert len(pages.made) == 2 and pages.cancelled == []
+
+
+def test_the_deploy_gives_up_when_every_deployment_stalls(tmp_path):
+    pages = _Pages(tmp_path)
+    run = pages.deploy(["stall"] * 5)
+    assert run.returncode != 0
+    assert "::error::" in run.stdout
+    assert len(pages.made) == len(pages.cancelled) >= 1
+    assert not pages.outputs.exists()
+
+
+def test_the_two_publishes_of_a_run_deploy_under_names_of_their_own(tmp_path):
+    """The first publish and the narration's publish share the run's commit;
+    each deployment still gets its own name."""
+    pages = _Pages(tmp_path)
+    for artifact in ("github-pages", "github-pages-narrated"):
+        run = pages.deploy(["succeed"], artifact=artifact)
+        assert run.returncode == 0, run.stdout + run.stderr
+    names = [made["pages_build_version"] for made in pages.made]
+    assert len(names) == len(set(names)) == 2
+
+
 def test_llm_smoke_test_cannot_enter_the_publishing_jobs_or_send_mail():
     wf, on = _workflow()
     assert on["workflow_dispatch"]["inputs"]["llm_smoke_test"]["default"] is False
@@ -195,13 +347,16 @@ def test_verbatim_posts_are_narrated_and_published_after_the_first_deploy():
     assert "workflow_call" in on
     job = publish["jobs"]["publish"]
     uses = {s.get("uses", "").split("@")[0]: s for s in job["steps"]}
-    # Nor can it across attempts: re-running a failed job adds an artifact
-    # beside the earlier attempt's, and deploy-pages refuses to choose between
-    # same-named ones (2026-11-06). So the name carries the attempt.
+    # The name carries the attempt, so that a re-run's artifact and its
+    # deployment are named apart from the earlier attempt's (2026-11-06,
+    # 2026-11-10), and the deploy takes the artifact this attempt uploaded.
     assert job["env"]["PAGES_ARTIFACT"] == \
         "${{ inputs.artifact_name }}-attempt-${{ github.run_attempt }}"
-    assert uses["actions/upload-pages-artifact"]["with"]["name"] == "${{ env.PAGES_ARTIFACT }}"
-    assert uses["actions/deploy-pages"]["with"]["artifact_name"] == "${{ env.PAGES_ARTIFACT }}"
+    upload = uses["actions/upload-pages-artifact"]
+    assert upload["with"]["name"] == "${{ env.PAGES_ARTIFACT }}"
+    deploy = _step(job, "Deploy to GitHub Pages")
+    assert deploy["env"]["ARTIFACT_ID"] == f"${{{{ steps.{upload['id']}.outputs.artifact_id }}}}"
+    assert '"$PAGES_ARTIFACT"' in deploy["run"]
 
 
 def test_narrate_job_gets_the_same_secrets_the_pipeline_needs_to_narrate():
@@ -309,7 +464,7 @@ def test_the_ffmpeg_install_keeps_its_packages_in_the_cache_directory(tmp_path):
     "downloads" where Dir::Cache::Archives points (apt's default is
     /var/cache/apt/archives) and refuses, as apt does, a directory without
     partial/."""
-    script = WORKFLOW.parent.parent.parent / "scripts" / "ci-install-ffmpeg.sh"
+    script = REPO / "scripts" / "ci-install-ffmpeg.sh"
     bin_dir, cache, log = tmp_path / "bin", tmp_path / "debs", tmp_path / "apt.log"
     bin_dir.mkdir()
     # Only the stand-ins and the plain tools they and the script use, so that an
@@ -344,7 +499,7 @@ def test_the_ffmpeg_install_keeps_its_packages_in_the_cache_directory(tmp_path):
 
 
 def test_the_ffmpeg_install_needs_its_cache_directory(tmp_path):
-    script = WORKFLOW.parent.parent.parent / "scripts" / "ci-install-ffmpeg.sh"
+    script = REPO / "scripts" / "ci-install-ffmpeg.sh"
     bin_dir = tmp_path / "bin"
     bin_dir.mkdir()
     for tool in ("bash", "dirname"):
