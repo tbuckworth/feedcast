@@ -45,16 +45,22 @@ site was live at 05:55. The live feed then matched main's feed.xml byte for
 byte. It listed today's briefing and five episodes, and all 78 of its
 enclosures returned 200 with the length the feed gives.
 
-## Fix
+## A fix that GitHub refused, reverted the same day
 
-`scripts/deploy-pages.sh` replaces `actions/deploy-pages` in
-`.github/workflows/publish-pages.yml`. It makes the deployment through the
-same API, under a name built from the commit, the run, the artifact's name
-(which carries the run attempt) and the try. It allows each try five
-minutes, then cancels it and tries again under a new name. It makes two
-tries, which together get the same ten minutes the action allowed one. A
-re-run of a failed publish now deploys under names of its own, and so does
-each of a run's two publishes. Tests in `tests/test_workflow_dev_mode.py`
-run the workflow's deploy step against a stand-in for the Pages API. The
-stand-in stalls deployments, fails them, and gives no status to a deployment
-made under a cancelled name.
+PR #89 replaced `actions/deploy-pages` with a script that made the
+deployment through the same API, under a name built from the commit, the
+run, the artifact's name and the try. The first publish after it merged
+([run 42791455106](https://github.com/tbuckworth/feedcast/actions/runs/42791455106))
+got `404 Not Found` from `POST /repos/{owner}/{repo}/pages/deployments` on
+both tries. Requests sent with a deliberately invalid OIDC token showed why.
+The API answers 404 to any build version that is not the full SHA of a
+commit in the repository: an invented 40-character SHA and a 7-character
+prefix of a real one were refused too. Only a real commit's full SHA got as
+far as the token check. A deployment's name is therefore always a commit,
+and a new name needs a new commit. PR #89 was reverted.
+
+A publish whose deployment was cancelled is recovered by dispatching a
+forced dev run, `gh workflow run update-feed.yml --ref main -f force=true`.
+The failed run has already pushed to main, so the dev run starts from a
+newer commit and its deployment gets a new name. Re-running the failed job
+reuses the cancelled deployment's name.
