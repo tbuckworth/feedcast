@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Tue, 10 Nov 2026 05:33:32 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 10 Nov 2026 05:36:26 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -50,6 +50,30 @@ Topics covered:
       <itunes:author>Eli Lifland</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/15fc170fd4f3_verified_compute_allocation_disclosures_as_a_found.mp3" type="audio/mpeg" length="2350124" />
       <itunes:duration>00:04:11</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Jensen Huang should resign</title>
+      <description>Audio version of Jensen Huang should resign by Shakeel Hashim from Transformer</description>
+      <pubDate>Mon, 09 Nov 2026 18:59:21 +0000</pubDate>
+      <guid>https://www.transformernews.ai/p/jensen-huang-should-resign-nvidia-affair-megaspeed</guid>
+      <link>https://www.transformernews.ai/p/jensen-huang-should-resign-nvidia-affair-megaspeed</link>
+      <itunes:author>Shakeel Hashim</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7913f29bfe40_jensen_huang_should_resign.mp3" type="audio/mpeg" length="2626796" />
+      <itunes:duration>00:04:40</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Where is all the AI safety research uplift?</title>
+      <description>Audio version of Where is all the AI safety research uplift? by Buck from Buck Shlegeris</description>
+      <pubDate>Mon, 09 Nov 2026 18:02:01 +0000</pubDate>
+      <guid isPermaLink="false">wPrpnfaNL5JP9i6KT</guid>
+      <link>https://www.lesswrong.com/posts/wPrpnfaNL5JP9i6KT/where-is-all-the-ai-safety-research-uplift</link>
+      <itunes:author>Buck</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/a9ab6b79c2e7_where_is_all_the_ai_safety_research_uplift.mp3" type="audio/mpeg" length="3847892" />
+      <itunes:duration>00:06:40</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
