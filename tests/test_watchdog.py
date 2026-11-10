@@ -1,6 +1,7 @@
 """scripts/watchdog.py: when the morning watchdog launches an agent."""
 
 import os
+import re
 import subprocess
 from datetime import UTC, date, datetime, time
 from pathlib import Path
@@ -181,6 +182,30 @@ def test_launch_writes_the_brief_and_starts_an_agent_on_this_checkout(tmp_path, 
     assert f"Titus listens from {CFG.ready_by:%H:%M} ({CFG.timezone})" in text
     assert "https://example.test/feed.xml" in text
     assert "$" not in text
+
+
+def test_the_briefs_recovery_steps_name_what_the_workflows_have():
+    """The brief tells the agent what to do by the step that failed, so the
+    steps, the dispatch input and the report it cites must exist. A deploy
+    that was cancelled is recovered by a forced dev run, not a re-run
+    (docs/publish-incident-2026-11-10.md)."""
+    brief = watchdog.BRIEF_TEMPLATE.read_text()
+    forced_run = f"gh workflow run {watchdog.WORKFLOW} --ref main -f force=true"
+    (cancelled_deploy,) = [line for line in brief.splitlines()
+                           if '"Deploy to GitHub Pages" step' in line]
+    assert forced_run in cancelled_deploy
+    assert "gh run rerun" not in cancelled_deploy
+
+    wf = yaml.safe_load(WORKFLOW.read_text())
+    # PyYAML reads the bare key `on` as the boolean True.
+    assert "force" in wf[True]["workflow_dispatch"]["inputs"]
+    assert '"Commit and push" failed' in brief
+    assert "Commit and push" in [s.get("name") for s in wf["jobs"]["update"]["steps"]]
+    publish = yaml.safe_load((WORKFLOW.parent / "publish-pages.yml").read_text())
+    assert "Deploy to GitHub Pages" in [s.get("name")
+                                        for s in publish["jobs"]["publish"]["steps"]]
+    cited = re.findall(r"docs/[\w-]+\.md", brief)
+    assert cited and all((watchdog.ROOT / doc).is_file() for doc in cited)
 
 
 def test_a_failed_launch_fails_loudly(tmp_path, monkeypatch):

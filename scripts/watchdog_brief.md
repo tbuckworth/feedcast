@@ -11,7 +11,9 @@ Follow AGENTS.md. In particular:
 
 Recovery, by what failed (`gh run view ID --log-failed` shows the step):
 - No run today has a successful update job, and none sent the email: the job failed in setup, in the pipeline, or never started. Dispatch the daily run as scripts/cron-backstop.sh does: `gh workflow run update-feed.yml --ref main`. It emails the list once, which is right, because nothing went out.
-- The update job sent the email but did not push ("Commit and push" failed), or a deploy failed after the push: run `gh run rerun ID --failed`. If the push itself keeps failing, dispatch `gh workflow run update-feed.yml --ref main -f force=true`. That is a dev run: it republishes and emails only Titus.
+- The update job sent the email but did not push ("Commit and push" failed): run `gh run rerun ID --failed`. If the push keeps failing, dispatch `gh workflow run update-feed.yml --ref main -f force=true`. That is a dev run: it republishes and emails only Titus.
+- A deploy failed after the push, and its "Deploy to GitHub Pages" step timed out or was cancelled (the deployment stalled at `syncing_files`, say): dispatch `gh workflow run update-feed.yml --ref main -f force=true`. A re-run cannot recover it, because its deployment takes the cancelled one's name and never starts (docs/publish-incident-2026-11-10.md).
+- A deploy failed in any other way: run `gh run rerun ID --failed`, and dispatch the forced dev run if the re-run does not publish.
 - The narrate job failed: run `gh run rerun ID --failed`. The posts it was reading out wait in the database, and the next run retries them anyway.
 - A run is queued or stuck: look at GitHub's status page (https://www.githubstatus.com) before you dispatch anything. A second run queues behind the first.
 
