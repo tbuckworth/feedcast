@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Tue, 10 Nov 2026 10:00:39 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 11 Nov 2026 05:34:09 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,61 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-11</title>
+      <description>Daily News Briefing - 2026-11-11
+
+Topics covered:
+- New York is gearing up to enforce one of the country's most significant AI safety laws
+- Google is back at the frontier
+- There is more detail on the AI-driven proof of the Aaronson-Ambainis conjecture
+- Anthropic's amended filing sets a price range of seventy to seventy-eight dollars a share
+- Nvidia's crisis has reached the White House
+- On Iran, Trump says the war is "effectively over," adding that the United States remains "locked and loaded." Brent crude fell to its lowest level since August</description>
+      <pubDate>Wed, 11 Nov 2026 05:32:56 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-11</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c0f329a7fb6d_daily_news_briefing_-_2026-11-11.mp3" type="audio/mpeg" length="3344828" />
+      <itunes:duration>00:05:56</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-11.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Iron Makes Iron</title>
+      <description>Audio version of Iron Makes Iron by Dean W. Ball from Hyperdimensional</description>
+      <pubDate>Tue, 10 Nov 2026 17:24:58 +0000</pubDate>
+      <guid>https://www.hyperdimensional.co/p/iron-makes-iron</guid>
+      <link>https://www.hyperdimensional.co/p/iron-makes-iron</link>
+      <itunes:author>Dean W. Ball</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ce4ee287e98b_iron_makes_iron.mp3" type="audio/mpeg" length="2138780" />
+      <itunes:duration>00:03:47</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Q3.5 Timelines Update: Looks Like the Intelligence Explosion Will Happen in 2027 After All</title>
+      <description>Audio version of Q3.5 Timelines Update: Looks Like the Intelligence Explosion Will Happen in 2027 After All by Eli Lifland from AI Futures Project</description>
+      <pubDate>Tue, 10 Nov 2026 16:15:14 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/q35-timelines-update-looks-like-the</guid>
+      <link>https://blog.aifutures.org/p/q35-timelines-update-looks-like-the</link>
+      <itunes:author>Eli Lifland</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8bfc573c5ddc_q35_timelines_update_looks_like_the_intelligence.mp3" type="audio/mpeg" length="2564324" />
+      <itunes:duration>00:04:35</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Nvidia CEO Jensen Huang Had an Affair With a Chinese Spy” by Zvi</title>
+      <description>Audio version of “Nvidia CEO Jensen Huang Had an Affair With a Chinese Spy” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 10 Nov 2026 13:11:45 +0000</pubDate>
+      <guid isPermaLink="false">453ec73c-f365-4cd5-84c5-86e7d46bdd2f</guid>
+      <link>https://www.lesswrong.com/posts/CjmuZz8QgGyqxkCxr/nvidia-ceo-jensen-huang-had-an-affair-with-a-chinese-spy</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/27b8c54614b7_nvidia_ceo_jensen_huang_had_an_affair_with_a_chin.mp3" type="audio/mpeg" length="2346812" />
+      <itunes:duration>00:04:08</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-10</title>
       <description>Daily News Briefing - 2026-11-10
@@ -1122,37 +1177,6 @@ Topics covered:
       <itunes:author>becausecurious</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/bb1027dffd78_quantity_vs_quality_in_pottery_is_a_lie.mp3" type="audio/mpeg" length="4313661" />
       <itunes:duration>00:07:51</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-12</title>
-      <description>Daily News Briefing - 2026-10-12
-
-Topics covered:
-- Britain is preparing to tell frontier AI companies they must do more on safety
-- The Verge reports that Silicon Valley is adopting President Trump's push to rename artificial intelligence as "super intelligence." An executive order requires federal agencies to use the term, and Trump has called anyone who sticks with the old phrase "the enemy." Elon Musk, Marc Benioff and Jensen Huang have already gone along with the change
-- On Ukraine, Trump declared an "energy ceasefire" on Truth Social, saying "both parties have agreed." Volodymyr Zelenskyy said the deal was "news to me," though he would accept it if Vladimir Putin did the same
-- The Houthi campaign against Saudi Arabia continues
-- In Pakistan, President Asif Ali Zardari declared an emergency in Khyber Pakhtunkhwa and suspended its government, which is run by Imran Khan's party
-- The day's EU sanctions vote and London's AI speech will each test how far allies are willing to break with Washington's line</description>
-      <pubDate>Mon, 12 Oct 2026 04:35:34 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-12</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/8a0331422d1f_daily_news_briefing_-_2026-10-12.mp3" type="audio/mpeg" length="2558853" />
-      <itunes:duration>00:04:33</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-12.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>A critical look at Lean4</title>
-      <description>Audio version of A critical look at Lean4 by Milo Moses from LessWrong Curated</description>
-      <pubDate>Fri, 09 Oct 2026 07:51:08 +0000</pubDate>
-      <guid isPermaLink="false">zHhGa3iQBQcdSifFL</guid>
-      <link>https://www.lesswrong.com/posts/zHhGa3iQBQcdSifFL/a-critical-look-at-lean4-1</link>
-      <itunes:author>Milo Moses</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/44e73f257106_a_critical_look_at_lean4.mp3" type="audio/mpeg" length="9793269" />
-      <itunes:duration>00:17:21</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
