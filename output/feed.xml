@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Thu, 12 Nov 2026 05:33:37 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Nov 2026 05:35:49 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -42,6 +42,18 @@ Topics covered:
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-12.txt" type="text/plain" />
     </item>
     <item>
+      <title>Hugging Face appears to be hosting a load of models that could be used for cyber attacks</title>
+      <description>Audio version of Hugging Face appears to be hosting a load of models that could be used for cyber attacks by Chris Stokel-Walker from Transformer</description>
+      <pubDate>Wed, 11 Nov 2026 18:00:36 +0000</pubDate>
+      <guid>https://www.transformernews.ai/p/hugging-face-appears-to-be-hosting</guid>
+      <link>https://www.transformernews.ai/p/hugging-face-appears-to-be-hosting</link>
+      <itunes:author>Chris Stokel-Walker</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/820d13baa65a_hugging_face_appears_to_be_hosting_a_load_of_model.mp3" type="audio/mpeg" length="5634692" />
+      <itunes:duration>00:09:55</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>“Fable and Mythos 5.2: The System Card” by Zvi</title>
       <description>Audio version of “Fable and Mythos 5.2: The System Card” by Zvi from Zvi Mowshowitz</description>
       <pubDate>Wed, 11 Nov 2026 16:32:16 +0000</pubDate>
@@ -50,6 +62,18 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/690fbae2e4c5_fable_and_mythos_52_the_system_card_by_zvi.mp3" type="audio/mpeg" length="2466260" />
       <itunes:duration>00:04:23</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Escaping The “Outside Criticism” Trap</title>
+      <description>Audio version of Escaping The “Outside Criticism” Trap from Scott Alexander</description>
+      <pubDate>Wed, 11 Nov 2026 07:12:01 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/escaping-the-outside-criticism-trap</guid>
+      <link>https://www.astralcodexten.com/p/escaping-the-outside-criticism-trap</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4986de69d8e2_escaping_the_outside_criticism_trap.mp3" type="audio/mpeg" length="6736412" />
+      <itunes:duration>00:12:06</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
