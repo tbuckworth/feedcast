@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Wed, 11 Nov 2026 05:34:09 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Nov 2026 05:33:37 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-12</title>
+      <description>Daily News Briefing - 2026-11-12
+
+Topics covered:
+- Jensen Huang's position at Nvidia has gone from shaky to precarious
+- On AI capabilities, Google DeepMind had a strong scientific day
+- On the money side of AI, the picture is mixed
+- On Iran, the Guardian reports that Mehdi Mohammadi, an adviser to chief negotiator Mohammad Bagher Ghalibaf, says Washington has set roughly a two-week window before Trump decides on military action, and that Tehran is preparing a response
+- Abu Dhabi talks produced the war's largest planned prisoner exchange, over a thousand per side, but no peace
+- In American politics, Democrat Scott Colom unseated Senator Cindy Hyde-Smith in Mississippi, becoming the state's first Black senator elected since Reconstruction and giving Democrats at least fifty-five Senate seats</description>
+      <pubDate>Thu, 12 Nov 2026 05:32:35 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-12</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/839ca3474f50_daily_news_briefing_-_2026-11-12.mp3" type="audio/mpeg" length="2810876" />
+      <itunes:duration>00:04:58</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-12.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Fable and Mythos 5.2: The System Card” by Zvi</title>
+      <description>Audio version of “Fable and Mythos 5.2: The System Card” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 11 Nov 2026 16:32:16 +0000</pubDate>
+      <guid isPermaLink="false">9bfdfeeb-d5ff-4f2e-b383-c905c52bb4b3</guid>
+      <link>https://www.lesswrong.com/posts/DXqmHa4XkjvwZiDcB/fable-and-mythos-5-2-the-system-card</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/690fbae2e4c5_fable_and_mythos_52_the_system_card_by_zvi.mp3" type="audio/mpeg" length="2466260" />
+      <itunes:duration>00:04:23</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-11</title>
       <description>Daily News Briefing - 2026-11-11
@@ -1134,37 +1165,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/040460a04d5a_arguments_about_ai_consciousness_remain_highly_mo.mp3" type="audio/mpeg" length="2063421" />
       <itunes:duration>00:03:40</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-13</title>
-      <description>Daily News Briefing - 2026-10-13
-
-Topics covered:
-- Microsoft president Brad Smith is calling for urgent AI regulation, and says Britain rather than the United States or the European Union is best placed to lead it
-- On capabilities, Meta's Superintelligence Lab has released Muse Wonder and Muse Wonder Full, its first frontier models
-- The International Monetary Fund warns that an AI share crash now threatens global financial stability
-- On Ukraine, the Kremlin has flatly rejected Trump's energy ceasefire
-- In France, hackers drove supermarket fridges to fifty degrees Celsius in what retailers call an unprecedented attack
-- Saudi Arabia has suspended all Riyadh airport flights until Saturday after further Houthi strikes</description>
-      <pubDate>Tue, 13 Oct 2026 04:34:45 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-13</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/baaceb902981_daily_news_briefing_-_2026-10-13.mp3" type="audio/mpeg" length="2918109" />
-      <itunes:duration>00:05:09</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-13.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“OpenAI Fires Three Safety Researchers” by Zvi</title>
-      <description>Audio version of “OpenAI Fires Three Safety Researchers” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 12 Oct 2026 22:33:17 +0000</pubDate>
-      <guid isPermaLink="false">6ee214ec-5323-4cce-b6da-e0150974b72e</guid>
-      <link>https://www.lesswrong.com/posts/zCNm2PnqE5Zp6Z2FW/openai-fires-three-safety-researchers</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0250556bc61d_openai_fires_three_safety_researchers_by_zvi.mp3" type="audio/mpeg" length="2318493" />
-      <itunes:duration>00:04:06</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
