@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Thu, 12 Nov 2026 05:35:49 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 05:34:51 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-13</title>
+      <description>Daily News Briefing - 2026-11-13
+
+Topics covered:
+- Jensen Huang is out at Nvidia
+- Huang has now agreed to testify in a closed-door session before Republican-led House committees, which had threatened a subpoena
+- The Guardian argues that Nvidia's real moat was Huang's opaque web of relationships, from sovereign AI deals with governments to financing the "neoclouds" that buy its chips
+- The neocloud model is showing strain elsewhere
+- On AI safety, Anna Wang, writing in a personal capacity on the Alignment Forum, proposes a legislated waiting period
+- Google replaced Gemini 3.8 Flash with Gemini 4 Hydrogen across its products, available immediately</description>
+      <pubDate>Fri, 13 Nov 2026 05:33:24 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-13</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/300f5073515c_daily_news_briefing_-_2026-11-13.mp3" type="audio/mpeg" length="3162188" />
+      <itunes:duration>00:05:36</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-13.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“AI #194: Spy Versus Guy” by Zvi</title>
+      <description>Audio version of “AI #194: Spy Versus Guy” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 12 Nov 2026 14:42:22 +0000</pubDate>
+      <guid isPermaLink="false">f065307e-9569-4e44-a522-47c972d1b520</guid>
+      <link>https://www.lesswrong.com/posts/qKd9DvDMiYXxzAugk/ai-194-spy-versus-guy</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/407e3464ee44_ai_194_spy_versus_guy_by_zvi.mp3" type="audio/mpeg" length="2356700" />
+      <itunes:duration>00:04:08</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-12</title>
       <description>Daily News Briefing - 2026-11-12
@@ -1158,37 +1189,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/d409e812e139_the_safety_culture_at_the_labs_is_broken_by_zvi.mp3" type="audio/mpeg" length="2494125" />
       <itunes:duration>00:04:24</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-14</title>
-      <description>Daily News Briefing - 2026-10-14
-
-Topics covered:
-- Britain’s domestic intelligence service has launched an Artificial Intelligence Threat Assessment Centre
-- Google has released Gemini four Argon, its first major frontier model since late twenty twenty-five
-- An OpenAI employee has been arrested and charged with covertly intercepting conversations after a recording device was found in an executive conference room
-- Ukraine says it received no advance warning from partners before Russian ballistic missiles struck Kyiv on successive nights
-- Saudi Arabia and the Houthis are escalating attacks toward energy infrastructure
-- Watch next for evidence clarifying Ukraine’s missile-warning gaps and whether the Saudi-Houthi confrontation produces further attacks on energy facilities</description>
-      <pubDate>Wed, 14 Oct 2026 04:34:51 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-14</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0cfd8eed3abf_daily_news_briefing_-_2026-10-14.mp3" type="audio/mpeg" length="2383197" />
-      <itunes:duration>00:04:10</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-14.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“Arguments About AI Consciousness Remain Highly Motivated and At Best Overconfident” by Zvi</title>
-      <description>Audio version of “Arguments About AI Consciousness Remain Highly Motivated and At Best Overconfident” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 13 Oct 2026 14:03:24 +0000</pubDate>
-      <guid isPermaLink="false">8ca2861a-83cb-40f1-bb50-cbb0bc8f66e9</guid>
-      <link>https://www.lesswrong.com/posts/4zHu6AiTHrkBdpxsm/arguments-about-ai-consciousness-remain-highly-motivated-and</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/040460a04d5a_arguments_about_ai_consciousness_remain_highly_mo.mp3" type="audio/mpeg" length="2063421" />
-      <itunes:duration>00:03:40</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
