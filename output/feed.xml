@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Fri, 13 Nov 2026 05:37:04 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 14 Nov 2026 05:33:34 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-14</title>
+      <description>Daily News Briefing - 2026-11-14
+
+Topics covered:
+- We start with new Anthropic safety research on whether red-teaming can be automated
+- A starker warning came from Paul Cristiano, executive director of the Alignment Research Center and an OpenAI Foundation board member
+- The Nvidia scandal has now reached the cabinet
+- The evidence on smuggled chips is also growing
+- On Iran, the Revolutionary Guards say they destroyed a United States early-warning radar in Bahrain
+- In Europe, EU leaders in Dublin agreed a negotiating team for Ukraine talks: the EU institutions plus Britain, France, Germany, Italy and Poland</description>
+      <pubDate>Sat, 14 Nov 2026 05:32:29 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-14</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7c860187be67_daily_news_briefing_-_2026-11-14.mp3" type="audio/mpeg" length="3243620" />
+      <itunes:duration>00:05:46</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-14.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Jensen Huang Resigns After Having Another Affair In Addition to the Chinese Spy” by Zvi</title>
+      <description>Audio version of “Jensen Huang Resigns After Having Another Affair In Addition to the Chinese Spy” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 13 Nov 2026 12:35:31 +0000</pubDate>
+      <guid isPermaLink="false">b4d4b3c2-a5b4-4907-89ee-c398c0ff9e2d</guid>
+      <link>https://www.lesswrong.com/posts/5u2ZNiskEkkJtrMDz/jensen-huang-resigns-after-having-another-affair-in-addition</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fb2479f207c6_jensen_huang_resigns_after_having_another_affair.mp3" type="audio/mpeg" length="2419076" />
+      <itunes:duration>00:04:16</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-13</title>
       <description>Daily News Briefing - 2026-11-13
@@ -1174,49 +1205,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-10-15</title>
-      <description>Daily News Briefing - 2026-10-15
-
-Topics covered:
-- Eight American states have sued OpenAI, accusing it of harming children and misleading the public about ChatGPT's safety
-- Anthropic is warning that small AI models could soon spread like worms through cheap internet-connected devices
-- Anthropic has also told prospective investors that revenue jumped forty-five percent to sixteen point eight billion dollars in the September quarter, the BBC understands
-- Ukraine's military has lost Starlink connectivity on fast-moving terminals, and the outage caused several combat missions to fail
-- Iran has sharply stepped up its attacks on shipping near the Strait of Hormuz
-- With midterms less than three weeks away, Hormuz shipping and next week's market reaction to the AI selloff are the pressure points to watch</description>
-      <pubDate>Thu, 15 Oct 2026 04:33:36 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-15</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/80a77cd2cbd7_daily_news_briefing_-_2026-10-15.mp3" type="audio/mpeg" length="2796621" />
-      <itunes:duration>00:04:55</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-15.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>AI Safety Is Not A Corporate Plot</title>
-      <description>Audio version of AI Safety Is Not A Corporate Plot from Scott Alexander</description>
-      <pubDate>Thu, 15 Oct 2026 01:15:38 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/ai-safety-is-not-a-corporate-plot</guid>
-      <link>https://www.astralcodexten.com/p/ai-safety-is-not-a-corporate-plot</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fb420edfa64a_ai_safety_is_not_a_corporate_plot.mp3" type="audio/mpeg" length="12307437" />
-      <itunes:duration>00:21:48</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“The Safety Culture at the Labs is Broken” by Zvi</title>
-      <description>Audio version of “The Safety Culture at the Labs is Broken” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 14 Oct 2026 14:32:18 +0000</pubDate>
-      <guid isPermaLink="false">8631f31c-31de-40c5-8ad7-99e240a223aa</guid>
-      <link>https://www.lesswrong.com/posts/Azqs8XD75k4F9f7ua/the-safety-culture-at-the-labs-is-broken</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d409e812e139_the_safety_culture_at_the_labs_is_broken_by_zvi.mp3" type="audio/mpeg" length="2494125" />
-      <itunes:duration>00:04:24</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
       <title>Quantity vs quality in pottery is a lie</title>
       <description>Audio version of Quantity vs quality in pottery is a lie by becausecurious from LessWrong Curated</description>
       <pubDate>Mon, 12 Oct 2026 15:40:03 +0000</pubDate>
@@ -1225,18 +1213,6 @@ Topics covered:
       <itunes:author>becausecurious</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/bb1027dffd78_quantity_vs_quality_in_pottery_is_a_lie.mp3" type="audio/mpeg" length="4313661" />
       <itunes:duration>00:07:51</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Cat-Belling Problems</title>
-      <description>Audio version of Cat-Belling Problems by Eliezer Yudkowsky from LessWrong Curated</description>
-      <pubDate>Thu, 03 Sep 2026 21:20:28 +0000</pubDate>
-      <guid isPermaLink="false">SwYBLQvo8MddDcCwz</guid>
-      <link>https://www.lesswrong.com/posts/SwYBLQvo8MddDcCwz/cat-belling-problems</link>
-      <itunes:author>Eliezer Yudkowsky</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7e7edd5850ec_cat-belling_problems.mp3" type="audio/mpeg" length="2369037" />
-      <itunes:duration>00:04:11</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
