@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sat, 14 Nov 2026 05:35:28 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Nov 2026 05:33:02 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,25 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-15</title>
+      <description>Daily News Briefing - 2026-11-15
+
+Topics covered:
+- Helen Toner, executive director of Georgetown's Center for Security and Emerging Technology and one of the four OpenAI board members who voted to fire Sam Altman, told The Verge's Decoder podcast that "we're screwed" if AI safety rests on any one person being trusted to get it right
+- On the Alignment Forum, Chris Leong published course notes on Miles Brundage's essay "We're in Triage Mode for AI Safety." Brundage is a former OpenAI senior adviser for AGI readiness
+- The Nvidia fallout keeps spreading
+- Across Asia, governments are reassuring their markets
+- In geopolitics, the White House says Donald Trump, Vladimir Putin and Xi Jinping will hold a trilateral meeting on the sidelines of the Asia-Pacific Economic Cooperation summit in Shenzhen next week
+- On Ukraine itself, Zelenskyy says American negotiators asked, for the first time, whether Kyiv would withdraw from the Donbas in exchange for NATO membership</description>
+      <pubDate>Sun, 15 Nov 2026 05:32:42 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-15</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/efe7372fd7f9_daily_news_briefing_-_2026-11-15.mp3" type="audio/mpeg" length="3241172" />
+      <itunes:duration>00:05:40</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-15.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-14</title>
       <description>Daily News Briefing - 2026-11-14
@@ -1182,37 +1201,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/9da23b32db4e_monthly_roundup_47_october_2026_by_zvi.mp3" type="audio/mpeg" length="2205981" />
       <itunes:duration>00:03:57</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-16</title>
-      <description>Daily News Briefing - 2026-10-16
-
-Topics covered:
-- Federal regulators have opened a formal probe into Anthropic and OpenAI
-- On the same day, Anthropic gave six researchers from the nonprofit evaluator METR employee-level access
-- On capabilities, Meta released Muse Spark Open, which it calls the most capable open-weight model in the United States
-- The AI selloff deepened
-- Trump's energy ceasefire between Russia and Ukraine has collapsed, according to the Guardian
-- In Yemen, Houthi missiles struck the presidential palace complex in Aden for the first time in this conflict, killing five people, as the United Nations Security Council condemned attacks on Saudi Arabia</description>
-      <pubDate>Fri, 16 Oct 2026 04:38:33 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-16</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3471d2015622_daily_news_briefing_-_2026-10-16.mp3" type="audio/mpeg" length="2833077" />
-      <itunes:duration>00:05:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-16.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“AI #190: Scion of the Times” by Zvi</title>
-      <description>Audio version of “AI #190: Scion of the Times” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Thu, 15 Oct 2026 21:31:44 +0000</pubDate>
-      <guid isPermaLink="false">ed9898db-c1e8-428a-b4f6-02a533f89c5e</guid>
-      <link>https://www.lesswrong.com/posts/z4guBXZeymkgvd75S/ai-190-scion-of-the-times</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/86b323dea97a_ai_190_scion_of_the_times_by_zvi.mp3" type="audio/mpeg" length="2428101" />
-      <itunes:duration>00:04:18</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
