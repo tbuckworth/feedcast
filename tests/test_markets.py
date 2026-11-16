@@ -1,5 +1,6 @@
-"""Prediction markets in the briefing: parsing, the move rules, the writer's input,
-and the daily email's charts. No network: every API reply here is a fixture."""
+"""Prediction markets in the briefing: parsing, the move rules, the sentence on how
+each market resolves, the writer's input, and the daily email's market notes. No
+network: every API reply here is a fixture."""
 
 import asyncio
 import json
@@ -12,11 +13,14 @@ import pytest
 import src.main as main
 import src.markets as markets
 from src import llm, notices
+from src.chunking import sentences
 from src.config import load_config
-from src.email_report import (ChartNote, ReportEpisode, RunReport, build_html, send_report)
-from src.market_charts import charts_for_report
-from src.markets import (Market, MarketContext, MarketRules, MarketScout, is_move,
-                         kalshi_markets, pick_moves, polymarket_markets)
+from src.email_report import (MarketNote, ReportEpisode, RunReport, build_html, build_text,
+                              send_report)
+from src.market_charts import market_notes_for_report
+from src.markets import (MAX_RESOLVES_WORDS, NO_RULES, Market, MarketContext, MarketRules,
+                         MarketScout, is_move, kalshi_markets, pick_moves, polymarket_markets,
+                         resolution, rule_sentence)
 from src.monitor import FeedEntry, FeedMonitor
 from src.news import NewsAggregator
 from tests.conftest import FakeApi, FakeMessagesApi
@@ -25,14 +29,44 @@ NOW = datetime(2026, 9, 19, 4, 0, tzinfo=timezone.utc)
 # The backtest's move sizes, which config.yaml `prediction_markets` sets.
 RULES = MarketRules(move=0.15, major_move=0.20, max_moves=3)
 
+# Rules as each platform's API returned them on 16 Nov 2026 (the Polymarket and
+# Manifold ones shortened after their second paragraph), and the sentence of
+# each that says how the market resolves.
+POLYMARKET_RULES = (
+    'This market will resolve to "Yes" if Anthropic shares are listed on a public securities '
+    'exchange and open for trading by 11:59 PM ET on the listed date. Otherwise, this market '
+    'will resolve to "No."\n\nIf Anthropic is acquired by another company that is already '
+    'public, this market will immediately resolve to "No."')
+POLYMARKET_RESOLVES = (
+    'This market will resolve to "Yes" if Anthropic shares are listed on a public securities '
+    "exchange and open for trading by 11:59 PM ET on the listed date.")
+KALSHI_PRIMARY = "If Anthropic confirms an IPO before Dec 1, 2026, then the market resolves to Yes."
+KALSHI_SECONDARY = (
+    "An IPO is confirmed if 1) the SEC declares the company's Form S-1 effective OR 2) the IPO "
+    "is priced OR 3) a securities exchange has assigned a ticker to it.")
+MANIFOLD_RULES = (
+    "Artificial General Intelligence (AGI) refers to a type of artificial intelligence that has "
+    "the ability to understand, learn, and apply its intelligence to a wide variety of "
+    "problems, much like a human being. It involves the capability to reason, plan, solve "
+    "problems, think abstractly, comprehend complex ideas, learn quickly, and learn from "
+    "experience.\n\nResolves as YES if such a system is created and publicly announced before "
+    "January 1st 2029\n\nMOD EDIT (Nov 2, 2025 - @Stralor)\n\nIf that resolves NO for this "
+    "market's year (and every year earlier), this also resolves NO.")
+MANIFOLD_RESOLVES = ("Resolves as YES if such a system is created and publicly announced before "
+                     "January 1st 2029.")
+BILL_RESOLVES = ('This market will resolve to "Yes" if a federal AI safety bill is signed into '
+                 "law by December 31, 2026, 11:59 PM ET.")
+
 
 def _m(title="Will Congress pass an AI safety bill in 2026?", platform="Polymarket", prob=0.30,
        before=0.55, volume=500_000.0, volume_30d=100_000.0, volume_24h=40_000.0,
-       closes=NOW + timedelta(days=90), event=None, key=None, traders=None):
+       closes=NOW + timedelta(days=90), event=None, key=None, traders=None,
+       resolves=BILL_RESOLVES):
     key = key or f"{platform.lower()}:{title}"
     return Market(platform=platform, key=key, title=title, url=f"https://pm/{abs(hash(title))}",
                   prob=prob, prob_24h=before, volume=volume, volume_30d=volume_30d,
-                  volume_24h=volume_24h, closes=closes, event=event or key, traders=traders)
+                  volume_24h=volume_24h, closes=closes, event=event or key, traders=traders,
+                  resolves=resolves)
 
 
 class TestParsing:
@@ -42,7 +76,7 @@ class TestParsing:
             {"id": "1", "question": "Anthropic IPO by October 31, 2026?", "outcomes": '["Yes", "No"]',
              "outcomePrices": '["0.03", "0.97"]', "oneDayPriceChange": -0.52, "volumeNum": 1160616,
              "volume1mo": 432462, "volume24hr": 50000, "endDate": "2026-10-31T12:00:00Z",
-             "clobTokenIds": '["tok1", "tok2"]'},
+             "clobTokenIds": '["tok1", "tok2"]', "description": POLYMARKET_RULES},
             {"id": "2", "question": "closed one", "closed": True, "outcomes": '["Yes", "No"]',
              "outcomePrices": '["1", "0"]', "clobTokenIds": '["t"]'},
             {"id": "3", "question": "three-way", "outcomes": '["A", "B", "C"]',
@@ -53,19 +87,22 @@ class TestParsing:
         assert m.url == "https://polymarket.com/event/anthropic-ipo-by"
         assert m.event == "polymarket:7" and m.history_ref == "tok1"
         assert m.traded() == "$1.2M traded"
+        assert m.rules == POLYMARKET_RULES and resolution(m) == POLYMARKET_RESOLVES
 
     def test_kalshi_titles_carry_the_outcome_and_skip_untraded_markets(self):
         event = {"event_ticker": "KXIPOANTHROPIC-DATE", "series_ticker": "KXIPOANTHROPIC",
                  "title": "When will Anthropic officially announce an IPO?", "markets": [
                      {"ticker": "A", "yes_sub_title": "Before Nov 1, 2026", "last_price_dollars": "0.06",
                       "previous_price_dollars": "0.53", "volume_fp": "478276", "volume_24h_fp": "40565",
-                      "close_time": "2026-11-01T03:59:00Z"},
+                      "close_time": "2026-11-01T03:59:00Z", "rules_primary": KALSHI_PRIMARY,
+                      "rules_secondary": KALSHI_SECONDARY},
                      {"ticker": "B", "yes_sub_title": "Before Dec 1", "last_price_dollars": "0.5",
                       "previous_price_dollars": "0.5", "volume_fp": "0"}]}
         (m,) = kalshi_markets(event)
         assert m.title == "When will Anthropic officially announce an IPO? Before Nov 1, 2026"
         assert m.move == pytest.approx(-0.47) and m.history_ref == "KXIPOANTHROPIC|A"
         assert m.url == "https://kalshi.com/markets/kxipoanthropic"
+        assert m.rules == f"{KALSHI_PRIMARY}\n{KALSHI_SECONDARY}" and resolution(m) == KALSHI_PRIMARY
 
 
 class TestMoveRules:
@@ -109,11 +146,88 @@ class TestMoveRules:
         assert pick_moves([a], RULES, NOW, recently_reported={"pm:1": 0.30}) == [a]
 
 
+class TestResolutionSentence:
+    """The one sentence on how a market resolves is lifted from its rules, never written."""
+
+    @pytest.mark.parametrize("rules, sentence", [
+        (POLYMARKET_RULES, POLYMARKET_RESOLVES),
+        (f"{KALSHI_PRIMARY}\n{KALSHI_SECONDARY}", KALSHI_PRIMARY),
+        # Background first, and the rule on a line with no full stop: one is added.
+        (MANIFOLD_RULES, MANIFOLD_RESOLVES),
+        # A link and an image, as Manifold's plain text leaves them.
+        ("(https://www.metaculus.com/questions/embed/41141)Resolves according to Metaculus "
+         "resolution.\n\n[image]More below.", "Resolves according to Metaculus resolution."),
+        ("I'll resolve this entirely subjectively.", "I'll resolve this entirely subjectively."),
+    ])
+    def test_it_is_the_first_sentence_of_the_rules_that_says_how(self, rules, sentence):
+        found = rule_sentence(rules)
+        assert found == sentence
+        # Word for word from the rules, but for the full stop a bare line gets.
+        assert found.rstrip(".") in rules
+
+    @pytest.mark.parametrize("rules", [POLYMARKET_RULES, f"{KALSHI_PRIMARY}\n{KALSHI_SECONDARY}",
+                                       MANIFOLD_RULES])
+    def test_it_is_exactly_one_sentence(self, rules):
+        found = rule_sentence(rules)
+        assert found.endswith(".") and len(found.split()) <= MAX_RESOLVES_WORDS
+        assert sentences(found) == [found]   # no second sentence
+
+    @pytest.mark.parametrize("sentence", [
+        'This market will resolve to "Yes" if the U.S. federal government or OpenAI publicly '
+        "alleges that he acted on behalf of the listed entity by December 31, 2026, 11:59 PM ET.",
+        "This market will resolve according to the number of qualifying resets announced between "
+        "12:00 a.m. ET on November 16, 2026, and 11:59 p.m. ET on November 22, 2026.",
+        "This market will resolve to the company with the highest market capitalization in U.S. "
+        "dollars, e.g. Anthropic, on its first trading day before Dec. 31, 2026.",
+        "This market resolves YES if Donald J. Trump signs the bill before 2027.",
+    ])
+    def test_an_abbreviation_does_not_end_the_sentence(self, sentence):
+        assert rule_sentence(f"{sentence} Otherwise, this market will resolve to \"No.\" "
+                             "More rules follow.") == sentence
+
+    def test_a_closing_quote_after_the_full_stop_ends_the_sentence(self):
+        assert sentences('It will resolve to "No." If acquired, it resolves "No". Then more.') == [
+            'It will resolve to "No."', 'If acquired, it resolves "No".', "Then more."]
+
+    @pytest.mark.parametrize("rules", [
+        # "Resolve" the noun, not the verb.
+        "China might seize an island to test American and Taiwanese resolve, as a bargaining chip.",
+        # The rule introduces a list the sentence does not carry; the side
+        # condition after it is not passed off as the rule.
+        "Resolves YES if OpenAI offers compute through ANY of the following:\n"
+        "Public cloud service\nResolves NO if he dies in custody.",
+        # Too long to read out.
+        "This market will resolve to \"Yes\" if " + "the agency confirms it " * 20 + "by June.",
+        "Background only, with no rule in it.",
+    ])
+    def test_rules_with_no_usable_sentence_give_none(self, rules):
+        assert rule_sentence(rules) is None
+
+    def test_only_a_manifold_market_may_state_no_rules(self):
+        assert resolution(_m(platform="Manifold")) is None         # rules not read yet
+        blank = _m(platform="Manifold")
+        blank.rules = "  \n"
+        assert resolution(blank) == NO_RULES
+        assert NO_RULES == "This market states no resolution rules beyond its title."
+        # Polymarket and Kalshi always publish rules: none means the reply changed
+        # shape, and the market is dropped rather than said to have no rules.
+        for platform in ("Polymarket", "Kalshi"):
+            empty = _m(platform=platform)
+            empty.rules = ""
+            assert resolution(empty) is None
+
+
+IPO = "Anthropic IPO by October 31, 2026?"
+OHIO_RESOLVES = ("This market will resolve according to the party of the candidate who wins the "
+                 "2026 Ohio Senate election.")
+
+
 def _ctx_with_story_and_move(cause):
-    story = _m("Will Democrats win the Ohio Senate race in 2026?", prob=0.62, before=None)
+    story = _m("Will Democrats win the Ohio Senate race in 2026?", prob=0.62, before=None,
+               resolves=OHIO_RESOLVES)
     story.history = [(NOW - timedelta(days=8), 0.58), (NOW - timedelta(days=2), 0.60),
                      (NOW - timedelta(hours=1), 0.62)]
-    move = _m("Anthropic IPO by October 31, 2026?", prob=0.03, before=0.55, key="pm:ipo")
+    move = _m(IPO, prob=0.03, before=0.55, key="pm:ipo", resolves=POLYMARKET_RESOLVES)
     return MarketContext(stories={"https://news/ohio": [story]},
                          story_times={"https://news/ohio": NOW}, moves=[move],
                          causes={"pm:ipo": cause})
@@ -125,6 +239,7 @@ class TestWriterInput:
         block = _ctx_with_story_and_move(None).story_block("https://news/ohio")
         assert "58% a week before this story, 60% the day before it, 62% now" in block
         assert "$500k traded" in block and _ctx_with_story_and_move(None).story_block("x") == ""
+        assert block.endswith(f"\n    Resolves: {OHIO_RESOLVES}")
 
     def test_moves_section_says_what_the_search_found_or_did_not(self):
         found = {"found": True, "summary": "The Journal reported a November target.",
@@ -133,6 +248,9 @@ class TestWriterInput:
                _ctx_with_story_and_move(found).moves_section()
         assert "no clear cause" in _ctx_with_story_and_move({"found": False}).moves_section()
         assert "55% to 3%" in _ctx_with_story_and_move({"found": False}).moves_section()
+        # The move's own sentence, between its odds and its cause.
+        assert (f"https://pm/{abs(hash(IPO))}\n  Resolves: {POLYMARKET_RESOLVES}\n  Cause found"
+                in _ctx_with_story_and_move(found).moves_section())
 
     def test_no_market_data_means_no_instructions_and_an_unchanged_message(self):
         assert MarketContext().instructions() == "" and not MarketContext()
@@ -155,6 +273,8 @@ class TestWriterInput:
         assert sent[0] == sent[1]
         asyncio.run(agg.synthesize_briefing("ARTICLES", _ctx_with_story_and_move(None).instructions()))
         assert '"On the prediction markets,"' in sent[2] and "Leave them out" in sent[2]
+        assert ('Every market below has a "Resolves:" line' in sent[2]
+                and "never describe from memory how a market resolves" in sent[2])
         assert sent[2].index("prediction markets") < sent[2].index("## Today's articles:")
 
     def test_briefing_input_carries_the_odds_and_the_moves(self):
@@ -189,7 +309,8 @@ BILL_EVENT = {"id": 7, "slug": "ai-bill", "title": "AI bill", "markets": [{
     "outcomes": '["Yes", "No"]', "outcomePrices": '["0.30", "0.70"]',
     "oneDayPriceChange": -0.25, "volumeNum": 500000, "volume1mo": 100000, "volume24hr": 40000,
     "endDate": (datetime.now(timezone.utc) + timedelta(days=90)).isoformat(),
-    "clobTokenIds": '["tok1", "tok2"]'}]}
+    "clobTokenIds": '["tok1", "tok2"]',
+    "description": f'{BILL_RESOLVES} Otherwise, this market will resolve to "No".'}]}
 BILL = "Will Congress pass an AI safety bill in 2026?"
 
 
@@ -247,6 +368,72 @@ class TestFailuresReachTheEmail:
         assert history.startswith("prediction markets: 1 of 1 30-day price histories failed")
         assert long_history.startswith("prediction markets: 1 of 1 long price histories failed")
         assert cause.startswith(f"market cause lookup for {BILL!r} failed (RuntimeError: down)")
+
+    def test_every_market_handed_on_has_its_sentence_and_the_rest_are_left_out(
+            self, monkeypatch, routes):
+        close = int((datetime.now(timezone.utc) + timedelta(days=60)).timestamp() * 1000)
+        descriptions = {"agi": MANIFOLD_RULES, "blank": "", "vague": "Background, and no rule."}
+        asked_for = []
+
+        def manifold(mid: str) -> dict:
+            return {"id": mid, "question": f"Will the Senate pass an AI bill ({mid})?",
+                    "probability": 0.4, "volume": 1000, "uniqueBettorCount": 120,
+                    "closeTime": close, "url": f"https://manifold.markets/{mid}"}
+
+        def handler(request):
+            host, path = request.url.host, request.url.path
+            if host == "gamma-api.polymarket.com":
+                return httpx.Response(200, json=[BILL_EVENT] if path == "/events"
+                                      else {"events": []})
+            if host == "api.elections.kalshi.com":
+                return httpx.Response(200, json={"events": []})
+            if path == "/v0/search-markets":   # the listing: no description in it
+                return httpx.Response(200, json=[manifold(m) for m in
+                                                 ("agi", "blank", "vague", "down")])
+            if path.startswith("/v0/market/"):
+                mid = path.rsplit("/", 1)[1]
+                asked_for.append(mid)
+                if mid == "down":
+                    return httpx.Response(503)
+                return httpx.Response(200, json={**manifold(mid),
+                                                 "textDescription": descriptions[mid]})
+            return httpx.Response(200, json=[] if host == "api.manifold.markets"
+                                  else {"history": []})
+        _market_api(monkeypatch, handler)
+        # The checker: one story's queries, then two markets for each story.
+        routes["anthropic"] = FakeApi([
+            '{"0": ["AI bill"], "1": ["AI bill"]}',
+            '{"0": ["manifold:agi", "manifold:blank"], "1": ["manifold:vague", "manifold:down"]}'])
+        monkeypatch.setenv("ANTHROPIC_API_KEY", "key")
+        search = FakeMessagesApi('{"found": false}')
+        monkeypatch.setattr(llm, "native_anthropic", lambda: search)
+        stories = [{"title": f"Senate debates an AI bill, day {i}", "url": f"https://news/{i}",
+                    "summary": "s", "published": NOW} for i in (1, 2)]
+
+        ctx = asyncio.run(MarketScout(rules=RULES, polymarket_tags=["ai"])._build(stories))
+
+        # Polymarket's rules came with the listing; Manifold's were read one by
+        # one, for the four linked markets only.
+        assert sorted(asked_for) == ["agi", "blank", "down", "vague"]
+        assert [(m.key, m.resolves) for m in ctx.moves] == [("polymarket:1", BILL_RESOLVES)]
+        # The second story's markets had no rules to give, so it carries none.
+        assert {url: [(m.key, m.resolves) for m in ms] for url, ms in ctx.stories.items()} == {
+            "https://news/1": [("manifold:agi", MANIFOLD_RESOLVES), ("manifold:blank", NO_RULES)]}
+        assert list(ctx.story_times) == ["https://news/1"]
+        lookups, left_out = notices.report()
+        assert lookups.startswith("prediction markets: 1 of 4 market rules lookups failed "
+                                  "(first: manifold:down: HTTPStatusError")
+        assert left_out == (
+            "prediction markets: 1 left out because their rules have no sentence of at most 60 "
+            "words saying how they resolve (first: manifold:vague, "
+            "'Will the Senate pass an AI bill (vague)?')")
+        # The writer is given each sentence, and so is the search for a move's cause.
+        assert f"Resolves: {MANIFOLD_RESOLVES}" in ctx.story_block("https://news/1")
+        assert f"Resolves: {NO_RULES}" in ctx.story_block("https://news/1")
+        assert f"Resolves: {BILL_RESOLVES}" in ctx.moves_section()
+        (request,) = search.requests
+        assert (f"How it resolves, from its rules: {BILL_RESOLVES}"
+                in request["messages"][0]["content"])
 
     def test_failed_searches_and_an_unreadable_match_are_reported(self, routes):
         close = int((datetime.now(timezone.utc) + timedelta(days=60)).timestamp() * 1000)
@@ -429,7 +616,7 @@ class TestReportedMoves:
         assert m.recent_market_reports(days=0) == {}
 
 
-class TestChartsInTheEmail:
+class TestMarketNotesInTheEmail:
 
     def _report(self):
         briefing = ReportEpisode(title="Daily News Briefing - 2026-09-19", author="", feed_name="",
@@ -438,19 +625,55 @@ class TestChartsInTheEmail:
                                           {"text": "No link"}])
         return RunReport(episodes=[briefing])
 
-    def test_charts_sit_under_their_bullet_and_the_rest_get_a_section(self):
+    def test_notes_sit_under_their_bullet_and_the_rest_get_a_section(self):
         report = self._report()
-        report.charts = [
-            ChartNote(cid="c0@f", title="Democrats win Ohio?", platform="Polymarket",
-                      url="https://pm/ohio", caption="Now 62%", anchor="https://news/ohio"),
-            ChartNote(cid="c1@f", title="Anthropic IPO by Oct 31?", platform="Polymarket",
-                      url="https://pm/ipo", caption="55% to 3%", anchor=""),
+        report.market_notes = [
+            MarketNote(cid="c0@f", title="Democrats win Ohio?", platform="Polymarket",
+                       url="https://pm/ohio", caption="Now 62%", resolves=OHIO_RESOLVES,
+                       anchor="https://news/ohio"),
+            MarketNote(cid="c1@f", title="Anthropic IPO by Oct 31?", platform="Polymarket",
+                       url="https://pm/ipo", caption="55% to 3%", resolves=POLYMARKET_RESOLVES,
+                       anchor=""),
         ]
         html = build_html(report, datetime(2026, 9, 19))
         assert html.index("Ohio race") < html.index("cid:c0@f") < html.index("No link")
         assert html.count("cid:c0@f") == 1
         assert html.index("Prediction markets") < html.index("cid:c1@f")
         assert "cid:" not in build_html(self._report(), datetime(2026, 9, 19))
+
+    def test_every_note_says_how_its_market_resolves_in_both_versions(self):
+        report = self._report()
+        report.market_notes = [
+            MarketNote(cid="c0@f", title="Democrats win Ohio?", platform="Polymarket",
+                       url="https://pm/ohio", caption="Now 62%", resolves=OHIO_RESOLVES,
+                       anchor="https://news/ohio"),
+            MarketNote(cid="c1@f", title="Anthropic IPO by Oct 31?", platform="Polymarket",
+                       url="https://pm/ipo", caption="55% to 3%", resolves=POLYMARKET_RESOLVES,
+                       anchor=""),
+        ]
+        html = build_html(report, datetime(2026, 9, 19))
+        # Under its chart, escaped: the rules quote "Yes".
+        assert html.index("cid:c0@f") < html.index(f"How it resolves: {OHIO_RESOLVES}")
+        assert ("How it resolves: This market will resolve to &quot;Yes&quot; if Anthropic shares"
+                in html)
+        text = build_text(report, datetime(2026, 9, 19)).splitlines()
+        # The plain-text email has no charts, and places the notes as the HTML does.
+        ohio = text.index("      - Polymarket: Democrats win Ohio?")
+        assert text.index("  - Ohio race (https://news/ohio)") < ohio < text.index("  - No link")
+        assert text[ohio + 3] == f"        How it resolves: {OHIO_RESOLVES}"
+        ipo = text.index("  - Polymarket: Anthropic IPO by Oct 31?")
+        assert text.index("Prediction markets:") < ipo
+        assert text[ipo + 3] == f"    How it resolves: {POLYMARKET_RESOLVES}"
+
+    def test_a_market_with_no_chart_keeps_its_note(self):
+        report = self._report()
+        report.market_notes = [MarketNote(
+            cid="", title="Democrats win Ohio?", platform="Polymarket", url="https://pm/ohio",
+            caption="Now 62%", resolves=OHIO_RESOLVES, anchor="https://news/ohio")]
+        html = build_html(report, datetime(2026, 9, 19))
+        assert "<img" not in html and "cid:" not in html
+        assert (html.index("Ohio race") < html.index("Polymarket: Democrats win Ohio?")
+                < html.index(f"How it resolves: {OHIO_RESOLVES}") < html.index("No link"))
 
     def test_charts_go_in_the_daily_email_to_the_whole_list(self, monkeypatch):
         sent = []
@@ -468,8 +691,9 @@ class TestChartsInTheEmail:
             monkeypatch.setenv(k, v)
         monkeypatch.delenv("FEEDCAST_TEST_RUN", raising=False)
         report = self._report()
-        report.charts = [ChartNote(cid="c0@f", title="t", platform="Polymarket", url="u",
-                                   caption="c", anchor="https://news/ohio")]
+        report.market_notes = [MarketNote(cid="c0@f", title="t", platform="Polymarket", url="u",
+                                          caption="c", resolves=OHIO_RESOLVES,
+                                          anchor="https://news/ohio")]
         assert send_report(report, images={"c0@f": b"\x89PNG"})
         (msg,) = sent
         # The one daily email: the operator plus the list.
@@ -478,7 +702,7 @@ class TestChartsInTheEmail:
         raw = msg.as_string()
         assert "Content-ID: <c0@f>" in raw and "multipart/related" in raw
 
-    def test_only_markets_the_digest_cites_are_charted(self):
+    def test_only_markets_the_digest_cites_are_noted(self):
         ctx = _ctx_with_story_and_move({"found": False})
         for m in ctx.moves:
             m.history = [(NOW - timedelta(days=2), 0.55), (NOW, 0.03)]
@@ -503,32 +727,48 @@ class TestChartsInTheEmail:
                                           {"text": "Strikes", "url": "https://news/yemen"},
                                           {"text": "Polymarket: 65%", "url": yemen.url}]}],
                              markets=ctx.to_dict())
-        charts, images = charts_for_report(briefing)
-        assert [c.title for c in charts] == [
+        found, images = market_notes_for_report(briefing)
+        assert [n.title for n in found] == [
             "Anthropic IPO by October 31, 2026?", "Will Democrats win the Ohio Senate race in 2026?",
             "Houthi military action against Saudi Arabia on October 15?"]
-        assert [c.anchor for c in charts] == ["", ohio.url, yemen.url]
-        assert set(images) == {c.cid for c in charts}
+        assert [n.anchor for n in found] == ["", ohio.url, yemen.url]
+        assert [n.resolves for n in found] == [POLYMARKET_RESOLVES, OHIO_RESOLVES, BILL_RESOLVES]
+        assert set(images) == {n.cid for n in found}
         assert all(png.startswith(b"\x89PNG") for png in images.values())
+        # Only a chart with a story on it explains its dashed line.
+        assert [n.caption for n in found] == [
+            "55% to 3% in the last 24 hours · $500k traded",
+            "Now 62% · $500k traded · dashed line: the story",
+            "Now 65% · $500k traded"]
+
+    def test_a_market_with_too_little_history_to_draw_is_noted_without_a_chart(self):
+        ctx = _ctx_with_story_and_move({"found": False})   # the move has no price history
+        briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
+                             content="On Polymarket, the IPO odds fell.", markets=ctx.to_dict())
+        (note,), images = market_notes_for_report(briefing)
+        assert (note.cid, images) == ("", {})
+        assert note.title == IPO and note.resolves == POLYMARKET_RESOLVES
+        assert note.caption == "55% to 3% in the last 24 hours · $500k traded"
 
     def test_a_chart_cited_from_a_sub_bullet_sits_under_its_parent(self):
         report = self._report()
         report.episodes[0].bullets = [
             {"text": "Houthi escalation", "sub": [{"text": "Odds 65%", "url": "https://pm/houthi"}]},
             {"text": "Ohio race", "url": "https://news/ohio"}]
-        report.charts = [ChartNote(cid="c0@f", title="Houthi action Oct 15?", platform="Polymarket",
-                                   url="https://pm/houthi", caption="Now 65%",
-                                   anchor="https://pm/houthi")]
+        report.market_notes = [MarketNote(
+            cid="c0@f", title="Houthi action Oct 15?", platform="Polymarket",
+            url="https://pm/houthi", caption="Now 65%", resolves=BILL_RESOLVES,
+            anchor="https://pm/houthi")]
         html = build_html(report, datetime(2026, 9, 19))
         assert html.index("Odds 65%") < html.index("cid:c0@f") < html.index("Ohio race")
         assert html.count("cid:c0@f") == 1 and "Prediction markets" not in html
 
-    def test_no_market_data_no_charts(self):
+    def test_no_market_data_no_notes(self):
         briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
                              content="Polymarket")
-        assert charts_for_report(briefing) == ([], {})
+        assert market_notes_for_report(briefing) == ([], {})
 
-    def test_a_chart_that_fails_costs_the_charts_not_the_email(self, monkeypatch):
+    def test_a_chart_that_fails_costs_the_market_notes_not_the_email(self, monkeypatch):
         import src.market_charts as market_charts
 
         def broken(*a, **kw):
@@ -536,9 +776,9 @@ class TestChartsInTheEmail:
         monkeypatch.setattr(market_charts, "render_chart", broken)
         briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
                              content="Polymarket", markets=_ctx_with_story_and_move(None).to_dict())
-        assert charts_for_report(briefing) == ([], {})
+        assert market_notes_for_report(briefing) == ([], {})
         assert notices.report() == [
-            "prediction-market charts left out of this email: ValueError: bad history"]
+            "prediction-market notes left out of this email: ValueError: bad history"]
 
 
 def test_market_record_round_trips_through_json():
@@ -546,6 +786,8 @@ def test_market_record_round_trips_through_json():
     data = json.loads(json.dumps(ctx.to_dict()))
     assert data["moves"][0]["prob_24h"] == pytest.approx(0.55)
     assert data["stories"]["https://news/ohio"][0]["history"][0][1] == 0.58
+    assert data["moves"][0]["resolves"] == POLYMARKET_RESOLVES
+    assert data["stories"]["https://news/ohio"][0]["resolves"] == OHIO_RESOLVES
     assert [s["url"] for s in ctx.sources()] == [ctx.moves[0].url, ctx.stories["https://news/ohio"][0].url]
 
 
@@ -576,9 +818,13 @@ def test_preview_writes_a_briefing_and_emails_it_without_publishing(tmp_path, mo
     assert png.get_payload(decode=True).startswith(b"\x89PNG")
     html = msg.get_body(("html",)).get_content()
     assert html.index("Democratic odds in Ohio rose") < html.index("cid:market-0@feedcast")
+    assert html.index("cid:market-0@feedcast") < html.index(f"How it resolves: {OHIO_RESOLVES}")
     text = msg.get_body(("plain",)).get_content()
     assert "Democratic odds in Ohio rose to 62% on Polymarket." in text   # the digest
     assert "On Polymarket, odds rose." in text                            # the full script
+    # Both markets say how they resolve, the uncited move in a section of its own.
+    assert f"How it resolves: {OHIO_RESOLVES}" in text
+    assert f"How it resolves: {POLYMARKET_RESOLVES}" in text
     assert monitor.get_processed_entries() == [] and monitor.get_recent_briefings() == []
 
 
@@ -668,8 +914,8 @@ class TestLongHistoryCharts:
                              content="Polymarket",
                              bullets=[{"text": "Ohio", "url": "https://news/ohio", "sub": cites}],
                              markets=ctx.to_dict())
-        charts, images = charts_for_report(briefing)
-        return {c.title.split("(")[1].rstrip(")?"): _png_height(images[c.cid]) for c in charts}
+        found, images = market_notes_for_report(briefing)
+        return {c.title.split("(")[1].rstrip(")?"): _png_height(images[c.cid]) for c in found}
 
     def test_zoom_only_on_markets_older_than_three_months(self, capsys):
         heights = self._chart_heights({
@@ -701,6 +947,6 @@ class TestLongHistoryCharts:
         briefing = FeedEntry(id="b", title="b", link="", published=NOW, author="", feed_name="",
                              content="Polymarket", bullets=[{"text": "Ohio", "url": m.url}],
                              markets=ctx.to_dict())
-        _, images = charts_for_report(briefing)
+        _, images = market_notes_for_report(briefing)
         (png,) = images.values()
         assert _png_height(png) == 190

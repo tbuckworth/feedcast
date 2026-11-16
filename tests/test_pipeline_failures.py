@@ -203,13 +203,14 @@ class TestInjection:
         assert "Deleted lw-guid-1 (Land) for re-injection" in capsys.readouterr().out
 
 
-def test_a_chart_failure_reaches_the_email_it_was_left_out_of(pipeline, monkeypatch, routes):
-    """The charts are drawn for the email, so their notice must be in it."""
+def test_a_chart_failure_reaches_the_email_whose_market_notes_it_cost(pipeline, monkeypatch, routes):
+    """The market notes are made for the email, so their notice must be in it."""
     pipeline.news(item("Land tax passes", "https://bbc.example/land"))
     routes["anthropic"] = Model(lambda m: "Friday's briefing. Parliament passed a land tax.")
     now = datetime.now(timezone.utc)
     move = Market(platform="Polymarket", key="pm:1", title="Land tax by 2027?",
                   url="https://pm/land", prob=0.8, prob_24h=0.5,
+                  resolves='This market will resolve to "Yes" if the land tax is law by 2027.',
                   history=[(now - timedelta(days=1), 0.5), (now, 0.8)])
 
     async def scan(self, selected):   # Polymarket, Kalshi and the checker, over the network
@@ -220,6 +221,6 @@ def test_a_chart_failure_reaches_the_email_it_was_left_out_of(pipeline, monkeypa
         raise ValueError("bad history")
     monkeypatch.setattr(market_charts, "render_chart", broken)
     email = pipeline.run()
-    assert "prediction-market charts left out of this email: ValueError: bad history" \
+    assert "prediction-market notes left out of this email: ValueError: bad history" \
         in listed(email, "Fallbacks and skips this run:")
     assert notices.report() == listed(email, "Fallbacks and skips this run:")

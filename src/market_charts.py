@@ -1,4 +1,4 @@
-"""Small price charts of prediction markets, and which ones the daily email gets.
+"""Small price charts of prediction markets, and which markets the daily email notes.
 
 PNG, because Gmail renders neither SVG nor scripts. The main panel is the
 market's whole life (capped at a year by the fetch), so a long-running question
@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 from . import notices  # noqa: E402
 # The email's palette: the charts appear only in it.
-from .email_report import ACCENT, MUTED, RULE, ChartNote, bullet_urls  # noqa: E402
+from .email_report import ACCENT, MUTED, RULE, MarketNote, bullet_urls  # noqa: E402
 from .monitor import FeedEntry  # noqa: E402
 
 MARK = "#b5532c"
@@ -128,17 +128,19 @@ def render_chart(history: list[tuple[datetime, float]], story_time: datetime | N
         plt.close(fig)
 
 
-def charts_for_report(briefing: FeedEntry) -> tuple[list[ChartNote], dict[str, bytes]]:
-    """Price charts for the daily email: the notes, and the PNGs by Content-ID.
+def market_notes_for_report(briefing: FeedEntry) -> tuple[list[MarketNote], dict[str, bytes]]:
+    """The daily email's market notes, and their charts' PNGs by Content-ID.
 
-    A chart is drawn for each unexplained move and for each story market the
-    digest cites, and sits under the bullet that links it. Every chart shows
-    the market's whole life; one whose history goes back more than three
-    months also gets a 7-day zoom (wants_zoom). Nothing on days the
-    briefing used no market. Never raises: a missing chart must not cost the
-    day's email. A failure is printed and added to the run's notices.
+    A note is made for each unexplained move and for each story market the
+    digest cites, and sits under the bullet that links it. It gives the
+    market's odds and the sentence on how it resolves, under a chart of the
+    market's whole life; one whose history goes back more than three months
+    also gets a 7-day zoom (wants_zoom). A market with too little history to
+    draw keeps its note, without a chart. Nothing on days the briefing used
+    no market. Never raises: a missing note must not cost the day's email. A
+    failure is printed and added to the run's notices.
     """
-    charts: list[ChartNote] = []
+    notes: list[MarketNote] = []
     images: dict[str, bytes] = {}
     try:
         data = briefing.markets
@@ -166,11 +168,15 @@ def charts_for_report(briefing: FeedEntry) -> tuple[list[ChartNote], dict[str, b
                       f"whole life plus a {ZOOM_DAYS}-day zoom" if len(zoom) >= 2 else
                       "whole life only")
             print(f"    chart: {m['title'][:70]}: {history_days(line):.0f} days of history, {panels}")
+            cid = ""
             if png:
                 cid = f"market-{len(images)}@feedcast"
                 images[cid] = png
-                charts.append(ChartNote(cid=cid, title=m["title"], platform=m["platform"],
-                                        url=m["url"], caption=caption, anchor=anchor))
+                if story_time:
+                    caption += " · dashed line: the story"
+            notes.append(MarketNote(cid=cid, title=m["title"], platform=m["platform"],
+                                    url=m["url"], caption=caption, resolves=m["resolves"],
+                                    anchor=anchor))
 
         for m in data.get("moves") or []:
             add(m, m["url"] if m["url"] in cited else "", None,
@@ -187,11 +193,10 @@ def charts_for_report(briefing: FeedEntry) -> tuple[list[ChartNote], dict[str, b
                 # only from a sub-bullet.
                 if m["url"] not in cited:
                     continue
-                add(m, m["url"], story_time,
-                    f"Now {m['prob']:.0%} · {m['traded']} · dashed line: the story")
-    except Exception as e:  # noqa: BLE001 — the email goes out without charts
-        note = f"prediction-market charts left out of this email: {type(e).__name__}: {e}"
+                add(m, m["url"], story_time, f"Now {m['prob']:.0%} · {m['traded']}")
+    except Exception as e:  # noqa: BLE001 — the email goes out without market notes
+        note = f"prediction-market notes left out of this email: {type(e).__name__}: {e}"
         print(f"  {note}")
         notices.add(note)
         return [], {}
-    return charts, images
+    return notes, images

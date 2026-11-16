@@ -9,7 +9,7 @@ the narration pass's failure email from what those runs made.
 from datetime import datetime, timedelta
 
 from . import notices
-from .email_report import ChartNote, LinkedPost, ReportEpisode, RunReport
+from .email_report import LinkedPost, MarketNote, ReportEpisode, RunReport
 from .feed import Episode, audio_url, episode_page_url, feed_url
 from .mathiness import MathsVerdict
 from .monitor import FeedEntry, is_briefing, stored_author, stored_json
@@ -143,8 +143,9 @@ def build_run_report(
     )
 
 
-def preview_report(entry: FeedEntry, base_url: str, charts: list[ChartNote]) -> RunReport:
-    """PREVIEW_BRIEFING's email: a briefing nobody has published, with its charts.
+def preview_report(entry: FeedEntry, base_url: str,
+                   market_notes: list[MarketNote]) -> RunReport:
+    """PREVIEW_BRIEFING's email: a briefing nobody has published, with its market notes.
 
     The digest as the daily email shows it, then the whole script, which is
     where the market lines actually are.
@@ -159,7 +160,7 @@ def preview_report(entry: FeedEntry, base_url: str, charts: list[ChartNote]) -> 
                        fidelity=entry.fidelity, writer=entry.writer),
                   item(title="Full script", briefing_text=entry.content)],
         notices=notices.report(), feed_url=feed_url(base_url), site_url=base_url,
-        charts=charts,
+        market_notes=market_notes,
     )
 
 
