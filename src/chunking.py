@@ -16,13 +16,22 @@ import re
 SENTENCE_BREAK = re.compile(r"(?<=[.!?])\s+")
 CLAUSE_BREAK = re.compile(r"(?<=,)\s+")
 
-# Where one sentence ends and the next begins: closing punctuation, any closing
-# quote or bracket, a space, then a capital, a digit or an opening quote.
-SENTENCE_END = re.compile(r"""(?<=[.!?])["'”’)\]]*\s+(?=["'“‘(\[]?[A-Z0-9])""")
+# The marks that close a sentence, and the quotes and brackets that may follow them.
+_STOP = "[.!?]"
+_CLOSERS = r"""["'”’)\]]*"""
+# Where one sentence ends and the next begins: a closed sentence, a space, then
+# a capital, a digit or an opening quote.
+SENTENCE_END = re.compile(rf"""(?<={_STOP}){_CLOSERS}\s+(?=["'“‘(\[]?[A-Z0-9])""")
+_CLOSED = re.compile(rf"{_STOP}{_CLOSERS}$")
 # A full stop that ends an abbreviation or an initial, not a sentence.
 _ABBREVIATION = re.compile(
     r"(?:\b(?:e\.g|i\.e|vs|etc|Inc|Mr|Dr|[ap]\.m|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept?|Oct|Nov|Dec)\."
     r"|(?:[A-Z]\.){2,}|(?:^|\s)[A-Z]\.)$")
+
+
+def ends_a_sentence(text: str) -> bool:
+    """Whether `text` ends as a sentence does: on ".", "!" or "?", quoted or bracketed or not."""
+    return bool(_CLOSED.search(text))
 
 
 def sentences(text: str) -> list[str]:

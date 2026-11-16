@@ -42,7 +42,7 @@ from datetime import datetime, timedelta, timezone
 import httpx
 
 from . import notices
-from .chunking import sentences
+from .chunking import ends_a_sentence, sentences
 from .llm import complete, complete_with_web_search, extract_json
 
 POLYMARKET = "https://gamma-api.polymarket.com"
@@ -367,7 +367,6 @@ NO_RULES = "This market states no resolution rules beyond its title."
 _SAYS_HOW = re.compile(
     r"\bresolv(?:es|ed)\b|^resolve\b|\b(?:will|would|shall|should|may|might|can|must|to|I|we|"
     r"they|markets|questions|['’]ll)\s+(?:\w+\s+)?resolve\b", re.I)
-_ENDS_A_SENTENCE = re.compile(r"""[.!?]["'”’)\]]*$""")
 # What Manifold's plain-text description leaves where an image or a link was.
 _MARKUP = re.compile(r"\[image\]|\(https?://[^\s)]+\)")
 
@@ -388,7 +387,7 @@ def rule_sentence(rules: str) -> str | None:
     first = next((s for s in sentences(_MARKUP.sub(" ", rules)) if _SAYS_HOW.search(s)), None)
     if first is None or first.endswith((":", ",", ";")):
         return None
-    if not _ENDS_A_SENTENCE.search(first):
+    if not ends_a_sentence(first):
         first += "."
     return first if len(first.split()) <= MAX_RESOLVES_WORDS else None
 
@@ -778,10 +777,14 @@ class MarketContext:
                 "eighty words.")
         return "\n\n".join(parts)
 
+    def markets(self) -> list[Market]:
+        """Every market held, the moves first. One linked to two stories is listed twice."""
+        return [*self.moves, *(m for ms in self.stories.values() for m in ms)]
+
     def sources(self) -> list[dict]:
         """Market links for the email digest, alongside the articles."""
         seen, out = set(), []
-        for m in [*self.moves, *(m for ms in self.stories.values() for m in ms)]:
+        for m in self.markets():
             if m.url and m.url not in seen:
                 seen.add(m.url)
                 out.append({"title": m.title, "url": m.url, "source": m.platform})
@@ -826,7 +829,7 @@ class MarketScout:
         the first is counted with the failed calls, the second in a notice of
         its own.
         """
-        everything = [*ctx.moves, *(m for ms in ctx.stories.values() for m in ms)]
+        everything = ctx.markets()
         unread = [m for m in everything if m.rules is None]
         fetched = await asyncio.gather(*[manifold_rules(client, m.history_ref) for m in unread],
                                        return_exceptions=True)
@@ -879,7 +882,7 @@ class MarketScout:
 
             await self._keep_markets_with_a_resolution(client, ctx)
             since = now - timedelta(days=30)
-            everything = [*ctx.moves, *(m for ms in ctx.stories.values() for m in ms)]
+            everything = ctx.markets()
             fetched = await asyncio.gather(*[fetch_history(client, m, since) for m in everything],
                                            *[fetch_long_history(client, m) for m in everything],
                                            return_exceptions=True)
