@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sun, 15 Nov 2026 05:33:02 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 05:32:52 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,25 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-16</title>
+      <description>Daily News Briefing - 2026-11-16
+
+Topics covered:
+- We start with AI capabilities
+- Now Nvidia, where the fight has moved from whether Jensen Huang should go to whether he can come back
+- Megaspeed, the Singapore company at the centre of the affair, broke its silence on Sunday
+- AI misuse has also become a national issue in South Korea
+- In the Gulf, the lull is over
+- On Russia, Estonia will close all three border crossings from December first after what its security service calls a GRU-ordered attempt to bomb and burn the drone maker Threod Systems</description>
+      <pubDate>Mon, 16 Nov 2026 05:32:31 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-16</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/af269c69a545_daily_news_briefing_-_2026-11-16.mp3" type="audio/mpeg" length="2840780" />
+      <itunes:duration>00:05:01</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-16.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-15</title>
       <description>Daily News Briefing - 2026-11-15
@@ -1157,49 +1176,6 @@ Topics covered:
       <link>https://www.lesswrong.com/posts/NW4b7m6798byAndeB/leaked-anthropic-draft-ai-regulatory-bill-is-unacceptable</link>
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/49d92631b11c_leaked_anthropic_draft_ai_regulatory_bill_is_unac.mp3" type="audio/mpeg" length="2211621" />
-      <itunes:duration>00:03:57</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-17</title>
-      <description>Daily News Briefing - 2026-10-17
-
-Topics covered:
-- OpenAI has disclosed four more incidents in which its internal models broke rules during testing
-- India now says the problem reaches beyond any single lab
-- In France, the picture of last weekend's supermarket fridge attack has grown considerably
-- On Ukraine, the BBC reports that President Trump signed an executive order on Friday night waiving several sanctions in the new Graham law, just before it was due to take effect
-- In the Gulf, BBC Verify counts twelve ships reporting attacks around the Strait of Hormuz between October fifth and eleventh, the most in any week since the war with Iran began
-- The Graham law formally takes effect tomorrow, so the next test is how Congress responds to the waivers and whether more AI labs come forward with incident reports of their own</description>
-      <pubDate>Sat, 17 Oct 2026 04:33:57 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-17</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d379664b875d_daily_news_briefing_-_2026-10-17.mp3" type="audio/mpeg" length="2697525" />
-      <itunes:duration>00:04:46</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-17.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Your Book Review: Storm Of Steel</title>
-      <description>Audio version of Your Book Review: Storm Of Steel from Scott Alexander</description>
-      <pubDate>Fri, 16 Oct 2026 23:39:56 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-book-review-storm-of-steel</guid>
-      <link>https://www.astralcodexten.com/p/your-book-review-storm-of-steel</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bc6491d4985d_your_book_review_storm_of_steel.mp3" type="audio/mpeg" length="29992365" />
-      <itunes:duration>00:54:19</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Monthly Roundup #47: October 2026” by Zvi</title>
-      <description>Audio version of “Monthly Roundup #47: October 2026” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 16 Oct 2026 14:07:17 +0000</pubDate>
-      <guid isPermaLink="false">06635e84-ddfb-4e72-9756-b86c3452ae0d</guid>
-      <link>https://www.lesswrong.com/posts/aLjkbY3KMajc5zemE/monthly-roundup-47-october-2026</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9da23b32db4e_monthly_roundup_47_october_2026_by_zvi.mp3" type="audio/mpeg" length="2205981" />
       <itunes:duration>00:03:57</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
