@@ -210,6 +210,7 @@ def test_a_chart_failure_reaches_the_email_it_was_left_out_of(pipeline, monkeypa
     now = datetime.now(timezone.utc)
     move = Market(platform="Polymarket", key="pm:1", title="Land tax by 2027?",
                   url="https://pm/land", prob=0.8, prob_24h=0.5,
+                  resolves='This market will resolve to "Yes" if the land tax is law by 2027.',
                   history=[(now - timedelta(days=1), 0.5), (now, 0.8)])
 
     async def scan(self, selected):   # Polymarket, Kalshi and the checker, over the network

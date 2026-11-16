@@ -9,7 +9,7 @@ import pytest
 
 from src import main
 from src.email_report import (
-    ChartNote, LinkedPost, ReportEpisode, RunReport, _meta_bits, build_html, build_text,
+    LinkedPost, MarketNote, ReportEpisode, RunReport, _meta_bits, build_html, build_text,
     format_duration,
 )
 from src.monitor import MAX_AUTHORS, extract_authors, format_authors
@@ -139,8 +139,9 @@ class TestEmailReport:
         briefing = self._ep(title="Daily News Briefing", is_briefing=True, bullets=["A story."])
         report = RunReport(
             episodes=[self._ep(fidelity={"status": "flagged", "flags": [flag]}), briefing],
-            charts=[ChartNote(cid="c0", title="Will it?", platform="Polymarket",
-                              url="https://pm/will-it", caption="Now 40%")],
+            market_notes=[MarketNote(cid="c0", title="Will it?", platform="Polymarket",
+                                     url="https://pm/will-it", caption="Now 40%",
+                                     resolves="This market will resolve to \"Yes\" if it does.")],
             failures=[("Broken", "TTSError: 502")], dead_sources=["Reuters"],
             linked=[LinkedPost(title="Maths", author="Ada", feed_name="LW", link="https://lw/m")],
             notices=["digest: served by a backup"], recent=[self._ep(title="Older")],

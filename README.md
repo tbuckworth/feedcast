@@ -102,7 +102,7 @@ On/off variables count as on when set to `true`, `1` or `yes`. In CI, the `env:`
 | `maths_filter` | Whether posts too mathematical to follow by ear are linked in the email instead of narrated, and the threshold |
 | `tts.voice_sample` | The recording the voice is cloned from |
 | `pronunciations` | Words the voice gets wrong, mapped to spellings it says right; applied to the audio only |
-| `prediction_markets` | Prediction-market odds on the briefing's stories and a segment on big unexplained moves (`src/markets.py`) |
+| `prediction_markets` | Prediction-market odds on the briefing's stories and a segment on big unexplained moves, each market with the sentence of its own rules that says how it resolves (`src/markets.py`) |
 | `news_briefing` | The daily briefing: `enabled`, `lookback_hours`, how many stories the writer reads in full (`full_text_stories`, each capped at `max_article_chars`), its `prompt`, and its `sources` |
 | `watchdog` | When `scripts/watchdog.py` launches an agent: clock times in `timezone` for no run yet (`no_run_after`), a late email or briefing (`late_after`), a run still going (`stop_watching_at`), the agent's deadline (`ready_by`), and `poll_seconds` |
 

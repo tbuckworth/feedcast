@@ -145,7 +145,7 @@ class TestFirstPass:
                                             feed_name="Proofs", link=MATHS,
                                             maths_score=verdict["score"], source="rss")]
         assert (report.failures, report.dead_sources, report.recent, report.notices,
-                report.charts) == ([], [], [], [], [])
+                report.market_notes) == ([], [], [], [], [])
         assert report.total_in_feed == 2
 
         _logged_in_order(
@@ -308,7 +308,7 @@ class TestResend:
         assert [(e.title, e.bullets) for e in report.episodes] == [
             (BRIEFING_TITLE, [BULLET]), ("On Land", [BULLET])]
         assert report.linked == first.linked
-        assert (report.failures, report.recent, report.dead_sources, report.charts) == \
+        assert (report.failures, report.recent, report.dead_sources, report.market_notes) == \
             ([], [], [], [])
         assert json.loads(_posts(day)[SUMMARISED]["bullets"]) == [BULLET]
         assert len(day.monitor.deferred_entries()) == 1
@@ -329,7 +329,7 @@ def test_a_preview_emails_a_fresh_briefing_and_records_nothing(day, capsys):
     assert day.sent_with == [{"subject_tag": "[Preview]", "images": {}}]
     assert [(e.title, e.bullets, e.briefing_text) for e in report.episodes] == [
         (f"Preview: {BRIEFING_TITLE}", [BULLET], ""), ("Full script", [], SCRIPT)]
-    assert (report.feed_url, report.site_url, report.charts) == (f"{BASE}/feed.xml", BASE, [])
+    assert (report.feed_url, report.site_url, report.market_notes) == (f"{BASE}/feed.xml", BASE, [])
     assert _posts(day) == {} and day.monitor.get_recent_briefings() == []
     assert day.monitor.deferred_entries() == []
     assert not (day.root / "output").exists() and not (day.root / "data" / "sources").exists()

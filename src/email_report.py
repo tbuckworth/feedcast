@@ -66,15 +66,17 @@ class ReportEpisode:
 
 
 @dataclass
-class ChartNote:
-    """A prediction-market chart in the daily email, shown under its bullet."""
+class MarketNote:
+    """A prediction market in the daily email, shown under the bullet that cites it:
+    its question, its price chart, its odds and how it resolves."""
 
-    cid: str            # Content-ID of the attached PNG
+    cid: str            # Content-ID of the chart's PNG; "" when there was too little history to draw
     title: str          # the market's question
     platform: str
     url: str
     caption: str        # "55% a week before the story, 3% now · $1.2M traded"
-    anchor: str = ""    # bullet or sub-bullet URL to sit under; unplaced charts get their own section
+    resolves: str       # one sentence from the market's own rules (markets.resolution)
+    anchor: str = ""    # bullet or sub-bullet URL to sit under; unplaced notes get their own section
 
 
 @dataclass
@@ -106,8 +108,8 @@ class RunReport:
     feed_url: str = ""
     site_url: str = ""
     total_in_feed: int = 0
-    # The briefing's prediction-market charts (market_charts.charts_for_report).
-    charts: list[ChartNote] = field(default_factory=list)
+    # The briefing's prediction markets (market_charts.market_notes_for_report).
+    market_notes: list[MarketNote] = field(default_factory=list)
 
 
 def format_duration(seconds: int) -> str:
@@ -310,19 +312,42 @@ def number_notes(episodes: list) -> tuple[dict[int, dict[str, int]], list[tuple[
     return marks, ordered
 
 
-def _chart_html(c: ChartNote) -> str:
+# Before a market's resolution sentence, in both versions of the email.
+RESOLVES_PREFIX = "How it resolves:"
+
+
+def _notes_cited_by(bullet, market_notes: dict[str, list[MarketNote]]) -> list[MarketNote]:
+    """The notes anchored to `bullet` or one of its sub-bullets.
+
+    Takes them out of `market_notes`, so a market two bullets cite is shown
+    under the first.
+    """
+    return [n for u in bullet_urls(bullet) for n in market_notes.pop(u, [])]
+
+
+def _market_note_text(n: MarketNote, indent: str) -> list[str]:
+    """One market in the plain-text email, which has no charts."""
+    return [f"{indent}- {n.platform}: {n.title}", f"{indent}  {n.url}", f"{indent}  {n.caption}",
+            f"{indent}  {RESOLVES_PREFIX} {n.resolves}"]
+
+
+def _market_note_html(n: MarketNote) -> str:
+    chart = (f'<img src="cid:{escape(n.cid, quote=True)}" width="560" '
+             f'alt="{escape(n.title, quote=True)}" style="display:block;max-width:100%;height:auto;">'
+             if n.cid else "")
     return (f'<div style="margin:6px 0 12px 0;padding:8px 10px;border:1px solid {RULE};'
             f'border-radius:4px;background:#fafafa;">'
             f'<div style="font-size:12px;color:{INK};margin-bottom:4px;">'
-            f'<a href="{escape(c.url, quote=True)}" style="color:{ACCENT};text-decoration:none;">'
-            f'{escape(c.platform)}: {escape(c.title)}</a></div>'
-            f'<img src="cid:{escape(c.cid, quote=True)}" width="560" alt="{escape(c.title, quote=True)}"'
-            f' style="display:block;max-width:100%;height:auto;">'
-            f'<div style="font-size:11px;color:{MUTED};margin-top:3px;">{escape(c.caption)}</div></div>')
+            f'<a href="{escape(n.url, quote=True)}" style="color:{ACCENT};text-decoration:none;">'
+            f'{escape(n.platform)}: {escape(n.title)}</a></div>'
+            f'{chart}'
+            f'<div style="font-size:11px;color:{MUTED};margin-top:3px;">{escape(n.caption)}</div>'
+            f'<div style="font-size:11px;color:{MUTED};margin-top:3px;">'
+            f'{escape(RESOLVES_PREFIX)} {escape(n.resolves)}</div></div>')
 
 
 def _episode_html(ep: ReportEpisode, marks: dict[str, int],
-                  charts: dict[str, list[ChartNote]] | None = None) -> str:
+                  market_notes: dict[str, list[MarketNote]] | None = None) -> str:
     title = escape(ep.title)
     title_html = (
         f'<a href="{escape(ep.link, quote=True)}" style="color:{INK};text-decoration:none;">{title}</a>'
@@ -331,13 +356,13 @@ def _episode_html(ep: ReportEpisode, marks: dict[str, int],
     meta = " &middot; ".join(escape(bit) for bit in _meta_bits(ep))
     body = ""
     if ep.bullets:
-        # A market chart sits under the first bullet, or the parent of the
+        # A market note sits under the first bullet, or the parent of the
         # first sub-bullet, that links its anchor.
-        charts = dict(charts or {})
+        market_notes = dict(market_notes or {})
         items = "".join(
             f'<li style="margin:0 0 7px 0;font-size:14px;line-height:1.5;color:{INK};">'
             f"{_bullet_html(b, marks)}"
-            + "".join(_chart_html(c) for u in bullet_urls(b) for c in charts.pop(u, []))
+            + "".join(_market_note_html(n) for n in _notes_cited_by(b, market_notes))
             + "</li>"
             for b in ep.bullets
         )
@@ -399,11 +424,11 @@ def _sections(report: RunReport, episodes: list, notes: list) -> list[tuple[str,
     """
     briefings = [e for e in episodes if e.is_briefing]
     others = [e for e in episodes if not e.is_briefing]
-    # A chart sits under the briefing bullet that cites it; the rest get a section.
+    # A market note sits under the briefing bullet that cites it; the rest get a section.
     cited = {u for e in briefings for b in e.bullets for u in bullet_urls(b)}
     sections = [
         ("briefing", "Daily news briefing", briefings),
-        ("markets", "Prediction markets", [c for c in report.charts if c.anchor not in cited]),
+        ("markets", "Prediction markets", [n for n in report.market_notes if n.anchor not in cited]),
         ("episodes", "New episode" if len(others) == 1 else "New episodes", others),
         ("failed", "Failed", report.failures),
         # Worth the space even though nothing broke visibly: a source that 404s
@@ -416,6 +441,14 @@ def _sections(report: RunReport, episodes: list, notes: list) -> list[tuple[str,
         ("recent", "Also published this week", report.recent),
     ]
     return [section for section in sections if section[2]]
+
+
+def _by_anchor(market_notes: list[MarketNote]) -> dict[str, list[MarketNote]]:
+    """The notes grouped by the bullet URL each sits under."""
+    grouped: dict[str, list[MarketNote]] = {}
+    for n in market_notes:
+        grouped.setdefault(n.anchor, []).append(n)
+    return grouped
 
 
 def _checked_intro(episodes: list) -> str:
@@ -432,9 +465,7 @@ def build_html(report: RunReport, when: datetime) -> str:
     """Render the full HTML body."""
     episodes = _in_email_order(report.episodes)
     marks_by_idx, notes = number_notes(episodes)
-    by_anchor: dict[str, list[ChartNote]] = {}
-    for c in report.charts:
-        by_anchor.setdefault(c.anchor, []).append(c)
+    by_anchor = _by_anchor(report.market_notes)
 
     def section(label: str, rows: str) -> str:
         return (
@@ -445,10 +476,12 @@ def build_html(report: RunReport, when: datetime) -> str:
 
     def episode_rows(eps: list[ReportEpisode]) -> str:
         return "".join(_episode_html(e, marks_by_idx.get(episodes.index(e), {}),
-                                     charts=by_anchor if e.is_briefing else None) for e in eps)
+                                     market_notes=by_anchor if e.is_briefing else None)
+                       for e in eps)
 
-    def market_rows(charts: list[ChartNote]) -> str:
-        return "".join(f'<tr><td style="padding:8px 0;">{_chart_html(c)}</td></tr>' for c in charts)
+    def market_rows(market_notes: list[MarketNote]) -> str:
+        return "".join(f'<tr><td style="padding:8px 0;">{_market_note_html(n)}</td></tr>'
+                       for n in market_notes)
 
     def failed_rows(failures: list[tuple[str, str]]) -> str:
         return "".join(
@@ -548,8 +581,10 @@ def build_html(report: RunReport, when: datetime) -> str:
 </div>"""
 
 
-def _episode_text(ep: ReportEpisode, marks: dict[str, int]) -> list[str]:
-    """One episode in the plain-text email."""
+def _episode_text(ep: ReportEpisode, marks: dict[str, int],
+                  market_notes: dict[str, list[MarketNote]] | None = None) -> list[str]:
+    """One episode in the plain-text email, with a briefing's market notes under
+    the bullets that cite them, as the HTML version places them."""
     lines = [f"* {ep.title}"]
     meta = " / ".join(_meta_bits(ep))
     if meta:
@@ -569,8 +604,11 @@ def _episode_text(ep: ReportEpisode, marks: dict[str, int]) -> list[str]:
             return out
 
         lines.append("")
+        market_notes = dict(market_notes or {})
         for b in ep.bullets:
             lines += line_for(b, "  ")
+            for n in _notes_cited_by(b, market_notes):
+                lines += _market_note_text(n, "      ")
     elif ep.is_briefing and ep.briefing_text:
         lines += ["", *(f"  {p.strip()}" for p in ep.briefing_text.split("\n\n") if p.strip())]
     check = fidelity_summary(ep.fidelity)
@@ -586,18 +624,19 @@ def build_text(report: RunReport, when: datetime) -> str:
     """Plain-text alternative for clients that refuse HTML."""
     episodes = _in_email_order(report.episodes)
     marks_by_idx, notes = number_notes(episodes)
+    by_anchor = _by_anchor(report.market_notes)
 
     def episode_lines(eps: list[ReportEpisode]) -> list[str]:
         lines: list[str] = []
         for ep in eps:
             if lines:
                 lines.append("")
-            lines += _episode_text(ep, marks_by_idx.get(episodes.index(ep), {}))
+            lines += _episode_text(ep, marks_by_idx.get(episodes.index(ep), {}),
+                                   market_notes=by_anchor if ep.is_briefing else None)
         return lines
 
-    def market_lines(charts: list[ChartNote]) -> list[str]:
-        return [line for c in charts
-                for line in (f"  - {c.platform}: {c.title}", f"    {c.url}", f"    {c.caption}")]
+    def market_lines(market_notes: list[MarketNote]) -> list[str]:
+        return [line for n in market_notes for line in _market_note_text(n, "  ")]
 
     def linked_lines(posts: list[LinkedPost]) -> list[str]:
         lines = []

@@ -23,7 +23,7 @@ from .fulltext import enrich_entry
 from .html_text import clean_html
 from .lesswrong import posted_at
 from . import notices
-from .market_charts import charts_for_report
+from .market_charts import market_notes_for_report
 from .markets import MarketRules, MarketScout
 from .mathiness import MathsVerdict, assess
 from .monitor import (FeedEntry, FeedMonitor, briefing_id, entry_from_row, episode_id,
@@ -903,16 +903,16 @@ def _email_run(run: Run, episodes: list[Episode], db_entries: list[dict],
             or run.deferring or run.options.email_always):
         print("  Nothing new — email report skipped (set FEEDCAST_EMAIL_ALWAYS=true to send anyway)")
         return
-    # Charts first: a chart that fails is a notice, and the report takes
+    # Market notes first: a chart that fails is a notice, and the report takes
     # the notices as they stand when it is built.
     briefing = run.briefing
-    charts, images = (charts_for_report(briefing)
-                      if briefing and briefing.id in run.new_ids else ([], {}))
+    market_notes, images = (market_notes_for_report(briefing)
+                            if briefing and briefing.id in run.new_ids else ([], {}))
     report = build_run_report(
         episodes, db_entries, run.new_ids, run.failures, run.config.podcast.base_url,
         run.maths_skipped, run.dead_sources, pending=waiting,
     )
-    report.charts = charts
+    report.market_notes = market_notes
     _email(report, images=images)
 
 
@@ -1005,10 +1005,10 @@ async def _preview_briefing(monitor: FeedMonitor, config: Config) -> None:
         return
     entry.bullets = await safe_bullets(entry.content, is_briefing=True, label=entry.title,
                                        sources=entry.sources)
-    # Charts first: a chart that fails is a notice, and the report takes
+    # Market notes first: a chart that fails is a notice, and the report takes
     # the notices as they stand when it is built.
-    charts, images = charts_for_report(entry)
-    _email(preview_report(entry, config.podcast.base_url, charts),
+    market_notes, images = market_notes_for_report(entry)
+    _email(preview_report(entry, config.podcast.base_url, market_notes),
            subject_tag="[Preview]", images=images)
 
 

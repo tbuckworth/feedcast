@@ -18,13 +18,19 @@ backtest over 768 AI markets, in which they fired between about once and
 three times a week. Without the volume floor some market moves 15 points
 every day.
 
+Every market the writer and the email are given carries one sentence on how it
+resolves, lifted from the market's own rules as fetched in the same run
+(`rule_sentence`): no model condenses it and nothing is written from memory.
+A market whose rules yield no such sentence is left out.
+
 Public read APIs only, no keys: Polymarket (Gamma + CLOB), Kalshi (trade API
 v2) and Manifold (play money, so context only, never a "move"). Every network
 call is bounded and every failure degrades to "no market data", never to a
-failed briefing. Failed Kalshi series scans, searches and price histories, and
-checker replies that are not JSON, are counted in the run's notices for the
-email (`_report_failures`), and a move whose cause could not be looked up is
-left out.
+failed briefing. Failed Kalshi series scans, searches, rules lookups and price
+histories, and checker replies that are not JSON, are counted in the run's
+notices for the email (`_report_failures`), as are markets left out for want of
+a resolution sentence, and a move whose cause could not be looked up is left
+out.
 """
 
 import asyncio
@@ -96,6 +102,13 @@ class Market:
     # long-running question needs months of context to show how surprising a
     # move was, and a short-dated one simply has a short line.
     long_history: list = field(default_factory=list)
+    # The platform's own rules text: Polymarket's `description`, Kalshi's
+    # `rules_primary` and `rules_secondary`, Manifold's `textDescription`.
+    # None until read: Manifold's search results leave it out (manifold_rules).
+    rules: str | None = None
+    # One sentence on how the market resolves, from `rules` (resolution).
+    # MarketScout sets it on every market it hands on; "" until then.
+    resolves: str = ""
 
     @property
     def move(self) -> float | None:
@@ -119,10 +132,11 @@ class Market:
         return before[-1] if before else None
 
     def to_dict(self) -> dict:
-        """Plain JSON for the episode record and the email's charts."""
+        """Plain JSON for the episode record and the email's market notes."""
         return {
             "platform": self.platform, "key": self.key, "title": self.title, "url": self.url,
             "prob": self.prob, "prob_24h": self.prob_24h, "traded": self.traded(),
+            "resolves": self.resolves,
             "history": [[t.isoformat(), p] for t, p in self.history],
             "long_history": [[t.isoformat(), p] for t, p in self.long_history],
         }
@@ -156,6 +170,7 @@ def polymarket_markets(event: dict) -> list[Market]:
             volume_24h=_float(m.get("volume24hr")),
             closes=_when(m.get("endDate") or event.get("endDate")),
             event=f"polymarket:{event.get('id')}", history_ref=str(token),
+            rules=m.get("description") or "",
         ))
     return out
 
@@ -178,6 +193,7 @@ def kalshi_markets(event: dict) -> list[Market]:
             prob=prob, prob_24h=prev, volume=volume, volume_24h=_float(m.get("volume_24h_fp")),
             closes=_when(m.get("close_time")), event=f"kalshi:{event.get('event_ticker')}",
             history_ref=f"{series}|{m.get('ticker')}",
+            rules="\n".join(r for r in (m.get("rules_primary"), m.get("rules_secondary")) if r),
         ))
     return out
 
@@ -237,6 +253,16 @@ async def manifold_search(client: httpx.AsyncClient, term: str) -> list[Market]:
     data = await _get(client, f"{MANIFOLD}/search-markets", term=term, filter="open",
                       contractType="BINARY", limit=6)
     return [m for m in (manifold_market(x) for x in data or []) if m]
+
+
+async def manifold_rules(client: httpx.AsyncClient, market_id: str) -> str:
+    """A Manifold market's description as plain text; "" when its creator wrote none.
+
+    One request per market, so only for the markets a briefing will use.
+    Raises on a failed request.
+    """
+    data = await _get(client, f"{MANIFOLD}/market/{market_id}")
+    return data.get("textDescription") or ""
 
 
 @dataclass(frozen=True)
@@ -322,6 +348,83 @@ def _thin(points: list, limit: int) -> list:
         return points
     step = len(points) / limit
     return [points[int(i * step)] for i in range(limit - 1)] + [points[-1]]
+
+
+# --- How a market resolves ----------------------------------------------------
+
+
+# The longest sentence worth reading out. Of 2,561 Polymarket and Kalshi rules
+# sampled on 16 Nov 2026, one ran longer.
+MAX_RESOLVES_WORDS = 60
+# What stands in for the sentence when a Manifold market's creator wrote no
+# description: the title is then all the rule there is.
+NO_RULES = "This market states no resolution rules beyond its title."
+
+# Where one sentence ends and the next begins: closing punctuation, any closing
+# quote or bracket, a space, then a capital, a digit or an opening quote.
+_SENTENCE_BREAK = re.compile(r"""(?<=[.!?])["'”’)\]]*\s+(?=["'“‘(\[]?[A-Z0-9])""")
+# A full stop that ends an abbreviation or an initial, not a sentence.
+_ABBREVIATION = re.compile(
+    r"(?:\b(?:e\.g|i\.e|vs|etc|Inc|Mr|Dr|[ap]\.m|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept?|Oct|Nov|Dec)\."
+    r"|(?:[A-Z]\.){2,}|(?:^|\s)[A-Z]\.)$")
+# "Resolve" as a verb: "resolves", "resolved", or "resolve" opening the sentence
+# or after an auxiliary or subject ("will immediately resolve", "I'll resolve").
+# Not the noun, as in "to test American and Taiwanese resolve".
+_SAYS_HOW = re.compile(
+    r"\bresolv(?:es|ed)\b|^resolve\b|\b(?:will|would|shall|should|may|might|can|must|to|I|we|"
+    r"they|markets|questions|['’]ll)\s+(?:\w+\s+)?resolve\b", re.I)
+_ENDS_A_SENTENCE = re.compile(r"""[.!?]["'”’)\]]*$""")
+# What Manifold's plain-text description leaves where an image or a link was.
+_MARKUP = re.compile(r"\[image\]|\(https?://[^\s)]+\)")
+
+
+def sentences(text: str) -> list[str]:
+    """`text` as sentences, in order. A line break always ends one."""
+    out = []
+    for line in _MARKUP.sub(" ", text).splitlines():
+        line = " ".join(line.split())
+        start = 0
+        for m in _SENTENCE_BREAK.finditer(line):
+            if not _ABBREVIATION.search(line[start:m.start()]):
+                out.append(line[start:m.end()].strip())
+                start = m.end()
+        out.append(line[start:])
+    return [s for s in out if s]
+
+
+def rule_sentence(rules: str) -> str | None:
+    """The sentence of `rules` that says how the market resolves, word for word.
+
+    That is the first sentence using the verb "resolve": the opening sentence
+    of a Polymarket description and of Kalshi's `rules_primary`, and the usual
+    wording on Manifold, whose free text sometimes puts a side remark first. A line with no closing punctuation gets a full
+    stop; nothing else is changed. None when no sentence says it, and when
+    the first that does cannot stand alone: it runs past MAX_RESOLVES_WORDS,
+    or ends by introducing a list. A later sentence is never taken instead,
+    because it would be a side condition passed off as the rule.
+    """
+    first = next((s for s in sentences(rules) if _SAYS_HOW.search(s)), None)
+    if first is None or first.endswith((":", ",", ";")):
+        return None
+    if not _ENDS_A_SENTENCE.search(first):
+        first += "."
+    return first if len(first.split()) <= MAX_RESOLVES_WORDS else None
+
+
+def resolution(m: Market) -> str | None:
+    """The one sentence on how `m` resolves, or None when its rules give none.
+
+    None too while the rules are unread (`m.rules` is None). Only a Manifold
+    market may have no rules text at all, since a description is optional
+    there, and it gets NO_RULES. Empty rules from Polymarket or Kalshi mean
+    the reply changed shape, so they give None instead of a false statement
+    about the market.
+    """
+    if m.rules is None:
+        return None
+    if not m.rules.strip():
+        return NO_RULES if m.platform == "Manifold" else None
+    return rule_sentence(m.rules)
 
 
 # --- Rules ------------------------------------------------------------------
@@ -567,6 +670,7 @@ async def link_stories(client: httpx.AsyncClient, stories: list[dict], rules: Ma
 CAUSE_PROMPT = """A prediction market moved sharply in the last day. Search recent news for what moved it.
 
 Market ({platform}): {title}
+How it resolves, from its rules: {resolves}
 Moved from {before:.0%} to {after:.0%} between {start} and {end} (UTC).
 
 Reply with ONLY JSON, no other text:
@@ -589,7 +693,8 @@ async def find_cause(m: Market, now: datetime) -> dict | None:
         print(f"    {note}")
         notices.add(note)
 
-    prompt = CAUSE_PROMPT.format(platform=m.platform, title=m.title, before=m.prob_24h,
+    prompt = CAUSE_PROMPT.format(platform=m.platform, title=m.title, resolves=m.resolves,
+                                 before=m.prob_24h,
                                  after=m.prob, start=f"{now - timedelta(days=1):%d %b %H:%M}",
                                  end=f"{now:%d %b %H:%M}")
     try:
@@ -607,6 +712,11 @@ async def find_cause(m: Market, now: datetime) -> dict | None:
 
 
 # --- Putting it together ------------------------------------------------------
+
+
+# What the writer's input calls a market's resolution sentence; its
+# instructions refer to the line by this label.
+RESOLVES_LABEL = "Resolves:"
 
 
 @dataclass
@@ -636,7 +746,8 @@ class MarketContext:
             if day is not None:
                 then.append(f"{day:.0%} the day before it")
             then.append(f"{m.prob:.0%} now")
-            lines.append(f'  - {m.platform}, "{m.title}": {", ".join(then)} ({m.traded()}). {m.url}')
+            lines.append(f'  - {m.platform}, "{m.title}": {", ".join(then)} ({m.traded()}). {m.url}'
+                         f"\n    {RESOLVES_LABEL} {m.resolves}")
         return "\n".join(lines)
 
     def moves_section(self) -> str:
@@ -645,7 +756,8 @@ class MarketContext:
         lines = ["## Prediction-market moves in the last 24 hours that today's stories do not explain", ""]
         for m in self.moves:
             line = (f'- {m.platform}, "{m.title}": {m.prob_24h:.0%} to {m.prob:.0%} in the last '
-                    f"24 hours ({m.traded()}). {m.url}")
+                    f"24 hours ({m.traded()}). {m.url}"
+                    f"\n  {RESOLVES_LABEL} {m.resolves}")
             # Every move here had its cause looked up: _build leaves out one
             # whose lookup failed.
             cause = self.causes[m.key]
@@ -673,6 +785,15 @@ class MarketContext:
                 "two sentences: the question, where the odds went, and the cause the section gives, "
                 "attributed to its source. If it gives none, say no clear cause was found. At most "
                 "eighty words, and not counted in your word limit.")
+        if parts:
+            parts.append(
+                f"Every market below has a \"{RESOLVES_LABEL}\" line: one sentence taken from the "
+                "market's own rules, or a note that it states none. Each time you mention a "
+                "market, add one sentence saying how it resolves, keeping that line's wording and "
+                "changing only what speech needs, such as numbers and abbreviations said in full. "
+                "Say nothing else about any market's rules, and never describe from memory how a "
+                "market resolves. These sentences are not counted in your word limit or in the "
+                "eighty words.")
         return "\n\n".join(parts)
 
     def sources(self) -> list[dict]:
@@ -712,6 +833,40 @@ class MarketScout:
             notices.add(note)
             return MarketContext()
 
+    @staticmethod
+    async def _keep_markets_with_a_resolution(client: httpx.AsyncClient,
+                                              ctx: MarketContext) -> None:
+        """Set `resolves` on each of `ctx`'s markets, and drop those with no sentence.
+
+        Reads the rules the listings left out (Manifold's) first. A market is
+        never shown without its resolution sentence, so one whose rules could
+        not be read, or give no sentence (`resolution`), leaves the briefing:
+        the first is counted with the failed calls, the second in a notice of
+        its own.
+        """
+        everything = [*ctx.moves, *(m for ms in ctx.stories.values() for m in ms)]
+        unread = [m for m in everything if m.rules is None]
+        fetched = await asyncio.gather(*[manifold_rules(client, m.history_ref) for m in unread],
+                                       return_exceptions=True)
+        _report_failures("market rules lookups", list(zip([m.key for m in unread], fetched)))
+        for m, rules in zip(unread, fetched):
+            if isinstance(rules, str):
+                m.rules = rules
+        for m in everything:
+            m.resolves = resolution(m) or ""
+        silent = list({m.key: m for m in everything if m.rules is not None and not m.resolves}
+                      .values())
+        if silent:
+            note = (f"prediction markets: {len(silent)} left out because their rules have no "
+                    f"sentence of at most {MAX_RESOLVES_WORDS} words saying how they resolve "
+                    f"(first: {silent[0].key}, {silent[0].title!r})")
+            print(f"    {note}")
+            notices.add(note)
+        ctx.moves = [m for m in ctx.moves if m.resolves]
+        ctx.stories = {url: kept for url, ms in ctx.stories.items()
+                       if (kept := [m for m in ms if m.resolves])}
+        ctx.story_times = {url: t for url, t in ctx.story_times.items() if url in ctx.stories}
+
     async def _build(self, selected: list[dict]) -> MarketContext:
         now = _utcnow()
         ctx = MarketContext()
@@ -740,6 +895,7 @@ class MarketScout:
                                    skip_events=linked_events,
                                    recently_reported=self.recently_reported)
 
+            await self._keep_markets_with_a_resolution(client, ctx)
             since = now - timedelta(days=30)
             everything = [*ctx.moves, *(m for ms in ctx.stories.values() for m in ms)]
             fetched = await asyncio.gather(*[fetch_history(client, m, since) for m in everything],

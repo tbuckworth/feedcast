@@ -39,7 +39,8 @@ The modules, roughly in the order a run uses them:
 - lesswrong: a LessWrong or Alignment Forum post's markdown, posting date and authors' full names, over GraphQL.
 - extractor: an article's text and metadata from any URL, for injected URLs.
 - news: the daily news briefing, from the configured news sources.
-- markets: prediction-market odds and big moves for the briefing.
+- markets: prediction-market odds and big moves for the briefing, each market with the
+  sentence of its own rules that says how it resolves.
 - mathiness: whether a post is too mathematical to follow by ear.
 - fulltext: a post's full text when its feed ships only an excerpt.
 - html_text: plain text from HTML, and small tables as prose, with no model calls.
@@ -53,7 +54,8 @@ The modules, roughly in the order a run uses them:
 - digest: the email's two-level bullet digest of each episode.
 - bundle: the per-episode record of what the writer saw and wrote, under data/sources/.
 - feed: feed.xml, the site's index and episode pages, and the briefings' transcripts.
-- market_charts: price charts of the markets the briefing's digest cites, for the email.
+- market_charts: the email's notes on the markets the briefing's digest cites: a price chart,
+  the odds and how each resolves.
 - run_report: the run report, assembled from what the run did and the rows it stored.
 - email_report: the run report email.
 - main: the entry point; runs the pipeline.
