@@ -13,13 +13,14 @@ import pytest
 import src.main as main
 import src.markets as markets
 from src import llm, notices
+from src.chunking import sentences
 from src.config import load_config
 from src.email_report import (MarketNote, ReportEpisode, RunReport, build_html, build_text,
                               send_report)
 from src.market_charts import market_notes_for_report
 from src.markets import (MAX_RESOLVES_WORDS, NO_RULES, Market, MarketContext, MarketRules,
                          MarketScout, is_move, kalshi_markets, pick_moves, polymarket_markets,
-                         resolution, rule_sentence, sentences)
+                         resolution, rule_sentence)
 from src.monitor import FeedEntry, FeedMonitor
 from src.news import NewsAggregator
 from tests.conftest import FakeApi, FakeMessagesApi
@@ -767,7 +768,7 @@ class TestMarketNotesInTheEmail:
                              content="Polymarket")
         assert market_notes_for_report(briefing) == ([], {})
 
-    def test_a_chart_that_fails_costs_the_charts_not_the_email(self, monkeypatch):
+    def test_a_chart_that_fails_costs_the_market_notes_not_the_email(self, monkeypatch):
         import src.market_charts as market_charts
 
         def broken(*a, **kw):
@@ -777,7 +778,7 @@ class TestMarketNotesInTheEmail:
                              content="Polymarket", markets=_ctx_with_story_and_move(None).to_dict())
         assert market_notes_for_report(briefing) == ([], {})
         assert notices.report() == [
-            "prediction-market charts left out of this email: ValueError: bad history"]
+            "prediction-market notes left out of this email: ValueError: bad history"]
 
 
 def test_market_record_round_trips_through_json():

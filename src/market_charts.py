@@ -195,7 +195,7 @@ def market_notes_for_report(briefing: FeedEntry) -> tuple[list[MarketNote], dict
                     continue
                 add(m, m["url"], story_time, f"Now {m['prob']:.0%} · {m['traded']}")
     except Exception as e:  # noqa: BLE001 — the email goes out without market notes
-        note = f"prediction-market charts left out of this email: {type(e).__name__}: {e}"
+        note = f"prediction-market notes left out of this email: {type(e).__name__}: {e}"
         print(f"  {note}")
         notices.add(note)
         return [], {}

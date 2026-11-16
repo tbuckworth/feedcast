@@ -210,10 +210,9 @@ pronunciations:
 # Prediction-market odds on the briefing's stories ("Polymarket had this at
 # twenty percent a week ago"), and a closing segment on big 24-hour moves in AI
 # markets that none of the day's stories explains, with the cause found by a
-# web search. Both are left out on days with nothing. Every market comes with
-# the sentence of its own rules that says how it resolves, and one whose rules
-# give none is left out. Thresholds come from a 30-day backtest
-# (src/markets.py); at these the segment ran about once or twice a week.
+# web search. Both are left out on days with nothing. Thresholds come from a
+# 30-day backtest (src/markets.py); at these the segment ran about once or
+# twice a week.
 prediction_markets:
   enabled: true
   polymarket_tags: [ai, openai, anthropic]

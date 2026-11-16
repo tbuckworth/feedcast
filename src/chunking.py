@@ -1,13 +1,48 @@
-"""Cutting text into pieces no longer than a limit, at the most natural break that fits.
+"""Cutting text into pieces no longer than a limit, at the most natural break that fits,
+and into its sentences.
 
-Used where a request takes bounded text: TTS chunks (audio.MAX_CHUNK_CHARS)
-and normaliser batches (normalizer.MAX_BATCH_CHARS).
+The pieces are used where a request takes bounded text: TTS chunks
+(audio.MAX_CHUNK_CHARS) and normaliser batches (normalizer.MAX_BATCH_CHARS).
+The sentences are used where one must stand alone: the sentence of a prediction
+market's rules that says how it resolves (markets.rule_sentence).
 """
 
 import re
 
+# Where a piece may be cut. Looser than SENTENCE_END on purpose: a piece only
+# has to end somewhere a voice or a model can pause, which the full stop of
+# "e.g." or "U.S." is, and every place it may not cut makes a long sentence
+# harder to fit in the limit.
 SENTENCE_BREAK = re.compile(r"(?<=[.!?])\s+")
 CLAUSE_BREAK = re.compile(r"(?<=,)\s+")
+
+# Where one sentence ends and the next begins: closing punctuation, any closing
+# quote or bracket, a space, then a capital, a digit or an opening quote.
+SENTENCE_END = re.compile(r"""(?<=[.!?])["'”’)\]]*\s+(?=["'“‘(\[]?[A-Z0-9])""")
+# A full stop that ends an abbreviation or an initial, not a sentence.
+_ABBREVIATION = re.compile(
+    r"(?:\b(?:e\.g|i\.e|vs|etc|Inc|Mr|Dr|[ap]\.m|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept?|Oct|Nov|Dec)\."
+    r"|(?:[A-Z]\.){2,}|(?:^|\s)[A-Z]\.)$")
+
+
+def sentences(text: str) -> list[str]:
+    """`text` as its sentences, in order, each with its spaces collapsed.
+
+    A line break always ends a sentence. A full stop after an abbreviation
+    ("e.g.", "11:59 p.m.", "Dec."), in an initialism ("U.S.") or after an
+    initial ("Donald J. Trump") does not, so a sentence that really ends on
+    one of these runs on into the next.
+    """
+    out = []
+    for line in text.splitlines():
+        line = " ".join(line.split())
+        start = 0
+        for m in SENTENCE_END.finditer(line):
+            if not _ABBREVIATION.search(line[start:m.start()]):
+                out.append(line[start:m.end()].strip())
+                start = m.end()
+        out.append(line[start:])
+    return [s for s in out if s]
 
 
 def pack(pieces: list[str], limit: int, sep: str) -> list[list[str]]:

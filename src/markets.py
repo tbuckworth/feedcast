@@ -42,6 +42,7 @@ from datetime import datetime, timedelta, timezone
 import httpx
 
 from . import notices
+from .chunking import sentences
 from .llm import complete, complete_with_web_search, extract_json
 
 POLYMARKET = "https://gamma-api.polymarket.com"
@@ -360,13 +361,6 @@ MAX_RESOLVES_WORDS = 60
 # description: the title is then all the rule there is.
 NO_RULES = "This market states no resolution rules beyond its title."
 
-# Where one sentence ends and the next begins: closing punctuation, any closing
-# quote or bracket, a space, then a capital, a digit or an opening quote.
-_SENTENCE_BREAK = re.compile(r"""(?<=[.!?])["'”’)\]]*\s+(?=["'“‘(\[]?[A-Z0-9])""")
-# A full stop that ends an abbreviation or an initial, not a sentence.
-_ABBREVIATION = re.compile(
-    r"(?:\b(?:e\.g|i\.e|vs|etc|Inc|Mr|Dr|[ap]\.m|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept?|Oct|Nov|Dec)\."
-    r"|(?:[A-Z]\.){2,}|(?:^|\s)[A-Z]\.)$")
 # "Resolve" as a verb: "resolves", "resolved", or "resolve" opening the sentence
 # or after an auxiliary or subject ("will immediately resolve", "I'll resolve").
 # Not the noun, as in "to test American and Taiwanese resolve".
@@ -378,32 +372,20 @@ _ENDS_A_SENTENCE = re.compile(r"""[.!?]["'”’)\]]*$""")
 _MARKUP = re.compile(r"\[image\]|\(https?://[^\s)]+\)")
 
 
-def sentences(text: str) -> list[str]:
-    """`text` as sentences, in order. A line break always ends one."""
-    out = []
-    for line in _MARKUP.sub(" ", text).splitlines():
-        line = " ".join(line.split())
-        start = 0
-        for m in _SENTENCE_BREAK.finditer(line):
-            if not _ABBREVIATION.search(line[start:m.start()]):
-                out.append(line[start:m.end()].strip())
-                start = m.end()
-        out.append(line[start:])
-    return [s for s in out if s]
-
-
 def rule_sentence(rules: str) -> str | None:
     """The sentence of `rules` that says how the market resolves, word for word.
 
     That is the first sentence using the verb "resolve": the opening sentence
     of a Polymarket description and of Kalshi's `rules_primary`, and the usual
-    wording on Manifold, whose free text sometimes puts a side remark first. A line with no closing punctuation gets a full
-    stop; nothing else is changed. None when no sentence says it, and when
-    the first that does cannot stand alone: it runs past MAX_RESOLVES_WORDS,
-    or ends by introducing a list. A later sentence is never taken instead,
-    because it would be a side condition passed off as the rule.
+    wording on Manifold, whose free text sometimes puts a side remark first.
+    A line with no closing punctuation gets a full stop, and Manifold's
+    markers for an image or a link are dropped; nothing else is changed. None
+    when no sentence says it, and when the first that does cannot stand
+    alone: it runs past MAX_RESOLVES_WORDS, or ends by introducing a list. A
+    later sentence is never taken instead, because it would be a side
+    condition passed off as the rule.
     """
-    first = next((s for s in sentences(rules) if _SAYS_HOW.search(s)), None)
+    first = next((s for s in sentences(_MARKUP.sub(" ", rules)) if _SAYS_HOW.search(s)), None)
     if first is None or first.endswith((":", ",", ";")):
         return None
     if not _ENDS_A_SENTENCE.search(first):
