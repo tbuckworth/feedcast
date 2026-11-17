@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 16 Nov 2026 05:32:52 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2026 05:33:46 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,49 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-17</title>
+      <description>Daily News Briefing - 2026-11-17
+
+Topics covered:
+- California's Attorney General, Rob Bonta, has sued OpenAI over rogue agent incidents, TechCrunch reports
+- On the same day, OpenAI said it will embed outside evaluators from Apollo Research, Goodfire, METR and Transluce as a pilot under the White House Accord on Super Intelligence
+- The FBI, meanwhile, warns that attackers are using autonomous open-source tools like Artex, which can plug into frontier models, to move from first targeting a system to compromising it in under three hours
+- On chips, the Commerce Department is preparing an interim rule requiring licences for AI chips going to data centres anywhere in the world that may serve companies in China or other embargoed countries
+- Donald Trump, however, says Jensen Huang's affair did not put national security at risk
+- Trump now heads to Manila for the Association of Southeast Asian Nations summit, then Shenzhen</description>
+      <pubDate>Tue, 17 Nov 2026 05:32:38 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-17</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b5fb609bdd42_daily_news_briefing_-_2026-11-17.mp3" type="audio/mpeg" length="3021692" />
+      <itunes:duration>00:05:20</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-17.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Fable 5.2 is the New Bazooka” by Zvi</title>
+      <description>Audio version of “Fable 5.2 is the New Bazooka” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Mon, 16 Nov 2026 20:34:18 +0000</pubDate>
+      <guid isPermaLink="false">c71187c9-8f72-4325-9b92-952ad43fb51a</guid>
+      <link>https://www.lesswrong.com/posts/ZQccv9GPAzHGbWcwE/fable-5-2-is-the-new-bazooka</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/ddf2008ca550_fable_52_is_the_new_bazooka_by_zvi.mp3" type="audio/mpeg" length="2395532" />
+      <itunes:duration>00:04:14</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Import AI 481: AI sub-contractors; a wet lab for AI; and subterfuge during development</title>
+      <description>Audio version of Import AI 481: AI sub-contractors; a wet lab for AI; and subterfuge during development by Jack Clark from Import AI</description>
+      <pubDate>Mon, 16 Nov 2026 14:01:15 +0000</pubDate>
+      <guid>https://jack-clark.net/2026/11/16/import-ai-481-ai-sub-contractors-a-wet-lab-for-ai-and-subterfuge-during-development/</guid>
+      <link>https://jack-clark.net/2026/11/16/import-ai-481-ai-sub-contractors-a-wet-lab-for-ai-and-subterfuge-during-development/</link>
+      <itunes:author>Jack Clark</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c7ef43bdd762_import_ai_481_ai_sub-contractors_a_wet_lab_for_a.mp3" type="audio/mpeg" length="2674988" />
+      <itunes:duration>00:04:44</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-16</title>
       <description>Daily News Briefing - 2026-11-16
@@ -1138,25 +1181,6 @@ Topics covered:
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-19.txt" type="text/plain" />
     </item>
     <item>
-      <title>Daily News Briefing - 2026-10-18</title>
-      <description>Daily News Briefing - 2026-10-18
-
-Topics covered:
-- Popular websites are shutting AI agents out
-- Separately, Meta has dropped language from its commercial terms that critics, including the Cornell law professor James Grimmelmann, read as letting it scrape news sites for AI training regardless of robots dot text instructions
-- Anthropic, meanwhile, may be losing a major customer
-- On Ukraine, Zelenskyy called Trump's sanctions waiver a "reward" for Putin and predicted that more sanctions will be lifted
-- In Yemen, sources tell the Guardian that the United Arab Emirates will resume paying southern government forces fighting the Houthis, with Saudi Arabia providing air cover
-- France saw more than twelve hundred arrests and one hundred fifty police injured on Saturday, as protests in support of high school students, swelled by anger over high prices, turned violent</description>
-      <pubDate>Sun, 18 Oct 2026 04:34:27 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-18</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bd0d4a72c7c5_daily_news_briefing_-_2026-10-18.mp3" type="audio/mpeg" length="2477037" />
-      <itunes:duration>00:04:23</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-18.txt" type="text/plain" />
-    </item>
-    <item>
       <title>I Did This Without Your Knowledge</title>
       <description>Audio version of I Did This Without Your Knowledge by joec from LessWrong Curated</description>
       <pubDate>Sat, 17 Oct 2026 16:35:07 +0000</pubDate>
@@ -1165,18 +1189,6 @@ Topics covered:
       <itunes:author>joec</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/0ec58648ed8d_i_did_this_without_your_knowledge.mp3" type="audio/mpeg" length="2110485" />
       <itunes:duration>00:03:44</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“Leaked Anthropic Draft AI Regulatory Bill Is Unacceptable and Troubling” by Zvi</title>
-      <description>Audio version of “Leaked Anthropic Draft AI Regulatory Bill Is Unacceptable and Troubling” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Sat, 17 Oct 2026 14:56:28 +0000</pubDate>
-      <guid isPermaLink="false">dc947991-e0ce-40c6-ac8f-70afa50a5d97</guid>
-      <link>https://www.lesswrong.com/posts/NW4b7m6798byAndeB/leaked-anthropic-draft-ai-regulatory-bill-is-unacceptable</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/49d92631b11c_leaked_anthropic_draft_ai_regulatory_bill_is_unac.mp3" type="audio/mpeg" length="2211621" />
-      <itunes:duration>00:03:57</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
