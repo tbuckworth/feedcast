@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Tue, 17 Nov 2026 05:33:46 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 18 Nov 2026 05:33:48 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-18</title>
+      <description>Daily News Briefing - 2026-11-18
+
+Topics covered:
+- California's lawsuit against OpenAI turns out to be bigger than first reported
+- Commercial agents are misbehaving too
+- On military misuse, the evaluation startup Vals found that frontier models from Anthropic, OpenAI, Google, DeepSeek and others routinely marked civilians and surrendering soldiers as targets in drone and satellite imagery
+- On the research side, Anthropic's Evan Hubinger, writing personally on the Alignment Forum, sets out four kinds of monitorability: control, training, auditing and diffuse
+- At Nvidia, chairman Harvey Jones says the board "does not intend to reinstate Jensen as CEO." That came hours after Huang said publicly he would be "honored" to return
+- Washington confirmed the Justice and Commerce Departments have investigated Megaspeed since twenty twenty-four</description>
+      <pubDate>Wed, 18 Nov 2026 05:32:42 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-18</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/c3b159fe82a1_daily_news_briefing_-_2026-11-18.mp3" type="audio/mpeg" length="3502628" />
+      <itunes:duration>00:06:14</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-18.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Jensen Huang Really Liked Selling China Advanced AI Chips” by Zvi</title>
+      <description>Audio version of “Jensen Huang Really Liked Selling China Advanced AI Chips” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 17 Nov 2026 14:53:03 +0000</pubDate>
+      <guid isPermaLink="false">329b3623-2dd6-468d-8bf1-cf8ad35c3020</guid>
+      <link>https://www.lesswrong.com/posts/T3oJfyHEy6uLEJ9FB/jensen-huang-really-liked-selling-china-advanced-ai-chips</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/bb5960fd6e1e_jensen_huang_really_liked_selling_china_advanced.mp3" type="audio/mpeg" length="2383076" />
+      <itunes:duration>00:04:11</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-17</title>
       <description>Daily News Briefing - 2026-11-17
@@ -1160,25 +1191,6 @@ Topics covered:
       <itunes:duration>00:04:15</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-19</title>
-      <description>Daily News Briefing - 2026-10-19
-
-Topics covered:
-- Anthropic is setting aside five percent of its shares for what it calls a public benefit fund, TechCrunch reports
-- In the Character.AI bankruptcy, a filing spotted by Bloomberg shows Disney agreeing to offer jobs to at least sixty employees, most of the startup's workforce, at an estimated sixty million dollars a year in pay
-- On Ukraine, Zelenskyy told NBC's Meet the Press that Washington has restored intelligence warnings of Russian ballistic missile launches
-- On the ground, Ukraine launched one of its largest aerial attacks yet
-- France's unrest has grown sharply since Saturday's first count
-- In the West Bank, Netanyahu's office has questioned European diplomats' account of Saturday's settler attack near Taybeh</description>
-      <pubDate>Mon, 19 Oct 2026 04:34:15 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-19</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/9bdf9d305df0_daily_news_briefing_-_2026-10-19.mp3" type="audio/mpeg" length="2807469" />
-      <itunes:duration>00:04:55</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-19.txt" type="text/plain" />
     </item>
     <item>
       <title>I Did This Without Your Knowledge</title>
