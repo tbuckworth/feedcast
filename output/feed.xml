@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Wed, 18 Nov 2026 05:36:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 19 Nov 2026 05:33:56 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,73 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-19</title>
+      <description>Daily News Briefing - 2026-11-19
+
+Topics covered:
+- We start with OpenAI's leadership on keeping humans in charge
+- The Verge's Rani Molla finds little trace of the summer's frontier slowdown
+- Anthropic itself begins trading on Nasdaq today under the ticker "ANT." TechCrunch reports it priced at eighty-three dollars a share, above its range, and sold nine hundred eighty million shares
+- The Nvidia affair keeps reaching Commerce Secretary Howard Lutnick
+- In Shenzhen today, Putin, Xi and Trump hold the first ever three-way meeting of their countries' leaders
+- In the Gulf, Kuwait says it repelled the first Iranian drone attack in two months, aimed at Ali Al Salem Air Base</description>
+      <pubDate>Thu, 19 Nov 2026 05:32:48 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-19</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/adbd2021b00a_daily_news_briefing_-_2026-11-19.mp3" type="audio/mpeg" length="3291644" />
+      <itunes:duration>00:05:49</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-19.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Pacing AI via Compute Reallocation</title>
+      <description>Audio version of Pacing AI via Compute Reallocation by Thomas Larsen from AI Futures Project</description>
+      <pubDate>Wed, 18 Nov 2026 18:22:17 +0000</pubDate>
+      <guid>https://blog.aifutures.org/p/pacing-ai-via-compute-reallocation</guid>
+      <link>https://blog.aifutures.org/p/pacing-ai-via-compute-reallocation</link>
+      <itunes:author>Thomas Larsen</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/45c1431a6a05_pacing_ai_via_compute_reallocation.mp3" type="audio/mpeg" length="2638748" />
+      <itunes:duration>00:04:39</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Silent Consensus</title>
+      <description>Audio version of The Silent Consensus by Dean W. Ball from Hyperdimensional</description>
+      <pubDate>Wed, 18 Nov 2026 18:02:06 +0000</pubDate>
+      <guid>https://www.hyperdimensional.co/p/the-silent-consensus</guid>
+      <link>https://www.hyperdimensional.co/p/the-silent-consensus</link>
+      <itunes:author>Dean W. Ball</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f8f3a9653bc6_the_silent_consensus.mp3" type="audio/mpeg" length="2166236" />
+      <itunes:duration>00:03:53</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>“Quickly, There’s No Time” by Zvi</title>
+      <description>Audio version of “Quickly, There’s No Time” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 18 Nov 2026 15:23:15 +0000</pubDate>
+      <guid isPermaLink="false">6003636b-eddf-4988-b898-39cce71cfdd6</guid>
+      <link>https://www.lesswrong.com/posts/KyEuyNAoz3AsJf6RW/quickly-there-s-no-time</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/64849cf4ebe3_quickly_theres_no_time_by_zvi.mp3" type="audio/mpeg" length="2235620" />
+      <itunes:duration>00:03:57</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Putting Pacing Into Practice</title>
+      <description>Audio version of Putting Pacing Into Practice from Anton Leicht</description>
+      <pubDate>Wed, 18 Nov 2026 13:31:53 +0000</pubDate>
+      <guid>https://writing.antonleicht.me/p/pacing</guid>
+      <link>https://writing.antonleicht.me/p/pacing</link>
+      <itunes:author>Anton Leicht</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/d29af3f0d685_putting_pacing_into_practice.mp3" type="audio/mpeg" length="2346068" />
+      <itunes:duration>00:04:10</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-18</title>
       <description>Daily News Briefing - 2026-11-18
@@ -1170,37 +1237,6 @@ Topics covered:
       <itunes:author>Scott Alexander</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/e0c5ba7ab789_book_review_sadly_porn.mp3" type="audio/mpeg" length="39983613" />
       <itunes:duration>01:12:23</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-20</title>
-      <description>Daily News Briefing - 2026-10-20
-
-Topics covered:
-- A single hacker broke into more than one hundred websites using AI agents that mostly worked on their own, according to the security firm Norforge
-- Microsoft, meanwhile, is now openly telling customers not to trust the agents they buy
-- Anthropic co-founder Jack Clark told an International Monetary Fund audience in Bangkok on Saturday that the singularity has begun
-- The money behind that buildout is looking shakier
-- France's unrest has reached its bond market
-- In the Gulf, the Guardian reports Iran has attacked at least fifteen container ships in the strait of Hormuz in ten days, using drones, mines and, on Sunday, a rocket-propelled grenade fired from a small boat</description>
-      <pubDate>Tue, 20 Oct 2026 04:34:55 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-20</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/32cbc9e4a9b9_daily_news_briefing_-_2026-10-20.mp3" type="audio/mpeg" length="2949237" />
-      <itunes:duration>00:05:13</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-20.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“I Can See Everything” by Zvi</title>
-      <description>Audio version of “I Can See Everything” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 19 Oct 2026 13:55:10 +0000</pubDate>
-      <guid isPermaLink="false">cb63f4c1-ed58-4772-8c59-5bbe372a509e</guid>
-      <link>https://www.lesswrong.com/posts/w2tBHwNERDoSawznx/i-can-see-everything</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/59e0032b0e32_i_can_see_everything_by_zvi.mp3" type="audio/mpeg" length="2393469" />
-      <itunes:duration>00:04:15</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
