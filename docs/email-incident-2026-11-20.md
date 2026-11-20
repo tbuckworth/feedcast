@@ -75,7 +75,18 @@ notification that is dated after the send and reports a failure for one of
 the email's recipients makes the send a failed one, and so does an inbox that
 cannot be read. A failed send fails the update job after it has published,
 which launches the watchdog's agent. `scripts/watchdog_brief.md` tells the
-agent to resend to Titus alone and to ask before it emails the list.
+agent to resend to Titus alone. When that resend passes and the first email
+bounced for every recipient, no reader has the email, and the agent resends
+it to the list without asking, as Titus decided on 20 Nov. In every other
+case it asks him first.
+
+The check first read the real inbox at 11:58 on 20 Nov, in a resend to Titus
+alone ([run 44731686732](https://github.com/tbuckworth/feedcast/actions/runs/44731686732)),
+and found no bounce. A replay then gave the check the times of two earlier
+sends, in a job that only read the inbox
+([run 44734879072](https://github.com/tbuckworth/feedcast/actions/runs/44734879072)).
+For the blocked send of 05:34 it found a bounce for 12 of 12 recipients, and
+for the resend to the list at 10:04 it found none.
 
 The tests read a stand-in inbox that serves a notice copied from one of the
 twelve.

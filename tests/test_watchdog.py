@@ -13,7 +13,9 @@ import yaml
 from scripts import watchdog
 from scripts.watchdog import Run, assess
 from src.config import load_config
+from src.email_report import RunReport, send_report
 from src.feed import Episode, FeedGenerator
+from tests.conftest import bounce_notice
 
 CFG = load_config().watchdog
 WORKFLOW = Path(__file__).resolve().parent.parent / ".github" / "workflows" / watchdog.WORKFLOW
@@ -208,16 +210,33 @@ def test_the_briefs_recovery_steps_name_what_the_workflows_have():
     named = set(re.findall(r'"([^"]+)"', cancelled_deploy))
     assert len(named) == 3 and named <= publish_steps
     # An email the mail server bounced fails the update job at this step. The
-    # agent tries a resend on Titus alone, and asks before it emails the list.
+    # agent tries a resend on Titus alone. When that passes and the first
+    # email bounced for every recipient, no reader has it, and the agent sends
+    # it to the list without asking (Titus, 2026-11-20). Otherwise it asks.
     (bounced,) = [line for line in brief.splitlines() if "bounced" in line]
     assert '"Fail the job if the report email was not sent"' in bounced
     assert "Fail the job if the report email was not sent" in [
         s.get("name") for s in wf["jobs"]["update"]["steps"]]
-    assert f"gh workflow run {watchdog.WORKFLOW} --ref main -f resend_report=true`" in bounced
-    assert "resend_report" in wf[True]["workflow_dispatch"]["inputs"]
-    assert "notify_list" not in bounced and "ask before" in bounced
+    resend = f"gh workflow run {watchdog.WORKFLOW} --ref main -f resend_report=true"
+    to_titus, for_everyone, to_the_list, otherwise = (
+        bounced.index(text) for text in (f"{resend}`", "bounced for every recipient",
+                                         f"{resend} -f notify_list=true`", "In every other case"))
+    assert to_titus < for_everyone < to_the_list < otherwise
+    assert "do not email the list" in bounced[otherwise:] and "ask" in bounced[otherwise:]
+    assert {"resend_report", "notify_list"} <= set(wf[True]["workflow_dispatch"]["inputs"])
     cited = re.findall(r"docs/[\w-]+\.md", brief)
     assert len(set(cited)) == 2 and all((watchdog.ROOT / doc).is_file() for doc in cited)
+
+
+def test_the_brief_quotes_the_log_line_of_an_email_that_bounced_for_everyone(smtp, inbox, capsys):
+    """The agent emails the list only when that line's two counts are equal,
+    so the brief quotes the line as send_report prints it."""
+    now = datetime.now(UTC)
+    inbox.notices += [bounce_notice("operator@example.com", now),
+                      bounce_notice("list@example.com", now)]
+    assert send_report(RunReport()) is False
+    (quoted,) = re.findall(r'"(bounced for [^"]+)"', watchdog.BRIEF_TEMPLATE.read_text())
+    assert re.sub(r"\d+", "2", quoted) in capsys.readouterr().out
 
 
 def test_a_failed_launch_fails_loudly(tmp_path, monkeypatch):
