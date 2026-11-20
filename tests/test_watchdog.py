@@ -202,8 +202,11 @@ def test_the_briefs_recovery_steps_name_what_the_workflows_have():
     assert '"Commit and push" failed' in brief
     assert "Commit and push" in [s.get("name") for s in wf["jobs"]["update"]["steps"]]
     publish = yaml.safe_load((WORKFLOW.parent / "publish-pages.yml").read_text())
-    assert "Deploy to GitHub Pages" in [s.get("name")
-                                        for s in publish["jobs"]["publish"]["steps"]]
+    publish_steps = {s.get("name") for s in publish["jobs"]["publish"]["steps"]}
+    # Either try's deployment can be cancelled, and the first try's failure
+    # does not end the job: the check after it does. The brief names all three.
+    named = set(re.findall(r'"([^"]+)"', cancelled_deploy))
+    assert len(named) == 3 and named <= publish_steps
     cited = re.findall(r"docs/[\w-]+\.md", brief)
     assert cited and all((watchdog.ROOT / doc).is_file() for doc in cited)
 

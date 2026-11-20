@@ -26,7 +26,7 @@ jobs:
     timeout-minutes: 20
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.redeployment.outputs.page_url }}
     env:
       PAGES_ARTIFACT: ${{ inputs.artifact_name }}-attempt-${{ github.run_attempt }}
     steps:
@@ -51,8 +51,38 @@ jobs:
           name: ${{ env.PAGES_ARTIFACT }}
           path: output
 
+      # deploy-pages finds the artifact by listing the run's artifacts, and
+      # GitHub's list can lag the upload: on 2026-11-20 it did not yet show
+      # the artifact finalized half a second earlier
+      # (docs/publish-incident-2026-11-20.md). The action has no retry of its
+      # own, so a failed deploy is tried once more, here, after a pause.
       - name: Deploy to GitHub Pages
         id: deployment
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+        with:
+          artifact_name: ${{ env.PAGES_ARTIFACT }}
+
+      # Only a deploy that failed before it created a deployment is tried
+      # again. The action sets page_url once the deployment exists, and a
+      # second deployment under the name of one that then timed out or was
+      # cancelled never starts (docs/publish-incident-2026-11-10.md).
+      - name: Check that deploying again can work
+        if: steps.deployment.outcome == 'failure'
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          PAUSE_SECONDS: 30
+        run: |
+          if [[ -n "$PAGE_URL" ]]; then
+            echo "::error::The Pages deployment was created and then failed (see the Deploy to GitHub Pages step); deploying again from this run cannot work"
+            exit 1
+          fi
+          echo "::warning::Deploy to GitHub Pages failed before it created a deployment; deploying again in ${PAUSE_SECONDS}s"
+          sleep "$PAUSE_SECONDS"
+
+      - name: Deploy to GitHub Pages again
+        id: redeployment
+        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v4
         with:
           artifact_name: ${{ env.PAGES_ARTIFACT }}

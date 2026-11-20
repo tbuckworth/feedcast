@@ -145,6 +145,70 @@ def test_hub_step_fails_when_the_feed_has_no_self_link(tmp_path):
     assert "POST" not in calls
 
 
+def test_a_failed_deploy_is_tried_again_by_the_same_job():
+    """deploy-pages finds its artifact by listing the run's artifacts. On
+    2026-11-20 GitHub's list did not yet show the artifact uploaded half a
+    second earlier, and the publish failed
+    (docs/publish-incident-2026-11-20.md)."""
+    job = yaml.safe_load(PUBLISH.read_text())["jobs"]["publish"]
+    names = [s.get("name") for s in job["steps"]]
+    first = _step(job, "Deploy to GitHub Pages")
+    check = _step(job, "Check that deploying again can work")
+    again = _step(job, "Deploy to GitHub Pages again")
+    # The job goes on past a failed first try, to the check and the second try.
+    assert first["continue-on-error"] is True
+    assert check["if"] == again["if"] == f"steps.{first['id']}.outcome == 'failure'"
+    assert names.index(first["name"]) < names.index(check["name"]) < names.index(again["name"])
+    # The second try is the same deploy, and a failure of it fails the job.
+    assert (again["uses"], again["with"]) == (first["uses"], first["with"])
+    assert "continue-on-error" not in again
+    # The hub is pinged after whichever try deployed, and the environment
+    # links to the site either way.
+    assert names.index("Notify the WebSub hub") > names.index(again["name"])
+    assert job["environment"]["url"] == (f"${{{{ steps.{first['id']}.outputs.page_url"
+                                         f" || steps.{again['id']}.outputs.page_url }}}}")
+
+
+def _check_deploying_again(tmp_path, page_url: str):
+    """Run the step that follows a failed deploy, as if the deploy had
+    reported this page URL. Returns the run and the pauses it took, read from
+    a stand-in sleep, because the real pause is too long for a test."""
+    check = _step(yaml.safe_load(PUBLISH.read_text())["jobs"]["publish"],
+                  "Check that deploying again can work")
+    # deploy-pages sets page_url once it has created a deployment.
+    assert check["env"]["PAGE_URL"] == "${{ steps.deployment.outputs.page_url }}"
+    pause = check["env"]["PAUSE_SECONDS"]
+    assert pause > 0
+    bin_dir, log = tmp_path / "bin", tmp_path / "sleep.log"
+    bin_dir.mkdir()
+    sleep = bin_dir / "sleep"
+    sleep.write_text(f"#!/usr/bin/env bash\nprintf '%s\\n' \"$*\" >> '{log}'\n")
+    sleep.chmod(0o755)
+    env = {**os.environ, "PAGE_URL": page_url, "PAUSE_SECONDS": str(pause),
+           "PATH": f"{bin_dir}:{os.environ['PATH']}"}
+    # GitHub runs a `run:` with no `shell:` as `bash -e`.
+    run = subprocess.run(["bash", "-e", "-c", check["run"]], cwd=tmp_path, env=env,
+                         capture_output=True, text=True, timeout=60)
+    return run, (log.read_text().split() if log.exists() else []), str(pause)
+
+
+def test_a_deploy_that_created_no_deployment_is_tried_again_after_a_pause(tmp_path):
+    run, pauses, pause = _check_deploying_again(tmp_path, "")
+    assert run.returncode == 0, run.stdout + run.stderr
+    assert pauses == [pause]
+    # A run that needed its second try says so, though it ends green.
+    assert "::warning::" in run.stdout and f"{pause}s" in run.stdout
+
+
+def test_a_deployment_that_was_created_and_then_failed_is_not_tried_again(tmp_path):
+    """A second deployment would take the failed one's name and never start
+    (docs/publish-incident-2026-11-10.md), so the job fails at once."""
+    run, pauses, _ = _check_deploying_again(tmp_path, "https://example.org/pod/")
+    assert run.returncode != 0
+    assert pauses == []
+    assert "::error::" in run.stdout and "Deploy to GitHub Pages" in run.stdout
+
+
 def test_llm_smoke_test_cannot_enter_the_publishing_jobs_or_send_mail():
     wf, on = _workflow()
     assert on["workflow_dispatch"]["inputs"]["llm_smoke_test"]["default"] is False
