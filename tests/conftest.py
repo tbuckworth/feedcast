@@ -5,6 +5,7 @@ sender's inbox), a real MP3, and a scratch repository to run the whole
 pipeline on (the `pipeline` fixture)."""
 
 import asyncio
+import email
 import io
 import shutil
 import subprocess
@@ -243,7 +244,8 @@ GMAIL_BLOCKED = ("Message rejected. For more information, go to "
 
 
 def bounce_notice(recipient: str, when: datetime, action: str = "failed",
-                  reason: str = GMAIL_BLOCKED) -> bytes:
+                  reason: str = GMAIL_BLOCKED,
+                  sender: str = "Mail Delivery Subsystem <mailer-daemon@googlemail.com>") -> bytes:
     """A delivery status notification as Gmail writes one, for `recipient`.
 
     Copied from a notice of 2026-11-20 (docs/email-incident-2026-11-20.md),
@@ -257,7 +259,7 @@ To: bot@example.com
 Auto-Submitted: auto-replied
 Message-ID: <6affdbd7.16c24c18.930ec.3735.GMR@mx.google.com>
 Date: {format_datetime(when)}
-From: Mail Delivery Subsystem <mailer-daemon@googlemail.com>
+From: {sender}
 Subject: Delivery Status Notification (Failure)
 References: <6affdbd5.628c870a.e3c7e.b53b@mx.google.com>
 In-Reply-To: <6affdbd5.628c870a.e3c7e.b53b@mx.google.com>
@@ -317,7 +319,8 @@ def inbox(monkeypatch):
 
     The inbox is a network service, so a stand-in for imaplib.IMAP4_SSL serves
     the notices a test puts in `inbox.notices` (raw messages, as bounce_notice
-    writes them), and the wait for them is cut to nothing. It records the
+    writes them), and the wait for them is cut to nothing. As a server does,
+    it finds only the messages from a sender the search names. It records the
     login and what was asked of it. Every test gets it, so that no send
     reaches a real server.
     """
@@ -336,7 +339,10 @@ def inbox(monkeypatch):
             return "OK", [str(len(box.notices)).encode()]
         def search(self, charset, *criteria):
             box.searches.append(criteria)
-            return "OK", [" ".join(str(n + 1) for n in range(len(box.notices))).encode()]
+            senders = [c.strip('"') for c in criteria if c.startswith('"')]
+            found = [str(n + 1) for n, raw in enumerate(box.notices)
+                     if any(s in email.message_from_bytes(raw)["From"].lower() for s in senders)]
+            return "OK", [" ".join(found).encode()]
         def fetch(self, number, parts):
             raw = box.notices[int(number) - 1]
             return "OK", [(b"%s (BODY[] {%d}" % (number, len(raw)), raw), b")"]

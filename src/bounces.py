@@ -5,9 +5,8 @@ on 2026-11-20: it blocked the daily email for all twelve recipients two
 seconds after accepting it (docs/email-incident-2026-11-20.md). smtplib has
 returned by then. The server reports the refusal as a delivery status
 notification (RFC 3464), one per recipient, mailed to the sender. `bounced`
-reads the sender's inbox over IMAP for those notices, once, WAIT_SECONDS
-after the send. A later refusal, such as one a recipient's own server sends
-after retrying, is not seen.
+reads the sender's inbox over IMAP for those notices. A later refusal, such
+as one a recipient's own server sends after retrying, is not seen.
 """
 
 import email

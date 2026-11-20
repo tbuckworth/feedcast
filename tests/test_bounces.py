@@ -11,7 +11,7 @@ import pytest
 
 from src import bounces, main
 from src.email_report import RunReport, send_report
-from tests.conftest import bounce_notice
+from tests.conftest import GMAIL_BLOCKED, bounce_notice
 
 LOGIN = ("imap.example.com", "bot@example.com", "pw")
 SENT = datetime(2026, 11, 20, 5, 34, 13, tzinfo=UTC)
@@ -20,8 +20,7 @@ SENT = datetime(2026, 11, 20, 5, 34, 13, tzinfo=UTC)
 def test_a_notice_names_the_recipient_and_the_servers_reason(inbox):
     inbox.notices.append(bounce_notice("Reader@Example.com", SENT + timedelta(seconds=2)))
     assert bounces.bounced(*LOGIN, ["reader@example.com", "other@example.com"], SENT) == {
-        "reader@example.com": "smtp; Message rejected. For more information, go to "
-                              "https://support.google.com/mail/answer/69585"}
+        "reader@example.com": f"smtp; {GMAIL_BLOCKED}"}
     assert (inbox.host, inbox.port, inbox.logins) == ("imap.example.com", 993,
                                                       [("bot@example.com", "pw")])
     # Read-only, so the notices stay unread for the person whose inbox it is.
@@ -31,6 +30,17 @@ def test_a_notice_names_the_recipient_and_the_servers_reason(inbox):
     # its own.
     assert inbox.searches == [("OR", "FROM", '"mailer-daemon"', "FROM", '"postmaster"',
                                "SINCE", "19-Nov-2026")]
+
+
+def test_a_notice_from_postmaster_counts_and_mail_from_anyone_else_does_not(inbox):
+    """Some servers send their notices as postmaster. A notice that somebody
+    else forwarded is not the server's word on this email."""
+    when = SENT + timedelta(seconds=2)
+    inbox.notices += [
+        bounce_notice("reader@example.com", when, sender="postmaster@example.org"),
+        bounce_notice("other@example.com", when, sender="A Reader <someone@example.org>")]
+    assert bounces.bounced(*LOGIN, ["reader@example.com", "other@example.com"], SENT) == {
+        "reader@example.com": f"smtp; {GMAIL_BLOCKED}"}
 
 
 def test_an_inbox_with_no_notice_means_nothing_bounced(inbox):
@@ -89,7 +99,7 @@ class TestTheReportEmail:
         assert len(smtp) == 1
         assert outputs.read_text() == "report_failed=true\n"
         out = capsys.readouterr().out
-        assert "bounced for 2 of 2 recipients" in out and "Message rejected" in out
+        assert "bounced for 2 of 2 recipients" in out and GMAIL_BLOCKED in out
         # The Actions log is public: no blind-copied address in it.
         assert "list@example.com" not in out
 
