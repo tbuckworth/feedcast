@@ -98,11 +98,12 @@ class TestTheReportEmail:
         """A reader's own mail server often repeats the address it refused."""
         inbox.notices.append(bounce_notice(
             "list@example.com", datetime.now(UTC),
-            reason="550 5.1.1 <List@Example.com>: User unknown"))
+            reason="550 5.1.1 <List@Example.com>: no mailbox list@example.com: User unknown"))
         assert send_report(RunReport()) is False
         out = capsys.readouterr().out
-        assert "bounced for 1 of 2 recipients" in out and "User unknown" in out
-        assert "example.com>" not in out.lower() and "550 5.1.1 <address>: User unknown" in out
+        assert "bounced for 1 of 2 recipients" in out
+        assert "550 5.1.1 <address>: no mailbox <address>: User unknown" in out
+        assert "list@example.com" not in out.lower()
 
     def test_a_report_nobody_bounced_is_sent(self, smtp, inbox, outputs, capsys):
         # Yesterday's notice, still in the inbox.

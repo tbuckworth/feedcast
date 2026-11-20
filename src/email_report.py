@@ -847,7 +847,7 @@ def send_report(report: RunReport, when: datetime | None = None,
         return False
     if bounces:
         # A server's reason can repeat the address it refused.
-        reasons = {re.sub(r"<?[^\s<>]+@[^\s<>]+>?", "<address>", r) for r in bounces.values()}
+        reasons = {re.sub(r"<?[^\s<>]+@[\w.-]+>?", "<address>", r) for r in bounces.values()}
         print(f"  Email report failed: bounced for {len(bounces)} of {len(recipients)} "
               f"recipients after {settings.host} accepted it: {'; '.join(sorted(reasons))}")
         return False

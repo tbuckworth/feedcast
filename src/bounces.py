@@ -6,8 +6,8 @@ seconds after accepting it (docs/email-incident-2026-11-20.md). smtplib has
 returned by then. The server reports the refusal as a delivery status
 notification (RFC 3464), one per recipient, mailed to the sender. `bounced`
 reads the sender's inbox over IMAP for those notices, once, WAIT_SECONDS
-after the send. A refusal that comes later, from a recipient's own server
-after its retries for one, is not seen.
+after the send. A later refusal, such as one a recipient's own server sends
+after retrying, is not seen.
 """
 
 import email
