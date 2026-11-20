@@ -56,5 +56,6 @@ The modules, roughly in the order a run uses them:
 - market_charts: the email's notes on the markets the briefing's digest cites, with their price charts.
 - run_report: the run report, assembled from what the run did and the rows it stored.
 - email_report: the run report email.
+- bounces: whether the mail server refused an email after accepting it.
 - main: the entry point; runs the pipeline.
 """

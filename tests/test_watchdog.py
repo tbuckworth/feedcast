@@ -207,8 +207,17 @@ def test_the_briefs_recovery_steps_name_what_the_workflows_have():
     # does not end the job: the check after it does. The brief names all three.
     named = set(re.findall(r'"([^"]+)"', cancelled_deploy))
     assert len(named) == 3 and named <= publish_steps
+    # An email the mail server bounced fails the update job at this step. The
+    # agent tries a resend on Titus alone, and asks before it emails the list.
+    (bounced,) = [line for line in brief.splitlines() if "bounced" in line]
+    assert '"Fail the job if the report email was not sent"' in bounced
+    assert "Fail the job if the report email was not sent" in [
+        s.get("name") for s in wf["jobs"]["update"]["steps"]]
+    assert f"gh workflow run {watchdog.WORKFLOW} --ref main -f resend_report=true`" in bounced
+    assert "resend_report" in wf[True]["workflow_dispatch"]["inputs"]
+    assert "notify_list" not in bounced and "ask before" in bounced
     cited = re.findall(r"docs/[\w-]+\.md", brief)
-    assert cited and all((watchdog.ROOT / doc).is_file() for doc in cited)
+    assert len(set(cited)) == 2 and all((watchdog.ROOT / doc).is_file() for doc in cited)
 
 
 def test_a_failed_launch_fails_loudly(tmp_path, monkeypatch):

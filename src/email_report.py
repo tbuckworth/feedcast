@@ -4,7 +4,8 @@ Configured entirely through environment variables, so the recipient addresses
 and credentials live in GitHub secrets rather than in the repo. With
 FEEDCAST_EMAIL_TO unset the email is off. With it set, a send that fails,
 missing credentials included, is logged and returned as False rather than
-raised, so the run still publishes; the workflow then fails the job.
+raised, so the run still publishes; the workflow then fails the job. An email
+the mail server accepted and then bounced is a failed send too (src/bounces.py).
 """
 
 import os
@@ -12,7 +13,7 @@ import re
 import smtplib
 import ssl
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from email.message import EmailMessage
 from html import escape
 
@@ -29,6 +30,7 @@ BACKUP = "#9a5b00"
 
 DEFAULT_PORT = 587
 
+from .bounces import bounced
 from .env import env_flag
 from .llm import model_name
 from .verify import fidelity_summary, material_flags
@@ -700,6 +702,8 @@ class EmailSettings:
     password: str
     host: str
     port: int
+    # Where the sender's inbox is read for bounces (src/bounces.py).
+    imap_host: str
     test_run: bool
 
     @classmethod
@@ -711,7 +715,8 @@ class EmailSettings:
         secret is a failure, not a reason to stop reporting), or an SMTP_PORT
         that is not a number (a misconfiguration, not unset). An unset GitHub
         Actions `vars.X` interpolates to an empty string rather than being
-        absent, so an empty host or port falls back as an unset one does.
+        absent, so an empty host or port falls back as an unset one does. The
+        hosts default to Gmail's.
         """
         to = _addresses(os.environ.get("FEEDCAST_EMAIL_TO", ""))
         if not to:
@@ -735,6 +740,7 @@ class EmailSettings:
             password=password,
             host=os.environ.get("SMTP_HOST", "").strip() or "smtp.gmail.com",
             port=int(raw_port) if raw_port else DEFAULT_PORT,
+            imap_host=os.environ.get("IMAP_HOST", "").strip() or "imap.gmail.com",
             test_run=is_test_run(),
         )
 
@@ -799,8 +805,10 @@ def send_report(report: RunReport, when: datetime | None = None,
     """Email the run report.
 
     Returns True if sent, None if the email is off (FEEDCAST_EMAIL_TO unset),
-    and False if it is on but was not sent, missing SMTP credentials included
-    (EmailSettings.from_env). `operator_only` leaves out the BCC list, as a
+    and False if it is on but did not go out: it was not sent (missing SMTP
+    credentials included, EmailSettings.from_env), the mail server bounced it
+    for a recipient after accepting it, or the sender's inbox could not be
+    read to find out. `operator_only` leaves out the BCC list, as a
     dev run does: the narration pass uses it to say a verbatim post failed
     after the day's email went out. `subject_tag` and `images` are as
     compose_message takes them.
@@ -819,6 +827,7 @@ def send_report(report: RunReport, when: datetime | None = None,
         msg = compose_message(report, when or datetime.now(), settings,
                               operator_only=operator_only, subject_tag=subject_tag,
                               images=images)
+        sent_at = datetime.now(UTC)
         _send(msg, settings)
     except Exception as e:
         print(f"  Email report failed: {type(e).__name__}: {e}")
@@ -828,4 +837,18 @@ def send_report(report: RunReport, when: datetime | None = None,
     bcc = _addresses(msg["Bcc"] or "")
     bcc_note = f" and {len(bcc)} bcc" if bcc else ""
     print(f"  Email report sent to {', '.join(settings.to)}{bcc_note}")
+    recipients = settings.to + bcc
+    try:
+        bounces = bounced(settings.imap_host, settings.user, settings.password,
+                          recipients, sent_at)
+    except Exception as e:
+        print(f"  Email report failed: the sender's inbox on {settings.imap_host} could not "
+              f"be read for bounces: {type(e).__name__}: {e}")
+        return False
+    if bounces:
+        print(f"  Email report failed: bounced for {len(bounces)} of {len(recipients)} "
+              f"recipients after {settings.host} accepted it: "
+              f"{'; '.join(sorted(set(bounces.values())))}")
+        return False
+    print(f"  Email report: no bounce in the sender's inbox on {settings.imap_host}")
     return True
