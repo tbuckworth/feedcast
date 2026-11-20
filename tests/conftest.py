@@ -237,15 +237,19 @@ def smtp(monkeypatch):
     return sent
 
 
-def bounce_notice(recipient: str, when: datetime, action: str = "failed") -> bytes:
+# What Gmail gave as its reason for each of the twelve notices of 2026-11-20.
+GMAIL_BLOCKED = ("Message rejected. For more information, go to "
+                 "https://support.google.com/mail/answer/69585")
+
+
+def bounce_notice(recipient: str, when: datetime, action: str = "failed",
+                  reason: str = GMAIL_BLOCKED) -> bytes:
     """A delivery status notification as Gmail writes one, for `recipient`.
 
     Copied from a notice of 2026-11-20 (docs/email-incident-2026-11-20.md),
     without its transport headers, HTML alternative and icon, and with the
     addresses replaced.
     """
-    reason = ("Message rejected. For more information, go to "
-              "https://support.google.com/mail/answer/69585")
     return f"""\
 Return-Path: <>
 Content-Type: multipart/report; boundary="000000000000453dbc0660ae9862"; report-type=delivery-status

@@ -846,9 +846,10 @@ def send_report(report: RunReport, when: datetime | None = None,
               f"be read for bounces: {type(e).__name__}: {e}")
         return False
     if bounces:
+        # A server's reason can repeat the address it refused.
+        reasons = {re.sub(r"<?[^\s<>]+@[^\s<>]+>?", "<address>", r) for r in bounces.values()}
         print(f"  Email report failed: bounced for {len(bounces)} of {len(recipients)} "
-              f"recipients after {settings.host} accepted it: "
-              f"{'; '.join(sorted(set(bounces.values())))}")
+              f"recipients after {settings.host} accepted it: {'; '.join(sorted(reasons))}")
         return False
     print(f"  Email report: no bounce in the sender's inbox on {settings.imap_host}")
     return True

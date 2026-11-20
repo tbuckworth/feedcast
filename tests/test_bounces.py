@@ -26,9 +26,11 @@ def test_a_notice_names_the_recipient_and_the_servers_reason(inbox):
                                                       [("bot@example.com", "pw")])
     # Read-only, so the notices stay unread for the person whose inbox it is.
     assert inbox.selected == [("INBOX", True)]
-    # The server is asked for the notices of the day before onwards: its
-    # SINCE compares dates only, in a time zone of its own.
-    assert inbox.searches == [("FROM", '"mailer-daemon"', "SINCE", "19-Nov-2026")]
+    # The server is asked for what its two usual senders of notices sent from
+    # the day before onwards: its SINCE compares dates only, in a time zone of
+    # its own.
+    assert inbox.searches == [("OR", "FROM", '"mailer-daemon"', "FROM", '"postmaster"',
+                               "SINCE", "19-Nov-2026")]
 
 
 def test_an_inbox_with_no_notice_means_nothing_bounced(inbox):
@@ -90,6 +92,17 @@ class TestTheReportEmail:
         assert "bounced for 2 of 2 recipients" in out and "Message rejected" in out
         # The Actions log is public: no blind-copied address in it.
         assert "list@example.com" not in out
+
+    def test_a_reason_that_names_a_reader_is_logged_without_the_address(self, smtp, inbox,
+                                                                        capsys):
+        """A reader's own mail server often repeats the address it refused."""
+        inbox.notices.append(bounce_notice(
+            "list@example.com", datetime.now(UTC),
+            reason="550 5.1.1 <List@Example.com>: User unknown"))
+        assert send_report(RunReport()) is False
+        out = capsys.readouterr().out
+        assert "bounced for 1 of 2 recipients" in out and "User unknown" in out
+        assert "example.com>" not in out.lower() and "550 5.1.1 <address>: User unknown" in out
 
     def test_a_report_nobody_bounced_is_sent(self, smtp, inbox, outputs, capsys):
         # Yesterday's notice, still in the inbox.

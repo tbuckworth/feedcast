@@ -5,7 +5,9 @@ on 2026-11-20: it blocked the daily email for all twelve recipients two
 seconds after accepting it (docs/email-incident-2026-11-20.md). smtplib has
 returned by then. The server reports the refusal as a delivery status
 notification (RFC 3464), one per recipient, mailed to the sender. `bounced`
-reads the sender's inbox over IMAP for those notices.
+reads the sender's inbox over IMAP for those notices, once, WAIT_SECONDS
+after the send. A refusal that comes later, from a recipient's own server
+after its retries for one, is not seen.
 """
 
 import email
@@ -44,12 +46,16 @@ def bounced(host: str, user: str, password: str, recipients: Iterable[str],
     # SINCE compares dates only, in the server's own time zone, so ask from the
     # day before and compare the times here.
     since = imaplib.Time2Internaldate(earliest - timedelta(days=1))[1:12]
+    # Servers send their notices as MAILER-DAEMON or as postmaster. Asking for
+    # those two keeps the rest of the inbox unfetched; _failures then tells a
+    # notice from any other mail of theirs.
+    senders = ("OR", "FROM", '"mailer-daemon"', "FROM", '"postmaster"')
     found: dict[str, str] = {}
     with imaplib.IMAP4_SSL(host, IMAP_PORT, ssl_context=ssl.create_default_context(),
                            timeout=60) as inbox:
         inbox.login(user, password)
         _ok("SELECT", inbox.select("INBOX", readonly=True))
-        numbers = _ok("SEARCH", inbox.search(None, "FROM", '"mailer-daemon"', "SINCE", since))
+        numbers = _ok("SEARCH", inbox.search(None, *senders, "SINCE", since))
         for number in numbers[0].split():
             fetched = _ok("FETCH", inbox.fetch(number, "(BODY.PEEK[])"))
             notice = email.message_from_bytes(fetched[0][1], policy=policy.default)
