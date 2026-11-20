@@ -36,10 +36,7 @@ def bounced(host: str, user: str, password: str, recipients: Iterable[str],
     Waits WAIT_SECONDS, then reads the notices in `user`'s inbox on `host`
     that are dated after the send and name one of `recipients`. The inbox is
     opened read-only, so the notices stay unread there. `sent_at` carries its
-    time zone. Prints how many notices of a failed delivery the inbox holds
-    from the day before the send onwards, whichever email they are about: on
-    a day with such notices, that count shows that the search finds them in
-    this inbox. Raises when the inbox cannot be read (OSError, imaplib's
+    time zone. Raises when the inbox cannot be read (OSError, imaplib's
     errors, RuntimeError for a command the server refused).
     """
     time.sleep(WAIT_SECONDS)
@@ -53,7 +50,6 @@ def bounced(host: str, user: str, password: str, recipients: Iterable[str],
     # notice from any other mail of theirs.
     senders = ("OR", "FROM", '"mailer-daemon"', "FROM", '"postmaster"')
     found: dict[str, str] = {}
-    notices = 0
     with imaplib.IMAP4_SSL(host, IMAP_PORT, ssl_context=ssl.create_default_context(),
                            timeout=60) as inbox:
         inbox.login(user, password)
@@ -62,13 +58,10 @@ def bounced(host: str, user: str, password: str, recipients: Iterable[str],
         for number in numbers[0].split():
             fetched = _ok("FETCH", inbox.fetch(number, "(BODY.PEEK[])"))
             notice = email.message_from_bytes(fetched[0][1], policy=policy.default)
-            failures = _failures(notice)
-            notices += bool(failures)
-            if parsedate_to_datetime(notice["Date"]) >= earliest:
-                found.update((recipient, reason) for recipient, reason in failures.items()
-                             if recipient in wanted)
-    print(f"  Bounce check: the inbox on {host} holds {notices} notices of a failed delivery "
-          f"since {since}")
+            if parsedate_to_datetime(notice["Date"]) < earliest:
+                continue
+            found.update((recipient, reason) for recipient, reason in _failures(notice).items()
+                         if recipient in wanted)
     return found
 
 
