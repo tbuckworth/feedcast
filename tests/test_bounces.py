@@ -63,6 +63,19 @@ def test_a_notice_of_a_delay_is_not_a_bounce(inbox):
     assert bounces.bounced(*LOGIN, ["reader@example.com"], SENT) == {}
 
 
+def test_the_log_counts_the_failure_notices_the_inbox_holds(inbox, capsys):
+    """Whichever email they are about: on a day with notices, the count shows
+    that the search finds them in this inbox and that they are read as failures."""
+    inbox.notices += [
+        bounce_notice("reader@example.com", SENT + timedelta(seconds=2)),
+        bounce_notice("reader@example.com", SENT - timedelta(hours=6)),
+        bounce_notice("stranger@example.com", SENT - timedelta(hours=6)),
+        bounce_notice("reader@example.com", SENT + timedelta(seconds=2), action="delayed")]
+    assert len(bounces.bounced(*LOGIN, ["reader@example.com"], SENT)) == 1
+    assert ("the inbox on imap.example.com holds 3 notices of a failed delivery since 19-Nov-2026"
+            in capsys.readouterr().out)
+
+
 def test_an_inbox_that_cannot_be_read_raises(inbox, monkeypatch):
     inbox.notices.append(bounce_notice("reader@example.com", SENT + timedelta(seconds=2)))
     monkeypatch.setattr("imaplib.IMAP4_SSL.search", lambda self, *a: ("NO", [b"try later"]))
