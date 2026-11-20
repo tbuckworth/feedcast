@@ -1,15 +1,17 @@
 """Shared test setup: a fresh run's state, fakes for the paid and networked
 services the real classes call (the LLM routes, Anthropic's Messages API for
-the web search, DeepInfra's voice upload and TTS, and the SMTP server), a real
-MP3, and a scratch repository to run the whole pipeline on (the `pipeline`
-fixture)."""
+the web search, DeepInfra's voice upload and TTS, the SMTP server and the
+sender's inbox), a real MP3, and a scratch repository to run the whole
+pipeline on (the `pipeline` fixture)."""
 
 import asyncio
+import email
 import io
 import shutil
 import subprocess
 import wave
 from datetime import datetime, timedelta, timezone
+from email.utils import format_datetime
 from functools import lru_cache
 from pathlib import Path
 from types import SimpleNamespace
@@ -20,7 +22,7 @@ import pytest
 import yaml
 
 import src.main as main
-from src import audio, lesswrong, llm, notices
+from src import audio, bounces, lesswrong, llm, notices
 from src.audio import AudioGenerator
 from src.config import CONFIG_PATH, load_config
 from src.markets import MarketContext, MarketScout
@@ -234,6 +236,121 @@ def smtp(monkeypatch):
     for key in ("FEEDCAST_TEST_RUN", "SMTP_PORT"):
         monkeypatch.delenv(key, raising=False)
     return sent
+
+
+# What Gmail gave as its reason for each of the twelve notices of 2026-11-20.
+GMAIL_BLOCKED = ("Message rejected. For more information, go to "
+                 "https://support.google.com/mail/answer/69585")
+
+
+def bounce_notice(recipient: str, when: datetime, action: str = "failed",
+                  reason: str = GMAIL_BLOCKED,
+                  sender: str = "Mail Delivery Subsystem <mailer-daemon@googlemail.com>") -> bytes:
+    """A delivery status notification as Gmail writes one, for `recipient`.
+
+    Copied from a notice of 2026-11-20 (docs/email-incident-2026-11-20.md),
+    without its transport headers, HTML alternative and icon, and with the
+    addresses replaced.
+    """
+    return f"""\
+Return-Path: <>
+Content-Type: multipart/report; boundary="000000000000453dbc0660ae9862"; report-type=delivery-status
+To: bot@example.com
+Auto-Submitted: auto-replied
+Message-ID: <6affdbd7.16c24c18.930ec.3735.GMR@mx.google.com>
+Date: {format_datetime(when)}
+From: {sender}
+Subject: Delivery Status Notification (Failure)
+References: <6affdbd5.628c870a.e3c7e.b53b@mx.google.com>
+In-Reply-To: <6affdbd5.628c870a.e3c7e.b53b@mx.google.com>
+X-Failed-Recipients: {recipient}
+
+--000000000000453dbc0660ae9862
+Content-Type: multipart/related; boundary="000000000000454dec0660ae98d4"
+
+--000000000000454dec0660ae98d4
+Content-Type: text/plain; charset="UTF-8"
+
+
+** Message blocked **
+
+Your message to {recipient} has been blocked. See technical details below for more information.
+
+Learn more here: https://support.google.com/mail/answer/69585
+
+The response was:
+
+{reason}
+
+--000000000000454dec0660ae98d4--
+--000000000000453dbc0660ae9862
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; googlemail.com
+Received-From-MTA: dns; bot@example.com
+Arrival-Date: {format_datetime(when)}
+X-Original-Message-ID: <6affdbd5.628c870a.e3c7e.b53b@mx.google.com>
+
+Final-Recipient: rfc822; {recipient}
+Action: {action}
+Status: 5.7.1
+Diagnostic-Code: smtp; {reason}
+Last-Attempt-Date: {format_datetime(when)}
+
+--000000000000453dbc0660ae9862
+Content-Type: text/rfc822-headers
+
+Return-Path: <bot@example.com>
+Message-ID: <6affdbd5.628c870a.e3c7e.b53b@mx.google.com>
+Subject: Feedcast - 3 new episodes
+From: bot@example.com
+To: bot@example.com
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="===============3948882617402941873=="
+
+
+--000000000000453dbc0660ae9862--
+""".replace("\n", "\r\n").encode()
+
+
+@pytest.fixture(autouse=True)
+def inbox(monkeypatch):
+    """The sender's inbox, which the real bounce check reads after every send.
+
+    The inbox is a network service, so a stand-in for imaplib.IMAP4_SSL serves
+    the notices a test puts in `inbox.notices` (raw messages, as bounce_notice
+    writes them), and the wait for them is cut to nothing. As a server does,
+    it finds only the messages from a sender the search names. It records the
+    login and what was asked of it. Every test gets it, so that no send
+    reaches a real server.
+    """
+    box = SimpleNamespace(notices=[], logins=[], selected=[], searches=[])
+
+    class Inbox:
+        def __init__(self, host, port, **kw):
+            box.host, box.port = host, port
+        def __enter__(self): return self
+        def __exit__(self, *a): pass
+        def login(self, user, password):
+            box.logins.append((user, password))
+            return "OK", [b"logged in"]
+        def select(self, mailbox, readonly=False):
+            box.selected.append((mailbox, readonly))
+            return "OK", [str(len(box.notices)).encode()]
+        def search(self, charset, *criteria):
+            box.searches.append(criteria)
+            senders = [c.strip('"') for c in criteria if c.startswith('"')]
+            found = [str(n + 1) for n, raw in enumerate(box.notices)
+                     if any(s in email.message_from_bytes(raw)["From"].lower() for s in senders)]
+            return "OK", [" ".join(found).encode()]
+        def fetch(self, number, parts):
+            raw = box.notices[int(number) - 1]
+            return "OK", [(b"%s (BODY[] {%d}" % (number, len(raw)), raw), b")"]
+
+    monkeypatch.setattr("imaplib.IMAP4_SSL", Inbox)
+    monkeypatch.setattr(bounces, "WAIT_SECONDS", 0)
+    monkeypatch.delenv("IMAP_HOST", raising=False)
+    return box
 
 
 # --- The whole pipeline on a scratch repository ---------------------------------

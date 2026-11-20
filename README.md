@@ -77,6 +77,7 @@ An injected URL skips the feeds: the page is fetched and its article extracted w
 | `SMTP_USER` | SMTP username (the sending Gmail address) |
 | `GMAIL_APP_PASSWORD` | SMTP password, a Google app password; `SMTP_PASSWORD` is an alias |
 | `SMTP_HOST`, `SMTP_PORT` | SMTP server (default `smtp.gmail.com`) and port (default 587, STARTTLS; 465 uses implicit TLS) |
+| `IMAP_HOST` | IMAP server of the sending account (default `imap.gmail.com`). After each send the pipeline reads that account's inbox, with the SMTP login, for bounces: an email the server accepted and then bounced is a failed send, and so is an inbox that cannot be read (`src/bounces.py`) |
 | `LLM_TIMEOUT_SECONDS` | Timeout of each LLM request, on every account (default 180); the SDKs retry a failed request up to 3 times |
 | `VOICE_UPLOAD_DELAY_SECONDS` | Seconds to wait after uploading the voice sample, for DeepInfra to replicate it (default 0; CI uses 5) |
 | `SAVE_DEBUG_WAVS` | Keep every TTS chunk's WAV under `data/audio/debug_wavs/` |

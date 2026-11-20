@@ -183,9 +183,12 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           # Completion email. An unset FEEDCAST_EMAIL_TO turns it off; with it
           # set, a missing SMTP_USER or GMAIL_APP_PASSWORD is a failed send,
-          # which fails the job once the run has published.
+          # which fails the job once the run has published. So is an email
+          # the server bounced: the sender's inbox on IMAP_HOST is read for
+          # bounces after each send, with the same login.
           SMTP_HOST: ${{ vars.SMTP_HOST }}
           SMTP_PORT: ${{ vars.SMTP_PORT }}
+          IMAP_HOST: ${{ vars.IMAP_HOST }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           FEEDCAST_EMAIL_TO: ${{ secrets.FEEDCAST_EMAIL_TO }}
@@ -259,6 +262,7 @@ jobs:
           # Mails the operator, and only when a narration fails.
           SMTP_HOST: ${{ vars.SMTP_HOST }}
           SMTP_PORT: ${{ vars.SMTP_PORT }}
+          IMAP_HOST: ${{ vars.IMAP_HOST }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           FEEDCAST_EMAIL_TO: ${{ secrets.FEEDCAST_EMAIL_TO }}

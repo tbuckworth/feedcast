@@ -273,8 +273,11 @@ def test_narrate_job_gets_the_same_secrets_the_pipeline_needs_to_narrate():
     first = _step(wf["jobs"]["update"], "Run pipeline")
     step = _step(wf["jobs"]["narrate"], "Narrate deferred posts")
     for key in ("OPENROUTER_API_KEY", "DEEPINFRA_API_KEY", "FEEDCAST_EMAIL_TO", "SMTP_USER",
-                "GMAIL_APP_PASSWORD", "FEEDCAST_TEST_RUN", "VOICE_UPLOAD_DELAY_SECONDS"):
+                "GMAIL_APP_PASSWORD", "FEEDCAST_TEST_RUN", "VOICE_UPLOAD_DELAY_SECONDS",
+                "SMTP_HOST", "SMTP_PORT", "IMAP_HOST"):
         assert step["env"][key] == first["env"][key], key
+    # Each job reads the sender's inbox for bounces after it sends (src/bounces.py).
+    assert first["env"]["IMAP_HOST"] == "${{ vars.IMAP_HOST }}"
     # Failure mail goes to the operator only: no BCC list in this job.
     assert "FEEDCAST_EMAIL_BCC" not in step["env"]
 
