@@ -82,7 +82,11 @@ case it asks him first.
 
 The check first read the real inbox at 11:58 on 20 Nov, in a resend to Titus
 alone ([run 44731686732](https://github.com/tbuckworth/feedcast/actions/runs/44731686732)),
-and found no bounce.
+and found no bounce. A replay then gave the check the times of two earlier
+sends, in a job that only read the inbox
+([run 44734879072](https://github.com/tbuckworth/feedcast/actions/runs/44734879072)).
+For the blocked send of 05:34 it found a bounce for 12 of 12 recipients, and
+for the resend to the list at 10:04 it found none.
 
 The tests read a stand-in inbox that serves a notice copied from one of the
 twelve.
