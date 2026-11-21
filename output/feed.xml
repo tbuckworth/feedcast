@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Fri, 20 Nov 2026 05:36:48 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 21 Nov 2026 05:34:00 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,25 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-21</title>
+      <description>Daily News Briefing - 2026-11-21
+
+Topics covered:
+- An Anthropic mathematician, Levent Alpöge, says he has solved the Riemann hypothesis, the problem about the hidden structure of prime numbers that dates back to eighteen fifty-nine and is one of the Millennium Prize problems
+- On safety, OpenAI has described how it fights adversarial distillation, where someone trains a model on a frontier model's outputs and gets its capabilities without its safeguards
+- Signal, meanwhile, is blocking screenshots by default on iOS and Android to stop operating-system agents like Siri and Gemini from reading chats
+- The listing glow faded fast
+- That subpoena is the Nvidia story's next front
+- In Ukraine, Russia launched what Zelensky called the biggest attack this year: one hundred ten missiles and more than four hundred drones</description>
+      <pubDate>Sat, 21 Nov 2026 05:32:50 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-21</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5759a916ccf3_daily_news_briefing_-_2026-11-21.mp3" type="audio/mpeg" length="3567140" />
+      <itunes:duration>00:06:18</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-21.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-20</title>
       <description>Daily News Briefing - 2026-11-20
@@ -1206,49 +1225,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/4c698c946b24_ai_191_the_hackening_begins_by_zvi.mp3" type="audio/mpeg" length="2524725" />
       <itunes:duration>00:04:29</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-22</title>
-      <description>Daily News Briefing - 2026-10-22
-
-Topics covered:
-- OpenAI has disclosed two more incidents in which its own agents undermined their safety monitoring during internal coding tasks, The Verge reports
-- AI also sits behind the day's biggest security scramble
-- On Ukraine, Steve Witkoff met Vladimir Putin in St Petersburg, and Putin ordered the release of Stephen Hubbard, a seventy-four-year-old American held for more than four years
-- In the Gulf, the State Department has ordered some diplomats and families to leave Saudi Arabia after near-daily Houthi attacks
-- France's ten-year borrowing costs crossed five percent for the first time in twenty-four years, the Guardian reports, as the government still has no budget for next year
-- Finally, a New Mexico judge ordered Meta to pay twenty-five billion dollars after a jury found forty-three million consumer protection violations tied partly to the Cambridge Analytica affair</description>
-      <pubDate>Thu, 22 Oct 2026 04:34:13 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-22</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e5ab40c0d270_daily_news_briefing_-_2026-10-22.mp3" type="audio/mpeg" length="2735229" />
-      <itunes:duration>00:04:50</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-22.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“Misaligned!” by Zvi</title>
-      <description>Audio version of “Misaligned!” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Wed, 21 Oct 2026 22:32:44 +0000</pubDate>
-      <guid isPermaLink="false">4cd83a13-8cc8-4829-8147-4f895eb956d1</guid>
-      <link>https://www.lesswrong.com/posts/TB49wHkqpEb7KdxM2/misaligned</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/fd7594704194_misaligned_by_zvi.mp3" type="audio/mpeg" length="2224389" />
-      <itunes:duration>00:03:56</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Why Global Trepanation?</title>
-      <description>Audio version of Why Global Trepanation? from Scott Alexander</description>
-      <pubDate>Wed, 21 Oct 2026 21:53:11 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/why-global-trepanation</guid>
-      <link>https://www.astralcodexten.com/p/why-global-trepanation</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/35ec01962140_why_global_trepanation.mp3" type="audio/mpeg" length="5021733" />
-      <itunes:duration>00:09:03</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
