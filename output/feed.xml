@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sun, 22 Nov 2026 05:34:41 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Nov 2026 05:33:03 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,25 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-23</title>
+      <description>Daily News Briefing - 2026-11-23
+
+Topics covered:
+- OpenAI's chief scientist, Jakub Pachocki, has proposed a way to measure how fast AI is advancing, which is the first step toward limiting it
+- The cost of AI-speed security is already visible
+- The Nvidia affair has reached the Sunday shows
+- The war in Ukraine has reached the Mediterranean
+- In Antalya, the longest climate summit ever ended without its main deal
+- Next comes Huang's December first testimony, now set against a Democratic Congress eager to investigate</description>
+      <pubDate>Mon, 23 Nov 2026 05:32:41 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-23</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/f5856933640d_daily_news_briefing_-_2026-11-23.mp3" type="audio/mpeg" length="3207788" />
+      <itunes:duration>00:05:39</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-23.txt" type="text/plain" />
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-22</title>
       <description>Daily News Briefing - 2026-11-22
@@ -1196,49 +1215,6 @@ Topics covered:
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-25.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-24</title>
-      <description>Daily News Briefing - 2026-10-24
-
-Topics covered:
-- OpenAI says it will no longer train its frontier models on the live internet, TechCrunch reports
-- The Gulf crisis pushed oil higher again
-- The same midterm pressure is reaching the Caribbean
-- AI is reshaping elections too
-- On the data front, Ars Technica reports that a change to Google's privacy policy appears to dismantle its long-standing pledge not to personalize ads from Gmail, Drive and Photos content
-- Finally, the source of Nigeria's Ebola case is now a mystery</description>
-      <pubDate>Sat, 24 Oct 2026 04:35:48 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-24</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/844028b87971_daily_news_briefing_-_2026-10-24.mp3" type="audio/mpeg" length="2754789" />
-      <itunes:duration>00:04:50</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-24.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>Your Book Review: The Ghost In My Brain</title>
-      <description>Audio version of Your Book Review: The Ghost In My Brain from Scott Alexander</description>
-      <pubDate>Fri, 23 Oct 2026 23:45:42 +0000</pubDate>
-      <guid>https://www.astralcodexten.com/p/your-book-review-the-ghost-in-my</guid>
-      <link>https://www.astralcodexten.com/p/your-book-review-the-ghost-in-my</link>
-      <itunes:author>Scott Alexander</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0933d80c31ba_your_book_review_the_ghost_in_my_brain.mp3" type="audio/mpeg" length="16941957" />
-      <itunes:duration>00:30:20</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>“The Hackening” by Zvi</title>
-      <description>Audio version of “The Hackening” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Fri, 23 Oct 2026 21:22:50 +0000</pubDate>
-      <guid isPermaLink="false">6f339ace-5541-4f56-9420-be9fb49bee16</guid>
-      <link>https://www.lesswrong.com/posts/iqgZaJMnmyDCYfnuC/the-hackening-1</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/23d43737dd4f_the_hackening_by_zvi.mp3" type="audio/mpeg" length="2389029" />
-      <itunes:duration>00:04:13</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
       <title>I Did This Without Your Knowledge</title>
