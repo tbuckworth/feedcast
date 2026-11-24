@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 23 Nov 2026 05:33:03 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 05:33:03 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-24</title>
+      <description>Daily News Briefing - 2026-11-24
+
+Topics covered:
+- The debate over how to pace AI now has a direct comparison of two concrete brakes
+- The labs, meanwhile, are giving agents more authority
+- The biggest story is Nvidia's reversal
+- On security, German broadcasters report that Western intelligence agencies believe Russia could put a nuclear-armed satellite, Sputnik-S, into orbit as early as December
+- Finally, Virginia and Oregon became the first states to sue SpaceX, which now owns xAI
+- Huang's back-to-back hearings next week will show whether Congress accepts the White House's verdict on Nvidia and China</description>
+      <pubDate>Tue, 24 Nov 2026 05:32:12 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-24</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/08827debca5a_daily_news_briefing_-_2026-11-24.mp3" type="audio/mpeg" length="3130004" />
+      <itunes:duration>00:05:31</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-24.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Import AI 482: Huawei kernel benchmarks; airborne drone detection; and a national lab’s AI science benchmark</title>
+      <description>Audio version of Import AI 482: Huawei kernel benchmarks; airborne drone detection; and a national lab’s AI science benchmark by Jack Clark from Import AI</description>
+      <pubDate>Mon, 23 Nov 2026 14:11:17 +0000</pubDate>
+      <guid>https://jack-clark.net/2026/11/23/import-ai-482-huawei-kernel-benchmarks-airborne-drone-detection-and-a-national-labs-ai-science-benchmark/</guid>
+      <link>https://jack-clark.net/2026/11/23/import-ai-482-huawei-kernel-benchmarks-airborne-drone-detection-and-a-national-labs-ai-science-benchmark/</link>
+      <itunes:author>Jack Clark</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2eed9ed8727a_import_ai_482_huawei_kernel_benchmarks_airborne.mp3" type="audio/mpeg" length="2489348" />
+      <itunes:duration>00:04:28</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-23</title>
       <description>Daily News Briefing - 2026-11-23
