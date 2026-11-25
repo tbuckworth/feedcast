@@ -23,6 +23,8 @@ def section():
 
 @pytest.mark.parametrize("opening", [
     "<p>Tech Tales:</p><p><strong>The Visitor</strong><br>[Tomorrow]</p>",
+    "<p>Tech Tales</p><p>The Visitor</p>",
+    "<p>***</p><p><strong>The Visitor</strong></p>",
     "<p><strong>Tech Tales:<br></strong><br><strong>The Visitor</strong><br>[Tomorrow]</p>",
     "<p>***</p><p><strong>The Visitor<br></strong><em>[Tomorrow]</em></p>",
 ])
@@ -56,11 +58,26 @@ def test_story_follows_summary_without_going_through_a_language_model(
     assert "Rain." not in tts.texts[1]
 
 
-@pytest.mark.parametrize("html", ["<p>A speech about science.</p>",
-                                 "<p>Tech Tales:</p><p>Uncertain ending.</p>"])
-def test_summary_only_when_no_complete_story(html):
+def processor():
     p = ContentProcessor("p", verify=False, auto_verbatim_limit=1000,
                          verbatim_sections={"Import AI": section()})
     p.client = FakeApi(["A summary."])
-    text = asyncio.run(p.process(entry(html), "summarize"))
+    return p
+
+
+def test_summary_only_when_no_story():
+    text = asyncio.run(processor().process(entry("<p>A speech about science.</p>"), "summarize"))
     assert text == "Summary of Issue by Jack Clark.\n\nA summary.\n\nEnd of Issue."
+
+
+@pytest.mark.parametrize("html", [
+    "<p>Tech Tales:</p><p>Uncertain ending.</p>",
+    "<p>News.</p><p>Things that inspired this story: An ending without a title.</p>",
+    "<p>News.</p><p>Tech Tales:</p><p>Tech Tales:</p><p>Story.</p>"
+    "<p>Things that inspired this story: A duplicate opening.</p>",
+])
+def test_unclear_markers_report_the_issue_before_the_writer_runs(html):
+    p = processor()
+    with pytest.raises(ValueError, match="Unclear verbatim section in Issue"):
+        asyncio.run(p.process(entry(html), "summarize"))
+    assert not p.client.calls

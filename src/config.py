@@ -24,6 +24,7 @@ class _Strict(BaseModel):
 
 class VerbatimSection(_Strict):
     start_pattern: str
+    unheaded_divider: str | None = None
     end_pattern: str
     introduction: str
 

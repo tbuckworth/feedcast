@@ -5,7 +5,6 @@ from typing import Optional
 
 from bs4 import BeautifulSoup
 
-from . import notices
 from .chunking import SECTION_BREAK
 from .config import VerbatimSection
 from .html_text import clean_html, small_table_to_prose
@@ -41,20 +40,27 @@ def separate_verbatim_section(text: str, section: VerbatimSection, title: str) -
     if not starts and not ends:
         print(f"    No verbatim section in {title}")
         return text, ""
-    if len(starts) == len(ends) == 1:
-        start, end = starts[0], ends[0]
-        passage = text[start.end():end.start()].strip()
-        before = text[:start.start()].strip()
+    if len(ends) == 1:
+        end = ends[0]
+        lead = text[:end.start()]
+        before = passage = ""
+        if len(starts) == 1 and starts[0].end() < end.start():
+            start = starts[0]
+            before, passage = lead[:start.start()].strip(), lead[start.end():].strip()
+        elif not starts and section.unheaded_divider:
+            divider = f"\n\n{section.unheaded_divider}\n\n"
+            prefix, found, candidate = lead.rpartition(divider)
+            # A standalone title followed by a paragraph or bracketed setting.
+            if found and re.match(r"[^\n.!?:]+\n(?:\n|\[)", candidate):
+                before, passage = prefix.strip(), candidate.strip()
         if before and passage:
             # The end marker introduces an editorial note. Later paragraphs
             # can contain further reporting, as in Import AI 476.
             _, _, after = text[end.end():].partition("\n\n")
             print(f"    Verbatim section in {title}: {len(passage.split())} words")
             return (before + "\n\n" + after).strip(), passage
-    note = f"Unclear verbatim section in {title}. Summarising the entire issue."
-    print(f"    WARNING: {note}")
-    notices.add(note)
-    return text, ""
+    raise ValueError(f"Unclear verbatim section in {title}: "
+                     f"found {len(starts)} opening and {len(ends)} closing markers")
 
 
 class ContentProcessor:
