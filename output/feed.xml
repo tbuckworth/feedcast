@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Wed, 25 Nov 2026 05:35:45 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 17:52:13 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,18 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>“Rewrite this as a new ordinance”: Inside the ChatGPT transcripts of a city manager</title>
+      <description>Audio version of “Rewrite this as a new ordinance”: Inside the ChatGPT transcripts of a city manager from Transformer</description>
+      <pubDate>Wed, 25 Nov 2026 17:02:08 +0000</pubDate>
+      <guid>https://www.transformernews.ai/p/inside-chatgpt-transcripts-city-manager-kingsland-georgia-ai-writting-laws</guid>
+      <link>https://www.transformernews.ai/p/inside-chatgpt-transcripts-city-manager-kingsland-georgia-ai-writting-laws</link>
+      <itunes:author>Transformer</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/3df71fdedb6a_rewrite_this_as_a_new_ordinance_inside_the_chat.mp3" type="audio/mpeg" length="12547796" />
+      <itunes:duration>00:22:14</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-25</title>
       <description>Daily News Briefing - 2026-11-25
@@ -91,8 +103,8 @@ Topics covered:
       <guid>https://jack-clark.net/2026/11/23/import-ai-482-huawei-kernel-benchmarks-airborne-drone-detection-and-a-national-labs-ai-science-benchmark/</guid>
       <link>https://jack-clark.net/2026/11/23/import-ai-482-huawei-kernel-benchmarks-airborne-drone-detection-and-a-national-labs-ai-science-benchmark/</link>
       <itunes:author>Jack Clark</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2eed9ed8727a_import_ai_482_huawei_kernel_benchmarks_airborne.mp3" type="audio/mpeg" length="2489348" />
-      <itunes:duration>00:04:28</itunes:duration>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/2eed9ed8727a_import_ai_482_huawei_kernel_benchmarks_airborne.mp3" type="audio/mpeg" length="5268140" />
+      <itunes:duration>00:09:23</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -1241,25 +1253,6 @@ Topics covered:
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
-      <title>Daily News Briefing - 2026-10-26</title>
-      <description>Daily News Briefing - 2026-10-26
-
-Topics covered:
-- New detail has emerged about OpenAI's agents hacking outside websites during testing
-- There is also a sobering read on the economics
-- In Brazil, Lula has won a fourth term, becoming the first first-round runner-up to take the presidency since democracy returned in the nineteen-eighties
-- Serbia delivered a second upset
-- In Venezuela, María Corina Machado returned almost a year after leaving the country
-- Israel votes Tuesday, and the BBC says Friday's final polls showed the two blocs almost neck and neck</description>
-      <pubDate>Mon, 26 Oct 2026 05:34:40 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-26</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/b5dae25ffb56_daily_news_briefing_-_2026-10-26.mp3" type="audio/mpeg" length="2644581" />
-      <itunes:duration>00:04:40</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-26.txt" type="text/plain" />
-    </item>
-    <item>
       <title>Some Memories of Early Anthropic</title>
       <description>Audio version of Some Memories of Early Anthropic by Ivan Vendrov from LessWrong Curated</description>
       <pubDate>Mon, 26 Oct 2026 01:48:49 +0000</pubDate>
@@ -1268,18 +1261,6 @@ Topics covered:
       <itunes:author>Ivan Vendrov</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/ce05e08382c4_some_memories_of_early_anthropic.mp3" type="audio/mpeg" length="9319124" />
       <itunes:duration>00:17:00</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>I Did This Without Your Knowledge</title>
-      <description>Audio version of I Did This Without Your Knowledge by joec from LessWrong Curated</description>
-      <pubDate>Sat, 17 Oct 2026 16:35:07 +0000</pubDate>
-      <guid isPermaLink="false">3375SZNGA5dKHQMie</guid>
-      <link>https://www.lesswrong.com/posts/3375SZNGA5dKHQMie/i-did-this-without-your-knowledge</link>
-      <itunes:author>joec</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0ec58648ed8d_i_did_this_without_your_knowledge.mp3" type="audio/mpeg" length="2110485" />
-      <itunes:duration>00:03:44</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
