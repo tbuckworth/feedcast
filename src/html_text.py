@@ -2,7 +2,7 @@
 
 import re
 
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup, NavigableString, Tag
 
 # Substack's calls to action, which every Substack post carries: the
 # "Subscribe now" and "Share" buttons, a button's caption ("Share this
@@ -13,7 +13,7 @@ SUBSTACK_WIDGETS = ".button-wrapper, .captioned-button-wrap, .subscription-widge
 _BLOCKS = ["p", "h1", "h2", "h3", "h4", "h5", "h6"]
 
 
-def clean_html(html_content: str) -> str:
+def clean_html(html_content: str, *, preserve_paragraphs: bool = False) -> str:
     """Extract clean text from HTML content, without Substack's buttons and subscribe box."""
     soup = BeautifulSoup(html_content, "html.parser")
 
@@ -22,6 +22,20 @@ def clean_html(html_content: str) -> str:
         element.decompose()
     for element in soup.select(SUBSTACK_WIDGETS):
         element.decompose()
+
+    if preserve_paragraphs:
+        # Preserve inline punctuation, stanza breaks and section headings. Newlines
+        # in HTML source are ordinary spaces unless introduced by a block or <br>.
+        for node in soup.find_all(string=True):
+            if type(node) is NavigableString:
+                node.replace_with(re.sub(r"\s+", " ", node))
+        for br in soup.find_all("br"):
+            br.replace_with("\n")
+        for block in soup.find_all(_BLOCKS + ["div", "li", "blockquote", "pre", "hr", "tr", "td", "th"]):
+            block.insert_before("\n\n")
+            block.insert_after("\n\n")
+        text = re.sub(r"[^\S\n]*\n[^\S\n]*", "\n", soup.get_text())
+        return re.sub(r"\n{3,}", "\n\n", text).strip()
 
     # Get text
     text = soup.get_text(separator="\n")

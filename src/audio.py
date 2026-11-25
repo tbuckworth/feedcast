@@ -17,7 +17,7 @@ import httpx
 
 from . import notices
 from .env import env_flag
-from .chunking import split_sentences
+from .chunking import SECTION_BREAK, split_sentences
 
 MAX_CHUNK_CHARS = 500  # Tested: 650 works but 500 has better pacing
 
@@ -107,7 +107,8 @@ def upload_voice_to_deepinfra(voice_path: Path, api_key: str, max_retries: int =
 
 def split_into_chunks(text: str, max_chars: int = MAX_CHUNK_CHARS) -> list[str]:
     """Split text into TTS chunks at sentence boundaries, and an over-long sentence at commas."""
-    return split_sentences(text, max_chars, at_commas=True)
+    return [chunk for section in text.split(SECTION_BREAK)
+            for chunk in split_sentences(section, max_chars, at_commas=True)]
 
 
 async def generate_with_deepinfra_async(
