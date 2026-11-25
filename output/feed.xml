@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Tue, 24 Nov 2026 05:33:03 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 05:33:41 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-25</title>
+      <description>Daily News Briefing - 2026-11-25
+
+Topics covered:
+- Autonomous hacking has moved from warning to documented fact
+- Britain's National Cyber Security Centre says it has seen a "marked rise" in AI-driven attacks since September
+- On capabilities, OpenAI says its GPT-6 models can design new proteins using only reasoning and general-purpose code, without calling specialised biology models
+- Agents still stumble on everyday chores
+- The Nvidia euphoria lasted one day
+- AI is also showing up in election interference</description>
+      <pubDate>Wed, 25 Nov 2026 05:32:33 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-25</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e90ad624b0bd_daily_news_briefing_-_2026-11-25.mp3" type="audio/mpeg" length="3544436" />
+      <itunes:duration>00:06:16</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-25.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Jensen Huang Reinstated As Nvidia CEO at Behest of President Trump” by Zvi</title>
+      <description>Audio version of “Jensen Huang Reinstated As Nvidia CEO at Behest of President Trump” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Tue, 24 Nov 2026 22:51:46 +0000</pubDate>
+      <guid isPermaLink="false">1622da84-0ce0-406e-a266-b5cb5389d934</guid>
+      <link>https://www.lesswrong.com/posts/GrARsuPjWQL92hfxw/jensen-huang-reinstated-as-nvidia-ceo-at-behest-of-president</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e0db033da610_jensen_huang_reinstated_as_nvidia_ceo_at_behest_o.mp3" type="audio/mpeg" length="2260508" />
+      <itunes:duration>00:04:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-24</title>
       <description>Daily News Briefing - 2026-11-24
@@ -1227,25 +1258,6 @@ Topics covered:
       <itunes:duration>00:17:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-25</title>
-      <description>Daily News Briefing - 2026-10-25
-
-Topics covered:
-- With the midterms nine days away, a new study suggests the models behind America's chatbots are not politically neutral
-- Lawmakers are starting to respond to AI in political and commercial messaging
-- TechCrunch's postmortem on the PHP flaws adds nuance to the AI angle
-- In Ukraine, the military says its Starlink connection is stable again, ten days after speed caps of one hundred sixty kilometres per hour wrecked missions against jet-powered Shaheds
-- Brazil votes today in a presidential runoff between Lula and Flávio Bolsonaro, whose father is serving a twenty-seven-year sentence for plotting a coup
-- In France, the government says at least four hundred thousand people marched in support of striking schoolchildren and against heavy policing, while unions put the figure at double that</description>
-      <pubDate>Sun, 25 Oct 2026 05:34:42 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-25</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/4ecd86685b20_daily_news_briefing_-_2026-10-25.mp3" type="audio/mpeg" length="2955909" />
-      <itunes:duration>00:05:13</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-25.txt" type="text/plain" />
     </item>
     <item>
       <title>I Did This Without Your Knowledge</title>
