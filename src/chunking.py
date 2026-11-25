@@ -9,6 +9,10 @@ market's rules that says how it resolves (markets.rule_sentence).
 
 import re
 
+# A form feed separates the generated summary from a verbatim reading in a
+# saved script. The audio join inserts its usual between-chunk silence here.
+SECTION_BREAK = "\f"
+
 # Where a piece may be cut. Looser than SENTENCE_END on purpose: a piece only
 # has to end somewhere a voice or a model can pause, which the full stop of
 # "e.g." or "U.S." is, and every place it may not cut makes a long sentence

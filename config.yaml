@@ -116,6 +116,12 @@ feeds:
   # Read from Clark's own site, not Substack: see tests/test_config.py.
   - name: "Import AI"
     url: "https://jack-clark.net/feed/"
+    verbatim_section:
+      start_pattern: '^Tech Tales[ \t]*:?[ \t]*$'
+      # Some tales have only a section divider, a title and the closing note.
+      unheaded_divider: "***"
+      end_pattern: '^Things that inspired this story[ \t]*:'
+      introduction: "And now, a short story by Jack Clark, read verbatim."
     mode: "summarize"
     prompt: null
 

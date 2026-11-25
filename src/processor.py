@@ -1,9 +1,12 @@
 """An entry's script: a summary by the writer role, or the cleaned post to be read in full."""
 
+import re
 from typing import Optional
 
 from bs4 import BeautifulSoup
 
+from .chunking import SECTION_BREAK
+from .config import VerbatimSection
 from .html_text import clean_html, small_table_to_prose
 from .lesswrong import author_names
 from .verify import write_checked
@@ -29,14 +32,47 @@ def spoken_title(title: str, author: str) -> str:
 MAX_PROMPT_CHARS = 400000    # ~100k tokens; a cost ceiling, not a context limit
 
 
+def separate_verbatim_section(text: str, section: VerbatimSection, title: str) -> tuple[str, str]:
+    """Remove the marked passage and its closing note from the writer's input."""
+    flags = re.IGNORECASE | re.MULTILINE
+    starts = list(re.finditer(section.start_pattern, text, flags))
+    ends = list(re.finditer(section.end_pattern, text, flags))
+    if not starts and not ends:
+        print(f"    No verbatim section in {title}")
+        return text, ""
+    if len(ends) == 1:
+        end = ends[0]
+        lead = text[:end.start()]
+        before = passage = ""
+        if len(starts) == 1 and starts[0].end() < end.start():
+            start = starts[0]
+            before, passage = lead[:start.start()].strip(), lead[start.end():].strip()
+        elif not starts and section.unheaded_divider:
+            divider = f"\n\n{section.unheaded_divider}\n\n"
+            prefix, found, candidate = lead.rpartition(divider)
+            # A standalone title followed by a paragraph or bracketed setting.
+            if found and re.match(r"[^\n.!?:]+\n(?:\n|\[)", candidate):
+                before, passage = prefix.strip(), candidate.strip()
+        if before and passage:
+            # The end marker introduces an editorial note. Later paragraphs
+            # can contain further reporting, as in Import AI 476.
+            _, _, after = text[end.end():].partition("\n\n")
+            print(f"    Verbatim section in {title}: {len(passage.split())} words")
+            return (before + "\n\n" + after).strip(), passage
+    raise ValueError(f"Unclear verbatim section in {title}: "
+                     f"found {len(starts)} opening and {len(ends)} closing markers")
+
+
 class ContentProcessor:
     """Processes feed content - either summarizing via the LLM or cleaning for verbatim."""
 
-    def __init__(self, default_prompt: str, *, verify: bool, auto_verbatim_limit: int):
+    def __init__(self, default_prompt: str, *, verify: bool, auto_verbatim_limit: int,
+                 verbatim_sections: dict[str, VerbatimSection] | None = None):
         # None routes each call through llm.complete() with fallbacks; tests
         # pin a fake client here instead.
         self.client = None
         self.default_prompt = default_prompt
+        self.verbatim_sections = verbatim_sections or {}
         # Check summaries against their source with a second model and fix
         # them once (src/verify.py). Off in tests and when config says so.
         self.verify = verify
@@ -95,8 +131,8 @@ class ContentProcessor:
 
         return str(soup)
 
-    async def clean_text(self, entry: FeedEntry) -> str:
-        """The post as plain text, its tables turned to prose. Raises on an empty post.
+    async def clean_text(self, entry: FeedEntry, *, preserve_paragraphs: bool = False) -> str:
+        """The post as plain text. Raises on an empty post.
 
         A table of more than three data rows is turned to prose by the writer
         model (process_tables), so this can make a model call.
@@ -105,17 +141,21 @@ class ContentProcessor:
         outro, so an empty post fails like any other entry: the run reports
         it, and a feed entry is queued for a retry.
         """
-        text = clean_html(await self.process_tables(entry.content))
+        # For a mixed reading, preserve the writer's original words in every
+        # section, including any table, before deciding what will be summarised.
+        html = entry.content if preserve_paragraphs else await self.process_tables(entry.content)
+        text = clean_html(html, preserve_paragraphs=preserve_paragraphs)
         if not text.strip():
             raise ValueError(f"no content to narrate in {entry.title!r}: "
                              f"the post is empty once cleaned")
         return text
 
     async def summarize(
-        self, entry: FeedEntry, prompt: Optional[str] = None
+        self, entry: FeedEntry, prompt: Optional[str] = None, *, clean_content: str | None = None
     ) -> str:
         """Summarize content with the writer role."""
-        clean_content = await self.clean_text(entry)
+        if clean_content is None:
+            clean_content = await self.clean_text(entry)
 
         system_prompt = prompt or self.default_prompt
 
@@ -180,10 +220,17 @@ Content:
             # News briefings: the synthesis already opens with the date, skip redundant intro
             text = await self.clean_text(entry)
         elif mode == "summarize":
-            summary = await self.summarize(entry, prompt)
+            section = self.verbatim_sections.get(entry.feed_name)
+            source, passage = None, ""
+            if section:
+                content = await self.clean_text(entry, preserve_paragraphs=True)
+                source, passage = separate_verbatim_section(content, section, entry.title)
+            summary = await self.summarize(entry, prompt, clean_content=source)
             # Add intro for context
             intro = f"Summary of {spoken_title(entry.title, entry.author)} by {entry.author}."
             text = f"{intro}\n\n{summary}"
+            if passage:
+                text += f"{SECTION_BREAK}{section.introduction}\n\n{passage}"
         elif mode == "verbatim":
             text = await self.process_verbatim(entry)
         else:

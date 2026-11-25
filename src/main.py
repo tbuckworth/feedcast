@@ -12,6 +12,7 @@ import httpx
 
 from .audio import AudioGenerator
 from .bundle import write_bundle
+from .chunking import SECTION_BREAK
 from .config import CONFIG_PATH, ROOT, Config, FeedConfig, load_config
 from .digest import safe_bullets
 from .duplicates import same_text, word_runs
@@ -98,7 +99,7 @@ async def process_entry(
     # arrives with its bullets already written (and already emailed).
     digest_task = asyncio.create_task(
         _same(entry.bullets) if entry.bullets else
-        safe_bullets(attempt.processed_text or attempt.normalized_text or "",
+        safe_bullets((attempt.processed_text or attempt.normalized_text or "").partition(SECTION_BREAK)[0],
                      is_briefing=is_briefing(entry.id),
                      label=entry.title,
                      sources=entry.sources)
@@ -111,8 +112,9 @@ async def process_entry(
     try:
         if attempt.normalized_text is None:
             attempt.stage = "normalize"
-            attempt.normalized_text = await normalizer.normalize_for_tts(
-                attempt.processed_text, label=entry.title)
+            prose, separator, verbatim = attempt.processed_text.partition(SECTION_BREAK)
+            spoken = await normalizer.normalize_for_tts(prose, label=entry.title)
+            attempt.normalized_text = spoken + separator + verbatim
             print(f"    Normalized text: {len(attempt.normalized_text)} chars")
         else:
             print(f"    Resuming with the normalised script from an earlier attempt "
@@ -154,7 +156,9 @@ class Workers:
         """
         return cls(
             processor=ContentProcessor(config.default_prompt, verify=config.fidelity_check,
-                                       auto_verbatim_limit=config.auto_verbatim_limit),
+                                       auto_verbatim_limit=config.auto_verbatim_limit,
+                                       verbatim_sections={f.name: f.verbatim_section for f in config.feeds
+                                                          if f.verbatim_section}),
             normalizer=TextNormalizer(respellings=config.pronunciations),
             audio_gen=AudioGenerator(voice_sample=config.tts.voice_path),
         )

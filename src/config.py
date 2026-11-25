@@ -22,6 +22,13 @@ class _Strict(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
+class VerbatimSection(_Strict):
+    start_pattern: str
+    unheaded_divider: str | None = None
+    end_pattern: str
+    introduction: str
+
+
 class FeedConfig(_Strict):
     """Configuration for a single feed."""
 
@@ -31,6 +38,7 @@ class FeedConfig(_Strict):
     prompt: str | None = None
     skip_patterns: list[str] | None = None
     strip_patterns: list[str] | None = None
+    verbatim_section: VerbatimSection | None = None
 
 
 class PodcastMetaConfig(_Strict):
