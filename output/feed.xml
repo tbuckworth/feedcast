@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Wed, 25 Nov 2026 17:52:13 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Nov 2026 05:32:53 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-26</title>
+      <description>Daily News Briefing - 2026-11-26
+
+Topics covered:
+- Dario Amodei, Anthropic's chief executive, has rejected claims that his company wants humanity to "surrender human free will" to AI, calling the idea "absurd." TechCrunch reports that in a long post on X he wrote that "turning over governance to AI is a bad idea." He suggested drawing a line at recursive self-improvement, meaning AI that improves itself without human help, and wrote that "we may want limits on this process." The pushback follows remarks from rivals
+- Nvidia's governance troubles now carry a price
+- On trade, the United States trade representative has proposed new tariffs on fourteen partners, including the European Union, Japan, Taiwan and South Korea
+- In privacy news, forty-two state attorneys general are trying to stop bankrupt Character.AI from auctioning chat histories from more than twenty-one million American accounts, over two million of them belonging to minors
+- Finally, the Federal Communications Commission has conditionally authorised SpaceX to deploy up to one million satellites designed as orbital data centers
+- Next week, Huang faces Congress just as the Character.AI auction tests whether bankruptcy can override a privacy promise</description>
+      <pubDate>Thu, 26 Nov 2026 05:32:06 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-26</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/e9a9e2204edc_daily_news_briefing_-_2026-11-26.mp3" type="audio/mpeg" length="3297644" />
+      <itunes:duration>00:05:48</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-26.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Claude and Levent Alpöge Prove the Riemann Hypothesis” by Zvi</title>
+      <description>Audio version of “Claude and Levent Alpöge Prove the Riemann Hypothesis” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Wed, 25 Nov 2026 17:32:21 +0000</pubDate>
+      <guid isPermaLink="false">3e524ca5-8141-49cf-a2eb-859db3747e29</guid>
+      <link>https://www.lesswrong.com/posts/ENdfwPYrhLrAP8znD/claude-and-levent-alpoege-prove-the-riemann-hypothesis</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/493d41eb0098_claude_and_levent_alpge_prove_the_riemann_hypoth.mp3" type="audio/mpeg" length="2396204" />
+      <itunes:duration>00:04:13</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>“Rewrite this as a new ordinance”: Inside the ChatGPT transcripts of a city manager</title>
       <description>Audio version of “Rewrite this as a new ordinance”: Inside the ChatGPT transcripts of a city manager from Transformer</description>
