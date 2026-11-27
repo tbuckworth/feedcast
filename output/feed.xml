@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Thu, 26 Nov 2026 05:35:12 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Nov 2026 05:33:47 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-27</title>
+      <description>Daily News Briefing - 2026-11-27
+
+Topics covered:
+- Nvidia is now policing its own supply chain
+- The espionage question behind the scandal is still unresolved
+- Taiwan votes on Saturday in local elections shadowed by Beijing
+- Washington's new tariff proposals are drawing retaliation threats
+- Western intelligence reports suggest Russia could launch a nuclear-armed satellite within sixty days, and the Guardian has examined what a detonation would do
+- In the Gulf, two Italian technicians working for Rheinmetall were killed in a drone strike in Kuwait that Kuwait and Italy blame on Iran</description>
+      <pubDate>Fri, 27 Nov 2026 05:32:59 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-27</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/31b4adb42d79_daily_news_briefing_-_2026-11-27.mp3" type="audio/mpeg" length="3143636" />
+      <itunes:duration>00:05:31</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-27.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“AI #196: The Return” by Zvi</title>
+      <description>Audio version of “AI #196: The Return” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Thu, 26 Nov 2026 15:12:38 +0000</pubDate>
+      <guid isPermaLink="false">691ee04c-9c98-4007-bb6d-913926c062c7</guid>
+      <link>https://www.lesswrong.com/posts/MaGJRAwTKshpHxqpK/ai-196-the-return</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/419d775f408a_ai_196_the_return_by_zvi.mp3" type="audio/mpeg" length="2567396" />
+      <itunes:duration>00:04:32</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-26</title>
       <description>Daily News Briefing - 2026-11-26
@@ -1261,37 +1292,6 @@ Topics covered:
       <itunes:author>dynomight</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/47e459503172_scattered_thoughts_on_how_doing_math_feels_these_d.mp3" type="audio/mpeg" length="9381116" />
       <itunes:duration>00:16:58</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-27</title>
-      <description>Daily News Briefing - 2026-10-27
-
-Topics covered:
-- Anthropic has formally filed to go public, and its own paperwork warns that advanced AI could pose "catastrophic or existential risks to humanity" if misused, weaponised or allowed to operate with high autonomy
-- The capital race around it intensified
-- On capabilities, OpenAI claims three major results: a proof of the local smoothing conjecture that would also resolve Kakeya and Stein's restriction conjecture in all dimensions, an algorithm it says refutes the Exponential Time Hypothesis, and an existence proof for interacting quantum field theories including quantum chromodynamics
-- A separate agent-behaviour scare cooled quickly
-- Israelis are voting today in what the Guardian calls the most consequential election in the country's history
-- With Israel's count tonight and America's midterms a week away, the next few days will test whether this anti-incumbent run reaches its biggest prizes</description>
-      <pubDate>Tue, 27 Oct 2026 05:35:09 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-27</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/0f62bc56c709_daily_news_briefing_-_2026-10-27.mp3" type="audio/mpeg" length="2999565" />
-      <itunes:duration>00:05:17</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-27.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“Gemini 4 Argon: The Model and Safety Cards” by Zvi</title>
-      <description>Audio version of “Gemini 4 Argon: The Model and Safety Cards” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Mon, 26 Oct 2026 13:02:19 +0000</pubDate>
-      <guid isPermaLink="false">4929d39a-8b6e-474b-a04e-3e0c6f9f66db</guid>
-      <link>https://www.lesswrong.com/posts/EeT8MEqgpuPtpdmJE/gemini-4-argon-the-model-and-safety-cards</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/73593bfebf43_gemini_4_argon_the_model_and_safety_cards_by_zv.mp3" type="audio/mpeg" length="2623413" />
-      <itunes:duration>00:04:40</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
