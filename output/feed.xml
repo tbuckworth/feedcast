@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Sat, 28 Nov 2026 05:33:18 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Nov 2026 05:35:16 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -40,6 +40,18 @@ Topics covered:
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-28.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>Book Review Contest 2026 Winners</title>
+      <description>Audio version of Book Review Contest 2026 Winners from Scott Alexander</description>
+      <pubDate>Fri, 27 Nov 2026 20:32:19 +0000</pubDate>
+      <guid>https://www.astralcodexten.com/p/book-review-contest-2026-winners</guid>
+      <link>https://www.astralcodexten.com/p/book-review-contest-2026-winners</link>
+      <itunes:author>Scott Alexander</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/32a35a15c422_book_review_contest_2026_winners.mp3" type="audio/mpeg" length="5374268" />
+      <itunes:duration>00:09:40</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
       <title>“Astra 6.2’s Brain Gets Smart But Its Head Gets Dumb” by Zvi</title>
