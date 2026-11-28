@@ -7,7 +7,7 @@
     <link>https://tbuckworth.github.io/feedcast</link>
     <atom:link href="https://tbuckworth.github.io/feedcast/feed.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Fri, 27 Nov 2026 05:35:27 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Nov 2026 05:33:18 +0000</lastBuildDate>
     <itunes:author>Feedcast Bot</itunes:author>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -22,6 +22,37 @@
       <link>https://tbuckworth.github.io/feedcast</link>
     </image>
     <itunes:category text="Technology" />
+    <item>
+      <title>Daily News Briefing - 2026-11-28</title>
+      <description>Daily News Briefing - 2026-11-28
+
+Topics covered:
+- We start with interpretability
+- Jensen Huang's return to Nvidia has a precedent
+- The fight over AI hardware talent has moved to the courts
+- On Ukraine, President Volodymyr Zelensky told the BBC it was "strange" that Trump calls Vladimir Putin a friend
+- In Europe, Belgian authorities have ordered Google to stop building a datacentre near Charleroi
+- Next week Huang testifies on Capitol Hill, where the Intel precedent may now come up as well</description>
+      <pubDate>Sat, 28 Nov 2026 05:32:37 +0000</pubDate>
+      <guid isPermaLink="false">news-briefing-2026-11-28</guid>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/679903ee8872_daily_news_briefing_-_2026-11-28.mp3" type="audio/mpeg" length="3205748" />
+      <itunes:duration>00:05:39</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-11-28.txt" type="text/plain" />
+    </item>
+    <item>
+      <title>“Astra 6.2’s Brain Gets Smart But Its Head Gets Dumb” by Zvi</title>
+      <description>Audio version of “Astra 6.2’s Brain Gets Smart But Its Head Gets Dumb” by Zvi from Zvi Mowshowitz</description>
+      <pubDate>Fri, 27 Nov 2026 13:42:27 +0000</pubDate>
+      <guid isPermaLink="false">e45bc89f-44d9-42de-afbe-6010e971c2ea</guid>
+      <link>https://www.lesswrong.com/posts/RFTWNPhm8jmnmaF5t/astra-6-2-s-brain-gets-smart-but-its-head-gets-dumb</link>
+      <itunes:author>Zvi Mowshowitz</itunes:author>
+      <enclosure url="https://tbuckworth.github.io/feedcast/audio/5170c300e6cc_astra_62s_brain_gets_smart_but_its_head_gets_du.mp3" type="audio/mpeg" length="2211908" />
+      <itunes:duration>00:03:55</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     <item>
       <title>Daily News Briefing - 2026-11-27</title>
       <description>Daily News Briefing - 2026-11-27
@@ -1261,37 +1292,6 @@ Topics covered:
       <itunes:author>Zvi Mowshowitz</itunes:author>
       <enclosure url="https://tbuckworth.github.io/feedcast/audio/24ba044d9062_anthropic_files_its_s-1_by_zvi.mp3" type="audio/mpeg" length="2254461" />
       <itunes:duration>00:03:59</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Daily News Briefing - 2026-10-28</title>
-      <description>Daily News Briefing - 2026-10-28
-
-Topics covered:
-- OpenAI's three headline results from Monday now have a rival claimant
-- A new lawsuit tests how much latitude chatbots should have on medical questions
-- In Israel, exit polls show no clear winner after the highest turnout in fifty years, seventy-seven point one percent by six in the evening
-- Gulf states are drafting a multipart deal to stop a renewed war between America and Iran
-- Defenders now face a second botched disclosure in a week
-- Israel's coalition haggling and next week's midterms will decide two leaderships, while the Gulf talks determine whether the war resumes after them</description>
-      <pubDate>Wed, 28 Oct 2026 05:35:23 +0000</pubDate>
-      <guid isPermaLink="false">news-briefing-2026-10-28</guid>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/1898ec83d6e1_daily_news_briefing_-_2026-10-28.mp3" type="audio/mpeg" length="2849685" />
-      <itunes:duration>00:05:03</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>full</itunes:episodeType>
-      <podcast:transcript url="https://tbuckworth.github.io/feedcast/transcripts/news-briefing-2026-10-28.txt" type="text/plain" />
-    </item>
-    <item>
-      <title>“Anthropic Versus Anthropic” by Zvi</title>
-      <description>Audio version of “Anthropic Versus Anthropic” by Zvi from Zvi Mowshowitz</description>
-      <pubDate>Tue, 27 Oct 2026 12:52:41 +0000</pubDate>
-      <guid isPermaLink="false">527e98db-f4d9-462e-9534-a5897fa03fc0</guid>
-      <link>https://www.lesswrong.com/posts/ZSrX8gucWsKahsitk/anthropic-versus-anthropic</link>
-      <itunes:author>Zvi Mowshowitz</itunes:author>
-      <enclosure url="https://tbuckworth.github.io/feedcast/audio/7a7b20d63006_anthropic_versus_anthropic_by_zvi.mp3" type="audio/mpeg" length="2467029" />
-      <itunes:duration>00:04:26</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
